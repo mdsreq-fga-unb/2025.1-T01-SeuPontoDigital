@@ -1,5 +1,7 @@
 ## SeuPontoDigital
 
+Este projeto foi realizado durante a disciplina de Requisitos de Software, na Universidade de Brasília, sob orientação do Professor Dr. George Marsicano Correa. 
+
 <div style="text-align: center;">
   <img src="assets/icons/pontodigital.png" alt="Logo do produto" width="200">
 </div>

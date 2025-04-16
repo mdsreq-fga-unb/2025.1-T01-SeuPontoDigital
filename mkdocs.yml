@@ -25,6 +25,7 @@ theme:
 
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     # - toc.integrate
     - navigation.top
