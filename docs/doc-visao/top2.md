@@ -124,3 +124,8 @@ Relatórios mensais podem ser enviados por e-mail ou baixados nos formatos:
 ---
 ## Impacto da Solução 
 ---
+
+## Historico de Versão
+Data     | Versão | Descrição | Autor(es) | Revisor(es)
+-------- | ------ | --------- | ----- | ---------
+15/04/2025 | 1.0 | Características da solução e Ferramentas utilizadas | Lucas Guimarães |
