@@ -39,7 +39,7 @@ O **SeuPontoDigital** é uma solução para controle de ponto eletrônico, criad
     <div>
       <img src="assets/images/lucas.jpg" alt="Lucas Guimarães" style="width: 120px; height: 120px; border-radius: 50%;">
       <p style="margin: 5px 0 0;"><strong>Lucas Guimarães</strong></p>
-      <p style="margin: 0; font-size: 14px; color: #555;">Designer UX/UI e Desenvolvedor Mobile</p>
+      <p style="margin: 0; font-size: 14px; color: #555;">Desenvolvedor Mobile e Backend</p>
     </div>
     <div>
       <img src="assets/images/thiago.jpg" alt="Thiago Melo" style="width: 120px; height: 120px; border-radius: 50%;">
