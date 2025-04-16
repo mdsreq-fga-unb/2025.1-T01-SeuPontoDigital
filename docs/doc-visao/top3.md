@@ -84,3 +84,8 @@ A escolha do XP com práticas do Scrum foi baseada em três principais fatores, 
 - Cliente disponível na maior do tempo, facilitando as entregas contínuas, oferecendo feedbacks constantes em todas as sprints e podendo participar de todas as sprints review.
 - Equipe pequena, papéis flexíveis e pouco conhecimento em desenvolvimento mobile, permitindo que os membros participem de várias etapas e possam se adaptar durante o projeto, sendo mais eficiente que o AUP, voltado para equipes mistas ou com algum conhecimento prévio
 - Flexibilidade durante todo o projeto, permitindo que algumas mudanças possam ocorrer sem prejudicar todo o andamento do projeto.
+
+## Historico de Versão
+Data     | Versão | Descrição | Autor(es) | Revisor(es)
+-------- | ------ | --------- | ----- | ---------
+15/04/2025 | 1.0 | Estratégia priorizada para o projeto| Lucas Guimarães |
