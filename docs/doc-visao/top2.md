@@ -149,10 +149,12 @@ Relatórios mensais podem ser enviados por e-mail ou baixados nos formatos:
 ## Análise de Viabilidade
 ---
 ## Impacto da Solução 
----
+
+&nbsp;&nbsp;&nbsp;&nbsp;Como o escopo da solução consiste na gestão de uma folha de ponto, espera-se que o aplicativo facilite a rotina do empregador, proporcionando maior controle sobre a organização dessas folhas. Além disso, exigiria menos esforço por parte do empregado para cumprir as exigências da legislação trabalhista, como a assinatura da folha, e o contador, por sua vez, receberia automaticamente os dados necessários para o preenchimento, já no formato exigido pela legislação. Dessa forma, avalia-se que a empresa seria impactada positivamente por meio da otimização de processos, redução de erros manuais e economia de tempo.
 
 ## Historico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 15/04/2025 | 1.0 | Características da solução e Ferramentas utilizadas | Lucas Guimarães |
-16/04/2025 | 1.1 | Pesquisa de Mercado e Análise Competitiva e Objetivo do Produto (Adjetivos) | Joao Pedro|
+16/04/2025 | 1.1 | Pesquisa de Mercado e Análise Competitiva e Objetivo do Produto (Adjetivos) | Joao Pedro |
+17/04/2025 | 1.2 | Impacto da Solução | Willian Silva |
