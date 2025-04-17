@@ -147,7 +147,7 @@ Relatórios mensais podem ser enviados por e-mail ou baixados nos formatos:
 
 ---
 ## Análise de Viabilidade
-A viabilidade do projeto SeuPontoDigital pode ser avaliada sob quatro dimensões principais: técnica, de prazo, financeira e de mercado. Cada uma dessas dimensões foi analisada para garantir que a solução proposta seja não apenas executável, mas também sustentável e alinhada às necessidades reais do público-alvo.
+A viabilidade do projeto SeuPontoDigital pode ser avaliada sob três dimensões principais: técnica, de prazo e de mercado. Cada uma dessas dimensões foi analisada para garantir que a solução proposta seja não apenas executável, mas também sustentável e alinhada às necessidades reais do público-alvo.
 
 ### Viabilidade Técnica
 
