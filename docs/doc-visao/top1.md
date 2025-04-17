@@ -4,9 +4,24 @@
 ## Identificação da Oportunidade ou Problema 
 
 
-##  Desafios do Projeto 
+##  Desafios do Projeto
 
+&nbsp;&nbsp;&nbsp;&nbsp;O principal desafio técnico do projeto é efetivar a migração dos registros manuais para o aplicativo SeuPontoDigital, garantindo que a marcação do ponto seja automatizada sem comprometer a precisão dos dados. Isso envolve integrar funcionalidades como geolocalização, notificações e cálculos automáticos de horas em tempo real, de forma a atender integralmente os requisitos da Lei complementar 150, sem sobrecarregar o sistema.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Outro desafio significativo é capacitar uma equipe ainda reduzida e com pouca experiência em soluções digitais, exigindo treinamentos intensivos e suporte contínuo para uma adaptação eficiente. Ademais, a empresa precisa assegurar que a transição não comprometa a continuidade operacional, mantendo o fluxo de registros e pagamentos ininterrupto, tanto para a folha digital quanto para as demandas legais existentes.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Por fim, a limitação orçamentária impõe a necessidade de priorizar as funcionalidades essenciais na fase inicial, garantindo a entrega de uma solução robusta — capaz de manter a operação mesmo diante de falhas pontuais —, ágil — Com evolução e reação a mudanças de requisitos com rapidez e segurança — e competitiva — capaz de se destacar no mercado regional e nacional —, sem extrapolar os custos previstos e mantendo a qualidade esperada pelos clientes.
 
 ## Segmentação de Clientes 
+
+&nbsp;&nbsp;&nbsp;&nbsp;A *Legalize Folha Doméstica* atende a dois principais segmentos de clientes, com necessidade e expectativas específicas em relação à gestão da folha de ponto digital:
+
+- **Empregadores Domésticos Individuais:**
+
+    São pessoas físicas que contratam empregados domésticos e buscam praticidade e segurança no controle da jornada de trabalho. Valoriza soluções intuitivas que garantam a conformidade com a legislação e a confiabilidade dos registros, facilitando a gestão dos direitos trabalhistas.
+
+- **Donos de Pequenas Empresas e Startups do Setor Doméstico:**
+
+    Negócios em fase de crescimento que desejam modernizar a gestão dos processos administrativos e operacionais por meio de tecnologias digitais. Os donos dessas empresas valorizam a escalabilidade e a integração do sistema com outras soluções de RH, priorizando eficiência, automação e a redução de custos operacionais.
 
 

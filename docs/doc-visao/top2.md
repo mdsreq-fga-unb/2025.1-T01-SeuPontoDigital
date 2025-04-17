@@ -1,4 +1,7 @@
 ## Objetivo do Produto 
+
+&nbsp;&nbsp;&nbsp;&nbsp;O objetivo do produto é automatizar a marcação do ponto pelos empregados por meio de um aplicativo intuitivo — que permite registrar entrada e saída sem necessidade de manual ou treinamento, com feedback visual com o menor tempo possível — e de navegação fácil — em que todas as funções principais (registro de ponto, histórico, relatórios) são acessíveis em no máximo três toques, com menus padronizados e rótulos claros —, permitindo a contabilização automática das horas diretamente para o contador. Isso reduzirá o tempo de processamento e garantirá uma carga horária justa e corretamente remunerada. Além disso, a solução proporcionará competitividade regional e abrirá a possibilidade de atender clientes em todo o país por meio de uma folha de ponto digital.
+
 ---
 ## Características da Solução 
 
@@ -119,6 +122,29 @@ Relatórios mensais podem ser enviados por e-mail ou baixados nos formatos:
 
 ---
 ## Pesquisa de Mercado e Análise Competitiva 
+
+**Análise do Mercado**
+
+&nbsp;&nbsp;&nbsp;&nbsp;O mercado de gestão de folha de ponto digital é composto principalmente por soluções destinadas a empresas de médio e grande porte. Contudo, empregadores domésticos e pequenas empresas ainda são pouco atendidos por essas soluções, especialmente aquelas que oferecem funcionalidades simplificadas e acessíveis.
+
+&nbsp;&nbsp;&nbsp;&nbsp;Além disso, a obrigatoriedade da folha de ponto para empregados domésticos, determinada pela Lei Complementar 150, é frequentemente ignorada por empregadores, o que evidencia uma oportunidade de oferecer uma solução acessível e eficiente.
+
+**Concorrentes**
+
+- **Concorrentes diretos** **(TEM QUE CORRIGIR)**
+
+  Aplicativos como PontoMais e MeuPonto que oferecem funcionalidades de controle de ponto, mas geralmente com foco em empresas maiores ou funcionalidades limitadas.
+
+- **Concorrentes indiretos**
+  Planilhas manuais (Google Sheets, Excel) e relógios de ponto convencionais, que são suscetíveis a erros e não se adaptam às necessidades específicas de empregadores domésticos.
+
+
+**Diferenciais Competitivos de SeuPontoDigital**
+
+- Automatização do cálculo de horas e geração automática de relatórios mensais.
+- Uso de geolocalização para assegurar registros confiáveis.
+- Interface intuitiva para empregadores domésticos e pequenas empresas, permitindo que qualquer usuário, mesmo sem experiência prévia em sistemas de RH, registre o ponto em poucos passos.
+
 ---
 ## Análise de Viabilidade
 ---
@@ -129,3 +155,4 @@ Relatórios mensais podem ser enviados por e-mail ou baixados nos formatos:
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 15/04/2025 | 1.0 | Características da solução e Ferramentas utilizadas | Lucas Guimarães |
+16/04/2025 | 1.1 | Pesquisa de Mercado e Análise Competitiva e Objetivo do Produto (Adjetivos) | Joao Pedro|
