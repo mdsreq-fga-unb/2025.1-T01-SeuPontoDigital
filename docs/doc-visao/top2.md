@@ -131,12 +131,13 @@ Relatórios mensais podem ser enviados por e-mail ou baixados nos formatos:
 
 **Concorrentes**
 
-- **Concorrentes diretos** **(TEM QUE CORRIGIR)**
+- **Concorrentes diretos**
 
-  Aplicativos como PontoMais e MeuPonto que oferecem funcionalidades de controle de ponto, mas geralmente com foco em empresas maiores ou funcionalidades limitadas.
+    Aplicativos como PontoMais e MeuPonto disponibilizam soluções completas para o controle de ponto digital e gestão da jornada de trabalho, oferecendo funcionalidades como cálculo automatizado de horas extras, administração do banco de horas e geração de relatórios detalhados, como o espelho de ponto. No entanto, os planos disponíveis são voltados para empresas com um grande número de funcionários, e a opção mais acessível contempla até 10 colaboradores — um número superior ao necessário para empregadores domésticos. Além disso, funcionalidades avançadas como geolocalização só estão disponíveis em modalidades superiores, tornando sua adoção menos acessível.
 
 - **Concorrentes indiretos**
-  Planilhas manuais (Google Sheets, Excel) e relógios de ponto convencionais, que são suscetíveis a erros e não se adaptam às necessidades específicas de empregadores domésticos.
+
+    Planilhas manuais, como Google Sheets e Excel, oferecem aos usuários uma maneira prática de registrar diversos tipos de dados, incluindo o controle de ponto digital, por meio de tabelas. Além disso, permitem cálculos automatizados de horas trabalhadas e horas extras por meio de fórmulas e automações. Contudo, o preenchimento manual está sujeito a erros e pode aumentar a carga de trabalho do empregador.
 
 
 **Diferenciais Competitivos de SeuPontoDigital**
