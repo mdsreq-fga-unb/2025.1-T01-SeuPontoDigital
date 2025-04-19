@@ -1,9 +1,25 @@
 ::selection {
-    background-color: #008efa;
-    color: #000;
-  }
-  
-  ::-moz-selection { 
-    background-color: #008efa;
-    color: #000;
-  }
+  background-color: #008efa;
+  color: #000;
+}
+
+::-moz-selection {
+  background-color: #008efa;
+  color: #000;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: #2094f3;
+  color: white;
+  font-size: 14px;
+}
+.md-header__title {
+  font-size: 1.1rem;
+}
+
+.md-header__inner,
+.md-tabs__link {
+  font-size: 0.8rem;
+  color: white;
+  font-weight: bold;
+}
