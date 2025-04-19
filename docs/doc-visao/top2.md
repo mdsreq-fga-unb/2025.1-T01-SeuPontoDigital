@@ -5,120 +5,44 @@
 ---
 ## Características da Solução 
 
-#### Cadastro de Empresa e Funcionários
+As caractéristicas da solução proposta, até o momento, incluem:
 
-Permite o cadastro da empresa contratante e de seus funcionários. Cada empresa precisa estar vinculada a uma empresa de gestão, que será responsável por acompanhar e administrar os registros de ponto.
+- Interface minimalista e intuitiva, voltada para usuários com pouca familiaridade tecnológica.
 
----
+- Controle exclusivo do cliente sobre o cadastro de empresas/empregadores e funcionários.
 
-#### Identificação do Tipo de Jornada
+- Liberação de acesso ao aplicativo condicionada à validação do vínculo empregatício.
 
-Permite o cadastro do tipo de jornada do funcionário:
+- Envio automático de notificações aos funcionários antes dos registros de ponto.
 
-- Jornada fixa  
-- Banco de horas  
+- Registro de ponto vinculado à presença física no local de trabalho, por geolocalização.
 
----
 
-#### Controle de Jornada com Base no Contrato
+- Justificativas de faltas e ausências registradas diretamente pelo aplicativo, com envio de arquivos.
 
-Cada funcionário terá sua jornada registrada de acordo com o contrato. O sistema envia notificações para lembrar o trabalhador de bater o ponto nos horários corretos, evitando esquecimentos.
+- Cálculo automático da jornada mensal, salário, descontos legais e horas extras.
 
----
+- Geração e envio de relatórios mensais para cliente, empregador e funcionário.
 
-#### Geolocalização no Registro de Ponto
-
-O ponto só poderá ser registrado caso o funcionário esteja no local de trabalho determinado no contrato.
-
----
-
-#### Cálculo Automático de Horas
-
-A aplicação calcula automaticamente:
-
-- Carga horária cumprida  
-- Saldo de horas (positivas ou negativas)  
-- Horas extras  
-
----
-
-#### Envio de Folha de Ponto Mensal
-
-Todo dia 25 de cada mês, um relatório automático com os dados de ponto é enviado para:
-
-- A empresa de gestão  
-- O contratante
-- O funcionário  
-
-Apenas a empresa de gestão e o contratante terão permissão para editar os dados, se necessário.
-
----
-
-#### Justificativa de Faltas
-
-Funcionários que faltarem devem enviar uma justificativa com anexo (ex: atestado médico). O empregador poderá validar ou recusar a justificativa.
-
----
-
-#### Formatos de Exportação
-
-Relatórios mensais podem ser enviados por e-mail ou baixados nos formatos:
-
-- PDF  
-- CSV  
+- Exclusividade do cliente para realizar alterações nos dados dos relatórios.
 
 ---
 
 ## Tecnologias a Serem Utilizadas 
 
-#### 1. **Frontend (Aplicativo Mobile)**
+1. **Frontend (Mobile):** React Native e Expo
 
-- <img src="https://raw.githubusercontent.com/github/explore/main/topics/react-native/react-native.png" width="24" style="vertical-align:middle;"> **React Native**  
-  Framework baseado em JavaScript utilizado para o desenvolvimento de aplicativos móveis nativos para Android e iOS, a partir de um único código-fonte.
+2. **Backend:** Node.js
 
-- <img src="https://avatars.githubusercontent.com/u/12504344?s=200&v=4" width="24" style="vertical-align:middle;"> **Expo**  
-  Plataforma que oferece um ambiente simplificado para o desenvolvimento com React Native, facilitando o processo de testes, builds e publicação do aplicativo.
+3. **Banco de Dados:** Supabase e PostgreSQL
 
----
+4. **Comunicação da Equipe:** Google Meet e Discord
 
-#### 2. **Backend (Servidor da Aplicação)**
+5. **Controle de Código e Versionamento:** Git e GitHub
 
-- <img src="https://raw.githubusercontent.com/github/explore/main/topics/nodejs/nodejs.png" width="24" style="vertical-align:middle;"> **Node.js**  
-  Ambiente de execução de código JavaScript no lado do servidor, utilizado para construção da API REST que se comunicará com o aplicativo mobile.
+6. **Organização e Gerenciamento da Equipe:** GitHub Issues
 
----
-
-#### 3. **Banco de Dados**
-
-- <img src="https://raw.githubusercontent.com/github/explore/main/topics/postgresql/postgresql.png" width="24" style="vertical-align:middle;"> **PostgreSQL**  
-  Sistema de gerenciamento de banco de dados relacional de alto desempenho, utilizado para armazenar os dados da aplicação.
-
----
-
-#### 4. **Comunicação da Equipe**
-
-- <img src="https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v1/web-96dp/logo_meet_2020q4_color_2x_web_96dp.png" width="24" style="vertical-align:middle;"> **Google Meet**  
-  Utilizado para reuniões com o cliente, acompanhamento do projeto e alinhamentos formais.
-
-- <img src="https://raw.githubusercontent.com/github/explore/main/topics/discord/discord.png" width="24" style="vertical-align:middle;"> **Discord**  
-  Usado para comunicação rápida e informal entre os membros da equipe.
-
----
-
-#### 5. **Controle de Código e Versionamento**
-
-- <img src="https://raw.githubusercontent.com/github/explore/main/topics/git/git.png" width="24" style="vertical-align:middle;"> **Git**  
-  Sistema de controle de versão distribuído para gerenciar o histórico de alterações no código.
-
-- <img src="https://raw.githubusercontent.com/github/explore/main/topics/github/github.png" width="24" style="vertical-align:middle;"> **GitHub**  
-  Plataforma usada para hospedagem de repositórios, versionamento e colaboração.
-
----
-
-#### 6. **Organização e Gerenciamento da Equipe**
-
-- <img src="https://raw.githubusercontent.com/github/explore/main/topics/github/github.png" width="24" style="vertical-align:middle;"> **GitHub Issues**  
-  Usado para gerenciamento de tarefas, bugs e funcionalidades durante o projeto.
+O aplicativo mobile será desenvolvido com **React Native**, utilizando o **Expo**. A comunicação com o backend será feito por meio de uma API REST construída com **Node.js**, que será responsável pelas regras de negócio e conexão com o banco de dados. Para armazenamento dos dados, será utilizado o Supabase que oferece autenticação, armazenamento e banco de dados em tempo real baseado no PostgreSQL. A equipe se comunicará por **Google Meet** (quando o cliente estiver presente) e **Discord** (reuniões internas da equipe), enquanto o controle de código será feito com **Git** e **GitHub**, que também será utilizado para organização de tarefas via **GitHub Issues**.
 
 ---
 ## Pesquisa de Mercado e Análise Competitiva 
