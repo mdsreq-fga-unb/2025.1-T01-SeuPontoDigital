@@ -8,13 +8,22 @@ repo_name: GitHub
 nav:
   - Início: index.md
   - Visão do Produto e Projeto: 
-      - Cenário Atual do Cliente e do Negócio: doc-visao/top1.md
-      - Solução Proposta: doc-visao/top2.md
-      - Estratégias de Engenharia de Software: doc-visao/top3.md
-      - Cronogramas e Entregas: doc-visao/top4.md
-      - Interação Entre Equipe e Cliente: doc-visao/top5.md
-      - Lições Aprendidas: doc-visao/top6.md
-      - Referências Bibliográficas: doc-visao/top7.md
+    - Cenário Atual do Cliente e do Negócio: doc-visao/top1.md
+    - Solução Proposta: doc-visao/top2.md
+    - Estratégias de Engenharia de Software: doc-visao/top3.md
+    - Cronogramas e Entregas: doc-visao/top4.md
+    - Interação Entre Equipe e Cliente: doc-visao/top5.md
+    - Lições Aprendidas: doc-visao/top6.md
+    - Referências Bibliográficas: doc-visao/top7.md
+  - Sprints:
+    - Sprint 01: sprints/sprint01.md
+  - Entregas:
+    - Entrega Unidade 1: entregas/entrega1.md
+  - Políticas da Equipe :
+    - Política de Issues: guias/issues.md
+    - Política de Branches: guias/branches.md
+    - Política de Pull Request (PR): guias/pull_requests.md
+    
 
 theme: 
   name: material
