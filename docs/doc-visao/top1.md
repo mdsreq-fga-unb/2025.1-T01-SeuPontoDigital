@@ -18,9 +18,6 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;É possível perceber através do diagrama que elguns desses aspectos do problema são passíveis de solução via tecnologia, enquanto outros não. Nesse contexto, observa-se que a digitalização da folha de ponto resolveria questões como demora, precisão na marcação e contagem de horas, eliminando inconsistências e reduzindo tempo de processamento. No entanto, não resolveria outros problemas como, por exemplo, a necessidade de o empregado manter-se atento aos registros.
 
-
-
-
 ##  Desafios do Projeto
 
 &nbsp;&nbsp;&nbsp;&nbsp;O principal desafio técnico do projeto é efetivar a migração dos registros manuais para o aplicativo SeuPontoDigital, garantindo que a marcação do ponto seja automatizada sem comprometer a precisão dos dados. Isso envolve integrar funcionalidades como geolocalização, notificações e cálculos automáticos de horas em tempo real, de forma a atender integralmente os requisitos da Lei complementar 150, sem sobrecarregar o sistema.
