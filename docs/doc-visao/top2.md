@@ -40,9 +40,9 @@ As caractéristicas da solução proposta, até o momento, incluem:
 
 5. **Controle de Código e Versionamento:** Git e GitHub
 
-6. **Organização e Gerenciamento da Equipe:** GitHub Issues
+6. **Organização e Gerenciamento da Equipe:** GitHub Issues e GitHub Projects
 
-O aplicativo mobile será desenvolvido com **React Native**, utilizando o **Expo**. A comunicação com o backend será feito por meio de uma API REST construída com **Node.js**, que será responsável pelas regras de negócio e conexão com o banco de dados. Para armazenamento dos dados, será utilizado o Supabase que oferece autenticação, armazenamento e banco de dados em tempo real baseado no PostgreSQL. A equipe se comunicará por **Google Meet** (quando o cliente estiver presente) e **Discord** (reuniões internas da equipe), enquanto o controle de código será feito com **Git** e **GitHub**, que também será utilizado para organização de tarefas via **GitHub Issues**.
+O aplicativo mobile será desenvolvido com **React Native**, utilizando o **Expo**. A comunicação com o backend será feito por meio de uma API REST construída com **Node.js**, que será responsável pelas regras de negócio e conexão com o banco de dados. Para armazenamento dos dados, será utilizado o Supabase que oferece autenticação, armazenamento e banco de dados em tempo real baseado no PostgreSQL. A equipe se comunicará por **Google Meet** (quando o cliente estiver presente) e **Discord** (reuniões internas da equipe), enquanto o controle de código será feito com **Git** e **GitHub**, que também será utilizado para organização de tarefas via **GitHub Issues** e **GitHub Projects**.
 
 ---
 ## Pesquisa de Mercado e Análise Competitiva 
@@ -100,3 +100,4 @@ Data     | Versão | Descrição | Autor(es) | Revisor(es)
 16/04/2025 | 1.1 | Pesquisa de Mercado e Análise Competitiva e Objetivo do Produto (Adjetivos) | Joao Pedro |
 17/04/2025 | 1.2 | Impacto da Solução | Willian Silva |
 17/04/2025 | 1.3 | Análise de viabilidade (técnica, prazo e mercado) | Davi de Aguiar |
+19/04/2025 | 1.4 | Correção das características da solução e ferramentas utilizadas | Lucas Guimarães |
