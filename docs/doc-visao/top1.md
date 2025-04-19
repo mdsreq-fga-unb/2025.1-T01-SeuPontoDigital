@@ -1,7 +1,24 @@
 ## Introdução ao Negócio e Contexto 
+&nbsp;&nbsp;&nbsp;&nbsp;A Legalize Folha de Pagamento do Lar LTDA (Legalize Folha Doméstica) é uma empresa especializada na gestão de folha de pagamento doméstica, que está no mercado desde janeiro de 2024 e vem crescendo de forma significativa. A empresa oferece serviços aos empregadores, sendo responsável por gerenciar todo o ciclo de vida da carteira de trabalho dos empregados, com foco nas empregadas domésticas. Atua com empregadores de toda Brasília e região (Distrito Federal).
+
+&nbsp;&nbsp;&nbsp;&nbsp;A missão da empresa é simplificar e assegurar de forma legal como as famílias contratam os serviços domésticos, proporcionando uma experiência personalizada e transparente. Por ser uma empresa recente, ela ainda não conta com todas as funcionalidades que outras competidoras oferecem. No entanto, é fundamental que os custos dos serviços não sejam elevados, ao mesmo tempo em que a qualidade do serviço entregue se mantenha competitiva no mercado.
 
 
 ## Identificação da Oportunidade ou Problema 
+
+&nbsp;&nbsp;&nbsp;&nbsp;A principal oportunidade identificada para a Legalize Folha Doméstica é a gestão da folha de ponto, que, atualmente, é lenta e suscetível a muitos riscos, pois depende da marcação manual e diária por parte do empregado, além da exigência do empregador. A falta de um sistema mais automatizado gera falhas recorrentes, como o acúmulo de horas trabalhadas não contabilizadas, o que resulta em direitos de horas extras não registrados e, muitas vezes, no esforço para contestar em uma ação trabalhista. Além disso, a empresa constata que uma grande parte dos empregadores no Brasil não mantém a folha de ponto, o que limita os direitos dos empregados e dificulta a justiça por parte dos empregadores.
+
+&nbsp;&nbsp;&nbsp;&nbsp;De acordo com a Lei Complementar 150, que regula o contrato doméstico, a folha de ponto é obrigatória, e a sua ausência pode resultar em riscos judiciais para o empregador. A  Legalize Folha Doméstica percebeu que, sem uma solução automatizada, perderá uma parte significativa do mercado para concorrentes que já oferecem tecnologias mais avançadas. Nesse contexto, a empresa vê uma grande oportunidade de crescimento, tanto na competitividade quanto na praticidade, ao reduzir o tempo necessário para a contabilização das horas trabalhadas, adotada na rotina de trabalho atual.
+
+&nbsp;&nbsp;&nbsp;&nbsp;A figura a seguir apresenta um diagrama de ishikawa com nossa exploração sobre o problema enfretado pela Legalize Folha Doméstica.
+
+<div style="text-align: center;">
+  <img src="assets/icons/diagrama de ishikawa-v1.0.png" alt="diagrama de ishikawa com os 6 Ms" width="600">
+</div>
+
+&nbsp;&nbsp;&nbsp;&nbsp;É possível perceber através do diagrama que elguns desses aspectos do problema são passíveis de solução via tecnologia, enquanto outros não. Nesse contexto, observa-se que a digitalização da folha de ponto resolveria questões como demora, precisão na marcação e contagem de horas, eliminando inconsistências e reduzindo tempo de processamento. No entanto, não resolveria outros problemas como, por exemplo, a necessidade de o empregado manter-se atento aos registros.
+
+
 
 
 ##  Desafios do Projeto
