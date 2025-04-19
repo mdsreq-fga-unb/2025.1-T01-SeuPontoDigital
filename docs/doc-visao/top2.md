@@ -68,8 +68,7 @@ O aplicativo mobile será desenvolvido com **React Native**, utilizando o **Expo
 
 - Automatização do cálculo de horas e geração automática de relatórios mensais.
 - Uso de geolocalização para assegurar registros confiáveis.
-- Interface intuitiva para empregadores domésticos e pequenas empresas, permitindo que qualquer usuário, mesmo sem experiência prévia em sistemas de RH, registre o ponto em poucos passos.
-
+- **interface intuitiva** – que adota padrões familiares de design, minimiza a curva de aprendizado ao privilegiar reconhecimento sobre memorização e orienta o usuário com elementos visuais autoexplicativos e feedback imediato, permitindo que empregadores domésticos e pequenas empresas, mesmo sem experiência prévia em sistemas de RH, registrem o ponto em poucos passos.
 ---
 ## Análise de Viabilidade
 A viabilidade do projeto SeuPontoDigital pode ser avaliada sob três dimensões principais: técnica, de prazo e de mercado. Cada uma dessas dimensões foi analisada para garantir que a solução proposta seja não apenas executável, mas também sustentável e alinhada às necessidades reais do público-alvo.
@@ -101,3 +100,4 @@ Data     | Versão | Descrição | Autor(es) | Revisor(es)
 17/04/2025 | 1.2 | Impacto da Solução | Willian Silva |
 17/04/2025 | 1.3 | Análise de viabilidade (técnica, prazo e mercado) | Davi de Aguiar |
 19/04/2025 | 1.4 | Correção das características da solução e ferramentas utilizadas | Lucas Guimarães |
+19/04/2025 | 1.5 | Correcao do adjetivo intuitiva no topico Diferenciais Competitivos| Joao Pedro | 
