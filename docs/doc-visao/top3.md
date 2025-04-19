@@ -85,6 +85,11 @@ A escolha do XP com práticas do Scrum foi baseada em três principais fatores, 
 - Equipe pequena, papéis flexíveis e pouco conhecimento em desenvolvimento mobile, permitindo que os membros participem de várias etapas e possam se adaptar durante o projeto, sendo mais eficiente que o AUP, voltado para equipes mistas ou com algum conhecimento prévio
 - Flexibilidade durante todo o projeto, permitindo que algumas mudanças possam ocorrer sem prejudicar todo o andamento do projeto.
 
+Além disso, utilizamos uma versão adaptada do GUPTA Framework para escolha da melhor metodologia. Segue imagem abaixo:
+
+[![GUPTA Framework](../assets/images/GUPTA.png)](../assets/images/GUPTA.png) *Obs:* caso a imagem esteja pequena, clique nela para visualizar melhor.
+
+---
 ## Historico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
