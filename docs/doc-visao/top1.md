@@ -14,10 +14,26 @@
 &nbsp;&nbsp;&nbsp;&nbsp;A figura a seguir apresenta um diagrama de ishikawa com nossa exploração sobre o problema enfretado pela Legalize Folha Doméstica.
 
 <div style="text-align: center;">
-  <img src="assets/icons/diagrama de ishikawa-v1.0.png" alt="diagrama de ishikawa com os 6 Ms" width="600">
+  <img src="assets/icons/diagrama de ishikawa-v1.0.png" alt="Diagrama de ishikawa com os 6 Ms" width="600">
 </div>
 
-&nbsp;&nbsp;&nbsp;&nbsp;É possível perceber através do diagrama que elguns desses aspectos do problema são passíveis de solução via tecnologia, enquanto outros não. Nesse contexto, observa-se que a digitalização da folha de ponto resolveria questões como demora, precisão na marcação e contagem de horas, eliminando inconsistências e reduzindo tempo de processamento. No entanto, não resolveria outros problemas como, por exemplo, a necessidade de o empregado manter-se atento aos registros.
+&nbsp;&nbsp;&nbsp;&nbsp;É possível perceber através do diagrama que elguns desses aspectos do problema são passíveis de solução via tecnologia, enquanto outros não.
+
+*O que está sendo resolvido:*
+  - **Quanto ao Meio Ambiente:** a solução possibilita escalabilidade para o aumento de folhas a serem geridas pela empresa.
+  - **Quanto aos Materiais:** o uso de papel e a necessidade de digitalização manual seria dispensada, além da folha se manter segura digitalmente.
+  - **Quanto aos Métodos:** a necessidade da precisão dos horários, a diminuição do tempo de contagem e cálculo de horas pode ser resolvidas.
+  - **Quanto à Medida:** uma solução tecnológica admite indicadores de desempenho e controle de processos.
+  - **Quanto a Máquina:** as múltiplas etapas de criação da folha de ponto persistiram.
+  - **Quanto à Mão de obra:** o contador e o empregador terá menos tempo de trabalho de manutenção da folha, e menos dificuldade.
+
+*O que não está sendo resolvido:*
+  - **Quanto ao Meio Ambiente:** a folha de ponto ainda deve ser criada e entregue ao e-Social, um fator externo obrigatório por lei.
+  - **Quanto à Mão de Obra:** ainda será necessário que o empregador se atente ao ponto diáriamente.
+  - **Quanto a Máquina:** as múltiplas etapas de criação da folha de ponto persistiram. (empregador precisa assinar uma folha física ao fim do mês, contador precisa verificar se os dados estão no formato certo, dentre outras etapas.)
+
+
+Nesse contexto, observa-se que a digitalização da folha de ponto resolveria questões como demora, precisão na marcação e contagem de horas, eliminando inconsistências e reduzindo tempo de processamento. No entanto, não resolveria outros problemas como, por exemplo, a necessidade de o empregado manter-se atento aos registros.
 
 ##  Desafios do Projeto
 
