@@ -1,5 +1,80 @@
 ## Composição da Equipe 
+&nbsp;&nbsp;&nbsp;&nbsp;A equipe envolvida no desenvolvimento é composta por:
+<table>
+  <thead>
+    <tr>
+      <th>Papel</th>
+      <th>Descrição</th>
+      <th>Responsável</th>
+      <th>Participantes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Gerente do Projeto</td>
+      <td>Organiza e conduz o projeto, além de assegurar a comunicação entre cliente e equipe, e o cumprimento do escopo e dos prazos estabelecidos.</td>
+      <td>Caio Venâncio</td>
+      <td align="center">-</td>
+    </tr>
+    <tr>
+      <td>Desenvolvedor Front-End Mobile</td>
+      <td>Atua na parte visual do aplicativo, o que inclui a interface com o usuário, o design e a navegação.</td>
+      <td>Lucas Guimarães</td>
+      <td>Caio Venâncio, Davi de Aguiar e Thiago Melo</td>
+    </tr>
+    <tr>
+      <td>Desenvolvedor Back-End</td>
+      <td>Responsável por implementar a lógica do servidor, gerenciar o banco de dados e integrar APIs.</td>
+      <td align="center">-</td>
+      <td>Guilherme Moura, João Pedro Ferreira, Willian Silva</td>
+    </tr>
+    <tr>
+      <td>Analista de QA</td>
+      <td>Planeja e executa casos de teste, realiza a verificação e validação dos resultados e analisa a cobertura de testes da aplicação.</td>
+      <td>Willian Silva</td>
+      <td align="center">-</td>
+    </tr>
+    <tr>
+      <td>Analista de Requisitos</td>
+      <td>Elabora os requisitos funcionais e não funcionais da solução e verifica se estão sendo atendidos ao longo do desenvolvimento.</td>
+      <td>Caio Venâncio</td>
+      <td>Davi de Aguiar, Thiago Melo, Lucas Gumarães, João Pedro Ferreira, Guilherme Moura e Willian Silva</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Comunicação 
 
+### Ferramentas de Comunicação
+<ul>
+  <li>
+    <strong>WhatsApp:</strong> Será utilizado como ferramenta de comunicação diária da equipe e com o cliente, pois a ferramenta oferece o envio instantâneo de mensagens, compartilhamento de arquivos e criação de grupos específicos de acordo com a composição da equipe.
+  </li>
+  <br>
+  <li>
+    <strong>Microsoft Teams/Google Meet:</strong> Ferramenta que será utilizada para efetuar reuniões semanais de revisão e planejamento de sprints com o cliente, por meio das quais a equipe poderá validar entregas, coletar feedback e alinhar as próximas atividades.
+  </li>
+</ul>
+
+### Métodos e Frequência de Reuniões
+<ul>
+  <li>
+    <strong>Daily Scrum:</strong> A equipe realizará reuniões diárias de 15 minutos, por meio do WhatsApp, Google Meet ou Microsoft Teams, para compartilhar o progresso individual, identificar impedimentos e alinhar os objetivos do dia.
+  </li>
+  <br>
+  <li>
+    <strong>Sprint Planning:</strong>  No início de cada sprint, a equipe e o cliente planejarão o sprint a ser executado, com a priorização dos itens do backlog baseada em critérios como valor de negócio e dependências entre tarefas.
+  </li>
+  <br>
+  <li>
+    <strong>Sprint Retrospective:</strong> Após a revisão da sprint, a equipe realiza uma retrospectiva interna para refletir sobre o processo, discutir o que deu certo, os problemas que ocorreram e as melhorias que podem ser aplicadas nas próximas sprints.
+  </li>
+  <br>
+  <li>
+    <strong>Sprint Review:</strong> Ao término de cada sprint, será conduzida uma reunião de revisão com o cliente, com frequência semanal, para apresentar o que foi desenvolvido, validar os resultados, obter feedback e ajustar o backlog.
+  </li>
+  
+</ul>
+
 ## Processo de Validação 
+<p>&nbsp;&nbsp;&nbsp;&nbsp;O processo de validação da solução ocorrerá com base na Definição de Pronto, que estabelece critérios objetivos para assegurar às partes envolvidas quais elementos de cada incremento farão parte da entrega. Essa definição será aplicada durante o desenvolvimento e validada nas reuniões de revisão de sprint, nas quais o cliente fornecerá feedback para confirmar se o produto atende às expectativas antes da implementação final.</p>
