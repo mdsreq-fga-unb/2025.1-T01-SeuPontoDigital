@@ -59,7 +59,7 @@ A *Legalize Folha Doméstica* atende a dois principais segmentos de clientes:
 ## Historico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-15/04/2025 | 1.0 | Introdução ao Negócio e Contexto | João Pedro Ferreira  | Lucas Guimarães |
+15/04/2025 | 1.0 | Desafios de Projeto e Segmentação de Clientes | João Pedro Ferreira  | Lucas Guimarães |
 18/04/2025 | 1.1 | Introdução ao Negócio e Contexto | Caio Venâncio | Lucas Guimarães |
 19/04/2025 | 1.2 | Identificação da Oportunidade e Problema e Diagrama de Ishikawa | Caio Venâncio | Lucas Guimarães|
 19/04/2025 | 1.3 | Correção e revisão do Cenário Atual do Cliente e do Negócio |  Lucas Guimarães |Caio Venâncio |
