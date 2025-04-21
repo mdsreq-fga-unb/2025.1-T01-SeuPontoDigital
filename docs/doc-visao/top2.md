@@ -37,15 +37,19 @@ As caractéristicas da solução proposta, até o momento, incluem:
 
 4. **Banco de Dados:** Supabase e PostgreSQL
 
-5. **Comunicação da Equipe:** Google Meet e Discord
+5. **Testes**: Jest
 
-6. **Controle de Código e Versionamento:** Git e GitHub
+6. **Comunicação da Equipe:** Google Meet e Discord
 
-7. **Organização e Gerenciamento da Equipe:** GitHub Issues e GitHub Projects
+7. **Controle de Código e Versionamento:** Git e GitHub
 
-O aplicativo mobile será desenvolvido com **React Native**, utilizando o **Expo**. A comunicação com o backend será feito por meio de uma API REST construída com **Node.js**, que será responsável pelas regras de negócio e conexão com o banco de dados. Para armazenamento dos dados, será utilizado o Supabase que oferece autenticação, armazenamento e banco de dados em tempo real baseado no PostgreSQL.
+8. **Organização e Gerenciamento da Equipe:** GitHub Issues e GitHub Projects
 
-Além disso, será desenvolvido um painel administrativo web utilizando o **React-Admin**, acessado via navegador. Esse painel permitirá o gerenciamento completo da aplicação, como cadastro de empregadores e funcionários, controle de permissões e visualização dos dados.
+O aplicativo mobile será desenvolvido com **React Native**, utilizando o **Expo**. A comunicação com o backend será feito por meio de uma API REST construída com **Node.js** e **Express**, que será responsável pelas regras de negócio e conexão com o banco de dados. Para armazenamento dos dados, será utilizado o Supabase que oferece autenticação, armazenamento e banco de dados em tempo real baseado no PostgreSQL.
+
+Além disso, será desenvolvido um painel administrativo web utilizando o **React-Admin**, acessado via navegador. Esse painel permitirá o gerenciamento completo da aplicação, como cadastro de empregadores e empregados, controle de permissões e visualização dos dados.
+
+Os testes da aplicação (tanto frontend quanto backend) serão feitos utilizando o **Jest**, que permitirá a verificação da lógica de negócio, componentes, e endpoints da API.
 
  A equipe se comunicará por **Google Meet** (quando o cliente estiver presente) e **Discord** (reuniões internas da equipe), enquanto o controle de código será feito com **Git** e **GitHub**, que também será utilizado para organização de tarefas via **GitHub Issues** e **GitHub Projects**.
 
@@ -104,9 +108,7 @@ O *SeuPontoDigital* propõe uma solução acessível e prática para o controle 
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 15/04/2025 | 1.0 | Características da solução e Ferramentas utilizadas | Lucas Guimarães |
-16/04/2025 | 1.1 | Pesquisa de Mercado e Análise Competitiva e Objetivo do Produto (Adjetivos) | Joao Pedro |
+16/04/2025 | 1.1 | Pesquisa de Mercado e Análise Competitiva e Objetivo do Produto (correção de adjetivos) | Joao Pedro |
 17/04/2025 | 1.2 | Impacto da Solução | Willian Silva |
 17/04/2025 | 1.3 | Análise de viabilidade (técnica, prazo e mercado) | Davi de Aguiar |
-19/04/2025 | 1.4 | Correção das características da solução e ferramentas utilizadas | Lucas Guimarães |
-19/04/2025 | 1.5 | Correção do adjetivo "intuitiva" no tópico Diferenciais Competitivos| Joao Pedro | 
-21/04/2025 | 1.6 | Correção e revisão da Solução Proposta| Lucas Guimarães | |
+21/04/2025 | 1.4 | Correção e revisão da Solução Proposta| Lucas Guimarães | |

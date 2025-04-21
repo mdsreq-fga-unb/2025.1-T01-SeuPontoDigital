@@ -61,7 +61,7 @@ A equipe envolvida no desenvolvimento é composta por:
 ### Métodos e Frequência de Reuniões
 <ul>
   <li>
-    <strong>Daily Scrum:</strong> A equipe realizará reuniões diárias de 15 minutos, por meio do WhatsApp, Google Meet ou Microsoft Teams, para compartilhar o progresso individual, identificar impedimentos e alinhar os objetivos do dia.
+    <strong>Daily Scrum:</strong> A equipe realizará reuniões diárias de 15 minutos, por meio do WhatsApp, para compartilhar o progresso individual, identificar impedimentos e alinhar os objetivos do dia.
   </li>
   <br>
   <li>
@@ -79,7 +79,7 @@ A equipe envolvida no desenvolvimento é composta por:
 </ul>
 
 ## Processo de Validação 
-O processo de validação da solução ocorrerá com base na Definição de Pronto, que estabelece critérios objetivos para assegurar às partes envolvidas quais elementos de cada incremento farão parte da entrega. Essa definição será aplicada durante o desenvolvimento e validada nas reuniões de revisão de sprint, nas quais o cliente fornecerá feedback para confirmar se o produto atende às expectativas antes da implementação final.
+O processo de validação da solução ocorrerá com base na *Definição de Pronto*, que estabelece critérios objetivos para assegurar às partes envolvidas quais elementos de cada incremento farão parte da entrega. Essa definição será aplicada durante o desenvolvimento e validada nas reuniões de revisão de sprint, nas quais o cliente fornecerá feedback para confirmar se o produto atende às expectativas antes da implementação final.
 
 ## Historico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)

@@ -1,4 +1,4 @@
-<p>Esta é uma <strong>versão preliminar</strong> do planejamento temporal do projeto. Ao longo da disciplina, o planejamento será atulizado.
+<p>Esta é uma <strong>versão preliminar</strong> do planejamento temporal do projeto. Ao longo da disciplina, o planejamento será atualizado.
 <p>
 <hr>
 

@@ -8,7 +8,7 @@
 
 5. **Beck, K. et al.** _Extreme Programming: A Gentle Introduction_. Disponível em: [http://www.extremeprogramming.org/](http://www.extremeprogramming.org/).
 
-
+6. **Brasil. (s.d.).** _Portal eSocial_ – Governo Federal. Disponível em: [https://www.gov.br/esocial/pt-br](https://www.gov.br/esocial/pt-br).
 
 ## Histórico de Versão
 

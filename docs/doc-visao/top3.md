@@ -31,12 +31,12 @@
     <tr>
       <td>Estrutura de Processos</td>
       <td>Focada em sprints curtas (1 - 2 semanas) e flexíveis com pequenas entregas ao final de cada sprint</td>
-      <td>Focado em iterações (1 - 4 semanas) e todas possuem as quatro fases sequenciais: Concepção, Elaboração, Construção e Transição</td>
+      <td>Focado em iterações (1 - 4 semanas) e quatro fases sequenciais: Concepção, Elaboração, Construção e Transição</td>
     </tr>
     <tr>
       <td>Flexibilidade de Requisitos</td>
       <td>Alta flexibilidade durante todo o projeto fundamentada pelo feedback constante do cliente</td>
-      <td>Permite mudanças durante todo o ciclo de vida do projeto, empregando o conceito de "requisitos emergentes"</td>
+      <td>Permite mudanças durante todo o ciclo de vida do projeto</td>
     </tr>
     <tr>
       <td>Colaboração com o cliente</td>
@@ -49,14 +49,9 @@
       <td>Complexidade um pouco maior, pois combina a estruturação dos processos do RUP com práticas ágeis</td>
     </tr>
     <tr>
-      <td>Práticas de Desenvolvimento</td>
-      <td>Inclui práticas como TDD (Test-Driven Development), <em>pair programming</em>, integração e refatoração contínua</td>
-      <td>Inclui sete disciplinas que ocorrem em paralelo: modelo, implementação, teste, implantação, gerenciamento de configuração, gerenciamento de projeto e ambiente</td>
-    </tr>
-    <tr>
       <td>Controle de Qualidade</td>
       <td>Controle de qualidade de acordo com as práticas do XP, como TDD e integração contínua</td>
-      <td>Controle de qualidade através de testes durante todas as iterações</td>
+      <td>Incorporta práticas como desenvolvimento orientado a testes, validação contínua e feedbacks do usuário</td>
     </tr>
     <tr>
       <td>Documentação</td>
@@ -85,7 +80,7 @@ A escolha do XP com práticas do Scrum foi baseada em três principais fatores, 
 - Equipe pequena, papéis flexíveis e pouco conhecimento em desenvolvimento mobile, permitindo que os membros participem de várias etapas e possam se adaptar durante o projeto, sendo mais eficiente que o AUP, voltado para equipes mistas ou com algum conhecimento prévio
 - Flexibilidade durante todo o projeto, permitindo que algumas mudanças possam ocorrer sem prejudicar todo o andamento do projeto.
 
-Além disso, utilizamos uma versão adaptada do GUPTA Framework para escolha da melhor metodologia. Segue imagem abaixo:
+Além disso, utilizamos uma versão adaptada do GUPTA Framework para ajudar na escolha do melhor processo. Segue imagem abaixo:
 
 [![GUPTA Framework](../assets/images/GUPTA.png)](../assets/images/GUPTA.png) *Obs:* caso a imagem esteja pequena, clique nela para visualizar melhor.
 

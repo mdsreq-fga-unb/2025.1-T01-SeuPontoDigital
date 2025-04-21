@@ -1,6 +1,6 @@
 ## Introdução ao Negócio e Contexto 
 
-A *Legalize Folha de Pagamento do Lar LTDA (Legalize Folha Doméstica)* é uma empresa sediada no Distrito Federal, especializada na gestão de folha de pagamento doméstica. Atua no mercado desde janeiro de 2024 e vem crescendo de forma significativa. Oferece serviços voltados a empregadores, sendo responsável por gerenciar todo o ciclo de vida da carteira de trabalho dos empregados domésticos por eles contratados, com foco especial nas empregadas domésticas.
+A *Legalize Folha de Pagamento do Lar LTDA (Legalize Folha Doméstica)* é uma empresa sediada no Distrito Federal, especializada na gestão de folha de pagamento doméstica. Atua no mercado desde janeiro de 2024 e vem crescendo de forma significativa. Oferece serviços voltados a empregadores, sendo responsável por gerenciar todo o ciclo de vida da carteira de trabalho dos empregados domésticos por eles contratados, com foco especial nos empregados domésticos.
 
 A missão da empresa é simplificar e legalizar o processo de contratação de serviços domésticos, oferecendo uma experiência personalizada e transparente para os empregadores. Para a empresa, é essencial manter os custos dos serviços acessíveis, sem comprometer a qualidade dos serviços prestados, garantindo competitividade no mercado. Entretanto, por ser uma empresa recente, ainda não dispõe de todos os recursos que algumas concorrentes oferecem.
 
