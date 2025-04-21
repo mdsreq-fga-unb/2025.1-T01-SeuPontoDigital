@@ -8,7 +8,7 @@ Este projeto foi realizado durante a disciplina de Requisitos de Software, na Un
   <img src="assets/icons/pontodigital.png" alt="Logo do produto" width="200">
 </div>
 
-O **SeuPontoDigital** é uma solução para controle de ponto eletrônico, criado para informatizar o registro da jornada de trabalho. Desenvolvido como um aplicativo mobile, o SeuPontoDigital tem como principal objetivo digitalizar a marcação de ponto dos funcionários via geolocalização, calculando as horas trabalhadas e enviando todas as informações diretamente ao empregador e/ou contador responsável.
+O **SeuPontoDigital** é uma solução para a empresa *Legalize Folha Doméstica*, criada para informatizar o controle de ponto eletrônico e otimizar o registro da jornada de trabalho. Além disso, a ferramenta auxilia na gestão da folha de pagamento, tornando mais fácil o gerenciamento dos dados dos empregados domésticos contratados pelos clientes da empresa.
 
 ## Equipe de Desenvolvimento
 <br>
