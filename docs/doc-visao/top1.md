@@ -22,7 +22,7 @@ A figura a seguir apresenta o Diagrama de Ishikawa sobre o problema enfretado pe
 
   - **Quanto ao Meio Ambiente:** a solução possibilita escalabilidade para o aumento de folhas a serem geridas pela empresa.
   - **Quanto aos Materiais:** o uso de papel e a necessidade de digitalização manual seria dispensada, além da folha se manter segura digitalmente.
-  - **Quanto aos Métodos:** a necessidade da precisão dos horários, a diminuição do tempo de contagem e cálculo de horas trabalhadas podem ser resolvidas.
+  - **Quanto aos Métodos:** a necessidade da precisão dos horários, a diminuição do tempo de contagem e cálculo de horas trabalhadas podem ser resolvidas. Também seria possível enviar o registro dos pontos automaticamente em qualquer data desejada.
   - **Quanto à Medida:** uma solução tecnológica admite indicadores de desempenho e controle de processos.
   - **Quanto à Mão de obra:** o contador e o empregador terá menos tempo de trabalho de manutenção da folha, e menos dificuldade.
 
