@@ -13,16 +13,15 @@ As caractéristicas da solução proposta, até o momento, incluem:
 
 - Liberação de acesso ao aplicativo condicionada à validação do vínculo empregatício.
 
-- Envio automático de notificações aos funcionários antes dos registros de ponto.
+- Envio automático de notificações aos funcionários sobre o registros de pontos.
 
 - Registro de ponto vinculado à presença física no local de trabalho, por geolocalização.
-
 
 - Justificativas de faltas e ausências registradas diretamente pelo aplicativo, com envio de arquivos.
 
 - Cálculo automático da jornada mensal, salário, descontos legais e horas extras.
 
-- Geração e envio de relatórios mensais para cliente, empregador e funcionário.
+- Geração e envio de relatórios mensais para o cliente e empregadores.
 
 - Exclusividade do cliente para realizar alterações nos dados dos relatórios.
 
