@@ -14,7 +14,7 @@ De acordo com a [Lei Complementar 150](https://www.planalto.gov.br/ccivil_03/lei
 
 A figura a seguir apresenta o Diagrama de Ishikawa sobre o problema enfretado pela *Legalize Folha Doméstica*:
 
-![Diagrama de Ishikawa ](../assets/images/diagrama_ishikawa.png)
+![Diagrama de Ishikawa ](../assets/images/diagrama-de-ishikawa-v1.1.png)
 
 É possível perceber, por meio do diagrama, que alguns desses aspectos do problema podem ser resolvidos com o uso da tecnologia, enquanto outros não.
 
@@ -24,14 +24,13 @@ A figura a seguir apresenta o Diagrama de Ishikawa sobre o problema enfretado pe
   - **Quanto aos Materiais:** o uso de papel e a necessidade de digitalização manual seria dispensada, além da folha se manter segura digitalmente.
   - **Quanto aos Métodos:** a necessidade da precisão dos horários, a diminuição do tempo de contagem e cálculo de horas trabalhadas podem ser resolvidas.
   - **Quanto à Medida:** uma solução tecnológica admite indicadores de desempenho e controle de processos.
-  - **Quanto a Máquina:** as múltiplas etapas de criação da folha de ponto persistiram.
   - **Quanto à Mão de obra:** o contador e o empregador terá menos tempo de trabalho de manutenção da folha, e menos dificuldade.
 
 *O que não está sendo resolvido:*
 
   - **Quanto ao Meio Ambiente:** a folha de ponto ainda deve ser criada e enviado no e-Social, um fator externo obrigatório por lei.
   - **Quanto à Mão de Obra:** ainda será necessário que o empregador se atente ao ponto diariamente.
-  - **Quanto a Máquina:** as múltiplas etapas de criação da folha de ponto persistiram (o empregador precisa assinar uma folha física ao fim do mês e a *Legalize Folha Doméstica* precisa verificar se os dados estão no formato certo, dentre outras etapas).
+  - **Quanto a Máquina:** as múltiplas etapas de criação da folha de ponto persistiram (o empregador precisa assinar uma folha física ao fim do mês e a *Legalize Folha Doméstica* precisa verificar se os dados estão no formato certo, dentre outras etapas). Também não seria possível impedir que dados incorretos sejam preenchidos no sistema do [eSocial](https://www.gov.br/esocial/pt-br) (plataforma do Governo Brasileiro para submeter documentos ao Ministério do Trabalho).
 
 Nesse contexto, observa-se que a digitalização da folha de ponto resolveria questões como demora, precisão na marcação e contagem de horas, eliminando inconsistências e reduzindo tempo de processamento. No entanto, não resolveria outros problemas como, por exemplo, a necessidade de o empregado manter-se atento aos registros.
 
