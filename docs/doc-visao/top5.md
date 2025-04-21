@@ -1,44 +1,46 @@
 ## Composição da Equipe 
-&nbsp;&nbsp;&nbsp;&nbsp;A equipe envolvida no desenvolvimento é composta por:
+
+A equipe envolvida no desenvolvimento é composta por:
+
 <table>
   <thead>
     <tr>
-      <th>Papel</th>
-      <th>Descrição</th>
-      <th>Responsável</th>
-      <th>Participantes</th>
+      <th align="center">Papel</th>
+      <th align="center">Descrição</th>
+      <th align="center">Responsável</th>
+      <th align="center">Participantes</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Gerente do Projeto</td>
+      <td>Gerente do Projeto (Product Owner)</td>
       <td>Organiza e conduz o projeto, além de assegurar a comunicação entre cliente e equipe, e o cumprimento do escopo e dos prazos estabelecidos.</td>
-      <td>Caio Venâncio</td>
+      <td align="center">Caio Venâncio</td>
       <td align="center">-</td>
     </tr>
     <tr>
       <td>Desenvolvedor Front-End Mobile</td>
       <td>Atua na parte visual do aplicativo, o que inclui a interface com o usuário, o design e a navegação.</td>
-      <td>Lucas Guimarães</td>
+      <td align="center">Lucas Guimarães</td>
       <td>Caio Venâncio, Davi de Aguiar e Thiago Melo</td>
     </tr>
     <tr>
       <td>Desenvolvedor Back-End</td>
       <td>Responsável por implementar a lógica do servidor, gerenciar o banco de dados e integrar APIs.</td>
-      <td align="center">-</td>
-      <td>Guilherme Moura, João Pedro Ferreira, Willian Silva</td>
+      <td align="center">Guilherme Moura</td>
+      <td>João Pedro Ferreira, Lucas Guimarães, Willian Silva</td>
     </tr>
     <tr>
       <td>Analista de QA</td>
       <td>Planeja e executa casos de teste, realiza a verificação e validação dos resultados e analisa a cobertura de testes da aplicação.</td>
-      <td>Willian Silva</td>
+      <td align="center">Willian Silva</td>
       <td align="center">-</td>
     </tr>
     <tr>
       <td>Analista de Requisitos</td>
       <td>Elabora os requisitos funcionais e não funcionais da solução e verifica se estão sendo atendidos ao longo do desenvolvimento.</td>
-      <td>Caio Venâncio</td>
-      <td>Davi de Aguiar, Thiago Melo, Lucas Gumarães, João Pedro Ferreira, Guilherme Moura e Willian Silva</td>
+      <td align="center">Caio Venâncio</td>
+      <td>Davi de Aguiar, Guilherme Moura, João Pedro Ferreira, Lucas Guimarães, Thiago Melo e Willian Silva</td>
     </tr>
   </tbody>
 </table>
@@ -52,7 +54,7 @@
   </li>
   <br>
   <li>
-    <strong>Microsoft Teams/Google Meet:</strong> Ferramenta que será utilizada para efetuar reuniões semanais de revisão e planejamento de sprints com o cliente, por meio das quais a equipe poderá validar entregas, coletar feedback e alinhar as próximas atividades.
+    <strong>Google Meet:</strong> Ferramenta que será utilizada para efetuar reuniões semanais de revisão e planejamento de sprints com o cliente, por meio das quais a equipe poderá validar entregas, coletar feedback e alinhar as próximas atividades.
   </li>
 </ul>
 
@@ -77,4 +79,9 @@
 </ul>
 
 ## Processo de Validação 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;O processo de validação da solução ocorrerá com base na Definição de Pronto, que estabelece critérios objetivos para assegurar às partes envolvidas quais elementos de cada incremento farão parte da entrega. Essa definição será aplicada durante o desenvolvimento e validada nas reuniões de revisão de sprint, nas quais o cliente fornecerá feedback para confirmar se o produto atende às expectativas antes da implementação final.</p>
+O processo de validação da solução ocorrerá com base na Definição de Pronto, que estabelece critérios objetivos para assegurar às partes envolvidas quais elementos de cada incremento farão parte da entrega. Essa definição será aplicada durante o desenvolvimento e validada nas reuniões de revisão de sprint, nas quais o cliente fornecerá feedback para confirmar se o produto atende às expectativas antes da implementação final.
+
+## Historico de Versão
+Data     | Versão | Descrição | Autor(es) | Revisor(es)
+-------- | ------ | --------- | ----- | ---------
+20/04/2025 | 1.0 | Interação entre Equipe e Cliente | Willian Silva | |
