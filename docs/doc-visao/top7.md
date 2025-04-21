@@ -4,8 +4,15 @@
 
 3. **Scrum Guide (2020).** _O Guia do Scrum_ (Versão em português). Disponível em: [https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-PortugueseBR-3.0.pdf](https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-PortugueseBR-3.0.pdf).
 
-## Histórico de Versão das Referências Bibliográficas
+4. **Brasil. (2015).** _Lei Complementar nº 150, de 1º de junho de 2015_. Dispõe sobre o contrato de trabalho doméstico. Disponível em: [https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp150.htm](https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp150.htm).
+
+5. **Beck, K. et al.** _Extreme Programming: A Gentle Introduction_. Disponível em: [http://www.extremeprogramming.org/](http://www.extremeprogramming.org/).
+
+
+
+## Histórico de Versão
 
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 15/04/2025 | 1.0 | Criação das Referências Bibliográficas | Lucas Guimarães | 
+21/04/2025 | 1.1 | Adição da Lei Complementar nº 150 e Extreme Programming: A Gentle introduction| Lucas Guimarães | 
