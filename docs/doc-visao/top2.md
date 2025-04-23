@@ -1,6 +1,6 @@
 ## Objetivo do Produto 
 
-O objetivo do produto é fornecer uma solução digital para a *Legalize Folha Doméstica*, informatizando o registro do ponto pelos empregados domésticos por meio de um aplicativo mobile, que permite registrar os horários de entradas, saídas e pausas para almoço, e com base nesses registros, calcular automaticamente o salário, as horas extras e os descontos. Além disso, o produto enviará os dados calculados automaticamente para a *Legalize Folha Doméstica*, facilitando a gestão da folha de pagamento e garantindo que os empregadores estejam em conformidade com a legislação trabalhista.
+O objetivo do produto é informatizar o registro de ponto pelos empregados domésticos por meio de um aplicativo mobile, que permite registrar os horários de entradas, saídas e pausas para almoço, e com base nesses registros, calcular automaticamente o salário, as horas extras e os descontos. Além disso, os dados calculados serão enviados automaticamente para a *Legalize Folha Doméstica*, facilitando a gestão da folha de pagamento e garantindo que os empregadores estejam em conformidade com a legislação trabalhista.
 
 ---
 ## Características da Solução 
