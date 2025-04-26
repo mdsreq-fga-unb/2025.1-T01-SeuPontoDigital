@@ -11,3 +11,4 @@ export const supabaseURL = process.env.SUPABASE_URL;
 export const supabaseKEY = process.env.SUPABASE_KEY;
 export const PORT = process.env.PORT;
 export const JWT_SECRET = process.env.JWT_SECRET;
+export const CORS_ORIGIN = process.env.CORS_ORIGIN;
