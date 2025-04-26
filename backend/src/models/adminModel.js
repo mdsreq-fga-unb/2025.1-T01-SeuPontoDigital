@@ -3,23 +3,20 @@ import supabase from "../config/supabase.js";
 const findOneAdminByEmail = async (email) => {
     try{
         const {data, error} = await supabase.from("admins").select("*").eq("email", email).single();
-
         if (error){
              if (error.code === "PGRST116") return null;
             }
         return data;
     }
     catch(err){
-        throw new Error(err)
+        throw err;
     }
-    
 }
 
-const registerAdminModel = async (name, email, password_hash) => {
+const registerAdminOnDB = async (name, email, password_hash) => {
     try{
         const admin = {name, email, password_hash};
         const {error} = await supabase.from("admins").insert(admin);
-
         if (error){
             throw new Error(error.message);
         }
@@ -30,4 +27,4 @@ const registerAdminModel = async (name, email, password_hash) => {
     }
 }
 
-export {findOneAdminByEmail, registerAdminModel};
+export {findOneAdminByEmail, registerAdminOnDB};
