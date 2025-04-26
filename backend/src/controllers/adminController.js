@@ -16,11 +16,13 @@ const registerAdminController = async (req, res) => {
 const loginAdminController = async (req, res) => {
     try{
         const {email, password} = req.body;
+
         const admin = await authenticateAdmin(email, password)
+        if (admin)
         res.status(200).json({msg: "authorized login"});
     }
     catch(err){
-        res.status(401).json({error: err.message});
+        res.status(401).json({errorEmail: err.message});
     }
 }
 

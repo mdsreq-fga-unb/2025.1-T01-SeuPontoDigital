@@ -5,12 +5,12 @@ const findOneAdminByEmail = async (email) => {
         const {data, error} = await supabase.from("admins").select("*").eq("email", email).single();
 
         if (error){
-            throw new Error (error.message);
-        }
+             if (error.code === "PGRST116") return null;
+            }
         return data;
     }
     catch(err){
-        throw err;
+        throw new Error(err)
     }
     
 }

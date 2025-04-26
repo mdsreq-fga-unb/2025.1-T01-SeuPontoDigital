@@ -7,7 +7,8 @@ const app = express();
 
 app.use(cors({
     origin: CORS_ORIGIN, 
-    credentials: true,                
+    credentials: true,
+    methods: ["POST", "GET"],            
 }))
 
 app.use(express.json());
