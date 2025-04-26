@@ -1,0 +1,18 @@
+.text-input input{
+    width: 100%;
+    padding: 14px;
+    border-radius: 4px;
+    border: 1px solid #000;
+    font-size: 20px;
+    margin-bottom: 32px;
+}
+
+.text-input label{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.text-input input:focus{
+    outline: 1.4px solid #0064C7;
+    border-color: transparent;
+}
