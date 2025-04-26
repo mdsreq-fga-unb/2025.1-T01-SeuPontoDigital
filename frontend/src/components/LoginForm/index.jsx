@@ -13,9 +13,7 @@ const LoginForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(email, password);
         setLoading(true);
-
     try {
         const response = await fetch(import.meta.env.VITE_API_URL+"/api/admin/login", {
             method: "POST",
@@ -28,25 +26,19 @@ const LoginForm = () => {
             }),
         });
             if (!response.ok) {
-                const errorEmail = (await response.text()).toString()
-
-                if(errorEmail === `{"errorEmail":"admin not found"}`){
+                const errorText = JSON.parse(await response.text())
+                if(errorText.error === "admin not found") {
                     Notification.error("Email não encontrado!");
-                    return
+                    return;
                 }
                 else {
                     Notification.error("Senha incorreta!");
                     return;
                 }
-                
             }
             Notification.sucess("Login realizado com sucesso!");
-            const data = await response.json();
-            console.log("api response:", data);
-
         } catch (error) {
             Notification.error("Erro de conexão com o servidor. Tente novamente mais tarde!");
-            console.error("Error:", error.message);
         } finally {
             setLoading(false);
         }
