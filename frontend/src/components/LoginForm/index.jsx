@@ -46,21 +46,21 @@ const LoginForm = () => {
         }
     }
     return(
-        <section className="login-form">;
-            <div className="login-form-container">;
-                <form onSubmit={handleSubmit}>;
+        <section className="login-form">
+            <div className="login-form-container">
+                <form onSubmit={handleSubmit}>
 
-                    <h2>SeuPonto<span>Digital</span></h2>;
+                    <h2>SeuPonto<span>Digital</span></h2>
 
-                    <TextInput label="Email" type="email" value={email} onChange={setEmail}/>;
-                    <TextInput label="Senha" type="password" value={password} onChange={setPassword}/>;
+                    <TextInput label="Email" type="email" value={email} onChange={setEmail}/>
+                    <TextInput label="Senha" type="password" value={password} onChange={setPassword}/>
 
                     <Button disabled={loading}>
-                    {loading ? "Acessando..." : "Acessar"};
-                    </Button>;
-                    <ToastContainer />;
-                </form>;
-            </div>;
+                    {loading ? "Acessando..." : "Acessar"}
+                    </Button>
+                    <ToastContainer />
+                </form>
+            </div>
         </section>
     )
 }
