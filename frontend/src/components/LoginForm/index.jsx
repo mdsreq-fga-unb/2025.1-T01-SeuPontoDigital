@@ -1,7 +1,9 @@
+import "./LoginForm.css"
 import TextInput from "../TextInput";
 import Button from "../Button";
 import { useState } from "react";
-import "./LoginForm.css"
+import { ToastContainer } from "react-toastify";
+import Notification from "../Notification";
 
 const LoginForm = () => {
 
@@ -11,7 +13,7 @@ const LoginForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(email, password)
+        console.log(email, password);
         setLoading(true);
 
     try {
@@ -25,34 +27,40 @@ const LoginForm = () => {
                 password
             }),
         });
+            if (!response.ok) {
+                if(response.status === 401 || response.status === 403){
+                    Notification.error("Usuário ou senha incorretos!");
+                    return;
+                }
+                throw new Error(response.statusText);
+            }
+            Notification.sucess("Login realizado com sucesso!");
+            const data = await response.json();
+            console.log("api response:", data);
 
-        if (!response.ok) {
-            throw new Error(response.statusText);
+        } catch (error) {
+            Notification.error("Erro de conexão com o servidor. Tente novamente mais tarde!");
+            console.error("Error:", error.message);
+        } finally {
+            setLoading(false);
         }
-
-        const data = await response.json();
-        console.log("api response:", data);
-
-    } catch (error) {
-        console.error("Error:", error.message);
-    } finally {
-        setLoading(false);
     }
-    }
-
     return(
-        <section className="login-form">
-            <form onSubmit={handleSubmit}>
+        <section className="login-form">;
+            <div className="login-form-container">;
+                <form onSubmit={handleSubmit}>;
 
-                <h2>SeuPonto<span>Digital</span></h2>
+                    <h2>SeuPonto<span>Digital</span></h2>;
 
-                <TextInput label="Email" type="email" value={email} onChange={setEmail}/>
-                <TextInput label="Senha" type="password" value={password} onChange={setPassword}/>
+                    <TextInput label="Email" type="email" value={email} onChange={setEmail}/>;
+                    <TextInput label="Senha" type="password" value={password} onChange={setPassword}/>;
 
-                <Button disabled={loading}>
-                {loading ? "Acessando..." : "Acessar"}
-                </Button>
-            </form>
+                    <Button disabled={loading}>
+                    {loading ? "Acessando..." : "Acessar"};
+                    </Button>;
+                    <ToastContainer />;
+                </form>;
+            </div>;
         </section>
     )
 }

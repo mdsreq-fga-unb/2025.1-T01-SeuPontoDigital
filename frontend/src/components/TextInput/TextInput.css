@@ -13,6 +13,6 @@
 }
 
 .text-input input:focus{
-    outline: 1.4px solid #0064C7;
+    outline: 2px solid #0064C7;
     border-color: transparent;
 }
