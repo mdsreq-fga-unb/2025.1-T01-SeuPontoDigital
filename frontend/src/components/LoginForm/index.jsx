@@ -28,11 +28,17 @@ const LoginForm = () => {
             }),
         });
             if (!response.ok) {
-                if(response.status === 401 || response.status === 403){
-                    Notification.error("Usuário ou senha incorretos!");
+                const errorEmail = (await response.text()).toString()
+
+                if(errorEmail === `{"errorEmail":"admin not found"}`){
+                    Notification.error("Email não encontrado!");
+                    return
+                }
+                else {
+                    Notification.error("Senha incorreta!");
                     return;
                 }
-                throw new Error(response.statusText);
+                
             }
             Notification.sucess("Login realizado com sucesso!");
             const data = await response.json();
