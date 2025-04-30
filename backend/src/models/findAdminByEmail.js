@@ -11,7 +11,7 @@ const findAdminByEmail = async (email) => {
         return data;
 
     }catch(err){
-        console.error("error:", err);
+        console.error("error in findAdminByEmail models:", err);
         throw err;
     }
 }

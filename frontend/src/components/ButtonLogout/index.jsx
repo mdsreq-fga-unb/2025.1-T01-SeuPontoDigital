@@ -7,7 +7,7 @@ const ButtonLogout = (props) => {
     const handleClickLogout = (event) => {
         event.preventDefault();
         localStorage.removeItem("token");
-        navigate("/login");
+        navigate("/");
     }
 
     return (

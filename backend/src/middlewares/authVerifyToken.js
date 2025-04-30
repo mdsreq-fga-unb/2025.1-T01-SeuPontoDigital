@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/env.js";
 
-const authVerifyJWT = (req, res, next) => { 
+const authVerifyToken = (req, res, next) => { 
 
     try{
         const token = req.headers['authorization'].replace("Bearer ", "");
@@ -21,9 +21,9 @@ const authVerifyJWT = (req, res, next) => {
         })
     }
     catch(err){
-        console.error("error in authVerifyJWT middleware:", err);
+        console.error("error in authVerifyToken middleware:", err);
         res.status(500).json({ error: "internal server error" });
     }
 }
 
-export default authVerifyJWT;
+export default authVerifyToken;

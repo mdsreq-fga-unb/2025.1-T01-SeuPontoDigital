@@ -14,16 +14,13 @@ const LoginForm = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-
         try{
             const data = await loginAdmin(email, password);
-            if (data.valid){
-                localStorage.setItem("token", data.token); 
-                Notification.success("Usuário autenticado com sucesso!")
-                setTimeout(()=>{
-                    navigate("/dashboard");
-                }, 2000);
-            }
+            localStorage.setItem("token", data.token); 
+            Notification.success("Usuário autenticado com sucesso!")
+            setTimeout(()=>{
+                navigate("/dashboard");
+            }, 2500);
         }
         catch(err){
                 if(err.status === 401)
@@ -52,5 +49,4 @@ const LoginForm = () => {
         </section>
     )
 }
-
 export default LoginForm;

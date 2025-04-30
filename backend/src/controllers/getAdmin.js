@@ -20,7 +20,7 @@ const getAdmin = async (req, res) => {
         })
     }
     catch(err){
-        console.error("error get admin:", err);
+        console.error("error in getAdmin controller:", err);
         throw err;
     }
 }

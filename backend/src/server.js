@@ -1,7 +1,7 @@
 import express from "express";
 import publicRoute from "./routes/public.route.js";
 import cors from "cors";
-import { CORS_ORIGIN } from "./config/env.js";
+import { CORS_ORIGIN, PORT } from "./config/env.js";
 
 const app = express();
 
@@ -15,6 +15,6 @@ app.use(cors({
 
 app.use("/api", publicRoute); 
 
-app.listen(3333, () => {
-    console.log("Server running on port 3333: http://localhost:3333");
+app.listen(PORT , () => {
+    console.log(`Server running on port ${PORT}: http://localhost:${PORT}`);
 })

@@ -4,11 +4,13 @@ const verifyPassword = async (loginPassword, storedPassword) =>{
     try {
         const isMatch = await bcrypt.compare(loginPassword, storedPassword);
 
-        if (isMatch) return true;
-        return false;
+        if (isMatch)
+            return true;
+        else
+            return false;
     }
     catch(err){
-        console.error("error in verify password", err);
+        console.error("error in verifyPassword service:", err);
         throw err;
     }   
 }

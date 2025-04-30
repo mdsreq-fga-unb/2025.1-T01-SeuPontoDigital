@@ -1,5 +1,12 @@
-.div-button-logout button{
+.div-button-logout{
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-button-logout button{
+    width: 10%;
     padding: 14px;
     border-radius: 4px;
     border: 1px solid #000;

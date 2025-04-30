@@ -1,9 +1,9 @@
 import "./ButtonLogin.css"
 
-const ButtonLogin = ({ children, ...props }) => {
+const ButtonLogin = (props) => {
     return (
         <div className="div-button-login">
-            <button {...props}>{children}</button>
+            <button>{props.children}</button>
         </div>
     )
 }

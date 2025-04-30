@@ -7,7 +7,7 @@ const createToken = (admin) => {
         return token;
     }
     catch(err){
-        console.error("error: ", err);
+        console.error("error in createToken middleware:", err);
         throw err;
     }
 }

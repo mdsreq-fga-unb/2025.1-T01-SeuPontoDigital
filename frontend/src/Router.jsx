@@ -6,12 +6,11 @@ import PrivateRoute from "./components/PrivateRoute";
 import "./Global.css"
 import { ToastContainer } from "react-toastify";
 
-function Router() {
-
+const Router = () => {
   return (
     <BrowserRouter>
         <Routes>
-            <Route path="/login" element = {<LoginForm/>}/>
+            <Route path="/" element = {<LoginForm/>}/>
             
             <Route
                 path="/dashboard"
@@ -19,12 +18,11 @@ function Router() {
                     <PrivateRoute>
                         <Dashboard/>
                     </PrivateRoute>
-                }
-            />
+                }/>
         </Routes>
         <ToastContainer />
     </BrowserRouter>
-)
+  )
 }
 
 export default Router;

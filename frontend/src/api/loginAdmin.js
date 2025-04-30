@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const loginAdmin = async (email, password) => {
-    const url = `${import.meta.env.VITE_API_URL}/api/login`
+    const URL = `${import.meta.env.VITE_API_URL}/api/login`
 
     try{
-        const response = await axios.post(url, {email, password});
+        const response = await axios.post(URL, {email, password});
         return response.data;
     }
     catch(err){
