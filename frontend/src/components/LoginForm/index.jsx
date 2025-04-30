@@ -1,62 +1,52 @@
 import "./LoginForm.css"
-import TextInput from "../TextInput";
-import Button from "../Button";
-import { useState } from "react";
-import { ToastContainer } from "react-toastify";
 import Notification from "../Notification";
+import { useState } from "react";
+import TextInput from "../TextInput";
+import ButtonLogin from "../ButtonLogin";
+import loginAdmin from "../../api/loginAdmin.js";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
 
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState("");
 
-    const handleSubmit = async (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-        setLoading(true);
-    try {
-        const response = await fetch(import.meta.env.VITE_API_URL+"/api/admin/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email,
-                password
-            }),
-        });
-            if (!response.ok) {
-                const errorText = JSON.parse(await response.text())
-                if(errorText.error === "admin not found") {
-                    Notification.error("Email não encontrado!");
-                    return;
-                }
-                else {
-                    Notification.error("Senha incorreta!");
-                    return;
-                }
+
+        try{
+            const data = await loginAdmin(email, password);
+            if (data.valid){
+                localStorage.setItem("token", data.token); 
+                Notification.success("Usuário autenticado com sucesso!")
+                setTimeout(()=>{
+                    navigate("/dashboard");
+                }, 2000);
             }
-            Notification.sucess("Login realizado com sucesso!");
-        } catch (error) {
-            Notification.error("Erro de conexão com o servidor. Tente novamente mais tarde!");
-        } finally {
-            setLoading(false);
+        }
+        catch(err){
+                if(err.status === 401)
+                    Notification.error("Email ou senha incorretos!")
+                else{
+                    console.error("login failed:", err.response?.data || err.message)
+                    Notification.error("Erro interno no servidor. Tente novamente mais tarde!")
+                } 
         }
     }
-    return(
+    return (
         <section className="login-form">
             <div className="login-form-container">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleFormSubmit}>
 
                     <h2>SeuPonto<span>Digital</span></h2>
 
                     <TextInput label="Email" type="email" value={email} onChange={setEmail}/>
+
                     <TextInput label="Senha" type="password" value={password} onChange={setPassword}/>
 
-                    <Button disabled={loading}>
-                    {loading ? "Acessando..." : "Acessar"}
-                    </Button>
-                    <ToastContainer />
+                    <ButtonLogin>Acessar</ButtonLogin>
+
                 </form>
             </div>
         </section>

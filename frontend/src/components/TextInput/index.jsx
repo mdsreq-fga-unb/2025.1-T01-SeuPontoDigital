@@ -1,17 +1,15 @@
-import "./TextInput.css"
+import "./TextInput.css";
 
-const TextInput = ({label,type, value, onChange}) => {
+const TextInput = (props) =>{
 
     const handleInputChange = (event) => {
-        onChange(event.target.value);
+        props.onChange(event.target.value);
     }
-
     return (
-        <div className="text-input">
-            <label>{label}</label>
-            <input type={type} value={value} onChange={handleInputChange}/>
+        <div className="div-text-input">
+            <label> {props.label}</label>
+            <input type={props.type} value={props.value} onChange={handleInputChange}/>
         </div>
     )
 }
-
-export default TextInput;
+export default TextInput

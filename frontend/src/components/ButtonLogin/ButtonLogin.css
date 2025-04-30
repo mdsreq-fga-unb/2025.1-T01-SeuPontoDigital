@@ -1,4 +1,4 @@
-.div-button button{
+.div-button-login button{
     width: 100%;
     padding: 14px;
     border-radius: 4px;
@@ -11,7 +11,7 @@
     transition-duration: .5s;
 }
 
-.div-button button:hover{
+.div-button-login button:hover{
     background-color: #023e7a;
     cursor: pointer;
 }

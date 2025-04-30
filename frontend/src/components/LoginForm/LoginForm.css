@@ -7,7 +7,7 @@
     
 }
 
-login-form-container{
+.login-form-container{
     display: flex;
     
     justify-content: center;
