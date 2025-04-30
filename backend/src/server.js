@@ -1,18 +1,20 @@
 import express from "express";
-import {PORT, CORS_ORIGIN} from "./config/env.js";
-import adminRouter from "./routes/admin.routes.js";
+import publicRoute from "./routes/public.route.js";
 import cors from "cors";
+import { CORS_ORIGIN } from "./config/env.js";
 
 const app = express();
 
+app.use(express.json())
+
 app.use(cors({
-    origin: CORS_ORIGIN, 
+    origin: CORS_ORIGIN,
     credentials: true,
-    methods: ["POST", "GET"],            
-}))
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH"]
+}));
 
-app.use(express.json());
+app.use("/api", publicRoute); 
 
-app.use("/api/admin", adminRouter);
-
-app.listen(PORT, () => {console.log("Server is running")});
+app.listen(3333, () => {
+    console.log("Server running on port 3333: http://localhost:3333");
+})
