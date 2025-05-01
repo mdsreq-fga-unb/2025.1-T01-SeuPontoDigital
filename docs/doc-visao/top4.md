@@ -19,97 +19,97 @@ _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) p
       <td style="text-align: center; vertical-align: middle;">Iniciação</td>
       <td style="text-align: center; vertical-align: middle;">09/04/2025</td>
       <td style="text-align: center; vertical-align: middle;">24/04/2025</td>
-      <td style="text-align: center; vertical-align: middle;">Elicitar requisitos, finalizar o documento de visão e configurar ambiente de desenvolvimento</td>
+      <td style="text-align: center; vertical-align: middle;">finalizar o documento de visão e configurar ambiente de desenvolvimento</td>
       <td style="text-align: center; vertical-align: middle;">Documento de visão</td>
-      <td style="text-align: center; vertical-align: middle;">Validação do documento de visão (informações não técnicas)</td>
+      <td style="text-align: center; vertical-align: middle;">Validação do documento de visão (informações não técnicas).</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 01</td>
       <td style="text-align: center; vertical-align: middle;">25/04/2025</td>
       <td style="text-align: center; vertical-align: middle;">01/05/2025</td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
+      <td style="text-align: center; vertical-align: middle;">Elicitação de requisitos e desenvolvimento de US1</td>
+      <td style="text-align: center; vertical-align: middle;">1.US1 </td>
+      <td style="text-align: center; vertical-align: middle;">Cliente não disponível.</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 02</td>
       <td style="text-align: center; vertical-align: middle;">02/05/2025</td>
       <td style="text-align: center; vertical-align: middle;">08/05/2025</td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
+      <td style="text-align: center; vertical-align: middle;">Primeira entrega</td>
+      <td style="text-align: center; vertical-align: middle;">1.US2<br>2.US8</td>
+      <td style="text-align: center; vertical-align: middle;">Validação de protótipos e critérios de aceitação.</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 03</td>
       <td style="text-align: center; vertical-align: middle;">09/05/2025</td>
       <td style="text-align: center; vertical-align: middle;">15/05/2025</td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 04</td>
       <td style="text-align: center; vertical-align: middle;">16/05/2025</td>
       <td style="text-align: center; vertical-align: middle;">22/05/2025</td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 05</td>
       <td style="text-align: center; vertical-align: middle;">23/05/2025</td>
       <td style="text-align: center; vertical-align: middle;">29/05/2025</td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 06</td>
       <td style="text-align: center; vertical-align: middle;">30/05/2025</td>
       <td style="text-align: center; vertical-align: middle;">05/06/2025</td>
-     <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
+     <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 07</td>
       <td style="text-align: center; vertical-align: middle;">06/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">12/06/2025</td>
-     <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
+     <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 08</td>
       <td style="text-align: center; vertical-align: middle;">13/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">19/06/2025</td>
-     <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
+     <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 09</td>
       <td style="text-align: center; vertical-align: middle;">20/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">26/06/2025</td>
-     <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
+     <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 10</td>
       <td style="text-align: center; vertical-align: middle;">27/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">03/07/2025</td>
-     <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
+     <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 11</td>
       <td style="text-align: center; vertical-align: middle;">04/07/2025</td>
       <td style="text-align: center; vertical-align: middle;">10/07/2025</td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
-      <td style="text-align: center; vertical-align: middle;"></td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;">...</td>
     </tr>
   </tbody>
 </table>
@@ -140,6 +140,13 @@ _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) p
       <td>1.1</td>
       <td>Correção de alguns objetivos, entregas e validações</td>
       <td>Lucas Guimarães</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>01/05/2025</td>
+      <td>2.0</td>
+      <td>Correção da primeira parte do cronograma com User Stories</td>
+      <td>Caio Venâncio</td>
       <td></td>
     </tr>
   </tbody>

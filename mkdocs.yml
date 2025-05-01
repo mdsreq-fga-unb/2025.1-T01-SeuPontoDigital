@@ -15,8 +15,10 @@ nav:
     - Interação Entre Equipe e Cliente: doc-visao/top5.md
     - Lições Aprendidas: doc-visao/top6.md
     - Referências Bibliográficas: doc-visao/top7.md
-  - Sprints:
+  - Sprints & Product Backlog:
+    - Product Backlog: sprints/product-backlog.md
     - Sprint 01: sprints/sprint01.md
+    - Sprint 02: sprints/sprint02.md
   - Entregas:
     - Entrega Unidade 1: entregas/entrega1.md
   - Políticas da Equipe :
