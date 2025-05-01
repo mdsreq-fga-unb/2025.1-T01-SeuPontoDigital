@@ -1,9 +1,11 @@
 import express from "express";
 import getEmployees from "../controllers/getEmployees.js";
-import authVerifyToken from "../middleware/authVerifyToken.js";
+import authVerifyToken from "../middlewares/authVerifyToken.js";
 
 const privateRoute = express.Router();
 
-privateRoute.get("/dashboard", authVerifyToken, getEmployees);
+privateRoute.use(authVerifyToken);
+
+privateRoute.get("/empregados", getEmployees);
 
 export default privateRoute;

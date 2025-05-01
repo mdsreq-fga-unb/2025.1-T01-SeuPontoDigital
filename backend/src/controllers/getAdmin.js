@@ -8,7 +8,7 @@ const getAdmin = async (req, res) => {
 
         const admin = await findAdminByEmail(email);
         if (admin && await verifyPassword(password, admin.password)){
-            res.status(200).json({
+            return res.status(200).json({
                 message: "login has been verified",
                 token: createToken(admin),
                 valid: true
