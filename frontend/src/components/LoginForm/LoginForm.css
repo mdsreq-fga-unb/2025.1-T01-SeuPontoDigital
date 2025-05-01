@@ -1,0 +1,35 @@
+.login-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  
+}
+
+.login-form-container{
+    display: flex;
+    
+    justify-content: center;
+    margin: auto;
+    width: 30%;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.login-form form{
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 32px;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+    margin: 24px;
+}
+
+.login-form h2{
+    text-align: center;
+    margin: 50px 0;
+    font-size: 30px;
+}
+
+.login-form span{
+    color: #0064C7;
+}
