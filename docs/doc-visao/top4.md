@@ -37,7 +37,7 @@ _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) p
       <td style="text-align: center; vertical-align: middle;">08/05/2025</td>
       <td style="text-align: center; vertical-align: middle;">Primeira entrega</td>
       <td style="text-align: center; vertical-align: middle;">1.US2<br>2.US8</td>
-      <td style="text-align: center; vertical-align: middle;">Validação de protótipos e critérios de aceitação.</td>
+      <td style="text-align: center; vertical-align: middle;">Validação de acesso administrativo.</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 03</td>
