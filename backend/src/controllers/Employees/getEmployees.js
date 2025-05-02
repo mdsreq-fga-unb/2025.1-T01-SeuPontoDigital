@@ -5,10 +5,10 @@ const getEmployees = async (req, res) => {
     try{
         const data = await fetchEmployees();
         if (data){
-            res.status(200).json(data)
+            return res.status(200).json(data)
         }
         else{
-            res.status(404).json({message: "not found employees"})
+            return res.status(404).json({message: "not found employees"})
         }
     }
     catch(err){
