@@ -1,4 +1,4 @@
-import fetchEmployees from "../models/fetchEmployees.js";
+import fetchEmployees from "../../models/Employees/fetchEmployees.js";
 
 const getEmployees = async (req, res) => {
 

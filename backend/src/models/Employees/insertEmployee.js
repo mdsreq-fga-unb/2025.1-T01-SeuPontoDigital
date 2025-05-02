@@ -1,4 +1,4 @@
-import supabase from "../config/supabase.js";
+import supabase from "../../config/supabase.js";
 
 const insertEmployee = async (employee) => {
     try{
@@ -8,10 +8,7 @@ const insertEmployee = async (employee) => {
             date_birth:employee.date_birth,
             address: employee.address
         })
-        if(error){
-            return error;
-        }
-        return;
+        if(error) return error;     
     }
     catch(err){
         console.error("error in insertEmployee models:", err);
