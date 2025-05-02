@@ -1,5 +1,5 @@
 import findAdminByEmail from "../models/findAdminByEmail.js";
-import verifyPassword from "../services/verifyPassword.js";
+import verifyPassword from "../middlewares/verifyPassword.js";
 import createToken from "../middlewares/createToken.js";
 
 const loginAdmin = async (req, res) => {
