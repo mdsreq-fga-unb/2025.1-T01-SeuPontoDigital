@@ -1,7 +1,11 @@
 import { body, validationResult } from "express-validator";
 
 const validateEmail = [
-    body("email").isEmail().withMessage("email is not valid"),
+    body("email")
+    .optional()
+    .isEmail()
+    .withMessage("email is not valid"),
+    
     (req, res, next) => {
         const errors = validationResult(req);
 
