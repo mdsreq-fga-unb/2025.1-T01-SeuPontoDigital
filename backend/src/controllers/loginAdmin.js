@@ -2,7 +2,7 @@ import findAdminByEmail from "../models/findAdminByEmail.js";
 import verifyPassword from "../services/verifyPassword.js";
 import createToken from "../middlewares/createToken.js";
 
-const getAdmin = async (req, res) => {
+const loginAdmin = async (req, res) => {
     try{
         const {email, password} = req.body;
 
@@ -20,8 +20,8 @@ const getAdmin = async (req, res) => {
         })
     }
     catch(err){
-        console.error("error in getAdmin controller:", err);
+        console.error("error in loginAdmin controller:", err);
         throw err;
     }
 }
-export default getAdmin;
+export default loginAdmin;
