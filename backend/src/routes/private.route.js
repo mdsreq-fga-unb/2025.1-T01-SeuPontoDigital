@@ -8,6 +8,7 @@ import getEmployers from "../controllers/Employers/getEmployers.js";
 import postEmployer from "../controllers/Employers/postEmployer.js";
 import validateEmail from "../middlewares/validateEmail.js";
 import deleteEmployer from "../controllers/Employers/deleteEmployer.js";
+import updateEmployer from "../controllers/Employers/updateEmployer.js";
 
 const privateRoute = express.Router();
 
@@ -24,6 +25,8 @@ privateRoute.delete("/empregados/:id", deleteEmployee);
 
 privateRoute.get("/empregadores", getEmployers);
 privateRoute.post("/empregadores", validateEmail, postEmployer);
+privateRoute.put("/empregadores/:id", validateEmail, updateEmployer);
 privateRoute.delete("/empregadores/:id", deleteEmployer);
+
 
 export default privateRoute;
