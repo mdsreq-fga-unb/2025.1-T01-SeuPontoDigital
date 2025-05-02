@@ -6,7 +6,7 @@ import updateEmployee from "../controllers/Employees/updateEmployee.js";
 import deleteEmployee from "../controllers/Employees/deleteEmployee.js";
 import getEmployers from "../controllers/Employers/getEmployers.js";
 import postEmployer from "../controllers/Employers/postEmployer.js";
-import validateEmail from "../services/validateEmail.js";
+import validateEmail from "../middlewares/validateEmail.js";
 
 const privateRoute = express.Router();
 

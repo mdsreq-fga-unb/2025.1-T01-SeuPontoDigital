@@ -1,4 +1,4 @@
-import validateCPF from "../../services/validateCPF.js";
+import validateCPF from "../../middlewares/validateCPF.js";
 import updateEmployeeByID from "../../models/Employees/updateEmployeeByID.js";
 
 const updateEmployee = async (req, res) => {

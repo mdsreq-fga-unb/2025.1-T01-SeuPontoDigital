@@ -1,5 +1,5 @@
 import insertEmployee from "../../models/Employees/insertEmployee.js";
-import validateCPF from "../../services/validateCPF.js";
+import validateCPF from "../../middlewares/validateCPF.js";
 
 const postEmployee = async (req, res) => {
     try{
