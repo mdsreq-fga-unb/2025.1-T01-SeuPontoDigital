@@ -23,6 +23,6 @@
 }
 
 .container-header h1{
-    color: var(--body-color);
+    color: var(--light-color);
     font-size: 3rem;
 }

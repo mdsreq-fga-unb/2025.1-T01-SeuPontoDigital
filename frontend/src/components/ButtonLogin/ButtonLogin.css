@@ -2,15 +2,15 @@
     width: 100%;
     padding: 1rem;
     border-radius: .4rem;
-    border: 1px solid #000;
+    border: 1px solid var(--dark-color);
     box-sizing: border-box;
-    background-color: #0064C7;
+    background-color: var(--primary-color);
     font-size: 1.8rem;
-    color: #fff;
+    color: var(--light-color);
     transition-duration: .5s;
 }
 
 .div-button-login button:hover{
-    background-color: #023e7a;
+    background-color: var(--secondary-color);
     cursor: pointer;
 }

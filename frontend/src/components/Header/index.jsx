@@ -1,12 +1,9 @@
 import "./Header.css"
 
-const Header = () => {
+const Header = (props) => {
     return (
         <header className="main-header">
-            <div className="container-header">
-                <img src="../../public/images/seupontodigital.png"></img>
-                <h1>SeuPonto<span>Digital</span></h1>
-            </div> 
+            {props.children}
         </header>
     )
 }

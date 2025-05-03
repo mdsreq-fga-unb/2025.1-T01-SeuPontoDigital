@@ -1,5 +1,4 @@
 import "./Dashboard.css"
-import ButtonLogout from "../ButtonLogout";
 import Sidebar from "../Sidebar";
 
 const Dashboard = () => {
@@ -8,7 +7,6 @@ const Dashboard = () => {
             <Sidebar/>
             <div className="container-dashboard">
                 <h1>Dashboard</h1>
-                <ButtonLogout>Sair</ButtonLogout>
             </div> 
         </>
 )

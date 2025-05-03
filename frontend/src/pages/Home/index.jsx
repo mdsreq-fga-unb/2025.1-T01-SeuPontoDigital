@@ -5,7 +5,12 @@ import Footer from "../../components/Footer";
 const Home = () => {
     return (
         <>
-            <Header/>
+            <Header>
+                <div className="container-header">
+                    <img src="../../public/images/seupontodigital.png"></img>
+                    <h1>SeuPontoDigital</h1>
+                </div> 
+            </Header>
             <LoginForm/>
             <Footer/>
         </>

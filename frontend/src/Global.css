@@ -9,7 +9,9 @@
 :root{
     --primary-color: #0064C7;
     --secondary-color: #023e7a;
-    --body-color: #FAFAFA;
+    --light-color: #FAFAFA;
+    --dark-color: oklch(14.5% 0 0);
+    --neutral-color: oklch(92.9% 0.013 255.508)
     --text-color: #2e2e2e;
 }
 
@@ -21,6 +23,6 @@ html{
 body{
     width: 100vw;
     height: 100vh;
-    background-color: var(--body-color);
+    background-color: var(--light-color);
     overflow: hidden;
 }
