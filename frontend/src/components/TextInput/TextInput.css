@@ -1,22 +1,22 @@
 .div-text-input input{
     width: 100%;
-    padding: 14px;
-    border-radius: 5px;
-    border: 1px solid black;
-    margin-bottom: 30px;
+    padding: 1.4rem;
+    border-radius: .5rem;
+    border: .1rem solid black;
+    margin-bottom: 3rem;
 }
 
 .div-text-input label{
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 700;
 }
 
 .div-text-input input{
-    padding: 14px;
-    font-size: 20px;
+    padding: 1.4rem;
+    font-size: 2rem;
 }
 
 .div-text-input input:focus{
-    outline: 2px solid #0064C7;
+    outline: .2rem solid #0064C7;
     border-color: transparent;
 }

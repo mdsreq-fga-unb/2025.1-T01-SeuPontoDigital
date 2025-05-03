@@ -1,5 +1,5 @@
 .main-footer{
-    height: 50px;
+    height: 5rem;
     width: 100%;
     background-color: var(--primary-color);
 }
@@ -11,5 +11,5 @@
     justify-content: center;
     align-items: center;
     color: var(--body-color);
-    font-size: 12px;
+    font-size: 1rem;
 }

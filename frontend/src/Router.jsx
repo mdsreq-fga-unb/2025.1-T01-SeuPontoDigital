@@ -1,9 +1,9 @@
+import "./Global.css"
 import React from "react";
+import { ToastContainer } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
-import "./Global.css"
-import { ToastContainer } from "react-toastify";
 import Home from "./pages/Home";
 
 const Router = () => {

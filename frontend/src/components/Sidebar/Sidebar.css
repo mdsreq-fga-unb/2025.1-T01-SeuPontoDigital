@@ -1,0 +1,13 @@
+.sidebar-nav{
+    width: 24rem;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: var(--primary-color);
+}
+
+.sidebar-nav img {
+    width: 3rem;
+    height: auto;
+}

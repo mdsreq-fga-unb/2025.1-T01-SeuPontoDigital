@@ -1,5 +1,6 @@
 import { toast, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./Notification.css"
 
 const Notification = {
     success: (message) => {

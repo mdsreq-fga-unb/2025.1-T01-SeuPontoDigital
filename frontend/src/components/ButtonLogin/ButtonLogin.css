@@ -1,11 +1,11 @@
 .div-button-login button{
     width: 100%;
-    padding: 14px;
-    border-radius: 4px;
+    padding: 1rem;
+    border-radius: .4rem;
     border: 1px solid #000;
     box-sizing: border-box;
     background-color: #0064C7;
-    font-size: 18px;
+    font-size: 1.8rem;
     color: #fff;
     transition-duration: .5s;
 }

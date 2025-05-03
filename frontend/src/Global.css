@@ -13,10 +13,14 @@
     --text-color: #2e2e2e;
 }
 
+html{
+    font-size: 62.5%;
+    font-family: "Roboto Flex", sans-serif;
+}
+
 body{
     width: 100vw;
     height: 100vh;
     background-color: var(--body-color);
     overflow: hidden;
-    font-family: "Roboto Flex", sans-serif;
 }
