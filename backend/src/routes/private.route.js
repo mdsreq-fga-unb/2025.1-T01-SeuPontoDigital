@@ -14,19 +14,19 @@ const privateRoute = express.Router();
 
 privateRoute.use(authVerifyToken);
 
-// ============= EMPLOYEES =============
+// ============= EMPLOYEES (role: 0)=============
 
-privateRoute.get("/empregados", getEmployees);
-privateRoute.post("/empregados", postEmployee);
-privateRoute.put("/empregados/:id", updateEmployee);
-privateRoute.delete("/empregados/:id", deleteEmployee);
+privateRoute.get("/employees", getEmployees);
+privateRoute.post("/employee", validateEmail, postEmployee);
+privateRoute.put("/employee/:id", updateEmployee);
+privateRoute.delete("/employee/:id", deleteEmployee);
 
-// ============= EMPLOYERS =============
+// ============= EMPLOYERS (role: 1)=============
 
-privateRoute.get("/empregadores", getEmployers);
-privateRoute.post("/empregadores", validateEmail, postEmployer);
-privateRoute.put("/empregadores/:id", validateEmail, updateEmployer);
-privateRoute.delete("/empregadores/:id", deleteEmployer);
+privateRoute.get("/employers", getEmployers);
+privateRoute.post("/employer", validateEmail, postEmployer);
+privateRoute.put("/employer/:id", validateEmail, updateEmployer);
+privateRoute.delete("/employer/:id", deleteEmployer);
 
 
 export default privateRoute;

@@ -1,9 +1,9 @@
-import fetchEmployees from "../../models/Employees/fetchEmployees.js";
+import getEmployeesFromDB from "../../models/Employees/getEmployeesFromDB.js";
 
 const getEmployees = async (req, res) => {
 
     try{
-        const data = await fetchEmployees();
+        const data = await getEmployeesFromDB();
         if (data){
             return res.status(200).json(data)
         }
