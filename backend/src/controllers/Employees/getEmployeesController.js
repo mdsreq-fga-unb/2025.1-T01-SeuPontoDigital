@@ -1,20 +1,20 @@
 import getEmployeesFromDB from "../../models/Employees/getEmployeesFromDB.js";
 
-const getEmployees = async (req, res) => {
+const getEmployeesController = async (req, res) => {
 
-    try{
+    try {
         const data = await getEmployeesFromDB();
-        if (data){
+        if (data) {
             return res.status(200).json(data)
         }
-        else{
-            return res.status(404).json({message: "not found employees"})
+        else {
+            return res.status(404).json({ message: "not found employees" })
         }
     }
-    catch(err){
+    catch (err) {
         console.log("error in getEmployess controller:", err);
         throw err;
     }
 }
 
-export default getEmployees;
+export default getEmployeesController;

@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-const verifyPassword = async (loginPassword, storedPassword) =>{
+const verifyPassword = async (loginPassword, storedPassword) => {
     try {
         const isMatch = await bcrypt.compare(loginPassword, storedPassword);
 
@@ -9,10 +9,10 @@ const verifyPassword = async (loginPassword, storedPassword) =>{
         else
             return false;
     }
-    catch(err){
+    catch (err) {
         console.error("error in verifyPassword service:", err);
         throw err;
-    }   
+    }
 }
 
 export default verifyPassword;

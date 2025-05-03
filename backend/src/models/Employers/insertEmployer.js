@@ -1,8 +1,8 @@
 import supabase from "../../config/supabase.js";
 
 const insertEmployer = async (employer) => {
-    try{
-        const {error} = await supabase.from("users").insert({
+    try {
+        const { error } = await supabase.from("users").insert({
             name: employer.name,
             cpf: employer.cpf,
             email: employer.email,
@@ -19,10 +19,10 @@ const insertEmployer = async (employer) => {
         });
         if (error) return error;
     }
-    catch(err){
+    catch (err) {
         console.error("error in insertEmployer models:", err);
         throw err;
     }
-}   
+}
 
 export default insertEmployer;

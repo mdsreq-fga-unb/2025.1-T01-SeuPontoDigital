@@ -1,7 +1,7 @@
-import {toast, Flip} from "react-toastify";
+import { toast, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Notification ={
+const Notification = {
     success: (message) => {
         toast.success(message, {
             position: "top-center",
@@ -14,7 +14,7 @@ const Notification ={
             theme: "colored",
             transition: Flip,
         });
-    },  
+    },
     error: (message) => {
         toast.error(message, {
             position: "top-center",

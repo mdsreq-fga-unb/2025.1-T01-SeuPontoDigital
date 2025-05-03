@@ -14,10 +14,10 @@ app.use(cors({
     methods: ["GET", "POST", "DELETE", "PUT", "PATCH"]
 }));
 
-app.use("/api", publicRoute); 
+app.use("/api", publicRoute);
 
 app.use("/dashboard", privateRoute);
 
-app.listen(PORT , () => {
+app.listen(PORT, () => {
     console.log(`Server running on: http://localhost:${PORT}`);
 });

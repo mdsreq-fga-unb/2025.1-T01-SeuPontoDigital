@@ -1,12 +1,12 @@
 import supabase from "../../config/supabase.js";
 
 const updateEmployeeByID = async (employeeID, updateFields) => {
-    try{
-        const {error} = await supabase.from("users").update(updateFields).eq("id", employeeID);
+    try {
+        const { error } = await supabase.from("users").update(updateFields).eq("id", employeeID);
 
-        if (error) return error;    
+        if (error) return error;
     }
-    catch(err){
+    catch (err) {
         console.error("error in updateEmployeeByID models:", err);
         throw err;
     }

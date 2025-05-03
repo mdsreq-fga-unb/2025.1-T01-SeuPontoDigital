@@ -1,6 +1,6 @@
 import "./TextInput.css";
 
-const TextInput = (props) =>{
+const TextInput = (props) => {
 
     const handleInputChange = (event) => {
         props.onChange(event.target.value);
@@ -8,7 +8,7 @@ const TextInput = (props) =>{
     return (
         <div className="div-text-input">
             <label> {props.label}</label>
-            <input type={props.type} value={props.value} onChange={handleInputChange}/>
+            <input type={props.type} value={props.value} onChange={handleInputChange} />
         </div>
     )
 }

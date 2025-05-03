@@ -14,21 +14,21 @@ const LoginForm = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        try{
+        try {
             const data = await loginAdmin(email, password);
-            localStorage.setItem("token", data.token); 
+            localStorage.setItem("token", data.token);
             Notification.success("Usuário autenticado com sucesso!")
-            setTimeout(()=>{
+            setTimeout(() => {
                 navigate("/dashboard");
             }, 2500);
         }
-        catch(err){
-                if(err.status === 401)
-                    Notification.error("Email ou senha incorretos!")
-                else{
-                    console.error("login failed:", err.response?.data || err.message)
-                    Notification.error("Erro interno no servidor. Tente novamente mais tarde!")
-                } 
+        catch (err) {
+            if (err.status === 401)
+                Notification.error("Email ou senha incorretos!")
+            else {
+                console.error("login failed:", err.response?.data || err.message)
+                Notification.error("Erro interno no servidor. Tente novamente mais tarde!")
+            }
         }
     }
     return (
@@ -38,9 +38,9 @@ const LoginForm = () => {
 
                     <h2>SeuPonto<span>Digital</span></h2>
 
-                    <TextInput label="Email" type="email" value={email} onChange={setEmail}/>
+                    <TextInput label="Email" type="email" value={email} onChange={setEmail} />
 
-                    <TextInput label="Senha" type="password" value={password} onChange={setPassword}/>
+                    <TextInput label="Senha" type="password" value={password} onChange={setPassword} />
 
                     <ButtonLogin>Acessar</ButtonLogin>
 
