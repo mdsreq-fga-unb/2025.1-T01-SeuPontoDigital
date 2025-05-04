@@ -1,6 +1,15 @@
-.container-dashboard{
-    display: flex;
-    margin: auto;
-    align-items: center;
-    height: 100vh;
+.container-dashboard {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  height: 100vh;
+}
+
+.container-table-pages {
+  height: 100vh;
+}
+
+.container-search-button {
+  display: flex;
+  flex-direction: row-reverse;
 }

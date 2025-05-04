@@ -11,23 +11,13 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
+
         <Route path="/" element={<Home />} />
 
-        <Route
-          path="/empregados"
-          element={
-            <PrivateRoute>
-              <Employees />
-            </PrivateRoute>
-          } />
+        <Route path="/empregados" element={<PrivateRoute>  <Employees /> </PrivateRoute>} />
 
-        <Route
-          path="/empregadores"
-          element={
-            <PrivateRoute>
-              <Employers />
-            </PrivateRoute>
-          } />
+        <Route path="/empregadores" element={<PrivateRoute>  <Employers />  </PrivateRoute>} />
+
       </Routes>
       <ToastContainer />
     </BrowserRouter>
