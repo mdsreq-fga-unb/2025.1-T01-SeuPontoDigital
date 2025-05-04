@@ -4,7 +4,6 @@ const getOneEmployerByID = async (id) => {
     try{
         const {data, error} = await supabase.from("users").select("*").eq("id", id).eq("role", 1).single();
         if (error){
-            console.log("kk")
             console.error(error);
             return null;
         }

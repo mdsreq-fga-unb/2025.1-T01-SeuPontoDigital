@@ -1,6 +1,6 @@
 import "./LoginForm.css"
 import Notification from "../Notification";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextInput from "../TextInput";
 import ButtonForm from "../ButtonForm";
 import axios from "axios";
@@ -11,6 +11,12 @@ const LoginForm = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token)
+            navigate("/empregados");
+    },[navigate])
 
     const handleInputEmail = (event) => setEmail(event.target.value);
         
