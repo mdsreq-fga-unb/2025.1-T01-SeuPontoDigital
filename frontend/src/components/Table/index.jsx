@@ -1,25 +1,8 @@
 import "./Table.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { FaTrashCan, FaPenToSquare } from "react-icons/fa6";
+import formatField from "../../services/formatField";
 
 const Table = (props) => {
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        axios.get(props.path, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-            .then(response => {
-                setData(response.data);
-            })
-            .catch(err => {
-                console.error("error:", err);
-            });
-    }, []);
-
     return (
         <div className="table-container">
             <table className="data-table">
@@ -28,14 +11,21 @@ const Table = (props) => {
                         {props.fieldsTH.map(field => (
                             <th>{field}</th>
                         ))}
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((item, index) => (
+                    {props.data.map((item, index) => (
                         <tr key={index}>
                             {props.fieldsTD.map((field, i) => (
-                                <td key={i}>{item[field]}</td>
+                                <td key={i}>
+                                {formatField(field, item[field])}
+                              </td>
                             ))}
+                            <td>
+                                <FaPenToSquare onClick={() => props.onEdit(item)} className="fa-edit" />
+                                <FaTrashCan onClick={() => props.onDelete(item)} className="fa-delete" />
+                            </td>
                         </tr>
                     ))}
                 </tbody>

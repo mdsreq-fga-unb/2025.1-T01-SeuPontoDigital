@@ -14,6 +14,9 @@
     --neutral-color: oklch(92.9% 0.013 255.508);
     --text-color: #2e2e2e;
     --select-color: oklch(55.4% 0.046 257.417);
+    --confirm-color: oklch(62.7% 0.194 149.214);
+    --error-color: oklch(57.7% 0.245 27.325);
+    --error2-color: oklch(50.5% 0.213 27.518);
 }
 
 html{

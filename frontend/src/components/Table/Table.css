@@ -28,9 +28,9 @@
 
 .data-table th {
     background-color: var(--primary-color);
-    font-weight: 500;
+    font-weight: 600;
     color: var(--light-color);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
 }
 
 .data-table tr:hover {
@@ -39,4 +39,27 @@
 
 .data-table td { 
     width: 20%; 
+    font-size: 1.4rem;
+}
+
+.fa-edit{
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-right: 2rem;
+}
+
+.fa-delete{
+    color: var(--error-color);
+    font-size: 2rem;
+    margin-left: 2rem;
+}
+
+.fa-edit:hover{
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+.fa-delete:hover{
+    cursor: pointer;
+    color: var(--error2-color);
 }
