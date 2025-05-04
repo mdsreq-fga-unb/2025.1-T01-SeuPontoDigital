@@ -1,56 +1,57 @@
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.349);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+.container-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.349);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
-.modal-content {
-    background: var(--light-color);
-    padding: 5rem;
-    border-radius: 0.5rem;
-    width: 60rem;
-    text-align: center;
-    font-size: 1.7rem;
+.container-modal-open {
+  background: var(--light-color);
+  padding: 5rem;
+  border-radius: 0.5rem;
+  width: 60rem;
+  text-align: center;
+  font-size: 1.7rem;
 }
 
-.modal-buttons {
-    margin-top: 3rem;
-    display: flex;
-    justify-content: space-evenly;
+.container-modal-buttons {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.confirm {
-    background-color: var(--confirm-color);
-    color: var(--light-color);
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: .4rem;
-    font-size: 1.5rem;
-    font-weight: 600;
-    width: 15rem;
-    text-align: center;
+.button-confirm {
+  background-color: var(--confirm-color);
+  color: var(--light-color);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  width: 15rem;
+  text-align: center;
 }
 
-.cancel {
-    background-color: var(--error-color);
-    color: var(--light-color);
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: .4rem;
-    font-size: 1.5rem;
-    font-weight: 600;
-    width: 15rem;
-    text-align: center;
+.button-cancel {
+  background-color: var(--error-color);
+  color: var(--light-color);
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  width: 15rem;
+  text-align: center;
 }
 
-.cancel:hover, .confirm:hover{
-    text-decoration: underline;
-    cursor: pointer;
+.cancel:hover,
+.button-confirm:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

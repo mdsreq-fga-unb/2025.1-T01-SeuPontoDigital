@@ -42,9 +42,9 @@ const LoginForm = () => {
         }
     }
     return (
-        <section className="login-form">
+        <section className="section-login-form">
             <img src="../../public/images/human.png" />
-            <div className="login-form-container">
+            <div className="container-login-form">
                 <form onSubmit={handleFormSubmit}>
                     <h2>SeuPonto<span>Digital</span></h2>
 

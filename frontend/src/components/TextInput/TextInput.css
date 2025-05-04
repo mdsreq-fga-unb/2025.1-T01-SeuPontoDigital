@@ -1,4 +1,4 @@
-.div-text-input input{
+.container-text-input input{
     width: 100%;
     padding: 1.4rem;
     border-radius: .5rem;
@@ -6,17 +6,17 @@
     margin-bottom: 3rem;
 }
 
-.div-text-input label{
+.container-text-input label{
     font-size: 1.8rem;
     font-weight: 700;
 }
 
-.div-text-input input{
+.container-text-input input{
     padding: 1.4rem;
     font-size: 2rem;
 }
 
-.div-text-input input:focus{
+.container-text-input input:focus{
     outline: .2rem solid #0064C7;
     border-color: transparent;
 }

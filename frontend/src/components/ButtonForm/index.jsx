@@ -2,7 +2,7 @@ import "./ButtonForm.css"
 
 const ButtonForm = (props) => {
     return (
-        <div className="div-button-login">
+        <div className="container-button-login">
             <button>{props.children}</button>
         </div>
     )

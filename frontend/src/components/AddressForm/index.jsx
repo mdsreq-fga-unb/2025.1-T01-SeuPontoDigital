@@ -1,7 +1,5 @@
-import "./AddressForm.css";
 import TextInput from "../TextInput";
 import { useState } from "react";
-import ButtonForm from "../ButtonForm";
 
 const AddressForm = () => {
 
@@ -32,14 +30,14 @@ const AddressForm = () => {
     const handleNumberAddress = (event) => setNumber(event.target.value);
 
     return (
-       <div className="address-form-container">
-        <TextInput label="CEP" type="text" onBlur={handleBlurCEP}/> 
-        <TextInput label="Rua" type="text" value={street} readOnly/>
-        <TextInput label="Complemento" type="text" value={complement} onChange={handleComplementAddress}/>
-        <TextInput label="Número" type="text" value={number} onChange={handleNumberAddress}/>
-        <TextInput label="Bairro" type="text" value={neighborhood} readOnly/>
-        <TextInput label="Cidade" type="text" value={city} readOnly/> 
-        <TextInput label="Estado" type="text" value={state} readOnly/>
+        <div>
+            <TextInput label="CEP" type="text" onBlur={handleBlurCEP}/> 
+            <TextInput label="Rua" type="text" value={street} readOnly/>
+            <TextInput label="Complemento" type="text" value={complement} onChange={handleComplementAddress}/>
+            <TextInput label="Número" type="text" value={number} onChange={handleNumberAddress}/>
+            <TextInput label="Bairro" type="text" value={neighborhood} readOnly/>
+            <TextInput label="Cidade" type="text" value={city} readOnly/> 
+            <TextInput label="Estado" type="text" value={state} readOnly/>
         </div>
     )
 }
