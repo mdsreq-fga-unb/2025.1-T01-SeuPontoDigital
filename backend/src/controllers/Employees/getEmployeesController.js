@@ -1,7 +1,6 @@
 import getEmployeesFromDB from "../../models/Employees/getEmployeesFromDB.js";
 
 const getEmployeesController = async (req, res) => {
-
     try {
         const data = await getEmployeesFromDB();
         if (data) {
