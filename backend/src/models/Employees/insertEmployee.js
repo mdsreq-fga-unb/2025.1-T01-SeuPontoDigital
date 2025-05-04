@@ -7,7 +7,7 @@ const insertEmployee = async (employee) => {
             cpf: employee.cpf,
             email: employee.email,
             phone: employee.phone,
-            nacionaly: employee.nacionality,
+            nacionality: employee.nacionality,
             marital_status: employee.marital_status,
             occupation: employee.occupation,
             rg: employee.rg,
@@ -15,6 +15,10 @@ const insertEmployee = async (employee) => {
             street: employee.street,
             home_number: employee.home_number,
             city: employee.city,
+            state: employee.state,
+            neighborhood: employee.neighborhood,
+            complement: employee.complement || null,
+            password: employee.password || null,
             role: 0,
         });
         if (error) return error;

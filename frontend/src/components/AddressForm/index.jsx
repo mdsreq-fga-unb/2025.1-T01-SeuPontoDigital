@@ -6,6 +6,7 @@ import ButtonForm from "../ButtonForm";
 const AddressForm = () => {
 
     const [street, setStreet] = useState("");
+    const [complement, setComplement] = useState("");
     const [number, setNumber] = useState("");
     const [neighborhood, setNeighborhood] = useState("");
     const [city, setCity] = useState("");
@@ -26,12 +27,15 @@ const AddressForm = () => {
         }
     }
 
+    const handleComplementAddress = (event) => setComplement(event.target.value);
+
     const handleNumberAddress = (event) => setNumber(event.target.value);
 
     return (
        <div className="address-form-container">
         <TextInput label="CEP" type="text" onBlur={handleBlurCEP}/> 
         <TextInput label="Rua" type="text" value={street} readOnly/>
+        <TextInput label="Complemento" type="text" value={complement} onChange={handleComplementAddress}/>
         <TextInput label="Número" type="text" value={number} onChange={handleNumberAddress}/>
         <TextInput label="Bairro" type="text" value={neighborhood} readOnly/>
         <TextInput label="Cidade" type="text" value={city} readOnly/> 
