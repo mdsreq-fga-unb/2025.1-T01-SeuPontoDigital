@@ -6,11 +6,14 @@ import ButtonAdd from "../../components/ButtonAdd";
 import ConfirmModal from "../../components/ConfirmModal";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Notification from "../../components/Notification";
 
 const Employers = () => {
     const [data, setData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
-    const [employeerToDelete, setEmployeerToDelete] = useState(null);
+    const [employerToDelete, setEmployerToDelete] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+
     const fieldsTH = ["Nome", "CPF", "Telefone", "Profissão", "Email"];
     const fieldsTD = ["name", "cpf", "phone", "occupation", "email"];
 
@@ -19,7 +22,7 @@ const Employers = () => {
     }, []);
 
     const handleDeleteRequest = (item) => {
-        setEmployeerToDelete(item);
+        setEmployerToDelete(item);
         setModalOpen(true);
     };
 
@@ -31,7 +34,7 @@ const Employers = () => {
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/employers`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            setData(response.data);
+            setData(response.data.sort((a,b) => a.name.localeCompare(b.name)));
         } catch (err) {
             console.error("error:", err);
         }
@@ -42,20 +45,34 @@ const Employers = () => {
     const handleConfirmDelete = async () => {
         const token = localStorage.getItem("token");
         try {
-            await axios.delete(`${import.meta.env.VITE_API_URL}/employer/${employeerToDelete.id}`, {
+            await axios.delete(`${import.meta.env.VITE_API_URL}/employer/${employerToDelete.id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setModalOpen(false);
-            setEmployeerToDelete(null);
+            setEmployerToDelete(null);
+            Notification.success("Usuário excluído com sucesso!");
             fetchData();
         } catch (err) {
-            console.error("error:", err);
+            console.error("error in handleConfirmDelete employer:", err);
+            Notification.error("Erro ao excluir usuário. Tente novamente mais tarde!");
+            setModalOpen(false);
+            setEmployerToDelete(null);
         }
     };
     const handleCancelDelete = () => {
         setModalOpen(false);
-        setEmployeerToDelete(null);
+        setEmployerToDelete(null);
     };
+
+    // ============================== FILTER SEARCH ==============================
+
+    const filteredData = data.filter((employee) =>
+        employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.cpf.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.occupation.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.email.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     // ============================== RETURN JSX ==============================
 
@@ -65,11 +82,11 @@ const Employers = () => {
             <div className="container-table-pages">
                 <div className="container-search-button">
                     <ButtonAdd>Adicionar Empregador</ButtonAdd>
-                    <SearchInput type="search" />
+                    <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
-                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={data} onDelete={handleDeleteRequest} />
+                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />
 
-                <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o empregador ${employeerToDelete?.name}?`} />
+                <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o empregador ${employerToDelete?.name}?`} />
             </div>
         </div>
     );

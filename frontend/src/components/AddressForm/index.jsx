@@ -22,6 +22,7 @@ const AddressForm = () => {
                 setCity(data.localidade);
                 setState(data.estado);
             })
+            .catch(e => console.error(e));
         }
     }
 

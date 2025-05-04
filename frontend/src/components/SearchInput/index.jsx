@@ -5,7 +5,7 @@ const SearchInput = (props) => {
     return (
         <div className="search-input-container">
             <FaSearch className="search-icon" />
-            <input type={props.type} className="search-input" />
+            <input type={props.type} className="search-input" placeholder="Buscar" value={props.value} onChange={props.onChange}/>
         </div>
     )
 }
