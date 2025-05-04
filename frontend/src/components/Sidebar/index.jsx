@@ -5,6 +5,9 @@ import { FaFileCircleCheck } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+
+    const navigate = useNavigate();
+
     const navItems = [
         { label: "Dashboard", href: "/dashboard", icon: FaChartLine },
         { label: "Empregados", href: "/empregados", icon: FaUsers },
@@ -25,9 +28,7 @@ const Sidebar = () => {
             navigate("/");
         }, 1000);
     }
-
-    const navigate = useNavigate();
-
+    
     return (
         <nav className="sidebar-nav">
             <div className="sidebar-header">

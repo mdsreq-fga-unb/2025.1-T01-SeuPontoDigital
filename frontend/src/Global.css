@@ -11,8 +11,9 @@
     --secondary-color: #023e7a;
     --light-color: #FAFAFA;
     --dark-color: oklch(14.5% 0 0);
-    --neutral-color: oklch(92.9% 0.013 255.508)
+    --neutral-color: oklch(92.9% 0.013 255.508);
     --text-color: #2e2e2e;
+    --select-color: oklch(55.4% 0.046 257.417);
 }
 
 html{

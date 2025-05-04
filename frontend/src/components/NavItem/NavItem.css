@@ -21,3 +21,9 @@
 .nav-icon {
     font-size: 1.5rem;
 }
+
+.nav-item.active {
+    background-color: var(--text-color);
+    border-radius: .8rem;
+    
+}

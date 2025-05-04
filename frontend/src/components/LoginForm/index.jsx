@@ -19,7 +19,7 @@ const LoginForm = () => {
             localStorage.setItem("token", data.token);
             Notification.success("Usuário autenticado com sucesso!")
             setTimeout(() => {
-                navigate("/dashboard");
+                navigate("/empregados");
             }, 2500);
         }
         catch (err) {

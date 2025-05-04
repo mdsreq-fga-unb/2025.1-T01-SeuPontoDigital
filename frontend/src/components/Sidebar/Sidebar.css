@@ -2,7 +2,7 @@
     width: 24rem;
     background-color: var(--primary-color);
     color: var(--light-color);
-    height: 100vh;
+    height: 100%;
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -45,4 +45,5 @@
     position: fixed;
     bottom: 3rem;
     left: 6rem;
+    width: fit-content;
 }
