@@ -1,6 +1,6 @@
-import "./ButtonLogin.css"
+import "./ButtonForm.css"
 
-const ButtonLogin = (props) => {
+const ButtonForm = (props) => {
     return (
         <div className="div-button-login">
             <button>{props.children}</button>
@@ -8,4 +8,4 @@ const ButtonLogin = (props) => {
     )
 }
 
-export default ButtonLogin;
+export default ButtonForm;
