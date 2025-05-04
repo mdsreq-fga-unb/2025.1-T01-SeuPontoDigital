@@ -7,7 +7,7 @@ import postEmployeeController from "../controllers/Employees/postEmployeeControl
 import updateEmployeeController from "../controllers/Employees/updateEmployeeController.js";
 import deleteEmployeeController from "../controllers/Employees/deleteEmployeeController.js";
 import getEmployersController from "../controllers/Employers/getEmployersController.js";
-import getOneEmployerController from "../controllers/Employees/getOneEmployeeController.js";
+import getOneEmployerController from "../controllers/Employers/getOneEmployerController.js";
 import postEmployerController from "../controllers/Employers/postEmployerController.js";
 import deleteEmployerController from "../controllers/Employers/deleteEmployerController.js";
 import updateEmployerController from "../controllers/Employers/updateEmployerController.js";

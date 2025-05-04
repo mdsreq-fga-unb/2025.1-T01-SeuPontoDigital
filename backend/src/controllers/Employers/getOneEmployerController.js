@@ -1,4 +1,4 @@
-import getOneEmployerByID from "../../models/Employees/getOneEmployeeByID.js";
+import getOneEmployerByID from "../../models/Employers/getOneEmployerByID.js";
 
 const getOneEmployerController = async (req, res) => {
     try {
@@ -8,7 +8,7 @@ const getOneEmployerController = async (req, res) => {
             return res.status(200).json(data)
         }
         else {
-            return res.status(404).json({ message: "not found employee" })
+            return res.status(404).json({ message: "not found employer" })
         }
     }
     catch (err) {
