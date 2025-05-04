@@ -10,6 +10,10 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+  ScrollView
 } from 'react-native';
 import { Link } from 'expo-router'
 
@@ -18,11 +22,19 @@ const { width, height } = Dimensions.get('window');
 export default function EntryScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false)
+
+   function handleVerify(){
+        console.log({email,password})
+   }
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#1565C0" />
-      
+      <KeyboardAvoidingView
+              style={styles.container}
+              behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
       <View style={styles.header}>
         <View style={styles.logoHeader}>
           <Image
@@ -35,6 +47,7 @@ export default function EntryScreen() {
           </Text>
         </View>
       </View>
+      
       
       <View style={styles.content}>
 
@@ -73,13 +86,14 @@ export default function EntryScreen() {
 
             <Pressable  
               style={styles.accessButton}
+              onPress={handleVerify}
             >
               <Text style={styles.accessButtonText}>Acessar</Text>
             </Pressable>
             
 
             <Link 
-                href='/(auth)/signup/page' 
+                href='/(auth)/firstTime/page' 
                 style={styles.registerLink}
             >
                 <Text style={styles.registerText}>Primeira vez? Clique aqui</Text>
@@ -100,6 +114,7 @@ export default function EntryScreen() {
       <View style={styles.footer}>
         <Text style={styles.footerText}>© SeuPontoDigital 2025</Text>
       </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

@@ -10,7 +10,7 @@ export default function MainLayout(){
         ></Stack.Screen>
 
         <Stack.Screen
-          name="(auth)/signup/page"
+          name="(auth)/firstTime/page"
           options={{headerShown: false}}
         ></Stack.Screen>
 
