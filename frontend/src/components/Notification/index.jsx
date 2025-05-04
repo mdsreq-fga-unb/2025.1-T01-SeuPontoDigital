@@ -1,4 +1,4 @@
-import { toast, Flip } from "react-toastify";
+import { toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Notification.css"
 
@@ -6,27 +6,27 @@ const Notification = {
     success: (message) => {
         toast.success(message, {
             position: "top-center",
-            autoClose: 2000,
+            autoClose: 2500,
             hideProgressBar: false,
             closeOnClick: false,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "colored",
-            transition: Flip,
+            theme: "light",
+            transition: Zoom,
         });
     },
     error: (message) => {
         toast.error(message, {
             position: "top-center",
-            autoClose: 2000,
+            autoClose: 2500,
             hideProgressBar: false,
             closeOnClick: false,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "colored",
-            transition: Flip,
+            theme: "light",
+            transition: Zoom,
         });
     }
 }

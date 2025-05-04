@@ -21,7 +21,7 @@ const AddressForm = () => {
                 setStreet(data.logradouro);
                 setNeighborhood(data.bairro);
                 setCity(data.localidade);
-                setState(data.estado);
+                setState(data.uf);
             })
             .catch(e => console.error(e));
         }
