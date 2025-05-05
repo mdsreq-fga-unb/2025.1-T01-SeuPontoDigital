@@ -55,7 +55,7 @@ const AddEmployee = () => {
     }
     return (
         <div className="container-dashboard">
-        <Sidebar activePath="/empregado"/>
+        <Sidebar />
         <section className="form-user-add">
             
             <form onSubmit={handleFormSubmit} className="form-users">

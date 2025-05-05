@@ -48,9 +48,9 @@ const LoginForm = () => {
                 <form onSubmit={handleFormSubmit}>
                     <h2>SeuPonto<span>Digital</span></h2>
 
-                    <TextInput label="Email" type="email" value={email} onChange={handleInputEmail} />
+                    <TextInput label="Email" type="email" value={email} onChange={handleInputEmail} placeholder="Digite seu email"/>
 
-                    <TextInput label="Senha" type="password" value={password} onChange={handleInputPassword} />
+                    <TextInput label="Senha" type="password" value={password} onChange={handleInputPassword} placeholder="Digite sua senha"/>
 
                     <ButtonForm>Acessar</ButtonForm>
                 </form>

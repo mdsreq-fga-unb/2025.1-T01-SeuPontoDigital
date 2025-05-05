@@ -28,6 +28,19 @@ const Notification = {
             theme: "light",
             transition: Zoom,
         });
+    },
+    info: (message) => {
+        toast.info(message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+        });
     }
 }
 

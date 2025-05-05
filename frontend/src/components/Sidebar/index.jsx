@@ -3,6 +3,7 @@ import NavItem from "../NavItem";
 import { FaChartLine, FaUsers, FaUserTie, FaFileContract, FaSignOutAlt } from "react-icons/fa";
 import { FaFileCircleCheck } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import Notification from "../Notification";
 
 const Sidebar = () => {
 
@@ -23,10 +24,11 @@ const Sidebar = () => {
 
     const handleClickLogout = (event) => {
         event.preventDefault();
+        Notification.info("Você foi desconectado. Redirecionando para a página inicial...")
         setTimeout(() => {
             localStorage.removeItem("token");
             navigate("/");
-        }, 1000);
+        }, 2000);
     }
     
     return (
