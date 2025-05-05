@@ -33,7 +33,7 @@ const AddressForm = () => {
         <div>
             <TextInput label="CEP" type="text" onBlur={handleBlurCEP}/> 
             <TextInput label="Rua" type="text" value={street} readOnly/>
-            <TextInput label="Complemento" type="text" value={complement} onChange={handleComplementAddress}/>
+            <TextInput label="Complemento (opcional)" type="text" value={complement} onChange={handleComplementAddress}/>
             <TextInput label="Número" type="text" value={number} onChange={handleNumberAddress}/>
             <TextInput label="Bairro" type="text" value={neighborhood} readOnly/>
             <TextInput label="Cidade" type="text" value={city} readOnly/> 

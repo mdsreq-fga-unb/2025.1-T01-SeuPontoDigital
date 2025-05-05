@@ -21,11 +21,11 @@ const Router = () => {
 
         <Route path="/empregadores" element={<PrivateRoute>  <Employers />  </PrivateRoute>} />
 
-        <Route path="*" element={<Error404 />} /> 
-
         <Route path="/empregado/adicionar" element={<PrivateRoute> <AddEmployee /> </PrivateRoute>} />
 
         <Route path="/empregador/adicionar" element={<PrivateRoute> <AddEmployer /> </PrivateRoute>} />
+
+        <Route path="*" element={<Error404 />} />
 
       </Routes>
       <ToastContainer />

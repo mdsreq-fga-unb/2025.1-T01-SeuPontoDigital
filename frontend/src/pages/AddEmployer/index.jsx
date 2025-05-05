@@ -1,13 +1,14 @@
+import "../pagesStyle.css";
+import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AddressForm from "../../components/AddressForm";
-import TextInput from "../../components/TextInput";
+import UserForm from "../../components/UserForm";
 import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";
-import axios from "axios";
-import "./AddEmployee.css";
-import { useNavigate } from "react-router-dom";
+
 const AddEmployee = () => {
-    const [employee, setEmployee] = useState({
+    const [employer, setEmployer] = useState({
         name: "",
         cpf: "",
         email: "",
@@ -23,108 +24,47 @@ const AddEmployee = () => {
         state: "",
         neighborhood: "",
         complement: "",
-    });
+    })
 
-    const handleInputChange = (event) => {
+    const navigate = useNavigate();
+
+    const handleInputUserChange = (event) => {
         const { name, value } = event.target;
-        setEmployee((prev) => ({ ...prev, [name]: value }));
-    };
+        setEmployer((prev) => ({ ...prev, [name]: value }));
+    }
 
-    const navigate = useNavigate()
+    const handleInputAddressChange = (address) => {
+        setEmployer((prev) => ({ ...prev, ...address }));
+    };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
             const token = localStorage.getItem("token");
-            await axios.post(
-                `${import.meta.env.VITE_API_URL}/employer`,
-                employee,
-                {
-                    headers: { Authorization: `Bearer ${token}` },
+            await axios.post(`${import.meta.env.VITE_API_URL}/employer`, employer, {headers: { 
+                Authorization: `Bearer ${token}` }, 
                 }
             );
-            Notification.success("Funcionário cadastrado com sucesso!");
-            setTimeout(() => {
-                navigate("/")
-            },2000)
+            Notification.success("Empregador cadastrado com sucesso!");
+            setTimeout(() => navigate("/"), 1500); 
         } catch (err) {
-            console.error("Erro ao cadastrar funcionário:", err.response?.data || err.message);
-            Notification.error("Erro ao cadastrar funcionário. Tente novamente.");
+            console.error("error in handleFormSubmit on add employer:", err.response?.data || err.message);
+            Notification.error("Erro ao cadastrar empregador. Tente novamente mais tarde!");
         }
-    };
-
+    }
     return (
-        <section className="add-employee-form">
+        <section className="form-user-add">
             <form onSubmit={handleFormSubmit}>
-                <h2>Adicionar Funcionário</h2>
+                <h2>Adicionar Empregador</h2>
 
-                <TextInput
-                    label="Nome"
-                    type="text"
-                    name="name"
-                    value={employee.name}
-                    onChange={handleInputChange}
-                />
-                <TextInput
-                    label="CPF"
-                    type="text"
-                    name="cpf"
-                    value={employee.cpf}
-                    onChange={handleInputChange}
-                />
-                <TextInput
-                    label="Email"
-                    type="email"
-                    name="email"
-                    value={employee.email}
-                    onChange={handleInputChange}
-                />
-                <TextInput
-                    label="Telefone"
-                    type="text"
-                    name="phone"
-                    value={employee.phone}
-                    onChange={handleInputChange}
-                />
-                <TextInput
-                    label="Nacionalidade"
-                    type="text"
-                    name="nacionality"
-                    value={employee.nacionality}
-                    onChange={handleInputChange}
-                />
-                <TextInput
-                    label="Estado Civil"
-                    type="text"
-                    name="marital_status"
-                    value={employee.marital_status}
-                    onChange={handleInputChange}
-                />
-                <TextInput
-                    label="Profissão"
-                    type="text"
-                    name="occupation"
-                    value={employee.occupation}
-                    onChange={handleInputChange}
-                />
-                <TextInput
-                    label="RG"
-                    type="text"
-                    name="rg"
-                    value={employee.rg}
-                    onChange={handleInputChange}
-                />
+                <UserForm user={employer} handleInputChange={handleInputUserChange}/>
 
-                <AddressForm
-                    onAddressChange={(address) =>
-                        setEmployee((prev) => ({ ...prev, ...address }))
-                    }
-                />
+                <AddressForm onAddressChange={handleInputAddressChange} />
 
-                <ButtonForm>Cadastrar Funcionário</ButtonForm>
+                <ButtonForm>Cadastrar Empregador</ButtonForm>
             </form>
         </section>
-    );
-};
+    )
+}
 
 export default AddEmployee;
