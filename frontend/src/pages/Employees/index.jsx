@@ -76,12 +76,6 @@ const Employees = () => {
         employee.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // ============================== HANDLE ADD EMPLOYEE ==============================
-
-    const handleAddEmployee = () => {
-        navigate("/empregados/add"); // Redireciona para a rota de adicionar empregado
-    };
-
     // ============================== RETURN JSX ==============================
 
     return (
@@ -89,7 +83,7 @@ const Employees = () => {
             <Sidebar />
             <div className="container-table-pages">
                 <div className="container-search-button">
-                    <ButtonAdd onClick={handleAddEmployee}>Adicionar Empregado</ButtonAdd>
+                    <ButtonAdd onClick={() => navigate("/empregado/adicionar")}>Adicionar Empregado</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
                 <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />

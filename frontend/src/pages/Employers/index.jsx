@@ -7,6 +7,7 @@ import ConfirmModal from "../../components/ConfirmModal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Notification from "../../components/Notification";
+import { useNavigate } from "react-router-dom";
 
 const Employers = () => {
     const [data, setData] = useState([]);
@@ -25,6 +26,7 @@ const Employers = () => {
         setEmployerToDelete(item);
         setModalOpen(true);
     };
+    const navigate = useNavigate();
 
     // ============================== FETCH EMPLOYERS ==============================
 
@@ -81,7 +83,7 @@ const Employers = () => {
             <Sidebar />
             <div className="container-table-pages">
                 <div className="container-search-button">
-                    <ButtonAdd>Adicionar Empregador</ButtonAdd>
+                <ButtonAdd onClick={() => navigate("/empregador/adicionar")}>Adicionar Empregador</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
                 <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />

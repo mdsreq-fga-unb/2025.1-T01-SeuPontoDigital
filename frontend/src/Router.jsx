@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Employers from "./pages/Employers";
 import Error404 from "./pages/Error404";
 import AddEmployee from "./pages/AddEmployee";
+import AddEmployer from "./pages/AddEmployer";
 
 const Router = () => {
   return (
@@ -22,7 +23,9 @@ const Router = () => {
 
         <Route path="*" element={<Error404 />} /> 
 
-        <Route path="/empregados/add" element={<PrivateRoute> <AddEmployee /> </PrivateRoute>} />
+        <Route path="/empregado/adicionar" element={<PrivateRoute> <AddEmployee /> </PrivateRoute>} />
+
+        <Route path="/empregador/adicionar" element={<PrivateRoute> <AddEmployer /> </PrivateRoute>} />
 
       </Routes>
       <ToastContainer />
