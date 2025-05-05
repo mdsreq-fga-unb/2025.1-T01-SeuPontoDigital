@@ -1,7 +1,10 @@
 import supabase from "../../config/supabase.js";
+import generatePasswordHash from "../../middlewares/generatePasswordHash.js";
 
 const insertEmployee = async (employee) => {
     try {
+        const passwordHash = await generatePasswordHash(employee.password);
+
         const { error } = await supabase.from("users").insert({
             name: employee.name,
             cpf: employee.cpf,
@@ -18,7 +21,7 @@ const insertEmployee = async (employee) => {
             state: employee.state,
             neighborhood: employee.neighborhood,
             complement: employee.complement || null,
-            password: employee.password || null,
+            password: passwordHash || null,
             role: 0,
         });
         if (error) return error;

@@ -5,7 +5,7 @@ import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";
 import axios from "axios";
 import "./AddEmployee.css";
-
+import { useNavigate } from "react-router-dom";
 const AddEmployee = () => {
     const [employee, setEmployee] = useState({
         name: "",
@@ -30,6 +30,8 @@ const AddEmployee = () => {
         setEmployee((prev) => ({ ...prev, [name]: value }));
     };
 
+    const navigate = useNavigate()
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -42,6 +44,9 @@ const AddEmployee = () => {
                 }
             );
             Notification.success("Funcionário cadastrado com sucesso!");
+            setTimeout(() => {
+                navigate("/")
+            },2000)
         } catch (err) {
             console.error("Erro ao cadastrar funcionário:", err.response?.data || err.message);
             Notification.error("Erro ao cadastrar funcionário. Tente novamente.");

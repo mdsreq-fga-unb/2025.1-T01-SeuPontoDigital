@@ -1,10 +1,10 @@
-.main-footer{
+.container-footer{
     height: 5rem;
     width: 100%;
     background-color: var(--primary-color);
 }
 
-.main-footer div{
+.container-footer div{
     height: 100%;
     width: 100%;
     display: flex;

@@ -1,11 +1,11 @@
-.button-add-container {
+.container-button-add {
   position: relative;
   width: 30rem;
   margin-top: 2rem;
   margin-right: 3rem;
 }
 
-.add-icon {
+.icon-add {
   position: absolute;
   top: 50%;
   left: 1rem;
@@ -15,7 +15,7 @@
   font-size: 1.5rem;
 }
 
-.button-add-container button {
+.container-button-add button {
   width: 100%;
   padding: 1rem;
   border: 0.2rem solid var(--text-color);
@@ -26,7 +26,7 @@
   color: var(--light-color);
 }
 
-.button-add-container button:hover {
+.container-button-add button:hover {
   text-decoration: underline;
   cursor: pointer;
 }

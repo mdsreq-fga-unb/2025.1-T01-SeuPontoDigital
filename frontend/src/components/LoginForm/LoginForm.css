@@ -1,4 +1,4 @@
-.login-form{
+.section-login-form{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -7,7 +7,7 @@
 
 }
 
-.login-form-container{
+.container-login-form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,7 +15,7 @@
     border-radius: 1rem;
 }
 
-.login-form form{
+.section-login-form form{
     border: .1rem solid var(--dark-color);
     border-radius: 1rem;
     padding: 3.2rem;
@@ -23,12 +23,12 @@
 
 }
 
-.login-form h2{
+.section-login-form h2{
     text-align: center;
     margin: 2rem 0px 4rem 0px;
     font-size: 2.8rem;
 }
 
-.login-form span{
+.section-login-form span{
     color: var(--primary-color);
 }

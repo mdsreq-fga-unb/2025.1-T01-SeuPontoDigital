@@ -2,7 +2,7 @@ import "./Footer.css"
 
 const Footer = () => {
     return (
-        <footer className="main-footer">
+        <footer className="container-footer">
             <div>
                 <p>© SeuPontoDigital 2025</p> 
             </div>

@@ -2,7 +2,7 @@ import "./Header.css"
 
 const Header = (props) => {
     return (
-        <header className="main-header">
+        <header className="container-main-header">
             {props.children}
         </header>
     )
