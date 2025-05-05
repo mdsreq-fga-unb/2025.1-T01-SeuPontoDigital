@@ -19,7 +19,7 @@ const validateUser = [
             const formattedName = value.replace(/\s+/g, ' ').trim();
             const parts = formattedName.split(" ");
             if (parts.length < 2) throw new Error("name must contain at least two words");
-            if (parts.some(p => p.length < 3)) throw new Error("each part of the name must have at least 3 characters");
+            if (formattedName.length < 6) throw new Error("each name must be bigger than 6");
             return formattedName;
         }),
 

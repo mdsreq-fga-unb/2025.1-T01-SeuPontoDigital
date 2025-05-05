@@ -5,6 +5,7 @@ import SearchInput from "../../components/SearchInput";
 import ButtonAdd from "../../components/ButtonAdd";
 import ConfirmModal from "../../components/ConfirmModal";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importa o hook useNavigate
 import axios from "axios";
 import Notification from "../../components/Notification";
 
@@ -13,6 +14,7 @@ const Employees = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [employeeToDelete, setEmployeeToDelete] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
+    const navigate = useNavigate(); // Inicializa o hook useNavigate
 
     const fieldsTH = ["Nome", "CPF", "Telefone", "Profissão", "Email"];
     const fieldsTD = ["name", "cpf", "phone", "occupation", "email"];
@@ -74,6 +76,12 @@ const Employees = () => {
         employee.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    // ============================== HANDLE ADD EMPLOYEE ==============================
+
+    const handleAddEmployee = () => {
+        navigate("/empregados/add"); // Redireciona para a rota de adicionar empregado
+    };
+
     // ============================== RETURN JSX ==============================
 
     return (
@@ -81,7 +89,7 @@ const Employees = () => {
             <Sidebar />
             <div className="container-table-pages">
                 <div className="container-search-button">
-                    <ButtonAdd>Adicionar Empregado</ButtonAdd>
+                    <ButtonAdd onClick={handleAddEmployee}>Adicionar Empregado</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
                 <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />
