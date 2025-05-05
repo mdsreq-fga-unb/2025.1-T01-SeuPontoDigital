@@ -83,7 +83,7 @@ const Employers = () => {
             <Sidebar />
             <div className="container-table-pages">
                 <div className="container-search-button">
-                <ButtonAdd onClick={() => navigate("/empregador/adicionar")}>Adicionar Empregador</ButtonAdd>
+                <ButtonAdd onClick={() => navigate("/empregadores/adicionar")}>Adicionar Empregador</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
                 <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />

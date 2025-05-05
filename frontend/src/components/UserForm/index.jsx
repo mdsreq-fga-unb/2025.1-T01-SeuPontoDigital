@@ -1,8 +1,9 @@
 import TextInput from "../TextInput";
+import "../../pages/pagesStyle.css"
 
 const UserForm = ({ user, handleInputChange }) => {
     return (
-        <div>
+        <div className="form-user-inputs">
             <TextInput label="Nome" name="name" value={user.name} onChange={handleInputChange} />
 
             <TextInput label="CPF" name="cpf" value={user.cpf} onChange={handleInputChange} />

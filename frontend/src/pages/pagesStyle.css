@@ -2,7 +2,6 @@
   display: flex;
   margin: auto;
   align-items: center;
-  height: 100vh;
 }
 
 .container-table-pages {
@@ -15,32 +14,36 @@
 }
 
 .form-user-add {
-  max-width: 60rem;
+  width: calc(100vw - 28rem);
   margin: 0 auto;
   padding: 2rem;
   background-color: var(--light-color);
   border: .1rem solid var(--neutral-color);
   border-radius: .8rem;
   box-shadow: 0 .2rem .4rem var(--dark-color);
-  max-height: 80vh; 
   overflow-y: auto; 
+  box-sizing: border-box;
+  height: 95vh;
 }
 
 .form-user-add h2 {
   text-align: center;
   margin-bottom: 2rem;
   color: var(--text-color);
+  height: 100%;
 }
 
 .form-user-add form {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  justify-content: space-between;
+  flex-direction:row;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .form-user-add input,
 .form-user-add button {
-  padding: 1rem;
   font-size: 1.6rem;
   border: .1rem solid var(--neutral-color);
   border-radius: 4px;
@@ -49,10 +52,14 @@
 .form-user-add button {
   background-color: var(--primary-color);
   color: var(--light-color);
-  cursor: pointer;
   transition: background-color 0.3s ease;
+  position: absolute;
+  bottom: 0rem;
+  right: 0;
+  max-width: 30rem;
 }
 
 .form-user-add button:hover {
   background-color: var(--secondary-color);
+  cursor: pointer;
 }

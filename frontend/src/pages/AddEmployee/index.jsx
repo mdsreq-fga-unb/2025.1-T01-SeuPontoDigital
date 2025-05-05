@@ -6,6 +6,7 @@ import AddressForm from "../../components/AddressForm";
 import UserForm from "../../components/UserForm";
 import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";
+import Sidebar from "../../components/Sidebar";
 
 const AddEmployee = () => {
     const [employee, setEmployee] = useState({
@@ -46,16 +47,19 @@ const AddEmployee = () => {
             }
         );
             Notification.success("Empregado cadastrado com sucesso!");
-            setTimeout(() => navigate("/"), 1500); 
+            setTimeout(() => navigate("/empregados"), 1500); 
         } catch (err) {
             console.error("error in handleFormSubmit on add employee:", err.response?.data || err.message);
             Notification.error("Erro ao cadastrar empregado. Tente novamente mais tarde!");
         }
     }
     return (
+        <div className="container-dashboard">
+        <Sidebar activePath="/empregado"/>
         <section className="form-user-add">
-            <form onSubmit={handleFormSubmit}>
-                <h2>Adicionar Empregado</h2>
+            
+            <form onSubmit={handleFormSubmit} className="form-users">
+                
 
                 <UserForm user={employee} handleInputChange={handleInputUserChange}/>
 
@@ -64,6 +68,7 @@ const AddEmployee = () => {
                 <ButtonForm>Cadastrar Empregado</ButtonForm>
             </form>
         </section>
+        </div>
     )
 }
 
