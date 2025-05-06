@@ -9,6 +9,8 @@ import Employers from "./pages/Employers";
 import Error404 from "./pages/Error404";
 import AddEmployee from "./pages/AddEmployee";
 import AddEmployer from "./pages/AddEmployer";
+import AddContract from "./pages/AddContract";
+// import Contracts from "./pages/Contracts";
 
 const Router = () => {
   return (
@@ -24,6 +26,10 @@ const Router = () => {
         <Route path="/empregados/adicionar" element={<PrivateRoute> <AddEmployee /> </PrivateRoute>} />
 
         <Route path="/empregadores/adicionar" element={<PrivateRoute> <AddEmployer /> </PrivateRoute>} />
+
+        {/* <Route path="/contratos" element={<PrivateRoute> <Contracts /> </PrivateRoute>} /> */}
+
+        <Route path="/contratos/adicionar" element={<PrivateRoute> <AddContract /> </PrivateRoute>} />
 
         <Route path="*" element={<Error404 />} />
 
