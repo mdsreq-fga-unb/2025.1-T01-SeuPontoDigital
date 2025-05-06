@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import Notification from "../../components/Notification";
+import { FaEdit } from "react-icons/fa";
 
 const Employees = () => {
     const [data, setData] = useState([]);
@@ -66,6 +67,10 @@ const Employees = () => {
         setModalOpen(false);
         setEmployeeToDelete(null);
     };
+
+    const handleEditRequest = (id) => {
+        navigate(`/empregados/editar/${id}`);
+    };
     
     // ============================== FILTER SEARCH ==============================
 
@@ -87,7 +92,7 @@ const Employees = () => {
                     <ButtonAdd onClick={() => navigate("/empregados/adicionar")}>Adicionar Empregado</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
-                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />
+                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} onEdit={handleEditRequest} />
 
                 <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o empregado ${employeeToDelete?.name}?`} />
             </div>

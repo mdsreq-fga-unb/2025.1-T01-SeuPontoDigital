@@ -9,7 +9,7 @@ import Employers from "./pages/Employers";
 import Error404 from "./pages/Error404";
 import AddEmployee from "./pages/AddEmployee";
 import AddEmployer from "./pages/AddEmployer";
-
+import UpdateEmployee from "./pages/UpdateEmployee";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -26,6 +26,8 @@ const Router = () => {
         <Route path="/empregadores/adicionar" element={<PrivateRoute> <AddEmployer /> </PrivateRoute>} />
 
         <Route path="*" element={<Error404 />} />
+
+        <Route path="/empregados/editar/:id" element={<PrivateRoute> <UpdateEmployee /> </PrivateRoute>} />
 
       </Routes>
       <ToastContainer />

@@ -23,7 +23,7 @@ const Table = (props) => {
                               </td>
                             ))}
                             <td>
-                                <FaPenToSquare onClick={() => props.onEdit(item)} className="fa-edit" />
+                                <FaPenToSquare onClick={() => props.onEdit(item.id)} className="fa-edit" />
                                 <FaTrashCan onClick={() => props.onDelete(item)} className="fa-delete" />
                             </td>
                         </tr>
