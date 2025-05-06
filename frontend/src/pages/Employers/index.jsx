@@ -66,6 +66,10 @@ const Employers = () => {
         setEmployerToDelete(null);
     };
 
+    const handleEditRequest = (id) => {
+        navigate(`/empregador/editar/${id}`);
+    };
+
     // ============================== FILTER SEARCH ==============================
 
     const filteredData = data.filter((employee) =>
@@ -86,7 +90,7 @@ const Employers = () => {
                 <ButtonAdd onClick={() => navigate("/empregadores/adicionar")}>Adicionar Empregador</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
-                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />
+                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} onEdit={handleEditRequest} />
 
                 <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o empregador ${employerToDelete?.name}?`} />
             </div>
