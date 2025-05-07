@@ -1,12 +1,15 @@
 import TextInput from "../TextInput";
 import "../../pages/pagesStyle.css"
+import SearchInputAuto from "../SearchInputAuto";
 
 const ContractForm = ({ user, handleInputChange }) => {
     return (
         <div className="form-contract-inputs">
             {/* Elemento para selecionar empregador */}
+            <SearchInputAuto itemName="Empregador" endpoint="/employers"/>
 
             {/* Elemento para selecionar empregado */}
+            <SearchInputAuto itemName="Empregado" endpoint="/employees"/>
 
             {/* Ver se substitui function para role */}
             <TextInput label="Cargo" name="function" value={user.function} onChange={handleInputChange} />
