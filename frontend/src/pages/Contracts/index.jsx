@@ -1,4 +1,3 @@
-/*
 import "../pagesStyle.css"
 import Sidebar from "../../components/Sidebar";
 import Table from "../../components/Table";
@@ -97,4 +96,3 @@ const Contracts = () => {
 };
 
 export default Contracts;
-*/

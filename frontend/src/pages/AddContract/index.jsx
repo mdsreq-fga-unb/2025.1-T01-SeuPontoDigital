@@ -22,7 +22,7 @@ const AddContract = () => {
 
     const navigate = useNavigate();
 
-    const handleInputUserChange = (event) => {
+    const handleInputContractChange = (event) => {
         const { name, value } = event.target;
         setC((prev) => ({ ...prev, [name]: value }));
     }
@@ -56,7 +56,7 @@ const AddContract = () => {
             
             <form onSubmit={handleFormSubmit} className="form-users">
 
-                <ContractForm user={contract} handleInputChange={handleInputUserChange}/>
+                <ContractForm user={contract} handleInputChange={handleInputContractChange}/>
 
                 <ButtonForm>Cadastrar Contrato</ButtonForm>
             </form>

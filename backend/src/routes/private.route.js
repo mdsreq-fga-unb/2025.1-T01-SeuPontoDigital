@@ -32,5 +32,9 @@ privateRoute.post("/employer", validateUser, postEmployerController);
 privateRoute.put("/employer/:id", validateUser, updateEmployerController);
 privateRoute.delete("/employer/:id", deleteEmployerController);
 
+// ============= CONTRACTS =============
+
+
+
 
 export default privateRoute;
