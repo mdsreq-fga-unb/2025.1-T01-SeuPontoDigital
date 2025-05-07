@@ -19,7 +19,7 @@ _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) p
       <td style="text-align: center; vertical-align: middle;">Iniciação</td>
       <td style="text-align: center; vertical-align: middle;">09/04/2025</td>
       <td style="text-align: center; vertical-align: middle;">24/04/2025</td>
-      <td style="text-align: center; vertical-align: middle;">finalizar o documento de visão e configurar ambiente de desenvolvimento</td>
+      <td style="text-align: center; vertical-align: middle;">Elicitação de requisitos <br> Finalizar o documento de visão</td>
       <td style="text-align: center; vertical-align: middle;">Documento de visão</td>
       <td style="text-align: center; vertical-align: middle;">Validação do documento de visão (informações não técnicas).</td>
     </tr>
@@ -27,24 +27,24 @@ _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) p
       <td style="text-align: center; vertical-align: middle;">Sprint 01</td>
       <td style="text-align: center; vertical-align: middle;">25/04/2025</td>
       <td style="text-align: center; vertical-align: middle;">01/05/2025</td>
-      <td style="text-align: center; vertical-align: middle;">Elicitação de requisitos e desenvolvimento de US1</td>
-      <td style="text-align: center; vertical-align: middle;">1.US1 </td>
+      <td style="text-align: center; vertical-align: middle;">Configuração do ambiente de desenvolvimento <br>Desenvolvimento da US1 (RF01)</td>
+      <td style="text-align: center; vertical-align: middle;">1. US1 </td>
       <td style="text-align: center; vertical-align: middle;">Cliente não disponível.</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 02</td>
       <td style="text-align: center; vertical-align: middle;">02/05/2025</td>
       <td style="text-align: center; vertical-align: middle;">08/05/2025</td>
-      <td style="text-align: center; vertical-align: middle;">Primeira entrega</td>
-      <td style="text-align: center; vertical-align: middle;">1.US2<br>2.US8</td>
-      <td style="text-align: center; vertical-align: middle;">Validação de acesso administrativo.</td>
+      <td style="text-align: center; vertical-align: middle;">Desenvolvimento: <br> 1.US2<br>2.US3<br>3.US3<br>4.US4<br>5.US5</td>
+      <td style="text-align: center; vertical-align: middle;">1.US2<br>2.US3<br>3.US3<br>4.US4<br>5.US5</td>
+      <td style="text-align: center; vertical-align: middle;">Validação do acesso administrativo e exibição dos dados</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 03</td>
       <td style="text-align: center; vertical-align: middle;">09/05/2025</td>
       <td style="text-align: center; vertical-align: middle;">15/05/2025</td>
       <td style="text-align: center; vertical-align: middle;">...</td>
-      <td style="text-align: center; vertical-align: middle;">...</td>
+      <td style="text-align: center; vertical-align: middle;"><b>Release 1</b></td>
       <td style="text-align: center; vertical-align: middle;">...</td>
     </tr>
     <tr>
