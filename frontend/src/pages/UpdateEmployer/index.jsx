@@ -59,7 +59,7 @@ const UpdateEmployer = () => {
         event.preventDefault();
         try {
             const token = localStorage.getItem("token");
-            await axios.put(`${import.meta.env.VITE_API_URL}/employee/${id}`, employer, {
+            await axios.put(`${import.meta.env.VITE_API_URL}/employer/${id}`, employer, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             Notification.success("Empregador atualizado com sucesso!");
