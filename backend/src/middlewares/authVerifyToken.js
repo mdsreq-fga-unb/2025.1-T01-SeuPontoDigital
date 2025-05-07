@@ -17,8 +17,7 @@ const authVerifyToken = (req, res, next) => {
         })
     }
     catch (err) {
-        console.error("error in authVerifyToken middleware:", err);
-        res.status(500).json({ error: "internal server error" });
+        return res.status(500).json({ error: "internal server error" });
     }
 }
 

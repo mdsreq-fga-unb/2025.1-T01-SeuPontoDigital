@@ -33,10 +33,9 @@ const LoginForm = () => {
             }, 2500);
         }
         catch (err) {
-            if (err.status === 401 || err.status === 403) 
+            if (err.status === 401) 
                 Notification.error("Email ou senha incorretos!");
             else {
-                console.error("login failed:", err.response?.data || err.message);
                 Notification.error("Erro interno no servidor. Tente novamente mais tarde!");
             }
         }

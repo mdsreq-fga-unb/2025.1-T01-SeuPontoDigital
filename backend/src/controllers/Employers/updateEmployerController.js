@@ -11,13 +11,12 @@ const updateEmployerController = async (req, res) => {
 
         const error = await updateEmployerByID(id, updateDataEmployer);
         if (error) {
-            return res.status(500).json({ message: error.message });
+            return res.status(500).json({message: "internal server error"});
         }
         return res.status(200).json({ message: "updated employer" });
     }
     catch (err) {
-        console.error("error in updateEmployer controller:", err);
-        throw err;
+        return res.status(500).send({message: "internal server error"});
     }
 }
 

@@ -1,9 +1,9 @@
 import getEmployeesFromDB from "../../models/Employees/getEmployeesFromDB.js";
 
 const getEmployeesController = async (req, res) => {
-
     try {
         const data = await getEmployeesFromDB();
+        
         if (data) {
             return res.status(200).json(data)
         }
@@ -12,8 +12,7 @@ const getEmployeesController = async (req, res) => {
         }
     }
     catch (err) {
-        console.log("error in getEmployess controller:", err);
-        throw err;
+        return res.status(500).send({message: "internal server error"});
     }
 }
 
