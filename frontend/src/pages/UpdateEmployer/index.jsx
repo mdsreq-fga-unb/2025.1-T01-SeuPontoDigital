@@ -30,7 +30,6 @@ const UpdateEmployer = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    // Fetch employer data by ID
     useEffect(() => {
         const fetchEmployer = async () => {
             const token = localStorage.getItem("token");
@@ -41,7 +40,7 @@ const UpdateEmployer = () => {
                 setEmployer(response.data);
             } catch (err) {
                 console.error("Error fetching employer data:", err);
-                Notification.error("Erro ao carregar dados do empregado.");
+                Notification.error("Erro ao carregar dados do empregador.");
             }
         };
         fetchEmployer();
@@ -60,14 +59,14 @@ const UpdateEmployer = () => {
         event.preventDefault();
         try {
             const token = localStorage.getItem("token");
-            await axios.put(`${import.meta.env.VITE_API_URL}/employer/${id}`, employer, {
+            await axios.put(`${import.meta.env.VITE_API_URL}/employee/${id}`, employer, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             Notification.success("Empregador atualizado com sucesso!");
-            setTimeout(() => navigate("/empregados"), 1500);
+            setTimeout(() => navigate("/empregadores"), 1500);
         } catch (err) {
             console.error("Error updating employer:", err.response?.data || err.message);
-            Notification.error("Erro ao atualizar empregado. Tente novamente mais tarde!");
+            Notification.error("Erro ao atualizar empregador. Tente novamente mais tarde!");
         }
     };
 
@@ -77,7 +76,7 @@ const UpdateEmployer = () => {
             <section className="form-user-add">
                 <form onSubmit={handleFormSubmit} className="form-users">
                     <UserForm user={employer} handleInputChange={handleInputUserChange} />
-                    <AddressForm onAddressChange={handleInputAddressChange} />
+                    <AddressForm user={employer} handleInputChange={handleInputAddressChange} />
                     <ButtonForm>Atualizar Empregador</ButtonForm>
                 </form>
             </section>

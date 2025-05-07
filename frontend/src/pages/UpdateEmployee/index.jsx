@@ -30,7 +30,6 @@ const UpdateEmployee = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    // Fetch employee data by ID
     useEffect(() => {
         const fetchEmployee = async () => {
             const token = localStorage.getItem("token");
@@ -77,7 +76,7 @@ const UpdateEmployee = () => {
             <section className="form-user-add">
                 <form onSubmit={handleFormSubmit} className="form-users">
                     <UserForm user={employee} handleInputChange={handleInputUserChange} />
-                    <AddressForm user={employee} onAddressChange={handleInputAddressChange} />
+                    <AddressForm user={employee} handleInputChange={handleInputAddressChange} />
                     <ButtonForm>Atualizar Empregado</ButtonForm>
                 </form>
             </section>
