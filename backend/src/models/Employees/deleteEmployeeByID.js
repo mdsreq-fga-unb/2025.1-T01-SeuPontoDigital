@@ -6,8 +6,7 @@ const deleteEmployeeByID = async (id) => {
         if (error) return error;
     }
     catch (err) {
-        console.error("error in deleteEmployeeByID models:", err);
-        throw err;
+        console.error("error in deleteEmployeeByID models");
     }
 }
 

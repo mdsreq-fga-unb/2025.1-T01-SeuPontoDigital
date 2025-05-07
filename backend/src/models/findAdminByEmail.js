@@ -9,7 +9,7 @@ const findAdminByEmail = async (email) => {
         return data;
     }
     catch (err) {
-        console.error("error in findAdminByEmail models:", err);
+        console.error("error in findAdminByEmail models");
     }
 }
 

@@ -10,8 +10,7 @@ const getOneEmployeeByID = async (id) => {
         return data;
     }
     catch(err){
-        console.error("error in getOneEmployeeByID models:", err);
-        throw err;
+        console.error("error in getOneEmployeeByID models");
     }
 }
 

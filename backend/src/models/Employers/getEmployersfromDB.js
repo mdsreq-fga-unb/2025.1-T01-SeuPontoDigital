@@ -11,8 +11,7 @@ const getEmployersFromDB = async () => {
         return { data };
     }
     catch (err) {
-        console.log("error in getEmployersFromDB models:", err);
-        throw err;
+        console.log("error in getEmployersFromDB models");
     }
 }
 

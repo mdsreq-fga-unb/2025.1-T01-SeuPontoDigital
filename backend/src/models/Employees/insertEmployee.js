@@ -26,8 +26,7 @@ const insertEmployee = async (employee) => {
         });
         if (error) return error;
     } catch (err) {
-        console.error("error in insertEmployee models:", err);
-        throw err;
+        console.error("error in insertEmployee models");
     }
 }
 
