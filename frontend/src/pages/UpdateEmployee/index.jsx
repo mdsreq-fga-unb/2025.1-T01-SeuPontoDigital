@@ -77,7 +77,7 @@ const UpdateEmployee = () => {
             <section className="form-user-add">
                 <form onSubmit={handleFormSubmit} className="form-users">
                     <UserForm user={employee} handleInputChange={handleInputUserChange} />
-                    <AddressForm onAddressChange={handleInputAddressChange} />
+                    <AddressForm user={employee} onAddressChange={handleInputAddressChange} />
                     <ButtonForm>Atualizar Empregado</ButtonForm>
                 </form>
             </section>
