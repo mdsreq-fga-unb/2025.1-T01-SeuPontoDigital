@@ -5,7 +5,7 @@ Este projeto foi realizado durante a disciplina de Requisitos de Software, na Un
 Os arquivos da documentação do projeto se encontram na branch [docs](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/tree/docs).
 
 <p align="center">
-  <img src="images/pontodigital.png" alt="Logo do produto" width="200">
+  <img src="https://mdsreq-fga-unb.github.io/2025.1-T01-SeuPontoDigital/assets/icons/icon2.png" alt="Logo do produto" width="200">
 </p>
 
 O **SeuPontoDigital** é uma solução desenvolvida para auxiliar a empresa  *Legalize Folha de Pagamento do Lar LTDA (Legalize Folha Doméstica)* a controlar o registro da folha de ponto dos empregados domésticos contratados pelos clientes da empresa e auxiliar na gestão da folha de pagamento dos mesmos.
