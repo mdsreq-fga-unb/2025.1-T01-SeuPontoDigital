@@ -7,6 +7,7 @@ import UserForm from "../../components/UserForm";
 import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
+import handleError from "../../services/errors.js";
 
 const UpdateEmployee = () => {
     const [employee, setEmployee] = useState({
@@ -39,7 +40,6 @@ const UpdateEmployee = () => {
                 });
                 setEmployee(response.data);
             } catch (err) {
-                console.error("Error fetching employee data:", err);
                 Notification.error("Erro ao carregar dados do empregado.");
             }
         };
@@ -65,8 +65,7 @@ const UpdateEmployee = () => {
             Notification.success("Empregado atualizado com sucesso!");
             setTimeout(() => navigate("/empregados"), 1500);
         } catch (err) {
-            console.error("Error updating employee:", err.response?.data || err.message);
-            Notification.error("Erro ao atualizar empregado. Tente novamente mais tarde!");
+            handleError(err.response?.data.message || err.response?.data.errors);
         }
     };
 

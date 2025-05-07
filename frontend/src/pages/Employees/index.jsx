@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import Notification from "../../components/Notification";
-import { FaEdit } from "react-icons/fa";
 
 const Employees = () => {
     const [data, setData] = useState([]);

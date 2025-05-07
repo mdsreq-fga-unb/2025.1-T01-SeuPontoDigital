@@ -7,6 +7,7 @@ import UserForm from "../../components/UserForm";
 import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
+import handleError from "../../services/errors.js";
 
 const AddEmployer = () => {
     const [employer, setEmployer] = useState({
@@ -52,8 +53,7 @@ const AddEmployer = () => {
             Notification.success("Empregador cadastrado com sucesso!");
             setTimeout(() => navigate("/empregadores"), 1500);
         } catch (err) {
-            console.error("Error in handleFormSubmit on add employer:", err.response?.data || err.message);
-            Notification.error("Erro ao cadastrar empregador. Tente novamente mais tarde!");
+            handleError(err.response?.data.message || err.response?.data.errors);
         }
     };
 
