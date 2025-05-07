@@ -15,33 +15,33 @@ O **SeuPontoDigital** é uma solução desenvolvida para auxiliar a empresa  *Le
 <table align="center" cellspacing="20" cellpadding="0">
   <tr>
     <td align="center">
-      <img src="images/caio.jpg" width="100" style="border-radius: 50%;"><br>
+      <img src="https://avatars.githubusercontent.com/u/170828870?v=4" width="100" style="border-radius: 50%;"><br>
       <strong><a href="https://github.com/caio-venancio">Caio Venâncio</a></strong><br>
     </td>
     <td align="center">
-      <img src="images/davi.jpg" width="100" style="border-radius: 50%;"><br>
+      <img src="https://avatars.githubusercontent.com/u/143732704?v=4" width="100" style="border-radius: 50%;"><br>
       <strong><a href="https://github.com/davi-aguiar-vieira">Davi de Aguiar</a></strong><br>
     </td>
     <td align="center">
-      <img src="images/guilherme.png" width="100" style="border-radius: 50%;"><br>
+      <img src="https://avatars.githubusercontent.com/u/107576761?v=4" width="100" style="border-radius: 50%;"><br>
       <strong><a href="https://github.com/Guilherme-Moura">Guilherme Moura</a></strong><br>
     </td>
     <td align="center">
-      <img src="images/joao.jpeg" width="100" style="border-radius: 50%;"><br>
+      <img src="https://avatars.githubusercontent.com/u/151416735?v=4" width="100" style="border-radius: 50%;"><br>
       <strong><a href="https://github.com/JoaoPedro2206">João Pedro Ferreira</a></strong><br>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="images/lucas.jpg" width="100" style="border-radius: 50%;"><br>
+      <img src="https://avatars.githubusercontent.com/u/131381377?v=4" width="100" style="border-radius: 50%;"><br>
       <strong><a href="https://github.com/lcsgborges">Lucas Guimarães</a></strong><br>
     </td>
     <td align="center">
-      <img src="images/thiago.jpg" width="100" style="border-radius: 50%;"><br>
+      <img src="https://avatars.githubusercontent.com/u/143733162?v=4" width="100" style="border-radius: 50%;"><br>
       <strong><a href="https://github.com/audittmega">Thiago Melo</a></strong><br>
     </td>
     <td align="center">
-      <img src="images/willian.jpg" width="100" style="border-radius: 50%;"><br>
+      <img src="https://avatars.githubusercontent.com/u/75449306?v=4" width="100" style="border-radius: 50%;"><br>
       <strong><a href="https://github.com/Wooo589">Willian Xavier</a></strong><br>
     </td>
     <td align="center">
