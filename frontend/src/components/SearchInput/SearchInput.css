@@ -1,0 +1,24 @@
+.container-search-input {
+  position: relative;
+  width: 100%;
+  margin-top: 2rem;
+  margin-left: 3rem;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: var(--text-color);
+  pointer-events: none;
+  font-size: 1.5rem;
+}
+
+.search-input {
+  width: 30%;
+  padding: 1rem 1rem 1rem 3.5rem;
+  border: 0.2rem solid var(--text-color);
+  border-radius: 0.4rem;
+  font-size: 1.4rem;
+}
