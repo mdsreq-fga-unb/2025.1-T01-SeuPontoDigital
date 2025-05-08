@@ -23,7 +23,7 @@ const formatDate = (date) => {
 const formatField = (field, value) => {
     if (field === "cpf") return formatCPF(value);
     if (field === "phone") return formatPhone(value);
-    if (field === "active") return formatStatus(value);
+    if (field === "employer.active") return formatStatus(value);
     if (field === "salary") return formatSalary(value);
     if (field === "date_start") return formatDate(value);
     return value;

@@ -19,7 +19,7 @@ const Contracts = () => {
     const navigate = useNavigate(); 
 
     const fieldsTH = ["Empregador", "Empregado", "Status", "Função", "Salário", "Data de início"];
-    const fieldsTD = ["employer.name", "employee.name", "active", "function", "salary", "date_start"];
+    const fieldsTD = ["employer.name", "employee.name", "employer.active", "function", "salary", "date_start"];
 
     useEffect(() => {
         fetchData();
