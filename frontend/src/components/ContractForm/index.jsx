@@ -1,9 +1,11 @@
 import TextInput from "../TextInput";
 import "../../pages/pagesStyle.css"
 import SearchInputAuto from "../SearchInputAuto";
+import CheckBoxForm from "../CheckBoxForm";
 import { useState } from "react";
+import TimeInput from "../TimeInput";
 
-const ContractForm = ({ user, handleInputChange, setEmpregadoIdContractForm, setEmpregadorIdContractForm }) => {
+const ContractForm = ({ user, handleInputChange, setEmpregadoIdContractForm, setEmpregadorIdContractForm, addContractCheckBox }) => {
     const [empregadorId, setEmpregadorId] = useState(null);
     const [empregadoId, setEmpregadoId] = useState(null);
 
@@ -18,6 +20,11 @@ const ContractForm = ({ user, handleInputChange, setEmpregadoIdContractForm, set
         //props.setEmpregadoIdContractForm(id);
         setEmpregadoIdContractForm(id);
     };
+
+    const contractFormCheckBox = (checked) => {
+        addContractCheckBox(checked);
+    }
+
 
     return (
         <div className="form-contract-inputs">
@@ -38,7 +45,7 @@ const ContractForm = ({ user, handleInputChange, setEmpregadoIdContractForm, set
 
             <TextInput label="Horário de saída" name="clock_out" value={user.clock_out} onChange={handleInputChange} />
 
-            <TextInput label="Início do horário de almoço" name="break_start" value={user.break_start} onChange={handleInputChange} />
+            <TextInput label="Início do horário de almoço" name="break_start" value={user.break_start} onChange={handleInputChange} type="time"/>
             
             <TextInput label="Término do horário de almoço" name="break_end" value={user.break_end} onChange={handleInputChange} />
 
@@ -46,10 +53,7 @@ const ContractForm = ({ user, handleInputChange, setEmpregadoIdContractForm, set
 
             <TextInput label="Dia de começo" name="date_start" value={user.date_start} onChange={handleInputChange} />
 
-            <label>
-                <input type="checkbox" name="acceptTerms" value="yes" />
-                Aceito os Termos e Condições
-            </label>
+            <CheckBoxForm label="Status do contrato" name="active" onCheck={contractFormCheckBox}/>
         </div>
     )
 }

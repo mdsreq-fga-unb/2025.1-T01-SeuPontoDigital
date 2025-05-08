@@ -28,7 +28,6 @@ const SearchInputAuto = (props) => {
     // Quando o valor é alterado no autocomplete, atualiza o estado do id
     const handleSelect = (event, newValue) => {
         if (newValue) {
-            console.log("Nome da pessoa afasfa:", newValue);
             const person = searchData.find(user => user.name === newValue);
             
             props.onSelectId(person.id); // Passa o ID de volta para o ContractForm

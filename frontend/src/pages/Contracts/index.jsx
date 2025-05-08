@@ -17,7 +17,7 @@ const Contracts = () => {
 
     const navigate = useNavigate(); 
 
-    const fieldsTH = ["Status", "Função", "Salário", "Data de início"]; //to do: add nome empregado e empregador
+    const fieldsTH = ["Empregador", "Empregado", "Status", "Função", "Salário", "Data de início"];
     const fieldsTD = ["status", "function", "salary", "date_start"];
 
     useEffect(() => {
@@ -34,13 +34,12 @@ const Contracts = () => {
     const fetchData = async () => {
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/contracts`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/contracts/test`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            console.log("asdaSDAS", response.data);
-            setData(response.data.status = response.data.active ? "Ativo" : "Inativo");
-            console.log("asdaSDAS", response.data);
-            setData(response.data.sort((a,b) => a.name.localeCompare(b.name)));
+            console.log(response.data);
+            setData(response.data);
+            console.log(data);
         } catch (err) {
             console.error("error:", err);
         }

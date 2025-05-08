@@ -25,6 +25,7 @@ const AddContract = () => {
 
     const navigate = useNavigate();
 
+
     const handleInputContractChange = (event) => {
         const { name, value } = event.target;
         setContract((prev) => ({ ...prev, [name]: value }));
@@ -62,6 +63,14 @@ const AddContract = () => {
         }));
     };
 
+    const handleCheckbox = (checked) => {
+        // console.log("valor ao chegar aqui:", checked)
+        setContract((prevState) => ({
+            ...prevState, 
+            active: checked, 
+        }));
+    };
+
 
     
     return (
@@ -74,6 +83,7 @@ const AddContract = () => {
                 <ContractForm user={contract} handleInputChange={handleInputContractChange} 
                 setEmpregadorIdContractForm={handleEmpregadorSelect}
                 setEmpregadoIdContractForm={handleEmpregadoSelect}
+                addContractCheckBox={handleCheckbox}
                 />
 
                 <ButtonForm>Cadastrar Contrato</ButtonForm>
