@@ -5,6 +5,7 @@ import axios from "axios";
 const SearchInputAuto = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchData, setSearchData] = useState([]);
+    const [selectedId, setSelectedId] = useState(null);
 
     useEffect(() => {
         if (searchTerm) {
@@ -24,12 +25,27 @@ const SearchInputAuto = (props) => {
         }
     };
 
+    // Quando o valor é alterado no autocomplete, atualiza o estado do id
+    const handleSelect = (event, newValue) => {
+        if (newValue) {
+            console.log("Nome da pessoa afasfa:", newValue);
+            const person = searchData.find(user => user.name === newValue);
+            
+            props.onSelectId(person.id); // Passa o ID de volta para o ContractForm
+        } else {
+            setSearchTerm('');
+            setSelectedId(null);
+            props.onSelectId(null); // Limpa o ID se necessário
+        }
+    };
+
     return (
         <div>
             <Autocomplete
                 value={searchTerm}
                 onInputChange={(e, newValue) => setSearchTerm(newValue)}
                 options={searchData.map((searchData) => searchData.name)}
+                onChange={handleSelect}
                 renderInput={(params) => <TextField {...params} label={`Procure por ${props.itemName}`} />}
             />
         </div>

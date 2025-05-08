@@ -38,7 +38,7 @@ privateRoute.delete("/employer/:id", deleteEmployerController);
 // ================= CONTRACTS ===================
 
 privateRoute.get("/contracts", getContractsController);
-privateRoute.post("/contract", postContractController);
+privateRoute.post("/contract/adicionar", postContractController);
 privateRoute.delete("/contract/delete/:id", deleteContractController);
 
 export default privateRoute;

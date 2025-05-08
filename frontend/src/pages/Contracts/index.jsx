@@ -17,8 +17,8 @@ const Contracts = () => {
 
     const navigate = useNavigate(); 
 
-    const fieldsTH = ["Empregador", "Empregado", "Telefone", "Profissão", "Email"];
-    const fieldsTD = ["name", "cpf", "phone", "occupation", "email"];
+    const fieldsTH = ["Status", "Função", "Salário", "Data de início"]; //to do: add nome empregado e empregador
+    const fieldsTD = ["status", "function", "salary", "date_start"];
 
     useEffect(() => {
         fetchData();
@@ -37,6 +37,9 @@ const Contracts = () => {
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/contracts`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
+            console.log("asdaSDAS", response.data);
+            setData(response.data.status = response.data.active ? "Ativo" : "Inativo");
+            console.log("asdaSDAS", response.data);
             setData(response.data.sort((a,b) => a.name.localeCompare(b.name)));
         } catch (err) {
             console.error("error:", err);
@@ -69,13 +72,13 @@ const Contracts = () => {
     
     // ============================== FILTER SEARCH ==============================
 
-    const filteredData = data.filter((contract) =>
-        contract.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contract.cpf.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contract.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contract.occupation.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contract.email.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredData = data.filter((contract) => {
+        return  contract.function.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                contract.salary.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                contract.date_start.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                contract.status.toLowerCase().includes(searchTerm.toLowerCase())
+                //contract.active.toLowerCase().includes(searchTerm.toLowerCase())
+    });
 
     // ============================== RETURN JSX ==============================
 

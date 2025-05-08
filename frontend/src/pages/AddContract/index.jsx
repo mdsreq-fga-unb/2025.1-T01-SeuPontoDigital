@@ -9,12 +9,15 @@ import Sidebar from "../../components/Sidebar";
 
 const AddContract = () => {
     const [contract, setContract] = useState({
+        id_employer: "",
+        id_employee: "",
         function: "",
         daily_hour: "",
         days_number: "",
         clock_in: "",
         clock_out: "",
-        break_time: "",
+        break_start: "",
+        break_end: "",
         salary: "",
         date_start: "",
         active: "",        
@@ -24,19 +27,14 @@ const AddContract = () => {
 
     const handleInputContractChange = (event) => {
         const { name, value } = event.target;
-        setC((prev) => ({ ...prev, [name]: value }));
+        setContract((prev) => ({ ...prev, [name]: value }));
     }
-
-    const handleInputAddressChange = (address) => {
-        setContract((prev) => ({ ...prev, ...address }));
-    };
-
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
             const token = localStorage.getItem("token");
-            await axios.post(`${import.meta.env.VITE_API_URL}/contract`, contract, {headers: { 
+            await axios.post(`${import.meta.env.VITE_API_URL}/contract/adicionar`, contract, {headers: { 
                 Authorization: `Bearer ${token}` }, 
             }
         );
@@ -48,6 +46,23 @@ const AddContract = () => {
         }
     }
 
+    const handleEmpregadorSelect = (id) => {
+        console.log("pai do pai recebeu", id)
+        setContract((prevState) => ({
+            ...prevState, // Mantém o estado anterior
+            id_employer: id, // Atualiza somente o id_employee
+        }));
+    };
+
+    const handleEmpregadoSelect = (id) => {
+        console.log("pai do pai recebeu", id)
+        setContract((prevState) => ({
+            ...prevState, // Mantém o estado anterior
+            id_employee: id, // Atualiza somente o id_employee
+        }));
+    };
+
+
     
     return (
         <div className="container-dashboard">
@@ -56,7 +71,10 @@ const AddContract = () => {
             
             <form onSubmit={handleFormSubmit} className="form-users">
 
-                <ContractForm user={contract} handleInputChange={handleInputContractChange}/>
+                <ContractForm user={contract} handleInputChange={handleInputContractChange} 
+                setEmpregadorIdContractForm={handleEmpregadorSelect}
+                setEmpregadoIdContractForm={handleEmpregadoSelect}
+                />
 
                 <ButtonForm>Cadastrar Contrato</ButtonForm>
             </form>
