@@ -1,4 +1,4 @@
-.container-checkbox-input input{
+.container-searchinputauto-input input{
     width: 100%;
     padding: 1.4rem;
     border-radius: .5rem;
@@ -6,28 +6,17 @@
     margin-bottom: 3rem;
 }
 
-.container-checkbox-input label{
+.container-searchinputauto-input label{
     font-size: 1.8rem;
     font-weight: 700;
 }
 
-.container-checkbox-input input{
+.container-searchinputauto-input input{
     padding: 1.4rem;
     font-size: 2rem;
 }
 
-.container-checkbox-input input:focus{
+.container-searchinputauto-input input:focus{
     outline: .2rem solid #0064C7;
     border-color: transparent;
 }
-
-input[type=checkbox]  {
-    border: 0px;
-    width: 100%;
-    height: 2em;
-}
-
-input[type="checkbox"]:focus {
-    outline: none;
-  }
-  

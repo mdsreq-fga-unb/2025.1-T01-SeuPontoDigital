@@ -23,6 +23,7 @@ const CheckBoxForm = ({ label, checked, onCheck }) => {
     return (
         <div className="container-checkbox-input">
             <label>{label}</label>
+            <br></br><br></br>
             <input 
                 type="checkbox" 
                 checked={isChecked} // O valor do checkbox é controlado pelo estado local

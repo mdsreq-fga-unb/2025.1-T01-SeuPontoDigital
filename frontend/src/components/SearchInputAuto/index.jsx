@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import axios from "axios";
+import "./SearchInputAuto.css";
 
 const SearchInputAuto = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -39,13 +40,16 @@ const SearchInputAuto = (props) => {
     };
 
     return (
-        <div>
+        <div className="container-searchinputauto-input">
+            <label>{props.itemName}</label>
+            <br></br>
             <Autocomplete
                 value={searchTerm}
                 onInputChange={(e, newValue) => setSearchTerm(newValue)}
                 options={searchData.map((searchData) => searchData.name)}
                 onChange={handleSelect}
-                renderInput={(params) => <TextField {...params} label={`Procure por ${props.itemName}`} />}
+                // renderInput={(params) => <TextField {...params} label={`Procure por ${props.itemName}`} />}
+                renderInput={(params) => <TextField {...params} />}
             />
         </div>
     );
