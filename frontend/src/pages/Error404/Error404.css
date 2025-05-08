@@ -9,7 +9,7 @@
 
 .error404-container h1{
     color: var(--primary-color);
-    font-size: 24rem;
+    font-size: 20rem;
     margin-bottom: 2rem;
     margin-top: 5rem;
     font-weight: bold;
@@ -17,7 +17,7 @@
 
 .error404-container h2{
     color: var(--text-color);
-    font-size: 5rem;
+    font-size: 4rem;
     margin-bottom: 5rem;
     font-weight: bold;
 }
@@ -28,7 +28,7 @@
 }
 
 .error404-container button{
-    padding: 2rem 4.5rem;
+    padding: 1.5rem 3.5rem;
     border-radius: .5rem;
     border: .2rem solid var(--primary-color);
     background-color: var(--primary-color);

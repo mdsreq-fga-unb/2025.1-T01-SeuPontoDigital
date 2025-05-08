@@ -15,7 +15,7 @@ const Error404 = () => {
         <div className="error404-container">
             <Header>
                 <div className="container-header">
-                    <img src="../../public/images/seupontodigital.png"></img>
+                    <img src="/images/seupontodigital.png"></img>
                     <h3>SeuPontoDigital</h3>
                 </div>
             </Header>

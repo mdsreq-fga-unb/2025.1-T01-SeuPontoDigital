@@ -10,8 +10,7 @@ const fetchEmployees = async () => {
         return data;
     }
     catch (err) {
-        console.error("error in fetchEmployees models:", err);
-        throw err;
+        console.error("error in fetchEmployees models");
     }
 }
 

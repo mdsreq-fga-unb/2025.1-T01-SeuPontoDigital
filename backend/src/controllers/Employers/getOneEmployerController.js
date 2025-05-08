@@ -2,8 +2,8 @@ import getOneEmployerByID from "../../models/Employers/getOneEmployerByID.js";
 
 const getOneEmployerController = async (req, res) => {
     try {
-        const {id} = req.params
-        const data = await getOneEmployerByID(id);
+        const data = await getOneEmployerByID(req.params.id);
+
         if (data) {
             return res.status(200).json(data)
         }
@@ -12,8 +12,7 @@ const getOneEmployerController = async (req, res) => {
         }
     }
     catch (err) {
-        console.log("error in getOneEmployerController controller:", err);
-        throw err;
+        return res.status(500).send({message: "internal server error"});
     }
 }
 export default getOneEmployerController;

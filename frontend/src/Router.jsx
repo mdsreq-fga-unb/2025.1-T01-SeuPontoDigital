@@ -11,6 +11,8 @@ import AddEmployee from "./pages/AddEmployee";
 import AddEmployer from "./pages/AddEmployer";
 import AddContract from "./pages/AddContract";
 import Contracts from "./pages/Contracts";
+import UpdateEmployee from "./pages/UpdateEmployee";
+import UpdateEmployer from "./pages/UpdateEmployer";
 
 const Router = () => {
   return (
@@ -30,6 +32,10 @@ const Router = () => {
         <Route path="/contratos" element={<PrivateRoute> <Contracts /> </PrivateRoute>} />
 
         <Route path="/contratos/adicionar" element={<PrivateRoute> <AddContract /> </PrivateRoute>} />
+        
+        <Route path="/empregados/editar/:id" element={<PrivateRoute> <UpdateEmployee /> </PrivateRoute>} />
+
+        <Route path="/empregador/editar/:id" element={<PrivateRoute> <UpdateEmployer /> </PrivateRoute>} />
 
         <Route path="*" element={<Error404 />} />
 

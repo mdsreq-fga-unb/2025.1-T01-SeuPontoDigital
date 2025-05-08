@@ -33,17 +33,16 @@ const LoginForm = () => {
             }, 2500);
         }
         catch (err) {
-            if (err.status === 401 || err.status === 403) 
+            if (err.status === 401) 
                 Notification.error("Email ou senha incorretos!");
             else {
-                console.error("login failed:", err.response?.data || err.message);
                 Notification.error("Erro interno no servidor. Tente novamente mais tarde!");
             }
         }
     }
     return (
         <section className="section-login-form">
-            <img src="../../public/images/human.png" />
+            <img src="./images/human.png" />
             <div className="container-login-form">
                 <form onSubmit={handleFormSubmit}>
                     <h2>SeuPonto<span>Digital</span></h2>

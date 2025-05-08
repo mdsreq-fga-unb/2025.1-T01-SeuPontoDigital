@@ -7,7 +7,7 @@ const Home = () => {
         <>
             <Header>
                 <div className="container-header">
-                    <img src="../../public/images/seupontodigital.png"></img>
+                    <img src="./images/seupontodigital.png"></img>
                     <h1>SeuPontoDigital</h1>
                 </div> 
             </Header>

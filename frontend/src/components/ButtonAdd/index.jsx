@@ -5,7 +5,7 @@ const ButtonAdd = ({ onClick, children }) => {
     return (
         <div className="container-button-add">
             <FaSquarePlus className="icon-add" />
-            <button onClick={onClick}>{children}</button> {/* Adicionado onClick aqui */}
+            <button onClick={onClick}>{children}</button>
         </div>
     );
 };

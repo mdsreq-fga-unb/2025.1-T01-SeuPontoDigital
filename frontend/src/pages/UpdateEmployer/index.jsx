@@ -1,7 +1,7 @@
 import "../pagesStyle.css";
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import AddressForm from "../../components/AddressForm";
 import UserForm from "../../components/UserForm";
 import ButtonForm from "../../components/ButtonForm";
@@ -9,7 +9,7 @@ import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
 import handleError from "../../services/errors.js";
 
-const AddEmployer = () => {
+const UpdateEmployer = () => {
     const [employer, setEmployer] = useState({
         name: "",
         cpf: "",
@@ -28,7 +28,23 @@ const AddEmployer = () => {
         complement: "",
     });
 
+    const { id } = useParams();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchEmployer = async () => {
+            const token = localStorage.getItem("token");
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/employer/${id}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                setEmployer(response.data);
+            } catch (err) {
+                Notification.error("Erro ao carregar dados do empregador.");
+            }
+        };
+        fetchEmployer();
+    }, [id]);
 
     const handleInputUserChange = (event) => {
         const { name, value } = event.target;
@@ -43,14 +59,10 @@ const AddEmployer = () => {
         event.preventDefault();
         try {
             const token = localStorage.getItem("token");
-            await axios.post(
-                `${import.meta.env.VITE_API_URL}/employer`,
-                employer,
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
-            Notification.success("Empregador cadastrado com sucesso!");
+            await axios.put(`${import.meta.env.VITE_API_URL}/employer/${id}`, employer, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            Notification.success("Empregador atualizado com sucesso!");
             setTimeout(() => navigate("/empregadores"), 1500);
         } catch (err) {
             handleError(err.response?.data.message || err.response?.data.errors);
@@ -64,11 +76,11 @@ const AddEmployer = () => {
                 <form onSubmit={handleFormSubmit} className="form-users">
                     <UserForm user={employer} handleInputChange={handleInputUserChange} />
                     <AddressForm user={employer} handleInputChange={handleInputAddressChange} />
-                    <ButtonForm>Cadastrar Empregador</ButtonForm>
+                    <ButtonForm>Atualizar Empregador</ButtonForm>
                 </form>
             </section>
         </div>
     );
 };
 
-export default AddEmployer;
+export default UpdateEmployer;

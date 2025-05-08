@@ -11,17 +11,12 @@ const loginAdmin = async (req, res) => {
             return res.status(200).json({
                 message: "login has been verified",
                 token: createToken(admin),
-                valid: true
             });
         }
-        return res.status(401).json({
-            message: "invalid credentials",
-            valid: false
-        })
+        return res.status(401).json({message: "invalid credentials"})
     }
     catch (err) {
-        console.error("error in loginAdmin controller:", err);
-        throw err;
+        return res.status(500).send({message: "internal server error"});
     }
 }
 export default loginAdmin;

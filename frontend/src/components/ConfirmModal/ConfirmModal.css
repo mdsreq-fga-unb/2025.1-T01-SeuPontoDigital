@@ -50,7 +50,7 @@
   text-align: center;
 }
 
-.cancel:hover,
+.button-cancel:hover,
 .button-confirm:hover {
   text-decoration: underline;
   cursor: pointer;

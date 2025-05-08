@@ -7,8 +7,7 @@ const updateEmployeeByID = async (employeeID, updateFields) => {
         if (error) return error;
     }
     catch (err) {
-        console.error("error in updateEmployeeByID models:", err);
-        throw err;
+        console.error("error in updateEmployeeByID models");
     }
 }
 
