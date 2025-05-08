@@ -14,6 +14,7 @@ import updateEmployerController from "../controllers/Employers/updateEmployerCon
 import getContractsController from "../controllers/Contracts/getContractsController.js";
 import postContractController from "../controllers/Contracts/postContractController.js";
 import deleteContractController from "../controllers/Contracts/deleteContractController.js";
+import getContractsListController from "../controllers/Contracts/getContractListController.js";
 
 const privateRoute = express.Router();
 
@@ -38,6 +39,7 @@ privateRoute.delete("/employer/:id", deleteEmployerController);
 // ================= CONTRACTS ===================
 
 privateRoute.get("/contracts", getContractsController);
+privateRoute.get("/contracts/list", getContractsListController);
 privateRoute.post("/contract/adicionar", postContractController);
 privateRoute.delete("/contract/delete/:id", deleteContractController);
 
