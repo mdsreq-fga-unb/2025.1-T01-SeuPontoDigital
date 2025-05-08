@@ -8,7 +8,7 @@ const getEmployersFromDB = async () => {
             console.error(error);
             return { error };
         }
-        return { data };
+        return data ;
     }
     catch (err) {
         console.log("error in getEmployersFromDB models");
