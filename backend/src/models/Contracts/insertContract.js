@@ -14,7 +14,6 @@ const insertContract = async (contract) => {
             break_end: contract.break_end,
             salary: contract.salary,
             date_start: contract.date_start,
-            active: contract.active
         });
 
         if(error) return error;

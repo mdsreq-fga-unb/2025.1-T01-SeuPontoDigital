@@ -15,7 +15,7 @@ const formatSalary = (salary) => {
 };
 
 const formatDate = (date) => {
-    const [year, month, day] = date.split("-"); // Separa os componentes da data
+    const [year, month, day] = date.split("-");
     return `${day}/${month}/${year}`
 };
 

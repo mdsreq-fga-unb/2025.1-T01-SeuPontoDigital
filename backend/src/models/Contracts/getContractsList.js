@@ -20,7 +20,7 @@ const fetchContracts = async () => {
                         ...emp,
                         employer: {
                             ...emp.employer,
-                            active: contractInfo.active
+                            active: contractInfo ? contractInfo.active : false
                         }
                     };
                 });
