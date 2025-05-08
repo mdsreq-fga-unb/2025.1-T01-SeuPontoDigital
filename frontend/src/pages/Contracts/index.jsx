@@ -1,6 +1,6 @@
 import "../pagesStyle.css"
 import Sidebar from "../../components/Sidebar";
-import Table from "../../components/Table";
+import TableContracts from "../../components/TableContracts/TableContracts.jsx";
 import SearchInput from "../../components/SearchInput";
 import ButtonAdd from "../../components/ButtonAdd";
 import ConfirmModal from "../../components/ConfirmModal";
@@ -11,6 +11,7 @@ import Notification from "../../components/Notification";
 
 const Contracts = () => {
     const [data, setData] = useState([]);
+    const [contract, setContract] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [contractToDelete, setContractToDelete] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
@@ -18,7 +19,7 @@ const Contracts = () => {
     const navigate = useNavigate(); 
 
     const fieldsTH = ["Empregador", "Empregado", "Status", "Função", "Salário", "Data de início"];
-    const fieldsTD = ["status", "function", "salary", "date_start"];
+    const fieldsTD = ["employer.name", "employee.name", "active", "function", "salary", "date_start"];
 
     useEffect(() => {
         fetchData();
@@ -34,12 +35,10 @@ const Contracts = () => {
     const fetchData = async () => {
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/contracts/test`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/contracts/list`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            console.log(response.data);
             setData(response.data);
-            console.log(data);
         } catch (err) {
             console.error("error:", err);
         }
@@ -50,7 +49,7 @@ const Contracts = () => {
     const handleConfirmDelete = async () => {
         const token = localStorage.getItem("token");
         try {
-            await axios.delete(`${import.meta.env.VITE_API_URL}/contract/${contractToDelete.id}`, {
+            await axios.delete(`${import.meta.env.VITE_API_URL}/contract/delete/${contractToDelete.id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setModalOpen(false);
@@ -73,10 +72,8 @@ const Contracts = () => {
 
     const filteredData = data.filter((contract) => {
         return  contract.function.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                contract.salary.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                contract.date_start.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                contract.status.toLowerCase().includes(searchTerm.toLowerCase())
-                //contract.active.toLowerCase().includes(searchTerm.toLowerCase())
+                contract.employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                contract.employer.name.toLowerCase().includes(searchTerm.toLowerCase())
     });
 
     // ============================== RETURN JSX ==============================
@@ -89,9 +86,9 @@ const Contracts = () => {
                     <ButtonAdd onClick={() => navigate("/contratos/adicionar")}>Adicionar Contrato</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
-                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />
+                <TableContracts fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />
 
-                <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o contrato ${contractToDelete?.name}?`} />
+                <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o contrato?`} />
             </div>
         </div>
     );

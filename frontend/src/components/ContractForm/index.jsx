@@ -3,7 +3,6 @@ import "../../pages/pagesStyle.css"
 import SearchInputAuto from "../SearchInputAuto";
 import CheckBoxForm from "../CheckBoxForm";
 import { useState } from "react";
-import TimeInput from "../TimeInput";
 
 const ContractForm = ({ user, handleInputChange, setEmpregadoIdContractForm, setEmpregadorIdContractForm, addContractCheckBox }) => {
     const [empregadorId, setEmpregadorId] = useState(null);
