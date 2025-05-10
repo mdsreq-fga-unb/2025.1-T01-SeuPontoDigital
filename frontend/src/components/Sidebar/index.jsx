@@ -13,8 +13,8 @@ const Sidebar = () => {
         { label: "Dashboard", href: "/dashboard", icon: FaChartLine },
         { label: "Empregados", href: "/empregados", icon: FaUsers },
         { label: "Empregadores", href: "/empregadores", icon: FaUserTie },
-        { label: "Contratos de Trabalho", href: "/contratos/trabalho", icon: FaFileContract },
-        { label: "Contratos Ativos", href: "/contratos", icon: FaFileCircleCheck },
+        { label: "Contratos de Trabalho", href: "/contratos", icon: FaFileContract },
+        { label: "Contratos Ativos", href: "/contratos/ativos", icon: FaFileCircleCheck },
     ];
 
     const logoutItem = {
