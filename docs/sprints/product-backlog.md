@@ -2,89 +2,100 @@
 
 ### Quanto ao painel de administrador:
 
-
 **RF01: Realizar login no painel de administrador** <br>
 A LFD deve poder realizar login no painel de administrador.
 
-**RF02: Cadastrar usuários**  
-A LFD deve poder cadastrar usuários (empregados e empregadores) no sistema pelo painel de administrador.
+**RF02: Cadastrar empregados**  
+A LFD deve poder cadastrar empregados no sistema pelo painel de administrador.
 
-**RF03: Editar usuários**  
-A LFD deve poder editar os dados dos usuários (empregados e empregadores) pelo painel de administrador.
+**RF03: Editar empregados**  
+A LFD deve poder editar os dados dos empregados pelo painel de administrador.
 
-**RF04: Excluir usuários**  
-A LFD deve poder excluir qualquer usuário (empregado e empregador) do sistema pelo painel de administrador.
+**RF04: Excluir empregados**  
+A LFD deve poder excluir qualquer empregado do sistema pelo painel de administrador.
 
-**RF05: Visualizar dados dos usuários**  
-A LFD deve poder visualizar os dados dos usuários (empregados e empregadores) pelo painel de administrador.
+**RF05: Cadastrar empregadores**  
+A LFD deve poder visualizar os dados dos empregadores pelo painel de administrador.
 
-**RF06: Criar contrato de trabalho**  
+**RF06: Editar empregadores**  
+A LFD deve poder editar os dados dos empregadores pelo painel de administrador.
+
+**RF07: Excluir empregadores**  
+A LFD deve poder excluir qualquer empregador do sistema pelo painel de administrador.
+
+**RF08: Criar contrato de trabalho**  
 A LFD deve poder criar um novo contrato de trabalho entre um empregador e um empregado pelo painel de administrador.
 
-**RF07: Editar contrato de trabalho**  
+**RF09: Editar contrato de trabalho**  
 A LFD deve poder editar um contrato de trabalho já existente entre um empregador e um empregado pelo painel de administrador.
 
-**RF08: Excluir contrato de trabalho**  
+**RF10: Excluir contrato de trabalho**  
 A LFD deve poder excluir um contrato de trabalho já existente entre um empregador e um empregado pelo painel de administrador.
 
-**RF09: Controlar acesso ao aplicativo**  
-A LFD deve poder controlar o acesso de usuários (empregados e empregadores) ao aplicativo mobile.
+**RF11: Visualizar os dados**  
+A LFD deve poder visualizar os dados dos empregadores e de contratos existentes em formato de tabela no painel administrativo (os empregados deverão ser acessados nos dados dos empregadores)
 
-**RF10: Buscar os dados**  
-A LFD deve poder buscar os dados de usuários (empregados e empregadores) e de contratos existentes.
+**RF12: Buscar os dados**  
+A LFD deve poder buscar os dados dos empregados, empregadores e de contratos existentes.
 
-**RF11: Visualizar registros de ponto**  
-A LFD deve poder visualizar os dados de registro de ponto e os relatórios de jornada através do painel administrativo.
+**RF13: Filtrar os dados**  
+A LFD deve poder filtrar os dados dos empregados, empregadores e de contratos existentes baseado em status ativo ou inativo.
 
-**RF12: Editar registros de ponto**  
-A LFD deve poder editar os dados de registro de pontos e relatórios de jornada dos empregados pelo painel de administrador.
+**RF14: Controlar acesso ao aplicativo**  
+A LFD deve poder controlar o acesso de empregados e empregadores ao aplicativo mobile através da tabela de contratos de trabalho.
 
-**RF13: Exportar dados**  
-A LFD deve poder exportar os dados existentes no painel de administrador (usuários, contratos e histórico de pontos) a qualquer momento.
+**RF15: Visualizar registros de ponto**  
+A LFD deve poder visualizar os dados de registro de ponto e os relatórios de jornada de um empregado através de um empregador, na tabela de empregadores.
+
+**RF16: Editar registros de ponto**  
+A LFD deve poder editar os dados de registro de pontos e relatórios de jornada dos empregados através de um empregador, na tabela de empregadores.
 
 ---
 
 ### Quanto ao acesso ao aplicativo mobile de registro de ponto:
 
-**RF14: Realizar login no aplicativo mobile**  
-Os usuários (empregados e empregadores) deverão poder acessar o aplicativo mobile se estiverem cadastrados no sistema e possuírem permissão.
+**RF17: Realizar login no aplicativo mobile**  
+Os usuários (empregados e empregadores) deverão poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada.
 
-**RF15: Criar senha como novo usuário**  
-Os usuários (empregados e empregadores) que estiverem acessando o aplicativo pela primeira vez deverão ser redirecionados para uma nova página para cadastrar uma senha.
+**RF18: Criar senha como novo usuário**  
+Os usuários (empregados e empregadores) que estiverem acessando o aplicativo pela primeira vez deverão ter a opção de serem redirecionados para uma nova página para cadastrar uma senha de acesso.
 
 ---
 
 ### Quanto ao registro de ponto de trabalho no aplicativo mobile:
 
-**RF16: Registrar ponto**  
+**RF19: Registrar ponto**  
 O empregado deve poder registrar seus pontos de trabalho (incluindo as pausas) apenas no horário especificado no contrato de trabalho, levando em conta as regras de tolerância de horário.
 
-**RF17: Validar distância do ponto de batida**  
+**RF20: Validar distância do ponto de batida**  
 O sistema deve validar se o empregado está em um raio mínimo de 50 metros e máximo de 100 metros do local definido em contrato como ponto autorizado para registro de jornada.
 
-**RF18: Notificar empregado sobre o ponto**  
-O sistema deve enviar notificações aos empregados sempre que uma batida de ponto for registrada com sucesso, ou quando houver pendência de registro dentro dos horários estabelecidos em contrato.
+**RF21: Notificar empregado sobre o ponto**  
+O sistema deve enviar notificações aos empregados quando houver pendência de registro dentro dos horários estabelecidos em contrato.
 
-**RF19: Notificar empregador sobre o ponto**  
+**RF22: Notificar empregador sobre o ponto**  
 O sistema deve enviar notificações aos empregadores sempre que um empregado realizar uma batida de ponto, ou quando houver pendência no registro dentro do horário estipulado pelo contrato.
 
-**RF20: Justificar falta com envio de arquivo**
+**RF23: Justificar falta com envio de arquivo**
 Os empregados devem poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência.
+
+**RF24: Adicionar hora extra:**
+Um empregador deve poder adicionar hora extra para o empregado, respeitando o limite estabelecido pela lei.
 
 ---
 
 ### Quanto ao sistema de relatórios dos registros de ponto:
 
-**RF21: Visualizar histórico do registro de ponto**  
+**RF25: Visualizar histórico do registro de ponto**  
 O empregado deve poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo.
 
-**RF22: Visualizar histórico de pontos dos empregados**  
+**RF26: Visualizar histórico de pontos dos empregados**  
 O sistema deve permitir que os empregadores acessem o histórico de registros de ponto dos seus respectivos empregados.
 
-**RF23: Calcular salário, horas extras e descontos**
+**RF27: Calcular salário, horas extras e descontos**
 O sistema deve realizar automaticamente o cálculo do salário dos empregados, incluindo horas regulares, horas extras e descontos legais, com base nas marcações de ponto registradas e nas regras de negócio definidas no contrato de trabalho e na legislação vigente.
 
-**RF24: Enviar relatório mensal**  
+**RF28: Enviar relatório mensal**  
 O sistema deve gerar automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, etc), e enviá-lo à LFD e ao empregador responsável.
 
 
