@@ -32,70 +32,73 @@ A LFD deve poder editar um contrato de trabalho já existente entre um empregado
 **RF10: Excluir contrato de trabalho**  
 A LFD deve poder excluir um contrato de trabalho já existente entre um empregador e um empregado pelo painel de administrador.
 
-**RF11: Visualizar os dados**  
-A LFD deve poder visualizar os dados dos empregadores e de contratos existentes em formato de tabela no painel administrativo (os empregados deverão ser acessados nos dados dos empregadores)
+**RF11: Visualizar os dados dos usuários**  
+A LFD deve poder visualizar os dados dos empregados e empregadores em formato de tabela no painel administrativo (empregados deverão ser acessados dentro da tabela de empregadores).
 
-**RF12: Buscar os dados**  
+**RF12: Visualizar os dados dos contratos**  
+A LFD deve poder visualizar os dados dos contratos de trabalho em formato de tabela no painel administrativo.
+
+**RF13: Buscar os dados**  
 A LFD deve poder buscar os dados dos empregados, empregadores e de contratos existentes.
 
-**RF13: Filtrar os dados**  
+**RF14: Filtrar os dados**  
 A LFD deve poder filtrar os dados dos empregados, empregadores e de contratos existentes baseado em status ativo ou inativo.
 
-**RF14: Controlar acesso ao aplicativo**  
+**RF15: Controlar acesso ao aplicativo**  
 A LFD deve poder controlar o acesso de empregados e empregadores ao aplicativo mobile através da tabela de contratos de trabalho.
 
-**RF15: Visualizar registros de ponto**  
+**RF16: Visualizar registros de ponto**  
 A LFD deve poder visualizar os dados de registro de ponto e os relatórios de jornada de um empregado através de um empregador, na tabela de empregadores.
 
-**RF16: Editar registros de ponto**  
+**RF17: Editar registros de ponto**  
 A LFD deve poder editar os dados de registro de pontos e relatórios de jornada dos empregados através de um empregador, na tabela de empregadores.
 
 ---
 
 ### Quanto ao acesso ao aplicativo mobile de registro de ponto:
 
-**RF17: Realizar login no aplicativo mobile**  
+**RF18: Realizar login no aplicativo mobile**  
 Os usuários (empregados e empregadores) deverão poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada.
 
-**RF18: Criar senha como novo usuário**  
+**RF19: Criar senha como novo usuário**  
 Os usuários (empregados e empregadores) que estiverem acessando o aplicativo pela primeira vez deverão ter a opção de serem redirecionados para uma nova página para cadastrar uma senha de acesso.
 
 ---
 
 ### Quanto ao registro de ponto de trabalho no aplicativo mobile:
 
-**RF19: Registrar ponto**  
+**RF20: Registrar ponto**  
 O empregado deve poder registrar seus pontos de trabalho (incluindo as pausas) apenas no horário especificado no contrato de trabalho, levando em conta as regras de tolerância de horário.
 
-**RF20: Validar distância do ponto de batida**  
+**RF21: Validar distância do ponto de batida**  
 O sistema deve validar se o empregado está em um raio mínimo de 50 metros e máximo de 100 metros do local definido em contrato como ponto autorizado para registro de jornada.
 
-**RF21: Notificar empregado sobre o ponto**  
+**RF22: Notificar empregado sobre o ponto**  
 O sistema deve enviar notificações aos empregados quando houver pendência de registro dentro dos horários estabelecidos em contrato.
 
-**RF22: Notificar empregador sobre o ponto**  
+**RF23: Notificar empregador sobre o ponto**  
 O sistema deve enviar notificações aos empregadores sempre que um empregado realizar uma batida de ponto, ou quando houver pendência no registro dentro do horário estipulado pelo contrato.
 
-**RF23: Justificar falta com envio de arquivo**
+**RF24: Justificar falta com envio de arquivo**
 Os empregados devem poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência.
 
-**RF24: Adicionar hora extra:**
+**RF25: Adicionar hora extra:**
 Um empregador deve poder adicionar hora extra para o empregado, respeitando o limite estabelecido pela lei.
 
 ---
 
 ### Quanto ao sistema de relatórios dos registros de ponto:
 
-**RF25: Visualizar histórico do registro de ponto**  
+**RF26: Visualizar histórico do registro de ponto**  
 O empregado deve poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo.
 
-**RF26: Visualizar histórico de pontos dos empregados**  
+**RF27: Visualizar histórico de pontos dos empregados**  
 O sistema deve permitir que os empregadores acessem o histórico de registros de ponto dos seus respectivos empregados.
 
-**RF27: Calcular salário, horas extras e descontos**
+**RF28: Calcular salário, horas extras e descontos**
 O sistema deve realizar automaticamente o cálculo do salário dos empregados, incluindo horas regulares, horas extras e descontos legais, com base nas marcações de ponto registradas e nas regras de negócio definidas no contrato de trabalho e na legislação vigente.
 
-**RF28: Enviar relatório mensal**  
+**RF29: Enviar relatório mensal**  
 O sistema deve gerar automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, etc), e enviá-lo à LFD e ao empregador responsável.
 
 
@@ -122,6 +125,13 @@ O sistema deve gerar automaticamente, todo dia 25 de cada mês, um relatório co
       <td>07/05/2025</td>
       <td>1.1</td>
       <td>Adicionando Requisitos Funcionais do Product Backlog</td>
+      <td>Lucas Guimarães</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>11/05/2025</td>
+      <td>1.2</td>
+      <td>Editar os Requisitos Funcionais do Product Backlog</td>
       <td>Lucas Guimarães</td>
       <td></td>
     </tr>
