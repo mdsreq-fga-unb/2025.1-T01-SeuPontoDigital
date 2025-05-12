@@ -7,6 +7,8 @@ import postEmployerController from "../controllers/Employers/postEmployerControl
 import deleteEmployerController from "../controllers/Employers/deleteEmployerController.js";
 import updateEmployerController from "../controllers/Employers/updateEmployerController.js";
 import postContractController from "../controllers/ContractEmployee/postContractController.js";
+import getContractsController from "../controllers/ContractEmployee/getContractsController.js";
+import getOneContractController from "../controllers/ContractEmployee/getOneContractController.js";
 
 const privateRoute = express.Router();
 
@@ -14,8 +16,8 @@ privateRoute.use(authVerifyToken);
 
 // ============= EMPLOYEES-CONTRACTS=============
 
-// privateRoute.get("/contracts", );
-// privateRoute.get("/contract/:id", );
+privateRoute.get("/contracts", getContractsController);
+privateRoute.get("/contract/:id", getOneContractController);
 privateRoute.post("/contract", validateUser, postContractController);
 // privateRoute.put("/contract/:id", validateUser, );
 // privateRoute.delete("/contract/:id", );
