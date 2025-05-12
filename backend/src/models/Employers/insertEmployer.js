@@ -5,7 +5,7 @@ const insertEmployer = async (employer) => {
     try {
         const passwordHash = await generatePasswordHash(employer.password);
 
-        const { error } = await supabase.from("users").insert({
+        const { error } = await supabase.from("employers").insert({
             name: employer.name,
             cpf: employer.cpf,
             email: employer.email,
@@ -13,7 +13,6 @@ const insertEmployer = async (employer) => {
             nacionality: employer.nacionality,
             marital_status: employer.marital_status,
             occupation: employer.occupation,
-            rg: employer.rg,
             cep: employer.cep,
             street: employer.street,
             home_number: employer.home_number,
@@ -22,7 +21,6 @@ const insertEmployer = async (employer) => {
             neighborhood: employer.neighborhood,
             complement: employer.complement || null,
             password: passwordHash || null,
-            role: 1,
         });
         if (error) return error;
     }

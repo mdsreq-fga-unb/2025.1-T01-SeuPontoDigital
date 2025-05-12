@@ -5,7 +5,7 @@ const insertEmployee = async (employee) => {
     try {
         const passwordHash = await generatePasswordHash(employee.password);
 
-        const { error } = await supabase.from("users").insert({
+        const { error } = await supabase.from("employees").insert({
             name: employee.name,
             cpf: employee.cpf,
             email: employee.email,
@@ -13,18 +13,13 @@ const insertEmployee = async (employee) => {
             nacionality: employee.nacionality,
             marital_status: employee.marital_status,
             occupation: employee.occupation,
-            rg: employee.rg,
-            cep: employee.cep,
-            street: employee.street,
-            home_number: employee.home_number,
-            city: employee.city,
-            state: employee.state,
-            neighborhood: employee.neighborhood,
-            complement: employee.complement || null,
+            number_work_card: employee.number_work_card || null,
+            serie_work_card: employee.serie_work_card || null,
+            uf_work_card: employee.uf_work_card || null,
             password: passwordHash || null,
-            role: 0,
         });
         if (error) return error;
+
     } catch (err) {
         console.error("error in insertEmployee models");
     }

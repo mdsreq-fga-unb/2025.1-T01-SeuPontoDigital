@@ -15,7 +15,7 @@ const LoginForm = () => {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token)
-            navigate("/empregados");
+            navigate("/empregadores");
     },[navigate])
 
     const handleInputEmail = (event) => setEmail(event.target.value);
@@ -29,7 +29,7 @@ const LoginForm = () => {
             localStorage.setItem("token", response.data.token);
             Notification.success("Usuário autenticado com sucesso!");
             setTimeout(() => {
-                navigate("/empregados");
+                navigate("/empregadores");
             }, 2500);
         }
         catch (err) {

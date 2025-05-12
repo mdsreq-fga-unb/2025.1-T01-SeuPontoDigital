@@ -9,6 +9,7 @@ import axios from "axios";
 import Notification from "../../components/Notification";
 import { useNavigate } from "react-router-dom";
 
+
 const Employers = () => {
     const [data, setData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
@@ -36,6 +37,7 @@ const Employers = () => {
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/employers`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
+            console.log(response.data)
             setData(response.data.sort((a,b) => a.name.localeCompare(b.name)));
         } catch (err) {
             console.error("error:", err);
@@ -90,7 +92,7 @@ const Employers = () => {
                 <ButtonAdd onClick={() => navigate("/empregadores/adicionar")}>Adicionar Empregador</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
-                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} onEdit={handleEditRequest} />
+                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} onEdit={handleEditRequest} onAddEmployee={() => navigate("/empregados/adicionar")}/>
 
                 <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o empregador ${employerToDelete?.name}?`} />
             </div>

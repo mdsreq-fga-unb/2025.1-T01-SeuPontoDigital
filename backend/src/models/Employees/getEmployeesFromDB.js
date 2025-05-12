@@ -2,7 +2,7 @@ import supabase from "../../config/supabase.js";
 
 const fetchEmployees = async () => {
     try {
-        const { data, error } = await supabase.from("users").select("*").eq("role", 0);
+        const { data, error } = await supabase.from("employees").select("*");
         if (error) {
             console.error(error);
             return null;

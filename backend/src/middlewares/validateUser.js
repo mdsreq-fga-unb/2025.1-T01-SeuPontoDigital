@@ -63,14 +63,6 @@ const validateUser = [
             return value.replace(/\s+/g, ' ').trim();
         }),
 
-    body("rg")
-        .trim()
-        .notEmpty().withMessage("rg is required")
-        .isLength({ min: 8, max: 20 }).withMessage("rg must be between 5 and 20 characters")
-        .matches(/^[\dA-Za-z.-]+$/).withMessage("rg must contain only letters, numbers, dots or hyphens")
-        .custom(value => {
-            return value.replace(/\s+/g, '').trim();
-        }),
 
     (req, res, next) => {
         const errors = validationResult(req);

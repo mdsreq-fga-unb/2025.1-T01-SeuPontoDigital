@@ -18,7 +18,6 @@ const UserForm = ({ user, handleInputChange }) => {
 
             <TextInput label="Profissão" name="occupation" value={user.occupation} onChange={handleInputChange} />
 
-            <TextInput label="RG" name="rg" value={user.rg} onChange={handleInputChange} />
         </div>
     )
 }

@@ -20,7 +20,7 @@ const privateRoute = express.Router();
 
 privateRoute.use(authVerifyToken);
 
-// ============= EMPLOYEES (role: 0)=============
+// ============= EMPLOYEES =============
 
 privateRoute.get("/employees", getEmployeesController);
 privateRoute.get("/employee/:id", getOneEmployeeController);
@@ -28,7 +28,7 @@ privateRoute.post("/employee", validateUser, postEmployeeController);
 privateRoute.put("/employee/:id", validateUser, updateEmployeeController);
 privateRoute.delete("/employee/:id", deleteEmployeeController);
 
-// ============= EMPLOYERS (role: 1)=============
+// ============= EMPLOYERS =============
 
 privateRoute.get("/employers", getEmployersController);
 privateRoute.get("/employer/:id", getOneEmployerController);

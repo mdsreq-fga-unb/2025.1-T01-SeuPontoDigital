@@ -21,8 +21,6 @@ const Router = () => {
 
         <Route path="/" element={<Home />} />
 
-        <Route path="/empregados" element={<PrivateRoute>  <Employees /> </PrivateRoute>} />
-
         <Route path="/empregadores" element={<PrivateRoute>  <Employers />  </PrivateRoute>} />
 
         <Route path="/empregados/adicionar" element={<PrivateRoute> <AddEmployee /> </PrivateRoute>} />

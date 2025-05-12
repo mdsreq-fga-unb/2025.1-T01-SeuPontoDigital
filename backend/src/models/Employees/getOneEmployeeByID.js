@@ -2,7 +2,7 @@ import supabase from "../../config/supabase.js";
 
 const getOneEmployeeByID = async (id) => {
     try{
-        const {data, error} = await supabase.from("users").select("*").eq("id", id).eq("role", 0).single();
+        const {data, error} = await supabase.from("employees").select("*").eq("id", id).single();
         if (error){
             console.error(error);
             return null;
