@@ -26,9 +26,6 @@ const handleError = (data) => {
     if (Array.isArray(data) && data.some((error) => error.includes("occupation")))
         return Notification.error("A profissão digitada não é válida. Tente novamente!")
 
-    if (Array.isArray(data) && data.some((error) => error.includes("rg")))
-        return Notification.error("O RG digitado não é válido. Tente novamente!")
-
     return Notification.error("Erro interno do servidor. Tente novamente mais tarde!")
 }
 

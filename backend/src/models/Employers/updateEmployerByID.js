@@ -2,7 +2,7 @@ import supabase from "../../config/supabase.js";
 
 const updateEmployerByID = async (employerID, updateFields) => {
     try {
-        const { error } = await supabase.from("employers").update(updateFields).eq("id", employerID).eq("role", 1);
+        const { error } = await supabase.from("employers").update(updateFields).eq("id", employerID);
 
         if (error) return error;
     }

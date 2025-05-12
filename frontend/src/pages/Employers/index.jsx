@@ -46,11 +46,12 @@ const Employers = () => {
 
     // ============================== DELETE EMPLOYER ==============================
 
-    const handleConfirmDelete = async () => {
+    const handleConfirmDelete = async (password) => {
         const token = localStorage.getItem("token");
         try {
             await axios.delete(`${import.meta.env.VITE_API_URL}/employer/${employerToDelete.id}`, {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` },
+                data: { password }, 
             });
             setModalOpen(false);
             setEmployerToDelete(null);
@@ -58,7 +59,7 @@ const Employers = () => {
             fetchData();
         } catch (err) {
             console.error("error in handleConfirmDelete employer:", err);
-            Notification.error("Erro ao excluir usuário. Tente novamente mais tarde!");
+            Notification.error("Erro ao excluir usuário. Verifique sua senha e tente novamente!");
             setModalOpen(false);
             setEmployerToDelete(null);
         }
