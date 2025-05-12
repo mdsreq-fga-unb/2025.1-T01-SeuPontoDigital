@@ -28,17 +28,6 @@ const AddContract = () => {
 
     const handleInputContractChange = (event) => {
         const { name, value } = event.target;
-        // Parte a ser removida se necessário
-        // if(name == "clock_in"){
-        //     console.log(value)
-        //     if (value.length === 2 && !value.includes(":")) {
-        //         value = `${value}:`; 
-        //     }
-        //     console.log(validateTime(value))
-        //     if(validateTime(value) || value === ""){
-        //         setContract((prev) => ({ ...prev, [name]: value }));
-        //     }
-        // } else {}
         setContract((prev) => ({ ...prev, [name]: value }));
         
     }

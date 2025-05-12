@@ -60,7 +60,7 @@ const AddEmployee = () => {
                 <form onSubmit={handleFormSubmit} className="form-users">
                     <UserForm user={employee} handleInputChange={handleInputUserChange} />
                     <WorkCardForm user={employee} handleInputChange={handleInputUserChange}> <p><b>OBS: </b>Preencher os campos acima apenas no uso de carteira de trabalho física</p></WorkCardForm>
-                    <ButtonForm>Cadastrar Empregado</ButtonForm>
+                    <ButtonForm>Cadastrar Empregado (próxima pagina)</ButtonForm>
                 </form>
             </section>
         </div>
