@@ -9,6 +9,7 @@ import updateEmployerController from "../controllers/Employers/updateEmployerCon
 import postContractController from "../controllers/ContractEmployee/postContractController.js";
 import getContractsController from "../controllers/ContractEmployee/getContractsController.js";
 import getOneContractController from "../controllers/ContractEmployee/getOneContractController.js";
+import deleteContractController from "../controllers/ContractEmployee/deleteContractController.js";
 
 const privateRoute = express.Router();
 
@@ -20,7 +21,7 @@ privateRoute.get("/contracts", getContractsController);
 privateRoute.get("/contract/:id", getOneContractController);
 privateRoute.post("/contract", validateUser, postContractController);
 // privateRoute.put("/contract/:id", validateUser, );
-// privateRoute.delete("/contract/:id", );
+privateRoute.delete("/contract/:id", deleteContractController);
 
 // ============= EMPLOYERS =============
 
