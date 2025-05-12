@@ -5,9 +5,32 @@ const FormContext = createContext();
 export const FormProvider = ({ children }) => {
   const [formData, setFormData] = useState({
     // colocar todas as colunas desejadas aqui
-    name: '',
-    email: '',
-    address: ''
+    name: "",
+    cpf: "",
+    email: "",
+    phone: "",
+    nacionality: "",
+    marital_status: "",
+    occupation: "",
+    rg: "",
+    cep: "",
+    street: "",
+    home_number: "",
+    city: "",
+    state: "",
+    neighborhood: "",
+    complement: "",
+    id_employer: "",
+    id_employee: "",
+    function: "",
+    daily_hour: "",
+    days_number: "",
+    clock_in: "",
+    clock_out: "",
+    break_start: "",
+    break_end: "",
+    salary: "",
+    date_start: "",    
   });
 
   return (
