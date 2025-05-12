@@ -6,12 +6,15 @@ import ContractForm from "../../components/ContractForm";
 import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
+import { useFormContext } from "../../components/ContractContext";
+import ButtonAdd from "../../components/ButtonAdd";
 
 const AddContract = () => {
+    const { formData, setFormData } = useFormContext();
     const [contract, setContract] = useState({
         id_employer: "",
         id_employee: "",
-        function: "",
+        job_function: "",
         daily_hour: "",
         days_number: "",
         clock_in: "",
@@ -19,12 +22,10 @@ const AddContract = () => {
         break_start: "",
         break_end: "",
         salary: "",
-        date_start: "",
-        // active: "",        
+        date_start: "",     
     })
 
     const navigate = useNavigate();
-
 
     const handleInputContractChange = (event) => {
         const { name, value } = event.target;
@@ -32,18 +33,16 @@ const AddContract = () => {
         
     }
 
-    const validateTime = (time) => {
-        const regex = /^([01]?[0-9]|2[0-3]):([0-5][0-9])$/;
-        
-        return regex.test(time); 
-    };
-
-
+    // esta função deve ser consertada para enviar para a nova tabela
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        setFormData({ ...formData, id_employer, id_employee, daily_hour, days_number, clock_in, clock_out, break_start, salary, date_start, job_function})
+
+        navigate('/contratos')
         try {
             const token = localStorage.getItem("token");
-            await axios.post(`${import.meta.env.VITE_API_URL}/contract/adicionar`, contract, {headers: { 
+            await axios.post(`${import.meta.env.VITE_API_URL}/contract/adicionar`, formData, {headers: { 
                 Authorization: `Bearer ${token}` }, 
             }
         );
@@ -90,9 +89,10 @@ const AddContract = () => {
                 setEmpregadoIdContractForm={handleEmpregadoSelect}
                 addContractCheckBox={handleCheckbox}
                 />
-
+                
                 <ButtonForm>Cadastrar Contrato</ButtonForm>
             </form>
+               <ButtonAdd onClick={() => navigate("/empregados/adicionar")}>Voltar à Cadastrar Empregado</ButtonAdd> 
         </section>
         </div>
     )
