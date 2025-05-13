@@ -6,7 +6,7 @@ const deleteContractModel = async (id) => {
         if(error) return error;
     }
     catch(err){
-        console.error("error in deleteContractModel: ", err);
+        console.error("error in deleteContractModel:");
     }
 }
 

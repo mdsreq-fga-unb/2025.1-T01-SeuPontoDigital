@@ -1,8 +1,8 @@
-import getOneEmployerByID from "../../models/Employers/getOneEmployerByID.js";
+import getOneEmployerModel from "../../models/Employers/getOneEmployerModel.js";
 
 const getOneEmployerController = async (req, res) => {
     try {
-        const data = await getOneEmployerByID(req.params.id);
+        const data = await getOneEmployerModel(req.params.id);
 
         if (data) {
             return res.status(200).json(data)

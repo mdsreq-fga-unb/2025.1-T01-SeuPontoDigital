@@ -1,5 +1,5 @@
 import deleteContractModel from "../../models/ContractEmployee/deleteContractModel.js";
-import findAdminByEmail from "../../models/findAdminByEmail.js";
+import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
 import verifyPassword from "../../middlewares/verifyPassword.js";
 
 const deleteContractController = async (req, res) => {
@@ -22,7 +22,7 @@ const deleteContractController = async (req, res) => {
         return res.status(200).json({ message: "contract deleted" });
     }
     catch (err) {
-        return res.status(500).send({message: "internal server error", error: err});
+        return res.status(500).send({message: "internal server error"});
     }
 }
 

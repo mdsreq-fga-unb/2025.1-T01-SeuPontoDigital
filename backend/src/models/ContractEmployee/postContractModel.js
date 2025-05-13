@@ -36,7 +36,7 @@ const postContractModel = async (data) => {
         }
     }
     catch (err) {
-        console.error("error in postContractModel: ", err);
+        console.error("error in postContractModel");
         throw err;
     }
 }

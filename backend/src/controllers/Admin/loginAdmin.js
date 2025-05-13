@@ -1,6 +1,6 @@
-import findAdminByEmail from "../models/findAdminByEmail.js";
-import verifyPassword from "../middlewares/verifyPassword.js";
-import createToken from "../middlewares/createToken.js";
+import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
+import verifyPassword from "../../middlewares/verifyPassword.js";
+import createToken from "../../middlewares/createToken.js";
 
 const loginAdmin = async (req, res) => {
     try {

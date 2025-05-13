@@ -1,5 +1,5 @@
-import deleteEmployerByID from "../../models/Employers/deleteEmployerByID.js";
-import findAdminByEmail from "../../models/findAdminByEmail.js";
+import deleteEmployerModel from "../../models/Employers/deleteEmployerModel.js";
+import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
 import verifyPassword from "../../middlewares/verifyPassword.js";
 
 const deleteEmployerController = async (req, res) => {
@@ -16,7 +16,7 @@ const deleteEmployerController = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json({message: "invalid password"});
         }
-        const error = await deleteEmployerByID(employerID);
+        const error = await deleteEmployerModel(employerID);
         if (error) {
             return res.status(400).json({ message: "one or more of the data sent is incorrect"});
         }

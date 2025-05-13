@@ -7,7 +7,7 @@ const putContractModel = async (id, updateFields) => {
         if (error) return error;
     }
     catch (err) {
-        console.error("error in putContractModel models");
+        console.error("error in putContractModel");
     }
 }
 

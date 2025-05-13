@@ -1,7 +1,7 @@
 import validateCPF from "../../middlewares/validateCPF.js";
-import updateEmployerByID from "../../models/Employers/updateEmployerByID.js";
+import putEmployerModel from "../../models/Employers/putEmployerModel.js";
 
-const updateEmployerController = async (req, res) => {
+const putEmployerController = async (req, res) => {
     try {
         const { id } = req.params;
         const updateDataEmployer = req.body;
@@ -9,7 +9,7 @@ const updateEmployerController = async (req, res) => {
         if (updateDataEmployer.cpf && !validateCPF(updateDataEmployer.cpf))
             return res.status(400).json({ message: "invalid cpf" });
 
-        const error = await updateEmployerByID(id, updateDataEmployer);
+        const error = await putEmployerModel(id, updateDataEmployer);
         if (error) {
             return res.status(500).json({message: "internal server error"});
         }
@@ -20,4 +20,4 @@ const updateEmployerController = async (req, res) => {
     }
 }
 
-export default updateEmployerController;
+export default putEmployerController;

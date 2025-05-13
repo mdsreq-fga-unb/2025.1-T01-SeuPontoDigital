@@ -1,6 +1,6 @@
 import supabase from "../../config/supabase.js";
 
-const getEmployersFromDB = async () => {
+const getEmployersModel = async () => {
     try {
         const { data, error } = await supabase.from("employers").select("*")
 
@@ -11,8 +11,8 @@ const getEmployersFromDB = async () => {
         return data ;
     }
     catch (err) {
-        console.log("error in getEmployersFromDB models");
+        console.log("error in getEmployersModel");
     }
 }
 
-export default getEmployersFromDB;
+export default getEmployersModel;

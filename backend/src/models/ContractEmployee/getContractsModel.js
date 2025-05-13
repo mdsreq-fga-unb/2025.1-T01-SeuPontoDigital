@@ -10,7 +10,7 @@ const getContractsModel = async () => {
         return data ;
     }
     catch (err){
-        console.error("error in getContractsModel: ", err);
+        console.error("error in getContractsModel:");
         throw err;
     }
 

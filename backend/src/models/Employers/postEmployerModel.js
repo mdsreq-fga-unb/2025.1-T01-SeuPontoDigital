@@ -1,7 +1,7 @@
 import supabase from "../../config/supabase.js";
 import generatePasswordHash from "../../middlewares/generatePasswordHash.js";
 
-const insertEmployer = async (employer) => {
+const postEmployerModel = async (employer) => {
     try {
         const passwordHash = await generatePasswordHash(employer.password);
 
@@ -29,4 +29,4 @@ const insertEmployer = async (employer) => {
     }
 }
 
-export default insertEmployer;
+export default postEmployerModel;
