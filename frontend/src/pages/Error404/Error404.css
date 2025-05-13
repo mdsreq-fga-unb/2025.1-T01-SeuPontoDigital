@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.error404-container h1{
+.title-error-404{
     color: var(--primary-color);
     font-size: 20rem;
     margin-bottom: 2rem;
