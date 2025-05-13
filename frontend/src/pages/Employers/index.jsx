@@ -17,7 +17,7 @@ const Employers = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const fieldsTH = ["Nome", "CPF", "Telefone", "Profissão", "Email"];
-    const fieldsTD = ["name", "cpf", "phone", "occupation", "email"];
+    const fieldsTD = ["name", "cpf", "phone", "job_function", "email"];
 
     useEffect(() => {
         fetchData();
@@ -79,7 +79,7 @@ const Employers = () => {
         employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         employee.cpf.toLowerCase().includes(searchTerm.toLowerCase()) ||
         employee.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.occupation.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.job_function.toLowerCase().includes(searchTerm.toLowerCase()) ||
         employee.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
 

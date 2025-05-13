@@ -17,9 +17,9 @@ const AddEmployee = () => {
         cpf: "",
         email: "",
         phone: "",
-        nacionality: "",
+        nationality: "",
         marital_status: "",
-        occupation: "",
+        job_function: "",
         rg: "",
         cep: "",
         street: "",
@@ -41,7 +41,7 @@ const AddEmployee = () => {
         console.log("agora esta função não envia para o banco de dados, a que envia está presente em AddContract")
         e.preventDefault();
 
-        setFormData({...formData, name: employee.name, cpf: employee.cpf, email: employee.email, phone: employee.phone, nacionality: employee.nacionality, marital_status: employee.marital_status, occupation: employee.occupation, rg: employee.rg, cep: employee.cep, street: employee.street, home_number: employee.home_number, city: employee.city, state: employee.state, neighborhood: employee.neighborhood, complement: employee.complement,
+        setFormData({...formData, name: employee.name, cpf: employee.cpf, email: employee.email, phone: employee.phone, nationality: employee.nationality, marital_status: employee.marital_status, job_function: employee.job_function, rg: employee.rg, cep: employee.cep, street: employee.street, home_number: employee.home_number, city: employee.city, state: employee.state, neighborhood: employee.neighborhood, complement: employee.complement,
   });
 
         navigate('/contratos/adicionar');
