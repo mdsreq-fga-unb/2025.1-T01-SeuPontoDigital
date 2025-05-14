@@ -1,8 +1,8 @@
 import express from "express";
-import getAdmin from "../controllers/getAdmin.js";
+import loginAdmin from "../controllers/loginAdmin.js";
 
 const publicRoute = express.Router();
 
-publicRoute.post("/login", getAdmin);
+publicRoute.post("/login", loginAdmin);
 
 export default publicRoute;

@@ -1,0 +1,112 @@
+import "../pagesStyle.css";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ContractForm from "../../components/ContractForm";
+import ButtonForm from "../../components/ButtonForm";
+import Notification from "../../components/Notification";
+import Sidebar from "../../components/Sidebar";
+
+const AddContract = () => {
+    const [contract, setContract] = useState({
+        id_employer: "",
+        id_employee: "",
+        function: "",
+        daily_hour: "",
+        days_number: "",
+        clock_in: "",
+        clock_out: "",
+        break_start: "",
+        break_end: "",
+        salary: "",
+        date_start: "",
+        // active: "",        
+    })
+
+    const navigate = useNavigate();
+
+
+    const handleInputContractChange = (event) => {
+        const { name, value } = event.target;
+        // Parte a ser removida se necessário
+        // if(name == "clock_in"){
+        //     console.log(value)
+        //     if (value.length === 2 && !value.includes(":")) {
+        //         value = `${value}:`; 
+        //     }
+        //     console.log(validateTime(value))
+        //     if(validateTime(value) || value === ""){
+        //         setContract((prev) => ({ ...prev, [name]: value }));
+        //     }
+        // } else {}
+        setContract((prev) => ({ ...prev, [name]: value }));
+        
+    }
+
+    const validateTime = (time) => {
+        const regex = /^([01]?[0-9]|2[0-3]):([0-5][0-9])$/;
+        
+        return regex.test(time); 
+    };
+
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const token = localStorage.getItem("token");
+            await axios.post(`${import.meta.env.VITE_API_URL}/contract/adicionar`, contract, {headers: { 
+                Authorization: `Bearer ${token}` }, 
+            }
+        );
+            Notification.success("Contrato cadastrado com sucesso!");
+            setTimeout(() => navigate("/contratos"), 1500); 
+        } catch (err) {
+            console.error("error in handleFormSubmit on add contract:", err.response?.data || err.message);
+            Notification.error("Erro ao cadastrar contrato. Tente novamente mais tarde!");
+        }
+    }
+
+    const handleEmpregadorSelect = (id) => {
+        setContract((prevState) => ({
+            ...prevState, // Mantém o estado anterior
+            id_employer: id, // Atualiza somente o id_employee
+        }));
+    };
+
+    const handleEmpregadoSelect = (id) => {
+        setContract((prevState) => ({
+            ...prevState, // Mantém o estado anterior
+            id_employee: id, 
+        }));
+    };
+
+    const handleCheckbox = (checked) => {
+        setContract((prevState) => ({
+            ...prevState, 
+            active: checked, 
+        }));
+    };
+
+
+    
+    return (
+        <div className="container-dashboard">
+        <Sidebar />
+        <section className="form-user-add">
+            
+            <form onSubmit={handleFormSubmit} className="form-users">
+
+                <ContractForm user={contract} handleInputChange={handleInputContractChange} 
+                setEmpregadorIdContractForm={handleEmpregadorSelect}
+                setEmpregadoIdContractForm={handleEmpregadoSelect}
+                addContractCheckBox={handleCheckbox}
+                />
+
+                <ButtonForm>Cadastrar Contrato</ButtonForm>
+            </form>
+        </section>
+        </div>
+    )
+}
+
+export default AddContract;

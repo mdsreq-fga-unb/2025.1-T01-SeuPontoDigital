@@ -1,11 +1,12 @@
 import express from "express";
-import publicRoute from "./routes/public.route.js";
 import cors from "cors";
+import publicRoute from "./routes/public.route.js";
+import privateRoute from "./routes/private.route.js";
 import { CORS_ORIGIN, PORT } from "./config/env.js";
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
 app.use(cors({
     origin: CORS_ORIGIN,
@@ -13,8 +14,10 @@ app.use(cors({
     methods: ["GET", "POST", "DELETE", "PUT", "PATCH"]
 }));
 
-app.use("/api", publicRoute); 
+app.use("/api", publicRoute);
 
-app.listen(PORT , () => {
-    console.log(`Server running on port ${PORT}: http://localhost:${PORT}`);
-})
+app.use(privateRoute);
+
+app.listen(PORT, () => {
+    console.log(`Server running on: http://localhost:${PORT}`);
+});
