@@ -34,7 +34,7 @@ const Employers = () => {
     const fetchData = async () => {
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/employers`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/employers`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             console.log(response.data)

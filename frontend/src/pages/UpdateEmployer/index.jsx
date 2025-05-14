@@ -8,6 +8,7 @@ import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
 import handleError from "../../services/errors.js";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const UpdateEmployer = () => {
     const [employer, setEmployer] = useState({
@@ -31,11 +32,14 @@ const UpdateEmployer = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const [modalOpen, setModalOpen] = useState(false);
+    const [password, setPassword] = useState("");
+
     useEffect(() => {
         const fetchEmployer = async () => {
             const token = localStorage.getItem("token");
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/employer/${id}`, {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/employer/${id}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setEmployer(response.data);
@@ -55,16 +59,21 @@ const UpdateEmployer = () => {
         setEmployer((prev) => ({ ...prev, ...address }));
     };
 
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
+    const handleFormSubmit = async (passwordInput) => {
         try {
             const token = localStorage.getItem("token");
-            await axios.put(`${import.meta.env.VITE_API_URL}/employer/${id}`, employer, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            await axios.put(
+                `${import.meta.env.VITE_API_URL}/api/employer/${id}`,
+                { ...employer, password: passwordInput },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+            setModalOpen(false);
             Notification.success("Empregador atualizado com sucesso!");
             setTimeout(() => navigate("/empregadores"), 1500);
         } catch (err) {
+            setModalOpen(false);
             handleError(err.response?.data.message || err.response?.data.errors);
         }
     };
@@ -73,12 +82,28 @@ const UpdateEmployer = () => {
         <div className="container-dashboard">
             <Sidebar />
             <section className="form-user-add">
-                <form onSubmit={handleFormSubmit} className="form-users">
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        setModalOpen(true);
+                    }}
+                    className="form-users"
+                >
                     <UserForm user={employer} handleInputChange={handleInputUserChange} />
                     <AddressForm user={employer} handleInputChange={handleInputAddressChange} />
                     <ButtonForm>Atualizar Empregador</ButtonForm>
                 </form>
             </section>
+                <ConfirmModal
+                    isOpen={modalOpen}
+                    onConfirm={async (passwordInput) => {
+                        setPassword(passwordInput);
+                        await handleFormSubmit(passwordInput);
+                    }}
+                    onCancel={() => setModalOpen(false)}
+                    message="Digite sua senha para confirmar a atualização."
+                />
+            
         </div>
     );
 };
