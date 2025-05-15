@@ -33,10 +33,11 @@ const api = axios.create({
   });
 
 export default function EntryScreen() {
-  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
+<<<<<<< Updated upstream
   async function handleVerify(){
       setLoading(true);
       try{
@@ -60,29 +61,74 @@ export default function EntryScreen() {
         setLoading(false);
       }
    }
+=======
+  const validateCPF = (cpf: string): boolean => {
+    // Remove non-numeric characters
+    cpf = cpf.replace(/[^\d]/g, '');
+    
+    // Check if CPF has 11 digits
+    if (cpf.length !== 11) return false;
+    
+    // Check if all digits are the same
+    if (/^(\d)\1{10}$/.test(cpf)) return false;
+    
+    // Validate first digit
+    let sum = 0;
+    for (let i = 0; i < 9; i++) {
+      sum += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let rest = 11 - (sum % 11);
+    let digit1 = rest > 9 ? 0 : rest;
+    
+    // Validate second digit
+    sum = 0;
+    for (let i = 0; i < 10; i++) {
+      sum += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    rest = 11 - (sum % 11);
+    let digit2 = rest > 9 ? 0 : rest;
+    
+    return digit1 === parseInt(cpf.charAt(9)) && digit2 === parseInt(cpf.charAt(10));
+  };
+
+  const formatCPF = (value: string): string => {
+    const cpf = value.replace(/\D/g, '');
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  };
+
+  const handleCPFChange = (value: string) => {
+    const formattedCPF = formatCPF(value);
+    setCpf(formattedCPF);
+  };
+
+  function handleVerify() {
+    if (!validateCPF(cpf)) {
+      Alert.alert('Erro', 'CPF inválido!');
+      return;
+    }
+    console.log({ cpf, password });
+  }
+>>>>>>> Stashed changes
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#1565C0" />
       <KeyboardAvoidingView
-              style={styles.container}
-              behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-    >
-      <View style={styles.header}>
-        <View style={styles.logoHeader}>
-          <Image
-            source={require('../../assets/images/splash-icon.png')}
-            style={styles.logoIcon}
-            resizeMode="contain"
-          />
-          <Text style={styles.logoText}>
-            SeuPonto<Text style={styles.logoHighlight}>Digital</Text>
-          </Text>
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+        <View style={styles.header}>
+          <View style={styles.logoHeader}>
+            <Image
+              source={require('../../assets/images/splash-icon.png')}
+              style={styles.logoIcon}
+              resizeMode="contain"
+            />
+            <Text style={styles.logoText}>
+              SeuPonto<Text style={styles.logoHighlight}>Digital</Text>
+            </Text>
+          </View>
         </View>
-      </View>
-      
-      
-      <View style={styles.content}>
 
         <View style={styles.illustrationContainer}>
           <Image
@@ -98,14 +144,14 @@ export default function EntryScreen() {
           </Text>
           
           <View style={styles.formGroup}>
-            <Text style={styles.inputLabel}>Email</Text>
+            <Text style={styles.inputLabel}>CPF</Text>
             <TextInput
               style={styles.inputField}
-              placeholder="Digite seu email"
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-              autoCapitalize="none"
+              placeholder="000.000.000-00"
+              value={cpf}
+              onChangeText={handleCPFChange}
+              keyboardType="number-pad"
+              maxLength={14}
             />
 
             <Text style={styles.inputLabel}>Senha</Text>
@@ -123,30 +169,22 @@ export default function EntryScreen() {
             >
               <Text style={styles.accessButtonText}>Acessar</Text>
             </Pressable>
-            
 
             <Link 
-                href='/(auth)/firstTime/page' 
-                style={styles.registerLink}
+              href='/(auth)/firstTime/page' 
+              style={styles.registerLink}
             >
-                <Text style={styles.registerText}>Primeira vez? Clique aqui</Text>
+              <Text style={styles.registerText}>Primeira vez? Clique aqui</Text>
             </Link>
 
             <Link 
-                href='/(auth)/forgotpass/page' 
-                style={styles.helpLink}
+              href='/(auth)/forgotpass/page' 
+              style={styles.helpLink}
             >
-                <Text style={styles.helpText}>Esqueceu sua senha?</Text>
+              <Text style={styles.helpText}>Esqueceu sua senha?</Text>
             </Link>
-                    
           </View>
         </View>
-      </View>
-      
-
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>© SeuPontoDigital 2025</Text>
-      </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -268,7 +306,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
     alignItems: 'center',
-
   },
   helpText: {
     color: '#000',
