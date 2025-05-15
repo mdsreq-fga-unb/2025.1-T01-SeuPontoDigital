@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddressForm from "../../components/AddressForm";
-import UserForm from "../../components/UserForm";
+import UserForm from "../../components/UserForm/index.jsx";
 import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
@@ -15,9 +15,9 @@ const AddEmployer = () => {
         cpf: "",
         email: "",
         phone: "",
-        nacionality: "",
+        nationality: "",
         marital_status: "",
-        occupation: "",
+        job_function: "",
         rg: "",
         cep: "",
         street: "",

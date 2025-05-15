@@ -63,3 +63,7 @@
   background-color: var(--secondary-color);
   cursor: pointer;
 }
+
+.container-dashboard {
+  font-size: 1.8rem;
+}

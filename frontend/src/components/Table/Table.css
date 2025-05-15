@@ -42,24 +42,46 @@
     font-size: 1.4rem;
 }
 
-.fa-edit{
-    color: var(--primary-color);
+.fa-add-employee{
+    color: var(--confirm-color);
     font-size: 2rem;
-    margin-right: 2rem;
+    margin-right: 4rem;
 }
 
-.fa-delete{
-    color: var(--error-color);
-    font-size: 2rem;
-    margin-left: 2rem;
-}
-
-.fa-edit:hover{
+.fa-add-employee:hover{
     cursor: pointer;
     color: var(--secondary-color);
 }
 
-.fa-delete:hover{
+.fa-edit-employer{
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-right: 4rem;
+}
+
+.fa-delete-employer{
+    color: var(--error-color);
+    font-size: 2rem;
+    margin-left: 0;
+}
+
+.fa-edit-employer:hover{
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+.fa-delete-employer:hover{
     cursor: pointer;
     color: var(--error2-color);
+}
+
+.name-button{
+    background-color: transparent;
+    border: none;
+}
+
+.name-button:hover{
+    cursor: pointer;
+    color: var(--secondary-color);
+    text-decoration: underline;
 }

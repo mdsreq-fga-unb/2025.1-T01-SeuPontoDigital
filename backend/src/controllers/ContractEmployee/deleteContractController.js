@@ -1,11 +1,10 @@
-import deleteEmployerModel from "../../models/Employers/deleteEmployerModel.js";
+import deleteContractModel from "../../models/ContractEmployee/deleteContractModel.js";
 import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
 import verifyPassword from "../../middlewares/verifyPassword.js";
 
-const deleteEmployerController = async (req, res) => {
-    
+const deleteContractController = async (req, res) => {
     try {
-        const employerID  = req.params.id;
+        const contractID  = req.params.id;
         const {password} = req.body;
         const adminEmail = req.email;
         const admin = await findAdminByEmail(adminEmail);
@@ -16,16 +15,15 @@ const deleteEmployerController = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json({message: "invalid password"});
         }
-        const error = await deleteEmployerModel(employerID);
+        const error = await deleteContractModel(contractID);
         if (error) {
             return res.status(400).json({ message: "one or more of the data sent is incorrect"});
         }
-        return res.status(200).json({ message: "employer deleted" });
+        return res.status(200).json({ message: "contract deleted" });
     }
     catch (err) {
-        return res.status(500).send({message: "internal server error", error: err});
-        
+        return res.status(500).send({message: "internal server error"});
     }
 }
 
-export default deleteEmployerController;
+export default deleteContractController;

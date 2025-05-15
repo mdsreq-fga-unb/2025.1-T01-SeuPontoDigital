@@ -1,8 +1,8 @@
-import getEmployersFromDB from "../../models/Employers/getEmployersfromDB.js";
+import getEmployersModel from "../../models/Employers/getEmployersModel.js";
 
 const getEmployersController = async (req, res) => {
     try {
-        const data = await getEmployersFromDB();
+        const data = await getEmployersModel();
 
         if (data) {
             return res.status(200).json(data)
