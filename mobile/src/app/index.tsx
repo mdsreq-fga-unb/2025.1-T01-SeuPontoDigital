@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   View, 
   Text, 
@@ -16,16 +16,49 @@ import {
   ScrollView
 } from 'react-native';
 import { Link } from 'expo-router'
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
+
+const LOCAL_IP = '192.168.0.79'
+
+const api = axios.create({ 
+  baseURL: 
+    Platform.OS === 'ios'
+      ? 'http://localhost:3333/api'
+      : Platform.OS === 'android'
+      ? 'http://10.0.2.2:3333/api'
+      : 'http://localhost:3333/api'
+  });
 
 export default function EntryScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false)
 
-   function handleVerify(){
-        console.log({email,password})
+  async function handleVerify(){
+      setLoading(true);
+      try{
+          const response = await api.post('/loginMobile', {email, password});
+          const { token } = response.data;
+          await AsyncStorage.setItem('userToken', token);
+          console.log('Token recebido:', token);
+          Alert.alert("Usuario Logado com Sucesso");
+      } catch (err){
+        if (axios.isAxiosError(err) && err.response) {
+          // Erro de resposta vinda do backend
+          Alert.alert('Erro', err.response.data.error || 'Falha na autenticação');
+        } else if (err instanceof Error) {
+          // Erro de rede ou timeout
+          Alert.alert('Erro de rede', err.message);
+          console.log(err);
+        } else {
+          Alert.alert('Erro', 'Ocorreu um erro desconhecido');
+        }
+      } finally {
+        setLoading(false);
+      }
    }
 
   return (
