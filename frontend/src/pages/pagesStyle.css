@@ -13,6 +13,11 @@
   flex-direction: row-reverse;
 }
 
+.container-text-input {
+  flex: 1;
+  overflow-y: auto;
+}
+
 .form-user-add {
   width: calc(100vw - 28rem);
   margin: 0 auto;
@@ -39,7 +44,7 @@
   flex-direction:row;
   position: relative;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .form-user-add input,

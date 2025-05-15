@@ -8,6 +8,7 @@ import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
 import { useFormContext } from "../../components/ContractContext";
 import ButtonAdd from "../../components/ButtonAdd";
+import { Button } from "@mui/material";
 
 const AddContract = () => {
     const { formData, setFormData } = useFormContext();
@@ -37,7 +38,7 @@ const AddContract = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        setFormData({ ...formData, id_employer, id_employee, daily_hour, days_number, clock_in, clock_out, break_start, salary, date_start, job_function})
+        setFormData({ ...formData, id_employer: contract.id_employer, id_employee: contract.id_employee, daily_hour: contract.daily_hour, days_number: contract.days_number, clock_in: contract.clock_in, clock_out: contract.clock_out, break_start: contract.break_start, salary: contract.salary, date_start: contract.date_start, job_function: contract.job_function})
 
         navigate('/contratos')
         try {
@@ -92,7 +93,10 @@ const AddContract = () => {
                 
                 <ButtonForm>Cadastrar Contrato</ButtonForm>
             </form>
-               <ButtonAdd onClick={() => navigate("/empregados/adicionar")}>Voltar à Cadastrar Empregado</ButtonAdd> 
+               <ButtonAdd  onClick={() => navigate("/empregados/adicionar")}>{"≪"} Voltar à Cadastrar Empregado</ButtonAdd> 
+               {/* <div className="container-button-add" >
+                    <button onClick={() => navigate("/empregados/adicionar")}>{"≪"} Voltar à Cadastrar Empregado</button> 
+               </div> */}
         </section>
         </div>
     )
