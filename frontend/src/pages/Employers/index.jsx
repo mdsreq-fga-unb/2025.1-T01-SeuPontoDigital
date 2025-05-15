@@ -8,13 +8,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Notification from "../../components/Notification";
 import { useNavigate } from "react-router-dom";
-
+import EmployerDetailsModal from "../../components/EmployerDetailsModal";
 
 const Employers = () => {
     const [data, setData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [employerToDelete, setEmployerToDelete] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
+    const [detailsModalOpen, setDetailsModalOpen] = useState(false); 
+    const [selectedEmployer, setSelectedEmployer] = useState(null); 
 
     const fieldsTH = ["Nome", "CPF", "Telefone", "Profissão", "Email"];
     const fieldsTD = ["name", "cpf", "phone", "job_function", "email"];
@@ -22,6 +24,25 @@ const Employers = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    const handleNameClick = async (employer) => {
+    try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/employer/${employer.id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        setSelectedEmployer(response.data); 
+        setDetailsModalOpen(true); 
+    } catch (err) {
+        console.error("Erro ao buscar detalhes do empregador:", err);
+        Notification.error("Erro ao carregar os detalhes do empregador.");
+    }
+};
+
+    const handleCloseDetailsModal = () => {
+        setDetailsModalOpen(false); 
+        setSelectedEmployer(null); 
+    };
 
     const handleDeleteRequest = (item) => {
         setEmployerToDelete(item);
@@ -75,12 +96,12 @@ const Employers = () => {
 
     // ============================== FILTER SEARCH ==============================
 
-    const filteredData = data.filter((employee) =>
-        employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.cpf.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.job_function.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.email.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredData = data.filter((employer) =>
+        employer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employer.cpf.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employer.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employer.job_function.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employer.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // ============================== RETURN JSX ==============================
@@ -93,9 +114,15 @@ const Employers = () => {
                 <ButtonAdd onClick={() => navigate("/empregadores/adicionar")}>Adicionar Empregador</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
-                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} onEdit={handleEditRequest} onAddEmployee={() => navigate("/empregados/adicionar")}/>
+                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} onEdit={handleEditRequest} onAddEmployee={() => navigate("/empregados/adicionar")} onNameClick={handleNameClick}/>
 
                 <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o empregador ${employerToDelete?.name}?`} />
+
+                <EmployerDetailsModal
+                    isOpen={detailsModalOpen}
+                    onRequestClose={handleCloseDetailsModal}
+                    employerData={selectedEmployer}
+                />
             </div>
         </div>
     );

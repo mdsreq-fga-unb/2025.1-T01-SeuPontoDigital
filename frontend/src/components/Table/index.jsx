@@ -20,11 +20,17 @@ const Table = (props) => {
                         <tr key={index}>
                             {props.fieldsTD.map((field, i) => (
                                 <td key={i}>
-                                {formatField(field, item[field])}
-                              </td>
+                                    {field === "name" ? (
+                                        <button className="name-button" onClick={() => props.onNameClick(item)}  >
+                                            {formatField(field, item[field])}
+                                        </button>
+                                    ) : (
+                                        formatField(field, item[field])
+                                    )}
+                                </td>
                             ))}
                             <td>
-                                <FaUserPlus onClick={()=> props.onAddEmployee() } className="fa-add-employee"/>
+                                <FaUserPlus onClick={() => props.onAddEmployee()} className="fa-add-employee" />
                                 <FaPenToSquare onClick={() => props.onEdit(item.id)} className="fa-edit-employer" />
                                 <FaTrashCan onClick={() => props.onDelete(item)} className="fa-delete-employer" />
                             </td>
