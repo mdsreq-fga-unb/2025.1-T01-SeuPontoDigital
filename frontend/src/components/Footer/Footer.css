@@ -1,0 +1,15 @@
+.container-footer{
+    height: 5rem;
+    width: 100%;
+    background-color: var(--primary-color);
+}
+
+.container-footer div{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--light-color);
+    font-size: 1.2rem;
+}

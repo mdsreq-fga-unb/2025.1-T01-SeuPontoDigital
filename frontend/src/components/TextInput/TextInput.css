@@ -1,0 +1,22 @@
+.container-text-input input{
+    width: 100%;
+    padding: 1.4rem;
+    border-radius: .5rem;
+    border: .1rem solid black;
+    margin-bottom: 3rem;
+}
+
+.container-text-input label{
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.container-text-input input{
+    padding: 1.4rem;
+    font-size: 2rem;
+}
+
+.container-text-input input:focus{
+    outline: .2rem solid #0064C7;
+    border-color: transparent;
+}

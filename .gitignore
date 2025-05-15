@@ -1,0 +1,33 @@
+# Node.js
+node_modules/
+.env
+dist/
+build/
+npm-debug.log
+
+# Expo
+.expo/
+web-build/
+expo-env.d.ts
+
+# Native
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# VSCode
+.vscode/
+
+# typescript
+*.tsbuildinfo
+
+app-example
+
+# Python virtual environment 
+venv/

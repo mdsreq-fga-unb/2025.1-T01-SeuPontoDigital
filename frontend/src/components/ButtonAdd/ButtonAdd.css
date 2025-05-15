@@ -1,0 +1,32 @@
+.container-button-add {
+  position: relative;
+  width: 30rem;
+  margin-top: 2rem;
+  margin-right: 3rem;
+}
+
+.icon-add {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: var(--light-color);
+  pointer-events: none;
+  font-size: 1.5rem;
+}
+
+.container-button-add button {
+  width: 100%;
+  padding: 1rem;
+  border: 0.2rem solid var(--text-color);
+  border-radius: 0.4rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+}
+
+.container-button-add button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
