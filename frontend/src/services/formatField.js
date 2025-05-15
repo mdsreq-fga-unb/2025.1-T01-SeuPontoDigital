@@ -6,8 +6,8 @@ const formatPhone = (phone) => {
     return phone.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
 }
 
-const formatStatus = (status) => {
-    return status ? "Ativo" : "Inativo";
+const formatStatus = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 const formatSalary = (salary) => {
@@ -23,9 +23,9 @@ const formatDate = (date) => {
 const formatField = (field, value) => {
     if (field === "cpf") return formatCPF(value);
     if (field === "phone") return formatPhone(value);
-    if (field === "employer.active") return formatStatus(value);
+    if (field === "contract_status") return formatStatus(value);
     if (field === "salary") return formatSalary(value);
-    if (field === "date_start") return formatDate(value);
+    if (field === "contract_start_date") return formatDate(value);
     return value;
 };
 

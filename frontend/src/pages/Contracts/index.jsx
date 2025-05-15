@@ -19,7 +19,7 @@ const Contracts = () => {
     const navigate = useNavigate(); 
 
     const fieldsTH = ["Empregador", "Empregado", "Status", "Função", "Salário", "Data de início"];
-    const fieldsTD = ["employer.name", "employee.name", "employer.active", "function", "salary", "date_start"];
+    const fieldsTD = ["employer.name", "name", "contract_status", "job_function", "salary", "contract_start_date"];
 
     useEffect(() => {
         fetchData();
@@ -35,7 +35,7 @@ const Contracts = () => {
     const fetchData = async () => {
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/contracts/list`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/contracts`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setData(response.data);
@@ -71,8 +71,8 @@ const Contracts = () => {
     // ============================== FILTER SEARCH ==============================
 
     const filteredData = data.filter((contract) => {
-        return  contract.function.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                contract.employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        return  contract.job_function.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                contract.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 contract.employer.name.toLowerCase().includes(searchTerm.toLowerCase())
     });
 
