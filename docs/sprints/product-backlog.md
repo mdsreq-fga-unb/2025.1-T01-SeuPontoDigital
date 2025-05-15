@@ -1,6 +1,9 @@
 ## Lista de Requisitos Funcionais
 
-### Quanto ao painel de administrador:
+---
+
+### Objetivo específico 1 - Controle exclusivo da LFD sobre usuários e dados
+#### Quanto ao painel de administrador
 
 **RF01: Realizar login no painel de administrador** <br>
 A LFD deve poder realizar login no painel de administrador.
@@ -54,8 +57,8 @@ A LFD deve poder visualizar os dados de registro de ponto e os relatórios de jo
 A LFD deve poder editar os dados de registro de pontos e relatórios de jornada dos empregados através de um empregador, na tabela de empregadores.
 
 ---
-
-### Quanto ao acesso ao aplicativo mobile de registro de ponto:
+### Objetivo específico 2 - Digitalização da marcação de ponto
+#### Quanto ao acesso ao aplicativo mobile de registro de ponto
 
 **RF18: Realizar login no aplicativo mobile**  
 Os usuários (empregados e empregadores) deverão poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada.
@@ -65,7 +68,7 @@ Os usuários (empregados e empregadores) que estiverem acessando o aplicativo pe
 
 ---
 
-### Quanto ao registro de ponto de trabalho no aplicativo mobile:
+#### Quanto ao registro de ponto de trabalho no aplicativo mobile
 
 **RF20: Registrar ponto**  
 O empregado deve poder registrar seus pontos de trabalho (incluindo as pausas) apenas no horário especificado no contrato de trabalho, levando em conta as regras de tolerância de horário.
@@ -87,7 +90,8 @@ Um empregador deve poder adicionar hora extra para o empregado, respeitando o li
 
 ---
 
-### Quanto ao sistema de relatórios dos registros de ponto:
+### Objetivo específico 3 - Informatização dos dados
+#### Quanto ao sistema de relatórios dos registros de ponto
 
 **RF26: Visualizar histórico do registro de ponto**  
 O empregado deve poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo.
@@ -100,6 +104,43 @@ O sistema deve realizar automaticamente o cálculo do salário dos empregados, i
 
 **RF29: Enviar relatório mensal**  
 O sistema deve gerar automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, etc), e enviá-lo à LFD e ao empregador responsável.
+
+<br>
+
+## Lista de Requisitos Não-Funcionais
+
+Estamos utilizado o Framework de Sommerville (2019) para requisitos não funcionais.
+
+---
+
+### Objetivo específico 1 - Controle exclusivo da LFD sobre usuários e dados
+#### Quanto à usabilidade:
+RNF01: A interface principal do aplicativo deve conter apenas os elementos essenciais para o registro de ponto, organizados de forma a facilitar a identificação e o uso.<br>
+RNF02: O sistema deve ser compatível com as versões mais recentes de iOS e Android, bem como com os navegadores mais utilizados (Chrome, Firefox, Edge).<br>
+#### Quanto à eficiência:
+RNF03: O sistema deverá ser capaz de escalar com o aumento de usuários.
+#### Quanto à requisitos regulatórios (requisitos externos)
+RNF04: Os dados dos empregados e empregadores devem estar em conformidade com a LGPD.
+
+---
+
+### Objetivo específico 2 - Digitalização da marcação de ponto
+#### Quanto à usabilidade:
+RNF05: O sistema deve entregar 95% das notificações de registro do ponto batido ou pendente em até 5 segundos após o evento ocorrer. (desempenho).<br>
+RNF06: O sistema deve limitar o envio de notificações, com no máximo 4 notificações por dia, de eventos críticos de forma a não sobrecarregar o usuário. Com intervalo mínimo de 15 minutos entre as notificações. (usabilidade).<br>
+RNF07: O tempo de resposta do sistema para a realização de um registro de ponto não deverá exceder 2 segundos em 95% das operações.<br>
+#### Quanto à dependabilidade:
+RNF08: O aplicativo mobile deverá ser compatível com versões mais simples de Android.
+#### Quanto à segurança da informação:
+RNF09: A autenticação de usuários deve ser segura e proteção contra acesso não autorizado.
+
+---
+
+### Objetivo específico 3 - Informatização dos dados
+
+RNF10 – Armazenamento de Dados: O sistema deve ser capaz de armazenar informações de usuários, registros de ponto e outros dados relacionados por pelo menos 5 anos.
+
+---
 
 
 <h2>Histórico de Versão</h2>
@@ -133,6 +174,13 @@ O sistema deve gerar automaticamente, todo dia 25 de cada mês, um relatório co
       <td>1.2</td>
       <td>Editar os Requisitos Funcionais do Product Backlog</td>
       <td>Lucas Guimarães</td>
+      <td>Caio Venâncio</td>
+    </tr>
+    <tr>
+      <td>14/05/2025</td>
+      <td>1.3</td>
+      <td>Editar os Requisitos Não-funcionais do Product Backlog</td>
+      <td>Caio Venâncio</td>
       <td></td>
     </tr>
   </tbody>
