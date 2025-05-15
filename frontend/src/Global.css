@@ -17,6 +17,7 @@
     --confirm-color: oklch(62.7% 0.194 149.214);
     --error-color: oklch(57.7% 0.245 27.325);
     --error2-color: oklch(50.5% 0.213 27.518);
+    --background-modal-color: rgba(36, 36, 36, 0.726);
 }
 
 html{

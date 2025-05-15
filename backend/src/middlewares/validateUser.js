@@ -38,10 +38,10 @@ const validateUser = [
             return value.replace(/\s+/g, '').trim();
         }),
 
-    body("nacionality")
+    body("nationality")
         .trim()
-        .notEmpty().withMessage("nacionality is required")
-        .matches(/^[A-Za-zÀ-ú\s]+$/).withMessage("nacionality must contain only letters and spaces")
+        .notEmpty().withMessage("nationality is required")
+        .matches(/^[A-Za-zÀ-ú\s]+$/).withMessage("nationality must contain only letters and spaces")
         .custom(value => {
             return value.replace(/\s+/g, ' ').trim();
         }),
@@ -54,23 +54,15 @@ const validateUser = [
             return value.replace(/\s+/g, ' ').trim();
         }),
 
-    body("occupation")
+    body("job_function")
         .trim()
-        .notEmpty().withMessage("occupation is required")
-        .isLength({ min: 2, max: 50 }).withMessage("occupation must be between 3 and 50 characters")
-        .matches(/^[A-Za-zÀ-ú\s]+$/).withMessage("occupation must contain only letters and spaces")
+        .notEmpty().withMessage("job_function is required")
+        .isLength({ min: 2, max: 50 }).withMessage("job_function must be between 3 and 50 characters")
+        .matches(/^[A-Za-zÀ-ú\s]+$/).withMessage("job_function must contain only letters and spaces")
         .custom(value => {
             return value.replace(/\s+/g, ' ').trim();
         }),
 
-    body("rg")
-        .trim()
-        .notEmpty().withMessage("rg is required")
-        .isLength({ min: 8, max: 20 }).withMessage("rg must be between 5 and 20 characters")
-        .matches(/^[\dA-Za-z.-]+$/).withMessage("rg must contain only letters, numbers, dots or hyphens")
-        .custom(value => {
-            return value.replace(/\s+/g, '').trim();
-        }),
 
     (req, res, next) => {
         const errors = validationResult(req);

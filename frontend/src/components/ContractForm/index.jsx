@@ -36,7 +36,7 @@ const ContractForm = ({ user, handleInputChange, setEmpregadoIdContractForm, set
             <br></br>
 
             {/* Ver se substitui function para role */}
-            <TextInput label="Cargo" name="function" value={user.function} onChange={handleInputChange} 
+            <TextInput label="Cargo" name="job_function" value={user.job_function} onChange={handleInputChange} 
             type="text"/>
 
             <TextInput label="Horas diárias" name="daily_hour" value={user.daily_hour} onChange={handleInputChange} type="number"/>

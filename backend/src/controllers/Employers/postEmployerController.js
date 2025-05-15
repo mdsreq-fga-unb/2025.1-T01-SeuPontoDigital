@@ -1,12 +1,12 @@
 import validateCPF from "../../middlewares/validateCPF.js";
-import insertEmployer from "../../models/Employers/insertEmployer.js";
+import postEmployerModel from "../../models/Employers/postEmployerModel.js";
 
 const postEmployerController = async (req, res) => {
     try {
         const employer = req.body;
 
         if (validateCPF(employer.cpf)) {
-            const error = await insertEmployer(employer);
+            const error = await postEmployerModel(employer);
             
             if (error) {
                 return res.status(400).json({ message: "error when inserting employer" });

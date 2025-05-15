@@ -13,6 +13,7 @@ const authVerifyToken = (req, res, next) => {
                 return res.status(401).json({ error: "invalid or expired token" });
             }
             req.id = decodedUser.id;
+            req.email = decodedUser.email
             next();
         })
     }

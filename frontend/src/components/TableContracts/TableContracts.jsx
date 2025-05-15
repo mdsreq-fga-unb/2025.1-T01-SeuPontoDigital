@@ -15,8 +15,8 @@ const TableContracts = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.data.map((item, index) => (
-                        <tr key={index}>
+                    {props.data.map((item) => (
+                        <tr key={item.id}>
                             {props.fieldsTD.map((field, i) => {
                                 const fieldParts = field.split(".");
                                 const value = fieldParts.length > 1 ? item[fieldParts[0]][fieldParts[1]] : item[field];
