@@ -7,5 +7,4 @@ const publicRoute = express.Router();
 publicRoute.post("/login", loginAdmin);
 publicRoute.post("/loginMobile", loginMobile);
 
-
 export default publicRoute;

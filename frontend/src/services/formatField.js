@@ -19,7 +19,6 @@ const formatDate = (date) => {
     return `${day}/${month}/${year}`
 };
 
-
 const formatField = (field, value) => {
     if (field === "cpf") return formatCPF(value);
     if (field === "phone") return formatPhone(value);
