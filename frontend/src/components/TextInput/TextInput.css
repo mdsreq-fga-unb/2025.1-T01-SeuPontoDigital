@@ -1,4 +1,6 @@
-.container-text-input input{
+/* LOGIN FORM STYLE FOR INPUTS */
+
+.div-login-text-input input{
     width: 100%;
     padding: 1.4rem;
     border-radius: .5rem;
@@ -6,17 +8,17 @@
     margin-bottom: 3rem;
 }
 
-.container-text-input label{
+.div-login-text-input label{
     font-size: 1.8rem;
     font-weight: 700;
 }
 
-.container-text-input input{
+.div-login-text-input input{
     padding: 1.4rem;
     font-size: 2rem;
 }
 
-.container-text-input input:focus{
+.div-login-text-input input:focus{
     outline: .2rem solid #0064C7;
     border-color: transparent;
 }

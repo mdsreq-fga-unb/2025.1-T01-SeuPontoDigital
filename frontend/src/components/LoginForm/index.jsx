@@ -9,13 +9,15 @@ import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
 
     const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (token)
+        if (token){
             navigate("/empregadores");
+        }    
     },[navigate])
 
     const handleInputEmail = (event) => setEmail(event.target.value);
@@ -47,9 +49,9 @@ const LoginForm = () => {
                 <form onSubmit={handleFormSubmit}>
                     <h2>SeuPonto<span>Digital</span></h2>
 
-                    <TextInput label="Email" type="email" value={email} onChange={handleInputEmail} placeholder="Digite seu email"/>
+                    <TextInput label="Email" type="email" value={email} onChange={handleInputEmail} placeholder="Digite seu email" className="div-login-text-input"/>
 
-                    <TextInput label="Senha" type="password" value={password} onChange={handleInputPassword} placeholder="Digite sua senha"/>
+                    <TextInput label="Senha" type="password" value={password} onChange={handleInputPassword} placeholder="Digite sua senha" className="div-login-text-input"/>
 
                     <ButtonForm>Acessar</ButtonForm>
                 </form>

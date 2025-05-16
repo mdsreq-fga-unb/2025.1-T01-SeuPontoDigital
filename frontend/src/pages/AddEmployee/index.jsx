@@ -2,7 +2,7 @@ import "../pagesStyle.css";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import WorkCardForm from "../../components/WorkCardForm";
+
 import UserForm from "../../components/UserForm/index.jsx";
 import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";
@@ -69,7 +69,7 @@ const AddEmployee = () => {
             <section className="form-user-add">
                 <form onSubmit={handleFormSubmit} className="form-users">
                     <UserForm user={employee} handleInputChange={handleInputUserChange} />
-                    <WorkCardForm user={employee} handleInputChange={handleInputUserChange}> <p><b>OBS: </b>Preencher os campos acima apenas no uso de carteira de trabalho física</p></WorkCardForm>
+                   
                     <ButtonForm>Próxima página</ButtonForm>
                 </form>
             </section>
