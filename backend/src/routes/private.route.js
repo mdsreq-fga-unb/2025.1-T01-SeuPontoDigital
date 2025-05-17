@@ -1,6 +1,7 @@
 import express from "express";
 import authVerifyToken from "../middlewares/authVerifyToken.js";
 import validateUser from "../middlewares/validateUser.js";
+import verifyDateEmployer from "../middlewares/verifyDateEmployer.js";
 import getEmployersController from "../controllers/Employers/getEmployersController.js";
 import getOneEmployerController from "../controllers/Employers/getOneEmployerController.js";
 import postEmployerController from "../controllers/Employers/postEmployerController.js";
@@ -30,6 +31,6 @@ privateRoute.get("/employers", getEmployersController);
 privateRoute.get("/employer/:id", getOneEmployerController);
 privateRoute.post("/employer", validateUser, postEmployerController);
 privateRoute.put("/employer/:id", validateUser, putEmployerController);
-privateRoute.delete("/employer/:id", deleteEmployerController);
+privateRoute.delete("/employer/:id", verifyDateEmployer, deleteEmployerController);
 
 export default privateRoute;

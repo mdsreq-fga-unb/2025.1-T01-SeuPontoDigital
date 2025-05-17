@@ -1,0 +1,21 @@
+.button-employer-form-back{
+    margin-bottom: 5rem;
+    width: 5rem;
+    padding: .5rem;
+    border-radius: 0.4rem;
+    border: 1px solid var(--light-color);
+    box-sizing: border-box;
+    background-color: var(--primary-color);
+    font-size: 1.8rem;
+    color: var(--light-color);
+    transition-duration: 0.5s;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-employer-form-back:hover{
+    cursor: pointer;
+    background-color: var(--secondary-color);
+}

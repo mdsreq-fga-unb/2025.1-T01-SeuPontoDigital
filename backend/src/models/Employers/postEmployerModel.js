@@ -10,9 +10,7 @@ const postEmployerModel = async (employer) => {
             cpf: employer.cpf,
             email: employer.email,
             phone: employer.phone,
-            nationality: employer.nationality,
-            marital_status: employer.marital_status,
-            job_function: employer.job_function,
+            password: passwordHash || null,
             cep: employer.cep,
             street: employer.street,
             home_number: employer.home_number,
@@ -20,7 +18,6 @@ const postEmployerModel = async (employer) => {
             state: employer.state,
             neighborhood: employer.neighborhood,
             complement: employer.complement || null,
-            password: passwordHash || null,
         });
         if (error) return error;
     }

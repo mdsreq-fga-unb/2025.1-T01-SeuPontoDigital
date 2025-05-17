@@ -8,13 +8,6 @@ const postContractModel = async (data) => {
             phone: data.phone || null,
             email: data.email || null,
             password: data.password || null,
-            marital_status: data.marital_status,
-            nationality: data.nationality,
-            work_card_type: data.work_card_type || null,
-            work_card_number: data.work_card_number || null,
-            work_card_series: data.work_card_series || null,
-            work_card_state: data.work_card_state || null,
-            work_card_issue_date: data.work_card_issue_date || null,
             employer_id: data.employer_id,
             job_function: data.job_function,
             work_schedule_type: data.work_schedule_type,
@@ -29,7 +22,15 @@ const postContractModel = async (data) => {
             contract_status: data.contract_status,
             contract_start_date: data.contract_start_date,
             contract_end_date: data.contract_end_date || null,
-            app_access_status: data.app_access_status
+            app_access_status: data.app_access_status,
+            workplace_employer: data.workplace_employer,
+            workplace_cep: data.cep,
+            workplace_street: data.street,
+            workplace_home_number: data.home_number,
+            workplace_city: data.city,
+            workplace_state: data.state,
+            workplace_neighborhood: data.neighborhood,
+            workplace_complement: data.complement || null,
         })
         if (error) {
             throw new Error(error.message);
