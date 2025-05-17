@@ -4,7 +4,7 @@ import verifyPassword from "../../middlewares/verifyPassword.js";
 
 const deleteContractController = async (req, res) => {
     try {
-        const contractID  = req.params.id;
+        const contractID  = req.id;
         const {password} = req.body;
         const adminEmail = req.email;
         const admin = await findAdminByEmail(adminEmail);

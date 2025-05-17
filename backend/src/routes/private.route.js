@@ -2,6 +2,7 @@ import express from "express";
 import authVerifyToken from "../middlewares/authVerifyToken.js";
 import validateUser from "../middlewares/validateUser.js";
 import verifyDateEmployer from "../middlewares/verifyDateEmployer.js";
+import verifyDateContract from "../middlewares/verifyDateContract.js";
 import getEmployersController from "../controllers/Employers/getEmployersController.js";
 import getOneEmployerController from "../controllers/Employers/getOneEmployerController.js";
 import postEmployerController from "../controllers/Employers/postEmployerController.js";
@@ -23,7 +24,7 @@ privateRoute.get("/contracts", getContractsController);
 privateRoute.get("/contract/:id", getOneContractController);
 privateRoute.post("/contract", validateUser, postContractController);
 privateRoute.put("/contract/:id", validateUser, putContractController);
-privateRoute.delete("/contract/:id", deleteContractController);
+privateRoute.delete("/contract/:id", verifyDateContract, deleteContractController);
 
 // ================== EMPLOYERS ==================
 
