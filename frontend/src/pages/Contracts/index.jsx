@@ -1,94 +1,93 @@
 import "../pagesStyle.css"
-import Sidebar from "../../components/Sidebar";
-import TableContracts from "../../components/TableContracts/TableContracts.jsx";
-import SearchInput from "../../components/SearchInput";
-import ButtonAdd from "../../components/ButtonAdd";
-import ConfirmModal from "../../components/ConfirmModal";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; 
-import axios from "axios";
-import Notification from "../../components/Notification";
+import Sidebar from "../../components/Sidebar";
+import SearchInput from "../../components/SearchInput";
+import ConfirmModal from "../../components/ConfirmModal";
+import Table from "../../components/Table";
+import filterDataContract from "../../services/filterDataContract";
+import useFetchContract from "../../hooks/useFetchContract";
+import useFetchEmployer from "../../hooks/useFetchEmployer";
+import useDeleteContract from "../../hooks/useDeleteContract";
 
 const Contracts = () => {
     const [data, setData] = useState([]);
-    const [contract, setContract] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
     const [contractToDelete, setContractToDelete] = useState(null);
-    const [searchTerm, setSearchTerm] = useState("");
+    const filteredData = filterDataContract(data, searchTerm);
+    const {fetchOneEmployer} = useFetchEmployer();
+    const fetchContract = useFetchContract();
+    const deleteContract = useDeleteContract();
 
-    const navigate = useNavigate(); 
-
-    const fieldsTH = ["Empregador", "Empregado", "Status", "Função", "Salário", "Data de início"];
-    const fieldsTD = ["employer.name", "name", "contract_status", "job_function", "salary", "contract_start_date"];
+    // Load data of contracts and name of each employer
+    const loadContracts = async () => {
+        const contracts = await fetchContract();
+        if (contracts) {
+            const contractsWithEmployer = await Promise.all(contracts.map(async (contract) => {
+                    let nameEmployer = "";
+                    if (contract.employer && contract.employer.id) {
+                        const employer = await fetchOneEmployer(contract.employer.id);
+                        nameEmployer = employer?.name || "";
+                    }
+                    return { ...contract, nameEmployer };
+                })
+            );
+            const sorted = contractsWithEmployer.sort((a, b) => a.name.localeCompare(b.name));
+            setData(sorted);
+        }
+    }; 
 
     useEffect(() => {
-        fetchData();
+        loadContracts();
     }, []);
+
+    const fieldsTH = ["Empregador", "Empregado", "Status", "Função", "Salário", "Data de início", "Acesso ao aplicativo"];
+    const fieldsTD = ["nameEmployer", "name", "contract_status", "job_function", "salary", "contract_start_date", "app_access_status"];
 
     const handleDeleteRequest = (item) => {
         setContractToDelete(item);
         setModalOpen(true);
     };
 
-    // ============================== FETCH CONTRACTS ==============================
-
-    const fetchData = async () => {
-        const token = localStorage.getItem("token");
-        try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/contracts`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            setData(response.data);
-        } catch (err) {
-            console.error("error:", err);
-        }
-    };
-
-    // ============================== DELETE CONTRACT ==============================
-
-    const handleConfirmDelete = async () => {
-        const token = localStorage.getItem("token");
-        try {
-            await axios.delete(`${import.meta.env.VITE_API_URL}/contract/delete/${contractToDelete.id}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            setModalOpen(false);
-            setContractToDelete(null);
-            Notification.success("Contrato excluído com sucesso!");
-            fetchData();
-        } catch (err) {
-            console.error("error in handleConfirmDelete contract:", err);
-            Notification.error("Erro ao excluir contrato. Tente novamente mais tarde!");
-            setModalOpen(false);
-            setContractToDelete(null);
-        }
-    };
     const handleCancelDelete = () => {
         setModalOpen(false);
         setContractToDelete(null);
     };
-    
-    // ============================== FILTER SEARCH ==============================
 
-    const filteredData = data.filter((contract) => {
-        return  contract.job_function.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                contract.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                contract.employer.name.toLowerCase().includes(searchTerm.toLowerCase())
-    });
+    const onSuccessDeleteContract = () => {
+        setModalOpen(false);
+        setContractToDelete(null);
+        loadContracts();
+    }
 
-    // ============================== RETURN JSX ==============================
+    const handleConfirmDelete = async (password) => {
+        if(!contractToDelete) return;
+        await deleteContract(contractToDelete.id, password, onSuccessDeleteContract);
+    };
 
     return (
         <div className="container-dashboard">
             <Sidebar />
             <div className="container-table-pages">
                 <div className="container-search-button">
-                    <ButtonAdd onClick={() => navigate("/empregados/adicionar")}>Adicionar Contrato</ButtonAdd>
-                    <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
+                    <SearchInput 
+                        type="search" 
+                        value={searchTerm} 
+                        onChange={e => setSearchTerm(e.target.value)}
+                    />
                 </div>
-                <TableContracts fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />
-
-                <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o contrato?`} />
+                <Table 
+                    fieldsHeader={fieldsTH} 
+                    fieldsData={fieldsTD} 
+                    data={filteredData} 
+                    onDelete={handleDeleteRequest}
+                />
+                <ConfirmModal 
+                    isOpen={modalOpen} 
+                    onConfirm={handleConfirmDelete} 
+                    onCancel={handleCancelDelete} 
+                    message="Confirme sua senha para excluir o contrato:"
+                />
             </div>
         </div>
     );

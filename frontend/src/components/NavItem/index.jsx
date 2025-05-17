@@ -4,7 +4,7 @@ import "./NavItem.css";
 const NavItem = ({ label, href, icon: Icon, onClick }) => {
 
     const location = useLocation();
-    const isActive = location.pathname === href || location.pathname.startsWith(href + "/");
+    const isActive = location.pathname.startsWith(href);
 
     return (
         <li className={`nav-item ${isActive ? 'active' : ''}`} onClick={onClick}>

@@ -2,6 +2,8 @@
     height: 5rem;
     width: 100%;
     background-color: var(--primary-color);
+    position: absolute;
+    bottom: 0;
 }
 
 .container-footer div{
@@ -12,4 +14,5 @@
     align-items: center;
     color: var(--light-color);
     font-size: 1.2rem;
+    
 }

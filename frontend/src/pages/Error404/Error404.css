@@ -7,14 +7,6 @@
     align-items: center;
 }
 
-.error404-container h1{
-    color: var(--primary-color);
-    font-size: 20rem;
-    margin-bottom: 2rem;
-    margin-top: 5rem;
-    font-weight: bold;
-}
-
 .error404-container h2{
     color: var(--text-color);
     font-size: 4rem;
@@ -22,12 +14,15 @@
     font-weight: bold;
 }
 
-.error404-container h3{
-    color: var(--light-color);
-    font-size: 3rem;
+.title-error404{
+    color: var(--primary-color);
+    font-size: 20rem;
+    margin-bottom: 2rem;
+    margin-top: 5rem;
+    font-weight: bold;
 }
 
-.error404-container button{
+.go-home-button{
     padding: 1.5rem 3.5rem;
     border-radius: .5rem;
     border: .2rem solid var(--primary-color);
@@ -37,12 +32,7 @@
     font-weight: 700;
 }
 
-.gohome-button:hover{
+.go-home-button:hover{
     cursor: pointer;
     background-color: var(--secondary-color);
-}
-
-.error404-container footer{
-    position: absolute;
-    bottom: 0;
 }

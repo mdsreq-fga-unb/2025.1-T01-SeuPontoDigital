@@ -1,16 +1,5 @@
 import { body, validationResult } from "express-validator";
 
-const validMaritalStatuses = [
-    "solteiro", "solteira",
-    "casado", "casada",
-    "divorciado", "divorciada",
-    "viúvo", "viúva",
-    "separado judicialmente", "separada judicialmente",
-    "união estável", 
-    "viuvo", "viuva",
-    "uniao estavel"
-];
-
 const validateUser = [
     body("name")
         .trim()
@@ -32,31 +21,15 @@ const validateUser = [
         }),
 
     body("email")
-        .notEmpty().withMessage("email is required")
+        .optional()
         .isEmail().withMessage("email is not valid")
         .custom(value => {
             return value.replace(/\s+/g, '').trim();
         }),
 
-    body("nationality")
-        .trim()
-        .notEmpty().withMessage("nationality is required")
-        .matches(/^[A-Za-zÀ-ú\s]+$/).withMessage("nationality must contain only letters and spaces")
-        .custom(value => {
-            return value.replace(/\s+/g, ' ').trim();
-        }),
-
-    body("marital_status")
-        .trim().toLowerCase()
-        .notEmpty().withMessage("marital status is required")
-        .isIn(validMaritalStatuses).withMessage(`marital status must be one of: ${validMaritalStatuses.join(", ")}`)
-        .custom(value => {
-            return value.replace(/\s+/g, ' ').trim();
-        }),
-
     body("job_function")
         .trim()
-        .notEmpty().withMessage("job_function is required")
+        .optional()
         .isLength({ min: 2, max: 50 }).withMessage("job_function must be between 3 and 50 characters")
         .matches(/^[A-Za-zÀ-ú\s]+$/).withMessage("job_function must contain only letters and spaces")
         .custom(value => {

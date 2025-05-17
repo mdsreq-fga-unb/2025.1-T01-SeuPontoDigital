@@ -1,5 +1,5 @@
 .sidebar-nav {
-    width: 24rem;
+    min-width: 24rem;
     background-color: var(--primary-color);
     color: var(--light-color);
     height: 100vh;

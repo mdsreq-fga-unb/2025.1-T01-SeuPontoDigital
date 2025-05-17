@@ -1,21 +1,23 @@
 import "./LoginForm.css"
-import Notification from "../Notification";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TextInput from "../TextInput";
 import ButtonForm from "../ButtonForm";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
 
 const LoginForm = () => {
 
     const navigate = useNavigate();
+
+    const {login, loading} = useLogin();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (token)
+        if (token){
             navigate("/empregadores");
+        }    
     },[navigate])
 
     const handleInputEmail = (event) => setEmail(event.target.value);
@@ -24,21 +26,7 @@ const LoginForm = () => {
         
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, {email, password});
-            localStorage.setItem("token", response.data.token);
-            Notification.success("Usuário autenticado com sucesso!");
-            setTimeout(() => {
-                navigate("/empregadores");
-            }, 2500);
-        }
-        catch (err) {
-            if (err.status === 401) 
-                Notification.error("Email ou senha incorretos!");
-            else {
-                Notification.error("Erro interno no servidor. Tente novamente mais tarde!");
-            }
-        }
+        login(email, password);
     }
     return (
         <section className="section-login-form">
@@ -47,11 +35,27 @@ const LoginForm = () => {
                 <form onSubmit={handleFormSubmit}>
                     <h2>SeuPonto<span>Digital</span></h2>
 
-                    <TextInput label="Email" type="email" value={email} onChange={handleInputEmail} placeholder="Digite seu email"/>
+                    <TextInput 
+                        label="Email" 
+                        name="email"
+                        type="email" 
+                        value={email} 
+                        onChange={handleInputEmail} 
+                        placeholder="Digite seu email" 
+                        className="div-login-text-input"
+                    />
 
-                    <TextInput label="Senha" type="password" value={password} onChange={handleInputPassword} placeholder="Digite sua senha"/>
+                    <TextInput 
+                        label="Senha" 
+                        name="password"
+                        type="password" 
+                        value={password} 
+                        onChange={handleInputPassword} 
+                        placeholder="Digite sua senha" 
+                        className="div-login-text-input"
+                    />
 
-                    <ButtonForm>Acessar</ButtonForm>
+                    <ButtonForm disabled={loading}>{loading ? "Entrando..." : "Entrar"}</ButtonForm>
                 </form>
             </div>
         </section>
