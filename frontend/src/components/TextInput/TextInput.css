@@ -1,10 +1,10 @@
-/* LOGIN FORM STYLE FOR INPUTS */
+/* ======================== LOGIN FORM STYLE FOR INPUTS ======================== */
 
 .div-login-text-input input{
     width: 100%;
     padding: 1.4rem;
     border-radius: .5rem;
-    border: .1rem solid black;
+    border: .1rem solid var(--dark-color);
     margin-bottom: 3rem;
 }
 
@@ -19,8 +19,62 @@
 }
 
 .div-login-text-input input:focus{
-    outline: .2rem solid #0064C7;
+    outline: .2rem solid var(--primary-color);
     border-color: transparent;
 }
 
-/* EMPLOYER FORM STYLE FOR INPUTS */
+/* ======================== EMPLOYER FORM STYLE FOR INPUTS ======================== */
+
+.div-employer-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.div-employer-form input{
+    width: 100%;
+    padding: 1.4rem;
+    border-radius: .5rem;
+    outline: .1rem solid var(--dark-color);
+    border: none;
+    margin-bottom: 3rem;
+    width: 40rem;
+    font-size: 1.44rem;
+    color: var(--text-color);
+}
+.div-employer-form input:focus{
+    outline: .2rem solid var(--primary-color);
+    border-color: transparent;
+}
+
+.div-employer-form label{
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* ======================== ADDRESS FORM STYLE FOR INPUTS ======================== */
+
+.div-address-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.div-address-form input{
+    width: 100%;
+    padding: 1.4rem;
+    border-radius: .5rem;
+    outline: .1rem solid var(--dark-color);
+    border: none;
+    margin-bottom: 3rem;
+    width: 40rem;
+    color: var(--text-color);
+    font-size: 1.44rem;
+}
+.div-address-form input:focus{
+    outline: .2rem solid var(--primary-color);
+    border-color: transparent;
+}
+
+.div-address-form label{
+    color: var(--text-color);
+    font-weight: 600;
+}

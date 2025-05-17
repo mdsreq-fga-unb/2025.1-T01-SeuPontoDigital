@@ -1,9 +1,21 @@
+import "./EmployerForm.css";
 import TextInput from "../TextInput";
-import "../../pages/pagesStyle.css"
+import {useNavigate} from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const EmployerForm = (props) => {
+    const navigate = useNavigate();
+
+    const handleButtonBack = (event) =>{
+        event.preventDefault();
+        navigate(-1);
+    }
+
     return (
-        <>
+        <div className="container-employer-form">
+
+            <button onClick={handleButtonBack} className="button-employer-form-back"><FaArrowLeft /></button>
+
             <TextInput 
                 label="Nome" 
                 name="name"
@@ -41,7 +53,7 @@ const EmployerForm = (props) => {
                 className="div-employer-form"
             />
             
-        </>
+        </div>
     )
 }
 

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AddressForm from "../../components/AddressForm";
 import EmployerForm from "../../components/EmployerForm/index.jsx";
-import ButtonForm from "../../components/ButtonForm";
 import Sidebar from "../../components/Sidebar";
 import ConfirmModal from "../../components/ConfirmModal";
 import useFetchEmployer from "../../hooks/useFetchEmployer";
@@ -59,8 +58,9 @@ const UpdateEmployer = () => {
                 >
                     <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
                     <AddressForm user={employer} handleInputChange={handleInputUserChange} />
-                    <ButtonForm>Atualizar Empregador</ButtonForm>
+                    
                 </form>
+                <button className="button-add-employer-confirm">Atualizar Empregador</button>
             </section>
 
                 <ConfirmModal

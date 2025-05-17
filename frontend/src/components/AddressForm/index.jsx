@@ -1,4 +1,5 @@
 import TextInput from "../TextInput";
+import "./AddressForm.css";
 
 const AddressForm = (props) => {
 
@@ -20,7 +21,7 @@ const AddressForm = (props) => {
     };
 
     return (
-        <>
+        <div className="container-address-form">
             <TextInput
                 label="CEP"
                 type="text"
@@ -85,7 +86,7 @@ const AddressForm = (props) => {
                 value={props.user.complement || ""}
                 onChange={(e) => props.handleInputChange({ name: "complement", value: e.target.value })}
             />
-        </>
+        </div>
     );
 };
 

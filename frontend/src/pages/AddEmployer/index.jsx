@@ -1,7 +1,6 @@
 import "../pagesStyle.css";
 import { useState } from "react";
 import AddressForm from "../../components/AddressForm";
-import ButtonForm from "../../components/ButtonForm";
 import Sidebar from "../../components/Sidebar";
 import EmployerForm from "../../components/EmployerForm/index.jsx";
 import usePostEmployer from "../../hooks/usePostEmployer.js";
@@ -39,8 +38,9 @@ const AddEmployer = () => {
                 <form onSubmit={handleFormSubmit} className="form-users">
                     <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
                     <AddressForm user={employer} handleInputChange={handleInputUserChange} />
-                    <ButtonForm>Cadastrar Empregador</ButtonForm>
+                    
                 </form>
+                <button className="button-add-employer-confirm">Cadastrar Empregador</button>
             </section>
         </div>
     );
