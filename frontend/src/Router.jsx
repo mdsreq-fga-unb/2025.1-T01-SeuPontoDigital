@@ -6,7 +6,6 @@ import PrivateRoute from "./components/PrivateRoute";
 import Home from "./pages/Home";
 import Employers from "./pages/Employers";
 import Error404 from "./pages/Error404";
-import AddEmployee from "./pages/AddEmployee";
 import AddEmployer from "./pages/AddEmployer";
 import { FormProvider } from "./components/ContractContext";
 import Contracts from "./pages/Contracts";
@@ -22,9 +21,6 @@ const Router = () => {
         <Route path="/" element={<Home />} />
 
         <Route path="/empregadores" element={<PrivateRoute>  <Employers />  </PrivateRoute>} />
-
-        <Route path="/empregados/adicionar" element={
-          <FormProvider> <PrivateRoute> <AddEmployee /> </PrivateRoute> </FormProvider>} />
 
         <Route path="/empregadores/adicionar" element={<PrivateRoute> <AddEmployer /> </PrivateRoute>} />
 

@@ -9,8 +9,10 @@ import axios from "axios";
 import Notification from "../../components/Notification";
 import { useNavigate } from "react-router-dom";
 import EmployerDetailsModal from "../../components/EmployerDetailsModal";
+import useFetchEmployer from "../../hooks/useFetchEmployer";
 
 const Employers = () => {
+    const fetchEmployer = useFetchEmployer();
     const [data, setData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [employerToDelete, setEmployerToDelete] = useState(null);
@@ -18,11 +20,21 @@ const Employers = () => {
     const [detailsModalOpen, setDetailsModalOpen] = useState(false); 
     const [selectedEmployer, setSelectedEmployer] = useState(null); 
 
-    const fieldsTH = ["Nome", "CPF", "Telefone", "Profissão", "Email"];
-    const fieldsTD = ["name", "cpf", "phone", "job_function", "email"];
+    const fieldsHeader = ["Nome", "CPF", "Telefone", "Email", "Bairro","Rua"];
+    const fieldsDataEmployer = ["name", "cpf", "phone", "email", "neighborhood","street"];
 
     useEffect(() => {
-        fetchData();
+        const loadData = async () => {
+            const employers = await fetchEmployer();
+            if (employers){
+                const sorted = employers.sort((a,b) => a.name.localeCompare(b.name));
+                setData(sorted);
+            }
+            else{
+                Notification.error("Não foi possível carregar os dados dos empregadores!")
+            }
+        }
+        loadData();
     }, []);
 
     const handleNameClick = async (employer) => {
@@ -50,21 +62,7 @@ const Employers = () => {
     };
     const navigate = useNavigate();
 
-    // ============================== FETCH EMPLOYERS ==============================
-
-    const fetchData = async () => {
-        const token = localStorage.getItem("token");
-        try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/employers`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            console.log(response.data)
-            setData(response.data.sort((a,b) => a.name.localeCompare(b.name)));
-        } catch (err) {
-            console.error("error:", err);
-        }
-    };
-
+    
     // ============================== DELETE EMPLOYER ==============================
 
     const handleConfirmDelete = async (password) => {
@@ -77,7 +75,7 @@ const Employers = () => {
             setModalOpen(false);
             setEmployerToDelete(null);
             Notification.success("Usuário excluído com sucesso!");
-            fetchData();
+            fetchEmployer();
         } catch (err) {
             console.error("error in handleConfirmDelete employer:", err);
             Notification.error("Erro ao excluir usuário. Verifique sua senha e tente novamente!");
@@ -108,13 +106,14 @@ const Employers = () => {
 
     return (
         <div className="container-dashboard">
-            <Sidebar />
+            <Sidebar/>
+
             <div className="container-table-pages">
                 <div className="container-search-button">
                 <ButtonAdd onClick={() => navigate("/empregadores/adicionar")}>Adicionar Empregador</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
-                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} onEdit={handleEditRequest} onAddEmployee={() => navigate("/empregados/adicionar")} onNameClick={handleNameClick}/>
+                <Table fieldsHeader={fieldsHeader} fieldsData={fieldsDataEmployer} data={filteredData} onDelete={handleDeleteRequest} onEdit={handleEditRequest} onAddEmployee={() => navigate("/empregados/adicionar")} onNameClick={handleNameClick}/>
 
                 <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o empregador ${employerToDelete?.name}?`} />
 

@@ -9,7 +9,7 @@ const Table = (props) => {
             <table className="data-table">
                 <thead>
                     <tr>
-                        {props.fieldsTH.map(field => (
+                        {props.fieldsHeader.map(field => (
                             <th>{field}</th>
                         ))}
                         <th></th>
@@ -18,7 +18,7 @@ const Table = (props) => {
                 <tbody>
                     {props.data.map((item, index) => (
                         <tr key={index}>
-                            {props.fieldsTD.map((field, i) => (
+                            {props.fieldsData.map((field, i) => (
                                 <td key={i}>
                                     {field === "name" ? (
                                         <button className="name-button" onClick={() => props.onNameClick(item)}  >
