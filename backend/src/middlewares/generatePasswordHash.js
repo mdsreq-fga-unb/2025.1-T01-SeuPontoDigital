@@ -11,5 +11,4 @@ const generatePasswordHash = async (password) => {
     }
 }
 
-
 export default generatePasswordHash;

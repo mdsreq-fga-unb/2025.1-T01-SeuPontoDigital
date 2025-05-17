@@ -22,8 +22,8 @@ const Employers = () => {
     const { fetchEmployers, fetchOneEmployer } = useFetchEmployer();
     const deleteEmployer = useDeleteEmployer();
     const filteredData = filterDataEmployer(data, searchTerm);
-    const fieldsHeader = ["Nome", "CPF", "Telefone", "Email", "Bairro", "Rua"];
-    const fieldsDataEmployer = ["name", "cpf", "phone", "email", "neighborhood", "street"];
+    const fieldsHeader = ["Nome", "CPF", "Telefone", "Email", ];
+    const fieldsDataEmployer = ["name", "cpf", "phone", "email", ];
 
     const loadEmployers = async () => {
         const employers = await fetchEmployers();

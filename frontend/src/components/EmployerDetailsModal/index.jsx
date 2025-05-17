@@ -5,7 +5,7 @@ import { useState } from "react";
 Modal.setAppElement("#root");
 
 const EmployerDetailsModal = ({ isOpen, onRequestClose, employerData }) => {
-    const [showActiveEmployees, setShowActiveEmployees] = useState(false);
+    const [showActiveEmployees, setShowActiveEmployees] = useState(true);
     const [showInactiveEmployees, setShowInactiveEmployees] = useState(false);
 
     if (!employerData) return null;

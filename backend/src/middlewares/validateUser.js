@@ -1,16 +1,5 @@
 import { body, validationResult } from "express-validator";
 
-const validMaritalStatuses = [
-    "solteiro", "solteira",
-    "casado", "casada",
-    "divorciado", "divorciada",
-    "viúvo", "viúva",
-    "separado judicialmente", "separada judicialmente",
-    "união estável", 
-    "viuvo", "viuva",
-    "uniao estavel"
-];
-
 const validateUser = [
     body("name")
         .trim()
