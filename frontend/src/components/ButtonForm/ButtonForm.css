@@ -8,6 +8,7 @@
   font-size: 1.8rem;
   color: var(--light-color);
   transition-duration: 0.5s;
+  font-weight: 600;
 }
 
 .container-button-login button:hover {

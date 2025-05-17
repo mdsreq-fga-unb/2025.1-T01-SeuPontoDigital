@@ -9,7 +9,7 @@ import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
 import handleError from "../../services/errors.js";
 
-const UpdateEmployee = () => {
+const UpdateContract = () => {
     const [employee, setEmployee] = useState({
         name: "",
         cpf: "",
@@ -83,4 +83,4 @@ const UpdateEmployee = () => {
     );
 };
 
-export default UpdateEmployee;
+export default UpdateContract;

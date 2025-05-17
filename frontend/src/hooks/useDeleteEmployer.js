@@ -1,5 +1,6 @@
 import axios from "axios";
 import Notification from "../components/Notification";
+import handleError from "../services/errors";
 
 const useDeleteEmployer = () => {
 
@@ -13,7 +14,7 @@ const useDeleteEmployer = () => {
             Notification.success("Usuário excluído com sucesso!");
             if (onSuccess) onSuccess();
         } catch (err) {
-            Notification.error("Erro ao excluir usuário. Verifique sua senha e tente novamente!");
+            handleError(err.response?.data.message || err.response?.data.errors);
         }
     }
     return deleteEmployer;

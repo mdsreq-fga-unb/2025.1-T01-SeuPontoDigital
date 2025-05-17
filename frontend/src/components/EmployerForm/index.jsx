@@ -1,17 +1,47 @@
 import TextInput from "../TextInput";
 import "../../pages/pagesStyle.css"
 
-const EmployerForm = ({ user, handleInputChange }) => {
+const EmployerForm = (props) => {
     return (
-        <div className="form-user-inputs">
-            <TextInput label="Nome" name="name" value={user.name} onChange={handleInputChange} />
-
-            <TextInput label="CPF" name="cpf" value={user.cpf} onChange={handleInputChange} />
-
-            <TextInput label="Email" type="email" name="email" value={user.email} onChange={handleInputChange} />
-
-            <TextInput label="Telefone" name="phone" value={user.phone} onChange={handleInputChange} />
-        </div>
+        <>
+            <TextInput 
+                label="Nome" 
+                name="name"
+                type="text"
+                value={props.employer.name} 
+                onChange={(e) => props.handleInputChange({ name: "name", value: e.target.value })}
+                placeholhder="Nome do empregador"
+                className="div-employer-form"
+            />
+            <TextInput 
+                label="CPF" 
+                name="cpf"
+                type="text"
+                value={props.employer.cpf} 
+                onChange={(e) => props.handleInputChange({ name: "cpf", value: e.target.value })}
+                placeholhder="CPF do empregador"
+                className="div-employer-form"
+            />
+            <TextInput 
+                label="Email" 
+                name="email"
+                type="email"
+                value={props.employer.email} 
+                onChange={(e) => props.handleInputChange({ name: "email", value: e.target.value })}
+                placeholhder="Email do empregador"
+                className="div-employer-form"
+            />
+            <TextInput 
+                label="Telefone" 
+                name="phone"
+                type="text"
+                value={props.employer.phone} 
+                onChange={(e) => props.handleInputChange({ name: "phone", value: e.target.value })}
+                placeholhder="Número do empregador"
+                className="div-employer-form"
+            />
+            
+        </>
     )
 }
 

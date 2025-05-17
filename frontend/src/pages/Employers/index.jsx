@@ -1,13 +1,11 @@
 import "../pagesStyle.css"
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import Table from "../../components/Table";
 import SearchInput from "../../components/SearchInput";
 import ButtonAdd from "../../components/ButtonAdd";
 import ConfirmModal from "../../components/ConfirmModal";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import Notification from "../../components/Notification";
-import { useNavigate } from "react-router-dom";
 import EmployerDetailsModal from "../../components/EmployerDetailsModal";
 import useFetchEmployer from "../../hooks/useFetchEmployer";
 import filterDataEmployer from "../../services/filterDataEmployer";
@@ -21,38 +19,29 @@ const Employers = () => {
     const [detailsModalOpen, setDetailsModalOpen] = useState(false);
     const [selectedEmployer, setSelectedEmployer] = useState(null);
     const navigate = useNavigate();
-    const fetchEmployer = useFetchEmployer();
+    const { fetchEmployers, fetchOneEmployer } = useFetchEmployer();
     const deleteEmployer = useDeleteEmployer();
     const filteredData = filterDataEmployer(data, searchTerm);
-    const fieldsHeader = ["Nome", "CPF", "Telefone", "Email", "Bairro", "Rua"];
-    const fieldsDataEmployer = ["name", "cpf", "phone", "email", "neighborhood", "street"];
+    const fieldsHeader = ["Nome", "CPF", "Telefone", "Email", ];
+    const fieldsDataEmployer = ["name", "cpf", "phone", "email", ];
 
-    const loadData = async () => {
-        const employers = await fetchEmployer();
+    const loadEmployers = async () => {
+        const employers = await fetchEmployers();
         if (employers) {
             const sorted = employers.sort((a, b) => a.name.localeCompare(b.name));
             setData(sorted);
         }
-        else Notification.error("Não foi possível carregar os dados dos empregadores!")
     }
 
     useEffect(() => {
-        loadData();
+        loadEmployers();
     }, []);
 
     const handleNameClick = async (employer) => {
-        try {
-            const token = localStorage.getItem("token");
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/employer/${employer.id}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            setSelectedEmployer(response.data);
-            setDetailsModalOpen(true);
-        } catch (err) {
-            console.error("Erro ao buscar detalhes do empregador:", err);
-            Notification.error("Erro ao carregar os detalhes do empregador.");
-        }
-    };
+        const dataEmployer = await fetchOneEmployer(employer.id)
+        setSelectedEmployer(dataEmployer);
+        setDetailsModalOpen(true);
+    }
 
     const handleCloseDetailsModal = () => {
         setDetailsModalOpen(false);
@@ -64,10 +53,10 @@ const Employers = () => {
         setModalOpen(true);
     };
 
-    const onSuccess = () => {
+    const onSuccessDeleteEmployer = () => {
         setModalOpen(false);
         setEmployerToDelete(null);
-        loadData();
+        loadEmployers();
     };
 
     const handleCancelDelete = () => {
@@ -77,11 +66,11 @@ const Employers = () => {
 
     const handleConfirmDelete = async (password) => {
         if (!employerToDelete) return;
-        await deleteEmployer(employerToDelete.id, password, onSuccess);
+        await deleteEmployer(employerToDelete.id, password, onSuccessDeleteEmployer);
     };
 
     const handleEditRequest = (id) => {
-        navigate(`/empregador/editar/${id}`);
+        navigate(`/empregadores/editar/${id}`);
     };
 
     return (
@@ -90,24 +79,29 @@ const Employers = () => {
             <div className="container-table-pages">
                 <div className="container-search-button">
                     <ButtonAdd onClick={() => navigate("/empregadores/adicionar")}>Adicionar Empregador</ButtonAdd>
-                    <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+                    <SearchInput 
+                        type="search" 
+                        value={searchTerm} 
+                        onChange={e => setSearchTerm(e.target.value)} 
+                    />
                 </div>
 
-                <Table 
-                    fieldsHeader={fieldsHeader} 
-                    fieldsData={fieldsDataEmployer} 
-                    data={filteredData} 
-                    onDelete={handleDeleteRequest} 
-                    onEdit={handleEditRequest} 
-                    onAddEmployee={() => navigate("/empregados/adicionar")} 
-                    onNameClick={handleNameClick} 
+                <Table
+                    fieldsHeader={fieldsHeader}
+                    fieldsData={fieldsDataEmployer}
+                    data={filteredData}
+                    onDelete={handleDeleteRequest}
+                    onEdit={handleEditRequest}
+                    onAddEmployee={() => navigate("/empregados/adicionar")}
+                    onNameClick={handleNameClick}
                 />
 
-                <ConfirmModal 
+                <ConfirmModal
                     isOpen={modalOpen}
-                    onConfirm={handleConfirmDelete} 
-                    onCancel={handleCancelDelete} 
-                    message={`Deseja realmente excluir o empregador ${employerToDelete?.name}?`} 
+                    onConfirm={handleConfirmDelete}
+                    onCancel={handleCancelDelete}
+                    message="Confirme sua senha para excluir"
+                    nameEmployer={employerToDelete?.name}
                 />
 
                 <EmployerDetailsModal
