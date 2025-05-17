@@ -8,13 +8,17 @@ repo_name: GitHub
 nav:
   - Início: index.md
   - Visão do Produto e Projeto: 
-    - Cenário Atual do Cliente e do Negócio: doc-visao/top1.md
-    - Solução Proposta: doc-visao/top2.md
-    - Estratégias de Engenharia de Software: doc-visao/top3.md
-    - Cronogramas e Entregas: doc-visao/top4.md
-    - Interação Entre Equipe e Cliente: doc-visao/top5.md
-    - Lições Aprendidas: doc-visao/top6.md
-    - Referências Bibliográficas: doc-visao/top7.md
+    - Cenário Atual do Cliente e do Negócio: doc-visao/1-cenario.md
+    - Solução Proposta: doc-visao/2-solucao.md
+    - Estratégias de Engenharia de Software: doc-visao/3-estrategia.md
+    - Engenharia de Requisitos: doc-visao/4-engenharia.md #nova aba
+    - Cronogramas e Entregas: doc-visao/5-cronograma.md
+    - Interação Entre Equipe e Cliente: doc-visao/6-interacao.md
+    - Requisitos de Software: doc-visao/7-requisitos.md #nova aba
+    - DoR e DoD: doc-visao/8-dor-e-dod.md #nova aba
+    - Backlog do Produto: doc-visao/9-backlog.md #nova aba
+    - Lições Aprendidas: doc-visao/10-licoes.md
+    - Referências Bibliográficas: doc-visao/11-referencias.md
   - Sprints & Product Backlog:
     - Product Backlog: sprints/product-backlog.md
     - Sprint 01: sprints/sprint01.md
