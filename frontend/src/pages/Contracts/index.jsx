@@ -5,9 +5,10 @@ import axios from "axios";
 import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
 import SearchInput from "../../components/SearchInput";
-import ButtonAdd from "../../components/ButtonAdd";
 import ConfirmModal from "../../components/ConfirmModal";
 import Table from "../../components/Table";
+import filterDataContract from "../../services/filterDataContract";
+import useFetchContract from "../../hooks/useFetchContract";
 
 const Contracts = () => {
     const [data, setData] = useState([]);
@@ -15,14 +16,23 @@ const Contracts = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [contractToDelete, setContractToDelete] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
-
+    const filteredData = filterDataContract(data, searchTerm);
+    const fetchContract = useFetchContract();
     const navigate = useNavigate(); 
 
     const fieldsTH = ["Empregador", "Empregado", "Status", "Função", "Salário", "Data de início"];
     const fieldsTD = ["employer.name", "name", "contract_status", "job_function", "salary", "contract_start_date"];
 
+    const loadContracts = async () => {
+        const contracts = await fetchEmployers();
+        if (contracts) {
+            const sorted = contracts.sort((a, b) => a.name.localeCompare(b.name));
+            setData(sorted);
+        }
+    }
+
     useEffect(() => {
-        fetchData();
+        loadContracts();
     }, []);
 
     const handleDeleteRequest = (item) => {
@@ -69,23 +79,12 @@ const Contracts = () => {
         setModalOpen(false);
         setContractToDelete(null);
     };
-    
-    // ============================== FILTER SEARCH ==============================
-
-    const filteredData = data.filter((contract) => {
-        return  contract.job_function.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                contract.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                contract.employer.name.toLowerCase().includes(searchTerm.toLowerCase())
-    });
-
-    // ============================== RETURN JSX ==============================
 
     return (
         <div className="container-dashboard">
             <Sidebar />
             <div className="container-table-pages">
                 <div className="container-search-button">
-                    <ButtonAdd onClick={() => navigate("/empregados/adicionar")}>Adicionar Contrato</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
                 <Table fieldsHeader={fieldsTH} fieldsData={fieldsTD} data={filteredData} onDelete={handleDeleteRequest}/>

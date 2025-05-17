@@ -22,7 +22,6 @@ const validateUser = [
 
     body("email")
         .optional()
-        .notEmpty().withMessage("email is required")
         .isEmail().withMessage("email is not valid")
         .custom(value => {
             return value.replace(/\s+/g, '').trim();
@@ -31,7 +30,6 @@ const validateUser = [
     body("job_function")
         .trim()
         .optional()
-        .notEmpty().withMessage("job_function is required")
         .isLength({ min: 2, max: 50 }).withMessage("job_function must be between 3 and 50 characters")
         .matches(/^[A-Za-zÀ-ú\s]+$/).withMessage("job_function must contain only letters and spaces")
         .custom(value => {
