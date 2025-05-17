@@ -24,12 +24,10 @@ const useLogin = () => {
       } else {
         Notification.error("Erro interno no servidor. Tente novamente mais tarde!");
       }
-
     } finally {
       setLoading(false);
     }
   };
-  
   return { login, loading };
 };
 
