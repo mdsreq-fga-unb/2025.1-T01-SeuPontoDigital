@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AddressForm from "../../components/AddressForm";
-import UserForm from "../../components/EmployerForm/index.jsx";
+import EmployerForm from "../../components/EmployerForm/index.jsx";
 import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
@@ -16,10 +16,6 @@ const UpdateEmployer = () => {
         cpf: "",
         email: "",
         phone: "",
-        nationality: "",
-        marital_status: "",
-        job_function: "",
-        rg: "",
         cep: "",
         street: "",
         home_number: "",
@@ -89,7 +85,7 @@ const UpdateEmployer = () => {
                     }}
                     className="form-users"
                 >
-                    <UserForm user={employer} handleInputChange={handleInputUserChange} />
+                    <EmployerForm user={employer} handleInputChange={handleInputUserChange} />
                     <AddressForm user={employer} handleInputChange={handleInputAddressChange} />
                     <ButtonForm>Atualizar Empregador</ButtonForm>
                 </form>

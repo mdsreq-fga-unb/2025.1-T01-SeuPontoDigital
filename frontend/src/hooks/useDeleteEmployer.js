@@ -12,8 +12,7 @@ const useDeleteEmployer = () => {
             });
             Notification.success("Usuário excluído com sucesso!");
             if (onSuccess) onSuccess();
-        } 
-        catch (err) {
+        } catch (err) {
             Notification.error("Erro ao excluir usuário. Verifique sua senha e tente novamente!");
         }
     }

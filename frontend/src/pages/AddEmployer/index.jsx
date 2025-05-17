@@ -1,24 +1,19 @@
 import "../pagesStyle.css";
-import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import AddressForm from "../../components/AddressForm";
-import UserForm from "../../components/EmployerForm/index.jsx";
 import ButtonForm from "../../components/ButtonForm";
-import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
-import handleError from "../../services/errors.js";
+import EmployerForm from "../../components/EmployerForm/index.jsx";
+import usePostEmployer from "../../hooks/usePostEmployer.js";
 
 const AddEmployer = () => {
+    const postEmployer = usePostEmployer();
+
     const [employer, setEmployer] = useState({
         name: "",
         cpf: "",
         email: "",
         phone: "",
-        nationality: "",
-        marital_status: "",
-        job_function: "",
-        rg: "",
         cep: "",
         street: "",
         home_number: "",
@@ -28,33 +23,13 @@ const AddEmployer = () => {
         complement: "",
     });
 
-    const navigate = useNavigate();
-
-    const handleInputUserChange = (event) => {
-        const { name, value } = event.target;
+    const handleInputUserChange = ({ name, value }) => {
         setEmployer((prev) => ({ ...prev, [name]: value }));
-    };
-
-    const handleInputAddressChange = (address) => {
-        setEmployer((prev) => ({ ...prev, ...address }));
     };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        try {
-            const token = localStorage.getItem("token");
-            await axios.post(
-                `${import.meta.env.VITE_API_URL}/api/employer`,
-                employer,
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
-            Notification.success("Empregador cadastrado com sucesso!");
-            setTimeout(() => navigate("/empregadores"), 1500);
-        } catch (err) {
-            handleError(err.response?.data.message || err.response?.data.errors);
-        }
+        postEmployer(employer);
     };
 
     return (
@@ -62,8 +37,8 @@ const AddEmployer = () => {
             <Sidebar />
             <section className="form-user-add">
                 <form onSubmit={handleFormSubmit} className="form-users">
-                    <UserForm user={employer} handleInputChange={handleInputUserChange} />
-                    <AddressForm user={employer} handleInputChange={handleInputAddressChange} />
+                    <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
+                    <AddressForm user={employer} handleInputChange={handleInputUserChange} />
                     <ButtonForm>Cadastrar Empregador</ButtonForm>
                 </form>
             </section>

@@ -70,7 +70,7 @@ const Employers = () => {
     };
 
     const handleEditRequest = (id) => {
-        navigate(`/empregador/editar/${id}`);
+        navigate(`/empregadores/editar/${id}`);
     };
 
     return (

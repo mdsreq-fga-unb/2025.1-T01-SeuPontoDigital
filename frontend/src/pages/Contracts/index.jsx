@@ -1,13 +1,13 @@
 import "../pagesStyle.css"
-import Sidebar from "../../components/Sidebar";
-import TableContracts from "../../components/TableContracts/TableContracts.jsx";
-import SearchInput from "../../components/SearchInput";
-import ButtonAdd from "../../components/ButtonAdd";
-import ConfirmModal from "../../components/ConfirmModal";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import Notification from "../../components/Notification";
+import Sidebar from "../../components/Sidebar";
+import SearchInput from "../../components/SearchInput";
+import ButtonAdd from "../../components/ButtonAdd";
+import ConfirmModal from "../../components/ConfirmModal";
+import Table from "../../components/Table";
 
 const Contracts = () => {
     const [data, setData] = useState([]);
@@ -86,7 +86,7 @@ const Contracts = () => {
                     <ButtonAdd onClick={() => navigate("/empregados/adicionar")}>Adicionar Contrato</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
-                <TableContracts fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />
+                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />
 
                 <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o contrato?`} />
             </div>

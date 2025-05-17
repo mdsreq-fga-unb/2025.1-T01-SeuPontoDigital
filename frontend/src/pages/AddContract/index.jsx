@@ -2,13 +2,10 @@ import "../pagesStyle.css";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ContractForm from "../../components/ContractForm";
 import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
-import { useFormContext } from "../../components/ContractContext";
 import ButtonAdd from "../../components/ButtonAdd";
-import { Button } from "@mui/material";
 
 const AddContract = () => {
     const { formData, setFormData } = useFormContext();
