@@ -19,7 +19,6 @@ const EmployerDetailsModal = ({ isOpen, onRequestClose, employerData }) => {
                 <p><strong>CPF:</strong> {employerData.cpf}</p>
                 <p><strong>Email:</strong> {employerData.email}</p>
                 <p><strong>Telefone:</strong> {employerData.phone}</p>
-                <p><strong>Profissão:</strong> {employerData.job_function}</p>
                 <p><strong>Rua:</strong> {employerData.street}</p>
                 <p><strong>Bairro:</strong> {employerData.neighborhood}</p>
                 <p><strong>Número:</strong> {employerData.home_number}</p>

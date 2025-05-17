@@ -28,12 +28,12 @@ const putEmployerController = async (req, res) => {
 
         const error = await putEmployerModel(id, updateDataEmployer);
         if (error) {
-            return res.status(500).json({ message: "internal server error" });
+            return res.status(500).json({ message: error.message });
         }
         return res.status(200).json({ message: "updated employer" });
     }
     catch (err) {
-        return res.status(500).send({ message: "internal server error" });
+        return res.status(500).send({ message: err.message });
     }
 }
 

@@ -1,16 +1,20 @@
 import "../pagesStyle.css";
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AddressForm from "../../components/AddressForm";
 import EmployerForm from "../../components/EmployerForm/index.jsx";
 import ButtonForm from "../../components/ButtonForm";
-import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
-import handleError from "../../services/errors.js";
 import ConfirmModal from "../../components/ConfirmModal";
+import useFetchEmployer from "../../hooks/useFetchEmployer";
+import usePutEmployer from "../../hooks/usePutEmployer.js";
 
 const UpdateEmployer = () => {
+    const { id } = useParams();
+    const {fetchOneEmployer} = useFetchEmployer();
+    const putEmployer = usePutEmployer();
+    const [modalOpen, setModalOpen] = useState(false);
+    const [password, setPassword] = useState("");
     const [employer, setEmployer] = useState({
         name: "",
         cpf: "",
@@ -25,53 +29,21 @@ const UpdateEmployer = () => {
         complement: "",
     });
 
-    const { id } = useParams();
-    const navigate = useNavigate();
-
-    const [modalOpen, setModalOpen] = useState(false);
-    const [password, setPassword] = useState("");
-
     useEffect(() => {
         const fetchEmployer = async () => {
-            const token = localStorage.getItem("token");
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/employer/${id}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setEmployer(response.data);
-            } catch (err) {
-                Notification.error("Erro ao carregar dados do empregador.");
-            }
+            setEmployer(await fetchOneEmployer(id));
         };
         fetchEmployer();
     }, [id]);
 
-    const handleInputUserChange = (event) => {
-        const { name, value } = event.target;
+    const handleInputUserChange = ({ name, value }) => {
         setEmployer((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleInputAddressChange = (address) => {
-        setEmployer((prev) => ({ ...prev, ...address }));
-    };
+    const closeModal = () => setModalOpen(false);
 
     const handleFormSubmit = async (passwordInput) => {
-        try {
-            const token = localStorage.getItem("token");
-            await axios.put(
-                `${import.meta.env.VITE_API_URL}/api/employer/${id}`,
-                { ...employer, password: passwordInput },
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
-            setModalOpen(false);
-            Notification.success("Empregador atualizado com sucesso!");
-            setTimeout(() => navigate("/empregadores"), 1500);
-        } catch (err) {
-            setModalOpen(false);
-            handleError(err.response?.data.message || err.response?.data.errors);
-        }
+        putEmployer(employer, closeModal, passwordInput)
     };
 
     return (
@@ -79,27 +51,28 @@ const UpdateEmployer = () => {
             <Sidebar />
             <section className="form-user-add">
                 <form
-                    onSubmit={(e) => {
+                    className="form-users"
+                    onSubmit={ (e) => {
                         e.preventDefault();
                         setModalOpen(true);
                     }}
-                    className="form-users"
                 >
-                    <EmployerForm user={employer} handleInputChange={handleInputUserChange} />
-                    <AddressForm user={employer} handleInputChange={handleInputAddressChange} />
+                    <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
+                    <AddressForm user={employer} handleInputChange={handleInputUserChange} />
                     <ButtonForm>Atualizar Empregador</ButtonForm>
                 </form>
             </section>
+
                 <ConfirmModal
                     isOpen={modalOpen}
-                    onConfirm={async (passwordInput) => {
+                    onConfirm={ async (passwordInput) => {
                         setPassword(passwordInput);
                         await handleFormSubmit(passwordInput);
                     }}
                     onCancel={() => setModalOpen(false)}
-                    message="Digite sua senha para confirmar a atualização."
+                    message="Confirme sua senha para atualizar os dados de"
+                    nameEmployer={employer.name}
                 />
-            
         </div>
     );
 };

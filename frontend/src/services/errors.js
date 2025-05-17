@@ -8,6 +8,9 @@ const handleError = (data) => {
     if (data === 'duplicate key value violates unique constraint "user_cpf_key"')
         return Notification.error("O CPF digitado já está em uso. Tente novamente!")
 
+    if (data === "invalid password")
+        return Notification.error("Senha incorreta. Tente novamente!")
+
     if (Array.isArray(data) && data.some((error) => error.includes("name")))
         return Notification.error("O nome digitado não é válido. Tente novamente!")
 
@@ -16,12 +19,6 @@ const handleError = (data) => {
 
     if (Array.isArray(data) && data.some((error) => error.includes("phone")))
         return Notification.error("O número de telefone digitado não é válido. Tente novamente!")
-
-    if (Array.isArray(data) && data.some((error) => error.includes("nationality")))
-        return Notification.error("A nacionalidade digitada não é válida. Tente novamente!")
-    
-    if (Array.isArray(data) && data.some((error) => error.includes("marital status")))
-        return Notification.error("O estado civil digitado não é válido. Tente novamente!")
 
     if (Array.isArray(data) && data.some((error) => error.includes("job_function")))
         return Notification.error("A profissão digitada não é válida. Tente novamente!")

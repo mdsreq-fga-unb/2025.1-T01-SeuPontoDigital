@@ -79,7 +79,11 @@ const Employers = () => {
             <div className="container-table-pages">
                 <div className="container-search-button">
                     <ButtonAdd onClick={() => navigate("/empregadores/adicionar")}>Adicionar Empregador</ButtonAdd>
-                    <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+                    <SearchInput 
+                        type="search" 
+                        value={searchTerm} 
+                        onChange={e => setSearchTerm(e.target.value)} 
+                    />
                 </div>
 
                 <Table
@@ -96,6 +100,7 @@ const Employers = () => {
                     isOpen={modalOpen}
                     onConfirm={handleConfirmDelete}
                     onCancel={handleCancelDelete}
+                    message="Confirme sua senha para excluir"
                     nameEmployer={employerToDelete?.name}
                 />
 

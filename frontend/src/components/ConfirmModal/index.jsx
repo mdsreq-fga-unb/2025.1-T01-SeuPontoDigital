@@ -4,7 +4,7 @@ import "./ConfirmModal.css";
 
 Modal.setAppElement("#root");
 
-const ConfirmModal = ({ isOpen, onConfirm, onCancel, nameEmployer }) => {
+const ConfirmModal = ({ isOpen, onConfirm, onCancel, message, nameEmployer }) => {
     const [password, setPassword] = useState("");
 
     const handleConfirm = () => {
@@ -26,7 +26,7 @@ const ConfirmModal = ({ isOpen, onConfirm, onCancel, nameEmployer }) => {
             contentLabel="Confirmação"
         >
             <button className="close-modal" onClick={handleClose}>&times;</button>
-            <p>Confirme sua senha para excluir <span>{nameEmployer}</span></p>
+            <p>{message} <span>{nameEmployer}</span></p>
             
             <div className="container-modal-input-button">
                 <input
