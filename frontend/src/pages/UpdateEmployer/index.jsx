@@ -49,19 +49,13 @@ const UpdateEmployer = () => {
         <div className="container-dashboard">
             <Sidebar />
             <section className="form-user-add">
-                <form
-                    className="form-users"
-                    onSubmit={ (e) => {
-                        e.preventDefault();
-                        setModalOpen(true);
-                    }}
-                >
-                    <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
-                    <AddressForm user={employer} handleInputChange={handleInputUserChange} />
-                    
-                </form>
-                <button className="button-add-employer-confirm">Atualizar Empregador</button>
-            </section>
+            <form className="form-users">
+                <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
+                <AddressForm user={employer} handleInputChange={handleInputUserChange} />
+            </form>
+            <button onClick={() => setModalOpen(true)} className="button-add-employer-confirm"> Atualizar Empregador </button>
+
+        </section>
 
                 <ConfirmModal
                     isOpen={modalOpen}

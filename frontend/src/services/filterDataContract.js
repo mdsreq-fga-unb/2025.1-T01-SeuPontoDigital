@@ -4,7 +4,9 @@ const filterDataContract = (data, searchTerm) => {
     return data.filter((contract) =>
         contract.name.toLowerCase().includes(lowerSearchTerm) ||
         contract.job_function.toLowerCase().includes(lowerSearchTerm) ||
-        contract.salary.toLowerCase().includes(lowerSearchTerm)
+        contract.salary.toString().includes(lowerSearchTerm) || 
+        contract.contract_status.toLowerCase().includes(lowerSearchTerm) ||
+        contract.employer.name.toLowerCase().includes(lowerSearchTerm)
     );
 };
 

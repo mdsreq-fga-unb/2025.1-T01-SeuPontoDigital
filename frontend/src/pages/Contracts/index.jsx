@@ -1,6 +1,5 @@
 import "../pagesStyle.css"
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
@@ -9,52 +8,46 @@ import ConfirmModal from "../../components/ConfirmModal";
 import Table from "../../components/Table";
 import filterDataContract from "../../services/filterDataContract";
 import useFetchContract from "../../hooks/useFetchContract";
+import useFetchEmployer from "../../hooks/useFetchEmployer";
 
 const Contracts = () => {
     const [data, setData] = useState([]);
-    const [contract, setContract] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
     const [contractToDelete, setContractToDelete] = useState(null);
-    const [searchTerm, setSearchTerm] = useState("");
     const filteredData = filterDataContract(data, searchTerm);
+    const {fetchOneEmployer} = useFetchEmployer();
     const fetchContract = useFetchContract();
-    const navigate = useNavigate(); 
-
-    const fieldsTH = ["Empregador", "Empregado", "Status", "Função", "Salário", "Data de início"];
-    const fieldsTD = ["employer.name", "name", "contract_status", "job_function", "salary", "contract_start_date"];
 
     const loadContracts = async () => {
-        const contracts = await fetchEmployers();
+        const contracts = await fetchContract();
         if (contracts) {
-            const sorted = contracts.sort((a, b) => a.name.localeCompare(b.name));
+            const contractsWithEmployer = await Promise.all(
+                contracts.map(async (contract) => {
+                    let nameEmployer = "";
+                    if (contract.employer && contract.employer.id) {
+                        const employer = await fetchOneEmployer(contract.employer.id);
+                        nameEmployer = employer?.name || "";
+                    }
+                    return { ...contract, nameEmployer };
+                })
+            );
+            const sorted = contractsWithEmployer.sort((a, b) => a.name.localeCompare(b.name));
             setData(sorted);
         }
-    }
+    }; 
 
     useEffect(() => {
         loadContracts();
     }, []);
 
+    const fieldsTH = ["Empregador", "Empregado", "Status", "Função", "Salário", "Data de início", "Acesso ao aplicativo"];
+    const fieldsTD = ["nameEmployer", "name", "contract_status", "job_function", "salary", "contract_start_date", "app_access_status"];
+
     const handleDeleteRequest = (item) => {
         setContractToDelete(item);
         setModalOpen(true);
     };
-
-    // ============================== FETCH CONTRACTS ==============================
-
-    const fetchData = async () => {
-        const token = localStorage.getItem("token");
-        try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/contracts`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            setData(response.data);
-        } catch (err) {
-            console.error("error:", err);
-        }
-    };
-
-    // ============================== DELETE CONTRACT ==============================
 
     const handleConfirmDelete = async (password) => {
         const token = localStorage.getItem("token");
@@ -85,9 +78,18 @@ const Contracts = () => {
             <Sidebar />
             <div className="container-table-pages">
                 <div className="container-search-button">
-                    <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
+                    <SearchInput 
+                        type="search" 
+                        value={searchTerm} 
+                        onChange={e => setSearchTerm(e.target.value)}
+                    />
                 </div>
-                <Table fieldsHeader={fieldsTH} fieldsData={fieldsTD} data={filteredData} onDelete={handleDeleteRequest}/>
+                <Table 
+                    fieldsHeader={fieldsTH} 
+                    fieldsData={fieldsTD} 
+                    data={filteredData} 
+                    onDelete={handleDeleteRequest}
+                />
 
                 <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o contrato?`} />
             </div>

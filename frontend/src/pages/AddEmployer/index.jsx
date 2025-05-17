@@ -35,13 +35,13 @@ const AddEmployer = () => {
         <div className="container-dashboard">
             <Sidebar />
             <section className="form-user-add">
-                <form onSubmit={handleFormSubmit} className="form-users">
-                    <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
-                    <AddressForm user={employer} handleInputChange={handleInputUserChange} />
-                    
-                </form>
-                <button className="button-add-employer-confirm">Cadastrar Empregador</button>
-            </section>
+            <form className="form-users">
+                <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
+                <AddressForm user={employer} handleInputChange={handleInputUserChange} />
+            </form>
+            <button onClick={handleFormSubmit} className="button-add-employer-confirm"> Cadastrar Empregador </button>
+
+        </section>
         </div>
     );
 };

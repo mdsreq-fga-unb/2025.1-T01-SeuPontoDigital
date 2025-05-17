@@ -7,7 +7,7 @@ const getOneEmployerModel = async (id) => {
         return data;
     }
     catch(err){
-        console.error("error in getOneEmployerModel");
+        console.error("error in getOneEmployerModel", err);
     }
 }
 
