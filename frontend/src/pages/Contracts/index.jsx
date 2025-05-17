@@ -46,11 +46,12 @@ const Contracts = () => {
 
     // ============================== DELETE CONTRACT ==============================
 
-    const handleConfirmDelete = async () => {
+    const handleConfirmDelete = async (password) => {
         const token = localStorage.getItem("token");
         try {
-            await axios.delete(`${import.meta.env.VITE_API_URL}/contract/delete/${contractToDelete.id}`, {
-                headers: { Authorization: `Bearer ${token}` }
+            await axios.delete(`${import.meta.env.VITE_API_URL}/api/contract/${contractToDelete.id}`, {
+                headers: { Authorization: `Bearer ${token}` },
+                data: { password },
             });
             setModalOpen(false);
             setContractToDelete(null);
@@ -63,6 +64,7 @@ const Contracts = () => {
             setContractToDelete(null);
         }
     };
+
     const handleCancelDelete = () => {
         setModalOpen(false);
         setContractToDelete(null);
@@ -86,7 +88,7 @@ const Contracts = () => {
                     <ButtonAdd onClick={() => navigate("/empregados/adicionar")}>Adicionar Contrato</ButtonAdd>
                     <SearchInput type="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)}/>
                 </div>
-                <Table fieldsTH={fieldsTH} fieldsTD={fieldsTD} data={filteredData} onDelete={handleDeleteRequest} />
+                <Table fieldsHeader={fieldsTH} fieldsData={fieldsTD} data={filteredData} onDelete={handleDeleteRequest}/>
 
                 <ConfirmModal isOpen={modalOpen} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} message={`Deseja realmente excluir o contrato?`} />
             </div>
