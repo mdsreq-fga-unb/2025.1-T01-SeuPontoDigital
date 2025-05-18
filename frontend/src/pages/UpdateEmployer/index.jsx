@@ -1,7 +1,6 @@
 import "../pagesStyle.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import AddressForm from "../../components/AddressForm";
 import EmployerForm from "../../components/EmployerForm/index.jsx";
 import Sidebar from "../../components/Sidebar";
 import ConfirmModal from "../../components/ConfirmModal";
@@ -51,7 +50,6 @@ const UpdateEmployer = () => {
             <section className="form-user-add">
             <form className="form-users">
                 <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
-                <AddressForm user={employer} handleInputChange={handleInputUserChange} />
             </form>
             <button onClick={() => setModalOpen(true)} className="button-add-employer-confirm"> Atualizar Empregador </button>
 

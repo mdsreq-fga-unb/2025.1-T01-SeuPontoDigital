@@ -1,3 +1,9 @@
+.container-employer-form-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10rem;
+}
+
 .button-employer-form-back{
     margin-bottom: 5rem;
     width: 5rem;

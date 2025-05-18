@@ -25,6 +25,30 @@ const ContractForm = (props) => {
         {value: "true", label: "Sim"}
     ];
 
+    const formatCPF = (value) => {
+        const cleaned = value.replace(/\D/g, '').slice(0, 11);
+        const masked = cleaned
+            .replace(/^(\d{3})(\d)/, '$1.$2')
+            .replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
+            .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
+        return masked;
+    };
+
+    const formatPhone = (value) => {
+        const cleaned = value.replace(/\D/g, '');
+        const masked = cleaned
+            .replace(/^(\d{2})(\d)/, '($1) $2')
+            .replace(/(\d{5})(\d)/, '$1-$2')
+            .replace(/(-\d{4})\d+?$/, '$1');
+        return masked;
+    };
+
+    const formatCEP = (value) => {
+        const cleaned = value.replace(/\D/g, '').slice(0, 8);
+        const masked = cleaned.replace(/^(\d{5})(\d)/, '$1-$2');
+        return masked;
+    };
+
     const {id} = useParams();
 
     const navigate = useNavigate();
@@ -89,7 +113,7 @@ const ContractForm = (props) => {
                 name="cpf"
                 type="text"
                 value={props.contract.cpf}
-                onChange={(e) => props.handleInputChange({ name: "cpf", value: e.target.value })}
+                onChange={(e) => props.handleInputChange({ name: "cpf", value: formatCPF(e.target.value)})}
                 className="div-employer-form"
             />
             <TextInput
@@ -105,7 +129,7 @@ const ContractForm = (props) => {
                 name="phone"
                 type="text"
                 value={props.contract.phone}
-                onChange={(e) => props.handleInputChange({ name: "phone", value: e.target.value })}
+                onChange={(e) => props.handleInputChange({ name: "phone", value: formatPhone(e.target.value)})}
                 className="div-employer-form"
             />
             <TextInput
@@ -170,7 +194,7 @@ const ContractForm = (props) => {
                 placeholder=""
                 className="div-address-form"
                 value={props.contract.cep || ""}
-                onChange={(e) => props.handleInputChange({ name: "cep", value: e.target.value })}
+                onChange={(e) => props.handleInputChange({ name: "cep", value: formatCEP(e.target.value)})}
                 onBlur={handleBlurCEP}
                 disabled={isEmployerAddress}
             />

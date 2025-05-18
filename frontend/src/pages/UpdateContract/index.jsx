@@ -2,7 +2,6 @@ import "../pagesStyle.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import AddressForm from "../../components/AddressForm";
 import UserForm from "../../components/EmployerForm/index.jsx";
 import ButtonForm from "../../components/ButtonForm";
 import Notification from "../../components/Notification";

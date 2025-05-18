@@ -14,11 +14,9 @@ const validateUser = [
 
     body("phone")
         .trim()
+        .customSanitizer(value => value.replace(/\D/g, '')) // remove tudo que não é número
         .notEmpty().withMessage("phone is required")
-        .matches(/^\+?\d{10,18}$/).withMessage("phone must contain 10 to 18 digits numbers only")
-        .custom(value => {
-            return value.replace(/\D/g, '');;
-        }),
+        .matches(/^\d{10,15}$/).withMessage("phone must contain 10 to 15 digits numbers only"),
 
     body("email")
         .optional()
