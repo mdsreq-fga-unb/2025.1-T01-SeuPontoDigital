@@ -15,14 +15,14 @@ const ContractForm = (props) => {
     ];
 
     const access_app = [
-        {value: false, label: "Não"},
-        {value: true, label: "Sim"}
+        {value: "false", label: "Não"},
+        {value: "true", label: "Sim"}
         
     ];
 
     const workplace_employer = [
-        {value: false, label: "Não"},
-        {value: true, label: "Sim"}
+        {value: "false", label: "Não"},
+        {value: "true", label: "Sim"}
     ];
 
     const {id} = useParams();
@@ -70,12 +70,14 @@ const ContractForm = (props) => {
         }
     };
 
+    const isEmployerAddress = props.contract.workplace_employer === true;
+
     return (
         <div>
             <button onClick={handleButtonBack} className="button-employer-form-back"><FaArrowLeft /></button>
             <div className="contract-form-grid">
             <TextInput
-                label="Nome"
+                label="Nome do Empregado"
                 name="name"
                 type="text"
                 value={props.contract.name}
@@ -83,7 +85,7 @@ const ContractForm = (props) => {
                 className="div-employer-form"
             />
             <TextInput
-                label="CPF"
+                label="CPF do Empregado"
                 name="cpf"
                 type="text"
                 value={props.contract.cpf}
@@ -91,7 +93,7 @@ const ContractForm = (props) => {
                 className="div-employer-form"
             />
             <TextInput
-                label="Email"
+                label="Email do Empregado"
                 name="email"
                 type="email"
                 value={props.contract.email}
@@ -99,7 +101,7 @@ const ContractForm = (props) => {
                 className="div-employer-form"
             />
             <TextInput
-                label="Telefone"
+                label="Telefone do Empregado"
                 name="phone"
                 type="text"
                 value={props.contract.phone}
@@ -115,7 +117,7 @@ const ContractForm = (props) => {
                 className="div-employer-form"
             />
             <TextInput
-                label="Salário"
+                label="Salário do Empregado"
                 name="salary"
                 type="text"
                 value={props.contract.salary}
@@ -149,7 +151,7 @@ const ContractForm = (props) => {
                 label="Acesso ao aplicativo"
                 name="access_app"
                 value={props.contract.access_app}
-                onChange={(e) => props.handleInputChange({ name: "access_app", value: Boolean(e.target.value) })}
+                onChange={(e) => props.handleInputChange({ name: "access_app", value: e.target.value === "true" })}
                 options={access_app}
                 className="div-contract-select"
             />
@@ -157,7 +159,7 @@ const ContractForm = (props) => {
                 label="Local de trabalho na casa do Empregador"
                 name="workplace_employer"
                 value={props.contract.workplace_employer}
-                onChange={(e) => props.handleInputChange({ name: "workplace_employer", value: Boolean(e.target.value) })}
+                onChange={(e) => props.handleInputChange({ name: "workplace_employer", value: e.target.value === "true" })}
                 options={workplace_employer}
                 className="div-contract-select"
             />
@@ -170,6 +172,7 @@ const ContractForm = (props) => {
                 value={props.contract.cep || ""}
                 onChange={(e) => props.handleInputChange({ name: "cep", value: e.target.value })}
                 onBlur={handleBlurCEP}
+                disabled={isEmployerAddress}
             />
             <TextInput
                 label="Rua"
@@ -179,6 +182,7 @@ const ContractForm = (props) => {
                 className="div-address-form"
                 value={props.contract.street || ""}
                 onChange={(e) => props.handleInputChange({ name: "street", value: e.target.value })}
+                disabled={props.contract.workplace_employer}
             />
             <TextInput
                 label="Bairro"
@@ -188,6 +192,7 @@ const ContractForm = (props) => {
                 className="div-address-form"
                 value={props.contract.neighborhood || ""}
                 onChange={(e) => props.handleInputChange({ name: "neighborhood", value: e.target.value })}
+                disabled={props.contract.workplace_employer}
             />
             <TextInput
                 label="Cidade"
@@ -197,6 +202,7 @@ const ContractForm = (props) => {
                 className="div-address-form"
                 value={props.contract.city || ""}
                 onChange={(e) => props.handleInputChange({ name: "city", value: e.target.value })}
+                disabled={props.contract.workplace_employer}
             />
             <TextInput
                 label="Estado"
@@ -206,6 +212,7 @@ const ContractForm = (props) => {
                 className="div-address-form"
                 value={props.contract.state || ""}
                 onChange={(e) => props.handleInputChange({ name: "state", value: e.target.value })}
+                disabled={props.contract.workplace_employer}
             />
             <TextInput
                 label="Número"
@@ -215,6 +222,7 @@ const ContractForm = (props) => {
                 className="div-address-form"
                 value={props.contract.home_number || ""}
                 onChange={(e) => props.handleInputChange({ name: "home_number", value: e.target.value })}
+                disabled={props.contract.workplace_employer}
             />
             <TextInput
                 label="Complemento (opcional)"
@@ -224,6 +232,7 @@ const ContractForm = (props) => {
                 className="div-address-form"
                 value={props.contract.complement || ""}
                 onChange={(e) => props.handleInputChange({ name: "complement", value: e.target.value })}
+                disabled={props.contract.workplace_employer}
             />
             </div>
         </div>

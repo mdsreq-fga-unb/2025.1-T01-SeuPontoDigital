@@ -15,9 +15,9 @@ const validateUser = [
     body("phone")
         .trim()
         .notEmpty().withMessage("phone is required")
-        .matches(/^\+?\d{10,15}$/).withMessage("phone must contain 10 to 15 digits numbers only")
+        .matches(/^\+?\d{10,18}$/).withMessage("phone must contain 10 to 18 digits numbers only")
         .custom(value => {
-            return value.replace(/\s+/g, '').trim();
+            return value.replace(/\D/g, '');;
         }),
 
     body("email")
