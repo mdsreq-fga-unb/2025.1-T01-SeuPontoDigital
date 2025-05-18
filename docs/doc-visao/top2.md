@@ -31,15 +31,15 @@ As caractéristicas da solução proposta, até o momento, incluem:
 
 1. **Frontend (Mobile):** React Native e Expo
 
-2. **Frontend (Painel de Administrador):** React-Admin
+2. **Frontend (Painel de Administrador):** React
 
-3. **Backend:** Node.js
+3. **Backend:** Node e Express
 
-4. **Banco de Dados:** Supabase e PostgreSQL
+4. **Banco de Dados:** Supabase
 
 5. **Testes**: Jest
 
-6. **Comunicação da Equipe:** Google Meet e Discord
+6. **Comunicação da Equipe:** Google Meet, Teams e Discord
 
 7. **Controle de Código e Versionamento:** Git e GitHub
 
@@ -47,7 +47,7 @@ As caractéristicas da solução proposta, até o momento, incluem:
 
 O aplicativo mobile será desenvolvido com **React Native**, utilizando o **Expo**. A comunicação com o backend será feito por meio de uma API REST construída com **Node.js** e **Express**, que será responsável pelas regras de negócio e conexão com o banco de dados. Para armazenamento dos dados, será utilizado o Supabase que oferece autenticação, armazenamento e banco de dados em tempo real baseado no PostgreSQL.
 
-Além disso, será desenvolvido um painel administrativo web utilizando o **React-Admin**, acessado via navegador. Esse painel permitirá o gerenciamento completo da aplicação, como cadastro de empregadores e empregados, controle de permissões e visualização dos dados.
+Além disso, será desenvolvido um painel administrativo web utilizando o **React**, acessado via navegador. Esse painel permitirá o gerenciamento completo da aplicação, como cadastro de empregadores e empregados, controle de permissões e visualização dos dados.
 
 Os testes da aplicação (tanto frontend quanto backend) serão feitos utilizando o **Jest**, que permitirá a verificação da lógica de negócio, componentes, e endpoints da API.
 
