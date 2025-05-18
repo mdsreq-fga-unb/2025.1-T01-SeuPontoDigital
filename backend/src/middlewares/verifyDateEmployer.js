@@ -18,7 +18,7 @@ const verifyDateEmployer = async (req, res, next) => {
             next(); 
         } 
         else {
-            return res.status(403).send({ message: "created less than 2 years ago" });
+            return res.status(403).send({ message: "employer created less than 2 years ago" });
         }
     } catch (error) {
         return res.status(500).send({ message: "internal server error"});

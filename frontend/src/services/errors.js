@@ -11,8 +11,11 @@ const handleError = (data) => {
     if (data === "invalid password")
         return Notification.error("Senha incorreta. Tente novamente!")
 
-    if (data === "created less than 2 years ago")
+    if (data === "employer created less than 2 years ago")
         return Notification.error("Não é possível excluir empregadores criados há menos de 2 anos!")
+
+    if (data === "contract created less than 2 years ago")
+        return Notification.error("Não é possível excluir contratos criados há menos de 2 anos!")
 
     if (Array.isArray(data) && data.some((error) => error.includes("name")))
         return Notification.error("O nome digitado não é válido. Tente novamente!")

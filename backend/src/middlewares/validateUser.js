@@ -14,7 +14,7 @@ const validateUser = [
 
     body("phone")
         .trim()
-        .customSanitizer(value => value.replace(/\D/g, '')) // remove tudo que não é número
+        .customSanitizer(value => value.replace(/\D/g, ''))
         .notEmpty().withMessage("phone is required")
         .matches(/^\d{10,15}$/).withMessage("phone must contain 10 to 15 digits numbers only"),
 
@@ -33,7 +33,6 @@ const validateUser = [
         .custom(value => {
             return value.replace(/\s+/g, ' ').trim();
         }),
-
 
     (req, res, next) => {
         const errors = validationResult(req);

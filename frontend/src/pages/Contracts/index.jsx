@@ -8,6 +8,7 @@ import filterDataContract from "../../services/filterDataContract";
 import useFetchContract from "../../hooks/useFetchContract";
 import useFetchEmployer from "../../hooks/useFetchEmployer";
 import useDeleteContract from "../../hooks/useDeleteContract";
+import { useNavigate } from "react-router-dom";
 
 const Contracts = () => {
     const [data, setData] = useState([]);
@@ -16,8 +17,9 @@ const Contracts = () => {
     const [contractToDelete, setContractToDelete] = useState(null);
     const filteredData = filterDataContract(data, searchTerm);
     const {fetchOneEmployer} = useFetchEmployer();
-    const fetchContract = useFetchContract();
+    const {fetchContract} = useFetchContract();
     const deleteContract = useDeleteContract();
+    const navigate = useNavigate();
 
     // Load data of contracts and name of each employer
     const loadContracts = async () => {
@@ -65,6 +67,10 @@ const Contracts = () => {
         await deleteContract(contractToDelete.id, password, onSuccessDeleteContract);
     };
 
+    const handleEditRequest = (id) => {
+        navigate(`/contratos/editar/${id}`);
+    }
+
     return (
         <div className="container-dashboard">
             <Sidebar />
@@ -81,6 +87,7 @@ const Contracts = () => {
                     fieldsData={fieldsTD} 
                     data={filteredData} 
                     onDelete={handleDeleteRequest}
+                    onEdit={handleEditRequest}
                 />
                 <ConfirmModal 
                     isOpen={modalOpen} 

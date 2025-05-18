@@ -11,7 +11,7 @@ const putContractController = async (req, res) => {
 
         const error = await putContractModel(id, updateDataContract);
         if (error) {
-            return res.status(500).json({message: "internal server error"});
+            return res.status(500).json({message: error.message});
         }
         return res.status(200).json({ message: "updated contract" });
     }
