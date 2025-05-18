@@ -21,7 +21,7 @@ const Table = (props) => {
                     {props.data.map((item, index) => (
                         <tr key={index}>
                             {props.fieldsData.map((field, i) => (
-                                <td key={i}>
+                                <td key={i} title={formatField(field, item[field])}>
                                     {field === "name" && isActive ? (
                                         <button className="name-button" onClick={() => props.onNameClick(item)}>
                                             {formatField(field, item[field])}

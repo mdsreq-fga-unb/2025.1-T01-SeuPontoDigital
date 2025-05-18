@@ -11,17 +11,17 @@ const verifyDateContract = async (req, res, next) => {
         
         const dateCreatedContract = new Date(contract.contract_start_date);
         const dateNow = new Date();
-        const twoYearsInMilliseconds = 2 * 365 * 24 * 60 * 60 * 1000;
+        const twoYearsInMilliseconds = 2 * 365.5 * 24 * 60 * 60 * 1000;
 
         if ((dateNow.getTime() - dateCreatedContract.getTime()) > twoYearsInMilliseconds) {
-            req.id = contractID
+            req.id = contractID;
             next(); 
         } 
         else {
             return res.status(403).send({ message: "contract created less than 2 years ago" });
         }
     } catch (error) {
-        return res.status(500).send({ message: error.message});
+        return res.status(500).send({ message: "internal server error" });
     }
    
 }

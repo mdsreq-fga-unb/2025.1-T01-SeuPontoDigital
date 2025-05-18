@@ -6,7 +6,7 @@ const generatePasswordHash = async (password) => {
         return passwordHash;
     }
     catch(err){
-        console.error(err);
+        console.error("error generating password hash");
         return null;
     }
 }

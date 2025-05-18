@@ -5,14 +5,14 @@ const getOneContractController = async (req, res) => {
         const data = await getOneContractModel(req.params.id);
 
         if (data) {
-            return res.status(200).json(data)
+            return res.status(200).json(data);
         }
         else {
-            return res.status(404).json({ message: "not found contract" })
+            return res.status(404).json({ message: "contract not found" });
         }
     }
     catch (err) {
-        return res.status(500).send({message: "internal server error"});
+        return res.status(500).send({message: "internal server error" });
     }
 }
 export default getOneContractController;

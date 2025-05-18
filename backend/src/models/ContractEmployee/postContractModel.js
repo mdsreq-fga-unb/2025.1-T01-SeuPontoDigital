@@ -2,9 +2,11 @@ import supabase from "../../config/supabase.js";
 
 const postContractModel = async (data) => {
     try {
+        const cleanCPF = data.cpf.replace(/\D/g, '');
+        
         const { error } = await supabase.from("employee_contracts").insert({
             name: data.name,
-            cpf: data.cpf,
+            cpf: cleanCPF,
             phone: data.phone || null,
             email: data.email || null,
             password: data.password || null,
@@ -28,12 +30,11 @@ const postContractModel = async (data) => {
             workplace_complement: data.complement || null,
         })
         if (error) {
-            throw new Error(error.message);
+            throw new Error("failed to insert contract");
         }
     }
     catch (err) {
         console.error("error in postContractModel");
-        throw err;
     }
 }
 

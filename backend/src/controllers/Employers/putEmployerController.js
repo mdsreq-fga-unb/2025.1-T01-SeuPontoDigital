@@ -15,13 +15,11 @@ const putEmployerController = async (req, res) => {
         }
 
         const admin = await findAdminByEmail(adminEmail);
-        
         if (!admin) {
             return res.status(404).json({ message: "admin not found" });
         }
 
         const isPasswordValid = await verifyPassword(password, admin.password);
-
         if (!isPasswordValid) {
             return res.status(401).json({ message: "invalid password" });
         }
@@ -30,12 +28,11 @@ const putEmployerController = async (req, res) => {
             return res.status(400).json({ message: "invalid cpf" });
 
         const error = await putEmployerModel(id, updateDataEmployer);
-
         if (error) {
             return res.status(500).json({ message: "internal server error" });
         }
 
-        return res.status(200).json({ message: "updated employer" });
+        return res.status(200).json({ message: "employer updated successfully" });
     }
     catch (err) {
         return res.status(500).send({ message: "internal server error" });

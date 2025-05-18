@@ -28,7 +28,7 @@ const validateUser = [
     body("job_function")
         .trim()
         .optional()
-        .isLength({ min: 2, max: 50 }).withMessage("job_function must be between 3 and 50 characters")
+        .isLength({ min: 4, max: 50 }).withMessage("job_function must be between 4 and 50 characters")
         .matches(/^[A-Za-zÀ-ú\s]+$/).withMessage("job_function must contain only letters and spaces")
         .custom(value => {
             return value.replace(/\s+/g, ' ').trim();

@@ -43,7 +43,7 @@ const Contracts = () => {
         loadContracts();
     }, []);
 
-    const fieldsTH = ["Empregador", "Empregado","Função do Empregado", "Status","Salário", "Data de início", "Acesso ao aplicativo"];
+    const fieldsTH = ["Empregador", "Empregado","Função do Empregado", "Status","Salário", "Data Admissão", "Acesso ao aplicativo"];
     const fieldsTD = ["nameEmployer", "name", "job_function", "contract_status", "salary", "contract_start_date", "app_access"];
 
     const handleDeleteRequest = (item) => {
@@ -93,7 +93,8 @@ const Contracts = () => {
                     isOpen={modalOpen} 
                     onConfirm={handleConfirmDelete} 
                     onCancel={handleCancelDelete} 
-                    message="Confirme sua senha para excluir o contrato:"
+                    message="Confirme sua senha para excluir o contrato de"
+                    nameEmployer={contractToDelete?.name}
                 />
             </div>
         </div>
