@@ -26,7 +26,7 @@ const Router = () => {
 
         <Route path="/contratos" element={<PrivateRoute> <Contracts /> </PrivateRoute>} />
 
-        <Route path="/contratos/adicionar" element={<PrivateRoute> <AddContract /> </PrivateRoute>} />
+        <Route path="/contratos/adicionar/:id" element={<PrivateRoute> <AddContract /> </PrivateRoute>} />
 
         <Route path="/empregados/editar/:id" element={<PrivateRoute> <UpdateContract /> </PrivateRoute>} />
 

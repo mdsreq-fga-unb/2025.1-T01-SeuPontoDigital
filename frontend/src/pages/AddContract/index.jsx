@@ -1,14 +1,14 @@
 import "../pagesStyle.css";
 import { useState } from "react";
-import AddressForm from "../../components/AddressForm";
 import Sidebar from "../../components/Sidebar";
-import EmployerForm from "../../components/EmployerForm/index.jsx";
 import usePostEmployer from "../../hooks/usePostEmployer.js";
+import ContractForm from "../../components/ContractForm/index.jsx";
+
 
 const AddContract = () => {
     const postEmployer = usePostEmployer();
-
-    const [employer, setEmployer] = useState({
+    
+    const [contract, setContract] = useState({
         name: "",
         cpf: "",
         email: "",
@@ -23,24 +23,22 @@ const AddContract = () => {
     });
 
     const handleInputUserChange = ({ name, value }) => {
-        setEmployer((prev) => ({ ...prev, [name]: value }));
+        setContract((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        postEmployer(employer);
+        postEmployer(contract);
     };
-
+    
     return (
         <div className="container-dashboard">
             <Sidebar />
-            <section className="form-user-add">
+            <section className="form-contract-add">
                 <form onSubmit={handleFormSubmit} className="form-users">
-                    <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
-                    <AddressForm user={employer} handleInputChange={handleInputUserChange} />
-                    
+                    <ContractForm contract={contract} handleInputChange={handleInputUserChange} />
                 </form>
-                <button className="button-add-employer-confirm">Cadastrar Empregador</button>
+                <button className="button-add-employer-confirm">Cadastrar Contrato</button>
             </section>
         </div>
     );

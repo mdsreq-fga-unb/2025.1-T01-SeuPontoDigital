@@ -41,8 +41,8 @@ const Contracts = () => {
         loadContracts();
     }, []);
 
-    const fieldsTH = ["Empregador", "Empregado", "Status", "Função", "Salário", "Data de início", "Acesso ao aplicativo"];
-    const fieldsTD = ["nameEmployer", "name", "contract_status", "job_function", "salary", "contract_start_date", "app_access_status"];
+    const fieldsTH = ["Empregador", "Empregado","Função do Empregado", "Status","Salário", "Data de início", "Acesso ao aplicativo"];
+    const fieldsTD = ["nameEmployer", "name", "job_function", "contract_status", "salary", "contract_start_date", "app_access"];
 
     const handleDeleteRequest = (item) => {
         setContractToDelete(item);

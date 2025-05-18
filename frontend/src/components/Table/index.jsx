@@ -31,7 +31,7 @@ const Table = (props) => {
                                     )}
                                 </td>
                             ))}
-                            <td>{ (isActive) ? <FaUserPlus onClick={() => props.onAddContract()} className="fa-add-contract" /> : ""
+                            <td>{ (isActive) ? <FaUserPlus onClick={() => props.onAddContract(item.id)} className="fa-add-contract" /> : ""
                                 }
                                 <FaPenToSquare onClick={() => props.onEdit(item.id)} className="fa-edit-employer" />
                                 <FaTrashCan onClick={() => props.onDelete(item)} className="fa-delete-employer" />
