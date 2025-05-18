@@ -10,8 +10,8 @@ import useFetchEmployer from "../../hooks/useFetchEmployer";
 const ContractForm = (props) => {
 
     const work_schedule_type = [
-        { value: "fixa", label: "Fixa" },
-        { value: "variavel", label: "Variável" }
+        { value: "variavel", label: "Variável" },
+        { value: "fixa", label: "Fixa" }
     ];
 
     const access_app = [
@@ -149,7 +149,7 @@ const ContractForm = (props) => {
                 label="Acesso ao aplicativo"
                 name="access_app"
                 value={props.contract.access_app}
-                onChange={(e) => props.handleInputChange({ name: "access_app", value: e.target.value })}
+                onChange={(e) => props.handleInputChange({ name: "access_app", value: Boolean(e.target.value) })}
                 options={access_app}
                 className="div-contract-select"
             />
@@ -157,7 +157,7 @@ const ContractForm = (props) => {
                 label="Local de trabalho na casa do Empregador"
                 name="workplace_employer"
                 value={props.contract.workplace_employer}
-                onChange={(e) => props.handleInputChange({ name: "workplace_employer", value: e.target.value })}
+                onChange={(e) => props.handleInputChange({ name: "workplace_employer", value: Boolean(e.target.value) })}
                 options={workplace_employer}
                 className="div-contract-select"
             />

@@ -14,7 +14,7 @@ const postContractController = async (req, res) => {
         return res.status(400).json({ message: "invalid cpf" })
     }
     catch(err){
-        return res.status(500).send({message: "internal server error"});
+        return res.status(500).send({message: err.message});
     }
 }
 
