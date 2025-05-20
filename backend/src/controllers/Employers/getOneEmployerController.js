@@ -4,7 +4,7 @@ const getOneEmployerController = async (req, res) => {
     try {
         const employerID = req.params.id;
         const employer = await getOneEmployerWithContractsModel(employerID);
-
+        console.log("metodo get: ", employer)
         if (!employer) {
             return res.status(404).send({ message: "employer not found" });
         }

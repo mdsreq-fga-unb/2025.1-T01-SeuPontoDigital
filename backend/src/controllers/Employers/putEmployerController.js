@@ -9,6 +9,9 @@ const putEmployerController = async (req, res) => {
         const updateDataEmployer = req.body;
         const { password } = req.body;
         const adminEmail = req.email;
+        
+        delete updateDataEmployer.activeEmployees;
+        delete updateDataEmployer.inactiveEmployees;
 
         if (!password) {
             return res.status(400).json({ message: "password required" });

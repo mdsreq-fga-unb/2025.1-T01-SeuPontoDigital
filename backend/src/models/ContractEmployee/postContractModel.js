@@ -3,7 +3,10 @@ import supabase from "../../config/supabase.js";
 const postContractModel = async (data) => {
     try {
         const cleanCPF = data.cpf.replace(/\D/g, '');
-        
+        let dateNowBrazil = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+        let [dia, mes, ano] = dateNowBrazil.split('/');
+        dateNowBrazil = `${ano}-${mes}-${dia}`;
+
         const { error } = await supabase.from("employee_contracts").insert({
             name: data.name,
             cpf: cleanCPF,
@@ -17,9 +20,8 @@ const postContractModel = async (data) => {
             work_days: data.work_days,
             salary: data.salary,
             contract_status: data.contract_status,
-            contract_start_date: data.contract_start_date,
-            contract_end_date: data.contract_end_date || null,
-            app_access: data.app_access_status || false,
+            contract_start_date: dateNowBrazil || null,
+            app_access: data.app_access || false,
             workplace_employer: data.workplace_employer,
             workplace_cep: data.cep,
             workplace_street: data.street,

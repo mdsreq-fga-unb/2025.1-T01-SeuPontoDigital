@@ -87,10 +87,10 @@ const ContractForm = (props) => {
             fetch(`https://viacep.com.br/ws/${cepValue}/json/`)
                 .then((response) => response.json())
                 .then((data) => {
-                    props.handleInputChange({ name: "street", value: data.logradouro });
-                    props.handleInputChange({ name: "neighborhood", value: data.bairro });
-                    props.handleInputChange({ name: "city", value: data.localidade });
-                    props.handleInputChange({ name: "state", value: data.uf });
+                    props.handleInputChange({ name: "workplace_street", value: data.logradouro });
+                    props.handleInputChange({ name: "workplace_neighborhood", value: data.bairro });
+                    props.handleInputChange({ name: "workplace_city", value: data.localidade });
+                    props.handleInputChange({ name: "workplace_state", value: data.uf });
                 })
                 .catch((e) => console.error(e));
         }
@@ -192,7 +192,7 @@ const ContractForm = (props) => {
                 <TextInput
                     label="CEP"
                     type="text"
-                    name="cep"
+                    name="workplace_cep"
                     placeholder=""
                     className="div-address-form"
                     value={props.contract.workplace_cep || ""}
@@ -203,7 +203,7 @@ const ContractForm = (props) => {
                 <TextInput
                     label="Rua"
                     type="text"
-                    name="street"
+                    name="workplace_street"
                     placeholder=""
                     className="div-address-form"
                     value={props.contract.workplace_street || ""}
@@ -213,7 +213,7 @@ const ContractForm = (props) => {
                 <TextInput
                     label="Bairro"
                     type="text"
-                    name="neighborhood"
+                    name="workplace_neighborhood"
                     placeholder=""
                     className="div-address-form"
                     value={props.contract.workplace_neighborhood || ""}
@@ -223,7 +223,7 @@ const ContractForm = (props) => {
                 <TextInput
                     label="Cidade"
                     type="text"
-                    name="city"
+                    name="workplace_city"
                     placeholder=""
                     className="div-address-form"
                     value={props.contract.workplace_city || ""}
@@ -233,7 +233,7 @@ const ContractForm = (props) => {
                 <TextInput
                     label="Estado"
                     type="text"
-                    name="state"
+                    name="workplace_state"
                     placeholder=""
                     className="div-address-form"
                     value={props.contract.workplace_state || ""}
@@ -243,7 +243,7 @@ const ContractForm = (props) => {
                 <TextInput
                     label="Número"
                     type="text"
-                    name="home_number"
+                    name="workplace_home_number"
                     placeholder=""
                     className="div-address-form"
                     value={props.contract.workplace_home_number || ""}
@@ -253,7 +253,7 @@ const ContractForm = (props) => {
                 <TextInput
                     label="Complemento (opcional)"
                     type="text"
-                    name="complement"
+                    name="workplace_complement"
                     placeholder=""
                     className="div-address-form"
                     value={props.contract.workplace_complement || ""}
