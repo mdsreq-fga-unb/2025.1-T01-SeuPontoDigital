@@ -1,18 +1,22 @@
 import supabase from "../../config/supabase.js";
+import generatePasswordHash from "../../middlewares/generatePasswordHash.js";
 
 const postContractModel = async (data) => {
     try {
         const cleanCPF = data.cpf.replace(/\D/g, '');
+
+        const passwordHash = await generatePasswordHash(data.password);
+
         let dateNowBrazil = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
-        let [dia, mes, ano] = dateNowBrazil.split('/');
-        dateNowBrazil = `${ano}-${mes}-${dia}`;
+        let [day, month, year] = dateNowBrazil.split('/');
+        dateNowBrazil = `${year}-${month}-${day}`;
 
         const { error } = await supabase.from("employee_contracts").insert({
             name: data.name,
             cpf: cleanCPF,
             phone: data.phone || null,
             email: data.email || null,
-            password: data.password || null,
+            password: passwordHash || null,
             employer_id: data.employer_id,
             job_function: data.job_function,
             work_schedule_type: data.work_schedule_type,
