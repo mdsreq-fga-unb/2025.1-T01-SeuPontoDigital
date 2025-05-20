@@ -9,7 +9,7 @@ requisito vai para o "Ready":
 - **O requisito contém os critérios de aceitação informados?** Através do que foi informado pelo stakeholder, o requisito deve conter critérios de aceitação que assegurem sua definição.
 - **O requisito está claro tanto para a equipe quanto para o stakeholder?** Com o objetivo de evitar ambiguidades e mensurar o requisito, é importante que os desenvolvedores e o stakeholder estejam alinhados sobre ele.
 - **O requisito encaixa na sprint?** O tamanho do requisito deve ser compatível com a duração da sprint, de modo que possa ser finalizado sem comprometer o prazo.
-- **O requisito tem o seu tipo de revisão explicitado: formal, informal?** O tipo de revisão, formal ou informal, deve estar explicitado com base nos critérios de aceitação, para que o processo de verificação adequado possa ser executado.
+<!-- - **O requisito tem o seu tipo de revisão explicitado: formal, informal?** O tipo de revisão, formal ou informal, deve estar explicitado com base nos critérios de aceitação, para que o processo de verificação adequado possa ser executado. -->
 - **O requisito possui apresentação através de história de usuário?** O requisito deve estar representado como uma história de usuário, o que auxilia na compreensão da equipe.
 - **O requisito foi revisado pelo analista de requisitos?** O analista de requisitos é responsável por realizar a última verificação do requisito, o que garante a sua inserção na sprint para ser trabalhada.
 
@@ -24,7 +24,7 @@ o "Done":
 - **Está desenvolvida por completo?** A funcionalidade deve estar totalmente implementada, com todas as suas partes integradas e operando conjuntamente.
 - **Está disponível para acesso pelo stakeholder?** A funcionalidade deve estar liberada e acessível ao stakeholder para uso.
 - **Foi incorporada à branch principal com ausência de conflitos?** A branch de desenvolvimento da funcionalidade deve estar integrada à branch principal sem conflitos.
-- **Foi revisada formalmente ou informalmente?** A funcionalidade deve ter passado por revisão, formal ou informal, conforme definido anteriormente.
+- **Foi revisada formalmente?** A funcionalidade deve ter passado por revisão formal, conforme definido anteriormente.
 - **Foi revisada pelo analista de QA?** O analista de QA deve revisar a funcionalidade, garantir a conformidade com a LGPD, se aplicável, e assegurar uma cobertura mínima de testes de 80%.
 - **Possui o feedback do cliente?** A funcionalidade deve ter sido apresentada ao cliente e conter eventuais ajustes ou confirmações provenientes do feedback recebido.
 - **Possui testes unitários e de integração executados?** A funcionalidade deve ter os testes unitários e de integração aprovados e efetuados.

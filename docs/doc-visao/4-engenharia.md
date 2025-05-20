@@ -46,7 +46,7 @@ Sprint Review | Verificação e Validação | Apresentação ao cliente dos incr
 ## Historico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-17/05/2025 | 2.0 | Adição de Atividades e Técnicas de ER | Caio Venâncio  | | <!-- colocar atividade explítcita-->
+17/05/2025 | 1.0 | Adição de Atividades e Técnicas de ER | Caio Venâncio  | | <!-- colocar atividade explítcita-->
 
 ## Referências Bibliográficas 
 - COHN, Mike. User Stories Applied: For Agile Software Development. Boston: Addison-Wesley, 2004. (para critérios de aceitação como testes de aceitação)
