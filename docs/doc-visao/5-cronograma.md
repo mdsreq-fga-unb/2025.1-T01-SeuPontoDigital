@@ -51,8 +51,8 @@ _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) p
       <td style="text-align: center; vertical-align: middle;">Sprint 04</td>
       <td style="text-align: center; vertical-align: middle;">16/05/2025</td>
       <td style="text-align: center; vertical-align: middle;">22/05/2025</td>
-      <td style="text-align: center; vertical-align: middle;">Desenvolvimento: <br>1.RF05<br>2.RF06<br>3.RF07<br>4.RF09</td>
-      <td style="text-align: center; vertical-align: middle;">1.RF05<br>2.RF06<br>3.RF07<br>4.RF09</td>
+      <td style="text-align: center; vertical-align: middle;">Desenvolvimento: <br>1.RF05<br>2.RF06<br>3.RF07<br>4.RF12</td>
+      <td style="text-align: center; vertical-align: middle;">1.RF05<br>2.RF06<br>3.RF07<br>4.RF12</td>
       <td style="text-align: center; vertical-align: middle;">Validação do CRUD de contratos de trabalho</td>
     </tr>
     <tr>
