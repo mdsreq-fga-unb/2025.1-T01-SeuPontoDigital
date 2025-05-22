@@ -35,7 +35,9 @@ const validateContract = [
                 
                 const startTotalMinutes = startHour * 60 + startMinute;
                 const endTotalMinutes = endHour * 60 + endMinute;
-                const workedMinutes = endTotalMinutes - startTotalMinutes - breakTotalMinutes;
+                const workedMinutes = endHour > startHour
+                        ? endTotalMinutes - startTotalMinutes - breakTotalMinutes
+                        : 24 * 60 - startTotalMinutes + endTotalMinutes - breakTotalMinutes;                
                 
                 if (workedMinutes < 240) {
                     throw new Error(`Insufficient worked hours on '${day.day}'. A minimum of 4 hours is required.`);
