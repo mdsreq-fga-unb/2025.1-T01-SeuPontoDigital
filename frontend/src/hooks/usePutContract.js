@@ -10,7 +10,7 @@ const usePutContract = () => {
         const token = localStorage.getItem("token");
 
         try {
-            await axios.put(`${import.meta.env.VITE_API_URL}/api/contract/${contract.id}`, { ...contract, password: passwordInput }, { headers: { Authorization: `Bearer ${token}` } }
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/contract/${contract.id}`, { ...contract, passwordAdmin: passwordInput }, { headers: { Authorization: `Bearer ${token}` } }
             );
 
             if (closeModal) closeModal();

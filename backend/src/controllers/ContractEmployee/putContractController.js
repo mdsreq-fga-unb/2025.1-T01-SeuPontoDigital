@@ -7,10 +7,10 @@ const putContractController = async (req, res) => {
     try {
         const id = req.params.id;
         const updateDataContract = req.body;
-        const { password } = req.body;
+        const { passwordAdmin } = req.body;
         const adminEmail = req.email;
 
-        if (!password) {
+        if (!passwordAdmin) {
             return res.status(400).json({ message: "password required" });
         }
 
@@ -19,7 +19,8 @@ const putContractController = async (req, res) => {
             return res.status(404).json({ message: "admin not found" });
         }
 
-        const isPasswordValid = await verifyPassword(password, admin.password);
+        const isPasswordValid = await verifyPassword(passwordAdmin, admin.password);
+        delete updateDataContract.passwordAdmin;
         if (!isPasswordValid) {
             return res.status(401).json({ message: "invalid password" });
         }
@@ -29,13 +30,13 @@ const putContractController = async (req, res) => {
 
         const error = await putContractModel(id, updateDataContract);
         if (error) {
-            return res.status(500).json({message: "internal server error" });
+            return res.status(500).json({message: "internal server error"});
         }
 
         return res.status(200).json({ message: "contract updated successfully" });
     }
     catch (err) {
-        return res.status(500).send({message: "internal server error"});
+        return res.status(500).send({message: "internal server error" });
     }
 }
 
