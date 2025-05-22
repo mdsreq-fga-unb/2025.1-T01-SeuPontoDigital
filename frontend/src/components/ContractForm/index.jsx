@@ -6,6 +6,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import DaysOfWeekSelector from "../DaysOfWeekSelector";
 import { useEffect } from "react";
 import useFetchEmployer from "../../hooks/useFetchEmployer";
+import Notification from "../Notification";
 
 const ContractForm = (props) => {
 
@@ -59,6 +60,20 @@ const ContractForm = (props) => {
         event.preventDefault();
         navigate(-1);
     }
+
+    const handleBreakIntervalChange = (e) => {
+        const value = e.target.value;
+        const [hours, minutes] = value.split(':').map(Number);
+        const totalMinutes = hours * 60 + minutes;
+        const minMinutes = 0;
+        const maxMinutes = 2 * 60;
+
+        if (totalMinutes >= minMinutes && totalMinutes <= maxMinutes) {
+            props.handleInputChange({ name: "break_interval", value });
+        } else {
+            Notification.error("Intervalo de descanso deve estar entre 00h00 e 02h00!");
+        }
+    };
 
     const { fetchOneEmployer } = useFetchEmployer();
 
@@ -162,8 +177,10 @@ const ContractForm = (props) => {
                     label="Intervalo de Descanso"
                     name="break_interval"
                     type="time"
+                    min="00:00"
+                    max="02:00"
                     value={props.contract.break_interval}
-                    onChange={(e) => props.handleInputChange({ name: "break_interval", value: e.target.value })}
+                    onChange={handleBreakIntervalChange}
                     className="div-employer-form"
                 />
             </div>
