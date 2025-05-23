@@ -38,8 +38,8 @@ const handleError = (data) => {
     if (Array.isArray(data) && data.some((error) => error.includes("break duration must be exactly 15 minutes")))
         return Notification.error("Para jornadas de até 6 horas, o intervalo deve ser exatamente 15 minutos.");
 
-    if (Array.isArray(data) && data.some((error) => error.includes("break must be between 1 and 2 hours")))
-        return Notification.error("Para jornadas acima de 6 horas, o intervalo deve estar entre 1 e 2 horas.");
+    if (Array.isArray(data) && data.some((error) => error.includes("break must be between 30 minutes and 2 hours")))
+        return Notification.error("Para jornadas acima de 6 horas, o intervalo deve estar entre 30 minutos e 2 horas.");
 
     if (Array.isArray(data) && data.some((error) => error.includes("exceeded weekly hours")))
        return Notification.error("O total de horas trabalhadas na semana ultrapassam o limite de 44 horas.");

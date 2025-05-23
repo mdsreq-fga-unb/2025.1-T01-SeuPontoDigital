@@ -49,8 +49,8 @@ const validateContract = [
 
                 if (workedMinutes <= 360 && breakTotalMinutes !== 15) {
                     throw new Error("For shifts lasting up to 6 hours, the break duration must be exactly 15 minutes.");
-                } else if (workedMinutes > 360 && workedMinutes <= 528 && (breakTotalMinutes < 60 || breakTotalMinutes > 120)) {
-                    throw new Error("For shifts exceeding 6 hours, the break must be between 1 and 2 hours.");
+                } else if (workedMinutes > 360 && workedMinutes <= 528 && (breakTotalMinutes < 30 || breakTotalMinutes > 120)) {
+                    throw new Error("For shifts exceeding 6 hours, the break must be between 30 minutes and 2 hours.");
                 }
 
                 totalWeeklyMinutes += workedMinutes;
