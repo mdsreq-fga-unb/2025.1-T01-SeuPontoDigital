@@ -1,3 +1,5 @@
+//a lista de requisitos funcionais está desatualizada aqui, siga a lista dentro de visão do produto
+
 ## Lista de Requisitos Funcionais
 
 ---
