@@ -83,7 +83,30 @@ Data     | Descrição | Prioridade | MVP
 **US26**| O sistema deve gerar automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, etc), e enviá-lo à LFD e ao empregador responsável.|Must Have|X
 
 ## 9.3 MVP
+O MVP (Produto Mínimo Viável) do sistema foi definido com base nos requisitos classificados como essenciais para o funcionamento básico e viável da solução, considerando principalmente as funcionalidades **Must Have** e algumas **Should Have** que complementam a jornada do usuário. A seleção foi realizada levando em conta a **prioridade de negócio**, a **viabilidade técnica inicial** e a **necessidade de validar a proposta de valor do sistema com usuários reais**. O foco foi garantir que a LFD (administração) possa gerenciar empregadores, contratos e empregados, e que usuários (empregados e empregadores) possam acessar e utilizar o aplicativo para controle de jornada de forma funcional e segura.
 
+#### **Itens que compõem o MVP**
+
+| Código   | Descrição                                                                                                                                                                                                                                                 |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **US01** | A LFD deve poder realizar login no painel de administrador.                                                                                                                                                                                               |
+| **US02** | A LFD deve poder cadastrar empregadores no sistema pelo painel de administrador.                                                                                                                                                                          |
+| **US03** | A LFD deve poder editar os dados dos empregadores pelo painel de administrador.                                                                                                                                                                           |
+| **US04** | A LFD deve poder excluir qualquer empregador do sistema pelo painel de administrador.                                                                                                                                                                     |
+| **US05** | A LFD deve poder criar um novo contrato e, junto dele, cadastrar os dados do empregado numa única operação.                                                                                                                                               |
+| **US06** | A LFD deve poder editar os dados de contrato e do empregado em uma única operação.                                                                                                                                                                        |
+| **US07** | A LFD deve poder excluir o contrato e o empregado associado.                                                                                                                                                                                              |
+| **US12** | A LFD deve poder controlar o acesso de empregados e empregadores ao aplicativo mobile através da tabela de contratos de trabalho.                                                                                                                         |
+| **US13** | A LFD deve poder visualizar os dados de registro de ponto e os relatórios de jornada de um empregado através de um empregador, na tabela de empregadores.                                                                                                 |
+| **US15** | Os usuários (empregados e empregadores) deverão poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada. |
+| **US16** | Os usuários (empregados e empregadores) que estiverem acessando o aplicativo pela primeira vez deverão ter a opção de serem redirecionados para uma nova página para cadastrar uma senha de acesso.                                                       |
+| **US17** | O empregado deve poder registrar seus pontos de trabalho (incluindo as pausas) apenas no horário especificado no contrato de trabalho, levando em conta as regras de tolerância de horário.                                                               |
+| **US18** | O sistema deve validar se o empregado está em um raio mínimo de 50 metros e máximo de 100 metros do local definido em contrato como ponto autorizado para registro de jornada.                                                                            |
+| **US19** | O sistema deve enviar notificações aos empregados quando houver pendência de registro dentro dos horários estabelecidos em contrato.                                                                                                                      |
+| **US21** | Os empregados devem poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência.                                                                                                                      |
+| **US26** | O sistema deve gerar automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, etc), e enviá-lo à LFD e ao empregador responsável.                                    |
+
+---
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
