@@ -1,44 +1,53 @@
 # 9. Backlog do Produto
 
 ## 9.1 Backlog Geral
-// falar de backlog
 
-// falar de user stories
+No Scrum, o Product Backlog (Backlog do produto) é uma lista dinâmica e priorizada que contém todos os itens necessários para a evolução do produto. Ela é considerada dinâmica, porque essa lista é constantemente atualizada à medida que novas necessidades surgem ou quando há mudanças nas prioridades. Além disso, ela é priorizada, pois o objetivo é garantir  o maior valor possível nas entregas desde o começo do desenvolvimento. O Product Backlog é a única fonte de trabalho para um Scrum Team (Equipe Scrum). Cada item no backlog é uma tarefa ou requisito, o que pode incluir funcionalidades, melhorias, correções, e ajustes.
 
-Product Backlog Building é uma técnica colaborativa de construção de backlog, popularizada por Felipe Aguiar, que foca em um processo dinâmico e inclusivo na definição e priorização das funcionalidades do produto. No Product Backlog Building (PBB), features são os blocos principais de funcionalidade do produto que são priorizados e detalhados ao longo do tempo para serem entregues nas iterações. Elas são grandes o suficiente para descrever funcionalidades importantes, mas precisam ser quebradas em tarefas menores para implementação prática. Na nossa equipe,
+No caso da nossa equipe, a SeuPontoDigital, utilizaremos user stories para representar os itens do nosso backlog. Uma user story (história de usuário) define funcionalidades que agregam valor tanto para os usuários quanto para os donos de um software ou sistema. Sua estrutura inclui uma descrição escrita que serve como referência para o planejamento e recordação. Além disso, uma história de usuário também é composta por testes que não apenas documentam as especificações, mas também são utilizados para avaliar se a funcionalidade foi implementada corretamente e está pronta para ser entregue. Esses testes serão usados como critérios de aceitação, na etapa de validação e verificação.
 
-//falta adicionar o "para que..." e confirmar com INVEST.
+Para gerar estas histórias, utilizamos o Product Backlog Building é uma técnica colaborativa de construção de backlog, popularizada por Felipe Aguiar, que foca em um processo dinâmico e inclusivo na definição e priorização das funcionalidades do produto. No Product Backlog Building (PBB), features são os blocos principais de funcionalidade do produto que são priorizados e detalhados ao longo do tempo para serem entregues nas iterações. Elas são grandes o suficiente para descrever funcionalidades importantes, mas precisam ser quebradas em tarefas menores para implementação prática. A nossa equipe utiliza Features para organizar o backlog.
 
-Nome    | Feature   | Descrição
+<!-- //falta adicionar o "para que..." e confirmar com INVEST. -->
+
+### **9.1.1 — Features**
+Nome    | Título | Descrição
+--------| ------ | ---------
+F01 | Painel de controle para administradores | Através dessa funcionalidade, será possível cadastrar e controlar o uso do aplicativo pelos usuários
+F02 | Sistema de marcação de ponto digital | Através dessa funcionalidade, será possível marcar o ponto de trabalho com horário e espaço, e gerenciar histórico de marcações com o tempo
+F03 | Envio automático de dados de ponto | Através dessa funcionalidade, será possível receber dados dos formatados no padrão ideal para contabilização
+
+### **9.1.2 — Histórias de usuário**
+Nome    | Feature Associada  | Descrição
 --------| --------- | ----- 
-**US01** | | Como gestor de folha de ponto na LFD, devo poder acessar o painel de administrador para que eu possa gerenciar os usuários (empregadores e empregados) e receber relatórios. 
-**US02** | | Como gestor de folha de ponto na LFD, devo poder cadastrar empregadores no sistema pelo painel de administrador para que eu possa visualizar, gerenciar e acompanhar as informações de cada empregador de forma organizada.
-**US03** | | Como gestor de folha de ponto na LFD, devo poder editar os dados dos empregadores pelo painel de administrador.
-**US04** | | Como gestor de folha de ponto na LFD, devo excluir qualquer empregador do sistema pelo painel de administrador.
-**US05** | | Como gestor de folha de ponto na LFD, devo criar um novo contrato e, junto dele, cadastrar os dados do empregado numa única operação.
-**US06** | | Como gestor de folha de ponto na LFD, devo editar os dados de contrato e do empregado em uma única operação.
-**US07** | | Como gestor de folha de ponto na LFD, devo excluir o contrato e o empregado associado.
-**US08** | | Como gestor de folha de ponto na LFD, devo visualizar os dados dos empregados e empregadores em formato de tabela no painel administrativo.
-**US09** | | Como gestor de folha de ponto na LFD, devo visualizar os dados dos contratos de trabalho em formato de tabela no painel administrativo.
-**US10** | | Como gestor de folha de ponto na LFD, devo buscar os dados dos empregados, empregadores e de contratos existentes. 
-**US11** | | Como gestor de folha de ponto na LFD, devo filtrar os dados dos empregados, empregadores e de contratos existentes baseado em status ativo ou inativo. 
-**US12** | | Como gestor de folha de ponto na LFD, devo controlar o acesso de empregados e empregadores ao aplicativo mobile através da tabela de contratos de trabalho. 
-**US13** | | Como gestor de folha de ponto na LFD, devo visualizar os dados de registro de ponto e os relatórios de jornada de um empregado através de um empregador, na tabela de empregadores.
-**US14** | | Como empregado, devo poder acessar o aplicativo mobile
-**US15** | | Como empregador, devo poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada. 
-**US16** | | Como usuário do aplicativo (empregado ou empregador) que estiverem acessando o aplicativo pela primeira vez deverão ter a opção de serem redirecionados para uma nova página para cadastrar uma senha de acesso.
-**US17** | | Como empregado, devo poder recuperar a senha se esquecido.
-**US18** | | Como empregado, devo poder registrar seus pontos de trabalho (incluindo as pausas) apenas no horário especificado no contrato de trabalho levando em conta as regras de tolerância de horário e de distância mínima do local de trabalho.
-**US19** | | Como empregador, devo receber notificações quando houver pendência de registro dentro do limite de horário estabelecido em contrato.
-**US21** | | Como gestor, devo poder ter alertas de falta de marcação do empregado (precisa disso) 
-**US22** | | Como empregador, devo receber notificações sempre que um empregado realizar uma batida de ponto no registro, dentro do horário estipulado pelo contrato. 
-**US23** | | Como empregado, devo poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência
-**US24** | | Como empregador, devo poder marcar certos dias de trabalho como feriado.
-**US25** | | Como gestor, devo poder colocar observações necessárias para dias de trabalho 
-**US26** | | Como empregado, devo poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo. 
-**US27** | | Como empregador, devo poder acessar o histórico de registros de ponto dos meus respectivos empregados. 
-**US28** | | Como gestor de folha de ponto na LFD, devo receber automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, descontos legais, dentre outros).
-**US29** | | Como empregado, devo receber a folha de ponto preenchida após o encerramento.
+**US01** | F01 | Como gestor de folha de ponto na LFD, devo poder acessar o painel de administrador para que eu possa gerenciar os usuários (empregadores e empregados) e receber relatórios. 
+**US02** | F01 | Como gestor de folha de ponto na LFD, devo poder cadastrar empregadores no sistema pelo painel de administrador para que eu possa visualizar, gerenciar e acompanhar as informações de cada empregador de forma organizada.
+**US03** | F01 | Como gestor de folha de ponto na LFD, devo poder editar os dados dos empregadores pelo painel de administrador.
+**US04** | F01 | Como gestor de folha de ponto na LFD, devo excluir qualquer empregador do sistema pelo painel de administrador.
+**US05** | F01 | Como gestor de folha de ponto na LFD, devo criar um novo contrato e, junto dele, cadastrar os dados do empregado numa única operação.
+**US06** | F01 | Como gestor de folha de ponto na LFD, devo editar os dados de contrato e do empregado em uma única operação.
+**US07** | F01 | Como gestor de folha de ponto na LFD, devo excluir o contrato e o empregado associado.
+**US08** | F01 | Como gestor de folha de ponto na LFD, devo visualizar os dados dos empregados e empregadores em formato de tabela no painel administrativo.
+**US09** | F01 | Como gestor de folha de ponto na LFD, devo visualizar os dados dos contratos de trabalho em formato de tabela no painel administrativo.
+**US10** | F01 | Como gestor de folha de ponto na LFD, devo buscar os dados dos empregados, empregadores e de contratos existentes. 
+**US11** | F01 | Como gestor de folha de ponto na LFD, devo filtrar os dados dos empregados, empregadores e de contratos existentes baseado em status ativo ou inativo. 
+**US12** | F01 | Como gestor de folha de ponto na LFD, devo controlar o acesso de empregados e empregadores ao aplicativo mobile através da tabela de contratos de trabalho. 
+**US13** | F01 | Como gestor de folha de ponto na LFD, devo visualizar os dados de registro de ponto e os relatórios de jornada de um empregado através de um empregador, na tabela de empregadores.
+**US14** | F02 | Como empregado, devo poder acessar o aplicativo mobile
+**US15** | F02 | Como empregador, devo poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada. 
+**US16** | F02 | Como usuário do aplicativo (empregado ou empregador) que estiverem acessando o aplicativo pela primeira vez deverão ter a opção de serem redirecionados para uma nova página para cadastrar uma senha de acesso.
+**US17** | F02 | Como empregado, devo poder recuperar a senha se esquecido.
+**US18** | F02 | Como empregado, devo poder registrar seus pontos de trabalho (incluindo as pausas) apenas no horário especificado no contrato de trabalho levando em conta as regras de tolerância de horário e de distância mínima do local de trabalho.
+**US19** | F02 | Como empregador, devo receber notificações quando houver pendência de registro dentro do limite de horário estabelecido em contrato.
+**US21** | F02 | Como gestor, devo poder ter alertas de falta de marcação do empregado (precisa disso) 
+**US22** | F02 | Como empregador, devo receber notificações sempre que um empregado realizar uma batida de ponto no registro, dentro do horário estipulado pelo contrato. 
+**US23** | F02 | Como empregado, devo poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência
+**US24** | F02 | Como empregador, devo poder marcar certos dias de trabalho como feriado.
+**US25** | F02 | Como gestor, devo poder colocar observações necessárias para dias de trabalho 
+**US26** | F03 | Como empregado, devo poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo. 
+**US27** | F03 | Como empregador, devo poder acessar o histórico de registros de ponto dos meus respectivos empregados. 
+**US28** | F03 | Como gestor de folha de ponto na LFD, devo receber automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, descontos legais, dentre outros).
+**US29** | F03 | Como empregado, devo receber a folha de ponto preenchida após o encerramento.
 
 ## 9.2 Priorização do Backlog Geral
 
