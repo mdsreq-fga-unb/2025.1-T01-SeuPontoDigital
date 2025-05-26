@@ -122,6 +122,65 @@ O sistema deve enviar automaticamente a folha de ponto preenchida ao empregado a
 
 ---
 
+## Requisitos Não Funcionais
+
+## Usability (Usabilidade):
+- **RNF01 - Interface Intuitiva:**
+
+A interface do aplicativo deve permitir que usuários realizem as principais tarefas com poucas interações por tela e elementos visuais de fácil leitura e toque.
+
+- **RNF02 - Interface Simples:** 
+
+A interface principal do aplicativo deve conter apenas os elementos essenciais para o registro de ponto, organizados de forma a facilitar a identificação e o uso.
+
+## Reliability (Confiabilidade):
+
+- **RNF03 - Sistema Escalável:**
+  
+O sistema deverá ser capaz de escalar sem degradação perceptível à medida que o número de usuários cresce.
+
+- **RNF04 - Teste automatizados:**
+
+Implementar cobertura de testes automatizados de pelo menos 80% de código, garantindo detecção precoce de regressões.
+
+- **RNF05 - Dados Confiáveis:**
+
+Os dados de empregados e empregadores devem estar em conformidade com a LGPD, incluindo anonimização ou criptografia de campos sensíveis.
+
+## Performance (Desempenho):
+
+- **RNF06 - Notificações Rápidas:**
+
+As notificações de ponto (batido ou pendente) devem ser entregues em até 5 segundos após o evento ocorrer, em 95% dos casos.
+
+- **RNF07 - Notificações Agradáveis:**
+
+Limitar o envio de notificações críticas a, no máximo, 4 por dia por usuário, com intervalo mínimo de 15 min entre elas, para não sobrecarregar o usuário.
+
+## Security (Segurança):
+
+- **RNF08 - APIs com rotas seguras:** 
+
+Todas as APIs devem usar JWT, com tokens expirando após 30 min de inatividade e renovação segura via refresh tokens.
+
+- **RNF09 - Dados Seguros:**
+  
+Dados sensíveis (senhas) devem ser criptografados em repouso pela bcrypt.
+
+## Portability (Portabilidade):
+
+- **RNF10 - Compatibilidade com vários aparelhos:**
+
+O aplicativo mobile deve ser compatível com Android (versões 7.0 em diante) e iOS (12.0 em diante), rodando em smartphones de diferentes fabricantes sem ajustes específicos no código.
+
+## Maintainability (Manutenibilidade):
+
+- **RNF11 - Código padronizado:**
+  
+Código modular e bem documentado; uso de comentários claros, padronização de commits.
+
+---
+
 <h2>Histórico de Versão</h2>
 <table border="1" style="width: 100%; border-collapse: collapse; text-align: left;">
   <thead>
@@ -139,6 +198,13 @@ O sistema deve enviar automaticamente a folha de ponto preenchida ao empregado a
       <td>1.0</td>
       <td>Adiciona a lista de requisitos funcionais</td>
       <td>Guilherme Moura</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>26/05/2025</td>
+      <td>1.1</td>
+      <td>Adiciona a lista de requisitos nao funcionais</td>
+      <td>Joao Pedro Ferreira Moraes</td>
       <td></td>
     </tr>
   </tbody>
