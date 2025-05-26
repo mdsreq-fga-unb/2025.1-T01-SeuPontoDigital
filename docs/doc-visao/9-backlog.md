@@ -39,15 +39,15 @@ Nome    | Feature Associada  | Descrição
 **US17** | F02 | Como empregado, devo poder recuperar a senha se esquecido.
 **US18** | F02 | Como empregado, devo poder registrar seus pontos de trabalho (incluindo as pausas) apenas no horário especificado no contrato de trabalho levando em conta as regras de tolerância de horário e de distância mínima do local de trabalho.
 **US19** | F02 | Como empregador, devo receber notificações quando houver pendência de registro dentro do limite de horário estabelecido em contrato.
-**US21** | F02 | Como gestor, devo poder ter alertas de falta de marcação do empregado (precisa disso) 
-**US22** | F02 | Como empregador, devo receber notificações sempre que um empregado realizar uma batida de ponto no registro, dentro do horário estipulado pelo contrato. 
-**US23** | F02 | Como empregado, devo poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência
-**US24** | F02 | Como empregador, devo poder marcar certos dias de trabalho como feriado.
-**US25** | F02 | Como gestor, devo poder colocar observações necessárias para dias de trabalho 
-**US26** | F03 | Como empregado, devo poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo. 
-**US27** | F03 | Como empregador, devo poder acessar o histórico de registros de ponto dos meus respectivos empregados. 
-**US28** | F03 | Como gestor de folha de ponto na LFD, devo receber automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, descontos legais, dentre outros).
-**US29** | F03 | Como empregado, devo receber a folha de ponto preenchida após o encerramento.
+**US20** | F02 | Como gestor, devo poder ter alertas de falta de marcação do empregado (precisa disso) 
+**US21** | F02 | Como empregador, devo receber notificações sempre que um empregado realizar uma batida de ponto no registro, dentro do horário estipulado pelo contrato. 
+**US22** | F02 | Como empregado, devo poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência
+**US23** | F02 | Como empregador, devo poder marcar certos dias de trabalho como feriado.
+**US24** | F02 | Como gestor, devo poder colocar observações necessárias para dias de trabalho 
+**US25** | F03 | Como empregado, devo poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo. 
+**US26** | F03 | Como empregador, devo poder acessar o histórico de registros de ponto dos meus respectivos empregados. 
+**US27** | F03 | Como gestor de folha de ponto na LFD, devo receber automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, descontos legais, dentre outros).
+**US28** | F03 | Como empregado, devo receber a folha de ponto preenchida após o encerramento.
 
 ## 9.2 Priorização do Backlog Geral
 
