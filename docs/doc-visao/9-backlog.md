@@ -18,37 +18,65 @@ F02 | Sistema de marcação de ponto digital | Através dessa funcionalidade, se
 F03 | Envio automático de dados de ponto | Através dessa funcionalidade, será possível receber dados dos formatados no padrão ideal para contabilização
 
 ### **9.1.2 — Histórias de usuário**
-Nome    | Feature Associada  | Descrição
---------| --------- | ----- 
-**US01** | F01 | Como gestor de folha de ponto na LFD, devo poder acessar o painel de administrador para que eu possa gerenciar os usuários (empregadores e empregados) e receber relatórios. 
-**US02** | F01 | Como gestor de folha de ponto na LFD, devo poder cadastrar empregadores no sistema pelo painel de administrador para que eu possa visualizar, gerenciar e acompanhar as informações de cada empregador de forma organizada.
-**US03** | F01 | Como gestor de folha de ponto na LFD, devo poder editar os dados dos empregadores pelo painel de administrador.
-**US04** | F01 | Como gestor de folha de ponto na LFD, devo excluir qualquer empregador do sistema pelo painel de administrador.
-**US05** | F01 | Como gestor de folha de ponto na LFD, devo criar um novo contrato e, junto dele, cadastrar os dados do empregado numa única operação.
-**US06** | F01 | Como gestor de folha de ponto na LFD, devo editar os dados de contrato e do empregado em uma única operação.
-**US07** | F01 | Como gestor de folha de ponto na LFD, devo excluir o contrato e o empregado associado.
-**US08** | F01 | Como gestor de folha de ponto na LFD, devo visualizar os dados dos empregados e empregadores em formato de tabela no painel administrativo.
-**US09** | F01 | Como gestor de folha de ponto na LFD, devo visualizar os dados dos contratos de trabalho em formato de tabela no painel administrativo.
-**US10** | F01 | Como gestor de folha de ponto na LFD, devo buscar os dados dos empregados, empregadores e de contratos existentes. 
-**US11** | F01 | Como gestor de folha de ponto na LFD, devo filtrar os dados dos empregados, empregadores e de contratos existentes baseado em status ativo ou inativo. 
-**US12** | F01 | Como gestor de folha de ponto na LFD, devo controlar o acesso de empregados e empregadores ao aplicativo mobile através da tabela de contratos de trabalho. 
-**US13** | F01 | Como gestor de folha de ponto na LFD, devo visualizar os dados de registro de ponto e os relatórios de jornada de um empregado através de um empregador, na tabela de empregadores.
-**US14** | F02 | Como empregado, devo poder acessar o aplicativo mobile
-**US15** | F02 | Como empregador, devo poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada. 
-**US16** | F02 | Como usuário do aplicativo (empregado ou empregador) que estiverem acessando o aplicativo pela primeira vez deverão ter a opção de serem redirecionados para uma nova página para cadastrar uma senha de acesso.
-**US17** | F02 | Como empregado, devo poder recuperar a senha se esquecido.
-**US18** | F02 | Como empregador, devo poder recuperar a senha se esquecido.
-**US19** | F02 | Como empregado, devo poder registrar seus pontos de trabalho (incluindo as pausas) apenas no horário especificado no contrato de trabalho levando em conta as regras de tolerância de horário e de distância mínima do local de trabalho.
-**US20** | F02 | Como empregador, devo receber notificações quando houver pendência de registro dentro do limite de horário estabelecido em contrato.
-**US21** | F02 | Como gestor, devo poder ter alertas de falta de marcação do empregado (precisa disso) 
-**US22** | F02 | Como empregador, devo receber notificações sempre que um empregado realizar uma batida de ponto no registro, dentro do horário estipulado pelo contrato. 
-**US23** | F02 | Como empregado, devo poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência
-**US24** | F02 | Como empregador, devo poder marcar certos dias de trabalho como feriado.
-**US25** | F02 | Como gestor, devo poder colocar observações necessárias para dias de trabalho 
-**US26** | F03 | Como empregado, devo poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo. 
-**US27** | F03 | Como empregador, devo poder acessar o histórico de registros de ponto dos meus respectivos empregados. 
-**US28** | F03 | Como gestor de folha de ponto na LFD, devo receber automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, descontos legais, dentre outros).
-**US29** | F03 | Como empregado, devo receber a folha de ponto preenchida após o encerramento.
+Nome    | Feature Associada | Requisito Funcional relacionado | Descrição
+--------| --------- | -------- | --------
+**US01** | F01 | RF01 | Como gestor de folha de ponto na LFD, devo poder acessar o painel de administrador para que eu possa gerenciar os usuários (empregadores e empregados) e receber relatórios. 
+**US02** | F01 | RF02 | Como gestor de folha de ponto na LFD, devo poder cadastrar empregadores no sistema pelo painel de administrador para que eu possa visualizar, gerenciar e acompanhar as informações de cada empregador de forma organizada.
+**US03** | F01 | RF03 | Como gestor de folha de ponto na LFD, devo poder editar os dados dos empregadores pelo painel de administrador, para que eu possa corrigir ou atualizar as informações quando necessário.
+**US04** | F01 | RF04 | Como gestor de folha de ponto na LFD, devo poder excluir qualquer empregador do sistema pelo painel de administrador, para que eu possa remover empregadores desnecessários ou inválidos..
+**US05** | F01 | RF05 | Como gestor de folha de ponto na LFD, devo poder criar um novo contrato e, junto dele, cadastrar os dados do empregado numa única operação, para que eu possa facilitar o processo de contratação e evitar erros.
+**US06** | F01 | RF06 | Como gestor de folha de ponto na LFD, devo poder editar os dados de contrato e do empregado em uma única operação, para que eu possa realizar ajustes de forma mais rápida e sem duplicação de esforços.
+**US07** | F01 | RF07 | Como gestor de folha de ponto na LFD, devo excluir o contrato e o empregado associado, para que eu possa manter o sistema organizado e remover informações que não são mais necessárias.
+**US08** | F01 | RF08 | Como gestor de folha de ponto na LFD, devo visualizar os dados dos empregados e empregadores em formato de tabela no painel administrativo, para que eu possa consultar facilmente as informações e tomar decisões rapidamente.
+**US09** | F01 | RF09 | Como gestor de folha de ponto na LFD, devo visualizar os dados dos contratos de trabalho em formato de tabela no painel administrativo, para que eu possa ter uma visão clara e organizada dos contratos em andamento.
+**US10** | F01 | RF10 | Como gestor de folha de ponto na LFD, devo buscar os dados dos empregados, empregadores e de contratos existentes, para que eu possa localizar rapidamente as informações necessárias. 
+**US11** | F01 | RF11 | Como gestor de folha de ponto na LFD, devo filtrar os dados dos empregados, empregadores e de contratos existentes baseado em status ativo ou inativo, para que eu possa realizar consultas mais específicas e organizar melhor os dados. 
+**US12** | F01 | RF12 | Como gestor de folha de ponto na LFD, devo controlar o acesso de empregados e empregadores ao aplicativo mobile através da tabela de contratos de trabalho, para que eu possa garantir que apenas usuários autorizados acessem o sistema. 
+**US13** | F01 | RF13 | Como gestor de folha de ponto na LFD, devo visualizar os dados de registro de ponto e os relatórios de jornada de um empregado através de um empregador, na tabela de empregadores, para que eu possa gerenciar os registros de forma centralizada.
+**US14** | F02 | RF14 | Como gestor, devo poder colocar observações necessárias para dias de trabalho para que eu possa registrar detalhes importantes relacionados aos dias específicos de trabalho ou eventos. 
+**US15** | F02 | RF15 | Como empregado, devo poder acessar o aplicativo mobile, para que eu possa realizar o registro de ponto e consultar minhas informações relacionadas ao trabalho.
+**US16** | F02 | RF16 | Como empregador, devo poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada, para que eu possa gerenciar os dados dos meus empregados de maneira eficiente. 
+**US17** | F02 | RF17 | Como usuário do aplicativo (empregado ou empregador) que estiverem acessando o aplicativo pela primeira vez deverão cadastrar uma senha de acesso, para que possam começar a utilizar o aplicativo de forma segura.
+**US18** | F02 | RF18 | Como usuário do aplicativo (empregado ou empregador), devo poder recuperar a senha se esquecido, para que eu possa acessar minha conta novamente sem complicações.
+**US19** | F02 | RF19 | Como usuário do aplicativo (empregado ou empregador), devo poder alterar a minha senha de acesso.
+**US20** | F02 | RF20 | Como empregado, devo poder registrar seus pontos de trabalho (incluindo as pausas) levando em conta as regras de tolerância de horário e de distância máxima do local de trabalho, para garantir que os registros sejam válidos e dentro dos limites contratuais.
+**US21** | F02 | RF21 | Como gestor, devo poder ter alertas de falta de marcação do empregado, para que eu possa agir rapidamente e corrigir quaisquer ausências não registradas. 
+**US22** | F02 | RF22 | Como empregador, devo receber notificações sempre que um empregado realizar um registro de ponto e quando houver pendência de registro dentro do limite de horário estabelecido em contrato, para que eu possa acompanhar e corrigir qualquer falha no processo de registro de ponto.
+**US23** | F02 | RF23 | Como empregado, devo poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência, para que eu possa documentar e formalizar a minha justificativa de maneira prática.
+**US24** | F02 | RF24 | Como empregador, devo poder marcar certos dias de trabalho como feriado, para que eu possa garantir que os registros de ponto sejam ajustados corretamente para esses dias.
+**US25** | F03 | RF25 | Como empregado, devo poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo. 
+**US26** | F03 | RF26 | Como empregador, devo poder acessar o histórico de registros de ponto dos meus respectivos empregados, para que eu possa monitorar o cumprimento das jornadas de trabalho. 
+**US27** | F03 | RF27 | Como gestor de folha de ponto na LFD, devo receber automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, descontos legais, dentre outros), para que eu possa revisar e aprovar as folhas de pagamento de forma eficiente.
+**US28** | F03 | RF28 | Como empregado, devo receber a folha de ponto preenchida após o encerramento, para que eu possa verificar se os registros de ponto e os cálculos de pagamento estão corretos.
+
+### **9.1.3 — Lista de requisitos não-funcionais**
+
+- **RNF01:** A interface do aplicativo deve permitir que usuários realizem as principais tarefas com poucas interações por tela e elementos visuais de fácil leitura e toque.
+
+- **RNF02:** A interface principal do aplicativo deve conter apenas os elementos essenciais para o registro de ponto, organizados de forma a facilitar a identificação e o uso.
+
+- **RNF03:** O sistema deverá ser capaz de escalar sem degradação perceptível à medida que o número de usuários cresce.
+
+- **RNF04:** Implementar cobertura de testes automatizados de pelo menos 80% de código, garantindo detecção precoce de regressões.
+
+- **RNF05:** Os dados de empregados e empregadores devem estar em conformidade com a LGPD, incluindo anonimização ou criptografia de campos sensíveis.
+
+- **RNF06:** As notificações de ponto (batido ou pendente) devem ser entregues em até 5 segundos após o evento ocorrer, em 95% dos casos.
+
+- **RNF07:** Limitar o envio de notificações críticas a, no máximo, 4 por dia por usuário, com intervalo mínimo de 15 min entre elas, para não sobrecarregar o usuário.
+
+- **RNF08:** O tempo de resposta do sistema para a realização de um registro de ponto não deverá exceder 2 segundos em 95% das operações.
+
+- **RNF09:** Todas as APIs devem usar JWT, com tokens expirando após 30 min de inatividade e renovação segura via refresh tokens.
+
+- **RNF10:** Dados sensíveis (senhas) devem ser criptografados em repouso pela bcrypt.
+
+- **RNF11:** O sistema deve ser capaz de armazenar informações de usuários, registros de ponto e outros dados relacionados por pelo menos 5 anos.
+
+- **RNF12:** O aplicativo mobile deve ser compatível com Android (versões 7.0 em diante) e iOS (12.0 em diante), rodando em smartphones de diferentes fabricantes sem ajustes específicos no código.
+
+- **RNF13:** Código modular e bem documentado; uso de comentários claros, padronização de commits.
+
 
 ## 9.2 Priorização do Backlog Geral
 

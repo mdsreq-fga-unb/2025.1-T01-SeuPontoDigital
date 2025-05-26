@@ -1,10 +1,12 @@
+# 7. Requisitos de software
+
 Esta lista de requisitos foi elaborada com base na metodologia Product Backlog Building (PBB), um processo colaborativo e estruturado concebido para a criação e o refinamento contínuo de um Product Backlog coeso e de alto valor, essencial para o sucesso de iniciativas ágeis. Diferente de abordagens que focam apenas na listagem de funcionalidades, o PBB investe na compreensão do problema a ser resolvido e das necessidades do usuário, garantindo que cada item do backlog contribua diretamente para a entrega de valor real.
 
 O resultado do PBB pode ser visualizado abaixo:
 
 <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVIzOTYj4=/?moveToViewport=-10768,-6704,13478,6696&embedId=592726896557" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
 
-## Requisitos Funcionais
+## 7.1 Requisitos Funcionais
 
 Os requisitos funcionais descrevem as funcionalidades específicas que o sistema deve implementar para
 atender às necessidades do negócio. Eles incluem integrações, processos e interações do usuário com o
@@ -61,27 +63,27 @@ A LFD deve poder adicionar observações necessárias para dias de trabalho.
 ### Objetivo específico 2 - Digitalização da marcação de ponto
 #### Quanto ao acesso ao aplicativo mobile de registro de ponto
 
-**RF15: Realizar login no aplicativo mobile**  
-Os usuários (empregados e empregadores) deverão poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada.
+**RF15: Realizar login como empregado no aplicativo mobile**  
+O empregado deve poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada.
 
-**RF16: Redefinir senha como novo usuário**  
+**RF16: Realizar login como empregador no aplicativo mobile**  
+O empregador deve poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada.
+
+**RF17: Redefinir senha como novo usuário**  
 Os usuários (empregados e empregadores) que estiverem acessando o aplicativo pela primeira vez deverão alterar a senha de acesso.
-
-**RF17: Redefinir senha**
-Os usuários (empregados e empregadores) devem poder alterar a senha de acesso ao aplicativo.
 
 **RF18: Recuperar senha**
 Os usuários (empregados e empregadores) devem poder recuperar o acesso ao aplicativo cadastrando uma nova senha.
+
+**RF19: Redefinir senha**
+Os usuários (empregados e empregadores) devem poder alterar a senha de acesso ao aplicativo.
 
 ---
 
 #### Quanto ao registro de ponto de trabalho no aplicativo mobile
 
-**RF19: Registrar ponto**  
-O empregado deve poder registrar seus pontos de trabalho (incluindo as pausas) apenas no horário especificado no contrato de trabalho, levando em conta as regras de tolerância de horário.
-
-**RF20: Validar distância do ponto de batida**  
-O sistema deve validar se o empregado está em um raio mínimo de 50 metros e máximo de 100 metros do local definido em contrato como ponto autorizado para registro de jornada.
+**RF20: Registrar ponto**  
+O empregado deve poder registrar seus pontos de trabalho (incluindo as pausas), levando em conta as regras de tolerância de distância máxima do local de trabalho.
 
 **RF21: Notificar LFD sobre o ponto**  
 O sistema deve enviar notificações à LFD quando houver pendência de registro de ponto dentro dos horários estabelecidos em contrato.
@@ -92,10 +94,7 @@ O sistema deve enviar notificações aos empregadores sempre que um empregado re
 **RF23: Justificar falta com envio de arquivo**
 Os empregados devem poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência.
 
-**RF24: Adicionar hora extra:**
-Um empregador deve poder adicionar hora extra para o empregado, respeitando o limite estabelecido pela lei.
-
-**RF25: Indicar feriados:**
+**RF24: Indicar feriados:**
 Um empregador deve poder indicar quais dias são feriados.
 
 ---
@@ -103,26 +102,23 @@ Um empregador deve poder indicar quais dias são feriados.
 ### Objetivo específico 3 - Informatização dos dados
 #### Quanto ao sistema de relatórios dos registros de ponto
 
-**RF26: Visualizar histórico do registro de ponto**  
+**RF25: Visualizar histórico do registro de ponto**  
 O empregado deve poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo.
 
 **RF26: Visualizar histórico de pontos dos empregados**  
 O sistema deve permitir que os empregadores acessem o histórico de registros de ponto dos seus respectivos empregados.
 
-**RF27: Calcular salário, horas extras e descontos**
-O sistema deve realizar automaticamente o cálculo do salário dos empregados, incluindo horas regulares, horas extras e descontos legais, com base nas marcações de ponto registradas e nas regras de negócio definidas no contrato de trabalho e na legislação vigente.
-
-**RF28: Enviar relatório mensal**  
+**RF27: Enviar relatório mensal**  
 O sistema deve gerar automaticamente um relatório mensal contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, etc), e enviá-lo à LFD e ao empregador responsável em um dia selecionado.
 
-**RF29: Enviar folha de ponto mensal**
+**RF28: Enviar folha de ponto mensal**
 O sistema deve enviar automaticamente a folha de ponto preenchida ao empregado após o encerramento do mês.
 
 <br>
 
 ---
 
-## Requisitos Não Funcionais
+## 7.2 Requisitos Não Funcionais
 
 ## Usability (Usabilidade):
 - **RNF01 - Interface Intuitiva:**
@@ -157,25 +153,32 @@ As notificações de ponto (batido ou pendente) devem ser entregues em até 5 se
 
 Limitar o envio de notificações críticas a, no máximo, 4 por dia por usuário, com intervalo mínimo de 15 min entre elas, para não sobrecarregar o usuário.
 
+- **RNF08 - Tempo de Resposta do Registro de Ponto:**
+O tempo de resposta do sistema para a realização de um registro de ponto não deverá exceder 2 segundos em 95% das operações.
+
 ## Security (Segurança):
 
-- **RNF08 - APIs com rotas seguras:** 
+- **RNF09 - APIs com rotas seguras:** 
 
 Todas as APIs devem usar JWT, com tokens expirando após 30 min de inatividade e renovação segura via refresh tokens.
 
-- **RNF09 - Dados Seguros:**
+- **RNF10 - Dados Seguros:**
   
 Dados sensíveis (senhas) devem ser criptografados em repouso pela bcrypt.
 
+- **RNF11 - Armazenamento de Dados:**
+
+O sistema deve ser capaz de armazenar informações de usuários, registros de ponto e outros dados relacionados por pelo menos 5 anos.
+
 ## Portability (Portabilidade):
 
-- **RNF10 - Compatibilidade com vários aparelhos:**
+- **RNF12 - Compatibilidade com vários aparelhos:**
 
 O aplicativo mobile deve ser compatível com Android (versões 7.0 em diante) e iOS (12.0 em diante), rodando em smartphones de diferentes fabricantes sem ajustes específicos no código.
 
 ## Maintainability (Manutenibilidade):
 
-- **RNF11 - Código padronizado:**
+- **RNF13 - Código padronizado:**
   
 Código modular e bem documentado; uso de comentários claros, padronização de commits.
 

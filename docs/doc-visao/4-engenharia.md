@@ -31,12 +31,12 @@
 ## Engenharia de Requisitos e o Scrum/XP
 Fases do Processo     | Atividades ER | Prática | Técnica | Resultado Esperado
 -------- | ------ | --------- | ----- | ---------
-Planejamento de Release | Elicitação e Descoberta | Levantamento de requisitos | Entrevistas com Stakeholders, Brainstorming, Product Backlog Building (PBB) | Entedimento de problemas, identificação de funcionalidades e lista de necessidades |
- | Análise e Consenso | Product Backlog Building (PBB), Priorização MoSCoW | Priorização dos Requisitos | Escopo e funcionalidades essenciais definidas e priorizadas em comum acordo. | 
- | Declaração | Registro dos requisitos | User Story, Épicos | Histórias de usuário que detalham as funcionalidades do projeto e épicos agrupam essas histórias. | 
-Sprint Planning | Análise e Consenso | Mensurar viabilidade de requisitos | Planning Game | Negociação do desenvolvimento na interação com desenvolvedores |
- | Declaração | Definição de Critérios de Aceitação | Critérios de aceitação, User Stories | User Stories dfinidos com escopo limitado |
-Execução da Sprint | Verificação e Validação | Verificação de implementação | Critérios de aceitação, DoD e DoR, Revisão informal ou formal | Confirmação de que entrega atende requisito |
+Planejamento de Release | [Elicitação e Descoberta](#elicitacao-e-descoberta) | Levantamento de requisitos | Entrevistas com Stakeholders, Brainstorming, Product Backlog Building (PBB) | Entedimento de problemas, identificação de funcionalidades e lista de necessidades |
+ | [Análise e Consenso](#analise-e-consenso) | Product Backlog Building (PBB), Priorização MoSCoW | Priorização dos Requisitos | Escopo e funcionalidades essenciais definidas e priorizadas em comum acordo. | 
+ | [Declaração](#declaracao-de-requisitos) | Registro dos requisitos | User Story, Épicos | Histórias de usuário que detalham as funcionalidades do projeto e épicos agrupam essas histórias. | 
+Sprint Planning | [Análise e Consenso](#analise-e-consenso) | Mensurar viabilidade de requisitos | Planning Game | Negociação do desenvolvimento na interação com desenvolvedores |
+ | [Declaração](#declaracao-de-requisitos) | Definição de Critérios de Aceitação | Critérios de aceitação, User Stories | User Stories dfinidos com escopo limitado |
+Execução da Sprint | [Verificação e Validação](#verificao-e-validacao-de-requisitos) | Verificação de implementação | Critérios de aceitação, DoD e DoR, Revisão informal ou formal | Confirmação de que entrega atende requisito |
 | Representação | Criação de storyboard | Storyboards | Storyboards orientam a equipe |
 Sprint Review | Verificação e Validação | Apresentação ao cliente dos incrementos desenvolvidos ao longo da Sprint. | Feedback do Cliente. | Funcionalidades avaliadas com base no retorno dos clientes. |
  | Organização e Atualização | Organização dos requisitos implementados ou atrasados | Backlog de requisitos | Backlog atualizado |
