@@ -52,45 +52,60 @@ Nome    | Feature Associada  | Descrição
 
 ## 9.2 Priorização do Backlog Geral
 
-Nesta seção, foi realizado a priorização dos itens do backlog utilizando a técnica MoSCoW. A princípio, acreditávamos que não seria possível aplicá-la, pois havíamos classificado as categorias diretamente nas funcionalidades em vez dos requisitos. Contudo, ao corrigir esse entendimento—focando os requisitos em vez das funcionalidades—ficou claro que a priorização MoSCoW se aplica perfeitamente.
+As técnicas de priorização que serão utilizadas pela equipe para priorizar os itens do backlog são **MoSCoW**, para análise qualitativa, e **ICE**, para análise quantitativa, uma vez que ambos se complementam ao suprir as limitações um do outro e assegurar maior objetividade 
+e alinhamento na priorização. Sob esse viés, seguem as explicações detalhadas de cada modelo:
 
-A seguir, apresentamos as quatro categorias da técnica MoSCoW:
-- **Must have** (Precisa ter): requisitos essenciais para o funcionamento do produto, que devem ser entregues obrigatoriamente.
-- **Should have** (Deve ter): requisitos importantes, mas que podem ser implementados após os essenciais.
-- **Could have** (Poderia ter): requisitos desejáveis, que agregam valor ao produto, porém não são prioritários no escopo inicial.
-- **Won’t have** (Não vai ter): requisitos que não serão incluídos no momento, sendo considerados para versões futuras.
+O modelo MoSCoW realiza uma segmentação qualitativa de prioridade ao dividir os requisitos em quatro categorias, conforme o grau de importância da presença de cada um no produto:
+- **Must have (Precisa ter):** requisitos essenciais para o funcionamento do produto e que devem ser implementados obrigatoriamente.
+- **Should have (Deve ter):** requisitos importantes, mas que podem ser inseridos após os essenciais.
+- **Could have (Poderia ter):** requisitos desejáveis que agregam valor ao produto, porém não são prioritários no escopo inicial.
+- **Won’t have (Não terá por agora):** requisitos que não serão incluídos no momento, sendo considerados para versões futuras. 
 
-Segue a abaixo a tabela de prioridades:
-//a lista está desatualizada, siga a lista acima
+Como modelo quantitativo, o modelo ICE é aplicado por meio da atribuição de pontos em uma escala de 1 a 10, em que 1 representa a menor e 10 a maior pontuação possível. Além disso, essa avaliação será realizada coletivamente pela equipe, o que permite alinhar as percepções de priorização e promover a coerência nas decisões.
 
-Data     | Descrição | Prioridade | MVP
---------| --------- | ----- | ---------
-**US01**| A LFD deve poder realizar login no painel de administrador.|Must Have| X |
-**US02**| A LFD deve poder cadastrar empregadores no sistema pelo painel de administrador.|Must Have| X |
-**US03**| A LFD deve poder editar os dados dos empregadores pelo painel de administrador.|Must Have| X |
-**US04**| A LFD deve poder excluir qualquer empregador do sistema pelo painel de administrador.|Must Have| X |
-**US05**| A LFD deve poder criar um novo contrato e, junto dele, cadastrar os dados do empregado numa única operação.|Must Have| X |
-**US06**| A LFD deve poder editar os dados de contrato e do empregado em uma única operação.|Must Have| X |
-**US07**| A LFD deve poder excluir o contrato e o empregado associado.|Must Have| X |
-**US08**| A LFD deve poder visualizar os dados dos empregados e empregadores em formato de tabela no painel administrativo (empregados deverão ser acessados dentro da tabela de empregadores).|Should have|  |
-**US09**| A LFD deve poder visualizar os dados dos contratos de trabalho em formato de tabela no painel administrativo.|Could have|
-**US10**| A LFD deve poder buscar os dados dos empregados, empregadores e de contratos existentes.|Could have|
-**US11**| A LFD deve poder filtrar os dados dos empregados, empregadores e de contratos existentes baseado em status ativo ou inativo.|Could have|
-**US12**| A LFD deve poder controlar o acesso de empregados e empregadores ao aplicativo mobile através da tabela de contratos de trabalho.|Must have|X
-**US13**| A LFD deve poder visualizar os dados de registro de ponto e os relatórios de jornada de um empregado através de um empregador, na tabela de empregadores.|Should Have|X
-**US14**| A LFD deve poder editar os dados de registro de pontos e relatórios de jornada dos empregados através de um empregador, na tabela de empregadores.|Could have|
-**US15**| Os usuários (empregados e empregadores) deverão poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada.|Must have|X
-**US16**| Os usuários (empregados e empregadores) que estiverem acessando o aplicativo pela primeira vez deverão ter a opção de serem redirecionados para uma nova página para cadastrar uma senha de acesso.|Should have|X
-**US17**| O empregado deve poder registrar seus pontos de trabalho (incluindo as pausas) apenas no horário especificado no contrato de trabalho, levando em conta as regras de tolerância de horário.|Must have|X
-**US18**| O sistema deve validar se o empregado está em um raio mínimo de 50 metros e máximo de 100 metros do local definido em contrato como ponto autorizado para registro de jornada.|Must have|X
-**US19**| O sistema deve enviar notificações aos empregados quando houver pendência de registro dentro dos horários estabelecidos em contrato.|Must have|X
-**US20**| O sistema deve enviar notificações aos empregadores sempre que um empregado realizar uma batida de ponto, ou quando houver pendência no registro dentro do horário estipulado pelo contrato.|Should have|
-**US21**| Os empregados devem poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência.|Must have|X
-**US22**| Um empregador deve poder adicionar hora extra para o empregado, respeitando o limite estabelecido pela lei.|Should have|
-**US23**| O empregado deve poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo.|Could have|
-**US24**| O sistema deve permitir que os empregadores acessem o histórico de registros de ponto dos seus respectivos empregados.|Should have|
-**US25**| O sistema deve realizar automaticamente o cálculo do salário dos empregados, incluindo horas regulares, horas extras e descontos legais, com base nas marcações de ponto registradas e nas regras de negócio definidas no contrato de trabalho e na legislação vigente.|Should have|
-**US26**| O sistema deve gerar automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, etc), e enviá-lo à LFD e ao empregador responsável.|Must Have|X
+Nesse processo, cada item do backlog é avaliado com base em três critérios, representados pelo acrônimo **ICE**: **Impact** (Impacto), **Confidence** (Confiança) e **Ease** (Facilidade). Após essa avaliação, a pontuação final é obtida por meio da multiplicação dos três valores:
+
+$$
+\text{ICE Score} = \text{Impacto} \times \text{Confiança} \times \text{Facilidade}
+$$
+
+Com isso, o item que alcançar o maior ICE Score deve ser considerado como o mais prioritário para implementação, já que ele indica a melhor combinação entre valor gerado, viabilidade e nível de certeza.
+
+A seguir, detalham-se os três critérios utilizados:
+- **Impacto:** refere-se ao potencial do requisito em gerar valor para o negócio.
+- **Confiança:** expressa o grau de certeza da equipe em relação à ocorrência do impacto estimado.
+- **Facilidade:** avalia o nível de simplicidade, velocidade e baixo custo envolvidos na implementação do requisito. 
+
+Portanto, a tabela a seguir apresenta os requisitos devidamente priorizados.
+
+Código     | Descrição | MoSCoW | Impacto | Confiança | Facilidade | ICE Score | MVP
+--------| --------- | ----- | ----- | ----- | ----- | ----- | ---------
+**US01**| A LFD deve poder realizar login no painel de administrador.|Must Have| 9 | 9 | 8 | 648 | X |
+**US02**| A LFD deve poder cadastrar empregadores no sistema pelo painel de administrador.|Must Have| 8 | 8 | 9 | 576 | X |
+**US03**| A LFD deve poder editar os dados dos empregadores pelo painel de administrador.|Must Have| 9 | 9 | 8 | 648 | X |
+**US04**| A LFD deve poder excluir qualquer empregador do sistema pelo painel de administrador.|Must Have| 7 | 9 | 9 | 567 | X |
+**US05**| A LFD deve poder criar um novo contrato e, junto dele, cadastrar os dados do empregado numa única operação.|Must Have| 8 | 6 | 7 | 336 | X |
+**US06**| A LFD deve poder editar os dados de contrato e do empregado em uma única operação.|Must Have| 9 | 9 | 6 | 486 | X |
+**US07**| A LFD deve poder excluir o contrato e o empregado associado.|Must Have| 8 | 8 | 6 | 384 | X |
+**US08**| A LFD deve poder visualizar os dados dos empregados e empregadores em formato de tabela no painel administrativo (empregados deverão ser acessados dentro da tabela de empregadores).|Should have| 9 | 8 | 7 | 504 |  |
+**US09**| A LFD deve poder visualizar os dados dos contratos de trabalho em formato de tabela no painel administrativo.|Could have| 7 | 8 | 8 | 448 |  |
+**US10**| A LFD deve poder buscar os dados dos empregados, empregadores e de contratos existentes.|Could have| 7 | 7 | 8 | 392 |  |
+**US11**| A LFD deve poder filtrar os dados dos empregados, empregadores e de contratos existentes baseado em status ativo ou inativo.|Could have| 6 | 7 | 9 | 378 |  |
+**US12**| A LFD deve poder controlar o acesso de empregados e empregadores ao aplicativo mobile através da tabela de contratos de trabalho.|Must have|  | | | | X |
+**US13**| A LFD deve poder visualizar os dados de registro de ponto e os relatórios de jornada de um empregado através de um empregador, na tabela de empregadores.|Should Have|  | | | | X |
+**US14**| A LFD deve poder editar os dados de registro de pontos e relatórios de jornada dos empregados através de um empregador, na tabela de empregadores.|Could have|  | | | |  |
+**US15**| Os usuários (empregados e empregadores) deverão poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada.|Must have|  | | | | X |
+**US16**| Os usuários (empregados e empregadores) que estiverem acessando o aplicativo pela primeira vez deverão ter a opção de serem redirecionados para uma nova página para cadastrar uma senha de acesso.|Should have|  | | | | X |
+**US17**| O empregado deve poder registrar seus pontos de trabalho (incluindo as pausas) apenas no horário especificado no contrato de trabalho, levando em conta as regras de tolerância de horário.|Must have|  | | | | X |
+**US18**| O sistema deve validar se o empregado está em um raio mínimo de 50 metros e máximo de 100 metros do local definido em contrato como ponto autorizado para registro de jornada.|Must have|  | | | | X |
+**US19**| O sistema deve enviar notificações aos empregados quando houver pendência de registro dentro dos horários estabelecidos em contrato.|Must have|  | | | | X |
+**US20**| O sistema deve enviar notificações aos empregadores sempre que um empregado realizar uma batida de ponto, ou quando houver pendência no registro dentro do horário estipulado pelo contrato.|Should have|  | | | |  |
+**US21**| Os empregados devem poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência.|Must have|  | | | | X |
+**US22**| Um empregador deve poder adicionar hora extra para o empregado, respeitando o limite estabelecido pela lei.|Should have|  | | | |  |
+**US23**| O empregado deve poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo.|Could have|  | | | |  |
+**US24**| O sistema deve permitir que os empregadores acessem o histórico de registros de ponto dos seus respectivos empregados.|Should have|  | | | |  |
+**US25**| O sistema deve realizar automaticamente o cálculo do salário dos empregados, incluindo horas regulares, horas extras e descontos legais, com base nas marcações de ponto registradas e nas regras de negócio definidas no contrato de trabalho e na legislação vigente.|Should have|  | | | |  |
+**US26**| O sistema deve gerar automaticamente, todo dia 25 de cada mês, um relatório contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, etc), e enviá-lo à LFD e ao empregador responsável.|Must Have|  | | | | X |
 
 ## 9.3 MVP
 O MVP (Produto Mínimo Viável) do sistema foi definido com base nos requisitos classificados como essenciais para o funcionamento básico e viável da solução, considerando principalmente as funcionalidades **Must Have** e algumas **Should Have** que complementam a jornada do usuário. A seleção foi realizada levando em conta a **prioridade de negócio**, a **viabilidade técnica inicial** e a **necessidade de validar a proposta de valor do sistema com usuários reais**. O foco foi garantir que a LFD (administração) possa gerenciar empregadores, contratos e empregados, e que usuários (empregados e empregadores) possam acessar e utilizar o aplicativo para controle de jornada de forma funcional e segura.
@@ -120,4 +135,6 @@ O MVP (Produto Mínimo Viável) do sistema foi definido com base nos requisitos 
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-20/05/2025 | 1.0 | BackLog Geral | Caio Venâncio e João Pedro | |
+20/05/2025 | 1.0 | Backlog geral | Caio Venâncio e João Pedro | |
+25/05/2025 | 1.1 | MVP | Davi de Aguiar | |
+26/05/2025 | 1.2 | Critérios de priorização | Willian Silva | |
