@@ -1,4 +1,6 @@
-## Atividades e Técnicas de ER
+# 4 Engenharia de Requisitos
+
+## 4.1 Atividades e Técnicas de ER
 
 ### Elicitação e Descoberta
 - **Entrevistas com stakeholders**: entrevistas realizadas com o stakeholder responsável pela Legalize Folha Doméstica (LFD), e colaboladores, ajudam a entender desejos, necessidades, sendo interpretados como ideias capazes de resolver o problema enfretado.
@@ -28,7 +30,7 @@
 - **User Story Mapping (USM)**: mapeamento de história de usuário é uma técnica visual para organizar, priorizar, e planejar funcionalidades com base na jornada do usário. Para a equipe SeuPontoDigital, vai ser uma forma de deixar os requisitos organizados e ordenados cronológicamente.
 - **Backlog de Requisitos**: é lista dinâmica, priorizada e ordenada de tudo o que deve ser desenvolvido no produto. No nosso caso, deve ser utilizada para atualização e priorização de requisitos, como uma lista aberta de acesso geral.
 
-## Engenharia de Requisitos e o Scrum/XP
+## 4.2 Engenharia de Requisitos e o Scrum/XP
 Fases do Processo     | Atividades ER | Prática | Técnica | Resultado Esperado
 -------- | ------ | --------- | ----- | ---------
 Planejamento de Release | [Elicitação e Descoberta](#elicitacao-e-descoberta) | Levantamento de requisitos | Entrevistas com Stakeholders, Brainstorming, Product Backlog Building (PBB) | Entedimento de problemas, identificação de funcionalidades e lista de necessidades |
@@ -36,10 +38,10 @@ Planejamento de Release | [Elicitação e Descoberta](#elicitacao-e-descoberta) 
  | [Declaração](#declaracao-de-requisitos) | Registro dos requisitos | User Story, Épicos | Histórias de usuário que detalham as funcionalidades do projeto e épicos agrupam essas histórias. | 
 Sprint Planning | [Análise e Consenso](#analise-e-consenso) | Mensurar viabilidade de requisitos | Planning Game | Negociação do desenvolvimento na interação com desenvolvedores |
  | [Declaração](#declaracao-de-requisitos) | Definição de Critérios de Aceitação | Critérios de aceitação, User Stories | User Stories dfinidos com escopo limitado |
-Execução da Sprint | [Verificação e Validação](#verificao-e-validacao-de-requisitos) | Verificação de implementação | Critérios de aceitação, DoD e DoR, Revisão informal ou formal | Confirmação de que entrega atende requisito |
-| Representação | Criação de storyboard | Storyboards | Storyboards orientam a equipe |
-Sprint Review | Verificação e Validação | Apresentação ao cliente dos incrementos desenvolvidos ao longo da Sprint. | Feedback do Cliente. | Funcionalidades avaliadas com base no retorno dos clientes. |
- | Organização e Atualização | Organização dos requisitos implementados ou atrasados | Backlog de requisitos | Backlog atualizado |
+Execução da Sprint | [Verificação e Validação](#verificacao-e-validacao-de-requisitos) | Verificação de implementação | Critérios de aceitação, DoD e DoR, Revisão informal ou formal | Confirmação de que entrega atende requisito |
+| [Representação](#representacao-de-requisitos) | Criação de storyboard | Storyboards | Storyboards orientam a equipe |
+Sprint Review | [Verificação e Validação](#verificacao-e-validacao-de-requisitos) | Apresentação ao cliente dos incrementos desenvolvidos ao longo da Sprint. | Feedback do Cliente. | Funcionalidades avaliadas com base no retorno dos clientes. |
+ | [Organização e Atualização](#organizacao-e-atualizacao-de-requisitos) | Organização dos requisitos implementados ou atrasados | Backlog de requisitos | Backlog atualizado |
 
 
 
