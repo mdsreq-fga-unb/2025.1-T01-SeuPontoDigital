@@ -1,4 +1,6 @@
-## Composição da Equipe 
+# 6. Interação Entre Equipe e Cliente
+
+## 6.1 Composição da Equipe 
 
 A equipe envolvida no desenvolvimento é composta por:
 
@@ -45,7 +47,7 @@ A equipe envolvida no desenvolvimento é composta por:
   </tbody>
 </table>
 
-## Comunicação 
+## 6.2 Comunicação 
 
 ### Ferramentas de Comunicação
 <ul>
@@ -78,7 +80,7 @@ A equipe envolvida no desenvolvimento é composta por:
   
 </ul>
 
-## Processo de Validação 
+## 6.3 Processo de Validação 
 O processo de validação da solução ocorrerá com base na *Definição de Pronto*, que estabelece critérios objetivos para assegurar às partes envolvidas quais elementos de cada incremento farão parte da entrega. Essa definição será aplicada durante o desenvolvimento e validada nas reuniões de revisão de sprint, nas quais o cliente fornecerá feedback para confirmar se o produto atende às expectativas antes da implementação final.
 
 ## Historico de Versão

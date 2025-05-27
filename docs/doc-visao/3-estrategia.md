@@ -1,4 +1,6 @@
-## Estratégia Priorizada
+# 3. Estratégias de Engenharia de Software
+
+## 3.1 Estratégia Priorizada
 
 **Abordagem de Desenvolvimento de Software:** Ágil
 
@@ -7,7 +9,7 @@
 **Processo de Engenharia de Software:** Scrum/XP
 
 ---
-## Quadro Comparativo 
+## 3.2 Quadro Comparativo 
 
 <table border="1" cellspacing="0" cellpadding="4">
   <thead>
@@ -72,7 +74,7 @@
 </table>
 
 ---
-## Justificativa 
+## 3.3 Justificativa 
 
 A escolha do Scrum/XP foi baseada em três principais fatores, sendo eles:
 

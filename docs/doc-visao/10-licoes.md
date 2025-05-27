@@ -1,4 +1,6 @@
-## Unidade 1
+# 10. Lições Aprendidas
+
+## 10.1 Unidade 1
 
 
 #### 1. Dificuldade na definição de horários para reuniões das sprints
@@ -23,8 +25,29 @@
 
 ---
 
-## Unidade 2 
+## 10.2 Unidade 2 
 
-## Unidade 3 
+Durante a Unidade 2, a equipe enfrentou alguns desafios que impactaram o andamento das atividades e a colaboração entre os membros:
 
-## Unidade 4 
+## Divisão dos Requisitos
+
+Houve dificuldade em distribuir de forma equilibrada as tarefas relacionadas à documentação e detalhamento dos requisitos, o que gerou sobrecarga para alguns integrantes.  
+**Ação a ser tomada:** Definir, desde o início da unidade, a responsabilidade de cada membro com clareza, garantindo que todos participem de forma justa e eficiente.
+
+## Gestão do Tempo para Entregas
+
+O cumprimento dos prazos seguiu como um ponto crítico, principalmente devido à carga de outras disciplinas e à falta de planejamento conjunto mais detalhado.  
+**Ação a ser tomada:** Criar um cronograma coletivo com prazos mais realistas e revisar semanalmente o andamento das tarefas, garantindo que todos estejam alinhados com as metas do grupo.
+
+## Marcação de Reuniões em Grupo
+
+A dificuldade em encontrar horários compatíveis entre os membros comprometeu alguns alinhamentos e atrasou decisões importantes.  
+**Ação a ser tomada:** Estabelecer um dia e horário fixos para reuniões semanais, além de reforçar o uso de meios alternativos de comunicação para manter todos atualizados.
+
+## Aprendizados Técnicos
+
+Durante a unidade, a equipe também aprendeu e aplicou técnicas fundamentais de Engenharia de Software para a **elicitação e descoberta de requisitos**, **análise** e **alcançar consenso entre os stakeholders**. Essas práticas contribuíram para melhorar a clareza dos objetivos do projeto e facilitaram a identificação das reais necessidades dos usuários.
+
+## 10.3 Unidade 3 
+
+## 10.4 Unidade 4 

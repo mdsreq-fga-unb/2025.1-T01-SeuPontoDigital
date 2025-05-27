@@ -1,3 +1,5 @@
+# 11. Referências Bibliográficas
+
 1. **Marsicano, G. (2025).** _Requisitos de Software: Fundamentos, Evolução e Práticas_ (Versão: 0.2, Draft). 
 
 2. **Furlan, R. C. (2012).** _Agile Unified Process e a Aderência ao Modelo de Processo de Software MPS.BR Nível G_ (Monografia de Especialização). Universidade Tecnológica Federal do Paraná – UTFPR. Disponível em: [https://riut.utfpr.edu.br/jspui/bitstream/1/23529/3/MD_ENGESS_I_2012_18.pdf](https://riut.utfpr.edu.br/jspui/bitstream/1/23529/3/MD_ENGESS_I_2012_18.pdf).

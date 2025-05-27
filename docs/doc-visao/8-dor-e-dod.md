@@ -1,6 +1,6 @@
-## DoR e DoD
+## 8. DoR e DoD
 
-### Definition of Ready (DoR) 
+### 8.1 Definition of Ready (DoR) 
 O DoR, em português Definição de Preparado, é o agrupamento de critérios definidos entre a equipe e o Product Owner (PO) que estabelece se 
 um requisito está preparado para ser trabalhado em uma sprint ou não. A importância de sua aplicação consiste na garantia de que os 
 requisitos estejam bem declarados, para que o desenvolvimento não seja prejudicado. Sendo assim, segue a lista de itens que definem se o 
@@ -12,7 +12,7 @@ requisito vai para o "Ready":
 - **O requisito possui apresentação através de história de usuário?** O requisito deve estar representado como uma história de usuário, o que auxilia na compreensão da equipe.
 - **O requisito foi revisado pelo analista de requisitos?** O analista de requisitos é responsável por realizar a última verificação do requisito, o que garante a sua inserção na sprint para ser trabalhada.
 
-### Definition of Done (DoD) 
+### 8.2 Definition of Done (DoD) 
 O DoD, em português Definição de Pronto, é o agrupamento de critérios definidos pela equipe que define a qualidade do requisito elaborado
 e a satisfação dos membros com o esforço realizado. Caso o requisito não atenda a todos os critérios, ele não está liberado, tanto para 
 implementação no produto quanto na apresentação na Sprint Review. Dessa forma, segue a lista de itens que definem se o requisito atende 
