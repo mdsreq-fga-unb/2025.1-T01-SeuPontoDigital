@@ -6,7 +6,7 @@ const Notification = {
     success: (message) => {
         toast.success(message, {
             position: "top-center",
-            autoClose: 2500,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: false,
             pauseOnHover: true,
@@ -19,7 +19,7 @@ const Notification = {
     error: (message) => {
         toast.error(message, {
             position: "top-center",
-            autoClose: 2500,
+            autoClose: 4000,
             hideProgressBar: false,
             closeOnClick: false,
             pauseOnHover: true,
@@ -32,7 +32,7 @@ const Notification = {
     info: (message) => {
         toast.info(message, {
             position: "top-center",
-            autoClose: 2500,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: false,
             pauseOnHover: true,

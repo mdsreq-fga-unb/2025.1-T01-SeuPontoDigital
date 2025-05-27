@@ -92,7 +92,7 @@ const Employers = () => {
                     data={filteredData}
                     onDelete={handleDeleteRequest}
                     onEdit={handleEditRequest}
-                    onAddContract={() => navigate("/contratos/adicionar")}
+                    onAddContract={(id) => navigate(`/contratos/adicionar/${id}`)}
                     onNameClick={handleNameClick}
                 />
 

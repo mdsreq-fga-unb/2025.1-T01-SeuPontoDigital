@@ -1,84 +1,75 @@
 import "../pagesStyle.css";
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import AddressForm from "../../components/AddressForm";
-import UserForm from "../../components/EmployerForm/index.jsx";
-import ButtonForm from "../../components/ButtonForm";
-import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
-import handleError from "../../services/errors.js";
+import useFetchContract from "../../hooks/useFetchContract.js";
+import usePutContract from "../../hooks/usePutContract.js";
+import ContractForm from "../../components/ContractForm/index.jsx";
+import { useParams } from "react-router-dom";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const UpdateContract = () => {
-    const [employee, setEmployee] = useState({
+    const putContract = usePutContract();
+    const {fetchOneContract} = useFetchContract();
+    const {id} = useParams();
+    const [modalOpen, setModalOpen] = useState(false);
+    const [password, setPassword] = useState("");
+    const [contract, setContract] = useState({
         name: "",
         cpf: "",
-        email: "",
         phone: "",
-        nationality: "",
-        marital_status: "",
+        email: "",
         job_function: "",
-        rg: "",
-        cep: "",
-        street: "",
-        home_number: "",
-        city: "",
-        state: "",
-        neighborhood: "",
-        complement: "",
+        work_schedule_type: "",
+        break_interval: "",
+        work_days: "",
+        salary: "",
+        app_access:"",
+        workplace_employer: "",
+        workplace_cep: "",
+        workplace_street: "",
+        workplace_home_number: "",
+        workplace_city: "",
+        workplace_state: "",
+        workplace_neighborhood: "",
+        workplace_complement: "",
     });
 
-    const { id } = useParams();
-    const navigate = useNavigate();
-
     useEffect(() => {
-        const fetchEmployee = async () => {
-            const token = localStorage.getItem("token");
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/employee/${id}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setEmployee(response.data);
-            } catch (err) {
-                Notification.error("Erro ao carregar dados do empregado.");
-            }
-        };
-        fetchEmployee();
-    }, [id]);
+            const fetchContract = async () => {
+                setContract(await fetchOneContract(id));
+            };
+            fetchContract();
+        }, [id]);
 
-    const handleInputUserChange = (event) => {
-        const { name, value } = event.target;
-        setEmployee((prev) => ({ ...prev, [name]: value }));
+    const handleInputUserChange = ({ name, value }) => {
+        setContract((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleInputAddressChange = (address) => {
-        setEmployee((prev) => ({ ...prev, ...address }));
-    };
+    const closeModal = () => setModalOpen(false);
 
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            const token = localStorage.getItem("token");
-            await axios.put(`${import.meta.env.VITE_API_URL}/employee/${id}`, employee, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            Notification.success("Empregado atualizado com sucesso!");
-            setTimeout(() => navigate("/empregados"), 1500);
-        } catch (err) {
-            handleError(err.response?.data.message || err.response?.data.errors);
-        }
+    const handleFormSubmit = async (passwordInput) => {
+        putContract(contract, closeModal, passwordInput)
     };
 
     return (
         <div className="container-dashboard">
             <Sidebar />
-            <section className="form-user-add">
-                <form onSubmit={handleFormSubmit} className="form-users">
-                    <UserForm user={employee} handleInputChange={handleInputUserChange} />
-                    <AddressForm user={employee} handleInputChange={handleInputAddressChange} />
-                    <ButtonForm>Atualizar Empregado</ButtonForm>
+            <section className="form-contract-add">
+                <form className="form-users">
+                    <ContractForm contract={contract} handleInputChange={handleInputUserChange} id={contract.employer_id}/>
                 </form>
+                <button onClick={() => setModalOpen(true)} className="button-add-employer-confirm">Atualizar Contrato</button>
             </section>
+            <ConfirmModal
+                    isOpen={modalOpen}
+                    onConfirm={ async (passwordInput) => {
+                        setPassword(passwordInput);
+                        await handleFormSubmit(passwordInput);
+                    }}
+                    onCancel={() => setModalOpen(false)}
+                    message="Confirme sua senha para atualizar os dados do contrato de"
+                    nameEmployer={contract.name}
+                />
         </div>
     );
 };

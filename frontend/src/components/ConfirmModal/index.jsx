@@ -5,15 +5,15 @@ import "./ConfirmModal.css";
 Modal.setAppElement("#root");
 
 const ConfirmModal = ({ isOpen, onConfirm, onCancel, message, nameEmployer }) => {
-    const [password, setPassword] = useState("");
+    const [passwordAdmin, setPasswordAdmin] = useState("");
 
     const handleConfirm = () => {
-        onConfirm(password);
-        setPassword("");
+        onConfirm(passwordAdmin);
+        setPasswordAdmin("");
     };
 
     const handleClose = () => {
-        setPassword("");
+        setPasswordAdmin("");
         onCancel();
     };
 
@@ -32,14 +32,14 @@ const ConfirmModal = ({ isOpen, onConfirm, onCancel, message, nameEmployer }) =>
                 <input
                     type="password"
                     placeholder="Digite sua senha"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={passwordAdmin}
+                    onChange={(e) => setPasswordAdmin(e.target.value)}
                     className="input-password"
                 />
                 <button
                     className="button-confirm"
                     onClick={handleConfirm}
-                    disabled={!password}
+                    disabled={!passwordAdmin}
                 >
                     Confirmar
                 </button>

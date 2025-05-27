@@ -1,9 +1,15 @@
+.container-employer-form-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10rem;
+}
+
 .button-employer-form-back{
     margin-bottom: 5rem;
     width: 5rem;
     padding: .5rem;
     border-radius: 0.4rem;
-    border: 1px solid var(--light-color);
+    border: .1rem solid var(--light-color);
     box-sizing: border-box;
     background-color: var(--primary-color);
     font-size: 1.8rem;

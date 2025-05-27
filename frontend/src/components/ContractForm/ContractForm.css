@@ -1,0 +1,11 @@
+.contract-form-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.contract-form-grid .div-employer-form,
+.contract-form-grid .div-contract-select,
+.contract-form-grid .div-address-form {
+    width: 100%;
+}

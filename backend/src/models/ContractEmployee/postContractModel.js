@@ -1,28 +1,31 @@
 import supabase from "../../config/supabase.js";
+import generatePasswordHash from "../../middlewares/generatePasswordHash.js";
 
 const postContractModel = async (data) => {
     try {
+        const cleanCPF = data.cpf.replace(/\D/g, '');
+
+        const passwordHash = await generatePasswordHash(data.password);
+
+        let dateNowBrazil = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+        let [day, month, year] = dateNowBrazil.split('/');
+        dateNowBrazil = `${year}-${month}-${day}`;
+
         const { error } = await supabase.from("employee_contracts").insert({
             name: data.name,
-            cpf: data.cpf,
+            cpf: cleanCPF,
             phone: data.phone || null,
             email: data.email || null,
-            password: data.password || null,
+            password: passwordHash || null,
             employer_id: data.employer_id,
             job_function: data.job_function,
             work_schedule_type: data.work_schedule_type,
-            start_time: data.start_time,
-            end_time: data.end_time,
             break_interval: data.break_interval,
-            rest_time: data.rest_time,
             work_days: data.work_days,
-            weekly_hours: data.weekly_hours || null,
-            monthly_hours: data.monthly_hours || null,
             salary: data.salary,
             contract_status: data.contract_status,
-            contract_start_date: data.contract_start_date,
-            contract_end_date: data.contract_end_date || null,
-            app_access_status: data.app_access_status,
+            contract_start_date: dateNowBrazil || null,
+            app_access: data.app_access || false,
             workplace_employer: data.workplace_employer,
             workplace_cep: data.cep,
             workplace_street: data.street,
@@ -33,12 +36,11 @@ const postContractModel = async (data) => {
             workplace_complement: data.complement || null,
         })
         if (error) {
-            throw new Error(error.message);
+            throw new Error("failed to insert contract");
         }
     }
     catch (err) {
         console.error("error in postContractModel");
-        throw err;
     }
 }
 

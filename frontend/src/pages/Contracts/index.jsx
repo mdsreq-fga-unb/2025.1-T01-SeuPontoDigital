@@ -8,6 +8,7 @@ import filterDataContract from "../../services/filterDataContract";
 import useFetchContract from "../../hooks/useFetchContract";
 import useFetchEmployer from "../../hooks/useFetchEmployer";
 import useDeleteContract from "../../hooks/useDeleteContract";
+import { useNavigate } from "react-router-dom";
 
 const Contracts = () => {
     const [data, setData] = useState([]);
@@ -16,8 +17,9 @@ const Contracts = () => {
     const [contractToDelete, setContractToDelete] = useState(null);
     const filteredData = filterDataContract(data, searchTerm);
     const {fetchOneEmployer} = useFetchEmployer();
-    const fetchContract = useFetchContract();
+    const {fetchContract} = useFetchContract();
     const deleteContract = useDeleteContract();
+    const navigate = useNavigate();
 
     // Load data of contracts and name of each employer
     const loadContracts = async () => {
@@ -41,8 +43,8 @@ const Contracts = () => {
         loadContracts();
     }, []);
 
-    const fieldsTH = ["Empregador", "Empregado", "Status", "Função", "Salário", "Data de início", "Acesso ao aplicativo"];
-    const fieldsTD = ["nameEmployer", "name", "contract_status", "job_function", "salary", "contract_start_date", "app_access_status"];
+    const fieldsTH = ["Empregador", "Empregado","Função do Empregado", "Status","Salário", "Data Admissão", "Acesso ao aplicativo"];
+    const fieldsTD = ["nameEmployer", "name", "job_function", "contract_status", "salary", "contract_start_date", "app_access"];
 
     const handleDeleteRequest = (item) => {
         setContractToDelete(item);
@@ -65,6 +67,10 @@ const Contracts = () => {
         await deleteContract(contractToDelete.id, password, onSuccessDeleteContract);
     };
 
+    const handleEditRequest = (id) => {
+        navigate(`/contratos/editar/${id}`);
+    }
+
     return (
         <div className="container-dashboard">
             <Sidebar />
@@ -81,12 +87,14 @@ const Contracts = () => {
                     fieldsData={fieldsTD} 
                     data={filteredData} 
                     onDelete={handleDeleteRequest}
+                    onEdit={handleEditRequest}
                 />
                 <ConfirmModal 
                     isOpen={modalOpen} 
                     onConfirm={handleConfirmDelete} 
                     onCancel={handleCancelDelete} 
-                    message="Confirme sua senha para excluir o contrato:"
+                    message="Confirme sua senha para excluir o contrato de"
+                    nameEmployer={contractToDelete?.name}
                 />
             </div>
         </div>

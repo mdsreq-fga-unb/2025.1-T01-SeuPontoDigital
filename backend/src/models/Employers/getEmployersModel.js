@@ -4,10 +4,8 @@ const getEmployersModel = async () => {
     try {
         const { data, error } = await supabase.from("employers").select("*")
 
-        if (error) {
-            console.error(error);
-            return { error };
-        }
+        if (error) return { error };
+            
         return data ;
     }
     catch (err) {

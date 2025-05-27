@@ -34,6 +34,22 @@
   height: 95vh;
 }
 
+.form-contract-add{
+  width: calc(100vw - 28rem);
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--light-color);
+  border: .1rem solid var(--neutral-color);
+  border-radius: .8rem;
+  box-shadow: 0 .2rem .4rem var(--dark-color);
+  overflow-y: auto; 
+  box-sizing: border-box;
+  height: 95vh;
+}
+
 .form-user-add h2 {
   text-align: center;
   margin-bottom: 2rem;

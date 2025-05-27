@@ -21,18 +21,20 @@ const Table = (props) => {
                     {props.data.map((item, index) => (
                         <tr key={index}>
                             {props.fieldsData.map((field, i) => (
-                                <td key={i}>
+                                <td key={i} title={formatField(field, item[field])}>
                                     {field === "name" && isActive ? (
-                                        <button className="name-button" onClick={() => props.onNameClick(item)}  >
+                                        <button className="name-button" onClick={() => props.onNameClick(item)}>
                                             {formatField(field, item[field])}
                                         </button>
+                                    ) : field === "app_access" ? (
+                                        item[field] ? "Sim" : "Não"
                                     ) : (
                                         formatField(field, item[field])
                                     )}
                                 </td>
                             ))}
-                            <td>{ (isActive) ? <FaUserPlus onClick={() => props.onAddContract()} className="fa-add-contract" /> : ""
-                                }
+                            <td>{(isActive) ? <FaUserPlus onClick={() => props.onAddContract(item.id)} className="fa-add-contract" /> : ""
+                            }
                                 <FaPenToSquare onClick={() => props.onEdit(item.id)} className="fa-edit-employer" />
                                 <FaTrashCan onClick={() => props.onDelete(item)} className="fa-delete-employer" />
                             </td>

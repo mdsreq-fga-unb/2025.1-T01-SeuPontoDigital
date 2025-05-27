@@ -4,10 +4,11 @@ import generatePasswordHash from "../../middlewares/generatePasswordHash.js";
 const postEmployerModel = async (employer) => {
     try {
         const passwordHash = await generatePasswordHash(employer.password);
-
+        const cleanCPF = employer.cpf.replace(/\D/g, '');
+        
         const { error } = await supabase.from("employers").insert({
             name: employer.name,
-            cpf: employer.cpf,
+            cpf: cleanCPF,
             email: employer.email,
             phone: employer.phone,
             password: passwordHash || null,
@@ -22,7 +23,7 @@ const postEmployerModel = async (employer) => {
         if (error) return error;
     }
     catch (err) {
-        console.error("error in insertEmployer models");
+        console.error("error in insertEmployer model");
     }
 }
 

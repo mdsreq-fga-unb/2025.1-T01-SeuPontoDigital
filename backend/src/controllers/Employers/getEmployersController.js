@@ -5,10 +5,10 @@ const getEmployersController = async (req, res) => {
         const data = await getEmployersModel();
 
         if (data) {
-            return res.status(200).json(data)
+            return res.status(200).json(data);
         }
         else {
-            return res.status(404).json({ message: "not found employers" })
+            return res.status(404).json({ message: "employers not found" });
         }
     }
     catch (err) {
