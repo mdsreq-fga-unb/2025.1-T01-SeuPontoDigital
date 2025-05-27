@@ -96,7 +96,7 @@ Nesse processo, cada item do backlog é avaliado com base em três critérios, r
 
 <div align="center">
   
-  <em>ICE Score</em> = <em>Impacto</em> × <em>Confiança</em> × <em>Facilidade</em>
+  ICE Score = Impacto × Confiança × Facilidade
   
 </div>
 
