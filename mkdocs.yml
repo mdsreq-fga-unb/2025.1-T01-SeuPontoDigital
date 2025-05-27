@@ -21,6 +21,7 @@ nav:
     - Referências Bibliográficas: doc-visao/11-referencias.md
   - Sprints & Product Backlog:
     - Product Backlog: doc-visao/9-backlog.md
+    - Planejamento da Release 01: sprints/release01.md
     - Sprint 01: sprints/sprint01.md
     - Sprint 02: sprints/sprint02.md
     - Sprint 03: sprints/sprint03.md
