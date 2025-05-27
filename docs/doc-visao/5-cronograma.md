@@ -67,49 +67,49 @@ _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) p
       <td style="text-align: center; vertical-align: middle;">Sprint 06</td>
       <td style="text-align: center; vertical-align: middle;">30/05/2025</td>
       <td style="text-align: center; vertical-align: middle;">05/06/2025</td>
-     <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US14<br>2.US16<br>3.US17<br>4.US18</td>
-      <td style="text-align: center; vertical-align: middle;">1.US14<br>2.US16<br>3.US17<br>4.US18</td>
+     <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US16<br>2.US17<br>3.US18</td>
+      <td style="text-align: center; vertical-align: middle;">1.US16<br>2.US17<br>3.US18</td>
       <td style="text-align: center; vertical-align: middle;">Validação do sistema de login para empregado e recuperação de senha</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 07</td>
       <td style="text-align: center; vertical-align: middle;">06/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">12/06/2025</td>
-     <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US19<br>2.US26<br>3.US27</td>
-      <td style="text-align: center; vertical-align: middle;">1.US19<br>2.US26<br>3.US27<br><b>Release 3</b></td>
+     <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US19<br>2.US20<br>3.US23</td>
+      <td style="text-align: center; vertical-align: middle;">1.US19<br>2.US20<br>3.US23<br><b>Release 3</b></td>
       <td style="text-align: center; vertical-align: middle;">Validação do sistema de registro de ponto e feedback da Release 3</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 08</td>
       <td style="text-align: center; vertical-align: middle;">13/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">19/06/2025</td>
-     <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US20<br>2.US21<br>3.US22</td>
-      <td style="text-align: center; vertical-align: middle;">1.US20<br>2.US21<br>3.US22</td>
+     <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US13<br>2.US22<br>3.US27</td>
+      <td style="text-align: center; vertical-align: middle;">1.US13<br>2.US22<br>3.US27<br><b>MVP</b></td>
       <td style="text-align: center; vertical-align: middle;">Validação do sistema de notificações do registro de ponto</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 09</td>
       <td style="text-align: center; vertical-align: middle;">20/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">26/06/2025</td>
-     <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US13<br>2.US24<br>3.US25</td>
-      <td style="text-align: center; vertical-align: middle;">1.US13<br>2.US24<br>3.US25<br><b>Release 4</b></td>
-      <td style="text-align: center; vertical-align: middle;">Validação do sistema de observação sobre dias de trabalho e feedback da release 4</td>
+     <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US11<br>2.US21<br>3.US24</td>
+      <td style="text-align: center; vertical-align: middle;">1.US11<br>2.US21<br>3.US24<br><b>Release 4</b></td>
+      <td style="text-align: center; vertical-align: middle;">Validação US11, US21, US24 e feedback release 4</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 10</td>
       <td style="text-align: center; vertical-align: middle;">27/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">03/07/2025</td>
-     <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US23<br>2.US28<br>3.US29</td>
-      <td style="text-align: center; vertical-align: middle;">1.US23<br>2.US28<br>3.US29</td>
-      <td style="text-align: center; vertical-align: middle;">Validação do sistema de envio de relatório da folha de ponto</td>
+     <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US25<br>2.US26<br>3.US28</td>
+      <td style="text-align: center; vertical-align: middle;">1.US25<br>2.US26<br>3.US28</td>
+      <td style="text-align: center; vertical-align: middle;">Validação US25, US26 e US28</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 11</td>
       <td style="text-align: center; vertical-align: middle;">04/07/2025</td>
       <td style="text-align: center; vertical-align: middle;">10/07/2025</td>
-      <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US11</td>
-      <td style="text-align: center; vertical-align: middle;">1.US11<br><b>Release 5 (Final)</b></td>
-      <td style="text-align: center; vertical-align: middle;">Validação do sistema de filtro de busca e feedback do projeto completo</td>
+      <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US14</td>
+      <td style="text-align: center; vertical-align: middle;">1.US14<br><b>Release 5 (Final)</b></td>
+      <td style="text-align: center; vertical-align: middle;">Feedback do projeto final</td>
     </tr>
   </tbody>
 </table>
