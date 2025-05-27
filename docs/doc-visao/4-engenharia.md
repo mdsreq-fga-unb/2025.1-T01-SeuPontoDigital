@@ -1,4 +1,6 @@
-## Atividades e Técnicas de ER
+# 4 Engenharia de Requisitos
+
+## 4.1 Atividades e Técnicas de ER
 
 ### Elicitação e Descoberta
 - **Entrevistas com stakeholders**: entrevistas realizadas com o stakeholder responsável pela Legalize Folha Doméstica (LFD), e colaboladores, ajudam a entender desejos, necessidades, sendo interpretados como ideias capazes de resolver o problema enfretado.
@@ -8,6 +10,7 @@
 - **Product Backlog Building (PBB)**: PBB (Product Backlog Building) é uma técnica usada para construir e estruturar o backlog do produto de forma colaborativa e alinhada ao negócio. No contexto da Legalize Folha Doméstica, o uso de PBB facilitará a análise ao conectar objetivos com tarefas concretas, enquanto promove o consenso da equipe e do cliente.
 - **Priorização MoSCoW**: a priorização MoSCoW é uma técnica utilizada para classificar requisitos ou funcionalidades com base em sua importância para o sucesso do projeto. Suas iniciais representam as categorias "Must have", "Should have", "Could have" e "Won't have". Como a equipe apontou, o projeto do SeuPontoDigital apresenta uma complexidade variável — podendo abranger desde um escopo amplo, com diversas etapas da carteira de trabalho, até um escopo mais restrito, focado apenas na marcação de ponto. Considerando que nosso objetivo principal é resolver o problema da LFD, é essencial aplicar técnicas de priorização que nos permitam distinguir as funcionalidades indispensáveis das que podem ser planejadas para o futuro.
 - **Planning Game**: o planning game é uma prática central do Extreme Programming (XP) usado para equilibrar o que precisa ser desenvolvido com seu esforço e complexidade. Com a dificuldade de estimar tempo de requisitos, Planning Game se torna uma opção favorável para equipe estimar capacidade de realizar o requisito na semana.
+- **Priorização ICE**:  é uma técnica para classificar e priorizar iniciativas, tarefas ou projetos com base em três critérios principais: Impacto, Confiança e Esforço. Na nossa equipe, ela serve para gerar uma pontuação de prioridade antes do sprint planning.
 
 ### Declaração de Requisitos
 - **User Story**: histórias de usuário são uma forma simples e informal de descrever requisitos funcionais, de forma que serve muito bem para a equipe SeuPontoDigital para instruir ou lembrar como o requisito deve ser implementado.
@@ -28,18 +31,18 @@
 - **User Story Mapping (USM)**: mapeamento de história de usuário é uma técnica visual para organizar, priorizar, e planejar funcionalidades com base na jornada do usário. Para a equipe SeuPontoDigital, vai ser uma forma de deixar os requisitos organizados e ordenados cronológicamente.
 - **Backlog de Requisitos**: é lista dinâmica, priorizada e ordenada de tudo o que deve ser desenvolvido no produto. No nosso caso, deve ser utilizada para atualização e priorização de requisitos, como uma lista aberta de acesso geral.
 
-## Engenharia de Requisitos e o Scrum/XP
+## 4.2 Engenharia de Requisitos e o Scrum/XP
 Fases do Processo     | Atividades ER | Prática | Técnica | Resultado Esperado
 -------- | ------ | --------- | ----- | ---------
-Planejamento de Release | Elicitação e Descoberta | Levantamento de requisitos | Entrevistas com Stakeholders, Brainstorming, Product Backlog Building (PBB) | Entedimento de problemas, identificação de funcionalidades e lista de necessidades |
- | Análise e Consenso | Product Backlog Building (PBB), Priorização MoSCoW | Priorização dos Requisitos | Escopo e funcionalidades essenciais definidas e priorizadas em comum acordo. | 
- | Declaração | Registro dos requisitos | User Story, Épicos | Histórias de usuário que detalham as funcionalidades do projeto e épicos agrupam essas histórias. | 
-Sprint Planning | Análise e Consenso | Mensurar viabilidade de requisitos | Planning Game | Negociação do desenvolvimento na interação com desenvolvedores |
- | Declaração | Definição de Critérios de Aceitação | Critérios de aceitação, User Stories | User Stories dfinidos com escopo limitado |
-Execução da Sprint | Verificação e Validação | Verificação de implementação | Critérios de aceitação, DoD e DoR, Revisão informal ou formal | Confirmação de que entrega atende requisito |
-| Representação | Criação de storyboard | Storyboards | Storyboards orientam a equipe |
-Sprint Review | Verificação e Validação | Apresentação ao cliente dos incrementos desenvolvidos ao longo da Sprint. | Feedback do Cliente. | Funcionalidades avaliadas com base no retorno dos clientes. |
- | Organização e Atualização | Organização dos requisitos implementados ou atrasados | Backlog de requisitos | Backlog atualizado |
+Planejamento de Release | [Elicitação e Descoberta](#elicitacao-e-descoberta) | Levantamento de requisitos | Entrevistas com Stakeholders, Brainstorming, Product Backlog Building (PBB) | Entedimento de problemas, identificação de funcionalidades e lista de necessidades |
+ | [Análise e Consenso](#analise-e-consenso) | Product Backlog Building (PBB), Priorização MoSCoW, Priorização ICE | Priorização dos Requisitos | Escopo e funcionalidades essenciais definidas e priorizadas em comum acordo. | 
+ | [Declaração](#declaracao-de-requisitos) | Registro dos requisitos | User Story, Épicos | Histórias de usuário que detalham as funcionalidades do projeto e épicos agrupam essas histórias. | 
+Sprint Planning | [Análise e Consenso](#analise-e-consenso) | Mensurar viabilidade de requisitos | Planning Game | Negociação do desenvolvimento na interação com desenvolvedores |
+ | [Declaração](#declaracao-de-requisitos) | Definição de Critérios de Aceitação | Critérios de aceitação, User Stories | User Stories dfinidos com escopo limitado |
+Execução da Sprint | [Verificação e Validação](#verificacao-e-validacao-de-requisitos) | Verificação de implementação | Critérios de aceitação, DoD e DoR, Revisão informal ou formal | Confirmação de que entrega atende requisito |
+| [Representação](#representacao-de-requisitos) | Criação de storyboard | Storyboards | Storyboards orientam a equipe |
+Sprint Review | [Verificação e Validação](#verificacao-e-validacao-de-requisitos) | Apresentação ao cliente dos incrementos desenvolvidos ao longo da Sprint. | Feedback do Cliente. | Funcionalidades avaliadas com base no retorno dos clientes. |
+ | [Organização e Atualização](#organizacao-e-atualizacao-de-requisitos) | Organização dos requisitos implementados ou atrasados | Backlog de requisitos | Backlog atualizado |
 
 
 

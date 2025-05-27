@@ -1,9 +1,11 @@
-## Objetivo do Produto 
+# 2. Solução Proposta
+
+## 2.1 Objetivo do Produto 
 
 O objetivo do produto é informatizar o registro de ponto pelos empregados domésticos por meio de um aplicativo mobile, que permite registrar os horários de entradas, saídas e pausas para almoço, e com base nesses registros, calcular automaticamente o salário, as horas extras e os descontos. Além disso, os dados calculados serão enviados automaticamente para a *Legalize Folha Doméstica*, facilitando a gestão da folha de pagamento e garantindo que os empregadores estejam em conformidade com a legislação trabalhista.
 
 ---
-## Características da Solução 
+## 2.2 Características da Solução 
 
 As caractéristicas da solução proposta, até o momento, incluem:
 
@@ -27,7 +29,7 @@ As caractéristicas da solução proposta, até o momento, incluem:
 
 ---
 
-## Tecnologias a Serem Utilizadas 
+## 2.3 Tecnologias a Serem Utilizadas 
 
 1. **Frontend (Mobile):** React Native e Expo
 
@@ -54,7 +56,7 @@ Os testes da aplicação (tanto frontend quanto backend) serão feitos utilizand
  A equipe se comunicará por **Google Meet** (quando o cliente estiver presente) e **Discord** (reuniões internas da equipe), enquanto o controle de código será feito com **Git** e **GitHub**, que também será utilizado para organização de tarefas via **GitHub Issues** e **GitHub Projects**.
 
 ---
-## Pesquisa de Mercado e Análise Competitiva 
+## 2.4 Pesquisa de Mercado e Análise Competitiva 
 
 **Análise do Mercado**
 
@@ -80,7 +82,7 @@ Além disso, a obrigatoriedade da folha de ponto para empregados domésticos, de
 - **interface intuitiva** – que adota padrões familiares de design, minimiza a curva de aprendizado ao privilegiar reconhecimento sobre memorização e orienta o usuário com elementos visuais autoexplicativos e feedback imediato, permitindo que empregadores domésticos e pequenas empresas, mesmo sem experiência prévia em sistemas de RH, registrem o ponto em poucos passos.
 
 ---
-## Análise de Viabilidade
+## 2.5 Análise de Viabilidade
 A viabilidade do projeto *SeuPontoDigital* pode ser avaliada sob três dimensões principais: técnica, de prazo e de mercado. Cada uma dessas dimensões foi analisada para garantir que a solução proposta seja não apenas executável, mas também sustentável e alinhada às necessidades reais do público-alvo.
 
 **Viabilidade Técnica**
@@ -98,7 +100,7 @@ Além disso, a equipe optou por utilizar tecnologias que possuem ampla documenta
 
 O *SeuPontoDigital* propõe uma solução acessível e prática para o controle de ponto no contexto doméstico, alinhada às exigências legais. Com funcionalidades que informatizam o controle de jornada, geram relatórios legais e promovem transparência entre empregador e empregado, a proposta busca atender um público com necessidades específicas de forma simples.
 
-## Impacto da Solução 
+## 2.6 Impacto da Solução 
 
  Espera-se que a solução facilite a rotina do empregado, do empregador e da *Legalize Folha Doméstica*, proporcionando maior controle sobre a organização das folhas de ponto e também dos dados relacionados à folha de pagamento. Como resultado, a empresa será positivamente impactada pela redução de falhas manuais e pela economia de tempo, fortalecendo sua competitividade no mercado e ampliando sua capacidade de atender clientes de forma mais eficiente.
 

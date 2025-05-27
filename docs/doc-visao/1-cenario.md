@@ -1,4 +1,6 @@
-## Introdução ao Negócio e Contexto 
+# 1. Cenário Atual do Cliente e do Negócio
+
+## 1.1 Introdução ao Negócio e Contexto 
 
 A *Legalize Folha de Pagamento do Lar LTDA (Legalize Folha Doméstica)* é uma empresa sediada no Distrito Federal, especializada na gestão de folha de pagamento doméstica. Atua no mercado desde janeiro de 2024 e vem crescendo de forma significativa. Oferece serviços voltados a empregadores, sendo responsável por gerenciar todo o ciclo de vida da carteira de trabalho dos empregados domésticos por eles contratados, com foco especial nos empregados domésticos.
 
@@ -6,7 +8,7 @@ A missão da empresa é simplificar e legalizar o processo de contratação de s
 
 ---
 
-## Identificação da Oportunidade ou Problema 
+## 1.2 Identificação da Oportunidade ou Problema 
 
 A principal oportunidade identificada para a *Legalize Folha Doméstica* é a gestão da folha de ponto, que atualmente é um processo lento e sujeito a erros, pois depende da marcação manual diária feita pelo empregado. A ausência de um sistema informatizado contribui para falhas recorrentes, como o acúmulo de horas trabalhadas não contabilizadas, resultando em horas extras não registradas e, frequentemente, em disputas trabalhistas. Além disso, a empresa constata que uma grande parte dos empregadores não mantém a folha de ponto atualizada, o que compromete os direitos dos empregados e, ao mesmo tempo, prejudica a segurança jurídica dos empregadores.
 
@@ -36,7 +38,7 @@ Nesse contexto, observa-se que a digitalização da folha de ponto resolveria qu
 
 ---
 
-##  Desafios do Projeto
+##  1.3 Desafios do Projeto
 
 O principal desafio técnico do projeto é realizar a migração dos dados dos clientes da empresa *Legalize Folha Doméstica* para o aplicativo *SeuPontoDigital*, assegurando que a nova marcação de ponto informatizada não comprometa o ciclo de trabalho atual. Isso requer a integração de funcionalidades como geolocalização, notificações e cálculos automáticos de horas em tempo real, de forma a atender integralmente os requisitos estabelecidos pela [Lei Complementar 150](https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp150.htm).
 
@@ -44,7 +46,7 @@ Outro desafio significativo é a capacitação da equipe que irá desenvolver o 
 
 ---
 
-## Segmentação de Clientes 
+## 1.4 Segmentação de Clientes 
 
 A *Legalize Folha Doméstica* atende a dois principais segmentos de clientes:
 
