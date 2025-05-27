@@ -84,6 +84,7 @@ As técnicas de priorização que serão utilizadas pela equipe para priorizar o
 e alinhamento na priorização. Sob esse viés, seguem as explicações detalhadas de cada modelo:
 
 O modelo MoSCoW realiza uma segmentação qualitativa de prioridade ao dividir os requisitos em quatro categorias, conforme o grau de importância da presença de cada um no produto:
+
 - **Must have (Precisa ter):** requisitos essenciais para o funcionamento do produto e que devem ser implementados obrigatoriamente.
 - **Should have (Deve ter):** requisitos importantes, mas que podem ser inseridos após os essenciais.
 - **Could have (Poderia ter):** requisitos desejáveis que agregam valor ao produto, porém não são prioritários no escopo inicial.
@@ -93,26 +94,21 @@ Como modelo quantitativo, o modelo ICE é aplicado por meio da atribuição de p
 
 Nesse processo, cada item do backlog é avaliado com base em três critérios, representados pelo acrônimo **ICE**: **Impact** (Impacto), **Confidence** (Confiança) e **Ease** (Facilidade). Após essa avaliação, a pontuação final é obtida por meio da multiplicação dos três valores:
 
-$$
-\text{ICE Score} = \text{Impacto} \times \text{Confiança} \times \text{Facilidade}
-$$
+<div align="center">
+  
+*ICE Score* = *Impacto* × *Confiança* × *Facilidade*
+
+</div>
 
 Com isso, o item que alcançar o maior ICE Score deve ser considerado como o mais prioritário para implementação, já que ele indica a melhor combinação entre valor gerado, viabilidade e nível de certeza.
 
 A seguir, detalham-se os três critérios utilizados:
+
 - **Impacto:** refere-se ao potencial do requisito em gerar valor para o negócio.
 - **Confiança:** expressa o grau de certeza da equipe em relação à ocorrência do impacto estimado.
 - **Facilidade:** avalia o nível de simplicidade, velocidade e baixo custo envolvidos na implementação do requisito. 
 
 Portanto, a tabela a seguir apresenta os requisitos devidamente priorizados.
-
-Must Have - 2
-
-Should Have - 1.8
-
-Could have - 1.5
-
-Won't have - 1.2
 
 Código     | Descrição | MoSCoW | Impacto | Confiança | Facilidade | ICE Score | Pontuação | MVP
 --------| --------- | ----- | ----- | ----- | ----- | ----- | --------- | ------
