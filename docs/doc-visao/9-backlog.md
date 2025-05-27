@@ -96,8 +96,8 @@ Nesse processo, cada item do backlog é avaliado com base em três critérios, r
 
 <div align="center">
   
-- **ICE Score** = Impacto × Confiança × Facilidade
-  
+*ICE Score* = *Impacto* × *Confiança* × *Facilidade*
+
 </div>
 
 Com isso, o item que alcançar o maior ICE Score deve ser considerado como o mais prioritário para implementação, já que ele indica a melhor combinação entre valor gerado, viabilidade e nível de certeza.
