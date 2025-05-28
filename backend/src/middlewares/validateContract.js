@@ -8,11 +8,9 @@ const validateContract = [
         .isIn(["fixa","variavel"]).withMessage("work_schedule_type is not valid"),
 
     body("break_interval")
-        .matches(/^([0-1]\d|2[0-3]):([0-5]\d)(?::([0-5]\d))?$/)
-        .withMessage("break_interval is not valid")
-        .customSanitizer(value => {
-        return value.split(":").slice(0, 2).join(":");
-    }),
+        .if(body("break_type").equals("fixed"))
+        .matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/)
+        .withMessage("break_interval is not valid"),
 
     body("work_days")
         .isArray().withMessage("work days are not valid")
@@ -71,6 +69,31 @@ const validateContract = [
     body("app_access")
         .toBoolean()
         .isBoolean().withMessage("app_access is not valid"),
+
+    body("break_type")
+        .isIn(["fixed", "range"]).withMessage("break_type is not valid"),
+
+
+    body("break_start")
+        .if(body("break_type").equals("range"))
+        .matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/)
+        .withMessage("break_start is not valid"),
+
+    body("break_end")
+        .if(body("break_type").equals("range"))
+        .matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/)
+        .withMessage("break_end is not valid")
+        .custom((value, { req }) => {
+            if (req.body.break_type === "range") {
+                const [h1, m1] = req.body.break_start.split(":").map(Number);
+                const [h2, m2] = value.split(":").map(Number);
+                const diff = (h2 * 60 + m2) - (h1 * 60 + m1);
+                if (diff < 15 || diff > 120 || diff <= 0) {
+                    throw new Error("break range must be between 15 minutes and 2 hours and end after start");
+                }
+            }
+            return true;
+        }),
     
     (req, res, next) => {
         const errors = validationResult(req);
