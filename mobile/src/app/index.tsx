@@ -203,40 +203,62 @@ export default function EntryScreen() {
     try {
       const cleanCpf = cpf.replace(/\D/g, '');
       
-      // Use axios diretamente - isso garante que a instância estará correta
-      const baseURL = Platform.OS === 'android' 
-        ? 'http://10.0.2.2:3333/api' 
-        : 'http://localhost:3333/api';
+      // Usa o serverIp que já foi detectado e configurado no useEffect
+      let baseURL;
       
+      // Se temos uma instância API configurada, usa ela
+      if (api && api.defaults && api.defaults.baseURL) {
+        baseURL = api.defaults.baseURL;
+      } 
+      // Senão, constrói a URL com base no serverIp
+      else if (serverIp) {
+        baseURL = `http://${serverIp}:3333/api`;
+      } 
+      // Fallback para casos em que nada foi configurado
+      else {
+        baseURL = Platform.OS === 'android' 
+          ? isEmulator ? 'http://10.0.2.2:3333/api' : 'http://192.168.0.104:3333/api'
+          : 'http://localhost:3333/api';
+      }
+      
+      console.log(`Dispositivo: ${deviceIp || 'desconhecido'}`);
+      console.log(`Servidor: ${serverIp || 'não configurado'}`);
       console.log(`Tentando conectar a: ${baseURL}`);
       console.log(`Enviando CPF: ${cleanCpf}`);
       
-      const response = await axios({
-        method: 'post',
-        url: `${baseURL}/login-employer`,
-        data: { cpf: cleanCpf, password },
-        timeout: 15000
-      });
+      // Usa a instância API configurada se disponível, caso contrário cria uma requisição direta
+      let response;
+      
+      if (api && typeof api.post === 'function') {
+        response = await api.post('/login-employer', { cpf: cleanCpf, password });
+      } else {
+        response = await axios({
+          method: 'post',
+          url: `${baseURL}/login-employer`,
+          data: { cpf: cleanCpf, password },
+          timeout: 15000
+        });
+      }
       
       console.log('Status da resposta:', response.status);
       console.log('Response:', JSON.stringify(response.data));
-
+  
       if (response.data.token) {
         await AsyncStorage.setItem('userToken', response.data.token);
       }
       
       Alert.alert('Sucesso', response.data.message || 'Login realizado com sucesso');
-
       router.replace('/(panel)/profile/page');
-      // Salve token ou navegue para a tela principal
-    } catch (err: any) {      
+    } catch (err: any) {
+      console.error("Erro completo:", err);
+      
       if (err.message && err.message.includes('Network Error')) {
         Alert.alert(
           'Erro de Conexão', 
-          'Não foi possível conectar ao servidor. Verifique se o backend está rodando.'
+          `Não foi possível conectar ao servidor ${serverIp || ''}. ` +
+          'Verifique se o backend está rodando e acessível pela rede.'
         );
       } else if (err.response && err.response.status === 401) {
-        // Tratamento específico para credenciais inválidas
         Alert.alert('Acesso negado', 'CPF ou senha incorretos. Por favor, verifique seus dados.');
       } else {
         Alert.alert('Erro', err.response?.data?.message || err.message || 'Erro ao fazer login');
