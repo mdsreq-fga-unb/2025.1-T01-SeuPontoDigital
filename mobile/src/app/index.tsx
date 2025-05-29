@@ -226,6 +226,8 @@ export default function EntryScreen() {
       }
       
       Alert.alert('Sucesso', response.data.message || 'Login realizado com sucesso');
+
+      router.replace('/(panel)/profile/page');
       // Salve token ou navegue para a tela principal
     } catch (err: any) {      
       if (err.message && err.message.includes('Network Error')) {
