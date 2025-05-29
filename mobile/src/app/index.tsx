@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  Image, 
-  SafeAreaView, 
-  StatusBar, 
-  Dimensions, 
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  StatusBar,
+  Dimensions,
   TouchableOpacity,
   TextInput,
   Pressable,
@@ -21,57 +21,30 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
 
-const LOCAL_IP = '192.168.0.79'
+const LOCAL_IP = '192.168.1.192'; 
 
-const api = axios.create({ 
-  baseURL: 
-    Platform.OS === 'ios'
-      ? 'http://localhost:3333/api'
-      : Platform.OS === 'android'
-      ? 'http://10.0.2.2:3333/api'
-      : 'http://localhost:3333/api'
-  });
+const api = axios.create({
+  baseURL:
+    Platform.OS === 'android'
+      ? `http://${LOCAL_IP}:3333/api` 
+      : 'http://localhost:3333/api'  
+});
 
 export default function EntryScreen() {
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-<<<<<<< Updated upstream
-  async function handleVerify(){
-      setLoading(true);
-      try{
-          const response = await api.post('/loginMobile', {email, password});
-          const { token } = response.data;
-          await AsyncStorage.setItem('userToken', token);
-          console.log('Token recebido:', token);
-          Alert.alert("Usuario Logado com Sucesso");
-      } catch (err){
-        if (axios.isAxiosError(err) && err.response) {
-          // Erro de resposta vinda do backend
-          Alert.alert('Erro', err.response.data.error || 'Falha na autenticação');
-        } else if (err instanceof Error) {
-          // Erro de rede ou timeout
-          Alert.alert('Erro de rede', err.message);
-          console.log(err);
-        } else {
-          Alert.alert('Erro', 'Ocorreu um erro desconhecido');
-        }
-      } finally {
-        setLoading(false);
-      }
-   }
-=======
   const validateCPF = (cpf: string): boolean => {
     // Remove non-numeric characters
     cpf = cpf.replace(/[^\d]/g, '');
-    
+
     // Check if CPF has 11 digits
     if (cpf.length !== 11) return false;
-    
+
     // Check if all digits are the same
     if (/^(\d)\1{10}$/.test(cpf)) return false;
-    
+
     // Validate first digit
     let sum = 0;
     for (let i = 0; i < 9; i++) {
@@ -79,7 +52,7 @@ export default function EntryScreen() {
     }
     let rest = 11 - (sum % 11);
     let digit1 = rest > 9 ? 0 : rest;
-    
+
     // Validate second digit
     sum = 0;
     for (let i = 0; i < 10; i++) {
@@ -87,7 +60,7 @@ export default function EntryScreen() {
     }
     rest = 11 - (sum % 11);
     let digit2 = rest > 9 ? 0 : rest;
-    
+
     return digit1 === parseInt(cpf.charAt(9)) && digit2 === parseInt(cpf.charAt(10));
   };
 
@@ -101,14 +74,23 @@ export default function EntryScreen() {
     setCpf(formattedCPF);
   };
 
-  function handleVerify() {
+  async function handleVerify() {
     if (!validateCPF(cpf)) {
       Alert.alert('Erro', 'CPF inválido!');
       return;
     }
-    console.log({ cpf, password });
+    setLoading(true);
+    try {
+      const cleanCpf = cpf.replace(/\D/g, ''); // Remove pontos e traços
+      const response = await api.post('/login-employer', { cpf: cleanCpf, password });
+      Alert.alert('Sucesso', response.data.message);
+      // Salve token ou navegue para a tela principal
+    } catch (err: any) {
+      Alert.alert('Erro', err.response?.data?.message || 'Erro ao fazer login');
+    } finally {
+      setLoading(false);
+    }
   }
->>>>>>> Stashed changes
 
   return (
     <SafeAreaView style={styles.container}>
@@ -132,17 +114,17 @@ export default function EntryScreen() {
 
         <View style={styles.illustrationContainer}>
           <Image
-            source={require('../../assets/images/splash-icon.png')} 
+            source={require('../../assets/images/splash-icon.png')}
             style={styles.illustration}
             resizeMode="contain"
           />
         </View>
-        
+
         <View style={styles.loginCard}>
           <Text style={styles.cardTitle}>
             SeuPonto<Text style={styles.cardHighlight}>Digital</Text>
           </Text>
-          
+
           <View style={styles.formGroup}>
             <Text style={styles.inputLabel}>CPF</Text>
             <TextInput
@@ -163,22 +145,22 @@ export default function EntryScreen() {
               secureTextEntry
             />
 
-            <Pressable  
+            <Pressable
               style={styles.accessButton}
               onPress={handleVerify}
             >
               <Text style={styles.accessButtonText}>Acessar</Text>
             </Pressable>
 
-            <Link 
-              href='/(auth)/firstTime/page' 
+            <Link
+              href='/(auth)/firstTime/page'
               style={styles.registerLink}
             >
               <Text style={styles.registerText}>Primeira vez? Clique aqui</Text>
             </Link>
 
-            <Link 
-              href='/(auth)/forgotpass/page' 
+            <Link
+              href='/(auth)/forgotpass/page'
               style={styles.helpLink}
             >
               <Text style={styles.helpText}>Esqueceu sua senha?</Text>
