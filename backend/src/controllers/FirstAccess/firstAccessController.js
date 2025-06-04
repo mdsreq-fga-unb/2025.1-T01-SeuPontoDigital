@@ -25,7 +25,7 @@ const firstAccessController = async (req, res) => {
         if (user.name !== name || user.phone !== phone) {
             return res.status(400).send({ message: "incorrect data" });
         }
-
+        
         if (user.password) {
             return res.status(401).send({ message: `${userType} already has an account` });
         }
