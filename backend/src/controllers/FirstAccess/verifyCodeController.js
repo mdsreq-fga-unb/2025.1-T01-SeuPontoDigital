@@ -4,7 +4,7 @@ const verifyCodeController = async (req, res) => {
   const { phone, code } = req.body;
 
   if (!phone || !code) {
-    return res.status(400).send({ message: "Telefone e código são obrigatórios." });
+    return res.status(400).send({ message: "phone and code are obrigatory" });
   }
 
   try {

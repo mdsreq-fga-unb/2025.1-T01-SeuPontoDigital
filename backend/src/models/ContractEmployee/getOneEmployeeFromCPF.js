@@ -3,7 +3,7 @@ import supabase from "../../config/supabase.js";
 const getOneEmployeeFromCPF = async (cpf) => {
 
     try{
-        const {data, error} = await supabase.from("employee_contracts").select("name, cpf, phone").eq("cpf", cpf).single();
+        const {data, error} = await supabase.from("employee_contracts").select("id, name, cpf, phone").eq("cpf", cpf).single();
 
         if (error) return;
        
