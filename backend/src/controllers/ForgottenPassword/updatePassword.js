@@ -4,7 +4,7 @@ import generatePasswordHash from "../../middlewares/generatePasswordHash.js";
 import verifySMS from "../../middlewares/verifySMS.js";
 import supabase from "../../config/supabase.js";
 
-const createPassword = async (req, res) => {
+const updatePassword = async (req, res) => {
     const { cpf, password, confirmPassword, code } = req.body;
 
     if (!cpf || !password || !confirmPassword || !code) {
@@ -24,10 +24,6 @@ const createPassword = async (req, res) => {
 
         if (!user) {
             return res.status(404).send({ message: "user not found" });
-        }
-
-        if (user.password) {
-            return res.status(401).send({ message: `${userType} already has an account` });
         }
 
         const isValidCode = await verifySMS(user.phone, code);
@@ -52,11 +48,11 @@ const createPassword = async (req, res) => {
             return res.status(500).send({ message: "error updating password" });
         }
 
-        return res.status(200).send({ message: "password created successfully" });
+        return res.status(200).send({ message: "password update successfully" });
 
     } catch (err) {
         return res.status(500).send({ message: "internal server error" });
     }
 };
 
-export default createPassword;
+export default updatePassword;

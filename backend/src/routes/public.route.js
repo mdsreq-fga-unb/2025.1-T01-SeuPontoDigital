@@ -3,6 +3,8 @@ import loginAdmin from "../controllers/Admin/loginAdmin.js";
 import loginEmployer from "../controllers/Employers/loginEmployer.js";
 import firstAccessController from "../controllers/FirstAccess/firstAccessController.js";
 import createPassword from "../controllers/FirstAccess/createPassword.js";
+import forgottenPasswordController from "../controllers/ForgottenPassword/forgottenPasswordController.js";
+import updatePassword from "../controllers/ForgottenPassword/updatePassword.js";
 
 const publicRoute = express.Router();
 

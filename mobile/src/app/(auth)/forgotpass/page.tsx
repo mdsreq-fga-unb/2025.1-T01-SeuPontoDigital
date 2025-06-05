@@ -96,10 +96,12 @@ export default function ForgotPass() {
         confirmPassword,
         code,
       });
-      Alert.alert('Sucesso', 'Senha redefinida com sucesso!');
-      router.replace('/');
+      if (response.status === 200) {
+        Alert.alert('Sucesso', 'Senha atualizar com sucesso!');
+        router.replace('/');
+      }
     } catch (err: any) {
-      Alert.alert('Erro', err.response?.data?.message || 'Erro ao redefinir senha.');
+      Alert.alert('Erro', err.response?.data?.message || 'Erro ao atualizar senha.');
     } finally {
       setLoading(false);
     }

@@ -5,6 +5,9 @@ import sendSMS from "../../middlewares/sendSMS.js";
 const forgottenPasswordController = async (req, res) => {
     const { cpf, phone } = req.body;
 
+    console.log('--- [POST /first-access] ---');
+    console.log('Recebido:', { cpf, phone });
+
     if (!cpf || !phone) {
         return res.status(400).send({ message: "cpf and phone are required" });
     }
@@ -31,7 +34,10 @@ const forgottenPasswordController = async (req, res) => {
         return res.status(200).send({ message: "code sent" });
 
     } catch (err) {
-        return res.status(500).send({ message: "internal server error" });
+        console.error("Erro no forgottenPasswordController:", err);
+        return res.status(500).send({
+            message: "Erro interno ao processar solicitação de recuperação de senha. Tente novamente mais tarde."
+        });
     }
 }
 
