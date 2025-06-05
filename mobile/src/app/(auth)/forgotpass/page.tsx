@@ -24,12 +24,12 @@ const { width, height } = Dimensions.get('window');
 const api = axios.create({
   baseURL: Platform.OS === 'web'
     ? 'http://localhost:3333/api'
-    : 'http://192.168.0.10:3333/api', // Substitua pelo seu IP local
+    : 'http://192.168.0.10:3333/api', // Substituir pelo seu IP local sempre
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
 });
 
-export default function ForgotPass() {
+export default function ForgotPassScreen() {
   const [cpf, setCpf] = useState('');
   const [phone, setPhone] = useState('');
   const [step, setStep] = useState(1);
@@ -60,7 +60,7 @@ export default function ForgotPass() {
     }
     setLoading(true);
     try {
-      await api.post('/first-access', { name: 'Recuperação', cpf: cpf.replace(/\D/g, ''), phone });
+      await api.post('/forgotten-password', { cpf: cpf.replace(/\D/g, ''), phone });
       setStep(2);
       setTimer(300);
       Alert.alert('Sucesso', 'Código enviado por SMS.');
@@ -90,7 +90,7 @@ export default function ForgotPass() {
     }
     setLoading(true);
     try {
-      await api.patch('/create-password', {
+      const response = await api.patch('/update-password', {
         cpf: cpf.replace(/\D/g, ''),
         password,
         confirmPassword,
@@ -155,9 +155,6 @@ export default function ForgotPass() {
           </Text>
           <Pressable style={styles.accessButton} onPress={handleVerifyCode} disabled={loading || timer <= 0}>
             <Text style={styles.accessButtonText}>Verificar Código</Text>
-          </Pressable>
-          <Pressable style={styles.registerButton} onPress={handleSendSMS} disabled={loading || timer > 0}>
-            <Text style={styles.registerButtonText}>Reenviar Código</Text>
           </Pressable>
         </>
       );

@@ -28,6 +28,8 @@ const forgottenPasswordController = async (req, res) => {
         if (user.cpf !== cpf || user.phone !== phone) {
             return res.status(400).send({ message: "incorrect data (cpf or phone)" });
         }
+
+        
         
         await sendSMS(phone);
 
