@@ -52,6 +52,7 @@ const FirstTimeScreen: React.FC = () => {
         name,
         cpf,
         phone,
+        password,
       });
       if (response.status === 200) {
         setStep('code');

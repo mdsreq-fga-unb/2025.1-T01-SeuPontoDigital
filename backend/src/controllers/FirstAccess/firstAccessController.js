@@ -3,7 +3,7 @@ import getOneEmployerFromCPF from "../../models/Employers/getOneEmployerFromCPF.
 import sendSMS from "../../middlewares/sendSMS.js";
 
 const firstAccessController = async (req, res) => {
-    let { name, cpf, phone } = req.body;
+    let { name, cpf, phone, password } = req.body;
     phone = "+55" + phone
     
     if (!name || !cpf || !phone) {
