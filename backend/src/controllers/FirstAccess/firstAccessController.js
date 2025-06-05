@@ -36,13 +36,13 @@ const firstAccessController = async (req, res) => {
         try {
             await sendSMS(phone);
         } catch (smsErr) {
-            return res.status(500).send({ message: "error in sending sms" });
+            return res.status(500).send({ message: "Erro ao enviar SMS" });
         }
 
-        return res.status(200).send({ message: "send code!" });
+        return res.status(200).send({ message: "Código enviado!" });
 
     } catch (err) {
-        return res.status(500).send({ message: "internal server error" });
+        return res.status(500).send({ message: "Erro interno do servidor" });
     }
 }
 
