@@ -72,7 +72,7 @@ const FirstTimeScreen: React.FC = () => {
     }
     setLoading(true);
     try {
-      const response = await api.post('/create-password', {
+      const response = await api.patch('/create-password', {
         cpf,
         password,
         confirmPassword,
