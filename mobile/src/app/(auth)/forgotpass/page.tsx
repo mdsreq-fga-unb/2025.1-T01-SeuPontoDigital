@@ -41,7 +41,7 @@ export default function ForgotPass() {
   const router = useRouter();
   
   React.useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: number;
     if (step === 2 && timer > 0) {
       interval = setInterval(() => setTimer((t) => t - 1), 1000);
     }
@@ -252,6 +252,11 @@ const styles = StyleSheet.create({
     width: width * 0.6,
     height: height * 0.2,
     marginBottom: 20,
+  },
+  cardTitle: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   formCard: {
     width: '100%'
