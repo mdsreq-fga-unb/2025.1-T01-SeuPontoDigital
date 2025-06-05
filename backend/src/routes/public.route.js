@@ -13,4 +13,8 @@ publicRoute.post("/login-employer", loginEmployer);
 publicRoute.post("/first-access", firstAccessController);
 publicRoute.patch("/create-password", createPassword);
 
+// ======== FORGOTTEN PASSWORD ========
+publicRoute.post("/forgotten-password", forgottenPasswordController);
+publicRoute.patch("/update-password", updatePassword);
+
 export default publicRoute;

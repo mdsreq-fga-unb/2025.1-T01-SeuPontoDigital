@@ -22,7 +22,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const { width, height } = Dimensions.get('window');
 
 const api = axios.create({
-  baseURL: 'http://localhost:3333/api', // URL base da sua API
+  baseURL: 'http://localhost:3333/api', // URL base da sua API no computador (para Web)
+  // baseURL: 'http://192.168.179.198:3333/api', //URL base da sua API para acessar no Android físico
+  // baseURL: 'http://10.0.2.2:3333', //URL base para emulador android
   timeout: 10000, // tempo limite da requisição (em ms)
   headers: {
     'Content-Type': 'application/json',
