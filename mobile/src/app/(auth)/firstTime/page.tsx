@@ -22,25 +22,24 @@ const { width, height } = Dimensions.get('window');
 const FirstTimeScreen: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [cpf, setCpf] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
-  const [verified, setVerified] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const router = useRouter();
 
-  const handleVerify = (): void => { // Verifica se o empregado com esses dados esta com o contrato ativo
-    setVerified(true);
-    Alert.alert('Verificação', 'Conta verificada com sucesso!');
-  };
-
-  const handleSetPassword = (): void => { // Se estiver ele cria uma senha para esse empregado
-    if (password && password === confirmPassword) {
-      console.log({ name, cpf, email, phone, password });
-      router.replace('/');
-    } else {
-      Alert.alert('Erro', 'As senhas não coincidem.');
+  const handleRegister = (): void => {
+    if (!name || !cpf || !phone || !password || !confirmPassword) {
+      Alert.alert('Erro', 'Preencha todos os campos.');
+      return;
     }
+    if (password !== confirmPassword) {
+      Alert.alert('Erro', 'As senhas não coincidem.');
+      return;
+    }
+    // Aqui você pode adicionar a lógica de cadastro (API)
+    console.log({ name, cpf, phone, password });
+    Alert.alert('Cadastro', 'Conta criada com sucesso!');
+    router.replace('/');
   };
 
   return (
@@ -58,7 +57,7 @@ const FirstTimeScreen: React.FC = () => {
               color="#FFFFFF"
             />
           </Pressable>
-          <Text style={styles.headerTitle}>{verified ? 'Defina sua Senha' : 'Primeiro Login'}</Text>
+          <Text style={styles.headerTitle}>Primeiro Login</Text>
         </View>
 
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
@@ -70,73 +69,53 @@ const FirstTimeScreen: React.FC = () => {
 
           <View style={styles.formCard}>
             <View style={styles.formGroup}>
-              {!verified ? (
-                <>  
-                  <Text style={styles.inputLabel}>Nome Completo</Text>
-                  <TextInput
-                    style={styles.inputField}
-                    placeholder="Digite seu nome"
-                    value={name}
-                    onChangeText={setName}
-                  />
+              <Text style={styles.inputLabel}>Nome Completo</Text>
+              <TextInput
+                style={styles.inputField}
+                placeholder="Digite seu nome"
+                value={name}
+                onChangeText={setName}
+              />
 
-                  <Text style={styles.inputLabel}>CPF</Text>
-                  <TextInput
-                    style={styles.inputField}
-                    placeholder="000.000.000-00"
-                    value={cpf}
-                    onChangeText={setCpf}
-                    keyboardType="number-pad"
-                  />
+              <Text style={styles.inputLabel}>CPF</Text>
+              <TextInput
+                style={styles.inputField}
+                placeholder="000.000.000-00"
+                value={cpf}
+                onChangeText={setCpf}
+                keyboardType="number-pad"
+              />
 
-                  <Text style={styles.inputLabel}>Email</Text>
-                  <TextInput
-                    style={styles.inputField}
-                    placeholder="Digite seu email"
-                    value={email}
-                    onChangeText={setEmail}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                  />
+              <Text style={styles.inputLabel}>Telefone</Text>
+              <TextInput
+                style={styles.inputField}
+                placeholder="(00) 00000-0000"
+                value={phone}
+                onChangeText={setPhone}
+                keyboardType="phone-pad"
+              />
 
-                  <Text style={styles.inputLabel}>Telefone</Text>
-                  <TextInput
-                    style={styles.inputField}
-                    placeholder="(00) 00000-0000"
-                    value={phone}
-                    onChangeText={setPhone}
-                    keyboardType="phone-pad"
-                  />
+              <Text style={styles.inputLabel}>Criar Senha</Text>
+              <TextInput
+                style={styles.inputField}
+                placeholder="Digite sua senha"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+              />
 
-                  <Pressable style={styles.registerButton} onPress={handleVerify}>
-                    <Text style={styles.registerButtonText}>Verificar</Text>
-                  </Pressable>
-                </>
-              ) : (
-                <>
-                  <Text style={styles.inputLabel}>Senha</Text>
-                  <TextInput
-                    style={styles.inputField}
-                    placeholder="Digite sua senha"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                  />
+              <Text style={styles.inputLabel}>Confirmar Senha</Text>
+              <TextInput
+                style={styles.inputField}
+                placeholder="Repita sua senha"
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                secureTextEntry
+              />
 
-                  <Text style={styles.inputLabel}>Confirmar Senha</Text>
-                  <TextInput
-                    style={styles.inputField}
-                    placeholder="Repita sua senha"
-                    value={confirmPassword}
-                    onChangeText={setConfirmPassword}
-                    secureTextEntry
-                  />
-
-                  <Pressable style={styles.registerButton} onPress={handleSetPassword}>
-                    <Text style={styles.registerButtonText}>Criar Senha</Text>
-                  </Pressable>
-                </>
-              )}
+              <Pressable style={styles.registerButton} onPress={handleRegister}>
+                <Text style={styles.registerButtonText}>Criar Conta</Text>
+              </Pressable>
 
               <Link href="/" style={styles.backLink}>
                 <Text style={styles.backLinkText}>Voltar ao login</Text>
