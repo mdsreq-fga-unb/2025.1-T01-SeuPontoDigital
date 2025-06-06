@@ -19,5 +19,5 @@ app.use("/api", publicRoute);
 app.use("/api", privateRoute);
 
 app.listen(PORT, () => {
-    console.log(`Server running on: http://localhost:${PORT}`);
+    console.log(`Server running`);
 });
