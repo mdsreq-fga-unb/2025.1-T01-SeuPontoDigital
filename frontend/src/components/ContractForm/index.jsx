@@ -20,7 +20,6 @@ const ContractForm = (props) => {
     const app_access = [
         { value: "false", label: "Não" },
         { value: "true", label: "Sim" }
-
     ];
 
     const workplace_employer = [
@@ -65,13 +64,13 @@ const ContractForm = (props) => {
         const value = e.target.value;
         const [hours, minutes] = value.split(':').map(Number);
         const totalMinutes = hours * 60 + minutes;
-        const minMinutes = 0;
+        const minMinutes = 15;
         const maxMinutes = 2 * 60;
 
         if (totalMinutes >= minMinutes && totalMinutes <= maxMinutes) {
             props.handleInputChange({ name: "break_interval", value });
         } else {
-            Notification.error("Intervalo de descanso deve estar entre 00h00 e 02h00!");
+            Notification.error("Intervalo de descanso deve estar entre 00h15 e 02h00!");
         }
     };
 
@@ -173,16 +172,52 @@ const ContractForm = (props) => {
                     options={work_schedule_type}
                     className="div-contract-select"
                 />
-                <TextInput
-                    label="Intervalo de Descanso"
-                    name="break_interval"
-                    type="time"
-                    min="00:00"
-                    max="02:00"
-                    value={props.contract.break_interval}
-                    onChange={handleBreakIntervalChange}
-                    className="div-employer-form"
+
+                {/* NOVO BLOCO: Tipo de intervalo e campos condicionais */}
+                <SelectInput
+                    label="Tipo de Intervalo"
+                    name="break_type"
+                    value={props.contract.break_type}
+                    onChange={e => props.handleInputChange({ name: "break_type", value: e.target.value })}
+                    options={[
+                        { value: "fixed", label: "Duração fixa" },
+                        { value: "range", label: "Horário de início/fim" }
+                    ]}
+                    className="div-contract-select"
                 />
+
+                {props.contract.break_type === "fixed" ? (
+                    <TextInput
+                        label="Duração do Intervalo"
+                        name="break_interval"
+                        type="time"
+                        min="00:15"
+                        max="02:00"
+                        value={props.contract.break_interval}
+                        onChange={handleBreakIntervalChange}
+                        className="div-employer-form"
+                    />
+                ) : (
+                    <div style={{ display: "flex", gap: "1rem" }}>
+                        <TextInput
+                            label="Início do Intervalo"
+                            name="break_start"
+                            type="time"
+                            value={props.contract.break_start}
+                            onChange={e => props.handleInputChange({ name: "break_start", value: e.target.value })}
+                            className="div-employer-form"
+                        />
+                        <TextInput
+                            label="Fim do Intervalo"
+                            name="break_end"
+                            type="time"
+                            value={props.contract.break_end}
+                            onChange={e => props.handleInputChange({ name: "break_end", value: e.target.value })}
+                            className="div-employer-form"
+                        />
+                    </div>
+                )}
+                {/* FIM DO NOVO BLOCO */}
             </div>
             <DaysOfWeekSelector
                 selectedDays={props.contract.work_days || []}

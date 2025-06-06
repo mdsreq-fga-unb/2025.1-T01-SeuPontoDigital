@@ -1,114 +1,93 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  Image, 
-  SafeAreaView, 
-  StatusBar, 
-  Dimensions, 
-  TouchableOpacity,
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  StatusBar,
+  Dimensions,
   TextInput,
   Pressable,
   KeyboardAvoidingView,
   Platform,
   Alert,
-  ScrollView
+  ScrollView,
+  ActivityIndicator
 } from 'react-native';
-import { Link } from 'expo-router'
+import { Link, useRouter } from 'expo-router';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
 
-const LOCAL_IP = '192.168.0.79'
-
-const api = axios.create({ 
-  baseURL: 
-    Platform.OS === 'ios'
-      ? 'http://localhost:3333/api'
-      : Platform.OS === 'android'
-      ? 'http://10.0.2.2:3333/api'
-      : 'http://localhost:3333/api'
-  });
+const api = axios.create({
+  baseURL: 'http://localhost:3333/api', // URL base da sua API
+  timeout: 10000, // tempo limite da requisição (em ms)
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
 export default function EntryScreen() {
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  // const [api] = useState<AxiosInstance>(apiInstance);
+  const router = useRouter();
 
-<<<<<<< Updated upstream
-  async function handleVerify(){
-      setLoading(true);
-      try{
-          const response = await api.post('/loginMobile', {email, password});
-          const { token } = response.data;
-          await AsyncStorage.setItem('userToken', token);
-          console.log('Token recebido:', token);
-          Alert.alert("Usuario Logado com Sucesso");
-      } catch (err){
-        if (axios.isAxiosError(err) && err.response) {
-          // Erro de resposta vinda do backend
-          Alert.alert('Erro', err.response.data.error || 'Falha na autenticação');
-        } else if (err instanceof Error) {
-          // Erro de rede ou timeout
-          Alert.alert('Erro de rede', err.message);
-          console.log(err);
-        } else {
-          Alert.alert('Erro', 'Ocorreu um erro desconhecido');
-        }
-      } finally {
-        setLoading(false);
-      }
-   }
-=======
   const validateCPF = (cpf: string): boolean => {
-    // Remove non-numeric characters
     cpf = cpf.replace(/[^\d]/g, '');
-    
-    // Check if CPF has 11 digits
-    if (cpf.length !== 11) return false;
-    
-    // Check if all digits are the same
-    if (/^(\d)\1{10}$/.test(cpf)) return false;
-    
-    // Validate first digit
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+
     let sum = 0;
-    for (let i = 0; i < 9; i++) {
-      sum += parseInt(cpf.charAt(i)) * (10 - i);
-    }
+    for (let i = 0; i < 9; i++) sum += parseInt(cpf[i]) * (10 - i);
     let rest = 11 - (sum % 11);
     let digit1 = rest > 9 ? 0 : rest;
-    
-    // Validate second digit
+
     sum = 0;
-    for (let i = 0; i < 10; i++) {
-      sum += parseInt(cpf.charAt(i)) * (11 - i);
-    }
+    for (let i = 0; i < 10; i++) sum += parseInt(cpf[i]) * (11 - i);
     rest = 11 - (sum % 11);
     let digit2 = rest > 9 ? 0 : rest;
-    
-    return digit1 === parseInt(cpf.charAt(9)) && digit2 === parseInt(cpf.charAt(10));
+
+    return digit1 === parseInt(cpf[9]) && digit2 === parseInt(cpf[10]);
   };
 
-  const formatCPF = (value: string): string => {
-    const cpf = value.replace(/\D/g, '');
-    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-  };
+  const formatCPF = (value: string): string =>
+    value.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 
-  const handleCPFChange = (value: string) => {
-    const formattedCPF = formatCPF(value);
-    setCpf(formattedCPF);
-  };
+  const handleCPFChange = (value: string) => setCpf(formatCPF(value));
 
-  function handleVerify() {
+  async function handleVerify() {
     if (!validateCPF(cpf)) {
       Alert.alert('Erro', 'CPF inválido!');
       return;
     }
-    console.log({ cpf, password });
+
+    setLoading(true);
+    try {
+      const cleanCpf = cpf.replace(/\D/g, '');
+      const response = await api.post('/login-employer', { cpf: cleanCpf, password });
+
+      if (response.data.token) {
+        await AsyncStorage.setItem('userToken', response.data.token);
+      }
+
+      Alert.alert('Sucesso', response.data.message || 'Login realizado com sucesso');
+      router.replace('/(panel)/profile/page');
+    } catch (err: any) {
+      console.error("Erro completo:", err);
+      if (err.message?.includes('Network Error')) {
+        Alert.alert('Erro de Conexão', 'Não foi possível conectar ao servidor localhost:3333.');
+      } else if (err.response?.status === 401) {
+        Alert.alert('Acesso negado', 'CPF ou senha incorretos.');
+      } else {
+        Alert.alert('Erro', err.response?.data?.message || err.message || 'Erro ao fazer login');
+      }
+    } finally {
+      setLoading(false);
+    }
   }
->>>>>>> Stashed changes
 
   return (
     <SafeAreaView style={styles.container}>
@@ -130,61 +109,62 @@ export default function EntryScreen() {
           </View>
         </View>
 
-        <View style={styles.illustrationContainer}>
-          <Image
-            source={require('../../assets/images/splash-icon.png')} 
-            style={styles.illustration}
-            resizeMode="contain"
-          />
-        </View>
-        
-        <View style={styles.loginCard}>
-          <Text style={styles.cardTitle}>
-            SeuPonto<Text style={styles.cardHighlight}>Digital</Text>
-          </Text>
-          
-          <View style={styles.formGroup}>
-            <Text style={styles.inputLabel}>CPF</Text>
-            <TextInput
-              style={styles.inputField}
-              placeholder="000.000.000-00"
-              value={cpf}
-              onChangeText={handleCPFChange}
-              keyboardType="number-pad"
-              maxLength={14}
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <View style={styles.illustrationContainer}>
+            <Image
+              source={require('../../assets/images/splash-icon.png')}
+              style={styles.illustration}
+              resizeMode="contain"
             />
-
-            <Text style={styles.inputLabel}>Senha</Text>
-            <TextInput
-              style={styles.inputField}
-              placeholder="Digite sua senha"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-            />
-
-            <Pressable  
-              style={styles.accessButton}
-              onPress={handleVerify}
-            >
-              <Text style={styles.accessButtonText}>Acessar</Text>
-            </Pressable>
-
-            <Link 
-              href='/(auth)/firstTime/page' 
-              style={styles.registerLink}
-            >
-              <Text style={styles.registerText}>Primeira vez? Clique aqui</Text>
-            </Link>
-
-            <Link 
-              href='/(auth)/forgotpass/page' 
-              style={styles.helpLink}
-            >
-              <Text style={styles.helpText}>Esqueceu sua senha?</Text>
-            </Link>
           </View>
-        </View>
+
+          <View style={styles.loginCard}>
+            <Text style={styles.cardTitle}>
+              SeuPonto<Text style={styles.cardHighlight}>Digital</Text>
+            </Text>
+
+            <View style={styles.formGroup}>
+              <Text style={styles.inputLabel}>CPF</Text>
+              <TextInput
+                style={styles.inputField}
+                placeholder="000.000.000-00"
+                value={cpf}
+                onChangeText={handleCPFChange}
+                keyboardType="number-pad"
+                maxLength={14}
+              />
+
+              <Text style={styles.inputLabel}>Senha</Text>
+              <TextInput
+                style={styles.inputField}
+                placeholder="Digite sua senha"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+              />
+
+              <Pressable
+                style={[styles.accessButton, loading && styles.disabledButton]}
+                onPress={handleVerify}
+                disabled={loading}
+              >
+                {loading ? (
+                  <ActivityIndicator color="#FFFFFF" />
+                ) : (
+                  <Text style={styles.accessButtonText}>Acessar</Text>
+                )}
+              </Pressable>
+
+              <Link href='/(auth)/firstTime/page' style={styles.registerLink}>
+                <Text style={styles.registerText}>Primeira vez? Clique aqui</Text>
+              </Link>
+
+              <Link href='/(auth)/forgotpass/page' style={styles.helpLink}>
+                <Text style={styles.helpText}>Esqueceu sua senha?</Text>
+              </Link>
+            </View>
+          </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -221,10 +201,6 @@ const styles = StyleSheet.create({
   logoHighlight: {
     color: '#4FC3F7',
   },
-  content: {
-    flex: 1,
-    padding: 20,
-  },
   illustrationContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -246,6 +222,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 10,
+    marginHorizontal: 16,
     marginBottom: 20,
   },
   cardTitle: {
@@ -286,6 +263,10 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 16,
   },
+  disabledButton: {
+    backgroundColor: '#90CAF9',
+    borderColor: '#BDBDBD',
+  },
   accessButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
@@ -311,14 +292,5 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 15,
     textDecorationLine: 'underline',
-  },
-  footer: {
-    backgroundColor: '#1565C0',
-    padding: 15,
-    alignItems: 'center',
-  },
-  footerText: {
-    color: '#FFFFFF',
-    fontSize: 12,
   }
 });
