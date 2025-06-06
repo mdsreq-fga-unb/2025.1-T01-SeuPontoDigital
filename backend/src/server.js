@@ -15,7 +15,6 @@ app.use(cors({
 }));
 
 app.use("/api", publicRoute);
-
 app.use("/api", privateRoute);
 
 app.listen(PORT, () => {

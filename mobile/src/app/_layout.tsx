@@ -18,6 +18,11 @@ export default function MainLayout(){
           name="(panel)/profile/page"
           options={{headerShown: false}}
         ></Stack.Screen>
+
+        <Stack.Screen
+          name="(auth)/forgotpass/page"
+          options={{headerShown: false}}
+        ></Stack.Screen>
     </Stack>
   
   )
