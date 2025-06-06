@@ -52,6 +52,7 @@ const FirstTimeScreen: React.FC = () => {
         name,
         cpf,
         phone,
+        password,
       });
       if (response.status === 200) {
         setStep('code');
@@ -72,7 +73,7 @@ const FirstTimeScreen: React.FC = () => {
     }
     setLoading(true);
     try {
-      const response = await api.post('/create-password', {
+      const response = await api.patch('/create-password', {
         cpf,
         password,
         confirmPassword,
