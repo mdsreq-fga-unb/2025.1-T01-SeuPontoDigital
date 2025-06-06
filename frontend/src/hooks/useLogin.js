@@ -11,7 +11,7 @@ const useLogin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, {email, password,});
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, { email, password, });
 
       localStorage.setItem("token", response.data.token);
       Notification.success("Usuário autenticado com sucesso!");
@@ -20,8 +20,12 @@ const useLogin = () => {
 
     } catch (err) {
       if (err?.response?.status === 401) {
-        Notification.error("Email ou senha incorretos!");
-      } else {
+        Notification.error("Verifique sua senha e tente novamente!");
+      }
+      else if (err?.response?.status === 404) {
+        Notification.error("Verifique seu email e tente novamente!")
+      }
+      else {
         Notification.error("Erro interno no servidor. Tente novamente mais tarde!");
       }
     } finally {

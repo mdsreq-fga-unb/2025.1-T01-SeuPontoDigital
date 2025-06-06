@@ -1,84 +1,102 @@
 import "../pagesStyle.css";
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import AddressForm from "../../components/AddressForm";
-import UserForm from "../../components/EmployerForm/index.jsx";
-import ButtonForm from "../../components/ButtonForm";
-import Notification from "../../components/Notification";
 import Sidebar from "../../components/Sidebar";
-import handleError from "../../services/errors.js";
+import useFetchContract from "../../hooks/useFetchContract.js";
+import usePutContract from "../../hooks/usePutContract.js";
+import ContractForm from "../../components/ContractForm/index.jsx";
+import { useParams } from "react-router-dom";
+import ConfirmModal from "../../components/ConfirmModal";
 
 const UpdateContract = () => {
-    const [employee, setEmployee] = useState({
+    const putContract = usePutContract();
+    const {fetchOneContract} = useFetchContract();
+    const {id} = useParams();
+    const [modalOpen, setModalOpen] = useState(false);
+    const [password, setPassword] = useState("");
+    const [contract, setContract] = useState({
         name: "",
         cpf: "",
-        email: "",
         phone: "",
-        nationality: "",
-        marital_status: "",
+        email: "",
         job_function: "",
-        rg: "",
-        cep: "",
-        street: "",
-        home_number: "",
-        city: "",
-        state: "",
-        neighborhood: "",
-        complement: "",
+        work_schedule_type: "",
+        break_type: "fixed", // NOVO
+        break_interval: "",
+        break_start: "",
+        break_end: "",
+        work_days: "",
+        salary: "",
+        app_access:"",
+        workplace_employer: "",
+        workplace_cep: "",
+        workplace_street: "",
+        workplace_home_number: "",
+        workplace_city: "",
+        workplace_state: "",
+        workplace_neighborhood: "",
+        workplace_complement: "",
     });
 
-    const { id } = useParams();
-    const navigate = useNavigate();
-
     useEffect(() => {
-        const fetchEmployee = async () => {
-            const token = localStorage.getItem("token");
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/employee/${id}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setEmployee(response.data);
-            } catch (err) {
-                Notification.error("Erro ao carregar dados do empregado.");
-            }
+        const fetchContract = async () => {
+            const contractData = await fetchOneContract(id);
+            // Garante que break_type está correto (default para 'fixed' se não vier do backend)
+            setContract({
+                ...contractData,
+                break_type: contractData.break_type === "range" ? "range" : "fixed"
+            });
         };
-        fetchEmployee();
+        fetchContract();
     }, [id]);
 
-    const handleInputUserChange = (event) => {
-        const { name, value } = event.target;
-        setEmployee((prev) => ({ ...prev, [name]: value }));
-    };
-
-    const handleInputAddressChange = (address) => {
-        setEmployee((prev) => ({ ...prev, ...address }));
-    };
-
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            const token = localStorage.getItem("token");
-            await axios.put(`${import.meta.env.VITE_API_URL}/employee/${id}`, employee, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            Notification.success("Empregado atualizado com sucesso!");
-            setTimeout(() => navigate("/empregados"), 1500);
-        } catch (err) {
-            handleError(err.response?.data.message || err.response?.data.errors);
+    const validateBreak = (contract) => {
+        if (contract.break_type === "fixed") {
+            if (!contract.break_interval) return false;
+            const [h, m] = contract.break_interval.split(":").map(Number);
+            const total = h * 60 + m;
+            return total >= 15 && total <= 120;
+        } else {
+            if (!contract.break_start || !contract.break_end) return false;
+            const [h1, m1] = contract.break_start.split(":").map(Number);
+            const [h2, m2] = contract.break_end.split(":").map(Number);
+            const diff = (h2 * 60 + m2) - (h1 * 60 + m1);
+            return diff >= 15 && diff <= 120 && diff > 0;
         }
+    };
+
+    const handleInputUserChange = ({ name, value }) => {
+        setContract((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const closeModal = () => setModalOpen(false);
+
+    const handleFormSubmit = async (passwordInput) => {
+        if (!validateBreak(contract)) {
+            Notification.error("Preencha corretamente o intervalo de descanso!");
+            return;
+        }
+        putContract(contract, closeModal, passwordInput);
     };
 
     return (
         <div className="container-dashboard">
             <Sidebar />
-            <section className="form-user-add">
-                <form onSubmit={handleFormSubmit} className="form-users">
-                    <UserForm user={employee} handleInputChange={handleInputUserChange} />
-                    <AddressForm user={employee} handleInputChange={handleInputAddressChange} />
-                    <ButtonForm>Atualizar Empregado</ButtonForm>
+            <section className="form-contract-add">
+                <form className="form-users">
+                    <ContractForm contract={contract} handleInputChange={handleInputUserChange} id={contract.employer_id}/>
                 </form>
+                <button onClick={() => setModalOpen(true)} className="button-add-employer-confirm">Atualizar Contrato</button>
             </section>
+            <ConfirmModal
+                    isOpen={modalOpen}
+                    onConfirm={ async (passwordInput) => {
+                        setPassword(passwordInput);
+                        await handleFormSubmit(passwordInput);
+                    }}
+                    onCancel={() => setModalOpen(false)}
+                    message="Confirme sua senha para atualizar os dados do contrato de"
+                    nameEmployer={contract.name}
+                />
         </div>
     );
 };

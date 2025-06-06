@@ -1,0 +1,23 @@
+.div-contract-select{
+    display: flex;
+    flex-direction: column;
+}
+
+.div-contract-select label{
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.div-contract-select select{
+    padding: 1.4rem;
+    border-radius: .5rem;
+    border: .1rem solid var(--dark-color);
+    margin-bottom: 3rem;
+    background-color: var(--light-color);
+    font-size: 1.4rem;
+}
+
+.div-contract-select select:hover, .div-contract-select option:hover{
+    cursor: pointer;
+}

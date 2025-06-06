@@ -9,11 +9,13 @@ const postEmployerController = async (req, res) => {
             const error = await postEmployerModel(employer);
             
             if (error) {
-                return res.status(400).json({ message: "error when inserting employer" });
+                return res.status(400).json({ message: "failed to create employer" });
             }
-            return res.status(201).json({ message: "employer inserted" });
+            
+            return res.status(201).json({ message: "employer has been added successfully" });
         }
-        return res.status(400).json({ message: "invalid cpf" })
+
+        return res.status(400).json({ message: "invalid cpf" });
     }
     catch (err) {
         return res.status(500).send({message: "internal server error"});

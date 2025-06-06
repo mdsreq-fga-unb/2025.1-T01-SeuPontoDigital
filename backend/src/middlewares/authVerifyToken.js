@@ -5,20 +5,20 @@ const authVerifyToken = (req, res, next) => {
     try {
         const token = req.headers['authorization'].replace("Bearer ", "");
         if (!token) {
-            return res.status(403).json({ error: "token is required" });
+            return res.status(403).json({ message: "token is required" });
         }
+        
         jwt.verify(token, JWT_SECRET, (err, decodedUser) => {
 
-            if (err) {
-                return res.status(401).json({ error: "invalid or expired token" });
-            }
+            if (err) return res.status(401).json({ message: "invalid or expired token" });
+                
             req.id = decodedUser.id;
             req.email = decodedUser.email
             next();
         })
     }
     catch (err) {
-        return res.status(500).json({ error: "internal server error" });
+        return res.status(500).json({ message: "internal server error" });
     }
 }
 
