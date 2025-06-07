@@ -24,7 +24,7 @@ const Table = (props) => {
                                 <td key={i} title={formatField(field, item[field])}>
                                     {field === "name" && isActive ? (
                                         <button className="name-button" onClick={() => props.onNameClick(item)}>
-                                            {formatField(field, item[field])}
+                                            {formatField(field, item[field].toUpperCase())}
                                         </button>
                                     ) : field === "app_access" ? (
                                         item[field] ? "Sim" : "Não"

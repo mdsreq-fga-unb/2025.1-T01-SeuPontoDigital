@@ -1,7 +1,6 @@
 const validatePassword = (req, res, next) => {
     const { password } = req.body;
 
-    // Pelo menos 8 caracteres, 1 maiúscula, 1 especial (exceto espaço)
     const regex = /^(?=.*[A-Z])(?=.*[^A-Za-z0-9\s]).{8,}$/;
 
     if (!password) {

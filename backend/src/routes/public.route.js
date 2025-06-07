@@ -9,7 +9,10 @@ import validatePassword from '../middlewares/validatePassword.js';
 
 const publicRoute = express.Router();
 
-publicRoute.post("/login", loginAdmin);
+// ================= LOGIN WEB =================
+publicRoute.post("/login-admin", loginAdmin);
+
+// ================= LOGIN APP =================
 publicRoute.post("/login-employer", loginEmployer);
 
 // ======== FIRST ACCESS ========
