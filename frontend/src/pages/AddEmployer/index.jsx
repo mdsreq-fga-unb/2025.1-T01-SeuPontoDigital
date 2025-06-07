@@ -3,9 +3,11 @@ import { useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import EmployerForm from "../../components/EmployerForm/index.jsx";
 import usePostEmployer from "../../hooks/usePostEmployer.js";
+import usePostAddress from "../../hooks/usePostAddress.js";
 
 const AddEmployer = () => {
     const postEmployer = usePostEmployer();
+    const postAddress = usePostAddress();
 
     const [employer, setEmployer] = useState({
         name: "",
@@ -14,9 +16,9 @@ const AddEmployer = () => {
         phone: "",
         cep: "",
         street: "",
-        home_number: "",
+        house_number: "",
         city: "",
-        state: "",
+        uf: "",
         neighborhood: "",
         complement: "",
     });
@@ -27,7 +29,8 @@ const AddEmployer = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        postEmployer(employer);
+        const id_address = await postAddress(employer);
+        await postEmployer({ ...employer, id_address });
     };
 
     return (

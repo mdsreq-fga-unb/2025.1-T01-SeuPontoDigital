@@ -5,7 +5,7 @@ const postAddressModel = async (address) => {
 
     try{
         const addressID = await getOneAddressModel(address)
-
+        console.log(addressID)
         if (!addressID){
             const { data, error } = await supabase.from("address").insert({
             cep: address.cep,
@@ -21,7 +21,7 @@ const postAddressModel = async (address) => {
 
             return data[0].id;
         } 
-        return -2;
+        return addressID;
     }
     catch (err){
         console.log("error in postAddressModel")

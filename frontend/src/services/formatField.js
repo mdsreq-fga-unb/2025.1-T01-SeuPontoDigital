@@ -3,6 +3,7 @@ const formatCPF = (cpf) => {
 }
 
 const formatPhone = (phone) => {
+    phone = phone.slice(3)
     return phone.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
 }
 
