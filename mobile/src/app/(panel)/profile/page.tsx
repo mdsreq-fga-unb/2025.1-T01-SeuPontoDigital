@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   View, 
   Text, 
@@ -10,16 +10,40 @@ import {
   TouchableOpacity,
   Alert,
   Modal,
-  TextInput
+  TextInput,
+  ActivityIndicator,
+  Platform,
+  FlatList
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Profile() {
   const router = useRouter();
   const [currentDate] = useState(new Date());
   const [historicalModalVisible, setHistoricalModalVisible] = useState(false);
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [apiInstance, setApiInstance] = useState(null);
+  const [loadingButton, setLoadingButton] = useState('');
+  
+  // Novo estado para o modal de contratos e contrato selecionado
+  const [contractsModalVisible, setContractsModalVisible] = useState(true);
+  const [selectedContract, setSelectedContract] = useState(null);
+  
+  // Dados fictícios de contratos
+  const [contracts, setContracts] = useState([
+    { id: '1', employerName: 'TechSolutions LTDA', position: 'Analista de Sistemas', active: true },
+    { id: '2', employerName: 'Inovação Software S.A.', position: 'Desenvolvedor Frontend', active: true },
+    { id: '3', employerName: 'DataCloud Tecnologia', position: 'Engenheiro DevOps', active: true },
+  ]);
+  
+  // Mostrar o modal de contratos quando o componente é montado
+  useEffect(() => {
+    setContractsModalVisible(true);
+  }, []);
   
   // Estado para simular registros de ponto
   const [records, setRecords] = useState([
@@ -44,29 +68,138 @@ export default function Profile() {
     voltaAlmoco: false,
     saida: false
   });
+  
+  // Função para selecionar um contrato
+  const selectContract = (contract) => {
+    setSelectedContract(contract);
+    setContractsModalVisible(false);
+  };
+  
+  // Configuração do axios
+  useEffect(() => {
+    // Esta função será implementada quando o backend estiver pronto
+    const setupApi = async () => {
+      try {
+        const token = await AsyncStorage.getItem('userToken');
+        console.log('Token recuperado para uso futuro:', token ? 'Sim' : 'Não');
+      } catch (error) {
+        console.error('Erro ao recuperar token:', error);
+      }
+    };
+    
+    setupApi();
+  }, []);
 
   // Função para registrar ponto
-  const registerTimecard = (type: 'Entrada' | 'Saída Almoço' | 'Volta Almoço' | 'Saída') => {
+  const registerTimecard = async (type) => {
     const now = new Date();
     const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    const dateString = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
     
-    // Atualizaria no backend, mas apenas simulamos aqui
-    Alert.alert('Ponto Registrado', `${type} registrado com sucesso às ${timeString}`);
-    
-    // Atualiza o estado local para refletir que o registro foi feito
-    switch (type) {
-      case 'Entrada':
-        setTodayRecords({...todayRecords, entrada: true});
-        break;
-      case 'Saída Almoço':
-        setTodayRecords({...todayRecords, saidaAlmoco: true});
-        break;
-      case 'Volta Almoço':
-        setTodayRecords({...todayRecords, voltaAlmoco: true});
-        break;
-      case 'Saída':
-        setTodayRecords({...todayRecords, saida: true});
-        break;
+    setLoading(true);
+    setLoadingButton(type);
+    try {
+      // Verificar se temos um token de autenticação
+      const token = await AsyncStorage.getItem('userToken');
+      console.log('Token encontrado:', token ? 'Sim' : 'Não');
+      
+      //if (!token) {
+       // Alert.alert('Sessão expirada', 'Por favor, faça login novamente.');
+        //router.replace('/');
+        //return;
+      //}
+      
+      // Verificar se um contrato foi selecionado
+      if (!selectedContract) {
+        Alert.alert('Selecione um contrato', 'Você precisa selecionar um contrato para registrar o ponto.');
+        setContractsModalVisible(true);
+        setLoading(false);
+        setLoadingButton('');
+        return;
+      }
+      
+      // Preparar dados para envio
+      const data = {
+        type,
+        date: dateString,
+        time: timeString,
+        contractId: selectedContract.id
+      };
+      
+      console.log('Enviando dados de ponto:', data);
+      
+      // Simular a requisição (já que não temos a rota ainda)
+      setTimeout(() => {
+        // Atualiza o estado local para refletir que o registro foi feito
+        switch (type) {
+          case 'Entrada':
+            setTodayRecords({...todayRecords, entrada: true});
+            break;
+          case 'Saída Almoço':
+            setTodayRecords({...todayRecords, saidaAlmoco: true});
+            break;
+          case 'Volta Almoço':
+            setTodayRecords({...todayRecords, voltaAlmoco: true});
+            break;
+          case 'Saída':
+            setTodayRecords({...todayRecords, saida: true});
+            break;
+        }
+        
+        // Adiciona o registro ao histórico local
+        const today = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()}`;
+        
+        // Verifica se já existe um registro para hoje
+        const existingRecordIndex = records.findIndex(record => record.date === today);
+        
+        if (existingRecordIndex >= 0) {
+          // Adiciona o registro ao dia existente
+          const updatedRecords = [...records];
+          updatedRecords[existingRecordIndex].records.push({
+            type: type,
+            time: timeString,
+            status: 'Normal'
+          });
+          setRecords(updatedRecords);
+        } else {
+          // Cria um novo dia com este registro
+          setRecords([
+            {
+              date: today,
+              records: [{
+                type: type,
+                time: timeString,
+                status: 'Normal'
+              }]
+            },
+            ...records
+          ]);
+        }
+        
+        Alert.alert('Ponto Registrado', `${type} registrado com sucesso às ${timeString}`);
+        setLoading(false);
+        setLoadingButton('');
+      }, 1000);
+      
+    } catch (error) {
+      console.error('Erro ao registrar ponto:', error);
+      
+      if (error.message?.includes('Network Error')) {
+        Alert.alert(
+          'Erro de Conexão', 
+          'Não foi possível conectar ao servidor. Verifique sua conexão com a internet.'
+        );
+      } else if (error.response?.status === 401) {
+        Alert.alert('Sessão Expirada', 'Por favor, faça login novamente.');
+        router.replace('/');
+      } else {
+        Alert.alert(
+          'Erro ao Registrar Ponto', 
+          error.response?.data?.message || 'Ocorreu um erro ao registrar seu ponto.'
+        );
+      }
+      setLoading(false);
+      setLoadingButton('');
     }
   };
 
@@ -99,9 +232,15 @@ export default function Profile() {
           </View>
           <View style={styles.userInfo}>
             <Text style={styles.userName}>João da Silva</Text>
-            <Text style={styles.userRole}>Analista de Sistemas</Text>
-            <Text style={styles.userCompany}>TechSolutions LTDA</Text>
+            <Text style={styles.userRole}>{selectedContract ? selectedContract.position : 'Selecione um contrato'}</Text>
+            <Text style={styles.userCompany}>{selectedContract ? selectedContract.employerName : 'Nenhum contrato selecionado'}</Text>
           </View>
+          <TouchableOpacity 
+            style={styles.changeContractButton}
+            onPress={() => setContractsModalVisible(true)}
+          >
+            <MaterialIcons name="swap-horiz" size={20} color="#1565C0" />
+          </TouchableOpacity>
         </View>
         
         {/* Card de Data Atual */}
@@ -121,19 +260,31 @@ export default function Profile() {
               <TouchableOpacity 
                 style={[styles.timeButton, todayRecords.entrada && styles.disabledButton]}
                 onPress={() => registerTimecard('Entrada')}
-                disabled={todayRecords.entrada}
+                disabled={todayRecords.entrada || loading}
               >
-                <MaterialIcons name="login" size={24} color={todayRecords.entrada ? "#90A4AE" : "white"} />
-                <Text style={[styles.timeButtonText, todayRecords.entrada && styles.disabledButtonText]}>Entrada</Text>
+                {loadingButton === 'Entrada' ? (
+                  <ActivityIndicator size="small" color="#FFFFFF" />
+                ) : (
+                  <>
+                    <MaterialIcons name="login" size={24} color={todayRecords.entrada ? "#90A4AE" : "white"} />
+                    <Text style={[styles.timeButtonText, todayRecords.entrada && styles.disabledButtonText]}>Entrada</Text>
+                  </>
+                )}
               </TouchableOpacity>
               
               <TouchableOpacity 
                 style={[styles.timeButton, todayRecords.saidaAlmoco && styles.disabledButton]}
                 onPress={() => registerTimecard('Saída Almoço')}
-                disabled={todayRecords.saidaAlmoco || !todayRecords.entrada}
+                disabled={todayRecords.saidaAlmoco || !todayRecords.entrada || loading}
               >
-                <MaterialIcons name="lunch-dining" size={24} color={todayRecords.saidaAlmoco || !todayRecords.entrada ? "#90A4AE" : "white"} />
-                <Text style={[styles.timeButtonText, (todayRecords.saidaAlmoco || !todayRecords.entrada) && styles.disabledButtonText]}>Saída Almoço</Text>
+                {loading && loadingButton === 'Saída Almoço' ? (
+                  <ActivityIndicator size="small" color="#FFFFFF" />
+                ) : (
+                  <>
+                    <MaterialIcons name="lunch-dining" size={24} color={todayRecords.saidaAlmoco || !todayRecords.entrada ? "#90A4AE" : "white"} />
+                    <Text style={[styles.timeButtonText, (todayRecords.saidaAlmoco || !todayRecords.entrada) && styles.disabledButtonText]}>Saída Almoço</Text>
+                  </>
+                )}
               </TouchableOpacity>
             </View>
             
@@ -141,19 +292,31 @@ export default function Profile() {
               <TouchableOpacity 
                 style={[styles.timeButton, todayRecords.voltaAlmoco && styles.disabledButton]}
                 onPress={() => registerTimecard('Volta Almoço')}
-                disabled={todayRecords.voltaAlmoco || !todayRecords.saidaAlmoco}
+                disabled={todayRecords.voltaAlmoco || !todayRecords.saidaAlmoco || loading}
               >
-                <MaterialIcons name="lunch-dining" size={24} color={todayRecords.voltaAlmoco || !todayRecords.saidaAlmoco ? "#90A4AE" : "white"} />
-                <Text style={[styles.timeButtonText, (todayRecords.voltaAlmoco || !todayRecords.saidaAlmoco) && styles.disabledButtonText]}>Volta Almoço</Text>
+                {loading && loadingButton === 'Volta Almoço' ? (
+                  <ActivityIndicator size="small" color="#FFFFFF" />
+                ) : (
+                  <>
+                    <MaterialIcons name="lunch-dining" size={24} color={todayRecords.voltaAlmoco || !todayRecords.saidaAlmoco ? "#90A4AE" : "white"} />
+                    <Text style={[styles.timeButtonText, (todayRecords.voltaAlmoco || !todayRecords.saidaAlmoco) && styles.disabledButtonText]}>Volta Almoço</Text>
+                  </>
+                )}
               </TouchableOpacity>
               
               <TouchableOpacity 
                 style={[styles.timeButton, todayRecords.saida && styles.disabledButton]}
                 onPress={() => registerTimecard('Saída')}
-                disabled={todayRecords.saida || !todayRecords.voltaAlmoco}
+                disabled={todayRecords.saida || !todayRecords.voltaAlmoco || loading}
               >
-                <MaterialIcons name="logout" size={24} color={todayRecords.saida || !todayRecords.voltaAlmoco ? "#90A4AE" : "white"} />
-                <Text style={[styles.timeButtonText, (todayRecords.saida || !todayRecords.voltaAlmoco) && styles.disabledButtonText]}>Saída</Text>
+                {loading && loadingButton === 'Saída' ? (
+                  <ActivityIndicator size="small" color="#FFFFFF" />
+                ) : (
+                  <>
+                    <MaterialIcons name="logout" size={24} color={todayRecords.saida || !todayRecords.voltaAlmoco ? "#90A4AE" : "white"} />
+                    <Text style={[styles.timeButtonText, (todayRecords.saida || !todayRecords.voltaAlmoco) && styles.disabledButtonText]}>Saída</Text>
+                  </>
+                )}
               </TouchableOpacity>
             </View>
           </View>
@@ -193,6 +356,63 @@ export default function Profile() {
           <Text style={styles.backButtonText}>Voltar à Tela Inicial</Text>
         </TouchableOpacity>
       </ScrollView>
+      
+      {/* Modal para seleção de contratos */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={contractsModalVisible}
+        onRequestClose={() => {
+          if (selectedContract) {
+            setContractsModalVisible(false);
+          } else {
+            // Se é o primeiro acesso, seleciona o primeiro contrato por padrão
+            if (contracts.length > 0) {
+              selectContract(contracts[0]);
+            } else {
+              Alert.alert("Nenhum contrato disponível", "Não há contratos disponíveis para seleção.");
+            }
+          }
+        }}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Selecione um Contrato</Text>
+              {selectedContract && (
+                <TouchableOpacity onPress={() => setContractsModalVisible(false)}>
+                  <Ionicons name="close" size={24} color="#1565C0" />
+                </TouchableOpacity>
+              )}
+            </View>
+            
+            <Text style={styles.modalSubtitle}>Escolha o contrato para registrar o ponto:</Text>
+            
+            <FlatList
+              data={contracts}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <TouchableOpacity 
+                  style={[
+                    styles.contractItem, 
+                    selectedContract?.id === item.id && styles.contractItemSelected
+                  ]}
+                  onPress={() => selectContract(item)}
+                >
+                  <View style={styles.contractItemContent}>
+                    <Text style={styles.contractEmployer}>{item.employerName}</Text>
+                    <Text style={styles.contractPosition}>{item.position}</Text>
+                  </View>
+                  {selectedContract?.id === item.id && (
+                    <Ionicons name="checkmark-circle" size={24} color="#4CAF50" />
+                  )}
+                </TouchableOpacity>
+              )}
+              style={styles.contractsList}
+            />
+          </View>
+        </View>
+      </Modal>
       
       {/* Modal para histórico de pontos */}
       <Modal
@@ -298,6 +518,7 @@ export default function Profile() {
 }
 
 const styles = StyleSheet.create({
+  // Estilos existentes...
   container: {
     flex: 1,
     backgroundColor: '#F5F7FA',
@@ -331,6 +552,54 @@ const styles = StyleSheet.create({
   logoHighlight: {
     color: '#4FC3F7',
   },
+  // Novos estilos para o modal de contratos
+  changeContractButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: '#F0F8FF',
+    borderRadius: 15,
+    padding: 5,
+    borderWidth: 1,
+    borderColor: '#1565C0',
+  },
+  modalSubtitle: {
+    fontSize: 14,
+    color: '#455A64',
+    marginBottom: 15,
+  },
+  contractsList: {
+    maxHeight: 300,
+  },
+  contractItem: {
+    backgroundColor: '#F5F7FA',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  contractItemSelected: {
+    backgroundColor: '#E3F2FD',
+    borderColor: '#1565C0',
+  },
+  contractItemContent: {
+    flex: 1,
+  },
+  contractEmployer: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#263238',
+    marginBottom: 4,
+  },
+  contractPosition: {
+    fontSize: 14,
+    color: '#455A64',
+  },
+  // Estilos restantes...
   userInfoCard: {
     backgroundColor: '#FFFFFF',
     marginHorizontal: 16,
