@@ -29,6 +29,7 @@ export default function Profile() {
   const [currentDate] = useState(new Date());
   const [historicalModalVisible, setHistoricalModalVisible] = useState(false);
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
+  const [helpModalVisible, setHelpModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingButton, setLoadingButton] = useState('');
   
@@ -688,10 +689,7 @@ export default function Profile() {
               style={styles.quickActionButton}
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                Alert.alert(
-                  'Ajuda',
-                  'Para registrar seu ponto:\n\n• Funcionários de período integral: \nEntrada → Saída Almoço → Volta Almoço → Saída\n\n• Funcionários de meio período: \nEntrada → Saída'
-                );
+                setHelpModalVisible(true);
               }}
             >
               <View style={[styles.quickActionIconContainer, { backgroundColor: '#F3E5F5' }]}>
@@ -713,6 +711,11 @@ export default function Profile() {
           <Ionicons name="exit-outline" size={20} color="white" />
           <Text style={styles.backButtonText}>Sair</Text>
         </TouchableOpacity>
+
+        {/* Footer com marca */}
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>© SeuPontoDigital 2025</Text>
+        </View>
       </ScrollView>
       
       {/* Modal para seleção de contratos */}
@@ -944,6 +947,177 @@ export default function Profile() {
             >
               <Text style={styles.submitButtonText}>Enviar Atestado</Text>
               <Ionicons name="send" size={20} color="#FFFFFF" style={{marginLeft: 8}} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Modal de Ajuda e Instruções */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={helpModalVisible}
+        onRequestClose={() => setHelpModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={[styles.modalContent, { maxHeight: height * 0.8 }]}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Guia de Uso</Text>
+              <TouchableOpacity 
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setHelpModalVisible(false);
+                }}
+                style={styles.closeButton}
+              >
+                <Ionicons name="close" size={24} color="#1565C0" />
+              </TouchableOpacity>
+            </View>
+            
+            <View style={styles.modalDivider} />
+            
+            <ScrollView style={styles.modalScrollView}>
+              <View style={styles.helpSection}>
+                <Text style={styles.helpSectionTitle}>Como Registrar seu Ponto</Text>
+                <Text style={styles.helpText}>
+                  O SeuPontoDigital permite registrar seu ponto diário de forma simples e rápida. 
+                  Existem dois fluxos principais dependendo do seu tipo de contrato:
+                </Text>
+              </View>
+              
+              {/* Período Integral */}
+              <View style={styles.helpCard}>
+                <View style={styles.helpCardHeader}>
+                  <MaterialIcons name="access-time" size={20} color="#1565C0" />
+                  <Text style={styles.helpCardTitle}>Período Integral</Text>
+                </View>
+                <View style={styles.helpCardContent}>
+                  <Text style={styles.helpCardText}>Siga a sequência completa:</Text>
+                  
+                  <View style={styles.helpStep}>
+                    <View style={styles.helpStepIcon}>
+                      <MaterialIcons name="login" size={18} color="#FFFFFF" />
+                    </View>
+                    <View style={styles.helpStepContent}>
+                      <Text style={styles.helpStepTitle}>1. Entrada</Text>
+                      <Text style={styles.helpStepText}>Registre quando começar seu expediente</Text>
+                    </View>
+                  </View>
+                  
+                  <View style={styles.helpStepConnector} />
+                  
+                  <View style={styles.helpStep}>
+                    <View style={styles.helpStepIcon}>
+                      <MaterialIcons name="restaurant" size={18} color="#FFFFFF" />
+                    </View>
+                    <View style={styles.helpStepContent}>
+                      <Text style={styles.helpStepTitle}>2. Saída Almoço</Text>
+                      <Text style={styles.helpStepText}>Registre início do intervalo de almoço/descanso</Text>
+                    </View>
+                  </View>
+                  
+                  <View style={styles.helpStepConnector} />
+                  
+                  <View style={styles.helpStep}>
+                    <View style={styles.helpStepIcon}>
+                      <MaterialIcons name="work" size={18} color="#FFFFFF" />
+                    </View>
+                    <View style={styles.helpStepContent}>
+                      <Text style={styles.helpStepTitle}>3. Volta Almoço</Text>
+                      <Text style={styles.helpStepText}>Registre o retorno do intervalo</Text>
+                    </View>
+                  </View>
+                  
+                  <View style={styles.helpStepConnector} />
+                  
+                  <View style={styles.helpStep}>
+                    <View style={styles.helpStepIcon}>
+                      <MaterialIcons name="logout" size={18} color="#FFFFFF" />
+                    </View>
+                    <View style={styles.helpStepContent}>
+                      <Text style={styles.helpStepTitle}>4. Saída</Text>
+                      <Text style={styles.helpStepText}>Registre o término do expediente</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              
+              {/* Meio Período */}
+              <View style={styles.helpCard}>
+                <View style={styles.helpCardHeader}>
+                  <MaterialIcons name="timelapse" size={20} color="#FF9800" />
+                  <Text style={styles.helpCardTitle}>Meio Período</Text>
+                </View>
+                <View style={styles.helpCardContent}>
+                  <Text style={styles.helpCardText}>Sequência simplificada sem intervalo:</Text>
+                  
+                  <View style={styles.helpStep}>
+                    <View style={[styles.helpStepIcon, {backgroundColor: '#FF9800'}]}>
+                      <MaterialIcons name="login" size={18} color="#FFFFFF" />
+                    </View>
+                    <View style={styles.helpStepContent}>
+                      <Text style={styles.helpStepTitle}>1. Entrada</Text>
+                      <Text style={styles.helpStepText}>Registre quando começar seu expediente</Text>
+                    </View>
+                  </View>
+                  
+                  <View style={[styles.helpStepConnector, {backgroundColor: '#FFD54F'}]} />
+                  
+                  <View style={styles.helpStep}>
+                    <View style={[styles.helpStepIcon, {backgroundColor: '#FF9800'}]}>
+                      <MaterialIcons name="logout" size={18} color="#FFFFFF" />
+                    </View>
+                    <View style={styles.helpStepContent}>
+                      <Text style={styles.helpStepTitle}>2. Saída</Text>
+                      <Text style={styles.helpStepText}>Registre o término do expediente</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              
+              <View style={styles.helpSection}>
+                <Text style={styles.helpSectionTitle}>Dicas importantes</Text>
+                <View style={styles.helpTip}>
+                  <Ionicons name="information-circle" size={20} color="#1565C0" />
+                  <Text style={styles.helpTipText}>
+                    Para funcionários de meio período, o botão de Saída ficará disponível 
+                    imediatamente após registrar a Entrada.
+                  </Text>
+                </View>
+                
+                <View style={styles.helpTip}>
+                  <Ionicons name="information-circle" size={20} color="#1565C0" />
+                  <Text style={styles.helpTipText}>
+                    Os botões são ativados sequencialmente conforme você registra cada etapa.
+                  </Text>
+                </View>
+                
+                <View style={styles.helpTip}>
+                  <Ionicons name="information-circle" size={20} color="#1565C0" />
+                  <Text style={styles.helpTipText}>
+                    Você pode visualizar seu histórico completo de registros tocando no 
+                    botão "Histórico" na tela principal.
+                  </Text>
+                </View>
+                
+                <View style={styles.helpTip}>
+                  <Ionicons name="warning" size={20} color="#FF9800" />
+                  <Text style={styles.helpTipText}>
+                    Registros de atraso ou saída antes do horário serão sinalizados 
+                    automaticamente pelo sistema.
+                  </Text>
+                </View>
+              </View>
+            </ScrollView>
+            
+            <TouchableOpacity 
+              style={styles.helpCloseButton}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                setHelpModalVisible(false);
+              }}
+            >
+              <Text style={styles.helpCloseButtonText}>Entendi</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -1573,5 +1747,122 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
+  },
+
+  // Estilos para o modal de ajuda
+  helpSection: {
+    marginBottom: 20,
+  },
+  helpSectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#263238',
+    marginBottom: 10,
+  },
+  helpText: {
+    fontSize: 15,
+    color: '#455A64',
+    lineHeight: 22,
+  },
+  helpCard: {
+    backgroundColor: '#F5F7FA',
+    borderRadius: 12,
+    marginBottom: 16,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  helpCardHeader: {
+    backgroundColor: '#E3F2FD', 
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 12,
+  },
+  helpCardTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1565C0',
+    marginLeft: 8,
+  },
+  helpCardContent: {
+    padding: 16,
+  },
+  helpCardText: {
+    fontSize: 14,
+    color: '#455A64',
+    marginBottom: 12,
+  },
+  helpStep: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 5,
+  },
+  helpStepIcon: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    backgroundColor: '#1565C0',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  helpStepContent: {
+    marginLeft: 12,
+    flex: 1,
+  },
+  helpStepTitle: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#263238',
+  },
+  helpStepText: {
+    fontSize: 13,
+    color: '#455A64',
+  },
+  helpStepConnector: {
+    height: 24,
+    width: 2,
+    backgroundColor: '#1565C0',
+    marginLeft: 16,
+  },
+  helpTip: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  helpTipText: {
+    fontSize: 14,
+    color: '#455A64',
+    flex: 1,
+    marginLeft: 8,
+    lineHeight: 20,
+  },
+  helpCloseButton: {
+    backgroundColor: '#1565C0',
+    borderRadius: 12,
+    paddingVertical: 14,
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  helpCloseButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+
+  // Estilos para o footer
+  footer: {
+    backgroundColor: '#1565C0',
+    padding: 15,
+    alignItems: 'center',
+    width: '100%',
+  },
+  footerText: {
+    color: '#FFFFFF',
+    fontSize: 12,
   },
 });
