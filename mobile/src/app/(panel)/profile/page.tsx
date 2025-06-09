@@ -949,6 +949,18 @@ export default function Profile() {
                 </View>
               ))}
             </ScrollView>
+            
+            <TouchableOpacity 
+              style={styles.viewFullHistoryButton}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                setHistoricalModalVisible(false);
+                router.push('/timecard-history/page');
+              }}
+            >
+              <Text style={styles.viewFullHistoryButtonText}>Ver histórico completo</Text>
+              <Ionicons name="calendar" size={18} color="#FFFFFF" style={{marginLeft: 8}} />
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -1754,6 +1766,20 @@ const styles = StyleSheet.create({
   },
   recordStatusAlertText: {
     color: '#F57C00',
+  },
+  viewFullHistoryButton: {
+    backgroundColor: '#1565C0',
+    borderRadius: 12,
+    paddingVertical: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  viewFullHistoryButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
   },
   
   // Estilos para o form de upload

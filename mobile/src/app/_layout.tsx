@@ -23,6 +23,11 @@ export default function MainLayout(){
           name="(auth)/forgotpass/page"
           options={{headerShown: false}}
         ></Stack.Screen>
+
+        <Stack.Screen
+          name="(panel)/timecard-history/page"
+          options={{headerShown: false}}
+        ></Stack.Screen>
     </Stack>
   
   )
