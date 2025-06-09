@@ -347,9 +347,10 @@ export default function Profile() {
               </Text>
             </View>
             
+            {/* A linha só fica verde se AMBOS os pontos conectados estiverem registrados */}
             <View style={[
               styles.progressConnector,
-              todayRecords.entrada ? styles.progressConnectorActive : {}
+              todayRecords.entrada && todayRecords.saidaAlmoco ? styles.progressConnectorActive : {}
             ]} />
             
             <View style={[
@@ -374,9 +375,10 @@ export default function Profile() {
               </Text>
             </View>
             
+            {/* A linha só fica verde se AMBOS os pontos conectados estiverem registrados */}
             <View style={[
               styles.progressConnector,
-              todayRecords.saidaAlmoco ? styles.progressConnectorActive : {}
+              todayRecords.saidaAlmoco && todayRecords.voltaAlmoco ? styles.progressConnectorActive : {}
             ]} />
             
             <View style={[
@@ -401,9 +403,10 @@ export default function Profile() {
               </Text>
             </View>
             
+            {/* A linha só fica verde se AMBOS os pontos conectados estiverem registrados */}
             <View style={[
               styles.progressConnector,
-              todayRecords.voltaAlmoco ? styles.progressConnectorActive : {}
+              todayRecords.voltaAlmoco && todayRecords.saida ? styles.progressConnectorActive : {}
             ]} />
             
             <View style={[
