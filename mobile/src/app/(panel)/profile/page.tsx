@@ -110,7 +110,6 @@ export default function Profile() {
   const selectContract = (contract) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setSelectedContract(contract);
-    setContractsModalVisible(false);
   };
   
   // Função para registrar ponto
@@ -788,17 +787,30 @@ export default function Profile() {
             />
             
             <TouchableOpacity
-              style={styles.confirmButton}
+              style={[
+                styles.confirmButton,
+                !selectedContract && styles.disabledConfirmButton
+              ]}
               onPress={() => {
                 if (selectedContract) {
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                   setContractsModalVisible(false);
-                } else if (contracts.length > 0) {
-                  selectContract(contracts[0]);
+                } else {
+                  Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+                  Alert.alert(
+                    "Seleção necessária", 
+                    "Por favor, selecione um contrato para continuar.",
+                    [{ text: "OK", style: "default" }]
+                  );
                 }
               }}
             >
-              <Text style={styles.confirmButtonText}>Confirmar</Text>
+              <Text style={[
+                styles.confirmButtonText,
+                !selectedContract && styles.disabledConfirmButtonText
+              ]}>
+                Confirmar
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -1584,6 +1596,14 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
+  },
+  disabledConfirmButton: {
+    backgroundColor: '#BBDEFB', // Azul mais claro (desabilitado)
+    opacity: 0.7,
+  },
+  disabledConfirmButtonText: {
+    color: '#FFFFFF',
+    opacity: 0.8,
   },
   
   // Histórico de pontos
