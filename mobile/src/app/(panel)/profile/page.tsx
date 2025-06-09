@@ -495,11 +495,11 @@ export default function Profile() {
               style={[
                 styles.timecardButton, 
                 todayRecords.saidaAlmoco && styles.completedButton,
-                (!todayRecords.entrada || (todayRecords.saida && !todayRecords.saidaAlmoco)) && styles.disabledButton,
+                (!todayRecords.entrada || todayRecords.saida) && styles.disabledButton,
                 loading && loadingButton === 'Saída Almoço' && styles.loadingButton
               ]}
               onPress={() => registerTimecard('Saída Almoço')}
-              disabled={todayRecords.saidaAlmoco || !todayRecords.entrada || todayRecords.saida || loading}
+              disabled={!todayRecords.entrada || todayRecords.saida || todayRecords.saidaAlmoco || loading}
             >
               {loading && loadingButton === 'Saída Almoço' ? (
                 <ActivityIndicator size="small" color="#FFFFFF" />
@@ -511,7 +511,7 @@ export default function Profile() {
                     color={
                       todayRecords.saidaAlmoco 
                         ? "#4CAF50" 
-                        : (!todayRecords.entrada || (todayRecords.saida && !todayRecords.saidaAlmoco))
+                        : (!todayRecords.entrada || todayRecords.saida)
                           ? "#90A4AE" 
                           : "#1565C0"
                     } 
@@ -520,14 +520,14 @@ export default function Profile() {
                     <Text style={[
                       styles.timecardButtonTitle, 
                       todayRecords.saidaAlmoco && styles.completedButtonTitle,
-                      (!todayRecords.entrada || (todayRecords.saida && !todayRecords.saidaAlmoco)) && styles.disabledButtonTitle
+                      (!todayRecords.entrada || todayRecords.saida) && styles.disabledButtonTitle
                     ]}>
                       Saída Almoço
                     </Text>
                     <Text style={[
                       styles.timecardButtonSubtitle,
                       todayRecords.saidaAlmoco && styles.completedButtonSubtitle,
-                      (!todayRecords.entrada || (todayRecords.saida && !todayRecords.saidaAlmoco)) && styles.disabledButtonSubtitle
+                      (!todayRecords.entrada || todayRecords.saida) && styles.disabledButtonSubtitle
                     ]}>
                       {todayRecords.saidaAlmoco ? 'Registrado' : todayRecords.saida ? 'Indisponível' : 'Intervalo'}
                     </Text>
@@ -543,11 +543,11 @@ export default function Profile() {
               style={[
                 styles.timecardButton, 
                 todayRecords.voltaAlmoco && styles.completedButton,
-                (!todayRecords.saidaAlmoco || (todayRecords.saida && !todayRecords.voltaAlmoco)) && styles.disabledButton,
+                (!todayRecords.saidaAlmoco || todayRecords.saida) && styles.disabledButton,
                 loading && loadingButton === 'Volta Almoço' && styles.loadingButton
               ]}
               onPress={() => registerTimecard('Volta Almoço')}
-              disabled={todayRecords.voltaAlmoco || !todayRecords.saidaAlmoco || loading}
+              disabled={!todayRecords.saidaAlmoco || todayRecords.voltaAlmoco || todayRecords.saida || loading}
             >
               {loading && loadingButton === 'Volta Almoço' ? (
                 <ActivityIndicator size="small" color="#FFFFFF" />
@@ -559,7 +559,7 @@ export default function Profile() {
                     color={
                       todayRecords.voltaAlmoco 
                         ? "#4CAF50" 
-                        : (!todayRecords.saidaAlmoco || (todayRecords.saida && !todayRecords.voltaAlmoco)) 
+                        : (!todayRecords.saidaAlmoco || todayRecords.saida) 
                           ? "#90A4AE" 
                           : "#1565C0"
                     } 
@@ -568,14 +568,14 @@ export default function Profile() {
                     <Text style={[
                       styles.timecardButtonTitle, 
                       todayRecords.voltaAlmoco && styles.completedButtonTitle,
-                      (!todayRecords.saidaAlmoco || (todayRecords.saida && !todayRecords.voltaAlmoco)) && styles.disabledButtonTitle
+                      (!todayRecords.saidaAlmoco || todayRecords.saida) && styles.disabledButtonTitle
                     ]}>
                       Volta Almoço
                     </Text>
                     <Text style={[
                       styles.timecardButtonSubtitle,
                       todayRecords.voltaAlmoco && styles.completedButtonSubtitle,
-                      (!todayRecords.saidaAlmoco || (todayRecords.saida && !todayRecords.voltaAlmoco)) && styles.disabledButtonSubtitle
+                      (!todayRecords.saidaAlmoco || todayRecords.saida) && styles.disabledButtonSubtitle
                     ]}>
                       {todayRecords.voltaAlmoco ? 'Registrado' : 'Retorno ao trabalho'}
                     </Text>
@@ -591,11 +591,11 @@ export default function Profile() {
               style={[
                 styles.timecardButton, 
                 todayRecords.saida && styles.completedButton,
-                (!todayRecords.entrada && !todayRecords.saida) && styles.disabledButton,
+                (!todayRecords.entrada || (todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco)) && styles.disabledButton,
                 loading && loadingButton === 'Saída' && styles.loadingButton
               ]}
               onPress={() => registerTimecard('Saída')}
-              disabled={todayRecords.saida || !todayRecords.entrada || loading}
+              disabled={!todayRecords.entrada || (todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco) || todayRecords.saida || loading}
             >
               {loading && loadingButton === 'Saída' ? (
                 <ActivityIndicator size="small" color="#FFFFFF" />
@@ -607,7 +607,7 @@ export default function Profile() {
                     color={
                       todayRecords.saida 
                         ? "#4CAF50" 
-                        : (!todayRecords.entrada) 
+                        : (!todayRecords.entrada || (todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco)) 
                           ? "#90A4AE" 
                           : "#1565C0"
                     } 
@@ -616,14 +616,14 @@ export default function Profile() {
                     <Text style={[
                       styles.timecardButtonTitle, 
                       todayRecords.saida && styles.completedButtonTitle,
-                      (!todayRecords.entrada) && styles.disabledButtonTitle
+                      (!todayRecords.entrada || (todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco)) && styles.disabledButtonTitle
                     ]}>
                       Saída
                     </Text>
                     <Text style={[
                       styles.timecardButtonSubtitle,
                       todayRecords.saida && styles.completedButtonSubtitle,
-                      (!todayRecords.entrada) && styles.disabledButtonSubtitle
+                      (!todayRecords.entrada || (todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco)) && styles.disabledButtonSubtitle
                     ]}>
                       {todayRecords.saida ? 'Registrado' : 'Encerrar trabalho'}
                     </Text>
