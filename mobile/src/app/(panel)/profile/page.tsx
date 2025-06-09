@@ -489,11 +489,11 @@ export default function Profile() {
               style={[
                 styles.timecardButton, 
                 todayRecords.saidaAlmoco && styles.completedButton,
-                !todayRecords.entrada && styles.disabledButton, // Somente desabilitado se não tiver entrada
+                (!todayRecords.entrada || todayRecords.saida) && styles.disabledButton,
                 loading && loadingButton === 'Saída Almoço' && styles.loadingButton
               ]}
               onPress={() => registerTimecard('Saída Almoço')}
-              disabled={todayRecords.saidaAlmoco || !todayRecords.entrada || loading}
+              disabled={todayRecords.saidaAlmoco || !todayRecords.entrada || todayRecords.saida || loading}
             >
               {loading && loadingButton === 'Saída Almoço' ? (
                 <ActivityIndicator size="small" color="#FFFFFF" />
@@ -505,7 +505,7 @@ export default function Profile() {
                     color={
                       todayRecords.saidaAlmoco 
                         ? "#4CAF50" 
-                        : !todayRecords.entrada 
+                        : (!todayRecords.entrada || todayRecords.saida)
                           ? "#90A4AE" 
                           : "#1565C0"
                     } 
@@ -514,16 +514,16 @@ export default function Profile() {
                     <Text style={[
                       styles.timecardButtonTitle, 
                       todayRecords.saidaAlmoco && styles.completedButtonTitle,
-                      !todayRecords.entrada && styles.disabledButtonTitle
+                      (!todayRecords.entrada || todayRecords.saida) && styles.disabledButtonTitle
                     ]}>
                       Saída Almoço
                     </Text>
                     <Text style={[
                       styles.timecardButtonSubtitle,
                       todayRecords.saidaAlmoco && styles.completedButtonSubtitle,
-                      !todayRecords.entrada && styles.disabledButtonSubtitle
+                      (!todayRecords.entrada || todayRecords.saida) && styles.disabledButtonSubtitle
                     ]}>
-                      {todayRecords.saidaAlmoco ? 'Registrado' : 'Intervalo'}
+                      {todayRecords.saidaAlmoco ? 'Registrado' : todayRecords.saida ? 'Intervalo' : 'Intervalo'}
                     </Text>
                   </View>
                   {todayRecords.saidaAlmoco && (
@@ -585,11 +585,9 @@ export default function Profile() {
               style={[
                 styles.timecardButton, 
                 todayRecords.saida && styles.completedButton,
-                // Habilitar após entrada ou após volta almoço
                 (!todayRecords.entrada && !todayRecords.saida) && styles.disabledButton,
                 loading && loadingButton === 'Saída' && styles.loadingButton
               ]}
-              // Habilitar após entrada (meio período) ou após volta almoço (jornada completa)
               onPress={() => registerTimecard('Saída')}
               disabled={todayRecords.saida || !todayRecords.entrada || loading}
             >
