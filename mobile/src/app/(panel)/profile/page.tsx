@@ -40,6 +40,7 @@ export default function Profile() {
   // Estado para o modal de contratos e contrato selecionado
   const [contractsModalVisible, setContractsModalVisible] = useState(true);
   const [selectedContract, setSelectedContract] = useState(null);
+  const [currentContractId, setCurrentContractId] = useState(null);
   
   // Dados fictícios de contratos
   const [contracts, setContracts] = useState([
@@ -285,6 +286,9 @@ export default function Profile() {
             style={styles.changeContractButton}
             onPress={() => {
               Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              if (selectedContract) {
+                setCurrentContractId(selectedContract.id);
+              }
               setContractsModalVisible(true);
             }}
           >
@@ -794,8 +798,72 @@ export default function Profile() {
               onPress={() => {
                 if (selectedContract) {
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                  setContractsModalVisible(false);
+
+                  // Verificar se o contrato mudou, usando o ID armazenado
+                  const isChangingContract = currentContractId !== null && 
+                                             currentContractId !== selectedContract.id;
+                  
+                  // Se estiver trocando de contrato
+                  if (isChangingContract) {
+                    Alert.alert(
+                      "Alterar contrato",
+                      "Ao trocar de contrato, todos os registros de ponto do dia atual serão resetados. Deseja continuar?",
+                      [
+                        {
+                          text: "Cancelar",
+                          style: "cancel"
+                        },
+                        {
+                          text: "Confirmar",
+                          onPress: () => {
+                            // Resetar todos os registros de ponto
+                            setTodayRecords({
+                              entrada: false,
+                              saidaAlmoco: false,
+                              voltaAlmoco: false,
+                              saida: false
+                            });
+                            
+                            // Também remover registros do dia atual do histórico
+                            const today = new Date();
+                            const formattedToday = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+                            
+                            const updatedRecords = records.filter(record => record.date !== formattedToday);
+                            setRecords(updatedRecords);
+                            
+                            // Atualizar o ID do contrato atual
+                            setCurrentContractId(selectedContract.id);
+                            
+                            // Fechar o modal
+                            setContractsModalVisible(false);
+                            
+                            // Feedback de sucesso
+                            setTimeout(() => {
+                              Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                              Alert.alert(
+                                "Contrato alterado", 
+                                `Agora você está registrando ponto como ${selectedContract.position} para ${selectedContract.employerName}.\nTodos os registros do dia atual foram resetados.`
+                              );
+                            }, 300);
+                          }
+                        }
+                      ]
+                    );
+                  } else {
+                    // Atualizar o ID do contrato atual mesmo se não for mudança
+                    setCurrentContractId(selectedContract.id);
+                    setContractsModalVisible(false);
+                    
+                    // Se for a primeira seleção, mostrar mensagem informativa
+                    setTimeout(() => {
+                      Alert.alert(
+                        "Contrato selecionado", 
+                        `Você está registrando ponto como ${selectedContract.position} para ${selectedContract.employerName}.`
+                      );
+                    }, 300);
+                  }
                 } else {
+                  // Nenhum contrato selecionado
                   Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
                   Alert.alert(
                     "Seleção necessária", 
@@ -1466,13 +1534,6 @@ const styles = StyleSheet.create({
   quickActionIconContainer: {
     width: 50,
     height: 50,
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 8,
-  },
-  quickActionText: {
-    fontSize: 14,
     color: '#455A64',
     fontWeight: '500',
   },
