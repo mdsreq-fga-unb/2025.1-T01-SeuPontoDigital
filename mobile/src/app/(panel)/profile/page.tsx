@@ -259,7 +259,7 @@ export default function Profile() {
       <ScrollView 
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 30 }}
+        contentContainerStyle={{ paddingBottom: 70 }}
       >
         {/* Informações do Usuário */}
         <Animated.View 
@@ -711,12 +711,12 @@ export default function Profile() {
           <Ionicons name="exit-outline" size={20} color="white" />
           <Text style={styles.backButtonText}>Sair</Text>
         </TouchableOpacity>
-
-        {/* Footer com marca */}
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>© SeuPontoDigital 2025</Text>
-        </View>
       </ScrollView>
+
+      {/* Footer */}
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>© SeuPontoDigital 2025</Text>
+      </View>
       
       {/* Modal para seleção de contratos */}
       <Modal
@@ -1860,9 +1860,15 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: 'center',
     width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10, // Para garantir que fique acima do conteúdo
   },
   footerText: {
     color: '#FFFFFF',
     fontSize: 12,
+    fontWeight: '500',
   },
 });
