@@ -495,7 +495,7 @@ export default function Profile() {
               style={[
                 styles.timecardButton, 
                 todayRecords.saidaAlmoco && styles.completedButton,
-                (!todayRecords.entrada || todayRecords.saida) && styles.disabledButton,
+                (!todayRecords.entrada || (todayRecords.saida && !todayRecords.saidaAlmoco)) && styles.disabledButton,
                 loading && loadingButton === 'Saída Almoço' && styles.loadingButton
               ]}
               onPress={() => registerTimecard('Saída Almoço')}
@@ -511,7 +511,7 @@ export default function Profile() {
                     color={
                       todayRecords.saidaAlmoco 
                         ? "#4CAF50" 
-                        : (!todayRecords.entrada || todayRecords.saida)
+                        : (!todayRecords.entrada || (todayRecords.saida && !todayRecords.saidaAlmoco))
                           ? "#90A4AE" 
                           : "#1565C0"
                     } 
@@ -520,16 +520,16 @@ export default function Profile() {
                     <Text style={[
                       styles.timecardButtonTitle, 
                       todayRecords.saidaAlmoco && styles.completedButtonTitle,
-                      (!todayRecords.entrada || todayRecords.saida) && styles.disabledButtonTitle
+                      (!todayRecords.entrada || (todayRecords.saida && !todayRecords.saidaAlmoco)) && styles.disabledButtonTitle
                     ]}>
                       Saída Almoço
                     </Text>
                     <Text style={[
                       styles.timecardButtonSubtitle,
                       todayRecords.saidaAlmoco && styles.completedButtonSubtitle,
-                      (!todayRecords.entrada || todayRecords.saida) && styles.disabledButtonSubtitle
+                      (!todayRecords.entrada || (todayRecords.saida && !todayRecords.saidaAlmoco)) && styles.disabledButtonSubtitle
                     ]}>
-                      {todayRecords.saidaAlmoco ? 'Registrado' : todayRecords.saida ? 'Intervalo' : 'Intervalo'}
+                      {todayRecords.saidaAlmoco ? 'Registrado' : todayRecords.saida ? 'Indisponível' : 'Intervalo'}
                     </Text>
                   </View>
                   {todayRecords.saidaAlmoco && (
@@ -543,7 +543,7 @@ export default function Profile() {
               style={[
                 styles.timecardButton, 
                 todayRecords.voltaAlmoco && styles.completedButton,
-                (!todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco) && styles.disabledButton,
+                (!todayRecords.saidaAlmoco || (todayRecords.saida && !todayRecords.voltaAlmoco)) && styles.disabledButton,
                 loading && loadingButton === 'Volta Almoço' && styles.loadingButton
               ]}
               onPress={() => registerTimecard('Volta Almoço')}
@@ -559,7 +559,7 @@ export default function Profile() {
                     color={
                       todayRecords.voltaAlmoco 
                         ? "#4CAF50" 
-                        : (!todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco) 
+                        : (!todayRecords.saidaAlmoco || (todayRecords.saida && !todayRecords.voltaAlmoco)) 
                           ? "#90A4AE" 
                           : "#1565C0"
                     } 
@@ -568,14 +568,14 @@ export default function Profile() {
                     <Text style={[
                       styles.timecardButtonTitle, 
                       todayRecords.voltaAlmoco && styles.completedButtonTitle,
-                      (!todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco) && styles.disabledButtonTitle
+                      (!todayRecords.saidaAlmoco || (todayRecords.saida && !todayRecords.voltaAlmoco)) && styles.disabledButtonTitle
                     ]}>
                       Volta Almoço
                     </Text>
                     <Text style={[
                       styles.timecardButtonSubtitle,
                       todayRecords.voltaAlmoco && styles.completedButtonSubtitle,
-                      (!todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco) && styles.disabledButtonSubtitle
+                      (!todayRecords.saidaAlmoco || (todayRecords.saida && !todayRecords.voltaAlmoco)) && styles.disabledButtonSubtitle
                     ]}>
                       {todayRecords.voltaAlmoco ? 'Registrado' : 'Retorno ao trabalho'}
                     </Text>
@@ -1534,8 +1534,16 @@ const styles = StyleSheet.create({
   quickActionIconContainer: {
     width: 50,
     height: 50,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  quickActionText: {
+    fontSize: 14,
     color: '#455A64',
     fontWeight: '500',
+    marginTop: 4,
   },
   
   // Botão de sair
