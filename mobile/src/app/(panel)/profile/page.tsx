@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   View, 
   Text, 
@@ -13,12 +13,16 @@ import {
   TextInput,
   ActivityIndicator,
   Platform,
-  FlatList
+  FlatList,
+  Dimensions,
+  Animated
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
-import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Haptics from 'expo-haptics';
+
+const { width, height } = Dimensions.get('window');
 
 export default function Profile() {
   const router = useRouter();
@@ -26,24 +30,21 @@ export default function Profile() {
   const [historicalModalVisible, setHistoricalModalVisible] = useState(false);
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [apiInstance, setApiInstance] = useState(null);
   const [loadingButton, setLoadingButton] = useState('');
   
-  // Novo estado para o modal de contratos e contrato selecionado
+  // Animações
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const translateY = useRef(new Animated.Value(50)).current;
+  
+  // Estado para o modal de contratos e contrato selecionado
   const [contractsModalVisible, setContractsModalVisible] = useState(true);
   const [selectedContract, setSelectedContract] = useState(null);
   
   // Dados fictícios de contratos
   const [contracts, setContracts] = useState([
-    { id: '1', employerName: 'TechSolutions LTDA', position: 'Analista de Sistemas', active: true },
-    { id: '2', employerName: 'Inovação Software S.A.', position: 'Desenvolvedor Frontend', active: true },
-    { id: '3', employerName: 'DataCloud Tecnologia', position: 'Engenheiro DevOps', active: true },
+    { id: '1', employerName: 'Matheus Cunha Nascimento', position: 'Diarista', active: true },
+    { id: '2', employerName: 'Lucas Guimaraes', position: 'Cozinheiro', active: true },
   ]);
-  
-  // Mostrar o modal de contratos quando o componente é montado
-  useEffect(() => {
-    setContractsModalVisible(true);
-  }, []);
   
   // Estado para simular registros de ponto
   const [records, setRecords] = useState([
@@ -68,47 +69,60 @@ export default function Profile() {
     voltaAlmoco: false,
     saida: false
   });
+
+  // Efeito para animar componentes na entrada
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 700,
+        useNativeDriver: true
+      }),
+      Animated.timing(translateY, {
+        toValue: 0,
+        duration: 700,
+        useNativeDriver: true
+      })
+    ]).start();
+  }, []);
+  
+  // Mostrar o modal de contratos quando o componente é montado
+  useEffect(() => {
+    setContractsModalVisible(true);
+    
+    // Fake token para teste
+    const setupToken = async () => {
+      try {
+        const token = await AsyncStorage.getItem('userToken');
+        if (!token && __DEV__) {
+          await AsyncStorage.setItem('userToken', 'fake-token-for-dev');
+        }
+      } catch (error) {
+        console.error('Erro ao configurar token fake:', error);
+      }
+    };
+    
+    setupToken();
+  }, []);
   
   // Função para selecionar um contrato
   const selectContract = (contract) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setSelectedContract(contract);
     setContractsModalVisible(false);
   };
   
-  // Configuração do axios
-  useEffect(() => {
-    // Esta função será implementada quando o backend estiver pronto
-    const setupApi = async () => {
-      try {
-        const token = await AsyncStorage.getItem('userToken');
-        console.log('Token recuperado para uso futuro:', token ? 'Sim' : 'Não');
-      } catch (error) {
-        console.error('Erro ao recuperar token:', error);
-      }
-    };
-    
-    setupApi();
-  }, []);
-
   // Função para registrar ponto
   const registerTimecard = async (type) => {
     const now = new Date();
     const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     const dateString = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
     
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setLoading(true);
     setLoadingButton(type);
+    
     try {
-      // Verificar se temos um token de autenticação
-      const token = await AsyncStorage.getItem('userToken');
-      console.log('Token encontrado:', token ? 'Sim' : 'Não');
-      
-      //if (!token) {
-       // Alert.alert('Sessão expirada', 'Por favor, faça login novamente.');
-        //router.replace('/');
-        //return;
-      //}
-      
       // Verificar se um contrato foi selecionado
       if (!selectedContract) {
         Alert.alert('Selecione um contrato', 'Você precisa selecionar um contrato para registrar o ponto.');
@@ -126,25 +140,30 @@ export default function Profile() {
         contractId: selectedContract.id
       };
       
-      console.log('Enviando dados de ponto:', data);
+      console.log('Registro simulado:', data);
       
-      // Simular a requisição (já que não temos a rota ainda)
+      // Simular a requisição com timeout
       setTimeout(() => {
-        // Atualiza o estado local para refletir que o registro foi feito
+        // Atualiza o estado local para mostrar o botão como marcado
+        let updatedRecords = { ...todayRecords };
+        
         switch (type) {
           case 'Entrada':
-            setTodayRecords({...todayRecords, entrada: true});
+            updatedRecords.entrada = true;
             break;
           case 'Saída Almoço':
-            setTodayRecords({...todayRecords, saidaAlmoco: true});
+            updatedRecords.saidaAlmoco = true;
             break;
           case 'Volta Almoço':
-            setTodayRecords({...todayRecords, voltaAlmoco: true});
+            updatedRecords.voltaAlmoco = true;
             break;
           case 'Saída':
-            setTodayRecords({...todayRecords, saida: true});
+            updatedRecords.saida = true;
             break;
         }
+        
+        // Atualiza o estado com o novo objeto
+        setTodayRecords(updatedRecords);
         
         // Adiciona o registro ao histórico local
         const today = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()}`;
@@ -176,28 +195,17 @@ export default function Profile() {
           ]);
         }
         
+        // Feedback de sucesso
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         Alert.alert('Ponto Registrado', `${type} registrado com sucesso às ${timeString}`);
         setLoading(false);
         setLoadingButton('');
-      }, 1000);
+      }, 1500); // Tempo maior para simular melhor a experiência de carregamento
       
     } catch (error) {
-      console.error('Erro ao registrar ponto:', error);
-      
-      if (error.message?.includes('Network Error')) {
-        Alert.alert(
-          'Erro de Conexão', 
-          'Não foi possível conectar ao servidor. Verifique sua conexão com a internet.'
-        );
-      } else if (error.response?.status === 401) {
-        Alert.alert('Sessão Expirada', 'Por favor, faça login novamente.');
-        router.replace('/');
-      } else {
-        Alert.alert(
-          'Erro ao Registrar Ponto', 
-          error.response?.data?.message || 'Ocorreu um erro ao registrar seu ponto.'
-        );
-      }
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+      console.error('Erro simulado:', error);
+      Alert.alert('Erro', 'Ocorreu um erro ao registrar o ponto. Tente novamente.');
       setLoading(false);
       setLoadingButton('');
     }
@@ -205,6 +213,22 @@ export default function Profile() {
 
   // Formatar a data atual
   const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth() + 1).toString().padStart(2, '0')}/${currentDate.getFullYear()}`;
+  const formattedHour = `${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}`;
+  
+  // Função para obter um ícone baseado no tipo de registro
+  const getRecordIcon = (type) => {
+    switch (type) {
+      case 'Entrada':
+        return 'login';
+      case 'Saída Almoço':
+      case 'Volta Almoço':
+        return 'restaurant';
+      case 'Saída':
+        return 'logout';
+      default:
+        return 'schedule';
+    }
+  };
   
   return (
     <SafeAreaView style={styles.container}>
@@ -222,138 +246,472 @@ export default function Profile() {
             SeuPonto<Text style={styles.logoHighlight}>Digital</Text>
           </Text>
         </View>
+        
+        <TouchableOpacity 
+          style={styles.headerAction}
+          onPress={() => setHistoricalModalVisible(true)}
+        >
+          <Ionicons name="time-outline" size={24} color="#FFFFFF" />
+        </TouchableOpacity>
       </View>
       
-      <ScrollView style={styles.scrollView}>
+      <ScrollView 
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 30 }}
+      >
         {/* Informações do Usuário */}
-        <View style={styles.userInfoCard}>
+        <Animated.View 
+          style={[
+            styles.userInfoCard, 
+            { 
+              opacity: fadeAnim,
+              transform: [{ translateY: translateY }]
+            }
+          ]}
+        >
           <View style={styles.userAvatarContainer}>
             <FontAwesome5 name="user-circle" size={60} color="#1565C0" />
           </View>
           <View style={styles.userInfo}>
             <Text style={styles.userName}>João da Silva</Text>
             <Text style={styles.userRole}>{selectedContract ? selectedContract.position : 'Selecione um contrato'}</Text>
-            <Text style={styles.userCompany}>{selectedContract ? selectedContract.employerName : 'Nenhum contrato selecionado'}</Text>
+            <View style={styles.employerContainer}>
+              <FontAwesome5 name="building" size={12} color="#455A64" style={{marginRight: 6}} />
+              <Text style={styles.userCompany}>{selectedContract ? selectedContract.employerName : 'Nenhum contrato selecionado'}</Text>
+            </View>
           </View>
           <TouchableOpacity 
             style={styles.changeContractButton}
-            onPress={() => setContractsModalVisible(true)}
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              setContractsModalVisible(true);
+            }}
           >
             <MaterialIcons name="swap-horiz" size={20} color="#1565C0" />
           </TouchableOpacity>
-        </View>
+        </Animated.View>
         
-        {/* Card de Data Atual */}
-        <View style={styles.dateCard}>
-          <Ionicons name="calendar" size={24} color="#1565C0" />
-          <Text style={styles.dateText}>Hoje, {formattedDate}</Text>
-        </View>
+        {/* Card de Data e Hora Atual */}
+        <Animated.View 
+          style={[
+            styles.dateTimeCard, 
+            { 
+              opacity: fadeAnim,
+              transform: [{ translateY: translateY }]
+            }
+          ]}
+        >
+          <View style={styles.dateSection}>
+            <Ionicons name="calendar" size={22} color="#1565C0" />
+            <Text style={styles.dateText}>{formattedDate}</Text>
+          </View>
+          <View style={styles.timeSection}>
+            <Ionicons name="time-outline" size={22} color="#1565C0" />
+            <Text style={styles.timeText}>{formattedHour}</Text>
+          </View>
+        </Animated.View>
+        
+        {/* Card de Progresso do Dia */}
+        <Animated.View 
+          style={[
+            styles.progressCard, 
+            { 
+              opacity: fadeAnim,
+              transform: [{ translateY: translateY }]
+            }
+          ]}
+        >
+          <Text style={styles.progressTitle}>Progresso do Dia</Text>
+          <View style={styles.progressTracker}>
+            <View style={[
+              styles.progressStep,
+              todayRecords.entrada ? styles.progressStepCompleted : {}
+            ]}>
+              <View style={[
+                styles.progressCircle,
+                todayRecords.entrada ? styles.progressCircleCompleted : {}
+              ]}>
+                <MaterialIcons 
+                  name="login" 
+                  size={18} 
+                  color={todayRecords.entrada ? "#FFFFFF" : "#90A4AE"} 
+                />
+              </View>
+              <Text style={[
+                styles.progressText,
+                todayRecords.entrada ? styles.progressTextCompleted : {}
+              ]}>
+                Entrada
+              </Text>
+            </View>
+            
+            <View style={[
+              styles.progressConnector,
+              todayRecords.entrada ? styles.progressConnectorActive : {}
+            ]} />
+            
+            <View style={[
+              styles.progressStep,
+              todayRecords.saidaAlmoco ? styles.progressStepCompleted : {}
+            ]}>
+              <View style={[
+                styles.progressCircle,
+                todayRecords.saidaAlmoco ? styles.progressCircleCompleted : {}
+              ]}>
+                <MaterialIcons 
+                  name="restaurant" 
+                  size={18} 
+                  color={todayRecords.saidaAlmoco ? "#FFFFFF" : "#90A4AE"} 
+                />
+              </View>
+              <Text style={[
+                styles.progressText,
+                todayRecords.saidaAlmoco ? styles.progressTextCompleted : {}
+              ]}>
+                Almoço
+              </Text>
+            </View>
+            
+            <View style={[
+              styles.progressConnector,
+              todayRecords.saidaAlmoco ? styles.progressConnectorActive : {}
+            ]} />
+            
+            <View style={[
+              styles.progressStep,
+              todayRecords.voltaAlmoco ? styles.progressStepCompleted : {}
+            ]}>
+              <View style={[
+                styles.progressCircle,
+                todayRecords.voltaAlmoco ? styles.progressCircleCompleted : {}
+              ]}>
+                <MaterialIcons 
+                  name="work" 
+                  size={18} 
+                  color={todayRecords.voltaAlmoco ? "#FFFFFF" : "#90A4AE"} 
+                />
+              </View>
+              <Text style={[
+                styles.progressText,
+                todayRecords.voltaAlmoco ? styles.progressTextCompleted : {}
+              ]}>
+                Retorno
+              </Text>
+            </View>
+            
+            <View style={[
+              styles.progressConnector,
+              todayRecords.voltaAlmoco ? styles.progressConnectorActive : {}
+            ]} />
+            
+            <View style={[
+              styles.progressStep,
+              todayRecords.saida ? styles.progressStepCompleted : {}
+            ]}>
+              <View style={[
+                styles.progressCircle,
+                todayRecords.saida ? styles.progressCircleCompleted : {}
+              ]}>
+                <MaterialIcons 
+                  name="logout" 
+                  size={18} 
+                  color={todayRecords.saida ? "#FFFFFF" : "#90A4AE"} 
+                />
+              </View>
+              <Text style={[
+                styles.progressText,
+                todayRecords.saida ? styles.progressTextCompleted : {}
+              ]}>
+                Saída
+              </Text>
+            </View>
+          </View>
+        </Animated.View>
         
         {/* Card de Registro de Ponto */}
-        <View style={styles.card}>
+        <Animated.View 
+          style={[
+            styles.card, 
+            { 
+              opacity: fadeAnim,
+              transform: [{ translateY: translateY }]
+            }
+          ]}
+        >
           <View style={styles.cardHeader}>
             <Text style={styles.cardTitle}>Registrar Ponto</Text>
+            <Text style={styles.cardSubtitle}>Selecione o tipo de registro</Text>
           </View>
           
           <View style={styles.cardContent}>
-            <View style={styles.timeButtonsContainer}>
-              <TouchableOpacity 
-                style={[styles.timeButton, todayRecords.entrada && styles.disabledButton]}
-                onPress={() => registerTimecard('Entrada')}
-                disabled={todayRecords.entrada || loading}
-              >
-                {loadingButton === 'Entrada' ? (
-                  <ActivityIndicator size="small" color="#FFFFFF" />
-                ) : (
-                  <>
-                    <MaterialIcons name="login" size={24} color={todayRecords.entrada ? "#90A4AE" : "white"} />
-                    <Text style={[styles.timeButtonText, todayRecords.entrada && styles.disabledButtonText]}>Entrada</Text>
-                  </>
-                )}
-              </TouchableOpacity>
-              
-              <TouchableOpacity 
-                style={[styles.timeButton, todayRecords.saidaAlmoco && styles.disabledButton]}
-                onPress={() => registerTimecard('Saída Almoço')}
-                disabled={todayRecords.saidaAlmoco || !todayRecords.entrada || loading}
-              >
-                {loading && loadingButton === 'Saída Almoço' ? (
-                  <ActivityIndicator size="small" color="#FFFFFF" />
-                ) : (
-                  <>
-                    <MaterialIcons name="lunch-dining" size={24} color={todayRecords.saidaAlmoco || !todayRecords.entrada ? "#90A4AE" : "white"} />
-                    <Text style={[styles.timeButtonText, (todayRecords.saidaAlmoco || !todayRecords.entrada) && styles.disabledButtonText]}>Saída Almoço</Text>
-                  </>
-                )}
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity 
+              style={[
+                styles.timecardButton, 
+                todayRecords.entrada && styles.completedButton,
+                loading && loadingButton === 'Entrada' && styles.loadingButton
+              ]}
+              onPress={() => registerTimecard('Entrada')}
+              disabled={todayRecords.entrada || loading}
+            >
+              {loading && loadingButton === 'Entrada' ? (
+                <ActivityIndicator size="small" color="#FFFFFF" />
+              ) : (
+                <>
+                  <MaterialIcons 
+                    name="login" 
+                    size={24} 
+                    color={todayRecords.entrada ? "#4CAF50" : "#1565C0"} 
+                  />
+                  <View style={styles.buttonTextContainer}>
+                    <Text style={[
+                      styles.timecardButtonTitle, 
+                      todayRecords.entrada && styles.completedButtonTitle
+                    ]}>
+                      Entrada
+                    </Text>
+                    <Text style={[
+                      styles.timecardButtonSubtitle,
+                      todayRecords.entrada && styles.completedButtonSubtitle
+                    ]}>
+                      {todayRecords.entrada ? 'Registrado' : 'Iniciar trabalho'}
+                    </Text>
+                  </View>
+                  {todayRecords.entrada && (
+                    <Ionicons name="checkmark-circle" size={22} color="#4CAF50" />
+                  )}
+                </>
+              )}
+            </TouchableOpacity>
             
-            <View style={styles.timeButtonsContainer}>
-              <TouchableOpacity 
-                style={[styles.timeButton, todayRecords.voltaAlmoco && styles.disabledButton]}
-                onPress={() => registerTimecard('Volta Almoço')}
-                disabled={todayRecords.voltaAlmoco || !todayRecords.saidaAlmoco || loading}
-              >
-                {loading && loadingButton === 'Volta Almoço' ? (
-                  <ActivityIndicator size="small" color="#FFFFFF" />
-                ) : (
-                  <>
-                    <MaterialIcons name="lunch-dining" size={24} color={todayRecords.voltaAlmoco || !todayRecords.saidaAlmoco ? "#90A4AE" : "white"} />
-                    <Text style={[styles.timeButtonText, (todayRecords.voltaAlmoco || !todayRecords.saidaAlmoco) && styles.disabledButtonText]}>Volta Almoço</Text>
-                  </>
-                )}
-              </TouchableOpacity>
-              
-              <TouchableOpacity 
-                style={[styles.timeButton, todayRecords.saida && styles.disabledButton]}
-                onPress={() => registerTimecard('Saída')}
-                disabled={todayRecords.saida || !todayRecords.voltaAlmoco || loading}
-              >
-                {loading && loadingButton === 'Saída' ? (
-                  <ActivityIndicator size="small" color="#FFFFFF" />
-                ) : (
-                  <>
-                    <MaterialIcons name="logout" size={24} color={todayRecords.saida || !todayRecords.voltaAlmoco ? "#90A4AE" : "white"} />
-                    <Text style={[styles.timeButtonText, (todayRecords.saida || !todayRecords.voltaAlmoco) && styles.disabledButtonText]}>Saída</Text>
-                  </>
-                )}
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity 
+              style={[
+                styles.timecardButton, 
+                todayRecords.saidaAlmoco && styles.completedButton,
+                !todayRecords.entrada && styles.disabledButton, // Somente desabilitado se não tiver entrada
+                loading && loadingButton === 'Saída Almoço' && styles.loadingButton
+              ]}
+              onPress={() => registerTimecard('Saída Almoço')}
+              disabled={todayRecords.saidaAlmoco || !todayRecords.entrada || loading}
+            >
+              {loading && loadingButton === 'Saída Almoço' ? (
+                <ActivityIndicator size="small" color="#FFFFFF" />
+              ) : (
+                <>
+                  <MaterialIcons 
+                    name="restaurant" 
+                    size={24} 
+                    color={
+                      todayRecords.saidaAlmoco 
+                        ? "#4CAF50" 
+                        : !todayRecords.entrada 
+                          ? "#90A4AE" 
+                          : "#1565C0"
+                    } 
+                  />
+                  <View style={styles.buttonTextContainer}>
+                    <Text style={[
+                      styles.timecardButtonTitle, 
+                      todayRecords.saidaAlmoco && styles.completedButtonTitle,
+                      !todayRecords.entrada && styles.disabledButtonTitle
+                    ]}>
+                      Saída Almoço
+                    </Text>
+                    <Text style={[
+                      styles.timecardButtonSubtitle,
+                      todayRecords.saidaAlmoco && styles.completedButtonSubtitle,
+                      !todayRecords.entrada && styles.disabledButtonSubtitle
+                    ]}>
+                      {todayRecords.saidaAlmoco ? 'Registrado' : 'Intervalo'}
+                    </Text>
+                  </View>
+                  {todayRecords.saidaAlmoco && (
+                    <Ionicons name="checkmark-circle" size={22} color="#4CAF50" />
+                  )}
+                </>
+              )}
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={[
+                styles.timecardButton, 
+                todayRecords.voltaAlmoco && styles.completedButton,
+                (!todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco) && styles.disabledButton,
+                loading && loadingButton === 'Volta Almoço' && styles.loadingButton
+              ]}
+              onPress={() => registerTimecard('Volta Almoço')}
+              disabled={todayRecords.voltaAlmoco || !todayRecords.saidaAlmoco || loading}
+            >
+              {loading && loadingButton === 'Volta Almoço' ? (
+                <ActivityIndicator size="small" color="#FFFFFF" />
+              ) : (
+                <>
+                  <MaterialIcons 
+                    name="work" 
+                    size={24} 
+                    color={
+                      todayRecords.voltaAlmoco 
+                        ? "#4CAF50" 
+                        : (!todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco) 
+                          ? "#90A4AE" 
+                          : "#1565C0"
+                    } 
+                  />
+                  <View style={styles.buttonTextContainer}>
+                    <Text style={[
+                      styles.timecardButtonTitle, 
+                      todayRecords.voltaAlmoco && styles.completedButtonTitle,
+                      (!todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco) && styles.disabledButtonTitle
+                    ]}>
+                      Volta Almoço
+                    </Text>
+                    <Text style={[
+                      styles.timecardButtonSubtitle,
+                      todayRecords.voltaAlmoco && styles.completedButtonSubtitle,
+                      (!todayRecords.saidaAlmoco && !todayRecords.voltaAlmoco) && styles.disabledButtonSubtitle
+                    ]}>
+                      {todayRecords.voltaAlmoco ? 'Registrado' : 'Retorno ao trabalho'}
+                    </Text>
+                  </View>
+                  {todayRecords.voltaAlmoco && (
+                    <Ionicons name="checkmark-circle" size={22} color="#4CAF50" />
+                  )}
+                </>
+              )}
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={[
+                styles.timecardButton, 
+                todayRecords.saida && styles.completedButton,
+                // Habilitar após entrada ou após volta almoço
+                (!todayRecords.entrada && !todayRecords.saida) && styles.disabledButton,
+                loading && loadingButton === 'Saída' && styles.loadingButton
+              ]}
+              // Habilitar após entrada (meio período) ou após volta almoço (jornada completa)
+              onPress={() => registerTimecard('Saída')}
+              disabled={todayRecords.saida || !todayRecords.entrada || loading}
+            >
+              {loading && loadingButton === 'Saída' ? (
+                <ActivityIndicator size="small" color="#FFFFFF" />
+              ) : (
+                <>
+                  <MaterialIcons 
+                    name="logout" 
+                    size={24} 
+                    color={
+                      todayRecords.saida 
+                        ? "#4CAF50" 
+                        : (!todayRecords.entrada) 
+                          ? "#90A4AE" 
+                          : "#1565C0"
+                    } 
+                  />
+                  <View style={styles.buttonTextContainer}>
+                    <Text style={[
+                      styles.timecardButtonTitle, 
+                      todayRecords.saida && styles.completedButtonTitle,
+                      (!todayRecords.entrada) && styles.disabledButtonTitle
+                    ]}>
+                      Saída
+                    </Text>
+                    <Text style={[
+                      styles.timecardButtonSubtitle,
+                      todayRecords.saida && styles.completedButtonSubtitle,
+                      (!todayRecords.entrada) && styles.disabledButtonSubtitle
+                    ]}>
+                      {todayRecords.saida ? 'Registrado' : 'Encerrar trabalho'}
+                    </Text>
+                  </View>
+                  {todayRecords.saida && (
+                    <Ionicons name="checkmark-circle" size={22} color="#4CAF50" />
+                  )}
+                </>
+              )}
+            </TouchableOpacity>
           </View>
-        </View>
+        </Animated.View>
         
-        {/* Card de Ações */}
-        <View style={styles.card}>
-          <View style={styles.cardHeader}>
-            <Text style={styles.cardTitle}>Outras Ações</Text>
-          </View>
+        {/* Card de Ações Rápidas */}
+        <Animated.View 
+          style={[
+            styles.quickActionsCard, 
+            { 
+              opacity: fadeAnim,
+              transform: [{ translateY: translateY }]
+            }
+          ]}
+        >
+          <Text style={styles.quickActionsTitle}>Ações Rápidas</Text>
           
-          <View style={styles.cardContent}>
+          <View style={styles.quickActionsGrid}>
             <TouchableOpacity 
-              style={styles.actionButton}
-              onPress={() => setHistoricalModalVisible(true)}
+              style={styles.quickActionButton}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                setHistoricalModalVisible(true);
+              }}
             >
-              <Ionicons name="time-outline" size={24} color="#1565C0" />
-              <Text style={styles.actionButtonText}>Histórico de Pontos</Text>
+              <View style={[styles.quickActionIconContainer, { backgroundColor: '#E3F2FD' }]}>
+                <Ionicons name="time-outline" size={24} color="#1565C0" />
+              </View>
+              <Text style={styles.quickActionText}>Histórico</Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.actionButton}
-              onPress={() => setUploadModalVisible(true)}
+              style={styles.quickActionButton}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                setUploadModalVisible(true);
+              }}
             >
-              <Ionicons name="document-text-outline" size={24} color="#1565C0" />
-              <Text style={styles.actionButtonText}>Enviar Atestado</Text>
+              <View style={[styles.quickActionIconContainer, { backgroundColor: '#E8F5E9' }]}>
+                <Ionicons name="document-text-outline" size={24} color="#4CAF50" />
+              </View>
+              <Text style={styles.quickActionText}>Atestado</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={styles.quickActionButton}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                setContractsModalVisible(true);
+              }}
+            >
+              <View style={[styles.quickActionIconContainer, { backgroundColor: '#FFF3E0' }]}>
+                <Ionicons name="briefcase-outline" size={24} color="#FF9800" />
+              </View>
+              <Text style={styles.quickActionText}>Contratos</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={styles.quickActionButton}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                Alert.alert(
+                  'Ajuda',
+                  'Para registrar seu ponto:\n\n• Funcionários de período integral: \nEntrada → Saída Almoço → Volta Almoço → Saída\n\n• Funcionários de meio período: \nEntrada → Saída'
+                );
+              }}
+            >
+              <View style={[styles.quickActionIconContainer, { backgroundColor: '#F3E5F5' }]}>
+                <Ionicons name="help-circle-outline" size={24} color="#9C27B0" />
+              </View>
+              <Text style={styles.quickActionText}>Ajuda</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </Animated.View>
         
         {/* Botão para voltar à tela inicial */}
         <TouchableOpacity 
           style={styles.backButton}
-          onPress={() => router.replace('/')}
+          onPress={() => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+            router.replace('/');
+          }}
         >
-          <Ionicons name="arrow-back" size={24} color="white" />
-          <Text style={styles.backButtonText}>Voltar à Tela Inicial</Text>
+          <Ionicons name="exit-outline" size={20} color="white" />
+          <Text style={styles.backButtonText}>Sair</Text>
         </TouchableOpacity>
       </ScrollView>
       
@@ -366,7 +724,6 @@ export default function Profile() {
           if (selectedContract) {
             setContractsModalVisible(false);
           } else {
-            // Se é o primeiro acesso, seleciona o primeiro contrato por padrão
             if (contracts.length > 0) {
               selectContract(contracts[0]);
             } else {
@@ -380,11 +737,19 @@ export default function Profile() {
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Selecione um Contrato</Text>
               {selectedContract && (
-                <TouchableOpacity onPress={() => setContractsModalVisible(false)}>
+                <TouchableOpacity 
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    setContractsModalVisible(false);
+                  }}
+                  style={styles.closeButton}
+                >
                   <Ionicons name="close" size={24} color="#1565C0" />
                 </TouchableOpacity>
               )}
             </View>
+            
+            <View style={styles.modalDivider} />
             
             <Text style={styles.modalSubtitle}>Escolha o contrato para registrar o ponto:</Text>
             
@@ -399,6 +764,13 @@ export default function Profile() {
                   ]}
                   onPress={() => selectContract(item)}
                 >
+                  <View style={styles.contractItemIconContainer}>
+                    <FontAwesome5 
+                      name="file-contract" 
+                      size={20} 
+                      color={selectedContract?.id === item.id ? "#1565C0" : "#78909C"} 
+                    />
+                  </View>
                   <View style={styles.contractItemContent}>
                     <Text style={styles.contractEmployer}>{item.employerName}</Text>
                     <Text style={styles.contractPosition}>{item.position}</Text>
@@ -410,6 +782,20 @@ export default function Profile() {
               )}
               style={styles.contractsList}
             />
+            
+            <TouchableOpacity
+              style={styles.confirmButton}
+              onPress={() => {
+                if (selectedContract) {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  setContractsModalVisible(false);
+                } else if (contracts.length > 0) {
+                  selectContract(contracts[0]);
+                }
+              }}
+            >
+              <Text style={styles.confirmButtonText}>Confirmar</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -425,35 +811,55 @@ export default function Profile() {
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Histórico de Pontos</Text>
-              <TouchableOpacity onPress={() => setHistoricalModalVisible(false)}>
+              <TouchableOpacity 
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setHistoricalModalVisible(false);
+                }}
+                style={styles.closeButton}
+              >
                 <Ionicons name="close" size={24} color="#1565C0" />
               </TouchableOpacity>
             </View>
             
+            <View style={styles.modalDivider} />
+            
             <ScrollView style={styles.modalScrollView}>
               {records.map((day, index) => (
                 <View key={index} style={styles.dayRecord}>
-                  <Text style={styles.dayRecordDate}>{day.date}</Text>
+                  <View style={styles.dayRecordHeader}>
+                    <Text style={styles.dayRecordDate}>{day.date}</Text>
+                    <View style={styles.dayRecordBadge}>
+                      <Text style={styles.dayRecordBadgeText}>
+                        {day.records.length} registros
+                      </Text>
+                    </View>
+                  </View>
+                  
                   {day.records.map((record, rIndex) => (
                     <View key={rIndex} style={styles.recordItem}>
-                      <View style={styles.recordType}>
+                      <View style={styles.recordIconContainer}>
                         <MaterialIcons 
-                          name={
-                            record.type === 'Entrada' ? 'login' :
-                            record.type === 'Saída' ? 'logout' : 'lunch-dining'
-                          } 
+                          name={getRecordIcon(record.type)} 
                           size={18} 
                           color="#1565C0" 
                         />
-                        <Text style={styles.recordTypeText}>{record.type}</Text>
                       </View>
-                      <Text style={styles.recordTime}>{record.time}</Text>
-                      <Text style={[
-                        styles.recordStatus, 
-                        record.status !== 'Normal' && styles.recordStatusAlert
+                      <View style={styles.recordInfo}>
+                        <Text style={styles.recordType}>{record.type}</Text>
+                        <Text style={styles.recordTime}>{record.time}</Text>
+                      </View>
+                      <View style={[
+                        styles.recordStatusBadge,
+                        record.status !== 'Normal' && styles.recordStatusAlertBadge
                       ]}>
-                        {record.status}
-                      </Text>
+                        <Text style={[
+                          styles.recordStatusText,
+                          record.status !== 'Normal' && styles.recordStatusAlertText
+                        ]}>
+                          {record.status}
+                        </Text>
+                      </View>
                     </View>
                   ))}
                 </View>
@@ -474,42 +880,71 @@ export default function Profile() {
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Enviar Atestado</Text>
-              <TouchableOpacity onPress={() => setUploadModalVisible(false)}>
+              <TouchableOpacity 
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setUploadModalVisible(false);
+                }}
+                style={styles.closeButton}
+              >
                 <Ionicons name="close" size={24} color="#1565C0" />
               </TouchableOpacity>
             </View>
             
-            <View style={styles.uploadForm}>
-              <Text style={styles.formLabel}>Data da Falta</Text>
-              <TouchableOpacity style={styles.datePickerButton}>
-                <Text style={styles.datePickerText}>Selecionar data</Text>
-                <Ionicons name="calendar" size={20} color="#1565C0" />
-              </TouchableOpacity>
+            <View style={styles.modalDivider} />
+            
+            <ScrollView style={styles.modalScrollView} contentContainerStyle={{ paddingBottom: 20 }}>
+              <Text style={styles.uploadInstructions}>
+                Envie um atestado médico ou justificativa de ausência preenchendo os campos abaixo.
+              </Text>
               
-              <Text style={styles.formLabel}>Motivo</Text>
-              <TextInput
-                style={styles.textInput}
-                placeholder="Descreva o motivo da falta"
-                multiline={true}
-                numberOfLines={3}
-              />
-              
-              <Text style={styles.formLabel}>Anexar Atestado</Text>
-              <TouchableOpacity style={styles.uploadButton}>
-                <Ionicons name="cloud-upload-outline" size={24} color="white" />
-                <Text style={styles.uploadButtonText}>Selecionar Arquivo</Text>
-              </TouchableOpacity>
-              
-              <TouchableOpacity 
-                style={styles.submitButton}
-                onPress={() => {
-                  Alert.alert('Atestado Enviado', 'Seu atestado foi enviado com sucesso e será analisado.');
-                  setUploadModalVisible(false);
-                }}
-              >
-                <Text style={styles.submitButtonText}>Enviar</Text>
-              </TouchableOpacity>
-            </View>
+              <View style={styles.uploadForm}>
+                <Text style={styles.formLabel}>Data da Falta</Text>
+                <TouchableOpacity style={styles.datePickerButton}>
+                  <Text style={styles.datePickerText}>Selecionar data</Text>
+                  <Ionicons name="calendar" size={20} color="#1565C0" />
+                </TouchableOpacity>
+                
+                <Text style={styles.formLabel}>Motivo da Ausência</Text>
+                <View style={styles.textInputContainer}>
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Descreva o motivo da falta"
+                    multiline={true}
+                    numberOfLines={3}
+                    placeholderTextColor="#90A4AE"
+                  />
+                </View>
+                
+                <Text style={styles.formLabel}>Anexar Documento</Text>
+                <TouchableOpacity 
+                  style={styles.uploadFileButton}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    Alert.alert('Seleção de Arquivo', 'Esta funcionalidade selecionaria um arquivo de sua galeria ou câmera.');
+                  }}
+                >
+                  <Ionicons name="cloud-upload-outline" size={24} color="#1565C0" />
+                  <Text style={styles.uploadFileButtonText}>Selecionar Arquivo</Text>
+                </TouchableOpacity>
+                
+                <Text style={styles.uploadHelpText}>
+                  Formatos aceitos: JPG, PNG ou PDF com até 5 MB.
+                </Text>
+              </View>
+            </ScrollView>
+            
+            <TouchableOpacity 
+              style={styles.submitButton}
+              onPress={() => {
+                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                Alert.alert('Atestado Enviado', 'Seu atestado foi enviado com sucesso e será analisado.');
+                setUploadModalVisible(false);
+              }}
+            >
+              <Text style={styles.submitButtonText}>Enviar Atestado</Text>
+              <Ionicons name="send" size={20} color="#FFFFFF" style={{marginLeft: 8}} />
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -518,13 +953,13 @@ export default function Profile() {
 }
 
 const styles = StyleSheet.create({
-  // Estilos existentes...
   container: {
     flex: 1,
     backgroundColor: '#F5F7FA',
   },
   scrollView: {
     flex: 1,
+    paddingTop: 10,
   },
   header: {
     backgroundColor: '#1565C0',
@@ -532,6 +967,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  headerAction: {
+    padding: 8,
   },
   logoHeader: {
     flexDirection: 'row',
@@ -552,39 +996,394 @@ const styles = StyleSheet.create({
   logoHighlight: {
     color: '#4FC3F7',
   },
-  // Novos estilos para o modal de contratos
+  
+  // Novo design do card de usuário
+  userInfoCard: {
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 16,
+    marginTop: 16,
+    borderRadius: 16,
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  userAvatarContainer: {
+    marginRight: 16,
+  },
+  userInfo: {
+    flex: 1,
+  },
+  userName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#263238',
+    marginBottom: 4,
+  },
+  userRole: {
+    fontSize: 15,
+    color: '#455A64',
+    marginBottom: 4,
+    fontWeight: '500',
+  },
+  employerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  userCompany: {
+    fontSize: 14,
+    color: '#455A64',
+    fontStyle: 'italic',
+    flex: 1,
+  },
   changeContractButton: {
     position: 'absolute',
-    top: 10,
-    right: 10,
+    top: 12,
+    right: 12,
     backgroundColor: '#F0F8FF',
-    borderRadius: 15,
-    padding: 5,
+    borderRadius: 20,
+    width: 36,
+    height: 36,
+    alignItems: 'center',
+    justifyContent: 'center',
     borderWidth: 1,
     borderColor: '#1565C0',
   },
-  modalSubtitle: {
+  
+  // Novo design do card de data e hora
+  dateTimeCard: {
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 16,
+    marginTop: 16,
+    borderRadius: 16,
+    padding: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  dateSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  timeSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  dateText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#263238',
+    marginLeft: 8,
+  },
+  timeText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#1565C0',
+    marginLeft: 8,
+  },
+  
+  // Novo card de progresso
+  progressCard: {
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 16,
+    marginTop: 16,
+    borderRadius: 16,
+    padding: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  progressTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#263238',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  progressTracker: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  progressStep: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 60,
+  },
+  progressCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#F5F5F5',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  progressCircleCompleted: {
+    backgroundColor: '#4CAF50',
+    borderColor: '#4CAF50',
+  },
+  progressText: {
+    fontSize: 12,
+    color: '#78909C',
+    textAlign: 'center',
+  },
+  progressTextCompleted: {
+    color: '#4CAF50',
+    fontWeight: '500',
+  },
+  progressConnector: {
+    height: 2,
+    backgroundColor: '#E0E0E0',
+    flex: 1,
+    marginHorizontal: 4,
+  },
+  progressConnectorActive: {
+    backgroundColor: '#4CAF50',
+  },
+  progressStepCompleted: {
+    opacity: 1,
+  },
+  
+  // Card principal para registro de ponto
+  card: {
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 16,
+    marginTop: 16,
+    borderRadius: 16,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  cardHeader: {
+    backgroundColor: '#1565C0',
+    padding: 16,
+  },
+  cardTitle: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  cardSubtitle: {
+    color: '#FFFFFF',
     fontSize: 14,
+    opacity: 0.8,
+    marginTop: 2,
+  },
+  cardContent: {
+    padding: 16,
+  },
+  
+  // Novos botões de ponto
+  timecardButton: {
+    backgroundColor: '#F5F7FA',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  completedButton: {
+    backgroundColor: '#F1F8E9',
+    borderColor: '#C8E6C9',
+  },
+  disabledButton: {
+    backgroundColor: '#FAFAFA',
+    borderColor: '#EEEEEE',
+  },
+  loadingButton: {
+    backgroundColor: '#E3F2FD',
+    borderColor: '#BBDEFB',
+    justifyContent: 'center',
+  },
+  buttonTextContainer: {
+    flex: 1,
+    marginLeft: 16,
+  },
+  timecardButtonTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#263238',
+    marginBottom: 2,
+  },
+  completedButtonTitle: {
+    color: '#2E7D32',
+  },
+  disabledButtonTitle: {
+    color: '#9E9E9E',
+  },
+  timecardButtonSubtitle: {
+    fontSize: 14,
+    color: '#78909C',
+  },
+  completedButtonSubtitle: {
+    color: '#4CAF50',
+  },
+  disabledButtonSubtitle: {
+    color: '#BDBDBD',
+  },
+  
+  // Card de ações rápidas
+  quickActionsCard: {
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 16,
+    marginTop: 16,
+    borderRadius: 16,
+    padding: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  quickActionsTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#263238',
+    marginBottom: 16,
+  },
+  quickActionsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  quickActionButton: {
+    width: '48%',
+    padding: 16,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  quickActionIconContainer: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 8,
+  },
+  quickActionText: {
+    fontSize: 14,
+    color: '#455A64',
+    fontWeight: '500',
+  },
+  
+  // Botão de sair
+  backButton: {
+    backgroundColor: '#1565C0',
+    marginHorizontal: 16,
+    marginVertical: 20,
+    borderRadius: 12,
+    paddingVertical: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  backButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 8,
+  },
+  
+  // Modal
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(38, 50, 56, 0.7)',
+    padding: 16,
+  },
+  modalContent: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    width: '100%',
+    maxHeight: '90%',
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.25,
+    shadowRadius: 15,
+    elevation: 10,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  closeButton: {
+    padding: 5,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#263238',
+  },
+  modalDivider: {
+    height: 1,
+    backgroundColor: '#E0E0E0',
+    marginVertical: 15,
+  },
+  modalSubtitle: {
+    fontSize: 15,
     color: '#455A64',
     marginBottom: 15,
   },
+  
+  // Contratos no modal
   contractsList: {
     maxHeight: 300,
   },
   contractItem: {
     backgroundColor: '#F5F7FA',
-    borderRadius: 8,
+    borderRadius: 12,
     padding: 16,
-    marginBottom: 8,
+    marginBottom: 10,
     borderWidth: 1,
     borderColor: '#E0E0E0',
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  contractItemIconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#ECEFF1',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
   },
   contractItemSelected: {
     backgroundColor: '#E3F2FD',
-    borderColor: '#1565C0',
+    borderColor: '#BBDEFB',
   },
   contractItemContent: {
     flex: 1,
@@ -599,277 +1398,180 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#455A64',
   },
-  // Estilos restantes...
-  userInfoCard: {
-    backgroundColor: '#FFFFFF',
-    marginHorizontal: 16,
-    marginTop: 16,
-    borderRadius: 10,
-    padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  userAvatarContainer: {
-    marginRight: 16,
-  },
-  userInfo: {
-    flex: 1,
-  },
-  userName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#263238',
-  },
-  userRole: {
-    fontSize: 14,
-    color: '#455A64',
-  },
-  userCompany: {
-    fontSize: 14,
-    color: '#455A64',
-    fontStyle: 'italic',
-  },
-  dateCard: {
-    backgroundColor: '#FFFFFF',
-    marginHorizontal: 16,
-    marginTop: 16,
-    borderRadius: 10,
-    padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  dateText: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#263238',
-    marginLeft: 8,
-  },
-  card: {
-    backgroundColor: '#FFFFFF',
-    marginHorizontal: 16,
-    marginTop: 16,
-    borderRadius: 10,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  cardHeader: {
+  confirmButton: {
     backgroundColor: '#1565C0',
-    padding: 12,
+    borderRadius: 12,
+    paddingVertical: 16,
+    alignItems: 'center',
+    marginTop: 16,
   },
-  cardTitle: {
+  confirmButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
-  cardContent: {
-    padding: 16,
-  },
-  timeButtonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 12,
-  },
-  timeButton: {
-    backgroundColor: '#1565C0',
-    borderRadius: 8,
-    padding: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '48%',
-  },
-  disabledButton: {
-    backgroundColor: '#ECEFF1',
-    borderWidth: 1,
-    borderColor: '#CFD8DC',
-  },
-  timeButtonText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginLeft: 8,
-  },
-  disabledButtonText: {
-    color: '#90A4AE',
-  },
-  actionButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#1565C0',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 12,
-  },
-  actionButtonText: {
-    color: '#1565C0',
-    fontSize: 16,
-    fontWeight: '500',
-    marginLeft: 12,
-  },
-  backButton: {
-    backgroundColor: '#1565C0',
-    marginHorizontal: 16,
-    marginVertical: 24,
-    borderRadius: 8,
-    padding: 14,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginLeft: 8,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  modalContent: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    width: '90%',
-    maxHeight: '80%',
-    padding: 20,
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#1565C0',
-  },
+  
+  // Histórico de pontos
   modalScrollView: {
     maxHeight: 400,
   },
   dayRecord: {
     marginBottom: 16,
     backgroundColor: '#F5F7FA',
-    borderRadius: 8,
-    padding: 12,
+    borderRadius: 12,
+    padding: 16,
+  },
+  dayRecordHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+    paddingBottom: 8,
   },
   dayRecordDate: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#263238',
-    marginBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
-    paddingBottom: 4,
+  },
+  dayRecordBadge: {
+    backgroundColor: '#E3F2FD',
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  dayRecordBadgeText: {
+    fontSize: 12,
+    color: '#1565C0',
+    fontWeight: '500',
   },
   recordItem: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#EEEEEE',
   },
-  recordType: {
-    flexDirection: 'row',
+  recordIconContainer: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#E3F2FD',
     alignItems: 'center',
-    width: '40%',
+    justifyContent: 'center',
+    marginRight: 12,
   },
-  recordTypeText: {
-    marginLeft: 8,
-    fontSize: 14,
-    color: '#455A64',
+  recordInfo: {
+    flex: 1,
+  },
+  recordType: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: '#263238',
   },
   recordTime: {
     fontSize: 14,
-    color: '#263238',
-    fontWeight: '500',
-    width: '20%',
-    textAlign: 'center',
+    color: '#455A64',
   },
-  recordStatus: {
-    fontSize: 14,
+  recordStatusBadge: {
+    backgroundColor: '#E8F5E9',
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  recordStatusAlertBadge: {
+    backgroundColor: '#FFF3E0',
+  },
+  recordStatusText: {
+    fontSize: 12,
     color: '#4CAF50',
-    width: '40%',
-    textAlign: 'right',
+    fontWeight: '500',
   },
-  recordStatusAlert: {
+  recordStatusAlertText: {
     color: '#F57C00',
+  },
+  
+  // Estilos para o form de upload
+  uploadInstructions: {
+    fontSize: 14,
+    color: '#455A64',
+    marginBottom: 16,
+    lineHeight: 20,
   },
   uploadForm: {
     padding: 10,
   },
   formLabel: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#455A64',
-    marginBottom: 6,
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#263238',
+    marginBottom: 8,
   },
   datePickerButton: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: '#F5F7FA',
     borderWidth: 1,
-    borderColor: '#CFD8DC',
-    borderRadius: 4,
-    padding: 12,
+    borderColor: '#E0E0E0',
+    borderRadius: 12,
+    padding: 14,
     marginBottom: 16,
   },
   datePickerText: {
     color: '#455A64',
-    fontSize: 14,
+    fontSize: 15,
+  },
+  textInputContainer: {
+    backgroundColor: '#F5F7FA',
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    borderRadius: 12,
+    marginBottom: 16,
   },
   textInput: {
-    borderWidth: 1,
-    borderColor: '#CFD8DC',
-    borderRadius: 4,
-    padding: 10,
-    marginBottom: 16,
-    minHeight: 80,
+    padding: 14,
+    minHeight: 100,
     textAlignVertical: 'top',
+    fontSize: 15,
+    color: '#263238',
   },
-  uploadButton: {
-    backgroundColor: '#1565C0',
-    borderRadius: 4,
-    padding: 12,
+  uploadFileButton: {
+    backgroundColor: '#E3F2FD',
+    borderRadius: 12,
+    padding: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#BBDEFB',
   },
-  uploadButtonText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: '500',
-    marginLeft: 8,
+  uploadFileButtonText: {
+    color: '#1565C0',
+    fontSize: 15,
+    fontWeight: '600',
+    marginLeft: 10,
+  },
+  uploadHelpText: {
+    fontSize: 13,
+    color: '#78909C',
+    textAlign: 'center',
+    marginBottom: 16,
   },
   submitButton: {
     backgroundColor: '#4CAF50',
-    borderRadius: 4,
-    padding: 12,
+    borderRadius: 12,
+    paddingVertical: 16,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 10,
   },
   submitButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
 });
