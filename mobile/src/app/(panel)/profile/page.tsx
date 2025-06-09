@@ -39,8 +39,13 @@ export default function Profile() {
   
   // Estado para o modal de contratos e contrato selecionado
   const [contractsModalVisible, setContractsModalVisible] = useState(true);
-  const [selectedContract, setSelectedContract] = useState(null);
-  const [currentContractId, setCurrentContractId] = useState(null);
+  const [selectedContract, setSelectedContract] = useState<{
+    id: string;
+    employerName: string;
+    position: string;
+    active: boolean;
+  } | null>(null);
+  const [currentContractId, setCurrentContractId] = useState<string | null>(null);
   
   // Dados fictícios de contratos
   const [contracts, setContracts] = useState([
@@ -108,13 +113,13 @@ export default function Profile() {
   }, []);
   
   // Função para selecionar um contrato
-  const selectContract = (contract) => {
+  const selectContract = (contract: { id: string; employerName: string; position: string; active: boolean }) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setSelectedContract(contract);
   };
   
   // Função para registrar ponto
-  const registerTimecard = async (type) => {
+  const registerTimecard = async (type: 'Entrada' | 'Saída Almoço' | 'Volta Almoço' | 'Saída') => {
     const now = new Date();
     const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     const dateString = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
@@ -217,7 +222,7 @@ export default function Profile() {
   const formattedHour = `${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}`;
   
   // Função para obter um ícone baseado no tipo de registro
-  const getRecordIcon = (type) => {
+  const getRecordIcon = (type: 'Entrada' | 'Saída Almoço' | 'Volta Almoço' | 'Saída' | string) => {
     switch (type) {
       case 'Entrada':
         return 'login';
@@ -495,7 +500,7 @@ export default function Profile() {
               style={[
                 styles.timecardButton, 
                 todayRecords.saidaAlmoco && styles.completedButton,
-                (!todayRecords.entrada || todayRecords.saida) && styles.disabledButton,
+                !todayRecords.saidaAlmoco && (!todayRecords.entrada || todayRecords.saida) && styles.disabledButton,
                 loading && loadingButton === 'Saída Almoço' && styles.loadingButton
               ]}
               onPress={() => registerTimecard('Saída Almoço')}
@@ -510,31 +515,28 @@ export default function Profile() {
                     size={24} 
                     color={
                       todayRecords.saidaAlmoco 
-                        ? "#4CAF50" 
+                        ? "#4CAF50" // Verde para registrado
                         : (!todayRecords.entrada || todayRecords.saida)
-                          ? "#90A4AE" 
-                          : "#1565C0"
+                          ? "#90A4AE" // Cinza para desabilitado
+                          : "#1565C0"  // Azul para ativo
                     } 
                   />
                   <View style={styles.buttonTextContainer}>
                     <Text style={[
-                      styles.timecardButtonTitle, 
-                      todayRecords.saidaAlmoco && styles.completedButtonTitle,
-                      (!todayRecords.entrada || todayRecords.saida) && styles.disabledButtonTitle
+                      styles.timecardButtonTitle,
+                      todayRecords.saidaAlmoco ? styles.completedButtonTitle : // Priorizar este estilo
+                      ((!todayRecords.entrada || todayRecords.saida) ? styles.disabledButtonTitle : {})
                     ]}>
                       Saída Almoço
                     </Text>
                     <Text style={[
                       styles.timecardButtonSubtitle,
-                      todayRecords.saidaAlmoco && styles.completedButtonSubtitle,
-                      (!todayRecords.entrada || todayRecords.saida) && styles.disabledButtonSubtitle
+                      todayRecords.saidaAlmoco ? styles.completedButtonSubtitle : // Priorizar este estilo
+                      ((!todayRecords.entrada || todayRecords.saida) ? styles.disabledButtonSubtitle : {})
                     ]}>
                       {todayRecords.saidaAlmoco ? 'Registrado' : todayRecords.saida ? 'Indisponível' : 'Intervalo'}
                     </Text>
                   </View>
-                  {todayRecords.saidaAlmoco && (
-                    <Ionicons name="checkmark-circle" size={22} color="#4CAF50" />
-                  )}
                 </>
               )}
             </TouchableOpacity>
@@ -543,7 +545,7 @@ export default function Profile() {
               style={[
                 styles.timecardButton, 
                 todayRecords.voltaAlmoco && styles.completedButton,
-                (!todayRecords.saidaAlmoco || todayRecords.saida) && styles.disabledButton,
+                !todayRecords.voltaAlmoco && (!todayRecords.saidaAlmoco || todayRecords.saida) && styles.disabledButton,
                 loading && loadingButton === 'Volta Almoço' && styles.loadingButton
               ]}
               onPress={() => registerTimecard('Volta Almoço')}
@@ -566,23 +568,20 @@ export default function Profile() {
                   />
                   <View style={styles.buttonTextContainer}>
                     <Text style={[
-                      styles.timecardButtonTitle, 
-                      todayRecords.voltaAlmoco && styles.completedButtonTitle,
-                      (!todayRecords.saidaAlmoco || todayRecords.saida) && styles.disabledButtonTitle
+                      styles.timecardButtonTitle,
+                      todayRecords.voltaAlmoco ? styles.completedButtonTitle :
+                      ((!todayRecords.saidaAlmoco || todayRecords.saida) ? styles.disabledButtonTitle : {})
                     ]}>
                       Volta Almoço
                     </Text>
                     <Text style={[
                       styles.timecardButtonSubtitle,
-                      todayRecords.voltaAlmoco && styles.completedButtonSubtitle,
-                      (!todayRecords.saidaAlmoco || todayRecords.saida) && styles.disabledButtonSubtitle
+                      todayRecords.voltaAlmoco ? styles.completedButtonSubtitle :
+                      ((!todayRecords.saidaAlmoco || todayRecords.saida) ? styles.disabledButtonSubtitle : {})
                     ]}>
                       {todayRecords.voltaAlmoco ? 'Registrado' : 'Retorno ao trabalho'}
                     </Text>
                   </View>
-                  {todayRecords.voltaAlmoco && (
-                    <Ionicons name="checkmark-circle" size={22} color="#4CAF50" />
-                  )}
                 </>
               )}
             </TouchableOpacity>

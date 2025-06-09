@@ -17,7 +17,22 @@ import * as Haptics from 'expo-haptics';
 export default function TimecardHistory() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [fullHistory, setFullHistory] = useState([]);
+  interface TimecardRecord {
+    id: string;
+    date: string;
+    fullDate: Date;
+    records: {
+      entry: string;
+      lunchOut: string;
+      lunchIn: string;
+      exit: string;
+    };
+    totalHours: string;
+    hasAlert: boolean;
+    alertReason: string;
+  }
+  
+  const [fullHistory, setFullHistory] = useState<TimecardRecord[]>([]);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   
@@ -85,7 +100,7 @@ export default function TimecardHistory() {
       }
       
       // Ordenar por data (mais recente primeiro)
-      exampleData.sort((a, b) => b.fullDate - a.fullDate);
+      exampleData.sort((a, b) => b.fullDate.getTime() - a.fullDate.getTime());
       
       setFullHistory(exampleData);
       setLoading(false);
