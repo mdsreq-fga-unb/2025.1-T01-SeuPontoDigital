@@ -73,12 +73,15 @@ export default function EntryScreen() {
         await AsyncStorage.setItem('userToken', response.data.token);
       }
 
-      const { userType } = response.data.userType;
+      const { userType } = response.data;
 
       Alert.alert('Sucesso', response.data.message || 'Login realizado com sucesso');
+      console.log(userType)
       if(userType === 'employee'){
+        console.log("indo 1")
         router.replace('/(panel)/profile/page');
       } else if (userType === 'employer') {
+        console.log("indo 2")
         router.replace('/(panel)/employer/page');
       }
       

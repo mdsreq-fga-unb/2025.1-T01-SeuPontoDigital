@@ -8,6 +8,7 @@ const loginApp = async (req, res) => {
         const { cpf, password } = req.body;
 
         const { data, error, userType } = await getOneUserFromCPF(cpf)
+        console.log(userType)
 
         if (error || !data) {
             return res.status(404).send({ message: "CPF não encontrado" });
