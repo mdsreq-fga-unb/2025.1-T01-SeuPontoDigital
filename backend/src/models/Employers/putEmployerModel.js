@@ -18,9 +18,24 @@ const putEmployerModel = async (employerID, updateFields) => {
                     // Limpar CPF removendo formatação
                     employerFields[key] = updateFields[key].replace(/\D/g, '');
                 } else if (key === 'phone' && updateFields[key]) {
-                    // Formatar telefone para o padrão do Twilio se necessário
-                    const phone = updateFields[key].replace(/\D/g, '');
-                    employerFields[key] = phone.startsWith('55') ? `+${phone}` : `+55${phone}`;
+                    // Formatar telefone para o padrão do Twilio - sempre garantir +55 no início
+                    let phone = updateFields[key].trim();
+                    
+                    // Se já tem o prefixo +55, manter como está
+                    if (phone.startsWith('+55')) {
+                        employerFields[key] = phone;
+                    } else {
+                        // Remover qualquer formatação (parênteses, espaços, traços) e garantir que seja apenas números
+                        phone = phone.replace(/\D/g, '');
+                        
+                        // Se começar com 55, remover para evitar duplicação
+                        if (phone.startsWith('55')) {
+                            phone = phone.substring(2);
+                        }
+                        
+                        // Sempre adicionar +55 no início
+                        employerFields[key] = `+55${phone}`;
+                    }
                 } else {
                     employerFields[key] = updateFields[key];
                 }

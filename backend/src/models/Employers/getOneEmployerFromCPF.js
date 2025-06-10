@@ -7,6 +7,11 @@ const getOneEmployerFromCPF = async(cpf) => {
 
         if (error) return;
        
+        // Remover +55 do telefone para exibição no frontend
+        if (data && data.phone && data.phone.startsWith('+55')) {
+            data.phone = data.phone.substring(3);
+        }
+       
         return data ;
     }
     catch (err){

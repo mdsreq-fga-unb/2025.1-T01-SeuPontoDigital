@@ -7,6 +7,29 @@ const postContractModel = async (data) => {
 
         const passwordHash = await generatePasswordHash(data.password);
 
+        // Formatar telefone para o padrão do Twilio se fornecido
+        let phoneFormatTwilio = null;
+        if (data.phone) {
+            let phone = data.phone.trim();
+            
+            // Se já tem o prefixo +55, manter como está
+            if (phone.startsWith('+55')) {
+                phoneFormatTwilio = phone;
+            } else {
+                // Remover qualquer formatação e garantir que seja apenas números
+                phone = phone.replace(/\D/g, '');
+                
+                // Se começar com 55 e tiver 13 dígitos (55 + 11 dígitos do celular brasileiro)
+                // considera que já tem o código do país
+                if (phone.startsWith('55') && phone.length === 13) {
+                    phoneFormatTwilio = `+${phone}`;
+                } else {
+                    // Caso contrário, adiciona o +55
+                    phoneFormatTwilio = `+55${phone}`;
+                }
+            }
+        }
+
         let dateNowBrazil = new Date().toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
         let [day, month, year] = dateNowBrazil.split('/');
         dateNowBrazil = `${year}-${month}-${day}`;
@@ -14,7 +37,7 @@ const postContractModel = async (data) => {
         const { error } = await supabase.from("employee_contracts").insert({
             name: data.name,
             cpf: cleanCPF,
-            phone: data.phone || null,
+            phone: phoneFormatTwilio,
             email: data.email || null,
             password: passwordHash || null,
             employer_id: data.employer_id,

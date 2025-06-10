@@ -33,7 +33,7 @@ const getEmployersModel = async () => {
         // Flatten address data for each employer
         const flattenedData = data.map(employer => {
             const { address, ...employerData } = employer;
-            return {
+            const flattened = {
                 ...employerData,
                 cep: address?.cep || "",
                 street: address?.street || "",
@@ -43,6 +43,13 @@ const getEmployersModel = async () => {
                 house_number: address?.house_number || "",
                 complement: address?.complement || "",
             };
+            
+            // Remover +55 do telefone para exibição no frontend
+            if (flattened.phone && flattened.phone.startsWith('+55')) {
+                flattened.phone = flattened.phone.substring(3);
+            }
+            
+            return flattened;
         });
             
         return flattenedData;
