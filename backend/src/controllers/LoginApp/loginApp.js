@@ -1,16 +1,13 @@
 import supabase from "../../config/supabase.js";
 import verifyPassword from "../../middlewares/verifyPassword.js";
 import createToken from "../../middlewares/createToken.js";
+import { getUserByCPF } from "../../services/getUserByCPF.js";
 
-const loginEmployer = async (req, res) => {
+const loginApp = async (req, res) => {
     try {
         const { cpf, password } = req.body;
 
-        const { data, error } = await supabase
-            .from("employers")
-            .select("id, name, password")
-            .eq("cpf", cpf)
-            .single();
+        const { data, error, userType } = await getOneUserFromCPF(cpf)
 
         if (error || !data) {
             return res.status(404).send({ message: "CPF não encontrado" });
@@ -25,9 +22,10 @@ const loginEmployer = async (req, res) => {
         return res.status(200).json({
             message: "Login realizado com sucesso",
             token: createToken(data),
+            userType: userType
         });
     } catch (err) {
         return res.status(500).send({ message: "Erro interno no servidor" });
     }
 };
-export default loginEmployer;
+export default loginApp;

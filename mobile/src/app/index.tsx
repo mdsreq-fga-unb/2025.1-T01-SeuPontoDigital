@@ -67,14 +67,21 @@ export default function EntryScreen() {
     setLoading(true);
     try {
       const cleanCpf = cpf.replace(/\D/g, '');
-      const response = await api.post('/login-employer', { cpf: cleanCpf, password });
+      const response = await api.post('/login-app', { cpf: cleanCpf, password });
 
       if (response.data.token) {
         await AsyncStorage.setItem('userToken', response.data.token);
       }
 
+      const { userType } = response.data.userType;
+
       Alert.alert('Sucesso', response.data.message || 'Login realizado com sucesso');
-      router.replace('/(panel)/profile/page');
+      if(userType === 'employee'){
+        router.replace('/(panel)/profile/page');
+      } else if (userType === 'employer') {
+        router.replace('/(panel)/employer/page');
+      }
+      
     } catch (err: any) {
       console.error("Erro completo:", err);
       if (err.message?.includes('Network Error')) {

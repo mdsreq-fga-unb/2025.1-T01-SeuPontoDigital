@@ -20,6 +20,11 @@ export default function MainLayout(){
         ></Stack.Screen>
 
         <Stack.Screen
+          name="(panel)/employer/page"
+          options={{headerShown: false}}
+        ></Stack.Screen>
+
+        <Stack.Screen
           name="(auth)/forgotpass/page"
           options={{headerShown: false}}
         ></Stack.Screen>
