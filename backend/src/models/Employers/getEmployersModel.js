@@ -9,7 +9,7 @@ const getEmployersModel = async () => {
         return data ;
     }
     catch (err) {
-        console.log("error in getEmployersModel");
+        console.error("error in getEmployersModel");
     }
 }
 
