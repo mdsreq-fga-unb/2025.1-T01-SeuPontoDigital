@@ -1,7 +1,7 @@
 import supabase from "../../config/supabase.js";
 import verifyPassword from "../../middlewares/verifyPassword.js";
 import createToken from "../../middlewares/createToken.js";
-import { getUserByCPF } from "../../services/getUserByCPF.js";
+import getOneUserFromCPF from "../../models/LoginApp/getOneUserFromCPF.js";
 
 const loginApp = async (req, res) => {
     try {
@@ -25,7 +25,8 @@ const loginApp = async (req, res) => {
             userType: userType
         });
     } catch (err) {
-        return res.status(500).send({ message: "Erro interno no servidor" });
+        console.log(err)
+        return res.status(500).send({ message: "Erro interno no servidor :)" });
     }
 };
 export default loginApp;
