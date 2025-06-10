@@ -15,6 +15,7 @@ import getOneContractController from "../controllers/ContractEmployee/getOneCont
 import deleteContractController from "../controllers/ContractEmployee/deleteContractController.js";
 import putContractController from "../controllers/ContractEmployee/putContractController.js";
 import postAddressController from "../controllers/Address/postAddressController.js";
+import putAddressController from "../controllers/Address/putAddressController.js";
 
 const privateRoute = express.Router();
 
@@ -22,6 +23,7 @@ privateRoute.use(authVerifyToken);
 
 // ================= ADDRESS =================
 privateRoute.post("/address", postAddressController);
+privateRoute.put("/address/:id", putAddressController);
 
 // ============= EMPLOYEES-CONTRACTS =============
 

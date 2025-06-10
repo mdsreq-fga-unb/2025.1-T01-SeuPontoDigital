@@ -4,7 +4,22 @@ const getOneEmployerWithContractsModel = async (id) => {
     try {
         const { data: employer, error: employerError } = await supabase
             .from("employers")
-            .select("*")
+            .select(`
+                id,
+                name,
+                cpf,
+                phone,
+                email,
+                address:id_address (
+                    cep,
+                    street,
+                    uf,
+                    neighborhood,
+                    city,
+                    house_number,
+                    complement
+                )
+            `)
             .eq("id", id)
             .single();
 
@@ -20,7 +35,14 @@ const getOneEmployerWithContractsModel = async (id) => {
         const activeEmployees = contracts.filter(c => c.contract_status === "ativo");
         const inactiveEmployees = contracts.filter(c => c.contract_status === "inativo");
 
-        return { ...employer, activeEmployees, inactiveEmployees }
+        // Flatten address data
+        const flattenedEmployer = {
+            ...employer,
+            ...(employer.address || {}),
+        };
+        delete flattenedEmployer.address;
+
+        return { ...flattenedEmployer, activeEmployees, inactiveEmployees }
     } 
     catch (err) {
         console.error("error in getOneEmployerWithContractsModel");

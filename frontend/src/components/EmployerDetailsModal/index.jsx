@@ -21,7 +21,7 @@ const EmployerDetailsModal = ({ isOpen, onRequestClose, employerData }) => {
                 <p><strong>Telefone:</strong> {employerData.phone}</p>
                 <p><strong>Rua:</strong> {employerData.street}</p>
                 <p><strong>Bairro:</strong> {employerData.neighborhood}</p>
-                <p><strong>Número:</strong> {employerData.home_number}</p>
+                <p><strong>Número:</strong> {employerData.house_number}</p>
             </div>
 
             <div className="employee-box active-employees">

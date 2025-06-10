@@ -2,14 +2,54 @@ import supabase from "../../config/supabase.js";
 
 const getEmployersModel = async () => {
     try {
-        const { data, error } = await supabase.from("employers").select("*")
+        const { data, error } = await supabase
+            .from("employers")
+            .select(`
+                id,
+                name,
+                cpf,
+                phone,
+                email,
+                address:id_address (
+                    cep,
+                    street,
+                    uf,
+                    neighborhood,
+                    city,
+                    house_number,
+                    complement
+                )
+            `);
 
-        if (error) return { error };
+        if (error) {
+            console.error("Supabase error:", error);
+            return [];
+        }
+
+        if (!data) {
+            return [];
+        }
+
+        // Flatten address data for each employer
+        const flattenedData = data.map(employer => {
+            const { address, ...employerData } = employer;
+            return {
+                ...employerData,
+                cep: address?.cep || "",
+                street: address?.street || "",
+                uf: address?.uf || "",
+                neighborhood: address?.neighborhood || "",
+                city: address?.city || "",
+                house_number: address?.house_number || "",
+                complement: address?.complement || "",
+            };
+        });
             
-        return data ;
+        return flattenedData;
     }
     catch (err) {
-        console.log("error in getEmployersModel");
+        console.error("error in getEmployersModel:", err);
+        return [];
     }
 }
 

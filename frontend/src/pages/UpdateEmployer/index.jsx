@@ -1,5 +1,5 @@
 import "../pagesStyle.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import EmployerForm from "../../components/EmployerForm/index.jsx";
 import Sidebar from "../../components/Sidebar";
@@ -9,30 +9,50 @@ import usePutEmployer from "../../hooks/usePutEmployer.js";
 
 const UpdateEmployer = () => {
     const { id } = useParams();
-    const {fetchOneEmployer} = useFetchEmployer();
+    const { fetchOneEmployer } = useFetchEmployer();
     const putEmployer = usePutEmployer();
     const [modalOpen, setModalOpen] = useState(false);
     const [password, setPassword] = useState("");
     const [employer, setEmployer] = useState({
+        id: "",
+        id_address: "",
         name: "",
         cpf: "",
         email: "",
         phone: "",
         cep: "",
         street: "",
-        home_number: "",
+        house_number: "",
         city: "",
-        state: "",
+        uf: "",
         neighborhood: "",
         complement: "",
     });
 
+    const loadEmployerData = useCallback(async () => {
+        const employerData = await fetchOneEmployer(id);
+        if (employerData) {
+            setEmployer({
+                id: employerData.id,
+                id_address: employerData.id_address || "",
+                name: employerData.name || "",
+                cpf: employerData.cpf || "",
+                email: employerData.email || "",
+                phone: employerData.phone || "",
+                cep: employerData.cep || "",
+                street: employerData.street || "",
+                house_number: employerData.house_number || "",
+                city: employerData.city || "",
+                uf: employerData.uf || "",
+                neighborhood: employerData.neighborhood || "",
+                complement: employerData.complement || "",
+            });
+        }
+    }, [id, fetchOneEmployer]);
+
     useEffect(() => {
-        const fetchEmployer = async () => {
-            setEmployer(await fetchOneEmployer(id));
-        };
-        fetchEmployer();
-    }, [id]);
+        loadEmployerData();
+    }, [loadEmployerData]);
 
     const handleInputUserChange = ({ name, value }) => {
         setEmployer((prev) => ({ ...prev, [name]: value }));

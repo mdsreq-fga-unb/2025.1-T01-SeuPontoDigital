@@ -10,7 +10,11 @@ const usePutEmployer = () => {
         const token = localStorage.getItem("token");
 
         try {
-            await axios.put(`${import.meta.env.VITE_API_URL}/api/employer/${employer.id}`, { ...employer, passwordAdmin: passwordInput }, { headers: { Authorization: `Bearer ${token}` } }
+            // O backend já faz a separação entre dados do employer e endereço
+            await axios.put(
+                `${import.meta.env.VITE_API_URL}/api/employer/${employer.id}`, 
+                { ...employer, passwordAdmin: passwordInput }, 
+                { headers: { Authorization: `Bearer ${token}` } }
             );
 
             if (closeModal) closeModal();

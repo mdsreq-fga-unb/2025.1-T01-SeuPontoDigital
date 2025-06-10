@@ -38,7 +38,7 @@ const Employers = () => {
     }, []);
 
     const handleNameClick = async (employer) => {
-        const dataEmployer = await fetchOneEmployer(employer.id)
+        const dataEmployer = await fetchOneEmployer(employer.id, true)
         setSelectedEmployer(dataEmployer);
         setDetailsModalOpen(true);
     }

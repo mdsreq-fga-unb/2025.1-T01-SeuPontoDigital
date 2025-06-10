@@ -28,7 +28,7 @@ const Contracts = () => {
             const contractsWithEmployer = await Promise.all(contracts.map(async (contract) => {
                     let nameEmployer = "";
                     if (contract.employer && contract.employer.id) {
-                        const employer = await fetchOneEmployer(contract.employer.id);
+                        const employer = await fetchOneEmployer(contract.employer.id, false);
                         nameEmployer = employer?.name || "";
                     }
                     return { ...contract, nameEmployer };
