@@ -17,6 +17,8 @@ import putEmployerController from "../controllers/Employers/putEmployerControlle
 import postAddressController from "../controllers/Address/postAddressController.js";
 import putAddressController from "../controllers/Address/putAddressController.js";
 import postEmployeeController from "../controllers/Employees/postEmployeeController.js";
+import getEmployeesController from "../controllers/Employees/getEmployeesController.js";
+import getOneEmployeeController from "../controllers/Employees/getOneEmployeeController.js";
 
 const privateRoute = express.Router();
 
@@ -44,8 +46,8 @@ privateRoute.delete("/employer/:id", validateDateTwoYears, deleteEmployerControl
 
 // ================== EMPLOYEES ==================
 
-// privateRoute.get("/employees", getEmployeesController);
-// privateRoute.get("/employee/:id", getOneEmployeeController);
+privateRoute.get("/employees", getEmployeesController);
+privateRoute.get("/employee/:id", getOneEmployeeController);
 privateRoute.post("/employee", validateUser, postEmployeeController);
 // privateRoute.put("/employee/:id", validateUser, putEmployeeController);
 // privateRoute.delete("/employee/:id", validateDateTwoYears, deleteEmployeeController);

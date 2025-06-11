@@ -10,6 +10,7 @@ const getEmployersModel = async () => {
                 cpf,
                 phone,
                 email,
+                created_at,
                 address:id_address (
                     cep,
                     street,
