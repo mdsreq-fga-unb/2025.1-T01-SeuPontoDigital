@@ -7,7 +7,7 @@ const getOneEmployeeController = async (req, res) => {
         const employee = await getOneEmployeeModel(employeeID)
     
         if (!employee) {
-            return res.status(404).send({ message: "employer not found" });
+            return res.status(404).send({ message: "employee not found" });
         }
 
         return res.status(200).json(employee);
