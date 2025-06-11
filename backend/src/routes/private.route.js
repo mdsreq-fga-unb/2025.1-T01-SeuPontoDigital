@@ -1,25 +1,19 @@
 import express from "express";
 import authVerifyToken from "../middlewares/authVerifyToken.js";
 import validateUser from "../middlewares/validateUser.js";
-// import validateContract from "../middlewares/validateContract.js"
 import validateDateTwoYears from "../middlewares/validateDateTwoYears.js";
-// import verifyDateContract from "../middlewares/verifyDateContract.js";
 import getEmployersController from "../controllers/Employers/getEmployersController.js";
 import getOneEmployerController from "../controllers/Employers/getOneEmployerController.js";
 import postEmployerController from "../controllers/Employers/postEmployerController.js";
 import deleteEmployerController from "../controllers/Employers/deleteEmployerController.js";
 import putEmployerController from "../controllers/Employers/putEmployerController.js";
-// import postContractController from "../controllers/ContractEmployee/postContractController.js";
-// import getContractsController from "../controllers/ContractEmployee/getContractsController.js";
-// import getOneContractController from "../controllers/ContractEmployee/getOneContractController.js";
-// import deleteContractController from "../controllers/ContractEmployee/deleteContractController.js";
-// import putContractController from "../controllers/ContractEmployee/putContractController.js";
 import postAddressController from "../controllers/Address/postAddressController.js";
 import putAddressController from "../controllers/Address/putAddressController.js";
 import postEmployeeController from "../controllers/Employees/postEmployeeController.js";
 import getEmployeesController from "../controllers/Employees/getEmployeesController.js";
 import getOneEmployeeController from "../controllers/Employees/getOneEmployeeController.js";
 import putEmployeeController from "../controllers/Employees/putEmployeeController.js";
+import deleteEmployeeController from "../controllers/Employees/deleteEmployeeController.js";
 
 const privateRoute = express.Router();
 
@@ -51,6 +45,6 @@ privateRoute.get("/employees", getEmployeesController);
 privateRoute.get("/employee/:id", getOneEmployeeController);
 privateRoute.post("/employee", validateUser, postEmployeeController);
 privateRoute.put("/employee/:id", validateUser, putEmployeeController);
-// privateRoute.delete("/employee/:id", validateDateTwoYears, deleteEmployeeController);
+privateRoute.delete("/employee/:id", deleteEmployeeController);
 
 export default privateRoute;
