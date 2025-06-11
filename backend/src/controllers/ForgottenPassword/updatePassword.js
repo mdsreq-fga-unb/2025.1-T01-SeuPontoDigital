@@ -1,7 +1,7 @@
 import getOneEmployeeFromCPF from "../../models/ContractEmployee/getOneEmployeeFromCPF.js";
 import getOneEmployerFromCPF from "../../models/Employers/getOneEmployerFromCPF.js";
 import generatePasswordHash from "../../middlewares/generatePasswordHash.js";
-import verifySMS from "../../middlewares/verifySMS.js";
+import validateCodeSMS from "../../middlewares/validateCodeSMS.js";
 import supabase from "../../config/supabase.js";
 
 const updatePassword = async (req, res) => {
@@ -26,7 +26,7 @@ const updatePassword = async (req, res) => {
             return res.status(404).send({ message: "user not found" });
         }
 
-        const isValidCode = await verifySMS(user.phone, code);
+        const isValidCode = await validateCodeSMS(user.phone, code);
         if (!isValidCode) {
             return res.status(400).send({ message: "invalid code" });
         }

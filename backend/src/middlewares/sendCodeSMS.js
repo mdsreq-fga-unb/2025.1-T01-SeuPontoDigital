@@ -1,7 +1,7 @@
 import { TWILIO_VERIFY_SERVICE_ID } from "../config/env.js";
 import clientTwilio from "../config/twilio.js";
 
-const sendSMS = async (phone) => {
+const sendCodeSMS = async (phone) => {
   try {
     const verification = await clientTwilio.verify.v2
       .services(TWILIO_VERIFY_SERVICE_ID)
@@ -15,4 +15,4 @@ const sendSMS = async (phone) => {
   }
 }
 
-export default sendSMS;
+export default sendCodeSMS;

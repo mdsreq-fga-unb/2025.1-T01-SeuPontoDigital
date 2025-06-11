@@ -1,7 +1,7 @@
 import validateCPF from "../../middlewares/validateCPF.js";
 import putEmployerModel from "../../models/Employers/putEmployerModel.js";
 import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
-import verifyPassword from "../../middlewares/verifyPassword.js";
+import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqual.js";
 
 const putEmployerController = async (req, res) => {
     try {
@@ -25,7 +25,7 @@ const putEmployerController = async (req, res) => {
             return res.status(404).json({ message: "admin not found" });
         }
 
-        const isPasswordValid = await verifyPassword(passwordAdmin, admin.password);
+        const isPasswordValid = await validateHashPasswordEqual(passwordAdmin, admin.password);
         delete updateDataEmployer.passwordAdmin;
         if (!isPasswordValid) {
             return res.status(401).json({ message: "invalid password" });

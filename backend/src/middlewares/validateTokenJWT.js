@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/env.js";
 
-const authVerifyToken = (req, res, next) => {
+const validateTokenJWT = (req, res, next) => {
     try {
         const token = req.headers['authorization'].replace("Bearer ", "");
         if (!token) {
@@ -22,4 +22,4 @@ const authVerifyToken = (req, res, next) => {
     }
 }
 
-export default authVerifyToken;
+export default validateTokenJWT;

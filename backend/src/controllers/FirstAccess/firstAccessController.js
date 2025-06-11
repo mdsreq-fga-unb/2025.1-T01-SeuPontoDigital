@@ -1,6 +1,6 @@
 import getOneEmployeeFromCPF from "../../models/ContractEmployee/getOneEmployeeFromCPF.js";
 import getOneEmployerFromCPF from "../../models/Employers/getOneEmployerFromCPF.js";
-import sendSMS from "../../middlewares/sendSMS.js";
+import sendCodeSMS from "../../middlewares/sendCodeSMS.js";
 
 const firstAccessController = async (req, res) => {
     let { name, cpf, phone, password } = req.body;
@@ -53,7 +53,7 @@ const firstAccessController = async (req, res) => {
         }
 
         try {
-            await sendSMS(phone);
+            await sendCodeSMS(phone);
         } catch (smsErr) {
             return res.status(500).send({ message: "Erro ao enviar SMS" });
         }

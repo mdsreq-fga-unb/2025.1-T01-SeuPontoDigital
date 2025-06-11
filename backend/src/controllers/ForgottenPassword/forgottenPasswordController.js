@@ -1,6 +1,6 @@
 import getOneEmployeeFromCPF from "../../models/ContractEmployee/getOneEmployeeFromCPF.js";
 import getOneEmployerFromCPF from "../../models/Employers/getOneEmployerFromCPF.js";
-import sendSMS from "../../middlewares/sendSMS.js";
+import sendCodeSMS from "../../middlewares/sendCodeSMS.js";
 
 const forgottenPasswordController = async (req, res) => {
     let { cpf, phone } = req.body;
@@ -51,7 +51,7 @@ const forgottenPasswordController = async (req, res) => {
 
         
         
-        await sendSMS(phone);
+        await sendCodeSMS(phone);
 
         return res.status(200).send({ message: "code sent" });
 

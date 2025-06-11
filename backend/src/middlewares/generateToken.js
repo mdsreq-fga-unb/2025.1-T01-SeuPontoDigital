@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/env.js";
 
-const createToken = (admin) => {
+const generateToken = (admin) => {
     try {
         const token = jwt.sign({ id: admin.id, email: admin.email }, JWT_SECRET, { expiresIn: "7d" });
         return token;
@@ -11,4 +11,4 @@ const createToken = (admin) => {
         throw err;
     }
 }
-export default createToken;
+export default generateToken;

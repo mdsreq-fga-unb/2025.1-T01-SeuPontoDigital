@@ -1,6 +1,6 @@
 import deleteContractModel from "../../models/ContractEmployee/deleteContractModel.js";
 import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
-import verifyPassword from "../../middlewares/verifyPassword.js";
+import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqual.js";
 
 const deleteContractController = async (req, res) => {
     try {
@@ -13,7 +13,7 @@ const deleteContractController = async (req, res) => {
             return res.status(404).json({message: "admin not found"});
         }
 
-        const isPasswordValid = await verifyPassword(password, admin.password);
+        const isPasswordValid = await validateHashPasswordEqual(password, admin.password);
         if (!isPasswordValid) {
             return res.status(401).json({message: "invalid password"});
         }

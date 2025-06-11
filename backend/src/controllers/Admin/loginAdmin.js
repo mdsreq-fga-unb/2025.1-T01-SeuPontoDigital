@@ -1,6 +1,6 @@
 import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
-import verifyPassword from "../../middlewares/verifyPassword.js";
-import createToken from "../../middlewares/createToken.js";
+import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqual.js";
+import generateToken from "../../middlewares/generateToken.js";
 
 const loginAdmin = async (req, res) => {
     try {
@@ -10,10 +10,10 @@ const loginAdmin = async (req, res) => {
 
         if (!admin) return res.status(404).send({message: "email not found"});
 
-        if (admin && await verifyPassword(password, admin.password)) {
+        if (admin && await validateHashPasswordEqual(password, admin.password)) {
             return res.status(200).json({
                 message: "login has been verified",
-                token: createToken(admin),
+                token: generateToken(admin),
             });
         }
 

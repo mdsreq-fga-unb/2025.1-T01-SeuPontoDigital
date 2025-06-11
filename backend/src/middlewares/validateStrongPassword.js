@@ -1,4 +1,4 @@
-const validatePassword = (req, res, next) => {
+const validateStrongPassword = (req, res, next) => {
     const { password } = req.body;
 
     const regex = /^(?=.*[A-Z])(?=.*[^A-Za-z0-9\s]).{8,}$/;
@@ -16,4 +16,4 @@ const validatePassword = (req, res, next) => {
     next();
 };
 
-export default validatePassword;
+export default validateStrongPassword;

@@ -1,29 +1,29 @@
 import express from "express";
-import authVerifyToken from "../middlewares/authVerifyToken.js";
+import validateTokenJWT from "../middlewares/validateTokenJWT.js";
 import validateUser from "../middlewares/validateUser.js";
-import {validateDateTwoYearsEmployee, validateDateTwoYearsEmployer} from "../middlewares/validateDateTwoYears.js";
+import {validateDateTwoYearsEmployee, validateDateTwoYearsEmployer, validateDateTwoYearsContract} from "../middlewares/validateDateTwoYears.js";
+import postAddressController from "../controllers/Address/postAddressController.js";
+import putAddressController from "../controllers/Address/putAddressController.js";
 import getEmployersController from "../controllers/Employers/getEmployersController.js";
 import getOneEmployerController from "../controllers/Employers/getOneEmployerController.js";
 import postEmployerController from "../controllers/Employers/postEmployerController.js";
 import deleteEmployerController from "../controllers/Employers/deleteEmployerController.js";
 import putEmployerController from "../controllers/Employers/putEmployerController.js";
-import postAddressController from "../controllers/Address/postAddressController.js";
-import putAddressController from "../controllers/Address/putAddressController.js";
-import postEmployeeController from "../controllers/Employees/postEmployeeController.js";
 import getEmployeesController from "../controllers/Employees/getEmployeesController.js";
 import getOneEmployeeController from "../controllers/Employees/getOneEmployeeController.js";
-import putEmployeeController from "../controllers/Employees/putEmployeeController.js";
+import postEmployeeController from "../controllers/Employees/postEmployeeController.js";
 import deleteEmployeeController from "../controllers/Employees/deleteEmployeeController.js";
+import putEmployeeController from "../controllers/Employees/putEmployeeController.js";
 
 const privateRoute = express.Router();
 
-privateRoute.use(authVerifyToken);
+privateRoute.use(validateTokenJWT);
 
 // ================= ADDRESS =================
 privateRoute.post("/address", postAddressController);
 privateRoute.put("/address/:id", putAddressController);
 
-// ============= EMPLOYEES-CONTRACTS =============
+// ============= CONTRACTS =============
 
 // privateRoute.get("/contracts", getContractsController);
 // privateRoute.get("/contract/:id", getOneContractController);

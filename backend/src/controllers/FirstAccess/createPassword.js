@@ -1,7 +1,7 @@
 import getOneEmployeeFromCPF from "../../models/ContractEmployee/getOneEmployeeFromCPF.js";
 import getOneEmployerFromCPF from "../../models/Employers/getOneEmployerFromCPF.js";
 import generatePasswordHash from "../../middlewares/generatePasswordHash.js";
-import verifySMS from "../../middlewares/verifySMS.js";
+import validateCodeSMS from "../../middlewares/validateCodeSMS.js";
 import supabase from "../../config/supabase.js";
 
 const createPassword = async (req, res) => {
@@ -30,7 +30,7 @@ const createPassword = async (req, res) => {
             return res.status(401).send({ message: `${userType} já possui uma conta.` });
         }
 
-        const isValidCode = await verifySMS(user.phone, code);
+        const isValidCode = await validateCodeSMS(user.phone, code);
 
         if (!isValidCode) {
             return res.status(400).send({ message: "Código inválido." });

@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-const verifyPassword = async (loginPassword, storedPassword) => {
+const validateHashPasswordEqual = async (loginPassword, storedPassword) => {
     try {
         const isMatch = await bcrypt.compare(loginPassword, storedPassword);
         
@@ -14,4 +14,4 @@ const verifyPassword = async (loginPassword, storedPassword) => {
     }
 }
 
-export default verifyPassword;
+export default validateHashPasswordEqual;
