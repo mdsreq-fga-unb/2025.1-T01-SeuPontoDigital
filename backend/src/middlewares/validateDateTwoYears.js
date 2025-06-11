@@ -1,6 +1,6 @@
 import getOneEmployerModel from "../models/Employers/getOneEmployerModel.js";
 
-const verifyDateEmployer = async (req, res, next) => {
+const validateDateTwoYears = async (req, res, next) => {
     try {
         const employerID = req.params.id;
         const employer = await getOneEmployerModel(employerID);
@@ -26,4 +26,4 @@ const verifyDateEmployer = async (req, res, next) => {
    
 }
 
-export default verifyDateEmployer;
+export default validateDateTwoYears;
