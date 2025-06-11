@@ -1,7 +1,7 @@
 import express from "express";
 import authVerifyToken from "../middlewares/authVerifyToken.js";
 import validateUser from "../middlewares/validateUser.js";
-import validateDateTwoYears from "../middlewares/validateDateTwoYears.js";
+import {validateDateTwoYearsEmployee, validateDateTwoYearsEmployer} from "../middlewares/validateDateTwoYears.js";
 import getEmployersController from "../controllers/Employers/getEmployersController.js";
 import getOneEmployerController from "../controllers/Employers/getOneEmployerController.js";
 import postEmployerController from "../controllers/Employers/postEmployerController.js";
@@ -37,7 +37,7 @@ privateRoute.get("/employers", getEmployersController);
 privateRoute.get("/employer/:id", getOneEmployerController);
 privateRoute.post("/employer", validateUser, postEmployerController);
 privateRoute.put("/employer/:id", validateUser, putEmployerController);
-privateRoute.delete("/employer/:id", validateDateTwoYears, deleteEmployerController);
+privateRoute.delete("/employer/:id", validateDateTwoYearsEmployer, deleteEmployerController);
 
 // ================== EMPLOYEES ==================
 
@@ -45,6 +45,6 @@ privateRoute.get("/employees", getEmployeesController);
 privateRoute.get("/employee/:id", getOneEmployeeController);
 privateRoute.post("/employee", validateUser, postEmployeeController);
 privateRoute.put("/employee/:id", validateUser, putEmployeeController);
-privateRoute.delete("/employee/:id", deleteEmployeeController);
+privateRoute.delete("/employee/:id", validateDateTwoYearsEmployee, deleteEmployeeController);
 
 export default privateRoute;

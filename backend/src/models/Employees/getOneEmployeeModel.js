@@ -14,8 +14,6 @@ const getOneEmployeeModel = async (id) => {
             `)
             .eq("id", id)
             .single();
-        
-        console.log(data)
 
         if (error) throw new Error("failed to fetch employee");
 
