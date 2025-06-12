@@ -2,9 +2,9 @@ import supabase from "../../config/supabase.js";
 
 const getOneContractModel = async (id) => {
     try{
-        const {data, error} = await supabase.from("employee_contracts").select("*").eq("id", id).single();
+        const {data, error} = await supabase.from("contracts").select("*").eq("id", id).single();
 
-        if (error) return { error };
+        if (error);
             
         return data ;
     }

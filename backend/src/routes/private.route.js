@@ -14,6 +14,8 @@ import getOneEmployeeController from "../controllers/Employees/getOneEmployeeCon
 import postEmployeeController from "../controllers/Employees/postEmployeeController.js";
 import deleteEmployeeController from "../controllers/Employees/deleteEmployeeController.js";
 import putEmployeeController from "../controllers/Employees/putEmployeeController.js";
+import getContractsController from "../controllers/Contracts/getContractsController.js";
+import getOneContractController from "../controllers/Contracts/getOneContractController.js";
 import postContractController from "../controllers/Contracts/postContractController.js";
 
 const privateRoute = express.Router();
@@ -26,8 +28,8 @@ privateRoute.put("/address/:id", putAddressController);
 
 // ============= CONTRACTS =============
 
-// privateRoute.get("/contracts", getContractsController);
-// privateRoute.get("/contract/:id", getOneContractController);
+privateRoute.get("/contracts", getContractsController);
+privateRoute.get("/contract/:id", getOneContractController);
 privateRoute.post("/contract", postContractController);
 // privateRoute.put("/contract/:id", validateUser, validateContract, putContractController);
 // privateRoute.delete("/contract/:id", verifyDateContract, deleteContractController);
