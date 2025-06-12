@@ -2,7 +2,7 @@ import supabase from "../../config/supabase.js";
 
 const deleteContractModel = async (id) => {
     try{
-        const {error} = await supabase.from("employee_contracts").delete().eq("id", id);
+        const {error} = await supabase.from("contracts").delete().eq("id", id);
         
         if(error) return error;
     }

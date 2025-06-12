@@ -1,6 +1,6 @@
 import getOneEmployerModel from "../models/Employers/getOneEmployerModel.js";
 import getOneEmployeeModel from "../models/Employees/getOneEmployeeModel.js";
-import getOneContractModel from "../models/ContractEmployee/getOneContractModel.js";
+import getOneContractModel from "../models/Contracts/getOneContractModel.js";
 
 const validateDateTwoYearsEmployer = async (req, res, next) => {
     try {

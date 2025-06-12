@@ -1,4 +1,4 @@
-import deleteContractModel from "../../models/ContractEmployee/deleteContractModel.js";
+import deleteContractModel from "../../models/Contracts/deleteContractModel.js";
 import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
 import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqual.js";
 

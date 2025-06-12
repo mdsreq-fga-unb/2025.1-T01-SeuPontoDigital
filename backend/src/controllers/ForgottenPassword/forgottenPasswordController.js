@@ -1,4 +1,4 @@
-import getOneEmployeeFromCPF from "../../models/ContractEmployee/getOneEmployeeFromCPF.js";
+import getOneEmployeeFromCPF from "../../models/Contracts/getOneEmployeeFromCPF.js";
 import getOneEmployerFromCPF from "../../models/Employers/getOneEmployerFromCPF.js";
 import sendCodeSMS from "../../middlewares/sendCodeSMS.js";
 

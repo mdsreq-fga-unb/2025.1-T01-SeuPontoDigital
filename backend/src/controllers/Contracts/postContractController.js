@@ -1,21 +1,15 @@
-import postContractModel from "../../models/ContractEmployee/postContractModel.js";
-import validateCPF from "../../middlewares/validateCPF.js";
+import postContractModel from "../../models/Contracts/postContractModel.js";
 
 const postContractController = async (req, res) => {
-    const data = req.body;
+    const contract = req.body;
 
     try{
-        if (validateCPF(data.cpf)) {
-
-            const error = await postContractModel(data); 
-            if (error) {
-                return res.status(400).json({ message: "failed to create contract" });
-            }
-
-            return res.status(201).json({ message: "contract has been added successfully" });
+        const error = await postContractModel(contract); 
+        if (error) {
+            return res.status(400).json({ message: "failed to create contract" });
         }
 
-        return res.status(400).json({ message: "invalid cpf" });
+        return res.status(201).json({ message: "contract has been added successfully" });
     }
     catch(err){
         return res.status(500).send({message: "internal server error" });
