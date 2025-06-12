@@ -5,7 +5,7 @@ import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqu
 const deleteContractController = async (req, res) => {
     try {
         const contractID  = req.id;
-        const {password} = req.body;
+        const {passwordAdmin} = req.body;
         const adminEmail = req.email;
 
         const admin = await findAdminByEmail(adminEmail);
@@ -13,7 +13,7 @@ const deleteContractController = async (req, res) => {
             return res.status(404).json({message: "admin not found"});
         }
 
-        const isPasswordValid = await validateHashPasswordEqual(password, admin.password);
+        const isPasswordValid = await validateHashPasswordEqual(passwordAdmin, admin.password);
         if (!isPasswordValid) {
             return res.status(401).json({message: "invalid password"});
         }
