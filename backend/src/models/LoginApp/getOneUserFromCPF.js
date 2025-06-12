@@ -1,18 +1,22 @@
-import supabase from "../../config/supabase.js";
 import getOneEmployerFromCPF from "../Employers/getOneEmployerFromCPF.js";
 import getOneEmployeeFromCPF from "../ContractEmployee/getOneEmployeeFromCPF.js";
 
 const getOneUserFromCPF = async (cpf) => {
     try {
+
         // Tenta buscar o empregador
-        const { data: employerData, error: employerError } = await getOneEmployerFromCPF(cpf);
+        const findEmployer = await getOneEmployerFromCPF(cpf);
+        const employerData = findEmployer;
+        const employerError = findEmployer?.error;
 
         // Se não encontrar o empregador, tenta buscar o empregado
         if (employerError || !employerData) {
-            const { data: employeeData, error: employeeError } = await getOneEmployeeFromCPF(cpf);
-
+            const findEmployee = await getOneEmployeeFromCPF(cpf);
+            const employeeData = findEmployee;
+            const employeeError = findEmployee?.error;
+            
+            // Se não encontrar o empregado, retorna um erro
             if (employeeError || !employeeData) {
-                // Se não encontrar o empregado, retorna um erro
                 console.error("Usuário não encontrado como empregador ou empregado.");
                 return{
                     error: employeeError,
@@ -47,13 +51,3 @@ const getOneUserFromCPF = async (cpf) => {
 };
 
 export default getOneUserFromCPF;
-
-
-// export const getUserByCPF = async (cpf) => {
-//   // Por enquanto, retorna um mock:
-//   return { data: { id: 1, cpf, password: '$2b$10$fakehash', phone: '61999999999' }, error: null };
-// };
-
-// // Depois você trocar por:
-// // import { supabase } from '../config/supabase';
-// // const { data, error } = await supabase.from('users').select().eq('cpf', cpf).single();
