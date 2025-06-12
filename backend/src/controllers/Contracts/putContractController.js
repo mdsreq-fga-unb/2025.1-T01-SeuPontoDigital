@@ -1,11 +1,10 @@
-import validateCPF from "../../middlewares/validateCPF.js";
-import putContractModel from "../../models/ContractEmployee/putContractModel.js";
+import putContractModel from "../../models/Contracts/putContractModel.js";
 import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
 import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqual.js";
 
 const putContractController = async (req, res) => {
     try {
-        const id = req.params.id;
+        const contractID = req.params.id;
         const updateDataContract = req.body;
         const { passwordAdmin } = req.body;
         const adminEmail = req.email;
@@ -21,14 +20,12 @@ const putContractController = async (req, res) => {
 
         const isPasswordValid = await validateHashPasswordEqual(passwordAdmin, admin.password);
         delete updateDataContract.passwordAdmin;
+        
         if (!isPasswordValid) {
             return res.status(401).json({ message: "invalid password" });
         }
 
-        if (updateDataContract.cpf && !validateCPF(updateDataContract.cpf))
-            return res.status(400).json({ message: "invalid cpf" });
-
-        const error = await putContractModel(id, updateDataContract);
+        const error = await putContractModel(contractID, updateDataContract);
         if (error) {
             return res.status(500).json({message: "internal server error"});
         }

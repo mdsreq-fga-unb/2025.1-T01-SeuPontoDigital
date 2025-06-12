@@ -1,6 +1,7 @@
 import express from "express";
 import validateTokenJWT from "../middlewares/validateTokenJWT.js";
 import validateUser from "../middlewares/validateUser.js";
+import validateDataContract from "../middlewares/validateDataContract.js"
 import {validateDateTwoYearsEmployee, validateDateTwoYearsEmployer, validateDateTwoYearsContract} from "../middlewares/validateDateTwoYears.js";
 import postAddressController from "../controllers/Address/postAddressController.js";
 import putAddressController from "../controllers/Address/putAddressController.js";
@@ -17,6 +18,7 @@ import putEmployeeController from "../controllers/Employees/putEmployeeControlle
 import getContractsController from "../controllers/Contracts/getContractsController.js";
 import getOneContractController from "../controllers/Contracts/getOneContractController.js";
 import postContractController from "../controllers/Contracts/postContractController.js";
+import putContractController from "../controllers/Contracts/putContractController.js";
 
 const privateRoute = express.Router();
 
@@ -31,7 +33,7 @@ privateRoute.put("/address/:id", putAddressController);
 privateRoute.get("/contracts", getContractsController);
 privateRoute.get("/contract/:id", getOneContractController);
 privateRoute.post("/contract", postContractController);
-// privateRoute.put("/contract/:id", validateUser, validateContract, putContractController);
+privateRoute.put("/contract/:id", validateDataContract, putContractController);
 // privateRoute.delete("/contract/:id", verifyDateContract, deleteContractController);
 
 // ================== EMPLOYERS ==================
