@@ -20,6 +20,8 @@ import getOneContractController from "../controllers/Contracts/getOneContractCon
 import postContractController from "../controllers/Contracts/postContractController.js";
 import putContractController from "../controllers/Contracts/putContractController.js";
 import deleteContractController from "../controllers/Contracts/deleteContractController.js";
+import postWorkAddressController from "../controllers/WorkAddress/postWorkAddressController.js";
+import getAllWorkAddressController from "../controllers/WorkAddress/getAllWorkAddressController.js";
 
 const privateRoute = express.Router();
 
@@ -29,24 +31,29 @@ privateRoute.use(validateTokenJWT);
 privateRoute.post("/address", postAddressController);
 privateRoute.put("/address/:id", putAddressController);
 
-// ============= CONTRACTS =============
 
+// ================= WORK ADDRESS =================
+privateRoute.get("work-address", getAllWorkAddressController);
+privateRoute.post("/work-address", postWorkAddressController);
+
+
+// ================= CONTRACTS =================
 privateRoute.get("/contracts", getContractsController);
 privateRoute.get("/contract/:id", getOneContractController);
 privateRoute.post("/contract", postContractController);
 privateRoute.put("/contract/:id", validateDataContract, putContractController);
 privateRoute.delete("/contract/:id", validateDateTwoYearsContract, deleteContractController);
 
-// ================== EMPLOYERS ==================
 
+// ================== EMPLOYERS ==================
 privateRoute.get("/employers", getEmployersController);
 privateRoute.get("/employer/:id", getOneEmployerController);
 privateRoute.post("/employer", validateUser, postEmployerController);
 privateRoute.put("/employer/:id", validateUser, putEmployerController);
 privateRoute.delete("/employer/:id", validateDateTwoYearsEmployer, deleteEmployerController);
 
-// ================== EMPLOYEES ==================
 
+// ================== EMPLOYEES ==================
 privateRoute.get("/employees", getEmployeesController);
 privateRoute.get("/employee/:id", getOneEmployeeController);
 privateRoute.post("/employee", validateUser, postEmployeeController);
