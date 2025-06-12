@@ -24,7 +24,8 @@ import postWorkAddressController from "../controllers/WorkAddress/postWorkAddres
 import getAllWorkAddressController from "../controllers/WorkAddress/getAllWorkAddressController.js";
 import getAllEmployController from "../controllers/Employ/getEmployController.js";
 import postEmployController from "../controllers/Employ/postEmployController.js";
-
+import getAllSignContractController from "../controllers/SignContract /getAllSignContractController.js";
+import postSignContractController from "../controllers/SignContract /postSignContractController.js";
 
 const privateRoute = express.Router();
 
@@ -66,6 +67,11 @@ privateRoute.delete("/employee/:id", validateDateTwoYearsEmployee, deleteEmploye
 // ================= EMPLOY =================
 privateRoute.get("/employ", getAllEmployController);
 privateRoute.post("/employ", postEmployController);
+
+
+// ================= SIGN CONTRACT =================
+privateRoute.get("/sign-contract", getAllSignContractController);
+privateRoute.post("/sign-contract", postSignContractController);
 
 
 export default privateRoute;
