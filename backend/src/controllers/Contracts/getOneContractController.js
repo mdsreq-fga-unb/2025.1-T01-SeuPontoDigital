@@ -7,7 +7,7 @@ const getOneContractController = async (req, res) => {
         const contract = await getOneContractModel(contractID);
 
         if (!contract){
-            return res.status(404).json({ message: "contract not found" });
+            return res.status(404).send({ message: "contract not found" });
         }
         return res.status(200).json(contract);
     }

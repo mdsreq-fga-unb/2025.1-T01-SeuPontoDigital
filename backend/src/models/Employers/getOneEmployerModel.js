@@ -10,7 +10,6 @@ const getOneEmployerModel = async (id) => {
                 cpf,
                 email,
                 phone,
-                password,
                 id_address,
                 created_at,
                 address:id_address (
