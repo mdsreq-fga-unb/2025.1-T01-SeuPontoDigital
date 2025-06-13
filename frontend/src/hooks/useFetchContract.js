@@ -6,7 +6,7 @@ const useFetchContract = () => {
     const fetchContract = async () => {
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/contracts`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/sign-contract`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             return response.data;

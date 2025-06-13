@@ -12,6 +12,7 @@ const getOneEmployerModel = async (id) => {
                 phone,
                 password,
                 id_address,
+                created_at,
                 address:id_address (
                     id,
                     cep,
