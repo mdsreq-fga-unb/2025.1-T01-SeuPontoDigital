@@ -45,11 +45,6 @@ const getEmployersModel = async () => {
                 complement: address?.complement || "",
             };
             
-            // Remover +55 do telefone para exibição no frontend
-            if (flattened.phone && flattened.phone.startsWith('+55')) {
-                flattened.phone = flattened.phone.substring(3);
-            }
-            
             return flattened;
         });
             

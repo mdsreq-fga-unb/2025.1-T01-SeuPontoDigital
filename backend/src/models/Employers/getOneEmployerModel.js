@@ -43,17 +43,7 @@ const getOneEmployerModel = async (id) => {
             };
             delete flattenedEmployer.address;
             
-            // Remover +55 do telefone para exibição no frontend
-            if (flattenedEmployer.phone && flattenedEmployer.phone.startsWith('+55')) {
-                flattenedEmployer.phone = flattenedEmployer.phone.substring(3);
-            }
-            
             return flattenedEmployer;
-        }
-
-        // Remover +55 do telefone para exibição no frontend
-        if (employer && employer.phone && employer.phone.startsWith('+55')) {
-            employer.phone = employer.phone.substring(3);
         }
 
         return employer;
