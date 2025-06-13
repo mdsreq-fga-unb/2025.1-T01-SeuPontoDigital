@@ -1,7 +1,6 @@
 import postAddressModel from "../../models/Address/postAddressModel.js";
 
 const postAddressController = async (req, res) => {
-
     const address = req.body
     try {
         const id = await postAddressModel(address);
@@ -15,11 +14,9 @@ const postAddressController = async (req, res) => {
                 id_address: id,
             });
     }
-
     catch (err) {
         return res.status(500).send({ message: "internal server error" })
     }
-
 }
 
 export default postAddressController;

@@ -2,10 +2,10 @@ import putAddressModel from "../../models/Address/putAddressModel.js";
 
 const putAddressController = async (req, res) => {
     try {
-        const { id } = req.params;
+        const addressID = req.params.id;
         const addressData = req.body;
 
-        const error = await putAddressModel(id, addressData);
+        const error = await putAddressModel(addressID, addressData);
         
         if (error) {
             return res.status(500).json({ message: "failed to update address" });
