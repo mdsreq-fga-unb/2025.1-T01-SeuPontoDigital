@@ -4,7 +4,7 @@ const getOneSignContractController = async (req, res) => {
     try {
         const {employerID, employeeID, contractID, addressID} = req.body;
 
-        const signContract = getOneSignContractModel(employerID, employeeID, contractID, addressID);
+        const signContract = await getOneSignContractModel(employerID, employeeID, contractID, addressID);
 
         if (!signContract){
             return res.status(404).send({message: "not found contract in table sign_contract white these data"});
