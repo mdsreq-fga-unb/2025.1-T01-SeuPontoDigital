@@ -23,7 +23,16 @@ const Contracts = () => {
 
     const loadContracts = async () => {
         const contracts = await fetchContract();
+        console.log("Raw contracts data:", contracts); // Debug log
+        
+        if (!contracts || !Array.isArray(contracts)) {
+            console.log("No contracts data or invalid format");
+            setData([]);
+            return;
+        }
+        
         const mapped = contracts.map(item => ({
+            id: item.contract?.id ?? "", // Preservar o ID do contrato para navegação
             employerName: item.employer?.name ?? "",
             employeeName: item.employee?.name ?? "",
             function: item.contract?.function ?? "",
@@ -32,6 +41,7 @@ const Contracts = () => {
             start_date: item.contract?.start_date ?? "-",
             access_app: item.contract?.access_app ? "Ativo" : "Inativo"
         }));
+        console.log("Mapped contracts data:", mapped); // Debug log
         const sorted = mapped.sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
         setData(sorted);
     };

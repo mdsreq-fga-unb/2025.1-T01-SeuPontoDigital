@@ -25,6 +25,7 @@ import getAllWorkAddressController from "../controllers/WorkAddress/getAllWorkAd
 import getAllEmployController from "../controllers/Employ/getEmployController.js";
 import postEmployController from "../controllers/Employ/postEmployController.js";
 import getAllSignContractController from "../controllers/SignContract /getAllSignContractController.js";
+import getOneSignContractController from "../controllers/SignContract /getOneSignContractController.js";
 import postSignContractController from "../controllers/SignContract /postSignContractController.js";
 
 const privateRoute = express.Router();
@@ -71,6 +72,7 @@ privateRoute.post("/employ", postEmployController);
 
 // ================= SIGN CONTRACT =================
 privateRoute.get("/sign-contract", getAllSignContractController);
+privateRoute.get("/sign-contract/:id", getOneSignContractController);
 privateRoute.post("/sign-contract", postSignContractController);
 
 
