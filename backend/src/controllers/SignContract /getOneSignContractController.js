@@ -1,35 +1,21 @@
-import supabase from "../../config/supabase.js";
+import getOneSignContractModel from "../../models/SignContract/getOneSignContractModel.js";
 
 const getOneSignContractController = async (req, res) => {
     try {
-        const contractID = req.params.id;
+        const {employerID, employeeID, contractID, addressID} = req.body;
 
-        const { data, error } = await supabase.from("sign_contract")
-            .select(`
-                employer:id_employer (
-                    id, name, cpf, phone, email, created_at
-                ),
-                employee:id_employee (
-                    id, name, cpf, phone, created_at
-                ),
-                contract:id_contract (
-                    id, function, salary, status, access_app, start_date, end_date
-                ),
-                address:id_address (
-                    id, cep, uf, neighborhood, street, house_number, complement
-                )
-            `)
-            .eq("id_contract", contractID)
-            .single();
+        const signContract = getOneSignContractModel(employerID, employeeID, contractID, addressID);
 
-        if (error || !data) {
-            return res.status(404).json({ message: "sign contract not found" });
+        if (!signContract){
+            return res.status(404).send({message: "not found contract in table sign_contract white these data"});
         }
 
-        return res.status(200).json(data);
-    } catch (err) {
-        return res.status(500).json({ message: "internal server error" });
+        return res.status(200).json(signContract);
     }
-};
+    catch(err){
+        return res.status(500).send({message: "internal server error"})
+    }
+        
+}
 
 export default getOneSignContractController;
