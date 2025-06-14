@@ -2,9 +2,9 @@ import getOneSignContractModel from "../../models/SignContract/getOneSignContrac
 
 const getOneSignContractController = async (req, res) => {
     try {
-        const {employerID, employeeID, contractID, addressID} = req.body;
+        const contractID = req.params.id;
 
-        const signContract = await getOneSignContractModel(employerID, employeeID, contractID, addressID);
+        const signContract = await getOneSignContractModel(contractID);
 
         if (!signContract){
             return res.status(404).send({message: "not found contract in table sign_contract white these data"});

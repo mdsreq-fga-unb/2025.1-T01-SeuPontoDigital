@@ -6,7 +6,6 @@ import ConfirmModal from "../../components/ConfirmModal";
 import Table from "../../components/Table";
 import filterDataContract from "../../services/filterDataContract";
 import useFetchContract from "../../hooks/useFetchContract";
-import useFetchEmployer from "../../hooks/useFetchEmployer";
 import useDeleteContract from "../../hooks/useDeleteContract";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +15,6 @@ const Contracts = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [contractToDelete, setContractToDelete] = useState(null);
     const filteredData = filterDataContract(data, searchTerm);
-    const { fetchOneEmployer } = useFetchEmployer();
     const { fetchContract } = useFetchContract();
     const deleteContract = useDeleteContract();
     const navigate = useNavigate();
@@ -32,7 +30,7 @@ const Contracts = () => {
         }
         
         const mapped = contracts.map(item => ({
-            id: item.contract?.id ?? "", // Preservar o ID do contrato para navegação
+            contractID: item.contract?.id ?? "", // Preservar o ID do contrato para navegação
             employerName: item.employer?.name ?? "",
             employeeName: item.employee?.name ?? "",
             function: item.contract?.function ?? "",

@@ -14,17 +14,14 @@ const useFetchContract = () => {
             Notification.error("Não foi possível carregar os dados dos contratos!");
         }
     }
-    const fetchOneContract = async (id) => {
+    const fetchOneContract = async (contractID) => {
         const token = localStorage.getItem("token");
-        console.log("Fetching contract with ID:", id); // Debug log
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/sign-contract/${id}`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/sign-contract/${contractID}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            console.log("Response data:", response.data); // Debug log
             return response.data
         } catch (err) {
-            console.error("Error fetching contract:", err); // Debug log
             Notification.error("Erro ao carregar os detalhes do contrato.");
         }
     }

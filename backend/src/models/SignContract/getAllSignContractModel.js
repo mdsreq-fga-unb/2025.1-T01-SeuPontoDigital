@@ -15,7 +15,7 @@ const getAllSignContractModel = async() => {
                 id, function, salary, status, access_app, start_date, end_date
             ),
             address:id_address (
-                cep, uf, neighborhood, street, house_number, complement
+                id, cep, uf, neighborhood, city, street, house_number, complement
             )
         `);
 

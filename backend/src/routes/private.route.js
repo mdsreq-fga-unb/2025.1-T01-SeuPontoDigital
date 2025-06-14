@@ -71,8 +71,8 @@ privateRoute.post("/employ", postEmployController);
 
 
 // ================= SIGN CONTRACT =================
-privateRoute.get("/sign-contracts", getAllSignContractController);
-privateRoute.get("/sign-contract", getOneSignContractController);
+privateRoute.get("/sign-contract", getAllSignContractController);
+privateRoute.get("/sign-contract/:id", getOneSignContractController);
 privateRoute.post("/sign-contract", postSignContractController);
 
 

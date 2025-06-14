@@ -1,6 +1,6 @@
 import supabase from "../../config/supabase.js";
 
-const getOneSignContractModel = async (employerID, employeeID, contractID, addressID) => {
+const getOneSignContractModel = async (contractID) => {
 
     try{
         const {data, error} = await supabase.from("sign_contract").select(`
@@ -14,13 +14,10 @@ const getOneSignContractModel = async (employerID, employeeID, contractID, addre
                     id, function, salary, status, access_app, start_date, end_date
                 ),
                 address:id_address (
-                    id, cep, uf, neighborhood, street, house_number, complement
+                    id, cep, uf, neighborhood, city, street, house_number, complement
                 )
             `)
-            .eq("id_employer", employerID)
-            .eq("id_employee", employeeID)
             .eq("id_contract", contractID)
-            .eq("id_address", addressID)
             .single()
 
             if (error) return;
