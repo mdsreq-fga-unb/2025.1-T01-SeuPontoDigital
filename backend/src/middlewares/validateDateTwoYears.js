@@ -61,7 +61,7 @@ const validateDateTwoYearsContract = async (req, res, next) => {
             return res.status(404).send({ message: "contract not found" });
         }
         
-        const dateCreatedContract = new Date(contract.start_date);
+        const dateCreatedContract = new Date(contract.end_date);
         const dateNow = new Date();
         const twoYearsInMilliseconds = 2 * 365.5 * 24 * 60 * 60 * 1000;
 
@@ -70,7 +70,7 @@ const validateDateTwoYearsContract = async (req, res, next) => {
             next(); 
         } 
         else {
-            return res.status(403).send({ message: "contract created less than 2 years ago" });
+            return res.status(403).send({ message: "contract finished less than 2 years ago" });
         }
     } catch (error) {
         return res.status(500).send({ message: "internal server error" });

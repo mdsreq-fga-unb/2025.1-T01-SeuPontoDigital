@@ -30,7 +30,7 @@ const Contracts = () => {
         }
         
         const mapped = contracts.map(item => ({
-            contractID: item.contract?.id ?? "", // Preservar o ID do contrato para navegação
+            id: item.contract?.id ?? "", 
             employerName: item.employer?.name ?? "",
             employeeName: item.employee?.name ?? "",
             function: item.contract?.function ?? "",
@@ -99,7 +99,7 @@ const Contracts = () => {
                     onConfirm={handleConfirmDelete}
                     onCancel={handleCancelDelete}
                     message="Confirme sua senha para excluir o contrato de"
-                    nameEmployer={contractToDelete?.name}
+                    nameEmployer={contractToDelete?.employeeName}
                 />
             </div>
         </div>

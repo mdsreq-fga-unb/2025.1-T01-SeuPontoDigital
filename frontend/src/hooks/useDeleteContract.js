@@ -4,12 +4,12 @@ import handleError from "../services/errors";
 
 const useDeleteContract = () => {
 
-    const deleteContract = async (id, password, closeModal) => {
+    const deleteContract = async (id, passwordAdmin, closeModal) => {
         const token = localStorage.getItem("token");
         try {
             await axios.delete(`${import.meta.env.VITE_API_URL}/api/contract/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
-                data: { password },
+                data: { passwordAdmin },
             });
             Notification.success("Contrato excluído com sucesso!");
             if(closeModal) closeModal();

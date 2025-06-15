@@ -20,13 +20,13 @@ const deleteContractController = async (req, res) => {
 
         const error = await deleteContractModel(contractID);
         if (error) {
-            return res.status(400).json({ message: "one or more of the data sent are incorrect"});
+            return res.status(400).json({ message: error.message});
         }
 
         return res.status(200).json({ message: "contract deleted" });
     }
     catch (err) {
-        return res.status(500).send({message: "internal server error"});
+        return res.status(500).send({message: err.message});
     }
 }
 
