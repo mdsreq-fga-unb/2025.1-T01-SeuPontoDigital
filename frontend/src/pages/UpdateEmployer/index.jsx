@@ -29,6 +29,11 @@ const UpdateEmployer = () => {
         complement: "",
     });
 
+    const removeDDI = (phone) => {
+        if (!phone || typeof phone !== "string") return "";
+        return phone.replace(/^(\+55|55)/, "");
+    }
+
     const loadEmployerData = useCallback(async () => {
         const employerData = await fetchOneEmployer(id);
         if (employerData) {
@@ -38,7 +43,7 @@ const UpdateEmployer = () => {
                 name: employerData.name || "",
                 cpf: employerData.cpf || "",
                 email: employerData.email || "",
-                phone: employerData.phone || "",
+                phone: removeDDI(employerData.phone) || "",
                 cep: employerData.cep || "",
                 street: employerData.street || "",
                 house_number: employerData.house_number || "",
@@ -68,23 +73,23 @@ const UpdateEmployer = () => {
         <div className="container-dashboard">
             <Sidebar />
             <section className="form-user-add">
-            <form className="form-users">
-                <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
-            </form>
-            <button onClick={() => setModalOpen(true)} className="button-add-employer-confirm"> Atualizar Empregador </button>
+                <form className="form-users">
+                    <EmployerForm employer={employer} handleInputChange={handleInputUserChange} />
+                </form>
+                <button onClick={() => setModalOpen(true)} className="button-add-employer-confirm"> Atualizar Empregador </button>
 
-        </section>
+            </section>
 
-                <ConfirmModal
-                    isOpen={modalOpen}
-                    onConfirm={ async (passwordInput) => {
-                        setPassword(passwordInput);
-                        await handleFormSubmit(passwordInput);
-                    }}
-                    onCancel={() => setModalOpen(false)}
-                    message="Confirme sua senha para atualizar os dados de"
-                    nameEmployer={employer.name}
-                />
+            <ConfirmModal
+                isOpen={modalOpen}
+                onConfirm={async (passwordInput) => {
+                    setPassword(passwordInput);
+                    await handleFormSubmit(passwordInput);
+                }}
+                onCancel={() => setModalOpen(false)}
+                message="Confirme sua senha para atualizar os dados de"
+                nameEmployer={employer.name}
+            />
         </div>
     );
 };

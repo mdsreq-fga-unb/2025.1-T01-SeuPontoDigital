@@ -22,16 +22,26 @@ const Employers = () => {
     const { fetchEmployers, fetchOneEmployer } = useFetchEmployer();
     const deleteEmployer = useDeleteEmployer();
     const filteredData = filterDataEmployer(data, searchTerm);
-    const fieldsHeader = ["Nome", "CPF", "Telefone", "Email", ];
-    const fieldsDataEmployer = ["name", "cpf", "phone", "email", ];
+    const fieldsHeader = ["Nome", "CPF", "Telefone", "Email",];
+    const fieldsDataEmployer = ["name", "cpf", "phone", "email",];
+
+    const removeDDI = (phone) => {
+        if (!phone || typeof phone !== "string") return "";
+        return phone.replace(/^(\+55|55)/, "");
+    }
 
     const loadEmployers = async () => {
         const employers = await fetchEmployers();
         if (employers) {
-            const sorted = employers.sort((a, b) => a.name.localeCompare(b.name));
+            const sorted = employers
+                .map(emp => ({
+                    ...emp,
+                    phone: removeDDI(emp.phone)
+                }))
+                .sort((a, b) => a.name.localeCompare(b.name));
             setData(sorted);
         }
-    }
+    };
 
     useEffect(() => {
         loadEmployers();
@@ -79,10 +89,10 @@ const Employers = () => {
             <div className="container-table-pages">
                 <div className="container-search-button">
                     <ButtonAdd onClick={() => navigate("/empregadores/adicionar")}>Adicionar Empregador</ButtonAdd>
-                    <SearchInput 
-                        type="search" 
-                        value={searchTerm} 
-                        onChange={e => setSearchTerm(e.target.value)} 
+                    <SearchInput
+                        type="search"
+                        value={searchTerm}
+                        onChange={e => setSearchTerm(e.target.value)}
                     />
                 </div>
 
