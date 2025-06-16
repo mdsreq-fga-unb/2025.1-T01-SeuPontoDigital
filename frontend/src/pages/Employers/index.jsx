@@ -10,6 +10,7 @@ import EmployerDetailsModal from "../../components/EmployerDetailsModal";
 import useFetchEmployer from "../../hooks/useFetchEmployer";
 import filterDataEmployer from "../../services/filterDataEmployer";
 import useDeleteEmployer from "../../hooks/useDeleteEmployer";
+import formatField from "../../services/formatField";
 
 const Employers = () => {
     const [data, setData] = useState([]);
@@ -25,18 +26,13 @@ const Employers = () => {
     const fieldsHeader = ["Nome", "CPF", "Telefone", "Email",];
     const fieldsDataEmployer = ["name", "cpf", "phone", "email",];
 
-    const removeDDI = (phone) => {
-        if (!phone || typeof phone !== "string") return "";
-        return phone.replace(/^(\+55|55)/, "");
-    }
-
     const loadEmployers = async () => {
         const employers = await fetchEmployers();
         if (employers) {
             const sorted = employers
                 .map(emp => ({
                     ...emp,
-                    phone: removeDDI(emp.phone)
+                    phone: formatField("removeDDI", emp.phone)
                 }))
                 .sort((a, b) => a.name.localeCompare(b.name));
             setData(sorted);

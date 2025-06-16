@@ -6,6 +6,11 @@ const formatPhone = (phone) => {
     return phone.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
 }
 
+const removeDDI = (phone) => {
+    if (!phone || typeof phone !== "string") return "";
+    return phone.replace(/^(\+55|55)/, "");
+}
+
 const formatStatus = (str) => {
     if (!str || typeof str !== "string") return "";
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -33,6 +38,7 @@ const formatField = (field, value) => {
     if (field === "salary") return formatSalary(value);
     if (field === "start_date") return formatDate(value);
     if (field === "function") return formatFunction(value);
+    if (field === "removeDDI") return removeDDI(value);
     return value;
 };
 

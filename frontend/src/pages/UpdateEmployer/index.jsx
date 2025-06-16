@@ -6,6 +6,7 @@ import Sidebar from "../../components/Sidebar";
 import ConfirmModal from "../../components/ConfirmModal";
 import useFetchEmployer from "../../hooks/useFetchEmployer";
 import usePutEmployer from "../../hooks/usePutEmployer.js";
+import formatField from "../../services/formatField.js";
 
 const UpdateEmployer = () => {
     const { id } = useParams();
@@ -29,11 +30,6 @@ const UpdateEmployer = () => {
         complement: "",
     });
 
-    const removeDDI = (phone) => {
-        if (!phone || typeof phone !== "string") return "";
-        return phone.replace(/^(\+55|55)/, "");
-    }
-
     const loadEmployerData = useCallback(async () => {
         const employerData = await fetchOneEmployer(id);
         if (employerData) {
@@ -43,7 +39,7 @@ const UpdateEmployer = () => {
                 name: employerData.name || "",
                 cpf: employerData.cpf || "",
                 email: employerData.email || "",
-                phone: removeDDI(employerData.phone) || "",
+                phone: formatField("removeDDI", employerData.phone) || "",
                 cep: employerData.cep || "",
                 street: employerData.street || "",
                 house_number: employerData.house_number || "",

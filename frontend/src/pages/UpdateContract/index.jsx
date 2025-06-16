@@ -7,6 +7,7 @@ import ContractForm from "../../components/ContractForm/index.jsx";
 import { useParams } from "react-router-dom";
 import ConfirmModal from "../../components/ConfirmModal";
 import Notification from "../../components/Notification";
+import formatField from "../../services/formatField.js";
 
 const UpdateContract = () => {
     const putContract = usePutContract();
@@ -55,18 +56,6 @@ const UpdateContract = () => {
                     return cleaned.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
                 };
 
-                // Função auxiliar para formatar telefone
-                const formatPhone = (phone) => {
-                    if (!phone) return "";
-                    const cleaned = phone.replace(/\D/g, '');
-                    if (cleaned.length === 11) {
-                        return cleaned.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
-                    } else if (cleaned.length === 10) {
-                        return cleaned.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
-                    }
-                    return phone;
-                };
-
                 // Mapear dados da nova estrutura retornada pelo getOneSignContract
                 setContract({
                     id: contractData.contract?.id || "",
@@ -74,7 +63,7 @@ const UpdateContract = () => {
                     // Dados do funcionário
                     name: contractData.employee?.name || "",
                     cpf: formatCPF(contractData.employee?.cpf) || "",
-                    phone: formatPhone(contractData.employee?.phone) || "",
+                    phone: formatField("removeDDI", contractData.employee?.phone) || "",
                     // Dados do contrato
                     job_function: contractData.contract?.function || "",
                     salary: contractData.contract?.salary || "",
