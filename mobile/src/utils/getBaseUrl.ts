@@ -4,8 +4,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Device from 'expo-device';
 
 export async function getBaseUrl(): Promise<string> {
+
+  const fallbackUrl = process.env.EXPO_PUBLIC_API_BASE;
+
   // Tenta pegar IP salvo
   const savedIp = await AsyncStorage.getItem('serverIp');
+  console.log(savedIp)
   if (savedIp) return `http://${savedIp}:3333/api`;
 
   // Detecta se é emulador
@@ -17,5 +21,5 @@ export async function getBaseUrl(): Promise<string> {
   }
 
   // Fallback manual (substitua pelo IP real da sua máquina)
-  return 'http://192.168.0.104:3333/api';
+  return fallbackUrl || '';
 }

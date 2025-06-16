@@ -16,24 +16,15 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { Link, useRouter } from 'expo-router';
-import axios from 'axios';
+import api from '../../constants/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
-
-const api = axios.create({
-  baseURL: 'http://localhost:3333/api', // URL base da sua API
-  timeout: 10000, // tempo limite da requisição (em ms)
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
 
 export default function EntryScreen() {
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  // const [api] = useState<AxiosInstance>(apiInstance);
   const router = useRouter();
 
   const validateCPF = (cpf: string): boolean => {
@@ -59,8 +50,20 @@ export default function EntryScreen() {
   const handleCPFChange = (value: string) => setCpf(formatCPF(value));
 
   async function handleVerify() {
+
+    if (!cpf && !password) {
+      Alert.alert('Erro', 'Preencha CPF e senha.');
+      return;
+    } else if (!cpf) {
+      Alert.alert('Erro', 'CPF não informado.');
+      return;
+    } else if (!password) {
+      Alert.alert('Erro', 'Senha não informada.');
+      return;
+    }
+    
     if (!validateCPF(cpf)) {
-      Alert.alert('Erro', 'CPF inválido!');
+      Alert.alert('Erro', 'CPF inválido.');
       return;
     }
 
@@ -75,7 +78,7 @@ export default function EntryScreen() {
 
       const { userType } = response.data;
 
-      Alert.alert('Sucesso', response.data.message || 'Login realizado com sucesso');
+      Alert.alert('Sucesso', response.data.message || 'Login realizado com sucesso!');
       console.log(userType)
       if(userType === 'employee'){
         console.log("indo 1")
@@ -92,7 +95,7 @@ export default function EntryScreen() {
       } else if (err.response?.status === 401) {
         Alert.alert('Acesso negado', 'CPF ou senha incorretos.');
       } else {
-        Alert.alert('Erro', err.response?.data?.message || err.message || 'Erro ao fazer login');
+        Alert.alert('Erro', err.response?.data?.message || err.message || 'Erro ao fazer login.');
       }
     } finally {
       setLoading(false);

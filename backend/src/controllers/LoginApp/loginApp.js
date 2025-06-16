@@ -9,7 +9,7 @@ const loginApp = async (req, res) => {
         const { data, error, userType } = await getOneUserFromCPF(cpf)
 
         if (error || !data) {
-            return res.status(404).send({ message: "CPF not found" });
+            return res.status(404).send({ message: "CPF não encontrado." });
         }
 
         const valid = await verifyPassword(password, data.password);
@@ -18,13 +18,13 @@ const loginApp = async (req, res) => {
         }
 
         return res.status(200).json({
-            message: "You have successfully logged in",
+            message: "Login realizado com sucesso",
             token: createToken(data),
             userType: userType
         });
     } catch (err) {
         console.log(err)
-        return res.status(500).send({ message: "Internal Server Error" });
+        return res.status(500).send({ message: "Erro interno no servidor :)" });
     }
 };
 export default loginApp;

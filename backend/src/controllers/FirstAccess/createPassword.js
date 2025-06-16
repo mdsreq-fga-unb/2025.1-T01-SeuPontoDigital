@@ -8,7 +8,7 @@ const createPassword = async (req, res) => {
     const { cpf, password, confirmPassword, code } = req.body;
 
     if (!cpf || !password || !confirmPassword || !code) {
-        return res.status(400).send({ message: "CPF, password, password confirmation, and code are required." });
+        return res.status(400).send({ message: "CPF, senha, confirmação de senha e código são obrigatórios." });
     }
 
     try {
@@ -23,21 +23,21 @@ const createPassword = async (req, res) => {
         }
 
         if (!user) {
-            return res.status(404).send({ message: "User not found" });
+            return res.status(404).send({ message: "Usuário não encontrado." });
         }
 
         if (user.password) {
-            return res.status(401).send({ message: `${userType} already has an account.` });
+            return res.status(401).send({ message: `${userType} já possui uma conta.` });
         }
 
         const isValidCode = await verifySMS(user.phone, code);
 
         if (!isValidCode) {
-            return res.status(400).send({ message: "Invalid code" });
+            return res.status(400).send({ message: "Código inválido." });
         }
 
         if (password !== confirmPassword) {
-            return res.status(401).send({ message: "Passwords must match" });
+            return res.status(401).send({ message: "As senhas devem ser iguais." });
         }
 
         const passwordHash = await generatePasswordHash(password);
@@ -50,13 +50,13 @@ const createPassword = async (req, res) => {
             .single();
 
         if (error) {
-            return res.status(500).send({ message: "Error updating password" });
+            return res.status(500).send({ message: "Erro ao atualizar a senha." });
         }
 
-        return res.status(200).send({ message: "Password successfully created" });
+        return res.status(200).send({ message: "Senha criada com sucesso!" });
     } 
     catch (err){
-        return res.status(500).send({ message: "Internal Server Error" });
+        return res.status(500).send({ message: "Erro interno do servidor." });
     }
 }
 
