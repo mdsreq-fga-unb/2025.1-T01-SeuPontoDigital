@@ -8,8 +8,6 @@ const postWorkAddressModel = async (addressID, employeeID) => {
         });
 
         if (error) return error;
-
-        return;
     }
     catch (err){
         console.error("error in postWorkAddressModel");

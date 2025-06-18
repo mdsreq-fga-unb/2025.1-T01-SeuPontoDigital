@@ -22,6 +22,7 @@ import putContractController from "../controllers/Contracts/putContractControlle
 import deleteContractController from "../controllers/Contracts/deleteContractController.js";
 import postWorkAddressController from "../controllers/WorkAddress/postWorkAddressController.js";
 import getAllWorkAddressController from "../controllers/WorkAddress/getAllWorkAddressController.js";
+import getOneWorkAddressController from "../controllers/WorkAddress/getOneWorkAddressController.js";
 import getAllEmployController from "../controllers/Employ/getEmployController.js";
 import postEmployController from "../controllers/Employ/postEmployController.js";
 import getAllSignContractController from "../controllers/SignContract/getAllSignContractController.js";
@@ -38,7 +39,8 @@ privateRoute.put("/address/:id", putAddressController);
 
 
 // ================= WORK ADDRESS =================
-privateRoute.get("work-address", getAllWorkAddressController);
+privateRoute.get("/work-addresses", getAllWorkAddressController);
+privateRoute.get("/work-address", getOneWorkAddressController);
 privateRoute.post("/work-address", postWorkAddressController);
 
 
