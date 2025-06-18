@@ -18,7 +18,8 @@ const getOneWorkAddressModel = async(addressID, employeeID) => {
                     id,
                     name,
                     phone,
-                    cpf
+                    cpf,
+                    created_at
                 )
             `)
         .eq("id_address", addressID)
