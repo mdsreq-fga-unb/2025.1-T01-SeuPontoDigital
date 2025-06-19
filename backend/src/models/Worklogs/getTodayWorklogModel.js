@@ -1,12 +1,15 @@
 import supabase from "../../config/supabase.js";
 
-const getTodayWorklogModel = async (employeeId, date) => {
+const getTodayWorklogModel = async (employeeId, contractId) => {
+    const today = new Date().toISOString().split('T')[0];
+
     try {
         const {data, error} = await supabase
             .from('register_work_logs')
             .select('id_work_log, work_logs(date)')
             .eq('id_employee', employeeId)
-            .not('id_work_log', 'is', null)
+            .eq('id_contract', contractId)
+            .eq('work_logs.date', today)
             .single();
 
             if (error && error.code !== 'PGRST116') {
@@ -14,7 +17,7 @@ const getTodayWorklogModel = async (employeeId, date) => {
             return {error: error.message};
             }
 
-            if (data && data.work_logs && data.work_logs.date === date){
+            if (data){
                 return {data: data.id_work_log};
             }
 

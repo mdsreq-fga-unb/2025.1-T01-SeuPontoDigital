@@ -6,24 +6,32 @@ const postWorklogController = async (req, res) => {
     return res.status(405).json({ message: 'Método não permitido.' });
   }
 
-  const data = req.body;
+  const employeeId = req.id;
+  const { contractId, clock_in } = req.body;
 
-  if (!data.date || !data.clock_in || !data.employeeId || !data.contractId) {
+  if (!clock_in || !employeeId || !contractId) {
     return res.status(400).json({ message: 'Dados incompletos para registrar a entrada.' });
   }
 
   try {
-    const { data: existingWorkLogId, error: getError } = await getTodayWorklogModel(data.employeeId, data.date);
+    const { data: existingWorkLogId, error: getError } = await getTodayWorklogModel(employeeId, contractId);
 
     if (getError) {
       return res.status(500).json({ message: getError });
     }
 
     if (existingWorkLogId) {
-      return res.status(409).json({ message: 'Ponto de entrada já foi registrado hoje.' });
+      return res.status(409).json({ message: 'Ponto de entrada já foi registrado hoje para este contrato.' });
     }
 
-    const error = await postWorklogModel(data);
+    const worklogData = {
+      date: new Date().toISOString().split('T')[0],
+      clock_in,
+      employeeId,
+      contractId
+    };
+
+    const { data: newWorkLogData, error: error } = await postWorklogModel(worklogData);
     if (error) {
       return res.status(500).json({ message: error });
     }

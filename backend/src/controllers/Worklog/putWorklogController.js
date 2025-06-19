@@ -6,14 +6,15 @@ const putWorklogController = async (req, res) => {
     return res.status(405).json({ message: 'Método não permitido.' });
   }
 
-  const data = req.body;
+  const employeeId = req.id;
+  const { contractId, ...updatePayload } = req.body;
 
-  if (!data.date || !data.employeeId) {
-    return res.status(400).json({ message: 'Dados incompletos para atualizar o registro de ponto.' });
+  if (!employeeId || !contractId) {
+    return res.status(400).json({ message: 'Dados incompletos para registrar a entrada.' });
   }
 
   try {
-    const { data: existingWorkLogId, error: getError } = await getTodayWorklogModel(data.employeeId, data.date);
+    const { data: existingWorkLogId, error: getError } = await getTodayWorklogModel(employeeId, contractId);
 
     if (getError) {
       return res.status(500).json({ message: getError });
@@ -23,10 +24,7 @@ const putWorklogController = async (req, res) => {
       return res.status(404).json({ message: 'Nenhum registro de entrada encontrado para hoje.' });
     }
 
-    const updatePayload = {};
-    if (data.clock_out) updatePayload.clock_out = data.clock_out;
-    if (data.break_start) updatePayload.break_start = data.break_start;
-    if (data.break_end) updatePayload.break_end = data.break_end;
+    delete updatePayload.contractId;
 
     if (Object.keys(updatePayload).length === 0) {
       return res.status(400).json({ message: 'Nenhum dado de atualização fornecido.' });
