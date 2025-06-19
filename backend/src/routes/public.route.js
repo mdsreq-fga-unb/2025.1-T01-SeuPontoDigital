@@ -6,6 +6,7 @@ import createPassword from "../controllers/FirstAccess/createPassword.js";
 import forgottenPasswordController from "../controllers/ForgottenPassword/forgottenPasswordController.js";
 import updatePassword from "../controllers/ForgottenPassword/updatePassword.js";
 import validatePassword from '../middlewares/validatePassword.js';
+import loginApp from "../controllers/LoginApp/loginApp.js";
 
 const publicRoute = express.Router();
 

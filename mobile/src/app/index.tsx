@@ -158,6 +158,7 @@ export default function EntryScreen() {
 
               <Pressable
                 style={[styles.accessButton, loading && styles.disabledButton]}
+                //onPress={() => router.replace('/(panel)/profile/page')}
                 onPress={handleVerify}
                 disabled={loading}
               >
