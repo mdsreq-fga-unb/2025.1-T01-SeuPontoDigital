@@ -67,8 +67,7 @@ export default function EntryScreen() {
     setLoading(true);
     try {
       const cleanCpf = cpf.replace(/\D/g, '');
-      const response = await api.post('/login-employer', { cpf: cleanCpf, password });
-
+      const response = await api.post('/login-app', { cpf: cleanCpf, password });
       if (response.data.token) {
         await AsyncStorage.setItem('userToken', response.data.token);
       }
@@ -145,7 +144,8 @@ export default function EntryScreen() {
 
               <Pressable
                 style={[styles.accessButton, loading && styles.disabledButton]}
-                onPress={() => router.replace('/(panel)/profile/page')}
+                //onPress={() => router.replace('/(panel)/profile/page')}
+                onPress={handleVerify}
                 disabled={loading}
               >
                 {loading ? (

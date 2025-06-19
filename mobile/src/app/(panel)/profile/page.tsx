@@ -19,10 +19,35 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+import axios from 'axios';
+import api from '@/constants/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
 
 const { width, height } = Dimensions.get('window');
+
+interface Employee {
+  id: string;
+  name: string;
+}
+
+interface Contract {
+  id: string;
+  employerName: string;
+  position: string;
+  active: boolean;
+}
+
+interface RecordItem {
+    type: string;
+    time: string;
+    status: string;
+}
+
+interface DayRecord {
+    date: string;
+    records: RecordItem[];
+}
 
 export default function Profile() {
   const router = useRouter();
@@ -30,44 +55,24 @@ export default function Profile() {
   const [historicalModalVisible, setHistoricalModalVisible] = useState(false);
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
   const [helpModalVisible, setHelpModalVisible] = useState(false);
+
   const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
   const [loadingButton, setLoadingButton] = useState('');
+  
+  const [employeeInfo, setEmployeeInfo] = useState<Employee | null>(null);
+  const [contracts, setContracts] = useState<Contract[]>([]);
   
   // Animações
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(50)).current;
   
   // Estado para o modal de contratos e contrato selecionado
-  const [contractsModalVisible, setContractsModalVisible] = useState(true);
-  const [selectedContract, setSelectedContract] = useState<{
-    id: string;
-    employerName: string;
-    position: string;
-    active: boolean;
-  } | null>(null);
+  const [contractsModalVisible, setContractsModalVisible] = useState(false);
+  const [selectedContract, setSelectedContract] = useState<Contract | null>(null);
   const [currentContractId, setCurrentContractId] = useState<string | null>(null);
   
-  // Dados fictícios de contratos
-  const [contracts, setContracts] = useState([
-    { id: '1', employerName: 'Matheus Cunha Nascimento', position: 'Diarista', active: true },
-    { id: '2', employerName: 'Lucas Guimaraes', position: 'Cozinheiro', active: true },
-  ]);
-  
-  // Estado para simular registros de ponto
-  const [records, setRecords] = useState([
-    { date: '25/05/2025', records: [
-      { type: 'Entrada', time: '08:00', status: 'Normal' },
-      { type: 'Saída Almoço', time: '12:00', status: 'Normal' },
-      { type: 'Volta Almoço', time: '13:00', status: 'Normal' },
-      { type: 'Saída', time: '17:00', status: 'Normal' },
-    ]},
-    { date: '24/05/2025', records: [
-      { type: 'Entrada', time: '08:05', status: 'Atraso (5min)' },
-      { type: 'Saída Almoço', time: '12:00', status: 'Normal' },
-      { type: 'Volta Almoço', time: '13:02', status: 'Normal' },
-      { type: 'Saída', time: '17:00', status: 'Normal' },
-    ]},
-  ]);
+  const [records, setRecords] = useState<DayRecord[]>([]);
   
   // Estado para controlar quais registros já foram feitos hoje
   const [todayRecords, setTodayRecords] = useState({
@@ -92,126 +97,189 @@ export default function Profile() {
       })
     ]).start();
   }, []);
-  
-  // Mostrar o modal de contratos quando o componente é montado
-  useEffect(() => {
-    setContractsModalVisible(true);
-    
-    // Fake token para teste
-    const setupToken = async () => {
+
+  const fetchTodayRecords = async (contractId: string) => {
+    if (!contractId) return;
+
       try {
         const token = await AsyncStorage.getItem('userToken');
-        if (!token && __DEV__) {
-          await AsyncStorage.setItem('userToken', 'fake-token-for-dev');
+        const response = await api.get(`/worklogToday/${contractId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.data) {
+          const { todayRecords: fetchedToday, recordDetails } = response.data
+
+          setTodayRecords(fetchedToday);
+          
+          if (recordDetails && recordDetails.records.length > 0) {
+    
+              setRecords(prevRecords => {
+                  const otherDays = prevRecords.filter(r => r.date !== recordDetails.date);
+                  return [recordDetails, ...otherDays];
+              });
+          }
         }
       } catch (error) {
-        console.error('Erro ao configurar token fake:', error);
+          if (axios.isAxiosError(error)) {
+            console.error("Erro ao buscar registros do dia:", error.response?.data?.message || error.message);
+          } else {
+            console.error("Erro inesperado ao buscar registros do dia:", error);
+          }
+          setTodayRecords({ entrada: false, saidaAlmoco: false, voltaAlmoco: false, saida: false });
+          Alert.alert("Erro", "Não foi possível carregar os registros de ponto para este contrato.");
+      }
+  };
+
+  useEffect(() => {
+    const fetchEmployeeAndContracts = async () => {
+      try {
+        const token = await AsyncStorage.getItem('userToken');
+        if (!token) {
+          throw new Error("Token de autenticação não encontrado.");
+        }
+
+        const response = await api.get('/employee-contracts', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          timeout: 10000
+        });
+        
+        const { employee, contracts: contractsFromApi } = response.data;
+
+        setEmployeeInfo(employee);
+
+        const formattedContracts = contractsFromApi.map((sc: any) => ({
+          id: sc.id_contract,
+          employerName: sc.employerDetails.name,
+          position: sc.contractDetails.office,
+          active: sc.contractDetails.active_c || true
+        }));
+        
+        setContracts(formattedContracts);
+
+         if (formattedContracts.length > 1) {
+          const firstContract = formattedContracts[0];
+          setSelectedContract(formattedContracts[0]);
+          setCurrentContractId(formattedContracts[0].id);
+          await fetchTodayRecords(firstContract.id);
+          setContractsModalVisible(true);
+
+        } else if (formattedContracts.length === 1) {
+          const singleContract = formattedContracts[0];
+          setSelectedContract(formattedContracts[0]);
+          setCurrentContractId(formattedContracts[0].id);
+          await fetchTodayRecords(singleContract.id);
+
+        } else {
+          Alert.alert(
+            "Nenhum Contrato Encontrado", 
+            "Não encontramos contratos de trabalho ativos para você. Entre em contato com o suporte se isso for um erro."
+          );
+        }
+
+      } catch (error) {
+        console.error('Erro ao buscar dados do empregado:', error);
+        Alert.alert('Erro de Conexão', 'Não foi possível carregar seus dados. Verifique sua conexão e tente novamente.');
+      } finally {
+        setInitialLoading(false);
       }
     };
-    
-    setupToken();
+
+    fetchEmployeeAndContracts();
   }, []);
-  
-  // Função para selecionar um contrato
-  const selectContract = (contract: { id: string; employerName: string; position: string; active: boolean }) => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    setSelectedContract(contract);
+
+  const selectContract = async (contract: Contract) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+    if (currentContractId !== contract.id) {    
+      setSelectedContract(contract);
+      setCurrentContractId(contract.id)
+      setTodayRecords({ entrada: false, saidaAlmoco: false, voltaAlmoco: false, saida: false })
+      setRecords([]);
+      await fetchTodayRecords(contract.id);
+    } else {
+      setSelectedContract(contract);
+    }
+    setContractsModalVisible(false);
   };
+
   
   // Função para registrar ponto
-  const registerTimecard = async (type: 'Entrada' | 'Saída Almoço' | 'Volta Almoço' | 'Saída') => {
-    const now = new Date();
-    const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-    const dateString = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
-    
+  const registerTimecard = async (type: 'Entrada' | 'Saída Almoço' | 'Volta Almoço' | 'Saída') => {    
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setLoading(true);
     setLoadingButton(type);
     
+    // Verificar se um contrato foi selecionado
+    if (!selectedContract) {
+      Alert.alert('Selecione um contrato', 'Você precisa selecionar um contrato para registrar o ponto.');
+      setContractsModalVisible(true);
+      setLoading(false);
+      setLoadingButton('');
+      return;
+    }
+
     try {
-      // Verificar se um contrato foi selecionado
-      if (!selectedContract) {
-        Alert.alert('Selecione um contrato', 'Você precisa selecionar um contrato para registrar o ponto.');
-        setContractsModalVisible(true);
-        setLoading(false);
-        setLoadingButton('');
-        return;
+      const token = await AsyncStorage.getItem('userToken');
+      const timeString = new Date().toTimeString().split(' ')[0];
+
+      let response;
+        
+      const headers = { 'Authorization': `Bearer ${token}` };
+
+      if (type === 'Entrada') {
+          // Se for a primeira marcação, cria o registro do dia (POST)
+          const payload = {
+              contractId: selectedContract.id,
+              clock_in: timeString,
+          };
+          response = await api.post('/worklog', payload, { headers });
+      } else {
+          // Para as demais marcações, atualiza o registro existente (PUT)
+          const payload: { contractId: string; [key: string]: string } = {
+              contractId: selectedContract.id,
+          };
+          const fieldMap = {
+              'Saída Almoço': 'break_start',
+              'Volta Almoço': 'break_end',
+              'Saída': 'clock_out',
+          };
+          payload[fieldMap[type]] = timeString;
+          response = await api.put('/worklog', payload, { headers });
       }
-      
-      // Preparar dados para envio
-      const data = {
-        type,
-        date: dateString,
-        time: timeString,
-        contractId: selectedContract.id
-      };
-      
-      console.log('Registro simulado:', data);
-      
-      // Simular a requisição com timeout
-      setTimeout(() => {
-        // Atualiza o estado local para mostrar o botão como marcado
-        let updatedRecords = { ...todayRecords };
+
+      if (response.status === 201 || response.status === 200) {
+        setTodayRecords(prev => ({ ...prev, [type === 'Entrada' ? 'entrada' : type === 'Saída Almoço' ? 'saidaAlmoco' : type === 'Volta Almoço' ? 'voltaAlmoco' : 'saida']: true }));
         
-        switch (type) {
-          case 'Entrada':
-            updatedRecords.entrada = true;
-            break;
-          case 'Saída Almoço':
-            updatedRecords.saidaAlmoco = true;
-            break;
-          case 'Volta Almoço':
-            updatedRecords.voltaAlmoco = true;
-            break;
-          case 'Saída':
-            updatedRecords.saida = true;
-            break;
-        }
-        
-        // Atualiza o estado com o novo objeto
-        setTodayRecords(updatedRecords);
-        
-        // Adiciona o registro ao histórico local
-        const today = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()}`;
-        
-        // Verifica se já existe um registro para hoje
-        const existingRecordIndex = records.findIndex(record => record.date === today);
-        
-        if (existingRecordIndex >= 0) {
-          // Adiciona o registro ao dia existente
-          const updatedRecords = [...records];
-          updatedRecords[existingRecordIndex].records.push({
-            type: type,
-            time: timeString,
-            status: 'Normal'
-          });
-          setRecords(updatedRecords);
-        } else {
-          // Cria um novo dia com este registro
-          setRecords([
-            {
-              date: today,
-              records: [{
-                type: type,
-                time: timeString,
-                status: 'Normal'
-              }]
-            },
-            ...records
-          ]);
-        }
-        
-        // Feedback de sucesso
+        const todayFormatted = new Date().toLocaleDateString('pt-BR');
+        const newRecord: RecordItem = { type, time: timeString.substring(0, 5), status: 'Normal' };
+
+        setRecords(prevRecords => {
+            const existingDayIndex = prevRecords.findIndex(r => r.date === todayFormatted);
+            if (existingDayIndex > -1) {
+                const updatedRecords = [...prevRecords];
+                updatedRecords[existingDayIndex].records.push(newRecord);
+                return updatedRecords;
+            } else {
+                const newDay: DayRecord = { date: todayFormatted, records: [newRecord] };
+                return [newDay, ...prevRecords];
+            }
+        })
+
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-        Alert.alert('Ponto Registrado', `${type} registrado com sucesso às ${timeString}`);
-        setLoading(false);
-        setLoadingButton('');
-      }, 1500); // Tempo maior para simular melhor a experiência de carregamento
-      
+        Alert.alert('Ponto Registrado!', `${type} registrado com sucesso às ${timeString.substring(0, 5)}.`);
+      }
+
     } catch (error) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-      console.error('Erro simulado:', error);
-      Alert.alert('Erro', 'Ocorreu um erro ao registrar o ponto. Tente novamente.');
+      let errorMessage = 'Ocorreu um erro ao registrar o ponto.';
+      if (axios.isAxiosError(error) && error.response) {
+          errorMessage = error.response.data.message || errorMessage;
+      }
+      console.error('Erro ao registrar ponto:', error);
+      Alert.alert('Erro', errorMessage);
+    } finally {
       setLoading(false);
       setLoadingButton('');
     }
