@@ -36,12 +36,14 @@
 
 ---
 
-**Vídeos:**
-(Reunião de iniciação 1 - parte 1)[https://youtu.be/-bqFkUIhdvk]
-(Reunião de iniciação 1 - parte 2)[https://youtu.be/XC-78936bz8]
-(Reunião de iniciação 2 - parte 1)[https://youtu.be/ErdNZmx0qYM]
-(Reunião de iniciação 2 - parte 2)[https://youtu.be/pRnwasJdNgQ]
-(Reunião para criação de lista informal)[https://youtu.be/rwppDLJ6t60]
+## Vídeos de reuniões:
+[Reunião de iniciação 1 - parte 1](https://youtu.be/-bqFkUIhdvk) <br>
+[Reunião de iniciação 1 - parte 2](https://youtu.be/XC-78936bz8) <br>
+[Reunião de iniciação 2 - parte 1](https://youtu.be/ErdNZmx0qYM) <br>
+[Reunião de iniciação 2 - parte 2](https://youtu.be/pRnwasJdNgQ) <br>
+[Reunião para criação de lista informal](https://youtu.be/rwppDLJ6t60) <br>
+
+---
 
 ## Histórico de Versão
 
