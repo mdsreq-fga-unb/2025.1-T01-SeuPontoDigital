@@ -28,7 +28,6 @@
 - **Feedback do Cliente**: é uma obinião ou comentário dado pelo cliente através do que foi entregue. É uma forma de verificar se atende às necessidades do usuário e orienta futuras melhorias e práticas na equipe.
 
 ### Organização e Atualização de Requisitos
-- **User Story Mapping (USM)**: mapeamento de história de usuário é uma técnica visual para organizar, priorizar, e planejar funcionalidades com base na jornada do usário. Para a equipe SeuPontoDigital, vai ser uma forma de deixar os requisitos organizados e ordenados cronológicamente.
 - **Backlog de Requisitos**: é lista dinâmica, priorizada e ordenada de tudo o que deve ser desenvolvido no produto. No nosso caso, deve ser utilizada para atualização e priorização de requisitos, como uma lista aberta de acesso geral.
 
 ## 4.2 Engenharia de Requisitos e o Scrum/XP
@@ -50,6 +49,7 @@ Sprint Review | [Verificação e Validação](#verificacao-e-validacao-de-requis
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 17/05/2025 | 1.0 | Adição de Atividades e Técnicas de ER | Caio Venâncio  | | <!-- colocar atividade explítcita-->
+21/06/2025 | 1.1 | Retirar ambiguidade de USM e PBB [(#74)](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/issues/74) | Caio Venâcio  | |
 
 ## Referências Bibliográficas 
 - COHN, Mike. User Stories Applied: For Agile Software Development. Boston: Addison-Wesley, 2004. (para critérios de aceitação como testes de aceitação)
