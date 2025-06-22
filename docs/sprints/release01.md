@@ -50,4 +50,4 @@
 | Data       | Versão | Descrição                                                                 | Autor(es)         | Revisor(es)        |
 |------------|--------|---------------------------------------------------------------------------|-------------------|--------------------|
 | 09/04/2025 | 1.0    | Reunião de Elicitação de Requisitos e Definição de Tarefas                | Lucas Guimarães   | Caio Venâncio      |
-| 26/05/2025 | 2.0    | Alterando a data                                                          | Caio Venâncio     |                    | 
+| 26/05/2025 | 2.0    | Alterando a data e adicionando vídeos                                     | Caio Venâncio     |                    | 
