@@ -3,3 +3,11 @@
 Reunião para sprint planning 1: [https://youtu.be/LqN8Ten5HDk](https://youtu.be/LqN8Ten5HDk)
 
 Infelizmente não gravamos a sprint review, realizada dia 01/05 no Google Meet.
+
+## Sprint Planning
+
+## Sprint Review
+
+## Sprint Retrospective
+
+## Daily Scrum
