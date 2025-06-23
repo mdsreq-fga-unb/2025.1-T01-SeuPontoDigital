@@ -16,6 +16,7 @@
 Infelizmente não gravamos a sprint planning, realizada dia 09/05, realizada 15/05 no Google Meet.
 
 #### Principais pontos da sprint planning
+- Ficou combinado de resolver pendências em algumas histórias (US06, US7 e US15 do antigo backlog do produto)
 - Ficou combinado resolver os pendências do site para que ele possa ser publicado.
 - Ficou combinado ajustar o formulário de contrato.
 
@@ -34,6 +35,7 @@ Infelizmente não gravamos a sprint planning, realizada dia 09/05, realizada 15/
 Link para reunião gravada da sprint review 3: [drive.google.com](https://drive.google.com/file/d/1U4kxCRZjAf5gaPbFevsefQ-aGohixssS/view?usp=sharing)
 
 #### Principais pontos da Sprint Review
+- Pendências entregues (US06, US7 e US15 do antigo backlog do produto)
 - Demonstração do sistema atual
 - Discussão com o cliente
 - Feedback geral 
