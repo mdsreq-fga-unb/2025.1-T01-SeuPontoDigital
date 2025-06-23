@@ -37,6 +37,9 @@ Link para reunião gravada da sprint review 5: [drive.google.com](https://drive.
 - Decisões de Requisitos de Negócio (Aplicativo único para empregador e empregado, garantir segurança com senhas)
 
 ## Daily Scrum
+Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
+- 27/06 Presencial (Terça-feira) <br>
+- 29/06 Presencial (Quinta-feira) <br>
 
 ## Histórico de Versão
 

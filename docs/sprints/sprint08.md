@@ -25,6 +25,8 @@ Link para reunião gravada da sprint planning 8: [drive.google.com](https://driv
 
 ## Daily Scrum
 
+- Ainda não foi realizada
+
 ## Histórico de Versão
 
 | Data       | Versão | Descrição                                                                 | Autor(es)         | Revisor(es)        |

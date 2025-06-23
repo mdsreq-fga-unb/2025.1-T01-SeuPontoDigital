@@ -39,6 +39,11 @@ Link para reunião gravada da sprint review 7: [drive.google.com](https://drive.
 - Registro de ponto incompleto (falta regra de negócio de geolocalização, US17)
 
 ## Daily Scrum
+Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
+- 06/06 Online (sexta-feira) <br>
+- 09/06 Online (segunda-feira) <br>
+- 10/06 Presencial (segunda-feira) <br>
+- 11/06 Online (quarta-feira) <br>
 
 ## Histórico de Versão
 

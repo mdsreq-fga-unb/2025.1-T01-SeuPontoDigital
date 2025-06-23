@@ -41,8 +41,12 @@ Link para reunião gravada da sprint review 6: [drive.google.com](https://drive.
 - Feedback dos membros sobre a usabilidade da interface.
 
 
-
 ## Daily Scrum
+Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
+- 03/06 Presencial (Terça-feira) <br>
+- 04/06 Online (Quarta-feira) <br>
+- 05/06 Presencial (Quinta-feira) <br>
+
 
 ## Histórico de Versão
 

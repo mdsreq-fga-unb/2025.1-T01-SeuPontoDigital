@@ -23,6 +23,8 @@ Link para reunião gravada da sprint planning 4: [drive.google.com](https://driv
 
 ---
 ## Sprint Review
+Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
+- 17/05 Online (Sábado) <br>
 
 #### Detalhes da reunião
 |                     |                                                                                                           |
@@ -43,6 +45,9 @@ Link para reunião gravada da sprint review 4: [drive.google.com](https://drive.
 
 
 ## Daily Scrum
+Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
+- 20/05 Presencial (terça-feira) <br>
+- 22/05 Presencial (Quinta-feira) <br>
 
 ## Histórico de Versão
 

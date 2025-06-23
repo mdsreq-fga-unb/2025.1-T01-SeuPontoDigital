@@ -15,9 +15,9 @@
 
 Infelizmente não gravamos a sprint planning, realizada dia 09/05, realizada 15/05 no Google Meet.
 
-
-Atividades novas
-Código, título, responsáveis, link do issue
+#### Principais pontos da sprint planning
+- Ficou combinado resolver os pendências do site para que ele possa ser publicado.
+- Ficou combinado ajustar o formulário de contrato.
 
 ---
 ## Sprint Review
@@ -40,6 +40,11 @@ Link para reunião gravada da sprint review 3: [drive.google.com](https://drive.
 
 
 ## Daily Scrum
+Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
+- 12/05 Online (Segunda-feira) <br>
+- 13/05 Presencial (Terça-feira) <br>
+- 14/05 Online (Quarta-feira) <br>
+- 15/05 Presencial (Quinta-feira) <br>
 
 ## Histórico de Versão
 
