@@ -1,29 +1,42 @@
 **Data:** 06/06/2025 a 12/06/2025
 
-
-
+---
 ## Sprint Planning
+
+#### Detalhes da reunião
+|                     |                                                                                                           |
+|---------------------|-----------------------------------------------------------------------------------------------------------|
+| Data                | 05/06                                                                                                     |
+| Hora                | 21h                                                                                                       |
+| Plataforma          | Microsoft Teams                                                                                           |
+| Participantes       | Desenvolvedores e Stakeholder                                                                             |
+| Memembros Presentes | Willian Xavier, Thiago Tonin, Lucas Guimarães, João Pedro, Guilherme Moura, Davi de Aguiar, Caio Venâncio |
+
 Link para reunião gravada da sprint planning 7: [drive.google.com](https://drive.google.com/file/d/1o0CDmX3az4FlJzjYjxFYl5d2g4Ok7CB1/view?usp=sharing)
 
-Detalhes da reunião
-Data, hora, plataforma, participantes, membros presentes
+#### Principais pontos da sprint planning
+- Refatoração da US05 para permitir nova funcionalidade (débito)
+- Refatoração do acesso do usuário (US15) para permitir tanto empregados quanto empregadores (débito)
+- Entregar funcionalidade de Registro de ponto (US17)
 
-Atividades novas
-Código, título, responsáveis, link do issue
-
+---
 ## Sprint Review
+
+#### Detalhes da reunião
+|                     |                                                                                                           |
+|---------------------|-----------------------------------------------------------------------------------------------------------|
+| Data                | 12/06                                                                                                     |
+| Hora                | 21h                                                                                                       |
+| Plataforma          | Microsoft Teams                                                                                           |
+| Participantes       | Desenvolvedores e Stakeholder                                                                             |
+| Memembros Presentes | Willian Xavier, Guilherme Moura, Caio Venâncio                                                            |
+
 Link para reunião gravada da sprint review 7: [drive.google.com](https://drive.google.com/file/d/1bV4IaGSXwbzk79QSF0hVOqSjndh13N-G/view?usp=sharing)
 
-Detalhes da reunião
-Data, hora, plataforma, participantes, membros presentes
-
-Atividades finalizadas
-Código, título, responsáveis, link do issue
-
-Atividades debitadas
-Código, título, responsáveis, link do issue
-
-## Sprint Retrospective
+#### Principais pontos da sprint review 
+- Refatoração do banco de dados quase completa (US05)
+- Refatoração do Acesso do Empregador e Empregado Completa
+- Registro de ponto incompleto (falta regra de negócio de geolocalização, US17)
 
 ## Daily Scrum
 
@@ -31,4 +44,4 @@ Código, título, responsáveis, link do issue
 
 | Data       | Versão | Descrição                                                                 | Autor(es)         | Revisor(es)        |
 |------------|--------|---------------------------------------------------------------------------|-------------------|--------------------|
-| 22/06/2025 | 1.0    |                                                                           |  Caio Venâncio    |                    |
+| 22/06/2025 | 1.0    | Criar documentação da sprint                                              |  Caio Venâncio    |                    |

@@ -2,29 +2,45 @@
 
 <!-- Infelizmente não gravamos a sprint planning, realizada dia 16/05, nem a sprint review, realizada 22/05 no Google Meet. -->
 
+---
 ## Sprint Planning
+
+#### Detalhes da reunião
+|                     |                                                                                                           |
+|---------------------|-----------------------------------------------------------------------------------------------------------|
+| Data                | 15/05                                                                                                     |
+| Hora                | 21h                                                                                                       |
+| Plataforma          | Microsoft Teams                                                                                           |
+| Participantes       | Desenvolvedores e Stakeholder                                                                             |
+| Memembros Presentes | Willian Xavier, Thiago Tonin, Lucas Guimarães, João Pedro, Guilherme Moura, Davi de Aguiar, Caio Venâncio |
+
 Link para reunião gravada da sprint planning 4: [drive.google.com](https://drive.google.com/file/d/1U4kxCRZjAf5gaPbFevsefQ-aGohixssS/view?usp=sharing)
 <!-- Sprint Review 3 - Reunião em _General_-20250515_210550-Gravação de Reunião.mp4 -->
 
-Detalhes da reunião
-Data, hora, plataforma, participantes, membros presentes
+#### Principais pontos da sprint planning
+- Attividade de desenvolvimento de US de Contrato e de empregados, e de ativação de contrato (Lucas Guimarães, Guilherme Moura, João Pedro e Davi)
+- Documentação do projeto (Caio Venâncio, Wilian Xavier, Thiago Tonin)
 
-Atividades novas
-Código, título, responsáveis, link do issue
-
+---
 ## Sprint Review
+
+#### Detalhes da reunião
+|                     |                                                                                                           |
+|---------------------|-----------------------------------------------------------------------------------------------------------|
+| Data                | 22/05                                                                                                     |
+| Hora                | 21h                                                                                                       |
+| Plataforma          | Microsoft Teams                                                                                           |
+| Participantes       | Desenvolvedores e Stakeholder                                                                             |
+| Memembros Presentes | Willian Xavier, Thiago Tonin, Lucas Guimarães, João Pedro, Guilherme Moura, Davi de Aguiar, Caio Venâncio |
+
 Link para reunião gravada da sprint review 4: [drive.google.com](https://drive.google.com/file/d/10OB-QP-16v2G6ayHchzAB1UoDhdBNmuA/view?usp=sharing)
 
-Detalhes da reunião
-Data, hora, plataforma, participantes, membros presentes
+#### Principais pontos da sprint review
+- Sprint 4 fechou todos os requisitos RF01 a RF10 (antigos) completos.
+- Requisitos RF01 a RF10 estão concluídos e validados com o cliente.
+- Ajustes visuais e usabilidade foram elogiados
+- Discussões de regras de negócio
 
-Atividades finalizadas
-Código, título, responsáveis, link do issue
-
-Atividades debitadas
-Código, título, responsáveis, link do issue
-
-## Sprint Retrospective
 
 ## Daily Scrum
 
@@ -32,4 +48,4 @@ Código, título, responsáveis, link do issue
 
 | Data       | Versão | Descrição                                                                 | Autor(es)         | Revisor(es)        |
 |------------|--------|---------------------------------------------------------------------------|-------------------|--------------------|
-| 22/06/2025 | 1.0    |                                                                           |  Caio Venâncio    |                    |
+| 22/06/2025 | 1.0    | Criar documentação da sprint                                              |  Caio Venâncio    |                    |
