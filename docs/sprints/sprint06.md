@@ -16,8 +16,8 @@ Link para reunião gravada da sprint planning 6: [drive.google.com](https://driv
 
 #### Principais pontos da sprint planning
 - Unificação dos acessos (Requisito 15 + 16)
-- Implementação do Primeiro Acesso
-- Implementação da recuperação de senha
+- Implementação do Primeiro Acesso (US17 antigo)
+- Implementação da recuperação de senha (US19 antigo)
 - Testes automatizados
 
 ---
@@ -35,7 +35,7 @@ Link para reunião gravada da sprint planning 6: [drive.google.com](https://driv
 Link para reunião gravada da sprint review 6: [drive.google.com](https://drive.google.com/file/d/1o0CDmX3az4FlJzjYjxFYl5d2g4Ok7CB1/view?usp=sharing)
 
 #### Principais pontos da sprint review
-- Tela inicial do aplicativo com funcionalidades básicas de login.
+- Tela inicial do aplicativo com funcionalidades básicas de login. 
 - Demonstração da autenticação por sms.
 - Demonstração do clique na opção de primeiro acesso e navegação para cadastro.
 - Feedback dos membros sobre a usabilidade da interface.

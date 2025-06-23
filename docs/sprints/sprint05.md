@@ -33,7 +33,7 @@ Link para reunião gravada da sprint planning 5: [drive.google.com](https://driv
 Link para reunião gravada da sprint review 5: [drive.google.com](https://drive.google.com/file/d/1-VgwJBlW8SmRzTLcxmk5-RWPveBrpPRZ/view?usp=sharing)
 
 #### Principais pontos da sprint review
-- Finalizada a implementação do login para o empregado
+- Finalizada a implementação do login para o empregado (US15 atual)
 - Decisões de Requisitos de Negócio (Aplicativo único para empregador e empregado, garantir segurança com senhas)
 
 ## Daily Scrum

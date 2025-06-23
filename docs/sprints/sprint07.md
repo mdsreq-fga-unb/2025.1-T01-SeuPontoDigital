@@ -34,9 +34,9 @@ Link para reunião gravada da sprint planning 7: [drive.google.com](https://driv
 Link para reunião gravada da sprint review 7: [drive.google.com](https://drive.google.com/file/d/1bV4IaGSXwbzk79QSF0hVOqSjndh13N-G/view?usp=sharing)
 
 #### Principais pontos da sprint review 
-- Refatoração do banco de dados quase completa (US05)
+- Refatoração do banco de dados quase completa (US05 atual)
 - Refatoração do Acesso do Empregador e Empregado Completa
-- Registro de ponto incompleto (falta regra de negócio de geolocalização, US17)
+- Registro de ponto incompleto (falta regra de negócio de geolocalização, US17 atual)
 
 ## Daily Scrum
 Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>

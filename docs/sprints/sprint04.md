@@ -18,7 +18,7 @@ Link para reunião gravada da sprint planning 4: [drive.google.com](https://driv
 <!-- Sprint Review 3 - Reunião em _General_-20250515_210550-Gravação de Reunião.mp4 -->
 
 #### Principais pontos da sprint planning
-- Attividade de desenvolvimento de US de Contrato e de empregados, e de ativação de contrato (Lucas Guimarães, Guilherme Moura, João Pedro e Davi)
+- Atividade de desenvolvimento de US de Contrato e de empregados, e de ativação de contrato - US09 e US10
 - Documentação do projeto (Caio Venâncio, Wilian Xavier, Thiago Tonin)
 
 ---

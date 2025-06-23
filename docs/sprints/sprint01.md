@@ -17,6 +17,7 @@
 Link para reunião gravada da sprint planning 1: [https://youtu.be/LqN8Ten5HDk](https://youtu.be/LqN8Ten5HDk)
 
 #### Principais pontos da sprint planning
+- Envolveu US01
 - Definição de Ambiente e Repositório
 - Planejamento de Sprints (Sprint Planning ocorrerá às sextas-feiras e o Sprint Review às quintas-feiras.)
 - Discussão sobre Início do Desenvolvimento

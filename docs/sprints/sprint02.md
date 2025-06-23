@@ -16,8 +16,9 @@ Infelizmente não gravamos a sprint planning, realizada dia 02/05 no Google Meet
 
 <!-- arquivo.txt: reunião 6 01-05 (sprint review & planning) -->
 #### Principais pontos da sprint planning
-- Definimos o objetivo da sprint: desenvolver durante as semanas com menor carga de atividades.
 - Iniciamos as histórias US02 a US08 e a US15 (correspondentes ao backlog de produto anterior).
+- Definimos o objetivo da sprint: desenvolver durante as semanas com menor carga de atividades.
+
 
 ---
 ## Sprint Review
