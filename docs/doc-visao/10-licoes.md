@@ -50,4 +50,10 @@ Durante a unidade, a equipe também aprendeu e aplicou técnicas fundamentais de
 
 ## 10.3 Unidade 3 
 
+Na Unidade 3, a equipe aprofundou seus conhecimentos em técnicas de organização e planejamento de projetos, consolidando competências fundamentais para o desenvolvimento eficiente de produtos de software. Além da aplicação do método Product Backlog Building (PBB) para estruturar o backlog do produto, também foi possível compreender como priorizar os itens utilizando ferramentas como o COORG, garantindo que os PBIs (Product Backlog Items) fossem ordenados conforme a sequência mais adequada às demandas do projeto.
+
+Compreendemos ainda a importância de detalhar cada item do backlog em histórias de usuário, que funcionam como descrições objetivas do valor entregue ao cliente. Esses itens foram complementados com critérios de aceitação, essenciais para definir quando um PBI pode ser considerado finalizado, e com a criação de BDDs (Behavior-Driven Development), promovendo uma abordagem colaborativa entre os times de desenvolvimento e de negócios.
+
+Um destaque importante foi o aprendizado e a aplicação da técnica de User Story Mapping, que proporcionou uma visualização clara e estruturada do fluxo do produto. Essa abordagem permitiu compreender de forma linear e coesa as etapas envolvidas no desenvolvimento, facilitando a identificação dos pontos mais críticos e assegurando que o valor entregue ao cliente final fosse priorizado.
+
 ## 10.4 Unidade 4 
