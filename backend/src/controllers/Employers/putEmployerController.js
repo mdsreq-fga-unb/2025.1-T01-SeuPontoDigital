@@ -1,7 +1,7 @@
 import validateCPF from "../../middlewares/validateCPF.js";
 import putEmployerModel from "../../models/Employers/putEmployerModel.js";
 import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
-import verifyPassword from "../../middlewares/verifyPassword.js";
+import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqual.js";
 
 const putEmployerController = async (req, res) => {
     try {
@@ -10,8 +10,11 @@ const putEmployerController = async (req, res) => {
         const { passwordAdmin } = req.body;
         const adminEmail = req.email;
         
+        // Remover campos que não devem ser atualizados
         delete updateDataEmployer.activeEmployees;
         delete updateDataEmployer.inactiveEmployees;
+        delete updateDataEmployer.id;
+        delete updateDataEmployer.id_address;
 
         if (!passwordAdmin) {
             return res.status(400).json({ message: "password required" });
@@ -22,7 +25,7 @@ const putEmployerController = async (req, res) => {
             return res.status(404).json({ message: "admin not found" });
         }
 
-        const isPasswordValid = await verifyPassword(passwordAdmin, admin.password);
+        const isPasswordValid = await validateHashPasswordEqual(passwordAdmin, admin.password);
         delete updateDataEmployer.passwordAdmin;
         if (!isPasswordValid) {
             return res.status(401).json({ message: "invalid password" });
@@ -33,7 +36,7 @@ const putEmployerController = async (req, res) => {
         
         const error = await putEmployerModel(id, updateDataEmployer);
         if (error) {
-            return res.status(500).json({ message:  "internal server error" });
+            return res.status(500).json({ message: "internal server error" });
         }
 
         return res.status(200).json({ message: "employer updated successfully" });

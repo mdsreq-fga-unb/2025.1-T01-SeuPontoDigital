@@ -1,15 +1,35 @@
-import getOneEmployeeFromCPF from "../../models/ContractEmployee/getOneEmployeeFromCPF.js";
+import getOneEmployeeFromCPF from "../../models/Contracts/getOneEmployeeFromCPF.js";
 import getOneEmployerFromCPF from "../../models/Employers/getOneEmployerFromCPF.js";
-import sendSMS from "../../middlewares/sendSMS.js";
+import sendCodeSMS from "../../middlewares/sendCodeSMS.js";
 
 const forgottenPasswordController = async (req, res) => {
-    const { cpf, phone } = req.body;
+    let { cpf, phone } = req.body;
 
     console.log('--- [POST /first-access] ---');
     console.log('Recebido:', { cpf, phone });
 
     if (!cpf || !phone) {
         return res.status(400).send({ message: "cpf and phone are required" });
+    }
+
+    // Formatar telefone para o padrão do Twilio para comparação
+    phone = phone.trim();
+    
+    // Se já tem o prefixo +55, manter como está
+    if (phone.startsWith('+55')) {
+        // phone já está formatado
+    } else {
+        // Remover qualquer formatação e garantir que seja apenas números
+        phone = phone.replace(/\D/g, '');
+        
+        // Se começar com 55 e tiver 13 dígitos (55 + 11 dígitos do celular brasileiro)
+        // considera que já tem o código do país
+        if (phone.startsWith('55') && phone.length === 13) {
+            phone = `+${phone}`;
+        } else {
+            // Caso contrário, adiciona o +55
+            phone = `+55${phone}`;
+        }
     }
 
     try {
@@ -31,7 +51,7 @@ const forgottenPasswordController = async (req, res) => {
 
         
         
-        await sendSMS(phone);
+        await sendCodeSMS(phone);
 
         return res.status(200).send({ message: "code sent" });
 
