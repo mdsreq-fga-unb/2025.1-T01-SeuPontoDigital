@@ -2,11 +2,11 @@
 
 **Data:** 16/05/2025 a 22/05/2025
 
-**Horário:** 19h às 20h (reunião 1) e das
+**Horário:** 19h às 20h (reunião 1) e das 21 às 22h (reunião 2)
 <br><br>
 
 #### Vídeos das reuniões:
-- [Link para segunda reunião de PBB](https://youtu.be/8dlaPWhxiy4) <br>
+- [Link para segunda reunião de PBB](https://youtu.be/8dlaPWhxiy4)<br>
 - [Link para primeira reunião de PBB](https://youtu.be/na62PwEKt1c)<br>
 
 ## Objetivos

@@ -14,7 +14,7 @@
 
 ### Declaração de Requisitos
 - **User Story**: histórias de usuário são uma forma simples e informal de descrever requisitos funcionais, de forma que serve muito bem para a equipe SeuPontoDigital para instruir ou lembrar como o requisito deve ser implementado.
-<!-- - **Épicos**: épicos são histórias de usuário grandes demais para uma única interação, tornando-se agrupamentos de histórias. São ótimos para ver o quadro mais amplo em uma história, e também para procurar uma história maior sem perder a vantagem de estimar através de histórias menores. -->
+- **Épicos**: épicos são histórias de usuário grandes demais para uma única interação, tornando-se agrupamentos de histórias. São ótimos para ver o quadro mais amplo em uma história, e também para procurar uma história maior sem perder a vantagem de estimar através de histórias menores.
 
 ### Representação de Requisitos
 <!-- podemos fazer protótipos ou mockups -->
