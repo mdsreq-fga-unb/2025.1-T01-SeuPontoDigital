@@ -35,8 +35,10 @@ Fases do Processo     | Atividades ER | Prática | Técnica | Resultado Esperado
 -------- | ------ | --------- | ----- | ---------
 Planejamento de Release | [Elicitação e Descoberta](#elicitacao-e-descoberta) | Levantamento de requisitos | Entrevistas com Stakeholders, Brainstorming, Product Backlog Building (PBB) | Entedimento de problemas, identificação de funcionalidades e lista de necessidades |
  | [Análise e Consenso](#analise-e-consenso) | Product Backlog Building (PBB), Priorização MoSCoW, Priorização ICE | Priorização dos Requisitos | Escopo e funcionalidades essenciais definidas e priorizadas em comum acordo. | 
- | [Declaração](#declaracao-de-requisitos) | Registro dos requisitos | User Story, Épicos | Histórias de usuário que detalham as funcionalidades do projeto e épicos agrupam essas histórias. | 
-Sprint Planning | [Análise e Consenso](#analise-e-consenso) | Mensurar viabilidade de requisitos | Planning Game | Negociação do desenvolvimento na interação com desenvolvedores |
+| [Verificação e Validação](#verificacao-e-validacao-de-requisitos) | Validação de requisitos | Critérios de aceitação | Confirmação de que requisito entrega valor |
+ | [Declaração](#declaracao-de-requisitos) | Registro dos requisitos | User Story | Histórias de usuário que detalham as funcionalidades do projeto e Features agrupam essas histórias. |
+  | [Organização e Atualização](#organizacao-e-atualizacao-de-requisitos) | Organização dos requisitos implementados ou atrasados | Backlog de requisitos | Backlog atualizado |
+Sprint Planning | [Análise e Consenso](#analise-e-consenso) | Mensurar viabilidade de requisitos | Planning Game, Priorização ICE | Negociação do desenvolvimento na interação com desenvolvedores |
  | [Declaração](#declaracao-de-requisitos) | Definição de Critérios de Aceitação | Critérios de aceitação, User Stories | User Stories dfinidos com escopo limitado |
 Execução da Sprint | [Verificação e Validação](#verificacao-e-validacao-de-requisitos) | Verificação de implementação | Critérios de aceitação, DoD e DoR, Revisão informal ou formal | Confirmação de que entrega atende requisito |
 | [Representação](#representacao-de-requisitos) | Criação de storyboard | Storyboards | Storyboards orientam a equipe |
@@ -48,8 +50,9 @@ Sprint Review | [Verificação e Validação](#verificacao-e-validacao-de-requis
 ## Historico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-17/05/2025 | 1.0 | Adição de Atividades e Técnicas de ER | Caio Venâncio  | | <!-- colocar atividade explítcita-->
+17/05/2025 | 1.0 | Adição de Atividades e Técnicas de ER | Caio Venâncio  | | 
 21/06/2025 | 1.1 | Retirar ambiguidade de USM e PBB [(#74)](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/issues/74) | Caio Venâcio  | |
+21/06/2025 | 1.1 | Adicionar Organização/atualização e Verificação/validação na página [(#75)](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/issues/75) | Caio Venâcio  | |
 
 ## Referências Bibliográficas 
 - COHN, Mike. User Stories Applied: For Agile Software Development. Boston: Addison-Wesley, 2004. (para critérios de aceitação como testes de aceitação)
