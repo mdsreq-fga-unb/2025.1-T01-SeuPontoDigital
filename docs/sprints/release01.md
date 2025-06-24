@@ -14,12 +14,20 @@
 | Thiago Melo           | Desenvolvedor Mobile                   | ❌       |
 | Willian Xavier        | Tester e Desenvolvedor Backend         | ✅       |
 
+#### Vídeos de reuniões:
+- [Reunião de iniciação 1 - parte 1](https://youtu.be/-bqFkUIhdvk) <br>
+- [Reunião de iniciação 1 - parte 2](https://youtu.be/XC-78936bz8) <br>
+- [Reunião de iniciação 2 - parte 1](https://youtu.be/ErdNZmx0qYM) <br>
+- [Reunião de iniciação 2 - parte 2](https://youtu.be/pRnwasJdNgQ) <br>
+- [Reunião para criação de lista informal](https://youtu.be/rwppDLJ6t60) <br>
+
 ---
 
 ## Objetivos
 
-- Elicitar requisitos e entender mais sobre o projeto
+- Elicitar requisitos e entender mais sobre o projeto (Entrevista com Stakeholder)
 - Definir as tarefas de cada membro: adicionadas no [GitHub Issues](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/issues).
+- Brainstorming de ideias
 
 ---
 
@@ -36,16 +44,13 @@
 
 ---
 
-**Vídeos:**
-(Reunião de iniciação 1 - parte 1)[https://youtu.be/-bqFkUIhdvk]
-(Reunião de iniciação 1 - parte 2)[https://youtu.be/XC-78936bz8]
-(Reunião de iniciação 2 - parte 1)[https://youtu.be/ErdNZmx0qYM]
-(Reunião de iniciação 2 - parte 2)[https://youtu.be/pRnwasJdNgQ]
-(Reunião para criação de lista informal)[https://youtu.be/rwppDLJ6t60]
+
+
+---
 
 ## Histórico de Versão
 
 | Data       | Versão | Descrição                                                                 | Autor(es)         | Revisor(es)        |
 |------------|--------|---------------------------------------------------------------------------|-------------------|--------------------|
 | 09/04/2025 | 1.0    | Reunião de Elicitação de Requisitos e Definição de Tarefas                | Lucas Guimarães   | Caio Venâncio      |
-| 26/05/2025 | 2.0    | Alterando a data                                                          | Caio Venâncio     |                    | 
+| 26/05/2025 | 2.0    | Alterando a data e adicionando vídeos                                     | Caio Venâncio     |                    | 

@@ -1,30 +1,7 @@
-**Data:** 16/05/2025 a 22/05/2025
-
-<!-- Infelizmente não gravamos a sprint planning, realizada dia 16/05, nem a sprint review, realizada 22/05 no Google Meet. -->
+**Data:** 23/05/2025 a 29/05/2025
 
 ---
 ## Sprint Planning
-
-#### Detalhes da reunião
-|                     |                                                                                                           |
-|---------------------|-----------------------------------------------------------------------------------------------------------|
-| Data                | 15/05                                                                                                     |
-| Hora                | 21h                                                                                                       |
-| Plataforma          | Microsoft Teams                                                                                           |
-| Participantes       | Desenvolvedores e Stakeholder                                                                             |
-| Memembros Presentes | Willian Xavier, Thiago Tonin, Lucas Guimarães, João Pedro, Guilherme Moura, Davi de Aguiar, Caio Venâncio |
-
-Link para reunião gravada da sprint planning 4: [drive.google.com](https://drive.google.com/file/d/1U4kxCRZjAf5gaPbFevsefQ-aGohixssS/view?usp=sharing)
-<!-- Sprint Review 3 - Reunião em _General_-20250515_210550-Gravação de Reunião.mp4 -->
-
-#### Principais pontos da sprint planning
-- Atividade de desenvolvimento de US de Contrato e de empregados, e de ativação de contrato - US09 e US10
-- Documentação do projeto (Caio Venâncio, Wilian Xavier, Thiago Tonin)
-
----
-## Sprint Review
-Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
-- 17/05 Online (Sábado) <br>
 
 #### Detalhes da reunião
 |                     |                                                                                                           |
@@ -35,19 +12,34 @@ Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
 | Participantes       | Desenvolvedores e Stakeholder                                                                             |
 | Memembros Presentes | Willian Xavier, Thiago Tonin, Lucas Guimarães, João Pedro, Guilherme Moura, Davi de Aguiar, Caio Venâncio |
 
-Link para reunião gravada da sprint review 4: [drive.google.com](https://drive.google.com/file/d/10OB-QP-16v2G6ayHchzAB1UoDhdBNmuA/view?usp=sharing)
+Link para reunião gravada da sprint planning 5: [drive.google.com](https://drive.google.com/file/d/10OB-QP-16v2G6ayHchzAB1UoDhdBNmuA/view?usp=sharing)
+
+#### Principais pontos da sprint planning
+- Sprint 5 priorizou o RF15 (login mobile do empregador), que já estava parcialmente implementado.
+- Ajustes técnicos combinados na equipe (horário fixo e variado)
+
+---
+## Sprint Review
+
+#### Detalhes da reunião
+|                     |                                                                                                           |
+|---------------------|-----------------------------------------------------------------------------------------------------------|
+| Data                | 29/05                                                                                                     |
+| Hora                | 21h                                                                                                       |
+| Plataforma          | Microsoft Teams                                                                                           |
+| Participantes       | Desenvolvedores e Stakeholder                                                                             |
+| Memembros Presentes | Willian Xavier, Thiago Tonin, Lucas Guimarães, João Pedro, Guilherme Moura, Davi de Aguiar, Caio Venâncio |
+
+Link para reunião gravada da sprint review 5: [drive.google.com](https://drive.google.com/file/d/1-VgwJBlW8SmRzTLcxmk5-RWPveBrpPRZ/view?usp=sharing)
 
 #### Principais pontos da sprint review
-- Sprint 4 fechou todos os requisitos RF01 a RF10 (antigos) completos.
-- Requisitos RF01 a RF10 estão concluídos e validados com o cliente.
-- Ajustes visuais e usabilidade foram elogiados
-- Discussões de regras de negócio
-
+- Finalizada a implementação do login para o empregado (US15 atual)
+- Decisões de Requisitos de Negócio (Aplicativo único para empregador e empregado, garantir segurança com senhas)
 
 ## Daily Scrum
 Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
-- 20/05 Presencial (terça-feira) <br>
-- 22/05 Presencial (Quinta-feira) <br>
+- 27/06 Presencial (Terça-feira) <br>
+- 29/06 Presencial (Quinta-feira) <br>
 
 ## Histórico de Versão
 

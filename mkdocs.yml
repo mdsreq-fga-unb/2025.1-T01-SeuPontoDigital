@@ -26,9 +26,19 @@ nav:
     - Sprint 02: sprints/sprint02.md
     - Sprint 03: sprints/sprint03.md
     - Sprint 04: sprints/sprint04.md
+    - Planejamento da Release 02: sprints/release02.md
+    - Sprint 05: sprints/sprint05.md
+    - Sprint 06: sprints/sprint06.md
+    - Sprint 07: sprints/sprint07.md
+    - Sprint 08: sprints/sprint08.md
   - Entregas:
     - Entrega Unidade 1: entregas/entrega1.md
     - Entrega Unidade 2: entregas/entrega2.md
+    - Entrega Unidade 3: 
+      - Video da apresentação: entregas/entrega3-video.md
+      - PBB: entregas/entrega3-pbb.md
+      - USM: entregas/entrega3-usm.md
+
   - Políticas da Equipe :
     - Política de Issues: guias/issues.md
     - Política de Branches: guias/branches.md

@@ -18,101 +18,53 @@ sistema.
 #### Quanto ao painel de administrador
 
 **RF01: Realizar login no painel de administrador** <br>
-A LFD deve poder realizar login no painel de administrador.
 
-**RF02: Cadastrar empregadores**  
-A LFD deve poder cadastrar empregadores no sistema pelo painel de administrador.
+**RF02: Cadastrar empregador no painel de administrador** 
 
-**RF03: Editar empregadores**  
-A LFD deve poder editar os dados dos empregadores pelo painel de administrador.
+**RF03: Editar dados de empregador no painel de administrador** 
 
-**RF04: Excluir empregadores**  
-A LFD deve poder excluir qualquer empregador do sistema pelo painel de administrador.
+**RF04: Excluir dados de empregador no painel de administrador** 
 
-**RF05: Cadastrar contrato de trabalho**  
-A LFD deve poder criar um novo contrato e, junto dele, cadastrar os dados do empregado numa única operação.
+**RF05: Cadastrar contrato de trabalho** 
 
-**RF06: Editar contrato de trabalho**  
-A LFD deve poder editar os dados de contrato e do empregado em uma única operação.
+**RF06: Editar contrato de trabalho** 
 
-**RF07: Excluir contrato de trabalho**  
-A LFD deve poder excluir o contrato e o empregado associado.
+**RF07: Excluir contrato de trabalho** 
 
-**RF08: Visualizar os dados dos usuários**  
-A LFD deve poder visualizar os dados dos empregados e empregadores em formato de tabela no painel administrativo (empregados deverão ser acessados dentro da tabela de empregadores).
+**RF08: Visualizar dados dos empregadores** 
 
-**RF09: Visualizar os dados dos contratos**  
-A LFD deve poder visualizar os dados dos contratos de trabalho em formato de tabela no painel administrativo.
+**RF09: Visualizar dados de contrato de trabalho** 
 
-**RF10: Buscar os dados**  
-A LFD deve poder buscar os dados dos empregados, empregadores e de contratos existentes.
+**RF10: Controlar acesso de usuários ao aplicativo mobile** 
 
-**RF11: Filtrar os dados**  
-A LFD deve poder filtrar os dados dos empregados, empregadores e de contratos existentes baseado em status ativo ou inativo.
+**RF11: Visualizar registros de ponto de trabalho dos empregados** 
 
-**RF12: Controlar acesso ao aplicativo**  
-A LFD deve poder controlar o acesso de empregados e empregadores ao aplicativo mobile através da tabela de contratos de trabalho.
-
-**RF13: Visualizar registros de ponto**  
-A LFD deve poder visualizar os dados de registro de ponto e os relatórios de jornada de um empregado através de um empregador, na tabela de empregadores.
-
-**RF14: Adicionar observações para dias de trabalho**
-A LFD deve poder adicionar observações necessárias para dias de trabalho.
+**RF12: Adicionar observações a dias de trabalho dos empregados** 
 
 ---
 ### Objetivo específico 2 - Digitalização da marcação de ponto
 #### Quanto ao acesso ao aplicativo mobile de registro de ponto
 
-**RF15: Realizar login como empregado no aplicativo mobile**  
-O empregado deve poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada.
+**RF13: Criar nova senha de acesso no aplicativo mobile** 
 
-**RF16: Realizar login como empregador no aplicativo mobile**  
-O empregador deve poder acessar o aplicativo mobile se estiverem cadastrados no sistema, possuírem um contrato de trabalho ativo e tiverem permissão de acesso. O login deverá ser feito utilizando CPF e senha cadastrada.
-
-**RF17: Redefinir senha como novo usuário**  
-Os usuários (empregados e empregadores) que estiverem acessando o aplicativo pela primeira vez deverão alterar a senha de acesso.
-
-**RF18: Recuperar senha**
-Os usuários (empregados e empregadores) devem poder recuperar o acesso ao aplicativo cadastrando uma nova senha.
-
-**RF19: Redefinir senha**
-Os usuários (empregados e empregadores) devem poder alterar a senha de acesso ao aplicativo.
+**RF14: Realizar login no aplicativo mobile** 
 
 ---
 
 #### Quanto ao registro de ponto de trabalho no aplicativo mobile
 
-**RF20: Registrar ponto**  
-O empregado deve poder registrar seus pontos de trabalho (incluindo as pausas), levando em conta as regras de tolerância de distância máxima do local de trabalho.
+**RF15: Registrar ponto de trabalho** 
 
-**RF21: Notificar LFD sobre o ponto**  
-O sistema deve enviar notificações à LFD quando houver pendência de registro de ponto dentro dos horários estabelecidos em contrato.
-
-**RF22: Notificar empregador sobre o ponto**  
-O sistema deve enviar notificações aos empregadores sempre que um empregado realizar uma batida de ponto, ou quando houver pendência no registro dentro do horário estipulado pelo contrato.
-
-**RF23: Justificar falta com envio de arquivo**
-Os empregados devem poder justificar suas faltas diretamente pelo aplicativo, enviando um arquivo que comprove o motivo da ausência.
-
-**RF24: Indicar feriados:**
-Um empregador deve poder indicar quais dias são feriados.
+**RF16: Enviar justificativa de falta no aplicativo mobile** 
 
 ---
 
 ### Objetivo específico 3 - Informatização dos dados
 #### Quanto ao sistema de relatórios dos registros de ponto
 
-**RF25: Visualizar histórico do registro de ponto**  
-O empregado deve poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo.
+**RF17: Visualizar próprio histórico de ponto de trabalho** 
 
-**RF26: Visualizar histórico de pontos dos empregados**  
-O sistema deve permitir que os empregadores acessem o histórico de registros de ponto dos seus respectivos empregados.
-
-**RF27: Enviar relatório mensal**  
-O sistema deve gerar automaticamente um relatório mensal contendo os registros de ponto e os cálculos relacionados (salário base, horas extras, etc), e enviá-lo à LFD e ao empregador responsável em um dia selecionado.
-
-**RF28: Enviar folha de ponto mensal**
-O sistema deve enviar automaticamente a folha de ponto preenchida ao empregado após o encerramento do mês.
+**RF18: Gerar relatório de registro de ponto** 
 
 <br>
 
@@ -121,66 +73,73 @@ O sistema deve enviar automaticamente a folha de ponto preenchida ao empregado a
 ## 7.2 Requisitos Não Funcionais
 
 ## Usability (Usabilidade):
-- **RNF01 - Interface Intuitiva:**
 
-A interface do aplicativo deve permitir que usuários realizem as principais tarefas com poucas interações por tela e elementos visuais de fácil leitura e toque.
+- **RNF01 - Navegação Rápida:**
 
-- **RNF02 - Interface Simples:** 
+A interface do aplicativo deve ser projetada de forma a oferecer uma navegação rápida, permitindo que os usuários realizem as principais tarefas com no máximo 4  interações por tela.
 
-A interface principal do aplicativo deve conter apenas os elementos essenciais para o registro de ponto, organizados de forma a facilitar a identificação e o uso.
+- **RNF02 - Foco em Registro de Ponto:**
+
+A interface principal do aplicativo deve ser projetada com foco nos elementos diretamente relacionados ao registro de ponto, garantindo que informações ou funcionalidades secundárias não prejudiquem os usuários no tempo de identificação máximo de 5 segundos dos controles principais. 
+
+- **RNF03 - Controle de Notificações:**
+
+O sistema deve limitar o envio de notificações importantes — aquelas que envolvem ações essenciais do usuário, como confirmação de registros de ponto, lembretes de horários ou comunicações obrigatórias. Cada usuário poderá receber no máximo 4 dessas notificações por dia, com um intervalo mínimo de 15 minutos entre elas, a fim de preservar a atenção do usuário e evitar interrupções frequentes que possam afetar negativamente sua experiência de uso.
+
 
 ## Reliability (Confiabilidade):
-
-- **RNF03 - Sistema Escalável:**
-  
-O sistema deverá ser capaz de escalar sem degradação perceptível à medida que o número de usuários cresce.
 
 - **RNF04 - Teste automatizados:**
 
 Implementar cobertura de testes automatizados de pelo menos 80% de código, garantindo detecção precoce de regressões.
 
-- **RNF05 - Dados Confiáveis:**
-
-Os dados de empregados e empregadores devem estar em conformidade com a LGPD, incluindo anonimização ou criptografia de campos sensíveis.
-
 ## Performance (Desempenho):
 
-- **RNF06 - Notificações Rápidas:**
+<!-- anterior era 06 -->
+- **RNF05 - Notificações Rápidas:**
 
 As notificações de ponto (batido ou pendente) devem ser entregues em até 5 segundos após o evento ocorrer, em 95% dos casos.
 
-- **RNF07 - Notificações Agradáveis:**
+<!-- esta estava ok, não sei porque foi substituída -Caio -->
+<!-- - **RNF08 - Tempo de Resposta do Registro de Ponto:**
+O tempo de resposta do sistema para a realização de um registro de ponto não deverá exceder 2 segundos em 95% das operações. -->
 
-Limitar o envio de notificações críticas a, no máximo, 4 por dia por usuário, com intervalo mínimo de 15 min entre elas, para não sobrecarregar o usuário.
+<!--  anterior 04-->
+- **RNF06 - Tempo de Resposta:**
 
-- **RNF08 - Tempo de Resposta do Registro de Ponto:**
-O tempo de resposta do sistema para a realização de um registro de ponto não deverá exceder 2 segundos em 95% das operações.
+O sistema deverá garantir que o tempo de resposta para qualquer operação no sistema seja menor que 200ms.
 
 ## Security (Segurança):
 
-- **RNF09 - APIs com rotas seguras:** 
+<!-- RN08 anterior -->
+- **RNF07 - APIs com rotas seguras:** 
 
 Todas as APIs devem usar JWT, com tokens expirando após 30 min de inatividade e renovação segura via refresh tokens.
 
-- **RNF10 - Dados Seguros:**
-  
-Dados sensíveis (senhas) devem ser criptografados em repouso pela bcrypt.
+<!-- esta estava ok, não sei porque foi substituída -Caio -->
+<!-- - **RNF10 - Dados Seguros:**
+Dados sensíveis (senhas) devem ser criptografados em repouso pela bcrypt. -->
 
-- **RNF11 - Armazenamento de Dados:**
+<!-- RN05 anterior -->
+- **RNF08 - Armazenamento Seguro de Dados Sensíveis:**
+
+O sistema deverá utilizar a criptografia (geração de hash) do bcrypt para armazenar dados sensíveis.
+
+<!-- RN11 anterior -->
+- **RNF09 - Armazenamento de Dados:**
 
 O sistema deve ser capaz de armazenar informações de usuários, registros de ponto e outros dados relacionados por pelo menos 5 anos.
 
 ## Portability (Portabilidade):
 
-- **RNF12 - Compatibilidade com vários aparelhos:**
+<!-- permanece RNF06 -->
+- **RNF10 - Compatibilidade com Android:**
 
-O aplicativo mobile deve ser compatível com Android (versões 7.0 em diante) e iOS (12.0 em diante), rodando em smartphones de diferentes fabricantes sem ajustes específicos no código.
+O aplicativo mobile deve ser compatível com dispositivos que utilizem Android, em sua versão 10 ou superior.
 
-## Maintainability (Manutenibilidade):
+<!-- ## Maintainability (Manutenibilidade): -->
+<!-- vai ficar sem mesmo será? -Caio -->
 
-- **RNF13 - Código padronizado:**
-  
-Código modular e bem documentado; uso de comentários claros, padronização de commits.
 
 ---
 
