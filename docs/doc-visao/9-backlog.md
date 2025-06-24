@@ -140,6 +140,7 @@ O MVP (Produto Mínimo Viável) do sistema foi definido com base nos requisitos 
 | **US10** | Como gestor de folha de ponto na LFD, devo poder controlar contratos de trabalho, para que eu possa garantir que o acesso ao aplicativo mobile reflita apenas vínculos ativos e evitar fraudes ou acessos indevidos. |
 | **US13** | Como usuário do aplicativo (empregado ou empregador), devo poder criar uma nova senha, para que eu possa acessar minha conta no primeiro acesso ou caso tenha esquecido minha senha. |
 | **US14** | Como usuário do aplicativo (empregado ou empregador), devo poder acessar o aplicativo mobile para que eu possa acessar as funcionalidades do meu perfil. |
+| **US15** | Como empregado, devo poder registrar meus pontos de trabalho, para que eu possa ter meus registros de ponto digitalmente de maneira válida e precisa. |
 | **US17** | Como empregado, devo poder visualizar seu próprio histórico de registros de ponto diretamente no aplicativo, para que eu possa acompanhar minhas horas de trabalho e verificar a precisão dos registros. |
 | **US18** | Como gestor de folha de ponto na LFD, devo poder receber um relatório mensal dos registros de ponto, para que eu possa revisar e aprovar as folhas de pagamento de forma eficiente. |
 
@@ -152,3 +153,4 @@ Data     | Versão | Descrição | Autor(es) | Revisor(es)
 25/05/2025 | 1.1 | MVP | Davi de Aguiar | |
 26/05/2025 | 1.2 | Critérios de priorização | Willian Silva | |
 23/06/2025 | 1.3 | Priorizacao do BackLog, Requisitos Nao Funcionais, US | Caio Venâncio e João Pedro | |
+
