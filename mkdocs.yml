@@ -34,6 +34,11 @@ nav:
   - Entregas:
     - Entrega Unidade 1: entregas/entrega1.md
     - Entrega Unidade 2: entregas/entrega2.md
+    - Entrega Unidade 3: 
+      - Video da apresentação: entregas/entrega3-video.md
+      - PBB: entregas/entrega3-pbb.md
+      - USM: entregas/entrega3-usm.md
+
   - Políticas da Equipe :
     - Política de Issues: guias/issues.md
     - Política de Branches: guias/branches.md
