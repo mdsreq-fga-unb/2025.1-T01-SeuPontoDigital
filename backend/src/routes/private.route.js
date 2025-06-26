@@ -2,7 +2,6 @@ import express from "express";
 import authVerifyToken from "../middlewares/authVerifyToken.js";
 import validateUser from "../middlewares/validateUser.js";
 import validateContract from "../middlewares/validateContract.js"
-import validateCPF from "../middlewares/validateCPF.js";
 import verifyDateEmployer from "../middlewares/verifyDateEmployer.js";
 import verifyDateContract from "../middlewares/verifyDateContract.js";
 import getEmployersController from "../controllers/Employers/getEmployersController.js";
