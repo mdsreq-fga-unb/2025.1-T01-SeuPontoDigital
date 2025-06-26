@@ -1,6 +1,5 @@
 import express from "express";
 import loginAdmin from "../controllers/Admin/loginAdmin.js";
-import loginApp from "../controllers/LoginApp/loginApp.js";
 import firstAccessController from "../controllers/FirstAccess/firstAccessController.js";
 import createPassword from "../controllers/FirstAccess/createPassword.js";
 import forgottenPasswordController from "../controllers/ForgottenPassword/forgottenPasswordController.js";
