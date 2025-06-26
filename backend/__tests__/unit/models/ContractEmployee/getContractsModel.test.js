@@ -1,5 +1,5 @@
 import supabase from '@src/config/supabase.js';
-import getContractsModel from '@src/models/ContractEmployee/getContractsModel.js';
+import getContractsModel from '@src/models/Contracts/getContractsModel.js';
 
 jest.mock('@src/config/supabase.js', () => ({
   from: jest.fn()

@@ -84,7 +84,7 @@ BRF:6
 BRH:0
 end_of_record
 TN:
-SF:src/controllers/ContractEmployee/deleteContractController.js
+SF:src/controllers/Contracts/deleteContractController.js
 FN:5,(anonymous_0)
 FNF:1
 FNH:0
@@ -117,7 +117,7 @@ BRF:6
 BRH:0
 end_of_record
 TN:
-SF:src/controllers/ContractEmployee/getContractsController.js
+SF:src/controllers/Contracts/getContractsController.js
 FN:3,(anonymous_0)
 FNF:1
 FNH:0
@@ -137,7 +137,7 @@ BRF:2
 BRH:0
 end_of_record
 TN:
-SF:src/controllers/ContractEmployee/getOneContractController.js
+SF:src/controllers/Contracts/getOneContractController.js
 FN:3,(anonymous_0)
 FNF:1
 FNH:0
@@ -157,7 +157,7 @@ BRF:2
 BRH:0
 end_of_record
 TN:
-SF:src/controllers/ContractEmployee/postContractController.js
+SF:src/controllers/Contracts/postContractController.js
 FN:4,(anonymous_0)
 FNF:1
 FNH:0
@@ -182,7 +182,7 @@ BRF:4
 BRH:0
 end_of_record
 TN:
-SF:src/controllers/ContractEmployee/putContractController.js
+SF:src/controllers/Contracts/putContractController.js
 FN:6,(anonymous_0)
 FNF:1
 FNH:0
@@ -984,7 +984,7 @@ BRF:2
 BRH:0
 end_of_record
 TN:
-SF:src/models/ContractEmployee/deleteContractModel.js
+SF:src/models/Contracts/deleteContractModel.js
 FN:3,(anonymous_0)
 FNF:1
 FNH:0
@@ -1002,7 +1002,7 @@ BRF:2
 BRH:0
 end_of_record
 TN:
-SF:src/models/ContractEmployee/getContractsModel.js
+SF:src/models/Contracts/getContractsModel.js
 FN:3,(anonymous_0)
 FNF:1
 FNH:1
@@ -1021,7 +1021,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src/models/ContractEmployee/getOneContractModel.js
+SF:src/models/Contracts/getOneContractModel.js
 FN:3,(anonymous_0)
 FNF:1
 FNH:0
@@ -1040,7 +1040,7 @@ BRF:2
 BRH:0
 end_of_record
 TN:
-SF:src/models/ContractEmployee/getOneEmployeeFromCPF.js
+SF:src/models/Contracts/getOneEmployeeFromCPF.js
 FN:3,(anonymous_0)
 FNF:1
 FNH:0
@@ -1059,7 +1059,7 @@ BRF:2
 BRH:0
 end_of_record
 TN:
-SF:src/models/ContractEmployee/postContractModel.js
+SF:src/models/Contracts/postContractModel.js
 FN:4,(anonymous_0)
 FNF:1
 FNH:0
@@ -1101,7 +1101,7 @@ BRF:20
 BRH:0
 end_of_record
 TN:
-SF:src/models/ContractEmployee/putContractModel.js
+SF:src/models/Contracts/putContractModel.js
 FN:3,(anonymous_0)
 FNF:1
 FNH:0

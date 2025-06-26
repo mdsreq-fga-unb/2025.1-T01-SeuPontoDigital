@@ -1,4 +1,4 @@
-import getOneContractModel from "../models/ContractEmployee/getOneContractModel.js";
+import getOneContractModel from "../models/Contracts/getOneContractModel.js";
 
 const verifyDateContract = async (req, res, next) => {
     try {

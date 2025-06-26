@@ -1,0 +1,56 @@
+[2025-06-26 17:18:13][SERVER] Running on port 3333
+[2025-06-26 17:18:23][OPTIONS][/api/employer/1d912e7b-ac23-4fd3-8978-8036ef4bd0f6] IP: ::1
+[2025-06-26 17:18:25][GET][/api/employer/1d912e7b-ac23-4fd3-8978-8036ef4bd0f6] IP: ::1
+[2025-06-26 17:18:25][GET][/api/employer/1d912e7b-ac23-4fd3-8978-8036ef4bd0f6] Status: 200 Time: 627ms
+[2025-06-26 17:18:27][OPTIONS][/api/employers] IP: ::1
+[2025-06-26 17:18:27][GET][/api/employers] IP: ::1
+[2025-06-26 17:18:27][GET][/api/employers] Status: 200 Time: 117ms
+[2025-06-26 17:18:43][POST][/login-app] IP: ::ffff:172.18.16.1
+[2025-06-26 17:19:06][POST][/login-app] IP: ::ffff:172.18.16.1
+[2025-06-26 17:20:21][SERVER] Running on port 3333
+[2025-06-26 17:20:32][SERVER] Running on port 3333
+[2025-06-26 17:20:44][SERVER] Running on port 3333
+[2025-06-26 17:20:49][SERVER] Running on port 3333
+[2025-06-26 17:20:52][POST][/login-app] IP: ::ffff:172.18.16.1
+[2025-06-26 17:21:48][SERVER] Running on port 3333
+[2025-06-26 17:21:57][SERVER] Running on port 3333
+[2025-06-26 17:21:59][POST][/login-app] IP: ::ffff:172.18.16.1
+[2025-06-26 17:22:04][POST][/login-app] IP: ::ffff:172.18.16.1
+[2025-06-26 17:24:45][SERVER] Running on port 3333
+[2025-06-26 17:25:27][POST][/login-app] IP: ::ffff:172.18.16.1
+[2025-06-26 17:26:38][SERVER] Running on port 3333
+[2025-06-26 17:26:38][POST][/login-app] IP: ::ffff:172.18.16.1
+[2025-06-26 17:27:15][SERVER] Running on port 3333
+[2025-06-26 17:27:20][SERVER] Running on port 3333
+[2025-06-26 17:27:23][POST][/login-app] IP: ::ffff:172.18.16.1
+[2025-06-26 17:28:00][SERVER] Running on port 3333
+[2025-06-26 17:28:01][POST][/login-app] IP: ::ffff:172.18.16.1
+[2025-06-26 17:29:06][SERVER] Running on port 3333
+[2025-06-26 17:29:17][INFO] [SERVER] Running on port 3333
+[2025-06-26 17:29:36][INFO] [SERVER] Running on port 3333
+[2025-06-26 17:29:40][INFO] [POST][/login-app] IP: ::ffff:172.18.16.1
+[2025-06-26 17:29:50][INFO] Server started
+[2025-06-26 17:30:09][INFO] Server started
+[2025-06-26 17:30:11]Server started
+[2025-06-26 17:30:15]Incoming request
+[2025-06-26 17:30:41]Server started
+[2025-06-26 17:30:44]Server started
+[2025-06-26 17:30:48]Server started
+[2025-06-26 17:30:49]Incoming request - POST /login-app from ::ffff:172.18.16.1
+[2025-06-26 17:31:41]Server started
+[2025-06-26 17:31:50]Server started
+[2025-06-26 17:31:52]Incoming request - POST /login-app from ::ffff:172.18.16.1
+[2025-06-26 17:31:52]Route not found - POST /login-app
+[2025-06-26 17:31:52]Request failed
+[2025-06-26 17:33:03]Incoming request - POST /login-app from ::ffff:172.18.16.1
+[2025-06-26 17:33:03]Route not found - POST /login-app
+[2025-06-26 17:33:03]Request failed
+[2025-06-26 17:33:38]Incoming request - POST /api/login-app from ::ffff:172.29.109.172
+[2025-06-26 17:33:38]Attempting to login with CPF: 48494344102
+[2025-06-26 17:33:39]Found employee with CPF: 48494344102
+[2025-06-26 17:33:39]Login successful for CPF: 48494344102, user type: employee
+[2025-06-26 17:33:39]Request completed
+[2025-06-26 17:33:40]Incoming request - GET /api/employee-contracts from ::ffff:172.29.109.172
+[2025-06-26 17:33:40]Request completed
+[2025-06-26 17:33:40]Incoming request - GET /api/worklogToday/894881de-a2b0-466c-b1d5-98a2258f541b from ::ffff:172.29.109.172
+[2025-06-26 17:33:40]Request completed

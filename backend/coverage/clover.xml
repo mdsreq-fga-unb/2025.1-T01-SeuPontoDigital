@@ -56,9 +56,9 @@
         <line num="23" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="src.controllers.ContractEmployee">
+    <package name="src.controllers.Contracts">
       <metrics statements="62" coveredstatements="0" conditionals="26" coveredconditionals="0" methods="5" coveredmethods="0"/>
-      <file name="deleteContractController.js" path="/home/will/repos/seuponto/backend/src/controllers/ContractEmployee/deleteContractController.js">
+      <file name="deleteContractController.js" path="/home/will/repos/seuponto/backend/src/controllers/Contracts/deleteContractController.js">
         <metrics statements="16" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
@@ -77,7 +77,7 @@
         <line num="26" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
       </file>
-      <file name="getContractsController.js" path="/home/will/repos/seuponto/backend/src/controllers/ContractEmployee/getContractsController.js">
+      <file name="getContractsController.js" path="/home/will/repos/seuponto/backend/src/controllers/Contracts/getContractsController.js">
         <metrics statements="7" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -87,7 +87,7 @@
         <line num="10" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
       </file>
-      <file name="getOneContractController.js" path="/home/will/repos/seuponto/backend/src/controllers/ContractEmployee/getOneContractController.js">
+      <file name="getOneContractController.js" path="/home/will/repos/seuponto/backend/src/controllers/Contracts/getOneContractController.js">
         <metrics statements="7" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -97,7 +97,7 @@
         <line num="11" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
       </file>
-      <file name="postContractController.js" path="/home/will/repos/seuponto/backend/src/controllers/ContractEmployee/postContractController.js">
+      <file name="postContractController.js" path="/home/will/repos/seuponto/backend/src/controllers/Contracts/postContractController.js">
         <metrics statements="10" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -110,7 +110,7 @@
         <line num="18" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
       </file>
-      <file name="putContractController.js" path="/home/will/repos/seuponto/backend/src/controllers/ContractEmployee/putContractController.js">
+      <file name="putContractController.js" path="/home/will/repos/seuponto/backend/src/controllers/Contracts/putContractController.js">
         <metrics statements="22" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -544,9 +544,9 @@
         <line num="12" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="src.models.ContractEmployee">
+    <package name="src.models.Contracts">
       <metrics statements="39" coveredstatements="6" conditionals="30" coveredconditionals="2" methods="6" coveredmethods="1"/>
-      <file name="deleteContractModel.js" path="/home/will/repos/seuponto/backend/src/models/ContractEmployee/deleteContractModel.js">
+      <file name="deleteContractModel.js" path="/home/will/repos/seuponto/backend/src/models/Contracts/deleteContractModel.js">
         <metrics statements="5" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -554,7 +554,7 @@
         <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="10" count="0" type="stmt"/>
       </file>
-      <file name="getContractsModel.js" path="/home/will/repos/seuponto/backend/src/models/ContractEmployee/getContractsModel.js">
+      <file name="getContractsModel.js" path="/home/will/repos/seuponto/backend/src/models/Contracts/getContractsModel.js">
         <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
@@ -563,7 +563,7 @@
         <line num="9" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
       </file>
-      <file name="getOneContractModel.js" path="/home/will/repos/seuponto/backend/src/models/ContractEmployee/getOneContractModel.js">
+      <file name="getOneContractModel.js" path="/home/will/repos/seuponto/backend/src/models/Contracts/getOneContractModel.js">
         <metrics statements="6" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -572,7 +572,7 @@
         <line num="9" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
       </file>
-      <file name="getOneEmployeeFromCPF.js" path="/home/will/repos/seuponto/backend/src/models/ContractEmployee/getOneEmployeeFromCPF.js">
+      <file name="getOneEmployeeFromCPF.js" path="/home/will/repos/seuponto/backend/src/models/Contracts/getOneEmployeeFromCPF.js">
         <metrics statements="6" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -581,7 +581,7 @@
         <line num="10" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
       </file>
-      <file name="postContractModel.js" path="/home/will/repos/seuponto/backend/src/models/ContractEmployee/postContractModel.js">
+      <file name="postContractModel.js" path="/home/will/repos/seuponto/backend/src/models/Contracts/postContractModel.js">
         <metrics statements="11" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -595,7 +595,7 @@
         <line num="42" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
       </file>
-      <file name="putContractModel.js" path="/home/will/repos/seuponto/backend/src/models/ContractEmployee/putContractModel.js">
+      <file name="putContractModel.js" path="/home/will/repos/seuponto/backend/src/models/Contracts/putContractModel.js">
         <metrics statements="5" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>

@@ -14,20 +14,26 @@ app.use((req, res, next) => {
     // Attach logger to request object
     req.logger = createRequestLogger(req);
     
-    // Log request
-    req.logger.info(`[${req.method}][${req.originalUrl || req.url}] IP: ${req.ip}`);
+    // Log request with more details
+    req.logger.info(`Incoming request - ${req.method} ${req.originalUrl || req.url} from ${req.ip}`, req.body);
 
     // Override res.json to log response
     const originalJson = res.json;
     res.json = function(body) {
         const responseTime = Date.now() - start;
-        if(res.statusCode === 500) {
-            req.logger.error(`[${req.method}][${req.originalUrl || req.url}] Status: ${res.statusCode} Time: ${responseTime}ms ${JSON.stringify(body)}`);
-        }
-        else {
-            req.logger.info(`[${req.method}][${req.originalUrl || req.url}] Status: ${res.statusCode} Time: ${responseTime}ms`);
+        const logData = {
+            method: req.method,
+            url: req.originalUrl || req.url,
+            status: res.statusCode,
+            responseTime: `${responseTime}ms`
+        };
 
+        if(res.statusCode >= 400) {
+            req.logger.error(`Request failed`, { ...logData, body });
+        } else {
+            req.logger.info(`Request completed`, logData);
         }
+        
         return originalJson.call(this, body);
     };
 
@@ -45,6 +51,16 @@ app.use(cors({
 app.use("/api", publicRoute);
 app.use("/api", privateRoute);
 
+// Catch-all middleware for unmatched routes
+app.use((req, res) => {
+    req.logger.warn(`Route not found - ${req.method} ${req.originalUrl || req.url}`);
+    res.status(404).json({ 
+        message: "Route not found",
+        requested_url: req.originalUrl || req.url,
+        method: req.method
+    });
+});
+
 app.listen(PORT, () => {
-    logger.info(`[SERVER] Running on port ${PORT}`);
+    logger.info(`Server started`, { port: PORT });
 });

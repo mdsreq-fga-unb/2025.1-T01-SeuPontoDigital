@@ -1,4 +1,4 @@
-import getEmployeeAndContractsModel from '../../models/ContractEmployee/getEmployeeAndContractsModel.js';
+import getEmployeeAndContractsModel from '../../models/Contracts/getEmployeeAndContractsModel.js';
 
 const getEmployeeAndContractsController = async (req, res) => {
     const employeeId = req.id;
