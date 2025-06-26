@@ -5,7 +5,7 @@ const getOneEmployerFromCPF = async(cpf) => {
    try{
         const {data, error} = await supabase.from("employers").select("id, name, cpf, phone, password").eq("cpf", cpf).single();
 
-        if (error) return;
+        if (error) return { error };
        
         return data ;
     }
