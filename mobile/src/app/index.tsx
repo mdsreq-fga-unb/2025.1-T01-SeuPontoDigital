@@ -22,7 +22,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const { width, height } = Dimensions.get('window');
 
 const api = axios.create({
-  baseURL: 'http://localhost:3333/api', // URL base da sua API
+  baseURL: 'http://172.29.109.172:3333/api', // URL base da sua API
   timeout: 10000, // tempo limite da requisição (em ms)
   headers: {
     'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export default function EntryScreen() {
       Alert.alert('Sucesso', response.data.message || 'Login realizado com sucesso');
       router.replace('/(panel)/profile/page');
     } catch (err: any) {
-      console.error("Erro completo:", err);
+      console.error("Erro completo:", JSON.stringify(err));
       if (err.message?.includes('Network Error')) {
         Alert.alert('Erro de Conexão', 'Não foi possível conectar ao servidor localhost:3333.');
       } else if (err.response?.status === 401) {

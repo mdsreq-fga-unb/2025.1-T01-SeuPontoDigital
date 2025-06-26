@@ -1,3 +1,4 @@
+import logger from "../../config/logger.js";
 import supabase from "../../config/supabase.js";
 
 const putEmployerModel = async (employerID, updateFields) => {
@@ -65,6 +66,50 @@ const putEmployerModel = async (employerID, updateFields) => {
 
         // Atualizar dados do endereço se houver
         if (Object.keys(addressFields).length > 0 && employer.id_address) {
+
+            // Get current address details
+            const { data: currentAddress, error: addressFetchError } = await supabase
+                .from("address")
+                .select("*")
+                .eq("id", employer.id_address)
+                .single();
+
+            logger.info(`Current address: ${JSON.stringify(currentAddress)}`);
+
+            if (addressFetchError) return addressFetchError;
+
+            // Combine current and new address fields
+            const fullAddress = {
+                ...currentAddress,
+                ...addressFields
+            };
+
+            // Build address query string
+            const addressQuery = `${fullAddress.street}, ${fullAddress.house_number}, ${fullAddress.neighborhood}, ${fullAddress.city}, ${fullAddress.uf}, ${fullAddress.cep}`;
+            logger.info(`Address query: ${addressQuery}`);
+            const encodedQuery = encodeURIComponent(addressQuery);
+
+            // Make geocoding request
+            try {
+                const response = await fetch(
+                    `https://us1.locationiq.com/v1/search?key=pk.05c09cb62d481ccfb76ec10ffbaf1748&q=${encodedQuery}&format=json`
+                );
+                
+                const responseJson = await response.json();
+                
+                if (!response.ok) {
+                    logger.error(`Geocoding request failed with status ${response.status}: ${response.statusText}`);
+                    return { error: "Geocoding request failed, address is probably not valid" };
+                } else {
+                    addressFields.latitude = parseFloat(responseJson[0].lat);
+                    addressFields.longitude = parseFloat(responseJson[0].lon);
+                    logger.info(`Latitude: ${addressFields.latitude}, Longitude: ${addressFields.longitude}`);
+                }
+            } catch (error) {
+                console.warn("Error making geocoding request:", error);
+                // Continue with address update even if geocoding fails
+            }
+
             const { error: addressUpdateError } = await supabase
                 .from("address")
                 .update(addressFields)
