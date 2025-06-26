@@ -21,7 +21,13 @@ app.use((req, res, next) => {
     const originalJson = res.json;
     res.json = function(body) {
         const responseTime = Date.now() - start;
-        req.logger.info(`[${req.method}][${req.originalUrl || req.url}] Status: ${res.statusCode} Time: ${responseTime}ms`);
+        if(res.statusCode === 500) {
+            req.logger.error(`[${req.method}][${req.originalUrl || req.url}] Status: ${res.statusCode} Time: ${responseTime}ms ${JSON.stringify(body)}`);
+        }
+        else {
+            req.logger.info(`[${req.method}][${req.originalUrl || req.url}] Status: ${res.statusCode} Time: ${responseTime}ms`);
+
+        }
         return originalJson.call(this, body);
     };
 

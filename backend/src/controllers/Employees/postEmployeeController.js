@@ -18,6 +18,7 @@ const postEmployeeController = async (req, res) => {
         return res.status(400).json({ message: "invalid cpf" });
     }
     catch (err) {
+        req.logger.error(err.message);
         return res.status(500).send({message: "internal server error"});
     }
 }

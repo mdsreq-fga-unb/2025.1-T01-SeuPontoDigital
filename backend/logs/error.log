@@ -1,0 +1,2 @@
+[2025-06-26 16:50:20][POST][/api/login-employer] Status: 500 Time: 31ms {"message":"internal server error"}
+[2025-06-26 16:52:05][POST][/api/login-employer] Status: 500 Time: 48ms {"message":"internal server error"}

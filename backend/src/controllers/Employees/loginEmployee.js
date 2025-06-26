@@ -2,12 +2,12 @@ import supabase from "../../config/supabase.js";
 import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqual.js";
 import generateToken from "../../middlewares/generateToken.js";
 
-const loginEmployer = async (req, res) => {
+const loginEmployee = async (req, res) => {
     try {
         const { cpf, password } = req.body;
 
         const { data, error } = await supabase
-            .from("employers")
+            .from("employees")
             .select("id, name, password")
             .eq("cpf", cpf)
             .single();
@@ -27,7 +27,8 @@ const loginEmployer = async (req, res) => {
             token: generateToken(data),
         });
     } catch (err) {
+        logger.error(`Error in loginEmployee: ${err}`);
         return res.status(500).send({ message: "Erro interno no servidor" });
     }
 };
-export default loginEmployer;
+export default loginEmployee;
