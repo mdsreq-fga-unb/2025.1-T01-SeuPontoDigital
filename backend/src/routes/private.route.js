@@ -2,6 +2,7 @@ import express from "express";
 import authVerifyToken from "../middlewares/authVerifyToken.js";
 import validateUser from "../middlewares/validateUser.js";
 import validateContract from "../middlewares/validateContract.js"
+import validateCPF from "../middlewares/validateCPF.js";
 import verifyDateEmployer from "../middlewares/verifyDateEmployer.js";
 import verifyDateContract from "../middlewares/verifyDateContract.js";
 import getEmployersController from "../controllers/Employers/getEmployersController.js";
@@ -9,14 +10,14 @@ import getOneEmployerController from "../controllers/Employers/getOneEmployerCon
 import postEmployerController from "../controllers/Employers/postEmployerController.js";
 import deleteEmployerController from "../controllers/Employers/deleteEmployerController.js";
 import putEmployerController from "../controllers/Employers/putEmployerController.js";
-import postContractController from "../controllers/ContractEmployee/postContractController.js";
-import getContractsController from "../controllers/ContractEmployee/getContractsController.js";
-import getOneContractController from "../controllers/ContractEmployee/getOneContractController.js";
-import deleteContractController from "../controllers/ContractEmployee/deleteContractController.js";
-import putContractController from "../controllers/ContractEmployee/putContractController.js";
+import postContractController from "../controllers/Contracts/postContractController.js";
+import getContractsController from "../controllers/Contracts/getContractsController.js";
+import getOneContractController from "../controllers/Contracts/getOneContractController.js";
+import deleteContractController from "../controllers/Contracts/deleteContractController.js";
+import putContractController from "../controllers/Contracts/putContractController.js";
 import postWorklogController from "../controllers/Worklog/postWorklogController.js";
 import putWorklogController from "../controllers/Worklog/putWorklogController.js";
-import getEmployeeAndContractsController from "../controllers/ContractEmployee/getEmployeeAndContractsController.js";
+import getEmployeeAndContractsController from "../controllers/Contracts/getEmployeeAndContractsController.js";
 import getTodayRecordsController from "../controllers/Worklog/getTodayRecordsController.js";
 
 const privateRoute = express.Router();
