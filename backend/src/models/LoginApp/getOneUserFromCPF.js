@@ -1,5 +1,6 @@
 import getOneEmployerFromCPF from "../Employers/getOneEmployerFromCPF.js";
-import getOneEmployeeFromCPF from "../ContractEmployee/getOneEmployeeFromCPF.js";
+// import getOneEmployeeFromCPF from "../ContractEmployee/getOneEmployeeFromCPF.js";
+import getOneEmployeeFromCPFModel from "../Employees/getOneEmployeeFromCPFModel.js";
 
 const getOneUserFromCPF = async (cpf) => {
     try {
@@ -11,7 +12,7 @@ const getOneUserFromCPF = async (cpf) => {
 
         // Se não encontrar o empregador, tenta buscar o empregado
         if (employerError || !employerData) {
-            const findEmployee = await getOneEmployeeFromCPF(cpf);
+            const findEmployee = await getOneEmployeeFromCPFModel(cpf);
             const employeeData = findEmployee;
             const employeeError = findEmployee?.error;
             

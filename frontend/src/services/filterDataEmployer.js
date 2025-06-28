@@ -5,9 +5,7 @@ const filterDataEmployer = (data, searchTerm) => {
         employer.name.toLowerCase().includes(lowerSearchTerm) ||
         employer.cpf.toLowerCase().includes(lowerSearchTerm) ||
         employer.phone.toLowerCase().includes(lowerSearchTerm) ||
-        employer.email.toLowerCase().includes(lowerSearchTerm) ||
-        employer.street.toLowerCase().includes(lowerSearchTerm) ||
-        employer.neighborhood.toLowerCase().includes(lowerSearchTerm)
+        employer.email.toLowerCase().includes(lowerSearchTerm)
     );
 };
 

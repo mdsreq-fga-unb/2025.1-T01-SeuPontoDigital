@@ -26,7 +26,7 @@ const LoginForm = () => {
         
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        login(email, password);
+        await login(email, password);
     }
     return (
         <section className="section-login-form">

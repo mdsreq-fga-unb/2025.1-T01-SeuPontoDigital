@@ -133,14 +133,6 @@ const ContractForm = (props) => {
                     className="div-employer-form"
                 />
                 <TextInput
-                    label="Email do Empregado"
-                    name="email"
-                    type="email"
-                    value={props.contract.email}
-                    onChange={(e) => props.handleInputChange({ name: "email", value: e.target.value })}
-                    className="div-employer-form"
-                />
-                <TextInput
                     label="Telefone do Empregado"
                     name="phone"
                     type="text"
@@ -228,7 +220,7 @@ const ContractForm = (props) => {
                 <SelectInput
                     label="Acesso ao aplicativo"
                     name="app_access"
-                    value={props.contract.app_access}
+                    value={String(props.contract.app_access)}
                     onChange={(e) => props.handleInputChange({ name: "app_access", value: e.target.value === "true" })}
                     options={app_access}
                     className="div-contract-select"
@@ -236,7 +228,7 @@ const ContractForm = (props) => {
                 <SelectInput
                     label="Local de trabalho na casa do Empregador"
                     name="workplace_employer"
-                    value={props.contract.workplace_employer}
+                    value={String(props.contract.workplace_employer)}
                     onChange={(e) => props.handleInputChange({ name: "workplace_employer", value: e.target.value === "true" })}
                     options={workplace_employer}
                     className="div-contract-select"

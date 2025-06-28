@@ -1,12 +1,12 @@
 import deleteEmployerModel from "../../models/Employers/deleteEmployerModel.js";
 import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
-import verifyPassword from "../../middlewares/verifyPassword.js";
+import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqual.js";
 
 const deleteEmployerController = async (req, res) => {
     
     try {
         const employerID  = req.id;
-        const {password} = req.body;
+        const {passwordAdmin} = req.body;
         const adminEmail = req.email;
 
         const admin = await findAdminByEmail(adminEmail);
@@ -14,20 +14,20 @@ const deleteEmployerController = async (req, res) => {
             return res.status(404).json({message: "admin not found"});
         }
 
-        const isPasswordValid = await verifyPassword(password, admin.password);
+        const isPasswordValid = await validateHashPasswordEqual(passwordAdmin, admin.password);
         if (!isPasswordValid) {
             return res.status(401).json({message: "invalid password"});
         }
 
         const error = await deleteEmployerModel(employerID);
         if (error) {
-            return res.status(400).json({ message: "one or more of the data sent are incorrect"});
+            return res.status(400).json({ message: "insert failed: 'id_employer' cannot be null in 'sign_contract' table"});
         }
 
         return res.status(200).json({ message: "employer deleted" });
     }
     catch (err) {
-        return res.status(500).send({ message: "internal server error" });  
+        return res.status(500).send({ message: err.message});  
     }
 }
 

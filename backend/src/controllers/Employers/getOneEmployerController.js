@@ -1,9 +1,11 @@
-import getOneEmployerWithContractsModel from "../../models/Employers/getOneEmployerWithContractsModel.js";
+import getOneEmployerModel from "../../models/Employers/getOneEmployerModel.js";
 
 const getOneEmployerController = async (req, res) => {
     try {
         const employerID = req.params.id;
-        const employer = await getOneEmployerWithContractsModel(employerID);
+        
+        const employer = await getOneEmployerModel(employerID);
+        
         if (!employer) {
             return res.status(404).send({ message: "employer not found" });
         }

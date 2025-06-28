@@ -6,6 +6,8 @@ import usePutContract from "../../hooks/usePutContract.js";
 import ContractForm from "../../components/ContractForm/index.jsx";
 import { useParams } from "react-router-dom";
 import ConfirmModal from "../../components/ConfirmModal";
+import Notification from "../../components/Notification";
+import formatField from "../../services/formatField.js";
 
 const UpdateContract = () => {
     const putContract = usePutContract();
@@ -14,20 +16,24 @@ const UpdateContract = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [password, setPassword] = useState("");
     const [contract, setContract] = useState({
+        id: "",
+        employer_id: "",
         name: "",
         cpf: "",
         phone: "",
-        email: "",
         job_function: "",
         work_schedule_type: "",
-        break_type: "fixed", // NOVO
+        break_type: "fixed",
         break_interval: "",
         break_start: "",
         break_end: "",
         work_days: "",
         salary: "",
-        app_access:"",
-        workplace_employer: "",
+        app_access: false,
+        contract_status: "",
+        start_date: "",
+        end_date: "",
+        workplace_employer: false,
         workplace_cep: "",
         workplace_street: "",
         workplace_home_number: "",
@@ -39,12 +45,49 @@ const UpdateContract = () => {
 
     useEffect(() => {
         const fetchContract = async () => {
+            console.log("Contract ID:", id); // Debug log
             const contractData = await fetchOneContract(id);
-            // Garante que break_type está correto (default para 'fixed' se não vier do backend)
-            setContract({
-                ...contractData,
-                break_type: contractData.break_type === "range" ? "range" : "fixed"
-            });
+            console.log("Contract Data:", contractData); // Debug log
+            if (contractData) {
+                // Função auxiliar para formatar CPF
+                const formatCPF = (cpf) => {
+                    if (!cpf) return "";
+                    const cleaned = cpf.replace(/\D/g, '');
+                    return cleaned.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+                };
+
+                // Mapear dados da nova estrutura retornada pelo getOneSignContract
+                setContract({
+                    id: contractData.contract?.id || "",
+                    employer_id: contractData.employer?.id || "",
+                    // Dados do funcionário
+                    name: contractData.employee?.name || "",
+                    cpf: formatCPF(contractData.employee?.cpf) || "",
+                    phone: formatField("removeDDI", contractData.employee?.phone) || "",
+                    // Dados do contrato
+                    job_function: contractData.contract?.function || "",
+                    salary: contractData.contract?.salary || "",
+                    work_schedule_type: contractData.contract?.work_schedule_type || "",
+                    break_type: contractData.contract?.break_type === "range" ? "range" : "fixed",
+                    break_interval: contractData.contract?.break_interval || "",
+                    break_start: contractData.contract?.break_start || "",
+                    break_end: contractData.contract?.break_end || "",
+                    work_days: contractData.contract?.work_days || "",
+                    app_access: contractData.contract?.access_app || false,
+                    contract_status: contractData.contract?.status || "",
+                    start_date: contractData.contract?.start_date || "",
+                    end_date: contractData.contract?.end_date || "",
+                    // Dados do endereço de trabalho
+                    workplace_employer: false, // Valor padrão já que não vem do novo modelo
+                    workplace_cep: contractData.address?.cep || "",
+                    workplace_street: contractData.address?.street || "",
+                    workplace_home_number: contractData.address?.house_number || "",
+                    workplace_city: contractData.address?.city || "",
+                    workplace_state: contractData.address?.uf || "",
+                    workplace_neighborhood: contractData.address?.neighborhood || "",
+                    workplace_complement: contractData.address?.complement || "",
+                });
+            }
         };
         fetchContract();
     }, [id]);
