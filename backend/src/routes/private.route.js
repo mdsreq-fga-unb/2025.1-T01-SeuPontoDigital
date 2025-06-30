@@ -19,6 +19,7 @@ import postWorklogController from "../controllers/Worklog/postWorklogController.
 import putWorklogController from "../controllers/Worklog/putWorklogController.js";
 import getEmployeeAndContractsController from "../controllers/Contracts/getEmployeeAndContractsController.js";
 import getTodayRecordsController from "../controllers/Worklog/getTodayRecordsController.js";
+import getRecordsController from "../controllers/Worklog/getRecordsController.js"
 
 const privateRoute = express.Router();
 
@@ -43,6 +44,7 @@ privateRoute.delete("/employer/:id", verifyDateEmployer, deleteEmployerControlle
 
 // ================== WORKLOGS ==================
 privateRoute.get("/worklogToday/:id", getTodayRecordsController);
+privateRoute.get("/worklog", getRecordsController); //US17 nova, apague este comentário em produção
 privateRoute.post("/worklog", postWorklogController);
 privateRoute.put("/worklog", putWorklogController);
 
