@@ -22,6 +22,10 @@ export default function TimecardHistory() {
   const params = useLocalSearchParams();
   const employeeId = params.employeeId;
   const employeeName = params.employeeName;
+  const userType = params.userType || 'employee'; // 'employer' ou 'employee'
+
+  // Função auxiliar para verificar se é uma visualização de empregador
+  const isEmployerView = () => userType === 'employer';
 
   interface TimecardRecord {
     id: string;
@@ -296,17 +300,19 @@ export default function TimecardHistory() {
       </View>
 
       {/* Botão adicional para resumo do mês */}
-      <TouchableOpacity 
-        style={styles.summaryButton}
-        onPress={() => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-          setSummaryModalVisible(true);
-        }}
-      >
-        <Ionicons name="stats-chart" size={20} color="#FFFFFF" />
-        <Text style={styles.summaryButtonText}>Ver Resumo do Mês</Text>
-        <Ionicons name="chevron-forward" size={16} color="#FFFFFF" />
-      </TouchableOpacity>
+      {isEmployerView() && (
+        <TouchableOpacity 
+          style={styles.summaryButton}
+          onPress={() => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+            setSummaryModalVisible(true);
+          }}
+        >
+          <Ionicons name="stats-chart" size={20} color="#FFFFFF" />
+          <Text style={styles.summaryButtonText}>Ver Resumo do Mês</Text>
+          <Ionicons name="chevron-forward" size={16} color="#FFFFFF" />
+        </TouchableOpacity>
+      )}
       
       {/* Cabeçalho da Tabela */}
       <View style={styles.tableHeader}>
@@ -325,7 +331,11 @@ export default function TimecardHistory() {
         <View style={styles.tableHeaderCell}>
           <Text style={styles.tableHeaderText}>Saída</Text>
         </View>
-        {/* Coluna de horas removida */}
+        {isEmployerView() && (
+          <View style={[styles.tableHeaderCell, { flex: 1.2 }]}>
+            <Text style={styles.tableHeaderText}>Horas</Text>
+          </View>
+        )}
       </View>
       
       {/* Conteúdo da Tabela */}
@@ -373,7 +383,11 @@ export default function TimecardHistory() {
               <View style={styles.tableCell}>
                 <Text style={styles.timeText}>{item.records.exit}</Text>
               </View>
-              {/* Coluna de horas removida */}
+              {isEmployerView() && (
+                <View style={[styles.tableCell, { flex: 1.2 }]}>
+                  <Text style={styles.hoursText}>{item.totalHours}</Text>
+                </View>
+              )}
             </TouchableOpacity>
           )}
           ListFooterComponent={<View style={{height: 20}}/>}
@@ -725,7 +739,7 @@ const styles = StyleSheet.create({
   },
   dayText: {
     fontSize: 12,
-    color: '#757575',
+    color: '#00000',
     marginTop: 2,
   },
   hoursText: {

@@ -207,7 +207,11 @@ export default function Employer() {
 
     router.push({
       pathname: '/(panel)/timecard-history/page',
-      params: { employeeId: employee.id, employeeName: employee.name }
+      params: { 
+        employeeId: employee.id, 
+        employeeName: employee.name,
+        userType: 'employer' // Adicione este parâmetro
+      }
     });
     setEmployeeDetailsModalVisible(false);
   };

@@ -1022,7 +1022,13 @@ export default function Employee() {
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                 setHistoricalModalVisible(false);
-                router.push('/timecard-history/page');
+                router.push({
+                  pathname: '/(panel)/timecard-history/page',
+                  params: { 
+                    employeeId: currentContractId || '', 
+                    userType: 'employee' // Especifica que é visão de empregado
+                  }
+                });
               }}
             >
               <Text style={styles.viewFullHistoryButtonText}>Ver histórico completo</Text>
