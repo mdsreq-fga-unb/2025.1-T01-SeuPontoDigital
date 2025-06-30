@@ -66,24 +66,59 @@ const getRecordsModel = async ({ cpf, inicio, fim }) => {
   }
 };
 
-// Função auxiliar para buscar e calcular registros de ponto de um empregado
 async function buscarRegistrosDeEmpregado(id_employee, inicio, fim) {
   const cargaHorariaDia = 8;
   const intervaloMinutosContrato = 60;
 
-  let { data: registros, error } = await supabase
-    .from("work_logs")
-    .select("*")
-    .eq("id", id_employee);
+  // 1. Buscar todos os registros de ponto com o contrato vinculado
+  const { data: registros, error } = await supabase
+    .from("register_work_logs")
+    .select(`
+      id_work_log,
+      id_contract,
+      work_logs (
+        date,
+        clock_in,
+        clock_out,
+        break_start,
+        break_end
+      )
+    `)
+    .eq("id_employee", id_employee);
 
-  if (inicio && fim) {
-    registros = registros.filter((r) => r.date >= inicio && r.date <= fim);
+  if (error || !Array.isArray(registros)) {
+    console.error("Erro ao buscar registros:", error);
+    return {};
   }
 
-  if (error || !registros) return [];
+  // Filtro por data
+  const filtrados = (inicio && fim)
+    ? registros.filter(r => {
+        const data = r.work_logs?.date;
+        return data && data >= inicio && data <= fim;
+      })
+    : registros;
 
-  return registros.map((registro) => {
-    const { date, clock_in, break_start, break_end, clock_out } = registro;
+  const agrupados = {};
+
+  for (const r of filtrados) {
+    const { id_contract, work_logs } = r;
+    if (!work_logs) continue;
+
+    const { date, clock_in, break_start, break_end, clock_out } = work_logs;
+
+    // 2. Buscar CPF do empregador com base no contrato deste work_log
+    const { data: contratoData, error: contratoError } = await supabase
+      .from("sign_contract")
+      .select("employers (cpf)")
+      .eq("id_contract", id_contract)
+      .maybeSingle();
+
+    const cpf_empregador = contratoData?.employers?.cpf ?? "desconhecido";
+
+    if (contratoError) {
+      console.warn(`Erro ao buscar contrato ${id_contract}:`, contratoError);
+    }
 
     const entrada = new Date(`${date}T${clock_in}`);
     const saida = new Date(`${date}T${clock_out}`);
@@ -92,14 +127,17 @@ async function buscarRegistrosDeEmpregado(id_employee, inicio, fim) {
 
     const horasTrabalhadas =
       (saida - entrada - (voltaAlmoco - idaAlmoco)) / (1000 * 60 * 60);
-
     const horaExtra = horasTrabalhadas - cargaHorariaDia;
 
     const diaSemana = new Date(date).toLocaleDateString("pt-BR", {
       weekday: "long"
     });
 
-    return {
+    const chaveMes = date.slice(0, 7); // "YYYY-MM"
+
+    if (!agrupados[chaveMes]) agrupados[chaveMes] = [];
+
+    agrupados[chaveMes].push({
       data: date,
       dia_semana: diaSemana,
       entrada: clock_in,
@@ -109,9 +147,15 @@ async function buscarRegistrosDeEmpregado(id_employee, inicio, fim) {
       intervalo_contrato: intervaloMinutosContrato,
       carga_horaria_dia: cargaHorariaDia,
       horas_trabalhadas: horasTrabalhadas.toFixed(2),
-      horas_extra: horaExtra > 0 ? horaExtra.toFixed(2) : "0.00"
-    };
-  });
+      horas_extra: horaExtra > 0 ? horaExtra.toFixed(2) : "0.00",
+      cpf_empregador
+    });
+  }
+
+  return agrupados;
 }
+
+
+
 
 export default getRecordsModel;

@@ -42,7 +42,15 @@ const logger = winston.createLogger({
 
 // Redireciona console.log e console.error para o Winston
 console.log = (...args) => logger.info(args.join(" "));
-console.error = (...args) => logger.error(args.join(" "));
+console.error = (...args) => {
+  for (const arg of args) {
+    if (typeof arg === 'object') {
+      logger.error(JSON.stringify(arg, null, 2));
+    } else {
+      logger.error(arg);
+    }
+  }
+};
 
 // Create a child logger with request context
 export const createRequestLogger = (req) => {
