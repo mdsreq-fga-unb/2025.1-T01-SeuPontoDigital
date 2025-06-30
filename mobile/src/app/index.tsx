@@ -82,7 +82,7 @@ export default function EntryScreen() {
       console.log(userType)
       if(userType === 'employee'){
         console.log("indo 1")
-        router.replace('/(panel)/profile/page');
+        router.replace('/(panel)/employee/page');
       } else if (userType === 'employer') {
         console.log("indo 2")
         router.replace('/(panel)/employer/page');
@@ -158,7 +158,7 @@ export default function EntryScreen() {
 
               <Pressable
                 style={[styles.accessButton, loading && styles.disabledButton]}
-                //onPress={() => router.replace('/(panel)/profile/page')}
+                //onPress={() => router.replace('/(panel)/employee/page')}
                 onPress={handleVerify}
                 disabled={loading}
               >

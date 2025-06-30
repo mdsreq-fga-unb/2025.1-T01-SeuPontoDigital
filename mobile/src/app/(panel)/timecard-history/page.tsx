@@ -8,7 +8,8 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
-  FlatList
+  FlatList,
+  Modal
 } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter, useLocalSearchParams } from 'expo-router';
@@ -41,6 +42,7 @@ export default function TimecardHistory() {
   const [fullHistory, setFullHistory] = useState<TimecardRecord[]>([]);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [summaryModalVisible, setSummaryModalVisible] = useState(false);
   
   // Meses para filtragem
   const months = [
@@ -80,6 +82,55 @@ export default function TimecardHistory() {
   const getDayOfWeek = (date: Date) => {
     const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
     return days[date.getDay()];
+  };
+
+  // Função para calcular estatísticas detalhadas
+  const calculateDetailedStats = () => {
+    const totalRecords = filteredHistory.length;
+    const alertsCount = filteredHistory.filter(item => item.hasAlert).length;
+    
+    // Calcular diferentes tipos de alertas (exemplos fictícios para demonstração)
+    const lateCount = filteredHistory.filter(item => 
+      item.hasAlert && item.alertReason.includes('padrão')).length;
+    
+    const absentCount = filteredHistory.filter(item => 
+      item.hasAlert && item.records.entry === '--:--').length;
+    
+    const withMedicalCertificateCount = filteredHistory.filter(item => 
+      item.hasAlert && item.alertReason.includes('atestado')).length;
+    
+    const holidaysCount = filteredHistory.filter(item => 
+      item.hasAlert && item.alertReason.includes('feriado')).length;
+      
+    // Calcular total de horas
+    const totalMinutes = filteredHistory.reduce((acc, item) => {
+      const [hours, minutes] = item.totalHours.match(/(\d+)h(?:\s(\d+)m)?/)?.slice(1) || ['0', '0'];
+      return acc + (parseInt(hours) * 60) + (parseInt(minutes || '0'));
+    }, 0);
+    
+    const totalHours = Math.floor(totalMinutes / 60);
+    const remainingMinutes = totalMinutes % 60;
+    const totalHoursFormatted = `${totalHours}h${remainingMinutes > 0 ? ` ${remainingMinutes}m` : ''}`;
+    
+    // Para exemplos fictícios de horas extras
+    const overtime50 = `${Math.floor(totalHours * 0.15)}h ${Math.floor(remainingMinutes * 0.15)}m`;
+    const overtime100 = `${Math.floor(totalHours * 0.08)}h ${Math.floor(remainingMinutes * 0.08)}m`;
+    
+    // Calcular média diária
+    const avgHoursPerDay = totalRecords > 0 ? (totalMinutes / totalRecords / 60).toFixed(1) : 0;
+    
+    return {
+      totalRecords,
+      alertsCount,
+      lateCount,
+      absentCount, 
+      withMedicalCertificateCount,
+      holidaysCount,
+      totalHoursFormatted,
+      overtime50,
+      overtime100,
+      avgHoursPerDay
+    };
   };
 
   // Simulação de dados para demonstração - em produção viria de uma API
@@ -181,6 +232,36 @@ export default function TimecardHistory() {
       
       {/* Filtros */}
       <View style={styles.filtersContainer}>
+        {/* Filtro de Ano */}
+        <View style={styles.filterSection}>
+          <Text style={styles.filterLabel}>Ano:</Text>
+          <View style={styles.filterOptions}>
+            {years.map((year) => (
+              <TouchableOpacity
+                key={`year-${year}`}
+                style={[
+                  styles.filterChip,
+                  selectedYear === year && styles.filterChipSelected
+                ]}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setSelectedYear(year);
+                }}
+              >
+                <Text 
+                  style={[
+                    styles.filterChipText,
+                    selectedYear === year && styles.filterChipTextSelected
+                  ]}
+                >
+                  {year}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+        
+        {/* Filtro de Mês */}
         <View style={styles.filterSection}>
           <Text style={styles.filterLabel}>Mês:</Text>
           <ScrollView 
@@ -212,40 +293,24 @@ export default function TimecardHistory() {
             ))}
           </ScrollView>
         </View>
-        
-        <View style={styles.filterSection}>
-          <Text style={styles.filterLabel}>Ano:</Text>
-          <View style={styles.filterOptions}>
-            {years.map((year) => (
-              <TouchableOpacity
-                key={`year-${year}`}
-                style={[
-                  styles.filterChip,
-                  selectedYear === year && styles.filterChipSelected
-                ]}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  setSelectedYear(year);
-                }}
-              >
-                <Text 
-                  style={[
-                    styles.filterChipText,
-                    selectedYear === year && styles.filterChipTextSelected
-                  ]}
-                >
-                  {year}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
       </View>
+
+      {/* Botão adicional para resumo do mês */}
+      <TouchableOpacity 
+        style={styles.summaryButton}
+        onPress={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+          setSummaryModalVisible(true);
+        }}
+      >
+        <Ionicons name="stats-chart" size={20} color="#FFFFFF" />
+        <Text style={styles.summaryButtonText}>Ver Resumo do Mês</Text>
+        <Ionicons name="chevron-forward" size={16} color="#FFFFFF" />
+      </TouchableOpacity>
       
       {/* Cabeçalho da Tabela */}
       <View style={styles.tableHeader}>
-        <View style={[styles.tableHeaderCell, { flex: 1.2
-         }]}>
+        <View style={[styles.tableHeaderCell, { flex: 1.5 }]}>
           <Text style={styles.tableHeaderText}>Data</Text>
         </View>
         <View style={styles.tableHeaderCell}>
@@ -260,9 +325,7 @@ export default function TimecardHistory() {
         <View style={styles.tableHeaderCell}>
           <Text style={styles.tableHeaderText}>Saída</Text>
         </View>
-        <View style={[styles.tableHeaderCell, { flex: 1.2 }]}>
-          <Text style={styles.tableHeaderText}>Horas</Text>
-        </View>
+        {/* Coluna de horas removida */}
       </View>
       
       {/* Conteúdo da Tabela */}
@@ -286,11 +349,10 @@ export default function TimecardHistory() {
               onPress={() => {
                 if (item.hasAlert) {
                   Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
-                  // Em produção, aqui poderia abrir um modal com detalhes do alerta
                 }
               }}
             >
-              <View style={[styles.tableCell, { flex: 1.5 }]}>
+              <View style={[styles.tableCell, { flex: 1.8 }]}>
                 <Text style={styles.dateText}>{item.date}</Text>
                 <Text style={styles.dayText}>{item.dayOfWeek}</Text>
                 {item.hasAlert && (
@@ -311,39 +373,10 @@ export default function TimecardHistory() {
               <View style={styles.tableCell}>
                 <Text style={styles.timeText}>{item.records.exit}</Text>
               </View>
-              <View style={[styles.tableCell, { flex: 1.2 }]}>
-                <Text style={styles.hoursText}>{item.totalHours}</Text>
-              </View>
+              {/* Coluna de horas removida */}
             </TouchableOpacity>
           )}
-          ListFooterComponent={
-            <View style={styles.summaryContainer}>
-              <View style={styles.summaryItem}>
-                <Text style={styles.summaryLabel}>Total de registros:</Text>
-                <Text style={styles.summaryValue}>{filteredHistory.length}</Text>
-              </View>
-              <View style={styles.summaryItem}>
-                <Text style={styles.summaryLabel}>Com alertas:</Text>
-                <Text style={[styles.summaryValue, { color: '#F57C00' }]}>
-                  {filteredHistory.filter(item => item.hasAlert).length}
-                </Text>
-              </View>
-              <View style={styles.summaryItem}>
-                <Text style={styles.summaryLabel}>Total de horas:</Text>
-                <Text style={styles.summaryValue}>
-                  {(() => {
-                    const totalMinutes = filteredHistory.reduce((acc, item) => {
-                      const [hours, minutes] = item.totalHours.match(/(\d+)h(?:\s(\d+)m)?/)?.slice(1) || ['0', '0'];
-                      return acc + (parseInt(hours) * 60) + (parseInt(minutes || '0'));
-                    }, 0);
-                    const totalHours = Math.floor(totalMinutes / 60);
-                    const remainingMinutes = totalMinutes % 60;
-                    return `${totalHours}h${remainingMinutes > 0 ? ` ${remainingMinutes}m` : ''}`;
-                  })()}
-                </Text>
-              </View>
-            </View>
-          }
+          ListFooterComponent={<View style={{height: 20}}/>}
         />
       ) : (
         <View style={styles.emptyContainer}>
@@ -353,6 +386,144 @@ export default function TimecardHistory() {
           </Text>
         </View>
       )}
+
+      {/* Modal de Resumo */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={summaryModalVisible}
+        onRequestClose={() => setSummaryModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Resumo de {months[selectedMonth]} de {selectedYear}</Text>
+              <TouchableOpacity 
+                style={styles.modalCloseButton}
+                onPress={() => setSummaryModalVisible(false)}
+              >
+                <Ionicons name="close" size={24} color="#455A64" />
+              </TouchableOpacity>
+            </View>
+            
+            <ScrollView style={styles.modalContent}>
+              {/* Estatísticas principais */}
+              <View style={styles.statsSection}>
+                <Text style={styles.sectionTitle}>Registro de Pontos</Text>
+                
+                <View style={styles.statRow}>
+                  <View style={styles.statItem}>
+                    <View style={[styles.statIcon, {backgroundColor: '#E3F2FD'}]}>
+                      <Ionicons name="calendar" size={22} color="#1565C0" />
+                    </View>
+                    <View style={styles.statContent}>
+                      <Text style={styles.statValue}>{calculateDetailedStats().totalRecords}</Text>
+                      <Text style={styles.statLabel}>Total de Registros</Text>
+                    </View>
+                  </View>
+                  
+                  <View style={styles.statItem}>
+                    <View style={[styles.statIcon, {backgroundColor: '#FFF3E0'}]}>
+                      <Ionicons name="alert-circle" size={22} color="#FF9800" />
+                    </View>
+                    <View style={styles.statContent}>
+                      <Text style={styles.statValue}>{calculateDetailedStats().alertsCount}</Text>
+                      <Text style={styles.statLabel}>Alertas</Text>
+                    </View>
+                  </View>
+                </View>
+                
+                <View style={styles.statRow}>
+                  <View style={styles.statItem}>
+                    <View style={[styles.statIcon, {backgroundColor: '#FFEBEE'}]}>
+                      <Ionicons name="close-circle" size={22} color="#F44336" />
+                    </View>
+                    <View style={styles.statContent}>
+                      <Text style={styles.statValue}>{calculateDetailedStats().absentCount}</Text>
+                      <Text style={styles.statLabel}>Dias Ausentes</Text>
+                    </View>
+                  </View>
+                  
+                  <View style={styles.statItem}>
+                    <View style={[styles.statIcon, {backgroundColor: '#E1F5FE'}]}>
+                      <Ionicons name="medkit" size={22} color="#03A9F4" />
+                    </View>
+                    <View style={styles.statContent}>
+                      <Text style={styles.statValue}>{calculateDetailedStats().withMedicalCertificateCount}</Text>
+                      <Text style={styles.statLabel}>Com Atestado</Text>
+                    </View>
+                  </View>
+                </View>
+                
+                <View style={styles.statRow}>
+                  <View style={styles.statItem}>
+                    <View style={[styles.statIcon, {backgroundColor: '#FFF8E1'}]}>
+                      <Ionicons name="time" size={22} color="#FFA000" />
+                    </View>
+                    <View style={styles.statContent}>
+                      <Text style={styles.statValue}>{calculateDetailedStats().lateCount}</Text>
+                      <Text style={styles.statLabel}>Dias com Atraso</Text>
+                    </View>
+                  </View>
+                  
+                  <View style={styles.statItem}>
+                    <View style={[styles.statIcon, {backgroundColor: '#E8F5E9'}]}>
+                      <Ionicons name="flag" size={22} color="#4CAF50" />
+                    </View>
+                    <View style={styles.statContent}>
+                      <Text style={styles.statValue}>{calculateDetailedStats().holidaysCount}</Text>
+                      <Text style={styles.statLabel}>Feriados</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              
+              {/* Horas */}
+              <View style={styles.statsSection}>
+                <Text style={styles.sectionTitle}>Controle de Horas</Text>
+                
+                <View style={styles.hoursCard}>
+                  <Ionicons name="time-outline" size={28} color="#1565C0" />
+                  <Text style={styles.hoursLabel}>Total de Horas Trabalhadas</Text>
+                  <Text style={styles.hoursValue}>{calculateDetailedStats().totalHoursFormatted}</Text>
+                  <Text style={styles.hoursSubtext}>Média de {calculateDetailedStats().avgHoursPerDay}h por dia</Text>
+                </View>
+                
+                <View style={styles.overtimeContainer}>
+                  <View style={styles.overtimeCard}>
+                    <View style={styles.overtimeHeader}>
+                      <Ionicons name="star-half" size={18} color="#43A047" />
+                      <Text style={styles.overtimeTitle}>Horas Extras 50%</Text>
+                    </View>
+                    <Text style={[styles.overtimeValue, {color: '#43A047'}]}>
+                      {calculateDetailedStats().overtime50}
+                    </Text>
+                    <Text style={styles.overtimeCaption}>Dias úteis</Text>
+                  </View>
+                  
+                  <View style={styles.overtimeCard}>
+                    <View style={styles.overtimeHeader}>
+                      <Ionicons name="star" size={18} color="#E65100" />
+                      <Text style={styles.overtimeTitle}>Horas Extras 100%</Text>
+                    </View>
+                    <Text style={[styles.overtimeValue, {color: '#E65100'}]}>
+                      {calculateDetailedStats().overtime100}
+                    </Text>
+                    <Text style={styles.overtimeCaption}>Domingos/feriados</Text>
+                  </View>
+                </View>
+              </View>
+            </ScrollView>
+            
+            <TouchableOpacity 
+              style={styles.closeModalButton}
+              onPress={() => setSummaryModalVisible(false)}
+            >
+              <Text style={styles.closeModalButtonText}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -423,20 +594,48 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '500',
   },
+  summaryButton: {
+    flexDirection: 'row',
+    backgroundColor: '#1565C0',
+    marginHorizontal: 16,
+    marginVertical: 14,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+  },
+  summaryButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+    flex: 1,
+    textAlign: 'center',
+    marginHorizontal: 10,
+  },
   tableHeader: {
     flexDirection: 'row',
     backgroundColor: '#1565C0',
     padding: 12,
+    marginTop: 16, // Adicione esta linha para manter um espaçamento adequado
   },
   tableHeaderCell: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 14,
+    paddingHorizontal: 2,
   },
   tableHeaderText: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '600',
     color: '#FFFFFF',
+    textAlign: 'center',
   },
   tableContent: {
     paddingBottom: 20,
@@ -455,7 +654,7 @@ const styles = StyleSheet.create({
   },
   tableCell: {
     flex: 1,
-    padding: 12,
+    padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
@@ -466,8 +665,9 @@ const styles = StyleSheet.create({
     color: '#263238',
   },
   timeText: {
-    fontSize: 14,
+    fontSize: 13,
     color: '#455A64',
+    fontWeight: '500',
   },
   alertIconContainer: {
     position: 'absolute',
@@ -532,5 +732,165 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#1565C0',
     fontWeight: '600',
-  }
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+  },
+  modalContainer: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    width: '100%',
+    maxHeight: '90%',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#EEEEEE',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#263238',
+  },
+  modalCloseButton: {
+    padding: 4,
+  },
+  modalContent: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    maxHeight: '80%',
+  },
+  closeModalButton: {
+    backgroundColor: '#1565C0',
+    padding: 14,
+    margin: 16,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  closeModalButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  statsSection: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#263238',
+    marginBottom: 16,
+    marginTop: 8,
+  },
+  statRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  statItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    padding: 12,
+    width: '48%',
+    elevation: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 1,
+    borderWidth: 1,
+    borderColor: '#EEEEEE',
+  },
+  statIcon: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  statContent: {
+    flex: 1,
+  },
+  statValue: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#263238',
+  },
+  statLabel: {
+    fontSize: 12,
+    color: '#455A64',
+  },
+  hoursCard: {
+    backgroundColor: '#E3F2FD',
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  hoursLabel: {
+    fontSize: 14,
+    color: '#455A64',
+    marginVertical: 8,
+  },
+  hoursValue: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#1565C0',
+  },
+  hoursSubtext: {
+    fontSize: 12,
+    color: '#455A64',
+    marginTop: 4,
+  },
+  overtimeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  overtimeCard: {
+    backgroundColor: '#FFFFFF',
+    padding: 12,
+    borderRadius: 10,
+    width: '48%',
+    elevation: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 1,
+    borderWidth: 1,
+    borderColor: '#EEEEEE',
+  },
+  overtimeHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 6,
+  },
+  overtimeTitle: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#455A64',
+    marginLeft: 6,
+  },
+  overtimeValue: {
+    fontSize: 16,
+    fontWeight: '700',
+    marginVertical: 4,
+  },
+  overtimeCaption: {
+    fontSize: 11,
+    color: '#455A64',
+  },
 });

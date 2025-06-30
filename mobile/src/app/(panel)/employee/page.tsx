@@ -49,7 +49,7 @@ interface DayRecord {
     records: RecordItem[];
 }
 
-export default function Profile() {
+export default function Employee() {
   const router = useRouter();
   const [currentDate] = useState(new Date());
   const [historicalModalVisible, setHistoricalModalVisible] = useState(false);

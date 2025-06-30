@@ -14,7 +14,7 @@ export default function MainLayout(){
       ></Stack.Screen>
 
       <Stack.Screen
-        name="(panel)/profile/page"
+        name="(panel)/employee/page"
         options={{headerShown: false}}
       ></Stack.Screen>
 
