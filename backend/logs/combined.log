@@ -54,3 +54,127 @@
 [2025-06-26 17:33:40]Request completed
 [2025-06-26 17:33:40]Incoming request - GET /api/worklogToday/894881de-a2b0-466c-b1d5-98a2258f541b from ::ffff:172.29.109.172
 [2025-06-26 17:33:40]Request completed
+[2025-06-29 21:29:31]Server started
+[2025-06-29 21:36:05]Server started
+[2025-06-29 21:36:31]Incoming request - POST /api/login-app from ::ffff:127.0.0.1
+[2025-06-29 21:40:59]Attempting to login with CPF: 48494344102
+[2025-06-29 21:40:59]Incoming request - POST /api/login-app from ::ffff:127.0.0.1
+[2025-06-29 21:40:59]Attempting to login with CPF: 48494344102
+[2025-06-29 21:40:59]Incoming request - POST /api/login-app from ::ffff:127.0.0.1
+[2025-06-29 21:40:59]Attempting to login with CPF: 48494344102
+[2025-06-29 21:41:00]Found employee with CPF: 48494344102
+[2025-06-29 21:41:00]Found employee with CPF: 48494344102
+[2025-06-29 21:41:00]Found employee with CPF: 48494344102
+[2025-06-29 21:41:00]Login successful for CPF: 48494344102, user type: employee
+[2025-06-29 21:41:00]Request completed
+[2025-06-29 21:41:00]Login successful for CPF: 48494344102, user type: employee
+[2025-06-29 21:41:00]Request completed
+[2025-06-29 21:41:00]Login successful for CPF: 48494344102, user type: employee
+[2025-06-29 21:41:00]Request completed
+[2025-06-29 21:41:58]Incoming request - POST /api/login-app from ::ffff:127.0.0.1
+[2025-06-29 21:42:02]Attempting to login with CPF: 48494344102
+[2025-06-29 21:42:02]Found employee with CPF: 48494344102
+[2025-06-29 21:42:18]Incoming request - POST /api/login-app from ::ffff:127.0.0.1
+[2025-06-29 21:42:18]Attempting to login with CPF: 48494344102
+[2025-06-29 21:42:18]Login successful for CPF: 48494344102, user type: employee
+[2025-06-29 21:42:18]Request completed
+[2025-06-29 21:42:18]Found employee with CPF: 48494344102
+[2025-06-29 21:42:41]Incoming request - POST /api/login-app from ::ffff:127.0.0.1
+[2025-06-29 21:42:41]Attempting to login with CPF: 48494344102
+[2025-06-29 21:42:41]Login successful for CPF: 48494344102, user type: employee
+[2025-06-29 21:42:41]Request completed
+[2025-06-29 21:42:41]Found employee with CPF: 48494344102
+[2025-06-29 21:42:41]Login successful for CPF: 48494344102, user type: employee
+[2025-06-29 21:42:41]Request completed
+[2025-06-29 21:42:42]Incoming request - GET /api/employee-contracts from ::ffff:127.0.0.1
+[2025-06-29 21:42:42]Request completed
+[2025-06-29 21:42:42]Incoming request - GET /api/worklogToday/894881de-a2b0-466c-b1d5-98a2258f541b from ::ffff:127.0.0.1
+[2025-06-29 21:42:42]Request completed
+[2025-06-29 21:42:44]Incoming request - GET /api/worklogToday/9dcf12fa-56bc-462f-bb93-4a3dd23b2429 from ::ffff:127.0.0.1
+[2025-06-29 21:42:44]Request completed
+[2025-06-29 21:42:50]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:42:50]Request failed
+[2025-06-29 21:42:55]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:42:55]Request failed
+[2025-06-29 21:42:59]Incoming request - GET /api/worklogToday/894881de-a2b0-466c-b1d5-98a2258f541b from ::ffff:127.0.0.1
+[2025-06-29 21:43:00]Request completed
+[2025-06-29 21:43:01]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:43:01]Request failed
+[2025-06-29 21:47:14]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:47:20]Request completed
+[2025-06-29 21:47:29]Incoming request - PUT /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:47:30]Request completed
+[2025-06-29 21:47:35]Incoming request - PUT /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:47:46]Request completed
+[2025-06-29 21:47:48]Incoming request - PUT /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:47:48]Request completed
+[2025-06-29 21:48:36]Incoming request - GET /api/worklogToday/9dcf12fa-56bc-462f-bb93-4a3dd23b2429 from ::ffff:127.0.0.1
+[2025-06-29 21:48:36]Request completed
+[2025-06-29 21:48:38]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:48:39]Request failed
+[2025-06-29 21:48:42]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:48:42]Request failed
+[2025-06-29 21:49:31]Incoming request - GET /api/worklogToday/894881de-a2b0-466c-b1d5-98a2258f541b from ::ffff:127.0.0.1
+[2025-06-29 21:49:55]Incoming request - GET /api/worklogToday/9dcf12fa-56bc-462f-bb93-4a3dd23b2429 from ::ffff:127.0.0.1
+[2025-06-29 21:49:55]Incoming request - GET /api/worklogToday/894881de-a2b0-466c-b1d5-98a2258f541b from ::ffff:127.0.0.1
+[2025-06-29 21:49:55]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:49:55]Request completed
+[2025-06-29 21:49:55]Request completed
+[2025-06-29 21:49:55]Request completed
+[2025-06-29 21:49:55]Request failed
+[2025-06-29 21:50:00]Incoming request - GET /api/worklogToday/9dcf12fa-56bc-462f-bb93-4a3dd23b2429 from ::ffff:127.0.0.1
+[2025-06-29 21:50:00]Request completed
+[2025-06-29 21:50:02]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:50:02]Request failed
+[2025-06-29 21:50:07]Incoming request - GET /api/worklogToday/894881de-a2b0-466c-b1d5-98a2258f541b from ::ffff:127.0.0.1
+[2025-06-29 21:50:07]Request completed
+[2025-06-29 21:50:32]Incoming request - GET /api/worklogToday/9dcf12fa-56bc-462f-bb93-4a3dd23b2429 from ::ffff:127.0.0.1
+[2025-06-29 21:50:32]Request completed
+[2025-06-29 21:50:34]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:50:34]Request failed
+[2025-06-29 21:50:37]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:50:37]Request failed
+[2025-06-29 21:50:41]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:50:41]Request failed
+[2025-06-29 21:50:45]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:50:45]Request failed
+[2025-06-29 21:51:05]Server started
+[2025-06-29 21:51:28]Incoming request - POST /api/login-app from ::ffff:127.0.0.1
+[2025-06-29 21:51:28]Attempting to login with CPF: 48494344102
+[2025-06-29 21:51:29]Found employee with CPF: 48494344102
+[2025-06-29 21:51:29]Login successful for CPF: 48494344102, user type: employee
+[2025-06-29 21:51:29]Request completed
+[2025-06-29 21:51:29]Incoming request - GET /api/employee-contracts from ::ffff:127.0.0.1
+[2025-06-29 21:51:30]Request completed
+[2025-06-29 21:51:30]Incoming request - GET /api/worklogToday/894881de-a2b0-466c-b1d5-98a2258f541b from ::ffff:127.0.0.1
+[2025-06-29 21:51:30]Request completed
+[2025-06-29 21:51:32]Incoming request - GET /api/worklogToday/9dcf12fa-56bc-462f-bb93-4a3dd23b2429 from ::ffff:127.0.0.1
+[2025-06-29 21:51:32]Request completed
+[2025-06-29 21:51:34]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:51:34]Request failed
+[2025-06-29 21:51:41]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:51:41]Request failed
+[2025-06-29 21:51:55]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:51:55]Request failed
+[2025-06-29 21:51:57]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:51:57]Request failed
+[2025-06-29 21:52:02]Incoming request - GET /api/worklogToday/894881de-a2b0-466c-b1d5-98a2258f541b from ::ffff:127.0.0.1
+[2025-06-29 21:52:02]Request completed
+[2025-06-29 21:52:04]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:52:05]Request completed
+[2025-06-29 21:52:06]Incoming request - PUT /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:52:07]Request completed
+[2025-06-29 21:52:08]Incoming request - PUT /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:52:08]Request completed
+[2025-06-29 21:52:09]Incoming request - PUT /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:52:09]Request completed
+[2025-06-29 21:52:46]Incoming request - GET /api/employee-contracts from ::ffff:127.0.0.1
+[2025-06-29 21:52:47]Request completed
+[2025-06-29 21:52:47]Incoming request - GET /api/worklogToday/894881de-a2b0-466c-b1d5-98a2258f541b from ::ffff:127.0.0.1
+[2025-06-29 21:52:47]Request completed
+[2025-06-29 21:52:49]Incoming request - GET /api/worklogToday/9dcf12fa-56bc-462f-bb93-4a3dd23b2429 from ::ffff:127.0.0.1
+[2025-06-29 21:52:49]Request completed
+[2025-06-29 21:52:53]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:52:53]Request failed
+[2025-06-29 21:52:54]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
+[2025-06-29 21:52:55]Request failed

@@ -11,16 +11,22 @@ import {
   FlatList
 } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import * as Haptics from 'expo-haptics';
 
 export default function TimecardHistory() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  // Receber parâmetros de navegação
+  const params = useLocalSearchParams();
+  const employeeId = params.employeeId;
+  const employeeName = params.employeeName;
+
   interface TimecardRecord {
     id: string;
     date: string;
     fullDate: Date;
+    dayOfWeek: string;
     records: {
       entry: string;
       lunchOut: string;
@@ -46,6 +52,36 @@ export default function TimecardHistory() {
   const currentYear = new Date().getFullYear();
   const years = [currentYear, currentYear - 1, currentYear - 2];
   
+  // Função para calcular horas trabalhadas corretamente
+  const calculateWorkedHours = (entry: string, lunchOut: string, lunchIn: string, exit: string) => {
+    const [entryH, entryM] = entry.split(':').map(Number);
+    const [lunchOutH, lunchOutM] = lunchOut.split(':').map(Number);
+    const [lunchInH, lunchInM] = lunchIn.split(':').map(Number);
+    const [exitH, exitM] = exit.split(':').map(Number);
+    
+    // Converter tudo para minutos
+    const entryMinutes = entryH * 60 + entryM;
+    const lunchOutMinutes = lunchOutH * 60 + lunchOutM;
+    const lunchInMinutes = lunchInH * 60 + lunchInM;
+    const exitMinutes = exitH * 60 + exitM;
+    
+    // Calcular período da manhã e tarde
+    const morningMinutes = lunchOutMinutes - entryMinutes;
+    const afternoonMinutes = exitMinutes - lunchInMinutes;
+    const totalMinutes = morningMinutes + afternoonMinutes;
+    
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    
+    return `${hours}h${minutes > 0 ? ` ${minutes}m` : ''}`;
+  };
+
+  // Função para obter o dia da semana
+  const getDayOfWeek = (date: Date) => {
+    const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    return days[date.getDay()];
+  };
+
   // Simulação de dados para demonstração - em produção viria de uma API
   useEffect(() => {
     // Simular carregamento de dados
@@ -81,19 +117,28 @@ export default function TimecardHistory() {
         
         // Adicionar alguns registros com alertas (cerca de 10%)
         const hasAlert = Math.random() < 0.1;
-        
+
+        // Calcular horas trabalhadas
+        const workedHours = calculateWorkedHours(
+          `${String(entryHour).padStart(2, '0')}:${String(entryMin).padStart(2, '0')}`,
+          `${String(lunchOutHour).padStart(2, '0')}:${String(lunchOutMin).padStart(2, '0')}`,
+          `${String(lunchInHour).padStart(2, '0')}:${String(lunchInMin).padStart(2, '0')}`,
+          `${String(exitHour).padStart(2, '0')}:${String(exitMin).padStart(2, '0')}`
+        );
+
         // Organizar em um objeto adequado para a tabela
         exampleData.push({
           id: `record-${i}`,
           date: formattedDate,
           fullDate: date,
+          dayOfWeek: getDayOfWeek(date),
           records: {
             entry: `${String(entryHour).padStart(2, '0')}:${String(entryMin).padStart(2, '0')}`,
             lunchOut: `${String(lunchOutHour).padStart(2, '0')}:${String(lunchOutMin).padStart(2, '0')}`,
             lunchIn: `${String(lunchInHour).padStart(2, '0')}:${String(lunchInMin).padStart(2, '0')}`,
             exit: `${String(exitHour).padStart(2, '0')}:${String(exitMin).padStart(2, '0')}`
           },
-          totalHours: `${exitHour - entryHour - 1}h ${exitMin - entryMin}m`,
+          totalHours: workedHours,
           hasAlert: hasAlert,
           alertReason: hasAlert ? 'Horário fora do padrão' : ''
         });
@@ -128,7 +173,9 @@ export default function TimecardHistory() {
         >
           <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Histórico de Pontos</Text>
+        <Text style={styles.headerTitle}>
+          {employeeName ? `${employeeName} - Histórico` : 'Histórico de Pontos'}
+        </Text>
         <View style={{width: 24}} />
       </View>
       
@@ -197,7 +244,8 @@ export default function TimecardHistory() {
       
       {/* Cabeçalho da Tabela */}
       <View style={styles.tableHeader}>
-        <View style={[styles.tableHeaderCell, { flex: 1.2 }]}>
+        <View style={[styles.tableHeaderCell, { flex: 1.2
+         }]}>
           <Text style={styles.tableHeaderText}>Data</Text>
         </View>
         <View style={styles.tableHeaderCell}>
@@ -211,6 +259,9 @@ export default function TimecardHistory() {
         </View>
         <View style={styles.tableHeaderCell}>
           <Text style={styles.tableHeaderText}>Saída</Text>
+        </View>
+        <View style={[styles.tableHeaderCell, { flex: 1.2 }]}>
+          <Text style={styles.tableHeaderText}>Horas</Text>
         </View>
       </View>
       
@@ -239,8 +290,9 @@ export default function TimecardHistory() {
                 }
               }}
             >
-              <View style={[styles.tableCell, { flex: 1.2 }]}>
+              <View style={[styles.tableCell, { flex: 1.5 }]}>
                 <Text style={styles.dateText}>{item.date}</Text>
+                <Text style={styles.dayText}>{item.dayOfWeek}</Text>
                 {item.hasAlert && (
                   <View style={styles.alertIconContainer}>
                     <Ionicons name="alert-circle" size={16} color="#F57C00" />
@@ -259,6 +311,9 @@ export default function TimecardHistory() {
               <View style={styles.tableCell}>
                 <Text style={styles.timeText}>{item.records.exit}</Text>
               </View>
+              <View style={[styles.tableCell, { flex: 1.2 }]}>
+                <Text style={styles.hoursText}>{item.totalHours}</Text>
+              </View>
             </TouchableOpacity>
           )}
           ListFooterComponent={
@@ -271,6 +326,20 @@ export default function TimecardHistory() {
                 <Text style={styles.summaryLabel}>Com alertas:</Text>
                 <Text style={[styles.summaryValue, { color: '#F57C00' }]}>
                   {filteredHistory.filter(item => item.hasAlert).length}
+                </Text>
+              </View>
+              <View style={styles.summaryItem}>
+                <Text style={styles.summaryLabel}>Total de horas:</Text>
+                <Text style={styles.summaryValue}>
+                  {(() => {
+                    const totalMinutes = filteredHistory.reduce((acc, item) => {
+                      const [hours, minutes] = item.totalHours.match(/(\d+)h(?:\s(\d+)m)?/)?.slice(1) || ['0', '0'];
+                      return acc + (parseInt(hours) * 60) + (parseInt(minutes || '0'));
+                    }, 0);
+                    const totalHours = Math.floor(totalMinutes / 60);
+                    const remainingMinutes = totalMinutes % 60;
+                    return `${totalHours}h${remainingMinutes > 0 ? ` ${remainingMinutes}m` : ''}`;
+                  })()}
                 </Text>
               </View>
             </View>
@@ -365,7 +434,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tableHeaderText: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '600',
     color: '#FFFFFF',
   },
@@ -452,6 +521,16 @@ const styles = StyleSheet.create({
   summaryValue: {
     fontSize: 15,
     color: '#263238',
+    fontWeight: '600',
+  },
+  dayText: {
+    fontSize: 12,
+    color: '#757575',
+    marginTop: 2,
+  },
+  hoursText: {
+    fontSize: 14,
+    color: '#1565C0',
     fontWeight: '600',
   }
 });
