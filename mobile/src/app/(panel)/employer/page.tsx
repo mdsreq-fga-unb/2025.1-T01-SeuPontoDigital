@@ -40,6 +40,7 @@ export default function Employer() {
     totalHours: string;
     overtime50: string;
     overtime100: string;
+    breakTime: string;
   }
   
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -63,7 +64,8 @@ export default function Employer() {
           status: 'Ativo',
           totalHours: '178h 20m',
           overtime50: '12h 40m',
-          overtime100: '8h'
+          overtime100: '8h',
+          breakTime: '01:00'
         },
         { 
           id: '2', 
@@ -77,7 +79,8 @@ export default function Employer() {
           status: 'Ativo',
           totalHours: '181h 45m',
           overtime50: '15h 30m',
-          overtime100: '6h 15m'
+          overtime100: '6h 15m',
+          breakTime: '01:00'
         },
         { 
           id: '3', 
@@ -91,7 +94,8 @@ export default function Employer() {
           status: 'Ativo',
           totalHours: '150h',
           overtime50: '5h',
-          overtime100: '2h'
+          overtime100: '2h',
+          breakTime: '01:00'
         },
         { 
           id: '4', 
@@ -105,7 +109,8 @@ export default function Employer() {
           status: 'Ativo',
           totalHours: '180h',
           overtime50: '20h',
-          overtime100: '10h'
+          overtime100: '10h',
+          breakTime: '01:00'
         },
         { 
           id: '5', 
@@ -119,7 +124,8 @@ export default function Employer() {
           status: 'Ativo',
           totalHours: '140h',
           overtime50: '0h',
-          overtime100: '0h'
+          overtime100: '0h',
+          breakTime: '01:00'
         },
         { 
           id: '6', 
@@ -133,7 +139,8 @@ export default function Employer() {
           status: 'Férias',
           totalHours: '200h',
           overtime50: '25h',
-          overtime100: '15h'
+          overtime100: '15h',
+          breakTime: '01:00'
         },
         { 
           id: '7', 
@@ -147,7 +154,8 @@ export default function Employer() {
           status: 'Ativo',
           totalHours: '160h',
           overtime50: '10h',
-          overtime100: '5h'
+          overtime100: '5h',
+          breakTime: '01:00'
         },
       ];
       
@@ -397,6 +405,13 @@ export default function Employer() {
                         <Ionicons name="time-outline" size={18} color="#1565C0" />
                         <Text style={styles.detailLabel}>Horário:</Text>
                         <Text style={styles.detailValue}>{selectedEmployee.workHours}</Text>
+                      </View>
+
+                      {/* Nova linha para o tempo de intervalo */}
+                      <View style={styles.detailItem}>
+                        <Ionicons name="restaurant-outline" size={18} color="#1565C0" />
+                        <Text style={styles.detailLabel}>Tempo de intervalo:</Text>
+                        <Text style={styles.detailValue}>{selectedEmployee.breakTime} h</Text>
                       </View>
                       
                       <View style={styles.detailItem}>
@@ -977,6 +992,21 @@ const styles = StyleSheet.create({
   },
   
   // Botões de ação
+  actionButton: {
+    backgroundColor: '#1565C0',
+    borderRadius: 12,
+    padding: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  actionButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+    marginLeft: 8,
+  },
+  
   historyButton: {
     marginTop: 24,
     marginBottom: 8,
