@@ -272,10 +272,6 @@ export default function Employer() {
         <View style={styles.employeesCard}>
           <View style={styles.employeesCardHeader}>
             <Text style={styles.employeesCardTitle}>Meus Funcionários</Text>
-            <TouchableOpacity style={styles.filterButton}>
-              <MaterialIcons name="filter-list" size={20} color="#455A64" />
-              <Text style={styles.filterText}>Filtrar</Text>
-            </TouchableOpacity>
           </View>
           
           {loading ? (
@@ -391,9 +387,21 @@ export default function Employer() {
                       </View>
                     </View>
                     
+                    {/* Botão de histórico reposicionado aqui */}
+                    <TouchableOpacity 
+                      style={styles.historyButtonTop}
+                      onPress={() => viewEmployeeTimeHistory(selectedEmployee)}
+                    >
+                      <Ionicons name="time-outline" size={18} color="#FFFFFF" />
+                      <Text style={styles.historyButtonText}>Ver Histórico de Pontos</Text>
+                    </TouchableOpacity>
+                    
                     {/* Seção de dados pessoais */}
                     <View style={styles.employeeDetailSection}>
-                      <Text style={styles.sectionTitle}>Informações Pessoais</Text>
+                      <View style={styles.sectionTitleContainer}>
+                        <Ionicons name="person" size={22} color="#FFFFFF" style={styles.sectionTitleIcon} />
+                        <Text style={styles.sectionTitleEnhanced}>Informações Do Funcionário</Text>
+                      </View>
                       
                       <View style={styles.detailItem}>
                         <Ionicons name="calendar-outline" size={18} color="#1565C0" />
@@ -439,9 +447,9 @@ export default function Employer() {
                     
                     {/* Nova seção de horas - design completamente redesenhado */}
                     <View style={[styles.employeeDetailSection, { marginTop: 16 }]}>
-                      <View style={styles.sectionHeaderRow}>
-                        <Ionicons name="time-outline" size={20} color="#1565C0" />
-                        <Text style={styles.sectionTitle}>Horas do Mês Atual</Text>
+                      <View style={styles.sectionTitleContainer}>
+                        <Ionicons name="time" size={22} color="#FFFFFF" style={styles.sectionTitleIcon} />
+                        <Text style={styles.sectionTitleEnhanced}>Horas do Mês Atual</Text>
                       </View>
                       
                       {/* Card de horas totais */}
@@ -455,7 +463,7 @@ export default function Employer() {
                         <View style={styles.extraHoursCard}>
                           <View style={styles.extraHoursHeader}>
                             <Ionicons name="star-half" size={18} color="#43A047" />
-                            <Text style={styles.extraHoursTitle}>Horas Extras 50%</Text>
+                            <Text style={styles.extraHoursTitle}>Extras 50%</Text>
                           </View>
                           <Text style={[styles.extraHoursValue, styles.overtime50Value]}>
                             {selectedEmployee.overtime50}
@@ -466,7 +474,7 @@ export default function Employer() {
                         <View style={styles.extraHoursCard}>
                           <View style={styles.extraHoursHeader}>
                             <Ionicons name="star" size={18} color="#E65100" />
-                            <Text style={styles.extraHoursTitle}>Horas Extras 100%</Text>
+                            <Text style={styles.extraHoursTitle}>Extras 100%</Text>
                           </View>
                           <Text style={[styles.extraHoursValue, styles.overtime100Value]}>
                             {selectedEmployee.overtime100}
@@ -475,15 +483,6 @@ export default function Employer() {
                         </View>
                       </View>
                     </View>
-
-                    {/* Botão de histórico dentro do card */}
-                    <TouchableOpacity 
-                      style={[styles.actionButton, styles.historyButton]}
-                      onPress={() => viewEmployeeTimeHistory(selectedEmployee)}
-                    >
-                      <Ionicons name="time-outline" size={20} color="#FFFFFF" />
-                      <Text style={styles.actionButtonText}>Ver Histórico de Pontos</Text>
-                    </TouchableOpacity>
                   </View>
                 </ScrollView>
               </>
@@ -644,15 +643,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#263238',
-  },
-  filterButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  filterText: {
-    fontSize: 14,
-    color: '#455A64',
-    marginLeft: 4,
   },
   loadingContainer: {
     alignItems: 'center',
@@ -879,7 +869,7 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 14,
-    color: '#455A64',
+    color: '#000000',
     flex: 1,
     marginLeft: 8,
   },
@@ -987,7 +977,7 @@ const styles = StyleSheet.create({
   },
   extraHoursCaption: {
     fontSize: 11,
-    color: '#78909C',
+    color: '#00000',
     lineHeight: 14,
   },
   
@@ -1023,6 +1013,29 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   
+  historyButtonTop: {
+    backgroundColor: '#1565C0',
+    borderRadius: 8, 
+    padding: 18, 
+    marginTop: 10, 
+    marginBottom: 10, 
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  historyButtonText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '600',
+    marginLeft: 8,
+  },
+  
   // Footer
   footer: {
     backgroundColor: '#1565C0',
@@ -1033,5 +1046,33 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 12,
     fontWeight: '500',
+  },
+  
+  // Adicionados novos estilos
+  sectionTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#1565C0',
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  sectionTitleIcon: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    padding: 5,
+    borderRadius: 8,
+  },
+  sectionTitleEnhanced: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginLeft: 12,
+    letterSpacing: 0.3,
   },
 });
