@@ -37,6 +37,9 @@ export default function Employer() {
     alerts: number;
     daysWorked: number;
     status: string;
+    totalHours: string;
+    overtime50: string;
+    overtime100: string;
   }
   
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -57,7 +60,10 @@ export default function Employer() {
           startDate: '15/02/2024',
           alerts: 2,
           daysWorked: 45,
-          status: 'Ativo'
+          status: 'Ativo',
+          totalHours: '178h 20m',
+          overtime50: '12h 40m',
+          overtime100: '8h'
         },
         { 
           id: '2', 
@@ -68,7 +74,10 @@ export default function Employer() {
           startDate: '10/01/2024',
           alerts: 0,
           daysWorked: 72,
-          status: 'Ativo'
+          status: 'Ativo',
+          totalHours: '181h 45m',
+          overtime50: '15h 30m',
+          overtime100: '6h 15m'
         },
         { 
           id: '3', 
@@ -79,7 +88,10 @@ export default function Employer() {
           startDate: '05/03/2024',
           alerts: 1,
           daysWorked: 30,
-          status: 'Ativo'
+          status: 'Ativo',
+          totalHours: '150h',
+          overtime50: '5h',
+          overtime100: '2h'
         },
         { 
           id: '4', 
@@ -90,7 +102,10 @@ export default function Employer() {
           startDate: '20/12/2023',
           alerts: 3,
           daysWorked: 90,
-          status: 'Ativo'
+          status: 'Ativo',
+          totalHours: '180h',
+          overtime50: '20h',
+          overtime100: '10h'
         },
         { 
           id: '5', 
@@ -101,7 +116,10 @@ export default function Employer() {
           startDate: '07/04/2024',
           alerts: 0,
           daysWorked: 15,
-          status: 'Ativo'
+          status: 'Ativo',
+          totalHours: '140h',
+          overtime50: '0h',
+          overtime100: '0h'
         },
         { 
           id: '6', 
@@ -112,7 +130,10 @@ export default function Employer() {
           startDate: '12/11/2023',
           alerts: 4,
           daysWorked: 120,
-          status: 'Férias'
+          status: 'Férias',
+          totalHours: '200h',
+          overtime50: '25h',
+          overtime100: '15h'
         },
         { 
           id: '7', 
@@ -123,7 +144,10 @@ export default function Employer() {
           startDate: '03/01/2024',
           alerts: 1,
           daysWorked: 70,
-          status: 'Ativo'
+          status: 'Ativo',
+          totalHours: '160h',
+          overtime50: '10h',
+          overtime100: '5h'
         },
       ];
       
@@ -148,8 +172,7 @@ export default function Employer() {
   // Visualizar histórico de pontos do empregado
   const viewEmployeeTimeHistory = (employee: Employee) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    // Aqui seria a navegação para a tela de histórico de pontos com os dados do funcionário como parâmetro
-    // Em uma implementação real, você passaria o ID do funcionário como parâmetro para a rota
+
     router.push({
       pathname: '/(panel)/timecard-history/page',
       params: { employeeId: employee.id, employeeName: employee.name }
@@ -348,76 +371,106 @@ export default function Employer() {
               <>
                 <View style={styles.modalDivider} />
                 
-                <View style={styles.employeeDetailCard}>
-                  <View style={styles.employeeDetailHeader}>
-                    <View style={styles.employeeDetailAvatar}>
-                      <FontAwesome5 name="user" size={28} color="#FFFFFF" />
-                    </View>
-                    <View style={styles.employeeDetailInfo}>
-                      <Text style={styles.employeeDetailName}>{selectedEmployee.name}</Text>
-                      <Text style={styles.employeeDetailRole}>{selectedEmployee.role}</Text>
-                    </View>
-                  </View>
-                  
-                  <View style={styles.employeeDetailSection}>
-                    <View style={styles.detailItem}>
-                      <Ionicons name="calendar-outline" size={18} color="#1565C0" />
-                      <Text style={styles.detailLabel}>Data de admissão:</Text>
-                      <Text style={styles.detailValue}>{selectedEmployee.startDate}</Text>
-                    </View>
-                    
-                    <View style={styles.detailItem}>
-                      <Ionicons name="time-outline" size={18} color="#1565C0" />
-                      <Text style={styles.detailLabel}>Horário:</Text>
-                      <Text style={styles.detailValue}>{selectedEmployee.workHours}</Text>
-                    </View>
-                    
-                    <View style={styles.detailItem}>
-                      <Ionicons name="alert-circle-outline" size={18} color="#1565C0" />
-                      <Text style={styles.detailLabel}>Alertas:</Text>
-                      <View style={[
-                        styles.detailAlertBadge,
-                        selectedEmployee.alerts > 0 ? styles.detailAlertBadgeWarning : styles.detailAlertBadgeNormal
-                      ]}>
-                        <Text style={[
-                          styles.detailAlertText,
-                          selectedEmployee.alerts > 0 ? styles.detailAlertTextWarning : styles.detailAlertTextNormal
-                        ]}>
-                          {selectedEmployee.alerts}
-                        </Text>
+                <ScrollView style={styles.modalScrollView} showsVerticalScrollIndicator={false}>
+                  <View style={styles.employeeDetailCard}>
+                    <View style={styles.employeeDetailHeader}>
+                      <View style={styles.employeeDetailAvatar}>
+                        <FontAwesome5 name="user" size={28} color="#FFFFFF" />
+                      </View>
+                      <View style={styles.employeeDetailInfo}>
+                        <Text style={styles.employeeDetailName}>{selectedEmployee.name}</Text>
+                        <Text style={styles.employeeDetailRole}>{selectedEmployee.role}</Text>
                       </View>
                     </View>
                     
-                    <View style={styles.detailItem}>
-                      <Ionicons name="stats-chart-outline" size={18} color="#1565C0" />
-                      <Text style={styles.detailLabel}>Dias trabalhados:</Text>
-                      <Text style={styles.detailValue}>{selectedEmployee.daysWorked}</Text>
+                    {/* Seção de dados pessoais */}
+                    <View style={styles.employeeDetailSection}>
+                      <Text style={styles.sectionTitle}>Informações Pessoais</Text>
+                      
+                      <View style={styles.detailItem}>
+                        <Ionicons name="calendar-outline" size={18} color="#1565C0" />
+                        <Text style={styles.detailLabel}>Data de admissão:</Text>
+                        <Text style={styles.detailValue}>{selectedEmployee.startDate}</Text>
+                      </View>
+                      
+                      <View style={styles.detailItem}>
+                        <Ionicons name="time-outline" size={18} color="#1565C0" />
+                        <Text style={styles.detailLabel}>Horário:</Text>
+                        <Text style={styles.detailValue}>{selectedEmployee.workHours}</Text>
+                      </View>
+                      
+                      <View style={styles.detailItem}>
+                        <Ionicons name="alert-circle-outline" size={18} color="#1565C0" />
+                        <Text style={styles.detailLabel}>Alertas:</Text>
+                        <View style={[
+                          styles.detailAlertBadge,
+                          selectedEmployee.alerts > 0 ? styles.detailAlertBadgeWarning : styles.detailAlertBadgeNormal
+                        ]}>
+                          <Text style={[
+                            styles.detailAlertText,
+                            selectedEmployee.alerts > 0 ? styles.detailAlertTextWarning : styles.detailAlertTextNormal
+                          ]}>
+                            {selectedEmployee.alerts}
+                          </Text>
+                        </View>
+                      </View>
+                      
+                      <View style={styles.detailItem}>
+                        <Ionicons name="stats-chart-outline" size={18} color="#1565C0" />
+                        <Text style={styles.detailLabel}>Dias trabalhados:</Text>
+                        <Text style={styles.detailValue}>{selectedEmployee.daysWorked}</Text>
+                      </View>
                     </View>
+                    
+                    {/* Nova seção de horas - design completamente redesenhado */}
+                    <View style={[styles.employeeDetailSection, { marginTop: 16 }]}>
+                      <View style={styles.sectionHeaderRow}>
+                        <Ionicons name="time-outline" size={20} color="#1565C0" />
+                        <Text style={styles.sectionTitle}>Horas do Mês Atual</Text>
+                      </View>
+                      
+                      {/* Card de horas totais */}
+                      <View style={styles.totalHoursCard}>
+                        <Text style={styles.totalHoursLabel}>Total de Horas Trabalhadas</Text>
+                        <Text style={styles.totalHoursValue}>{selectedEmployee.totalHours}</Text>
+                      </View>
+                      
+                      {/* Cards de horas extras */}
+                      <View style={styles.extraHoursRow}>
+                        <View style={styles.extraHoursCard}>
+                          <View style={styles.extraHoursHeader}>
+                            <Ionicons name="star-half" size={18} color="#43A047" />
+                            <Text style={styles.extraHoursTitle}>Horas Extras 50%</Text>
+                          </View>
+                          <Text style={[styles.extraHoursValue, styles.overtime50Value]}>
+                            {selectedEmployee.overtime50}
+                          </Text>
+                          <Text style={styles.extraHoursCaption}>Dias úteis após jornada normal</Text>
+                        </View>
+                        
+                        <View style={styles.extraHoursCard}>
+                          <View style={styles.extraHoursHeader}>
+                            <Ionicons name="star" size={18} color="#E65100" />
+                            <Text style={styles.extraHoursTitle}>Horas Extras 100%</Text>
+                          </View>
+                          <Text style={[styles.extraHoursValue, styles.overtime100Value]}>
+                            {selectedEmployee.overtime100}
+                          </Text>
+                          <Text style={styles.extraHoursCaption}>Domingos e feriados</Text>
+                        </View>
+                      </View>
+                    </View>
+
+                    {/* Botão de histórico dentro do card */}
+                    <TouchableOpacity 
+                      style={[styles.actionButton, styles.historyButton]}
+                      onPress={() => viewEmployeeTimeHistory(selectedEmployee)}
+                    >
+                      <Ionicons name="time-outline" size={20} color="#FFFFFF" />
+                      <Text style={styles.actionButtonText}>Ver Histórico de Pontos</Text>
+                    </TouchableOpacity>
                   </View>
-                </View>
-                
-                <View style={styles.modalDivider} />
-                
-                <View style={styles.actionButtonsContainer}>
-                  <TouchableOpacity 
-                    style={styles.actionButton}
-                    onPress={() => viewEmployeeTimeHistory(selectedEmployee)}
-                  >
-                    <Ionicons name="time-outline" size={20} color="#FFFFFF" />
-                    <Text style={styles.actionButtonText}>Histórico de Pontos</Text>
-                  </TouchableOpacity>
-                  
-                  <TouchableOpacity 
-                    style={[styles.actionButton, styles.secondaryButton]}
-                    onPress={() => {
-                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                      Alert.alert('Em desenvolvimento', 'Funcionalidade de edição em desenvolvimento');
-                    }}
-                  >
-                    <Ionicons name="create-outline" size={20} color="#1565C0" />
-                    <Text style={styles.secondaryButtonText}>Editar Dados</Text>
-                  </TouchableOpacity>
-                </View>
+                </ScrollView>
               </>
             )}
           </View>
@@ -739,6 +792,10 @@ const styles = StyleSheet.create({
     shadowRadius: 15,
     elevation: 10,
   },
+  modalScrollView: {
+    width: '100%',
+    maxHeight: '80%',
+  },
   modalHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -764,7 +821,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F7FA',
     borderRadius: 12,
     padding: 16,
-    marginBottom: 16,
+    marginBottom: 8,
   },
   employeeDetailHeader: {
     flexDirection: 'row',
@@ -840,36 +897,100 @@ const styles = StyleSheet.create({
     color: '#F57C00',
   },
   
-  // Botões de ação
-  actionButtonsContainer: {
-    flexDirection: 'column',
-    marginTop: 5,
+  // Nova seção de horas
+  sectionHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
   },
-  actionButton: {
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#263238',
+    marginLeft: 8,
+  },
+  totalHoursCard: {
+    backgroundColor: '#1565C0',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 14,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  totalHoursLabel: {
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontSize: 13,
+    marginBottom: 6,
+  },
+  totalHoursValue: {
+    color: '#FFFFFF',
+    fontSize: 26,
+    fontWeight: '700',
+  },
+  extraHoursRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  extraHoursCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 14,
+    width: '48%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+    borderWidth: 1,
+    borderColor: '#EEEEEE',
+  },
+  extraHoursHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  extraHoursTitle: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#455A64',
+    marginLeft: 6,
+  },
+  extraHoursValue: {
+    fontSize: 20,
+    fontWeight: '700',
+    marginBottom: 6,
+  },
+  overtime50Value: {
+    color: '#43A047',
+  },
+  overtime100Value: {
+    color: '#E65100',
+  },
+  extraHoursCaption: {
+    fontSize: 11,
+    color: '#78909C',
+    lineHeight: 14,
+  },
+  
+  // Botões de ação
+  historyButton: {
+    marginTop: 24,
+    marginBottom: 8,
     backgroundColor: '#1565C0',
     borderRadius: 12,
     padding: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 12,
-  },
-  secondaryButton: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#1565C0',
-  },
-  actionButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
-    marginLeft: 8,
-  },
-  secondaryButtonText: {
-    color: '#1565C0',
-    fontSize: 16,
-    fontWeight: '600',
-    marginLeft: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
   },
   
   // Footer

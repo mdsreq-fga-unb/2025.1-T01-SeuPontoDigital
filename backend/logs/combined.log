@@ -178,3 +178,14 @@
 [2025-06-29 21:52:53]Request failed
 [2025-06-29 21:52:54]Incoming request - POST /api/worklog from ::ffff:127.0.0.1
 [2025-06-29 21:52:55]Request failed
+[2025-06-30 13:49:21]Server started
+[2025-06-30 13:52:03]Incoming request - POST /api/login-app from ::ffff:127.0.0.1
+[2025-06-30 13:52:10]Attempting to login with CPF: 42206663031
+[2025-06-30 13:52:10]Found employer with CPF: 42206663031
+[2025-06-30 13:52:10]Login successful for CPF: 42206663031, user type: employer
+[2025-06-30 13:52:10]Request completed
+[2025-06-30 13:58:23]Incoming request - POST /api/login-app from ::ffff:127.0.0.1
+[2025-06-30 13:58:23]Attempting to login with CPF: 42206663031
+[2025-06-30 13:58:23]Found employer with CPF: 42206663031
+[2025-06-30 13:58:23]Login successful for CPF: 42206663031, user type: employer
+[2025-06-30 13:58:23]Request completed
