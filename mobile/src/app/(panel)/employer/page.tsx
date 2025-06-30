@@ -41,6 +41,9 @@ export default function Employer() {
     overtime50: string;
     overtime100: string;
     breakTime: string;
+    daysAbsent: number;
+    daysWithMedicalCertificate: number;
+    daysLate: number;
   }
   
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -65,7 +68,10 @@ export default function Employer() {
           totalHours: '178h 20m',
           overtime50: '12h 40m',
           overtime100: '8h',
-          breakTime: '01:00'
+          breakTime: '01:00',
+          daysAbsent: 10,
+          daysWithMedicalCertificate: 4,
+          daysLate: 1
         },
         { 
           id: '2', 
@@ -80,7 +86,10 @@ export default function Employer() {
           totalHours: '181h 45m',
           overtime50: '15h 30m',
           overtime100: '6h 15m',
-          breakTime: '01:00'
+          breakTime: '01:00',
+          daysAbsent: 0,
+          daysWithMedicalCertificate: 0,
+          daysLate: 0
         },
         { 
           id: '3', 
@@ -95,7 +104,10 @@ export default function Employer() {
           totalHours: '150h',
           overtime50: '5h',
           overtime100: '2h',
-          breakTime: '01:00'
+          breakTime: '01:00',
+          daysAbsent: 0,
+          daysWithMedicalCertificate: 1,
+          daysLate: 0
         },
         { 
           id: '4', 
@@ -110,7 +122,10 @@ export default function Employer() {
           totalHours: '180h',
           overtime50: '20h',
           overtime100: '10h',
-          breakTime: '01:00'
+          breakTime: '01:00',
+          daysAbsent: 5,
+          daysWithMedicalCertificate: 2,
+          daysLate: 3
         },
         { 
           id: '5', 
@@ -125,7 +140,10 @@ export default function Employer() {
           totalHours: '140h',
           overtime50: '0h',
           overtime100: '0h',
-          breakTime: '01:00'
+          breakTime: '01:00',
+          daysAbsent: 0,
+          daysWithMedicalCertificate: 0,
+          daysLate: 0
         },
         { 
           id: '6', 
@@ -140,7 +158,10 @@ export default function Employer() {
           totalHours: '200h',
           overtime50: '25h',
           overtime100: '15h',
-          breakTime: '01:00'
+          breakTime: '01:00',
+          daysAbsent: 0,
+          daysWithMedicalCertificate: 0,
+          daysLate: 0
         },
         { 
           id: '7', 
@@ -155,7 +176,10 @@ export default function Employer() {
           totalHours: '160h',
           overtime50: '10h',
           overtime100: '5h',
-          breakTime: '01:00'
+          breakTime: '01:00',
+          daysAbsent: 1,
+          daysWithMedicalCertificate: 0,
+          daysLate: 1
         },
       ];
       
@@ -422,18 +446,51 @@ export default function Employer() {
                         <Text style={styles.detailValue}>{selectedEmployee.breakTime} h</Text>
                       </View>
                       
+                      {/* Substituição da seção de alertas */}
                       <View style={styles.detailItem}>
-                        <Ionicons name="alert-circle-outline" size={18} color="#1565C0" />
-                        <Text style={styles.detailLabel}>Alertas:</Text>
+                        <Ionicons name="calendar-sharp" size={18} color="#F44336" />
+                        <Text style={styles.detailLabel}>Dias ausente:</Text>
                         <View style={[
                           styles.detailAlertBadge,
-                          selectedEmployee.alerts > 0 ? styles.detailAlertBadgeWarning : styles.detailAlertBadgeNormal
+                          selectedEmployee.daysAbsent > 0 ? styles.detailAlertBadgeWarning : styles.detailAlertBadgeNormal
                         ]}>
                           <Text style={[
                             styles.detailAlertText,
-                            selectedEmployee.alerts > 0 ? styles.detailAlertTextWarning : styles.detailAlertTextNormal
+                            selectedEmployee.daysAbsent > 0 ? styles.detailAlertTextWarning : styles.detailAlertTextNormal
                           ]}>
-                            {selectedEmployee.alerts}
+                            {selectedEmployee.daysAbsent || 0}
+                          </Text>
+                        </View>
+                      </View>
+
+                      <View style={styles.detailItem}>
+                        <Ionicons name="medkit-outline" size={18} color="#2196F3" />
+                        <Text style={styles.detailLabel}>Dias de atestado:</Text>
+                        <View style={[
+                          styles.detailAlertBadge,
+                          styles.detailAlertBadgeInfo
+                        ]}>
+                          <Text style={[
+                            styles.detailAlertText,
+                            styles.detailAlertTextInfo
+                          ]}>
+                            {selectedEmployee.daysWithMedicalCertificate || 0}
+                          </Text>
+                        </View>
+                      </View>
+
+                      <View style={styles.detailItem}>
+                        <Ionicons name="time" size={18} color="#FF9800" />
+                        <Text style={styles.detailLabel}>Dias atrasados:</Text>
+                        <View style={[
+                          styles.detailAlertBadge,
+                          selectedEmployee.daysLate > 0 ? styles.detailAlertBadgeWarning : styles.detailAlertBadgeNormal
+                        ]}>
+                          <Text style={[
+                            styles.detailAlertText,
+                            selectedEmployee.daysLate > 0 ? styles.detailAlertTextWarning : styles.detailAlertTextNormal
+                          ]}>
+                            {selectedEmployee.daysLate || 0}
                           </Text>
                         </View>
                       </View>
@@ -891,6 +948,9 @@ const styles = StyleSheet.create({
   detailAlertBadgeWarning: {
     backgroundColor: '#FFF8E1',
   },
+  detailAlertBadgeInfo: {
+    backgroundColor: '#E3F2FD',
+  },
   detailAlertText: {
     fontSize: 12,
     fontWeight: '600',
@@ -900,6 +960,9 @@ const styles = StyleSheet.create({
   },
   detailAlertTextWarning: {
     color: '#F57C00',
+  },
+  detailAlertTextInfo: {
+    color: '#2196F3',
   },
   
   // Nova seção de horas
