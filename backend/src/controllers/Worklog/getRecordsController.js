@@ -1,21 +1,28 @@
 import getRecordsModel from "../../models/Worklogs/getRecordsModel.js"
+import logger from "../../config/logger.js";
 
 const getRecordsController = async (req, res) => {
-  const { inicio, fim } = req.query;
+  //data de início e fim são opcionais
+  //preciso de receber o dado do empregado e do empregador, através do cpf dele
+  //retorna um array de objetos em data
+//   logger.info("oi")
+//   console.log("oi2")
 
-  let filtros = {};
+  const { cpf, inicio, fim } = req.query;
 
-  if (inicio && fim) {
-    filtros.data = {
-      $gte: new Date(inicio),
-      $lte: new Date(fim)
-    };
-  }
+  try {
+        const { data, error } = await getRecordsModel({cpf, inicio, fim});
 
-  const registros = await db('worklogs') // ou qualquer ORM
-    .whereBetween('data', [filtros.data.$gte, filtros.data.$lte]);
+        if (error) {
+            return res.status(500).json({ message: error });
+        }
 
-  res.json(registros);
+        return res.status(200).json(data);
+
+    } catch (err) {
+        console.error("Erro inesperado no getRecordsController:", err);
+        return res.status(500).json({ message: "Ocorreu um erro inesperado no servidor." });
+    }
 };
 
 export default getRecordsController;

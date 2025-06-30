@@ -40,6 +40,10 @@ const logger = winston.createLogger({
     ]
 });
 
+// Redireciona console.log e console.error para o Winston
+console.log = (...args) => logger.info(args.join(" "));
+console.error = (...args) => logger.error(args.join(" "));
+
 // Create a child logger with request context
 export const createRequestLogger = (req) => {
     return logger.child({});
