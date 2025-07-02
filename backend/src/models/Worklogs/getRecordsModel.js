@@ -1,4 +1,5 @@
 import supabase from "../../config/supabase.js";
+import calcRegistroInfo from "./CalcRegisterInfo.js";
 
 const getRecordsModel = async ({ cpf, inicio, fim }) => {
   try {
@@ -137,24 +138,81 @@ async function buscarRegistrosDeEmpregado(id_employee, inicio, fim) {
 
     if (!agrupados[chaveMes]) agrupados[chaveMes] = [];
 
-    agrupados[chaveMes].push({
+      //   agrupados[chaveMes].push({
+      //   data: date,
+      //   dia_semana: diaSemana,
+      //   entrada: clock_in,
+      //   saida: clock_out,
+      //   ida_almoco: break_start,
+      //   volta_almoco: break_end,
+      //   intervalo_contrato: intervaloMinutosContrato,
+      //   carga_horaria_dia: cargaHorariaDia,
+      //   horas_trabalhadas: horasTrabalhadas.toFixed(2),
+      //   horas_extra: horaExtra > 0 ? horaExtra.toFixed(2) : "0.00",
+      //   cpf_empregador
+      // });
+
+      // agrupados[chaveMes].push({
+      //   data: date,
+      //   dia_semana: diaSemana,
+      //   entrada: clock_in,
+      //   saida: clock_out,
+      //   ida_almoco: break_start,
+      //   volta_almoco: break_end
+      //   // intervalo_contrato: intervaloMinutosContrato,
+      //   // carga_horaria_dia: cargaHorariaDia,
+      //   // horas_trabalhadas: horasTrabalhadas.toFixed(2),
+      //   // horas_extra: horaExtra > 0 ? horaExtra.toFixed(2) : "0.00",
+        
+      // });
+
+    const registroBase = {
       data: date,
       dia_semana: diaSemana,
       entrada: clock_in,
       saida: clock_out,
       ida_almoco: break_start,
-      volta_almoco: break_end,
-      intervalo_contrato: intervaloMinutosContrato,
-      carga_horaria_dia: cargaHorariaDia,
-      horas_trabalhadas: horasTrabalhadas.toFixed(2),
-      horas_extra: horaExtra > 0 ? horaExtra.toFixed(2) : "0.00",
+      volta_almoco: break_end
+    };
+
+    // 2. Adiciona o registro base
+    agrupados[chaveMes].push(registroBase);
+
+    // 3. Adiciona os campos calculados depois
+    const index = agrupados[chaveMes].length - 1;
+    agrupados[chaveMes][index] = {
+      ...agrupados[chaveMes][index],
+      ...calcRegistroInfo({
+          date,
+          diaSemana,
+          clock_in,
+          clock_out,
+          break_start,
+          break_end,
+          intervaloMinutosContrato,
+          cargaHorariaDia,
+          cpf_empregador
+        }),
       cpf_empregador
-    });
+    };
+
+    // agrupados[chaveMes].push(
+    //     calcRegistroInfo({
+    //       date,
+    //       diaSemana,
+    //       clock_in,
+    //       clock_out,
+    //       break_start,
+    //       break_end,
+    //       intervaloMinutosContrato,
+    //       cargaHorariaDia,
+    //       cpf_empregador
+    //     })
+    //   );
+    // }
   }
-
-  return agrupados;
+return agrupados;
 }
-
 
 
 
