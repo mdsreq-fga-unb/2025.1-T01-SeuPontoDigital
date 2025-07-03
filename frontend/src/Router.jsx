@@ -10,6 +10,7 @@ import Contracts from "./pages/Contracts";
 import AddContract from "./pages/AddContract";
 import UpdateContract from "./pages/UpdateContract";
 import UpdateEmployer from "./pages/UpdateEmployer";
+import Timesheets from "./pages/Timesheets";
 
 const Router = () => {
   return (
@@ -29,6 +30,8 @@ const Router = () => {
         <Route path="/contratos/adicionar/:id" element={<PrivateRoute> <AddContract /> </PrivateRoute>} />
 
         <Route path="/contratos/editar/:id" element={<PrivateRoute> <UpdateContract /> </PrivateRoute>} />
+
+        <Route path="/registros" element={<PrivateRoute> <Timesheets /> </PrivateRoute>} /> 
 
         <Route path="*" element={<Error404 />} />
 
