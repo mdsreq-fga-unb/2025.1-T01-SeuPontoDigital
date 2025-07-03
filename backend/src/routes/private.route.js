@@ -45,6 +45,7 @@ import deleteOneWorkScheduleController from "../controllers/WorkSchedule/deleteO
 import putOneWorkScheduleController from "../controllers/WorkSchedule/putOneWorkScheduleController.js";
 import getOneBreakController from "../controllers/WorkBreaks/getOneBreakController.js";
 import postBreakController from "../controllers/WorkBreaks/postBreakController.js";
+import putBreakController from "../controllers/WorkBreaks/putBreakController.js";
 
 
 const privateRoute = express.Router();
@@ -115,6 +116,7 @@ privateRoute.put("/workschedule/:id", putOneWorkScheduleController);
 
 // ================== WORK BREAKS ==================
 privateRoute.get("/workbreak/:id", getOneBreakController);
-privateRoute.post("/workbreak/:id", postBreakController)
+privateRoute.post("/workbreak/:id", postBreakController);
+privateRoute.put("/workbreak/:id", putBreakController);
 
 export default privateRoute;
