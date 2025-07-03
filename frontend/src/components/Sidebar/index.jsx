@@ -1,6 +1,6 @@
 import "./Sidebar.css";
 import NavItem from "../NavItem";
-import { FaChartLine, FaUserTie, FaFileContract, FaSignOutAlt } from "react-icons/fa";
+import { FaChartLine, FaUserTie, FaFileContract, FaBusinessTime, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Notification from "../Notification";
 
@@ -12,6 +12,7 @@ const Sidebar = () => {
         { label: "Dashboard", href: "/dashboard", icon: FaChartLine },
         { label: "Empregadores", href: "/empregadores", icon: FaUserTie },
         { label: "Contratos de Trabalho", href: "/contratos", icon: FaFileContract },
+        { label: "Registros de Ponto", href: "/registros", icon: FaBusinessTime },
     ];
 
     const logoutItem = { label: "Logout", icon: FaSignOutAlt};
