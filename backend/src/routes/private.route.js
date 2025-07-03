@@ -38,6 +38,8 @@ import postEmployController from "../controllers/Employ/postEmployController.js"
 import getAllSignContractController from "../controllers/SignContract/getAllSignContractController.js";
 import getOneSignContractController from "../controllers/SignContract/getOneSignContractController.js";
 import postSignContractController from "../controllers/SignContract/postSignContractController.js";
+import getAllWorkScheduleController from "../controllers/WorkSchedule/getAllWorkScheduleController.js";
+import getOneWorkScheduleController from "../controllers/WorkSchedule/getOneWorkScheduleController.js";
 
 const privateRoute = express.Router();
 
@@ -99,6 +101,7 @@ privateRoute.post("/worklog", postWorklogController);
 privateRoute.put("/worklog", putWorklogController);
 
 // ================== WORK SCHEDULE ==================
-// privateRoute.get("/workschedules", getAllWorkSchedules);
+privateRoute.get("/workschedules", getAllWorkAddressController);
+privateRoute.get("workschedule/:id", getOneWorkScheduleController);
 
 export default privateRoute;
