@@ -6,13 +6,16 @@ const postEmployeeController = async (req, res) => {
         const employee = req.body;
 
         if (validateCPF(employee.cpf)) {
-            const error = await postEmployeeModel(employee);
+            const result = await postEmployeeModel(employee);
             
-            if (error) {
-                return res.status(400).json({ message: error});
+            if (result?.error) {
+                return res.status(400).json({ message: result.error});
             }
             
-            return res.status(201).json({ message: "employee has been added successfully" });
+            return res.status(201).json({ 
+                message: "employee has been added successfully",
+                employeeId: result
+            });
         }
 
         return res.status(400).json({ message: "invalid cpf" });

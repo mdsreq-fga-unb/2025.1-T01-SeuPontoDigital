@@ -6,16 +6,19 @@ const postEmployeeModel = async (employee) => {
         const cleanCPF = employee.cpf.replace(/\D/g, '');
         const phoneFormatTwilio = generatePhoneFormatTwilio(employee.phone);
         
-        const { error } = await supabase.from("employees").insert({
+        const { data: employeeID, error } = await supabase.from("employees").insert({
             name: employee.name,
             cpf: cleanCPF,
             phone: phoneFormatTwilio
-        });
+        }).select("id");
 
-        if (error) return error;
+        if (error) return { error };
+        
+        return employeeID[0]?.id;
     }
     catch (err) {
         console.error("error in insertEmployee model");
+        return { error: "failed to insert employee" };
     }
 }
 
