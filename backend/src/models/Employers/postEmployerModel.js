@@ -6,8 +6,6 @@ const postEmployerModel = async (employer) => {
         const cleanCPF = employer.cpf.replace(/\D/g, '');
         const phoneFormatTwilio = generatePhoneFormatTwilio(employer.phone);
 
-        
-        
         const { error } = await supabase.from("employers").insert({
             name: employer.name,
             cpf: cleanCPF,
