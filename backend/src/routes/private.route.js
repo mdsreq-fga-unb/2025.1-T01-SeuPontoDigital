@@ -42,6 +42,7 @@ import getAllWorkScheduleController from "../controllers/WorkSchedule/getAllWork
 import getOneWorkScheduleController from "../controllers/WorkSchedule/getOneWorkScheduleController.js";
 import postWorkScheduleController from "../controllers/WorkSchedule/postWorkScheduleController.js";
 import deleteOneWorkScheduleController from "../controllers/WorkSchedule/deleteOneWorkScheduleController.js";
+import putOneWorkScheduleController from "../controllers/WorkSchedule/putOneWorkScheduleController.js";
 
 const privateRoute = express.Router();
 
@@ -107,5 +108,6 @@ privateRoute.get("/workschedules", getAllWorkScheduleController);
 privateRoute.get("/workschedule/:id", getOneWorkScheduleController);
 privateRoute.post("/workschedule/:id", postWorkScheduleController);
 privateRoute.delete("/workschedule/:id", deleteOneWorkScheduleController);
+privateRoute.put("/workschedule/:id", putOneWorkScheduleController);
 
 export default privateRoute;
