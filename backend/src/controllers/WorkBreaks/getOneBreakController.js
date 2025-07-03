@@ -5,10 +5,10 @@ const getOneBreakController = async (req, res) => {
     const idContract = req.params.id;
 
     try{
-        const fixedBreak = await getOneFixedBreakModel();
+        const fixedBreak = await getOneFixedBreakModel(idContract);
         if (!fixedBreak){
             try{
-                const flexBreak = await getOneFlexBreakModel();
+                const flexBreak = await getOneFlexBreakModel(idContract);
 
                 if (!flexBreak){
                     return res.status(404).send({message: "not found break for these data"});
