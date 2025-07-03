@@ -98,4 +98,7 @@ privateRoute.get("/worklog", getRecordsController); //US17 nova, apague este com
 privateRoute.post("/worklog", postWorklogController);
 privateRoute.put("/worklog", putWorklogController);
 
+// ================== WORK SCHEDULE ==================
+// privateRoute.get("/workschedules", getAllWorkSchedules);
+
 export default privateRoute;
