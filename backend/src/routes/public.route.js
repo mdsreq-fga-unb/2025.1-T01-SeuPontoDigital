@@ -4,13 +4,21 @@ import firstAccessController from "../controllers/FirstAccess/firstAccessControl
 import createPassword from "../controllers/FirstAccess/createPassword.js";
 import forgottenPasswordController from "../controllers/ForgottenPassword/forgottenPasswordController.js";
 import updatePassword from "../controllers/ForgottenPassword/updatePassword.js";
-import validatePassword from '../middlewares/validatePassword.js';
+// import validatePassword from '../middlewares/validatePassword.js'; virou outro import
 import loginApp from "../controllers/LoginApp/loginApp.js";
+import validatePassword from '../middlewares/validateStrongPassword.js';
 
 const publicRoute = express.Router();
 
+
+// ================= LOGIN WEB =================
+publicRoute.post("/login-admin", loginAdmin);
+
+// ================= LOGIN APP =================
+// publicRoute.post("/login-employer", loginEmployer);
 publicRoute.post("/login", loginAdmin);
 publicRoute.post("/login-app", loginApp);
+
 
 // ======== FIRST ACCESS ========
 publicRoute.post("/first-access", validatePassword, firstAccessController);

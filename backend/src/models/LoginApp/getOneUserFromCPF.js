@@ -1,10 +1,6 @@
 import getOneEmployerFromCPF from "../Employers/getOneEmployerFromCPF.js";
-import getOneEmployeeFromCPF from "../Contracts/getOneEmployeeFromCPF.js";
-import logger from "../../config/logger.js";
-
-const userLogger = logger.child({
-    module: "LoginApp"
-});
+// import getOneEmployeeFromCPF from "../ContractEmployee/getOneEmployeeFromCPF.js";
+import getOneEmployeeFromCPFModel from "../Employees/getOneEmployeeFromCPFModel.js";
 
 const getOneUserFromCPF = async (cpf) => {
     try {
@@ -19,11 +15,7 @@ const getOneUserFromCPF = async (cpf) => {
 
         // Se não encontrar o empregador, tenta buscar o empregado
         if (employerError || !employerData) {
-            userLogger.debug(`No employer found with CPF ${cpf}, searching for employee`);
-            
-            const findEmployee = await getOneEmployeeFromCPF(cpf);
-            userLogger.debug(`Employee search result:`, { employeeData: findEmployee });
-            
+            const findEmployee = await getOneEmployeeFromCPFModel(cpf);
             const employeeData = findEmployee;
             const employeeError = findEmployee?.error;
             
