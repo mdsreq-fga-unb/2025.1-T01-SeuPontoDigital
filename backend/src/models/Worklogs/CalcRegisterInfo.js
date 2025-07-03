@@ -53,10 +53,10 @@ const dias = [
 //   throw new Error(`Dia da semana inválido ou data inválida: ${date} (diaSemana=${diaSemana})`);
 // }
 
-const [startField, endField] = dias[diaSemana];
+  const [startField, endField] = dias[diaSemana];
   const start = new Date(`${date}T${schedule[startField]}`);
   const end = new Date(`${date}T${schedule[endField]}`);
-  const cargaHorariaDia = (end - start) / (1000 * 60 * 60);
+  const cargaHorariaDia = ((end - start) / (1000 * 60 * 60)) || 0;
 
   console.log("carga_horaria do dia", cargaHorariaDia)
 
