@@ -5,16 +5,21 @@ const putOneWorkScheduleController = async (req, res) => {
     const updateFieldsWorkSchedule = req.body;
     const idContract = req.params.id;
 
+    console.log("putOneWorkScheduleController - Contract ID:", idContract);
+    console.log("putOneWorkScheduleController - Request body:", JSON.stringify(updateFieldsWorkSchedule, null, 2));
+
     try{
-        const {error} = await putOneWorkScheduleModel(idContract, updateFieldsWorkSchedule);
+        const error = await putOneWorkScheduleModel(idContract, updateFieldsWorkSchedule);
 
         if (error) {
-            return res.status(401).send({message: "error in uptade work schedule"});
+            console.error("Error updating work schedule:", error);
+            return res.status(500).send({message: "error in update work schedule"});
         }
 
         return res.status(200).send({message: "work schedule updated"});
     }
     catch(err){
+        console.error("Exception in putOneWorkScheduleController:", err);
         return res.status(500).send({message: "internal server error"});
     }
 }

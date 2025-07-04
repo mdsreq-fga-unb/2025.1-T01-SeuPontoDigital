@@ -62,14 +62,18 @@ const ContractForm = (props) => {
                     props.handleInputChange({ name: "workplace_street", value: employer.street || "" });
                     props.handleInputChange({ name: "workplace_neighborhood", value: employer.neighborhood || "" });
                     props.handleInputChange({ name: "workplace_city", value: employer.city || "" });
-                    props.handleInputChange({ name: "workplace_state", value: employer.state || "" });
-                    props.handleInputChange({ name: "workplace_home_number", value: employer.home_number || "" });
+                    props.handleInputChange({ name: "workplace_state", value: employer.uf || "" });
+                    props.handleInputChange({ name: "workplace_home_number", value: employer.house_number || "" });
                     props.handleInputChange({ name: "workplace_complement", value: employer.complement || "" });
                 }
             }
         };
-        fillAddressFromEmployer();
-    }, [props.contract.workplace_employer]);
+        // Só executa se workplace_employer for true e os campos de endereço estiverem vazios
+        if ((props.contract.workplace_employer === true || props.contract.workplace_employer === "true") && 
+            !props.contract.workplace_cep) {
+            fillAddressFromEmployer();
+        }
+    }, [props.contract.workplace_employer, fetchOneEmployer, idEmployer, id, props.contract.workplace_cep]);
 
     const handleBlurCEP = (event) => {
         const cepValue = event.target.value?.replace(/[^0-9]/g, "");

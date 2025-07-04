@@ -27,6 +27,7 @@ import deleteEmployeeController from "../controllers/Employees/deleteEmployeeCon
 import putEmployeeController from "../controllers/Employees/putEmployeeController.js";
 import getContractsController from "../controllers/Contracts/getContractsController.js";
 import getOneContractController from "../controllers/Contracts/getOneContractController.js";
+import getFullContractDataController from "../controllers/Contracts/getFullContractDataController.js";
 import postContractController from "../controllers/Contracts/postContractController.js";
 import putContractController from "../controllers/Contracts/putContractController.js";
 import deleteContractController from "../controllers/Contracts/deleteContractController.js";
@@ -66,12 +67,13 @@ privateRoute.post("/work-address", postWorkAddressController);
 // ================= CONTRACTS =================
 privateRoute.get("/contracts", getContractsController);
 privateRoute.get("/contract/:id", getOneContractController);
+privateRoute.get("/contract/:id/full", getFullContractDataController);
 // privateRoute.get("/employee-contracts", getEmployeeAndContractsController); //TEM QUE CONSERTAR
 // privateRoute.post("/contract", validateUser, validateContract, postContractController); //TEM QUE CONSERTAR
 // privateRoute.put("/contract/:id", validateUser, validateContract, putContractController); //TEM QUE CONSERTAR
 // privateRoute.delete("/contract/:id", verifyDateContract, deleteContractController);
 privateRoute.post("/contract", postContractController);
-// privateRoute.put("/contract/:id", validateDataContract, putContractController); //TEM QUE CONSERTAR
+privateRoute.put("/contract/:id", putContractController);
 privateRoute.delete("/contract/:id", validateDateTwoYearsContract, deleteContractController);
 
 
