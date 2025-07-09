@@ -1,7 +1,6 @@
 import getEmployeeAndContractsModel from '../../models/ContractEmployee/getEmployeeAndContractsModel.js';
 
 const getEmployeeAndContractsController = async (req, res) => {
-    console.log("Cheguei")
     const employeeId = req.id;
 
     if (!employeeId) {

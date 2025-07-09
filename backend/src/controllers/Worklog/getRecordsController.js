@@ -1,28 +1,29 @@
-import getRecordsModel from "../../models/Worklogs/getRecordsModel.js"
-import logger from "../../config/logger.js";
+import getRecordsModel from "../../models/Worklogs/getRecordsModel.js";
 
 const getRecordsController = async (req, res) => {
-  //data de início e fim são opcionais
-  //preciso de receber o dado do empregado e do empregador, através do cpf dele
-  //retorna um array de objetos em data
-//   logger.info("oi")
-//   console.log("oi2")
+  // data de início e fim são opcionais
+  // recebendo o id do empregado via query
 
-  const { cpf, inicio, fim } = req.query;
+  const { employId = req.query.id, inicio, fim } = req.query;
+
+
+  if (!employId) {
+    return res.status(400).json({ message: "Parâmetro 'employeeId' é obrigatório." });
+  }
 
   try {
-        const { data, error } = await getRecordsModel({cpf, inicio, fim});
+    const { data, error } = await getRecordsModel({ employId, inicio, fim });
 
-        if (error) {
-            return res.status(500).json({ message: error });
-        }
-
-        return res.status(200).json(data);
-
-    } catch (err) {
-        console.error("Erro inesperado no getRecordsController:", err);
-        return res.status(500).json({ message: "Ocorreu um erro inesperado no servidor." });
+    if (error) {
+      return res.status(500).json({ message: error });
     }
+
+    return res.status(200).json(data);
+
+  } catch (err) {
+    console.error("Erro inesperado no getRecordsController:", err);
+    return res.status(500).json({ message: "Ocorreu um erro inesperado no servidor." });
+  }
 };
 
 export default getRecordsController;

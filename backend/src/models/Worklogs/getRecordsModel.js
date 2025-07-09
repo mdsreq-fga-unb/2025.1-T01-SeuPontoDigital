@@ -2,18 +2,21 @@ import supabase from "../../config/supabase.js";
 import calcRegistroInfo from "./CalcRegisterInfo.js";
 import getWorklogs from "./getWorklogs.js";
 
-const getRecordsModel = async ({ cpf, inicio, fim }) => {
+const getRecordsModel = async ({ employId, inicio, fim }) => {
   try {
-    // 1. Verificar se é um empregado
-    const { data: empregadoData } = await supabase
+    // 1. Tentar buscar o empregado com base no ID
+    const { data: empregadoData, error: empregadoError } = await supabase
       .from("employees")
       .select("id, name")
-      .eq("cpf", cpf)
+      .eq("id", employId)
       .maybeSingle();
 
+    if (empregadoError) {
+      return { error: "Erro ao buscar empregado." };
+    }
+
     if (empregadoData) {
-      //  É um empregado: buscar os próprios registros
-      // console.log("cheguei")
+      // É um empregado: buscar os próprios registros
       const registros = await getWorklogs(empregadoData.id, inicio, fim);
       return {
         data: [
@@ -28,15 +31,15 @@ const getRecordsModel = async ({ cpf, inicio, fim }) => {
       };
     }
 
-    // 2. Se não for empregado, verificar se é empregador
+    // 2. Caso não seja empregado, verificar se é um empregador
     const { data: empregadorData, error: empregadorError } = await supabase
       .from("employers")
       .select("id")
-      .eq("cpf", cpf)
+      .eq("id", employId)
       .maybeSingle();
 
     if (!empregadorData || empregadorError) {
-      return { error: "CPF não corresponde a um empregado nem a um empregador." };
+      return { error: "ID não corresponde a um empregado nem a um empregador." };
     }
 
     const id_employer = empregadorData.id;
@@ -65,16 +68,8 @@ const getRecordsModel = async ({ cpf, inicio, fim }) => {
     return { data: resultados };
   } catch (err) {
     console.error("Erro interno no getRecordsModel:", err);
-    console.error("Tipo do erro:", typeof err);              // geralmente 'object'
-    console.error("Instância:", err instanceof Error);       // geralmente true
-    console.error("Mensagem:", err.message);                 // se for Error
-    console.error("Stack:", err.stack);                      // rastreamento
-    console.error("Objeto completo:", JSON.stringify(err));  // para erros customizados
     return { error: "Erro interno ao processar registros." };
   }
 };
-
-
-
 
 export default getRecordsModel;

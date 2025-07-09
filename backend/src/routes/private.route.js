@@ -80,7 +80,6 @@ privateRoute.get("/employee/:id", getOneEmployeeController);
 privateRoute.post("/employee", validateUser, postEmployeeController);
 privateRoute.put("/employee/:id", validateUser, putEmployeeController);
 privateRoute.delete("/employee/:id", validateDateTwoYearsEmployee, deleteEmployeeController);
-
 privateRoute.get("/employee-contracts", getEmployeeAndContractsController);
 
 // ================= EMPLOY =================
