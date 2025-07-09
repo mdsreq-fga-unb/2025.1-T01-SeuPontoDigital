@@ -29,6 +29,7 @@ import getContractsController from "../controllers/Contracts/getContractsControl
 import getOneContractController from "../controllers/Contracts/getOneContractController.js";
 import getFullContractDataController from "../controllers/Contracts/getFullContractDataController.js";
 import postContractController from "../controllers/Contracts/postContractController.js";
+import postCompleteContractController from "../controllers/Contracts/postCompleteContractController.js";
 import putContractController from "../controllers/Contracts/putContractController.js";
 import deleteContractController from "../controllers/Contracts/deleteContractController.js";
 import postWorkAddressController from "../controllers/WorkAddress/postWorkAddressController.js";
@@ -73,6 +74,7 @@ privateRoute.get("/contract/:id/full", getFullContractDataController);
 // privateRoute.put("/contract/:id", validateUser, validateContract, putContractController); //TEM QUE CONSERTAR
 // privateRoute.delete("/contract/:id", verifyDateContract, deleteContractController);
 privateRoute.post("/contract", postContractController);
+privateRoute.post("/contract/complete", postCompleteContractController);
 privateRoute.put("/contract/:id", putContractController);
 privateRoute.delete("/contract/:id", validateDateTwoYearsContract, deleteContractController);
 

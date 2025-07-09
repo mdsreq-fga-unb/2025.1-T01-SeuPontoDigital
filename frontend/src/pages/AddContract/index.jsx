@@ -1,26 +1,14 @@
 import "../pagesStyle.css";
 import { useState } from "react";
 import Sidebar from "../../components/Sidebar";
-import usePostContract from "../../hooks/usePostContract.js";
-import usePostEmployee from "../../hooks/usePostEmployee.js";
-import usePostEmploy from "../../hooks/usePostEmploy.js";
-import usePostSignContract from "../../hooks/usePostSignContract.js";
-import usePostWorkSchedule from "../../hooks/usePostWorkSchedule.js";
-import usePostWorkBreak from "../../hooks/usePostWorkBreak.js";
-import usePostAddress from "../../hooks/usePostAddress.js";
+import usePostCompleteContract from "../../hooks/usePostCompleteContract.js";
 import useFetchEmployer from "../../hooks/useFetchEmployer.js";
 import ContractForm from "../../components/ContractForm/index.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 import Notification from "../../components/Notification";
 
 const AddContract = () => {
-    const postContract = usePostContract();
-    const postEmployee = usePostEmployee();
-    const postEmploy = usePostEmploy();
-    const postSignContract = usePostSignContract();
-    const postWorkSchedule = usePostWorkSchedule();
-    const postWorkBreak = usePostWorkBreak();
-    const postAddress = usePostAddress();
+    const postCompleteContract = usePostCompleteContract();
     const { fetchOneEmployer } = useFetchEmployer();
     const navigate = useNavigate();
     const {id} = useParams();
@@ -130,46 +118,24 @@ const AddContract = () => {
         }
 
         try {
-            // 1. Primeiro cria o funcionário
+            // Preparar dados do funcionário
             const employeeData = {
                 name: contract.name,
                 cpf: contract.cpf.replace(/\D/g, ''), // Remove formatação
                 phone: contract.phone
             };
 
-            const employeeId = await postEmployee(employeeData);
-            if (!employeeId) {
-                Notification.error("Erro ao criar funcionário!");
-                return;
-            }
-
-            // 2. Criar relacionamento empregador-funcionário
-            const employSuccess = await postEmploy(id, employeeId);
-            if (!employSuccess) {
-                Notification.error("Erro ao relacionar funcionário ao empregador!");
-                return;
-            }
-
-            // 3. Preparar dados do contrato para o modelo de contratos
+            // Preparar dados do contrato
             const contractData = {
-                function: contract.job_function || null,
-                salary: parseFloat(contract.salary) || 0,
+                function: contract.job_function,
+                salary: parseFloat(contract.salary),
                 start_date: new Date().toISOString().split('T')[0], // Data atual
-                end_date: contract.end_date || null,
+                end_date: null,
                 access_app: contract.app_access === "true" || contract.app_access === true,
                 status: true // Sempre ativo ao criar
             };
 
-            console.log("Contract data being sent:", contractData);
-
-            // 4. Cria o contrato e obtém o ID
-            const contractId = await postContract(contractData);
-            if (!contractId) {
-                Notification.error("Erro ao criar contrato!");
-                return;
-            }
-
-            // 5. Criar endereço de trabalho
+            // Preparar dados do endereço
             const addressData = {
                 cep: contract.workplace_cep,
                 street: contract.workplace_street,
@@ -180,41 +146,33 @@ const AddContract = () => {
                 complement: contract.workplace_complement || null
             };
 
-            const addressId = await postAddress(addressData);
-            if (!addressId) {
-                Notification.error("Erro ao criar endereço de trabalho!");
-                return;
-            }
-
-            // 6. Criar relacionamento entre empregador, funcionário e contrato
-            console.log("Sign contract data:", { employerId: id, employeeId, contractId, addressId });
-            const signContractSuccess = await postSignContract(id, employeeId, contractId, addressId);
-            if (!signContractSuccess) {
-                Notification.error("Erro ao assinar contrato!");
-                return;
-            }
-
-            // 7. Cria a jornada de trabalho usando o ID do contrato
+            // Preparar dados da jornada de trabalho
             const workScheduleData = extractWorkScheduleData(contract);
-            const workScheduleSuccess = await postWorkSchedule(workScheduleData, contractId);
 
-            if (!workScheduleSuccess) {
-                Notification.error("Erro ao criar jornada de trabalho!");
-                return;
-            }
-
-            // 8. Cria os dados de pausa usando o ID do contrato
+            // Preparar dados do intervalo
             const workBreakData = extractWorkBreakData(contract);
-            const workBreakSuccess = await postWorkBreak(workBreakData, contractId);
 
-            if (!workBreakSuccess) {
-                Notification.error("Erro ao criar dados de pausa!");
-                return;
+            // Preparar payload completo
+            const completeContractData = {
+                employee: employeeData,
+                contract: contractData,
+                address: addressData,
+                workSchedule: workScheduleData,
+                workBreak: workBreakData,
+                employerId: id
+            };
+
+            console.log("Complete contract data being sent:", completeContractData);
+
+            // Enviar tudo de uma vez para o endpoint unificado
+            const result = await postCompleteContract(completeContractData);
+            
+            if (result) {
+                Notification.success("Contrato cadastrado com sucesso!");
+                setTimeout(() => navigate("/contratos"), 1500);
+            } else {
+                Notification.error("Erro ao criar contrato!");
             }
-
-            // 9. Se tudo deu certo, exibe sucesso e navega
-            Notification.success("Contrato cadastrado com sucesso!");
-            setTimeout(() => navigate("/contratos"), 1500);
 
         } catch (error) {
             console.error("Erro durante o processo de criação do contrato:", error);
