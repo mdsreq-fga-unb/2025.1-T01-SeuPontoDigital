@@ -2,31 +2,40 @@ import supabase from "../../config/supabase.js";
 import getOneAddressModel from "./getOneAddressModel.js";
 
 const postAddressModel = async (address) => {
-
     try{
-        const addressID = await getOneAddressModel(address)
-        console.log(addressID)
+        console.log("Creating address with data:", address);
+        
+        const addressID = await getOneAddressModel(address);
+        console.log("Existing address ID:", addressID);
+        
         if (!addressID){
+            console.log("Address not found, creating new one");
             const { data, error } = await supabase.from("address").insert({
-            cep: address.cep,
-            street: address.street,
-            uf: address.uf,
-            neighborhood: address.neighborhood,
-            city: address.city,
-            house_number: address.house_number,
-            complement: address.complement || null
+                cep: address.cep,
+                street: address.street,
+                uf: address.uf,
+                neighborhood: address.neighborhood,
+                city: address.city,
+                house_number: address.house_number,
+                complement: address.complement || null
             }).select("id");
 
-            if (error || !data || data.length === 0) return;
+            if (error || !data || data.length === 0) {
+                console.error("Error creating address:", error);
+                return null;
+            }
 
+            console.log("New address created with ID:", data[0].id);
             return data[0].id;
         } 
+        
+        console.log("Using existing address ID:", addressID);
         return addressID;
     }
     catch (err){
-        console.log("error in postAddressModel")
+        console.error("Exception in postAddressModel:", err);
+        return null;
     }
-    
 }
 
 export default postAddressModel;

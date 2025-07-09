@@ -1,6 +1,7 @@
 import express from "express";
 import validateTokenJWT from "../middlewares/validateTokenJWT.js";
 import validateUser from "../middlewares/validateUser.js";
+import validateEmployer from "../middlewares/validateEmployer.js";
 import validateDataContract from "../middlewares/validateDataContract.js"
 import {validateDateTwoYearsEmployee, validateDateTwoYearsEmployer, validateDateTwoYearsContract} from "../middlewares/validateDateTwoYears.js";
 import postAddressController from "../controllers/Address/postAddressController.js";
@@ -82,8 +83,8 @@ privateRoute.delete("/contract/:id", validateDateTwoYearsContract, deleteContrac
 // ================== EMPLOYERS ==================
 privateRoute.get("/employers", getEmployersController);
 privateRoute.get("/employer/:id", getOneEmployerController);
-privateRoute.post("/employer", validateUser, postEmployerController);
-privateRoute.put("/employer/:id", validateUser, putEmployerController);
+privateRoute.post("/employer", validateEmployer, postEmployerController);
+privateRoute.put("/employer/:id", validateEmployer, putEmployerController);
 privateRoute.delete("/employer/:id", validateDateTwoYearsEmployer, deleteEmployerController);
 
 

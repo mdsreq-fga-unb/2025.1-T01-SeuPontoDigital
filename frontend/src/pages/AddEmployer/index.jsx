@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar";
 import EmployerForm from "../../components/EmployerForm/index.jsx";
 import usePostEmployer from "../../hooks/usePostEmployer.js";
 import usePostAddress from "../../hooks/usePostAddress.js";
+import Notification from "../../components/Notification";
 
 const AddEmployer = () => {
     const postEmployer = usePostEmployer();
@@ -29,8 +30,33 @@ const AddEmployer = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const id_address = await postAddress(employer);
-        await postEmployer({ ...employer, id_address });
+        
+        console.log("Submitting employer form with data:", employer);
+        
+        // Validação básica
+        if (!employer.name || !employer.cpf || !employer.email || !employer.phone) {
+            Notification.error("Preencha todos os campos obrigatórios!");
+            return;
+        }
+        
+        if (!employer.cep || !employer.street || !employer.house_number || !employer.city || !employer.uf || !employer.neighborhood) {
+            Notification.error("Preencha todos os campos de endereço obrigatórios!");
+            return;
+        }
+        
+        try {
+            const id_address = await postAddress(employer);
+            
+            if (!id_address) {
+                Notification.error("Erro ao criar endereço!");
+                return;
+            }
+            
+            await postEmployer({ ...employer, id_address });
+        } catch (error) {
+            console.error("Error in form submission:", error);
+            Notification.error("Erro inesperado ao criar empregador!");
+        }
     };
 
     return (
