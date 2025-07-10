@@ -1,13 +1,12 @@
 import supabase from "../../config/supabase.js";
 import calcRegistroInfo from "./CalcRegisterInfo.js";
 
-export default async function getWorklogs(id_employee, inicio, fim, contractId) {
+export default async function getEmployerWorklogs(id_employee, inicio, fim, id_contract_input) {
   console.log("Começando getWorklogs");
-  console.log("selectedContract:", contractId)
 
   try {
     // 1. Buscar todos os registros de ponto com o contrato vinculado
-    let query = supabase
+    const { data: registros, error } = await supabase
       .from("register_work_logs")
       .select(`
         id_work_log,
@@ -20,13 +19,8 @@ export default async function getWorklogs(id_employee, inicio, fim, contractId) 
           break_end
         )
       `)
-      .eq("id_employee", id_employee);
-
-    if (contractId) {
-      query = query.eq("id_contract", contractId);
-    }
-
-const { data: registros, error } = await query;
+      .eq("id_employee", id_employee)
+      .eq("id_contract", id_contract_input);
 
     if (error || !Array.isArray(registros)) {
       console.error("Erro ao buscar registros:", error);
@@ -43,8 +37,6 @@ const { data: registros, error } = await query;
 
     const agrupados = {};
 
-    const detalhesEmpregados = {}; // cache para evitar chamadas repetidas
-
     for (const r of filtrados) {
       try {
         const { id_contract, work_logs, id_work_log } = r;
@@ -52,7 +44,7 @@ const { data: registros, error } = await query;
 
         const { date, clock_in, break_start, break_end, clock_out } = work_logs;
 
-        // console.log("data:", date);
+        console.log("data:", date);
 
         // 2. Buscar CPF do empregador com base no contrato deste work_log
         const { data: contratoData, error: contratoError } = await supabase
@@ -64,6 +56,8 @@ const { data: registros, error } = await query;
         if (contratoError) {
           console.warn(`Erro ao buscar contrato ${id_contract}:`, contratoError);
         }
+
+        const cpf_empregador = contratoData?.employers?.cpf ?? "desconhecido";
 
         const diaSemana = new Date(date).toLocaleDateString("pt-BR", {
           weekday: "long"
@@ -102,7 +96,7 @@ const { data: registros, error } = await query;
 
     // Pós-processamento: soma de horas extras 50% e 100%
     for (const mes in agrupados) {
-        // console.log("mes:", mes)
+        console.log("mes:", mes)
         let extras50 = 0;
         let extras100 = 0;
         const registrosDoMes = agrupados[mes];

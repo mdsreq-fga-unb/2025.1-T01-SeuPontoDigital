@@ -110,8 +110,7 @@ export default function Employer() {
         }
         
         // Agora buscar os empregados deste empregador usando o ID obtido
-        const response = await api.get('/worklog', {
-          params: { employId: employerId },
+        const response = await api.get('/worklogEmployer', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -277,7 +276,7 @@ export default function Employer() {
         {/* Lista de funcionários */}
         <View style={styles.employeesCard}>
           <View style={styles.employeesCardHeader}>
-            <Text style={styles.employeesCardTitle}>Meus Funcionários</Text>
+            <Text style={styles.employeesCardTitle}>Funcionários Registrados</Text>
           </View>
           
           {loading ? (

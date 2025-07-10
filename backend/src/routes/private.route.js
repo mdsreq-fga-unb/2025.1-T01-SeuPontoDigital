@@ -38,6 +38,8 @@ import postEmployController from "../controllers/Employ/postEmployController.js"
 import getAllSignContractController from "../controllers/SignContract/getAllSignContractController.js";
 import getOneSignContractController from "../controllers/SignContract/getOneSignContractController.js";
 import postSignContractController from "../controllers/SignContract/postSignContractController.js";
+import getEmployerRecordsController from "../controllers/Worklog/getEmployerRecordsController.js";
+import authVerifyToken from "../middlewares/authVerifyToken.js";
 
 const privateRoute = express.Router();
 
@@ -95,8 +97,10 @@ privateRoute.post("/sign-contract", postSignContractController);
 
 // ================== WORKLOGS ==================
 privateRoute.get("/worklogToday/:id", getTodayRecordsController);
-privateRoute.get("/worklog", getRecordsController); //US17 nova, apague este comentário em produção
+privateRoute.get("/worklog", authVerifyToken, getRecordsController); //US17 nova, apague este comentário em produção
+privateRoute.get("/worklogEmployer", authVerifyToken, getEmployerRecordsController);
 privateRoute.post("/worklog", postWorklogController);
 privateRoute.put("/worklog", putWorklogController);
+
 
 export default privateRoute;

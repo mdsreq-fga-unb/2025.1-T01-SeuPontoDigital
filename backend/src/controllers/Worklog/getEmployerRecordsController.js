@@ -1,13 +1,11 @@
-import getRecordsModel from "../../models/Worklogs/getRecordsModel.js";
 
-const getRecordsController = async (req, res) => {
+import getEmployerRecordsModel from "../../models/Worklogs/getEmployerRecordsModel.js";
+
+const getEmployerRecordsController = async (req, res) => {
   // data de início e fim são opcionais
   // recebendo o id do empregado via query
-
   const employId = req.id;
-  const { inicio, fim, contractId } = req.query;
-  // tenho que pegar selectedContract
-  console.log("selectedContractttt", contractId)
+  const { inicio, fim } = req.query;
 
 
   if (!employId) {
@@ -15,7 +13,7 @@ const getRecordsController = async (req, res) => {
   }
 
   try {
-    const { data, error } = await getRecordsModel({ employId, inicio, fim, contractId });
+    const { data, error } = await getEmployerRecordsModel({ employId, inicio, fim });
 
     if (error) {
       return res.status(500).json({ message: error });
@@ -29,4 +27,4 @@ const getRecordsController = async (req, res) => {
   }
 };
 
-export default getRecordsController;
+export default getEmployerRecordsController;

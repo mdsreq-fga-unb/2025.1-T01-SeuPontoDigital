@@ -28,7 +28,7 @@ export default async function calcRegistroInfo(id_contract, date, id_log) {
     intervaloMinutos = flex?.duration_minutes ?? 0;
   }
 
-  console.log("intervalo de trabalho", intervaloMinutos)
+  // console.log("intervalo de trabalho", intervaloMinutos)
 
   // sobre pegar carga horária
   const { data: schedule } = await supabase
@@ -58,7 +58,7 @@ const dias = [
   const end = new Date(`${date}T${schedule[endField]}`);
   const cargaHorariaDia = ((end - start) / (1000 * 60 * 60)) || 0;
 
-  console.log("carga_horaria do dia", cargaHorariaDia)
+  // console.log("carga_horaria do dia", cargaHorariaDia)
 
   // sobre buscar 
   const { data: log } = await supabase
@@ -74,11 +74,11 @@ const dias = [
 
   // sobre calcular horas trabalhadas
   const horasTrabalhadas = (saida - entrada - (voltaAlmoco - idaAlmoco)) / (1000 * 60 * 60);
-  console.log("horastrabalhadas", horasTrabalhadas)
+  // console.log("horastrabalhadas", horasTrabalhadas)
 
   // sobre calcular as horas extras
   const horaExtra = horasTrabalhadas - cargaHorariaDia;
-  console.log("horaExtra", horaExtra)
+  // console.log("horaExtra", horaExtra)
 
   console.log("Terminando calcRegistroInfo")
   return {

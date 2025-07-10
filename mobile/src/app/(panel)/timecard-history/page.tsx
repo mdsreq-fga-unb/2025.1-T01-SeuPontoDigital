@@ -26,8 +26,10 @@ export default function TimecardHistory() {
   const params = useLocalSearchParams();
   const employeeId = params.employeeId;
   const employeeName = params.employeeName;
+  const selectedContract = params.contractId;
   const userType = params.userType || 'employee'; // 'employer' ou 'employee'
 
+  console.log("contratoal", params.selectedContract)
   // Função auxiliar para verificar se é uma visualização de empregador
   const isEmployerView = () => userType === 'employer';
 
@@ -334,19 +336,34 @@ export default function TimecardHistory() {
         
         params.inicio = startDate.toISOString().split('T')[0];
         params.fim = endDate.toISOString().split('T')[0];
+
+        console.log("Adicionando contrato", selectedContract)
+        if(selectedContract){
+          params.contractId = selectedContract as string;
+        }
         
         console.log("Enviando parâmetros:", params);
         
-        const response = await api.get('/worklog', { 
-          params,
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+        let response;
+        if(userType === "employee"){
+          response = await api.get('/worklog', { 
+            params,
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        } else if (userType === "employer"){
+          response = await api.get('/worklogEmployer', { 
+            params,
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        }
         
         console.log("Resposta recebida da API");
         
-        if (response.data && Array.isArray(response.data)) {
+        if (response?.data && Array.isArray(response.data)) {
           // Exibir a estrutura da resposta para debugging
           console.log("Estrutura da resposta:", 
             JSON.stringify(response.data.map(item => ({
@@ -371,7 +388,7 @@ export default function TimecardHistory() {
             setFullHistory([]);
           }
         } else {
-          console.log("Formato de resposta inválido:", response.data);
+          console.log("Formato de resposta inválido:", response?.data);
           Alert.alert("Aviso", "Os dados retornados estão em um formato inesperado.");
           setFullHistory([]);
         }

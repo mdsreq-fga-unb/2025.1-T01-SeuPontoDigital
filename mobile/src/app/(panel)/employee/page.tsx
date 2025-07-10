@@ -163,6 +163,7 @@ export default function Employee() {
           const firstContract = formattedContracts[0];
           setSelectedContract(formattedContracts[0]);
           setCurrentContractId(formattedContracts[0].id);
+          // console.log("contrato atual", currentContractId);
           await fetchTodayRecords(firstContract.id);
           setContractsModalVisible(true);
 
@@ -178,7 +179,7 @@ export default function Employee() {
             "Não encontramos contratos de trabalho ativos para você. Entre em contato com o suporte se isso for um erro."
           );
         }
-
+        // console.log("contrato atual", currentContractId);
       } catch (error) {
         console.error('Erro ao buscar dados do empregado:', error);
         Alert.alert('Erro de Conexão', 'Não foi possível carregar seus dados. Verifique sua conexão e tente novamente.');
@@ -1027,6 +1028,8 @@ export default function Employee() {
                   params: { 
                     employeeId: employeeInfo?.id || '',
                     employeeName: employeeInfo?.name || '',
+                    // contractId: currentContractId || '',
+                    contractId: currentContractId || '',
                     userType: 'employee' // Especifica que é visão de empregado
                   }
                 });
