@@ -304,7 +304,7 @@ const UpdateContract = () => {
             <Sidebar />
             <section className="form-contract-add">
                 <form className="form-users">
-                    <ContractForm contract={contract} handleInputChange={handleInputUserChange} id={contract.employer_id}/>
+                    <ContractForm contract={contract} handleInputChange={handleInputUserChange} id={contract.employer_id} isEditing={true}/>
                 </form>
                 <button onClick={() => setModalOpen(true)} className="button-add-employer-confirm">Atualizar Contrato</button>
             </section>

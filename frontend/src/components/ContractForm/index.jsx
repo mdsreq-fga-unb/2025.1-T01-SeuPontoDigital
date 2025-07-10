@@ -1,6 +1,7 @@
 import "./ContractForm.css";
 import TextInput from "../TextInput";
 import SelectInput from "../SelectInput";
+import ToggleSwitch from "../ToggleSwitch";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import DaysOfWeekSelector from "../DaysOfWeekSelector";
@@ -218,6 +219,20 @@ const ContractForm = (props) => {
                     options={app_access}
                     className="div-contract-select"
                 />
+                {props.isEditing && (
+                    <div className="contract-status-container">
+                        <label className="contract-status-label">Status do Contrato</label>
+                        <div className="contract-status-toggle">
+                            <ToggleSwitch 
+                                isOn={props.contract.contract_status === true || props.contract.contract_status === "true"}
+                                onToggle={() => props.handleInputChange({ 
+                                    name: "contract_status", 
+                                    value: !(props.contract.contract_status === true || props.contract.contract_status === "true") 
+                                })}
+                            />
+                        </div>
+                    </div>
+                )}
                 <SelectInput
                     label="Local de trabalho na casa do Empregador"
                     name="workplace_employer"

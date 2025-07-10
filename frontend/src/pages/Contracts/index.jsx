@@ -3,20 +3,25 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import SearchInput from "../../components/SearchInput";
 import ConfirmModal from "../../components/ConfirmModal";
+import StatusConfirmModal from "../../components/StatusConfirmModal";
 import Table from "../../components/Table";
 import filterDataContract from "../../services/filterDataContract";
 import useFetchContract from "../../hooks/useFetchContract";
 import useDeleteContract from "../../hooks/useDeleteContract";
+import useToggleContractStatus from "../../hooks/useToggleContractStatus";
 import { useNavigate } from "react-router-dom";
 
 const Contracts = () => {
     const [data, setData] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
+    const [statusModalOpen, setStatusModalOpen] = useState(false);
     const [contractToDelete, setContractToDelete] = useState(null);
+    const [contractToToggle, setContractToToggle] = useState(null);
     const filteredData = filterDataContract(data, searchTerm);
     const { fetchContract } = useFetchContract();
     const deleteContract = useDeleteContract();
+    const toggleContractStatus = useToggleContractStatus();
     const navigate = useNavigate();
 
     const loadContracts = async () => {
@@ -35,6 +40,7 @@ const Contracts = () => {
             employeeName: item.employee?.name ?? "",
             function: item.contract?.function ?? "",
             status: item.contract?.status ? "Ativo" : "Inativo",
+            statusValue: item.contract?.status ?? false, // Valor booleano para o toggle
             salary: item.contract?.salary ?? "-",
             start_date: item.contract?.start_date ?? "-",
             access_app: item.contract?.access_app ? "Ativo" : "Inativo"
@@ -76,6 +82,43 @@ const Contracts = () => {
         navigate(`/contratos/editar/${id}`);
     }
 
+    const handleToggleStatus = (contract) => {
+        setContractToToggle(contract);
+        setStatusModalOpen(true);
+    };
+
+    const handleCancelToggle = () => {
+        setStatusModalOpen(false);
+        setContractToToggle(null);
+    };
+
+    const handleConfirmToggle = async (password) => {
+        if (!contractToToggle) return;
+        
+        const result = await toggleContractStatus(
+            contractToToggle.id, 
+            contractToToggle.statusValue, 
+            password
+        );
+        
+        if (result.success) {
+            // Atualizar o estado local para refletir a mudança imediatamente
+            setData(prevData => 
+                prevData.map(item => 
+                    item.id === contractToToggle.id 
+                        ? { 
+                            ...item, 
+                            statusValue: result.newStatus, 
+                            status: result.newStatus ? "Ativo" : "Inativo" 
+                          }
+                        : item
+                )
+            );
+            setStatusModalOpen(false);
+            setContractToToggle(null);
+        }
+    };
+
     return (
         <div className="container-dashboard">
             <Sidebar />
@@ -93,6 +136,7 @@ const Contracts = () => {
                     data={filteredData}
                     onDelete={handleDeleteRequest}
                     onEdit={handleEditRequest}
+                    onToggleStatus={handleToggleStatus}
                 />
                 <ConfirmModal
                     isOpen={modalOpen}
@@ -100,6 +144,13 @@ const Contracts = () => {
                     onCancel={handleCancelDelete}
                     message="Confirme sua senha para excluir o contrato de"
                     nameEmployer={contractToDelete?.employeeName}
+                />
+                <StatusConfirmModal
+                    isOpen={statusModalOpen}
+                    onConfirm={handleConfirmToggle}
+                    onCancel={handleCancelToggle}
+                    contractName={contractToToggle?.employeeName}
+                    currentStatus={contractToToggle?.statusValue}
                 />
             </div>
         </div>

@@ -2,6 +2,7 @@ import "./Table.css";
 import { FaTrashCan, FaPenToSquare, FaUserPlus } from "react-icons/fa6";
 import formatField from "../../services/formatField";
 import { useLocation } from "react-router-dom";
+import ToggleSwitch from "../ToggleSwitch";
 
 const Table = (props) => {
     const location = useLocation();
@@ -26,6 +27,11 @@ const Table = (props) => {
                                         <button className="name-button" onClick={() => props.onNameClick(item)}>
                                             {formatField(field, (item[field] ?? "").toUpperCase())}
                                         </button>
+                                    ) : field === "status" && props.onToggleStatus ? (
+                                        <ToggleSwitch 
+                                            isOn={item.statusValue} 
+                                            onToggle={() => props.onToggleStatus(item)} 
+                                        />
                                     ) : ( formatField(field, item[field]) )}
                                 </td>
                             ))}

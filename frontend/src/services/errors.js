@@ -17,7 +17,10 @@ const handleError = (data) => {
         return Notification.error("Não é possível excluir empregadores criados há menos de 2 anos!")
 
     if (data === "contract created less than 2 years ago")
-        return Notification.error("Não é possível excluir contratos criados há menos de 2 anos!")
+        return Notification.error("Não é possível excluir contratos criados há menos de 2 anos! Aguarde até completar 2 anos desde a data de admissão.")
+
+    if (data === "contract finished less than 2 years ago")
+        return Notification.error("Não é possível excluir contratos finalizados há menos de 2 anos! Aguarde até completar 2 anos desde a data de finalização.")
 
     if (Array.isArray(data) && data.some((error) => error.includes("name")))
         return Notification.error("O nome digitado não é válido. Tente novamente!")
