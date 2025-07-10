@@ -1,15 +1,18 @@
-.div-contract-select{
+.div-contract-select,
+.div-time-select {
     display: flex;
     flex-direction: column;
 }
 
-.div-contract-select label{
+.div-contract-select label,
+.div-time-select label {
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--text-color);
 }
 
-.div-contract-select select{
+.div-contract-select select,
+.div-time-select select {
     padding: 1.4rem;
     border-radius: .5rem;
     border: .1rem solid var(--dark-color);
@@ -18,6 +21,11 @@
     font-size: 1.4rem;
 }
 
-.div-contract-select select:hover, .div-contract-select option:hover{
+.div-contract-select select:hover, .div-contract-select option:hover
+.div-time-select select:hover, .div-time-select option:hover {
     cursor: pointer;
+}
+
+.div-time-select select {
+    width: 15rem;
 }

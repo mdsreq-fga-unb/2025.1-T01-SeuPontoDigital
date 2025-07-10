@@ -31,7 +31,7 @@ const Router = () => {
 
         <Route path="/contratos/editar/:id" element={<PrivateRoute> <UpdateContract /> </PrivateRoute>} />
 
-        <Route path="/registros" element={<PrivateRoute> <Timesheets /> </PrivateRoute>} /> 
+        <Route path="/relatorios" element={<PrivateRoute> <Timesheets /> </PrivateRoute>} /> 
 
         <Route path="*" element={<Error404 />} />
 

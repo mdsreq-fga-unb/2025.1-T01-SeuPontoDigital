@@ -12,7 +12,7 @@ const Sidebar = () => {
         { label: "Dashboard", href: "/dashboard", icon: FaChartLine },
         { label: "Empregadores", href: "/empregadores", icon: FaUserTie },
         { label: "Contratos de Trabalho", href: "/contratos", icon: FaFileContract },
-        { label: "Registros de Ponto", href: "/registros", icon: FaBusinessTime },
+        { label: "Relatórios de Ponto", href: "/relatorios", icon: FaBusinessTime },
     ];
 
     const logoutItem = { label: "Logout", icon: FaSignOutAlt};
