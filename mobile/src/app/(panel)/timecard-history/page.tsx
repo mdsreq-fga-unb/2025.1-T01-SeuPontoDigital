@@ -26,9 +26,10 @@ export default function TimecardHistory() {
   const params = useLocalSearchParams();
   const employeeId = params.employeeId;
   const employeeName = params.employeeName;
-  const contractId = params.contractId; // Adicionar esta linha para extrair o contractId
+  const selectedContract = params.contractId;
   const userType = params.userType || 'employee'; // 'employer' ou 'employee'
 
+  console.log("contratoal", params.selectedContract)
   // Função auxiliar para verificar se é uma visualização de empregador
   const isEmployerView = () => userType === 'employer';
 
@@ -300,18 +301,10 @@ export default function TimecardHistory() {
 
   // Atualize o useEffect para buscar os dados do histórico do backend
   useEffect(() => {
-
-    console.log("Parâmetros recebidos na tela de histórico:", {
-      employeeId: employeeId, 
-      employeeName: employeeName,
-      contractId: contractId,
-      contractIdType: typeof contractId
-    });
-    
     const fetchRecords = async () => {
       try {
         setLoading(true);
-        
+  
         // Obter token de autenticação
         const token = await AsyncStorage.getItem('userToken');
         
@@ -322,47 +315,55 @@ export default function TimecardHistory() {
           return;
         }
         
-        // Parâmetros de consulta para filtrar por empregado e contrato
-        const queryParams: Record<string, string> = {};
-        
-        // Obter ID do empregado
+        // Parâmetros de consulta para filtrar por empregado
+        const params: Record<string, string> = {};
         if (employeeId) {
-          queryParams.employId = Array.isArray(employeeId) ? employeeId[0] : String(employeeId);
+          params.employId = Array.isArray(employeeId) ? employeeId[0] : String(employeeId);
+          console.log("Usando employeeId:", params.employId);
         } else {
           const userId = await AsyncStorage.getItem('userId');
           if (userId) {
-            queryParams.employId = userId;
+            params.employId = userId;
+            console.log("Usando userId do AsyncStorage:", userId);
           } else {
             throw new Error("ID do empregado não encontrado");
           }
-        }
-        
-        // Usar o contractId diretamente dos parâmetros da rota
-        if (contractId) {
-          // Garantir que é uma string, mesmo que venha como array
-          queryParams.contractId = Array.isArray(contractId) ? contractId[0] : String(contractId);
-          console.log("Usando contractId dos parâmetros:", queryParams.contractId);
         }
         
         // Adicionar início e fim do mês como parâmetros
         const startDate = new Date(selectedYear, selectedMonth, 1);
         const endDate = new Date(selectedYear, selectedMonth + 1, 0);
         
-        queryParams.inicio = startDate.toISOString().split('T')[0];
-        queryParams.fim = endDate.toISOString().split('T')[0];
+        params.inicio = startDate.toISOString().split('T')[0];
+        params.fim = endDate.toISOString().split('T')[0];
+
+        console.log("Adicionando contrato", selectedContract)
+        if(selectedContract){
+          params.contractId = selectedContract as string;
+        }
         
-        console.log("Enviando parâmetros:", queryParams);
+        console.log("Enviando parâmetros:", params);
         
-        const response = await api.get('/worklog', { 
-          params: queryParams,
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+        let response;
+        if(userType === "employee"){
+          response = await api.get('/worklog', { 
+            params,
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        } else if (userType === "employer"){
+          response = await api.get('/worklogEmployer', { 
+            params,
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        }
         
         console.log("Resposta recebida da API");
         
-        if (response.data && Array.isArray(response.data)) {
+        if (response?.data && Array.isArray(response.data)) {
           // Exibir a estrutura da resposta para debugging
           console.log("Estrutura da resposta:", 
             JSON.stringify(response.data.map(item => ({
@@ -374,7 +375,7 @@ export default function TimecardHistory() {
           
           // Encontra os dados do empregado atual
           const employeeData = employeeId 
-            ? response.data.find((emp: EmployeeData) => emp.empregado?.id === queryParams.employId) 
+            ? response.data.find((emp: EmployeeData) => emp.empregado?.id === params.employId) 
             : response.data[0];
               
           if (employeeData) {
@@ -387,7 +388,7 @@ export default function TimecardHistory() {
             setFullHistory([]);
           }
         } else {
-          console.log("Formato de resposta inválido:", response.data);
+          console.log("Formato de resposta inválido:", response?.data);
           Alert.alert("Aviso", "Os dados retornados estão em um formato inesperado.");
           setFullHistory([]);
         }
@@ -429,7 +430,7 @@ export default function TimecardHistory() {
     };
     
     fetchRecords();
-  }, [employeeId, selectedMonth, selectedYear, contractId]); // Adicionar contractId como dependência
+  }, [employeeId, selectedMonth, selectedYear]);
   
   // Filtrar histórico por mês e ano selecionados
   const filteredHistory = fullHistory.filter(item => {
