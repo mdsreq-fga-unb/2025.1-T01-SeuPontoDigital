@@ -2,7 +2,7 @@ import supabase from "../../config/supabase.js";
 
 const putBreakModel = async (updateFieldsWorkBreak, idContract) => {
     try{
-        console.log("putBreakModel - Fields received:", updateFieldsWorkBreak);
+        console.log("putBreakModel - Fields received:", JSON.stringify(updateFieldsWorkBreak, null, 2));
         
         // Verificar se é uma pausa fixa ou flexível pelo tipo
         if (updateFieldsWorkBreak.type === 'fixed') {
@@ -12,16 +12,48 @@ const putBreakModel = async (updateFieldsWorkBreak, idContract) => {
                 break_end: updateFieldsWorkBreak.break_end
             };
             
-            console.log("Updating fixed_breaks with:", fixedFields);
+            console.log("Updating fixed_breaks with:", JSON.stringify(fixedFields, null, 2));
             
-            const {error: fixedError} = await supabase
+            // Verificar se já existe um registro fixed_breaks para este contrato
+            const {data: existingFixed} = await supabase
                 .from("fixed_breaks")
-                .update(fixedFields)
-                .eq("id_contract", idContract);
+                .select("id")
+                .eq("id_contract", idContract)
+                .single();
+            
+            let fixedError;
+            if (existingFixed) {
+                // Se existe, fazer update
+                const {error} = await supabase
+                    .from("fixed_breaks")
+                    .update(fixedFields)
+                    .eq("id_contract", idContract);
+                fixedError = error;
+            } else {
+                // Se não existe, fazer insert
+                const {error} = await supabase
+                    .from("fixed_breaks")
+                    .insert({
+                        id_contract: idContract,
+                        ...fixedFields
+                    });
+                fixedError = error;
+            }
 
             if (fixedError) {
-                console.error("Error updating fixed_breaks:", fixedError);
+                console.error("Error updating/inserting fixed_breaks:", fixedError);
                 return fixedError;
+            }
+            
+            // Limpar/deletar flex_breaks quando usar fixed
+            const {error: clearFlexError} = await supabase
+                .from("flex_breaks")
+                .delete()
+                .eq("id_contract", idContract);
+
+            if (clearFlexError) {
+                console.error("Error clearing flex_breaks:", clearFlexError);
+                // Não retorna erro, pois é uma limpeza auxiliar
             }
             
             return null; // Sucesso no fixed_breaks
@@ -33,16 +65,48 @@ const putBreakModel = async (updateFieldsWorkBreak, idContract) => {
                 duration_minutes: updateFieldsWorkBreak.duration_minutes
             };
             
-            console.log("Updating flex_breaks with:", flexFields);
+            console.log("Updating flex_breaks with:", JSON.stringify(flexFields, null, 2));
             
-            const {error: flexError} = await supabase
+            // Verificar se já existe um registro flex_breaks para este contrato
+            const {data: existingFlex} = await supabase
                 .from("flex_breaks")
-                .update(flexFields)
-                .eq("id_contract", idContract);
+                .select("id")
+                .eq("id_contract", idContract)
+                .single();
+            
+            let flexError;
+            if (existingFlex) {
+                // Se existe, fazer update
+                const {error} = await supabase
+                    .from("flex_breaks")
+                    .update(flexFields)
+                    .eq("id_contract", idContract);
+                flexError = error;
+            } else {
+                // Se não existe, fazer insert
+                const {error} = await supabase
+                    .from("flex_breaks")
+                    .insert({
+                        id_contract: idContract,
+                        ...flexFields
+                    });
+                flexError = error;
+            }
 
             if (flexError) {
-                console.error("Error updating flex_breaks:", flexError);
+                console.error("Error updating/inserting flex_breaks:", flexError);
                 return flexError;
+            }
+            
+            // Limpar/deletar fixed_breaks quando usar flex
+            const {error: clearFixedError} = await supabase
+                .from("fixed_breaks")
+                .delete()
+                .eq("id_contract", idContract);
+
+            if (clearFixedError) {
+                console.error("Error clearing fixed_breaks:", clearFixedError);
+                // Não retorna erro, pois é uma limpeza auxiliar
             }
             
             return null; // Sucesso no flex_breaks
@@ -56,16 +120,47 @@ const putBreakModel = async (updateFieldsWorkBreak, idContract) => {
                 break_end: updateFieldsWorkBreak.break_end
             };
             
-            console.log("Auto-detected fixed break, updating with:", fixedFields);
+            console.log("Auto-detected fixed break, updating with:", JSON.stringify(fixedFields, null, 2));
             
-            const {error: fixedError} = await supabase
+            // Verificar se já existe um registro fixed_breaks para este contrato
+            const {data: existingFixed} = await supabase
                 .from("fixed_breaks")
-                .update(fixedFields)
-                .eq("id_contract", idContract);
+                .select("id")
+                .eq("id_contract", idContract)
+                .single();
+            
+            let fixedError;
+            if (existingFixed) {
+                // Se existe, fazer update
+                const {error} = await supabase
+                    .from("fixed_breaks")
+                    .update(fixedFields)
+                    .eq("id_contract", idContract);
+                fixedError = error;
+            } else {
+                // Se não existe, fazer insert
+                const {error} = await supabase
+                    .from("fixed_breaks")
+                    .insert({
+                        id_contract: idContract,
+                        ...fixedFields
+                    });
+                fixedError = error;
+            }
 
             if (fixedError) {
-                console.error("Error updating fixed_breaks (auto-detected):", fixedError);
+                console.error("Error updating/inserting fixed_breaks (auto-detected):", fixedError);
                 return fixedError;
+            }
+            
+            // Limpar/deletar flex_breaks quando usar fixed (auto-detecção)
+            const {error: clearFlexError} = await supabase
+                .from("flex_breaks")
+                .delete()
+                .eq("id_contract", idContract);
+
+            if (clearFlexError) {
+                console.error("Error clearing flex_breaks (auto-detected):", clearFlexError);
             }
             
             return null;
@@ -77,16 +172,47 @@ const putBreakModel = async (updateFieldsWorkBreak, idContract) => {
                 duration_minutes: updateFieldsWorkBreak.duration_minutes
             };
             
-            console.log("Auto-detected flex break, updating with:", flexFields);
+            console.log("Auto-detected flex break, updating with:", JSON.stringify(flexFields, null, 2));
             
-            const {error: flexError} = await supabase
+            // Verificar se já existe um registro flex_breaks para este contrato
+            const {data: existingFlex} = await supabase
                 .from("flex_breaks")
-                .update(flexFields)
-                .eq("id_contract", idContract);
+                .select("id")
+                .eq("id_contract", idContract)
+                .single();
+            
+            let flexError;
+            if (existingFlex) {
+                // Se existe, fazer update
+                const {error} = await supabase
+                    .from("flex_breaks")
+                    .update(flexFields)
+                    .eq("id_contract", idContract);
+                flexError = error;
+            } else {
+                // Se não existe, fazer insert
+                const {error} = await supabase
+                    .from("flex_breaks")
+                    .insert({
+                        id_contract: idContract,
+                        ...flexFields
+                    });
+                flexError = error;
+            }
 
             if (flexError) {
-                console.error("Error updating flex_breaks (auto-detected):", flexError);
+                console.error("Error updating/inserting flex_breaks (auto-detected):", flexError);
                 return flexError;
+            }
+            
+            // Limpar/deletar fixed_breaks quando usar flex (auto-detecção)
+            const {error: clearFixedError} = await supabase
+                .from("fixed_breaks")
+                .delete()
+                .eq("id_contract", idContract);
+
+            if (clearFixedError) {
+                console.error("Error clearing fixed_breaks (auto-detected):", clearFixedError);
             }
             
             return null;

@@ -77,13 +77,18 @@ const AddContract = () => {
             const [hours, minutes] = contract.break_interval.split(':');
             return {
                 type: 'flex',
-                duration_minutes: parseInt(hours) * 60 + parseInt(minutes)
+                duration_minutes: parseInt(hours) * 60 + parseInt(minutes),
+                // Garantir que campos de horário sejam explicitamente nulos
+                break_start: null,
+                break_end: null
             };
         } else {
             return {
                 type: 'fixed',
                 break_start: contract.break_start,
-                break_end: contract.break_end
+                break_end: contract.break_end,
+                // Garantir que campo de duração seja explicitamente nulo
+                duration_minutes: null
             };
         }
     };

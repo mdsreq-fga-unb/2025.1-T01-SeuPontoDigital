@@ -78,10 +78,15 @@ const UpdateContract = () => {
                         const hours = Math.floor(fullContractData.workBreak.duration_minutes / 60);
                         const minutes = fullContractData.workBreak.duration_minutes % 60;
                         breakInterval = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+                        // Garantir que campos de horário fiquem vazios
+                        breakStart = "";
+                        breakEnd = "";
                     } else {
                         breakType = "range"; // Fixed break no backend é "range" no frontend
-                        breakStart = fullContractData.workBreak.break_start;
-                        breakEnd = fullContractData.workBreak.break_end;
+                        breakStart = fullContractData.workBreak.break_start || "";
+                        breakEnd = fullContractData.workBreak.break_end || "";
+                        // Garantir que campo de duração fica vazio
+                        breakInterval = "";
                     }
                 }
 
@@ -192,13 +197,18 @@ const UpdateContract = () => {
             const [hours, minutes] = contract.break_interval.split(':');
             return {
                 type: 'flex',
-                duration_minutes: parseInt(hours) * 60 + parseInt(minutes)
+                duration_minutes: parseInt(hours) * 60 + parseInt(minutes),
+                // Garantir que campos de horário sejam explicitamente nulos
+                break_start: null,
+                break_end: null
             };
         } else {
             return {
                 type: 'fixed',
                 break_start: contract.break_start,
-                break_end: contract.break_end
+                break_end: contract.break_end,
+                // Garantir que campo de duração seja explicitamente nulo
+                duration_minutes: null
             };
         }
     };

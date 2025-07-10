@@ -151,7 +151,19 @@ const ContractForm = (props) => {
                     label="Tipo de Intervalo"
                     name="break_type"
                     value={props.contract.break_type}
-                    onChange={e => props.handleInputChange({ name: "break_type", value: e.target.value })}
+                    onChange={e => {
+                        const newBreakType = e.target.value;
+                        // Limpar campos do outro tipo quando trocar o tipo
+                        if (newBreakType === "fixed") {
+                            // Se escolher duração fixa, limpa campos de horário
+                            props.handleInputChange({ name: "break_start", value: "" });
+                            props.handleInputChange({ name: "break_end", value: "" });
+                        } else {
+                            // Se escolher horário, limpa campo de duração
+                            props.handleInputChange({ name: "break_interval", value: "" });
+                        }
+                        props.handleInputChange({ name: "break_type", value: newBreakType });
+                    }}
                     options={[
                         { value: "fixed", label: "Duração fixa" },
                         { value: "range", label: "Horário de início/fim" }
