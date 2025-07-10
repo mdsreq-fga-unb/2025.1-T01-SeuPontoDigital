@@ -17,6 +17,9 @@ import {
 import { useRouter } from 'expo-router';
 import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import api from '@/constants/api'; // Certifique-se de que o caminho para o arquivo de configuração da API está correto
 
 export default function Employer() {
   const router = useRouter();
@@ -46,146 +49,121 @@ export default function Employer() {
     daysLate: number;
   }
   
+  // Define the structure of the API response
+  interface EmployeeResponse {
+    empregado: {
+      id: string;
+      nome: string;
+      // Add other fields from the API as needed
+    };
+    // Add other top-level fields if needed
+  }
+  
+  // Define the structure of the employer data
+  interface Employer {
+    id: string;
+    cpf: string;
+    // Add other employer fields as needed
+  }
+  
   const [employees, setEmployees] = useState<Employee[]>([]);
 
-  // Simulação de dados para demonstração - em produção viria de uma API
   useEffect(() => {
-    // Simular carregamento de dados
-    setLoading(true);
+    const fetchEmployees = async () => {
+      try {
+        setLoading(true);
+        
+        // Obter token de autenticação
+        const token = await AsyncStorage.getItem('userToken');
+        
+        if (!token) {
+          console.error("Token de autenticação não encontrado");
+          setLoading(false);
+          return;
+        }
+        
+        // Obter CPF do usuário logado (para identificar qual empregador é o usuário atual)
+        const userCpf = await AsyncStorage.getItem('userCpf');
+        
+        // Buscar dados de empregadores
+        const employerResponse = await api.get('/employers', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        // Encontrar o empregador atual com base no CPF
+        const currentEmployer = employerResponse.data.find(
+          (employer: Employer) => employer.cpf === userCpf
+        );
+        
+        console.log("Dados de empregadores:", employerResponse.data);
+        
+        // Se não encontrar, usar o primeiro da lista (fallback)
+        const employerId = currentEmployer ? currentEmployer.id : 
+          (employerResponse.data.length > 0 ? employerResponse.data[0].id : null);
+        
+        console.log("ID do empregador encontrado:", employerId);
+        
+        if (!employerId) {
+          console.error("ID do empregador não encontrado na resposta da API");
+          setLoading(false);
+          return;
+        }
+        
+        // Agora buscar os empregados deste empregador usando o ID obtido
+        const response = await api.get('/worklog', {
+          params: { employId: employerId },
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        console.log("Dados dos empregados recebidos:", response.data);
+        
+        if (response.data && Array.isArray(response.data)) {
+          // Mapear os dados da API para o formato esperado pelo componente
+          const mappedEmployees: Employee[] = response.data.map((item: EmployeeResponse) => {
+            return {
+              id: item.empregado.id,
+              name: item.empregado.nome,
+              role: "Funcionário",
+              photo: null,
+              workHours: "08:00 - 17:00",
+              startDate: new Date().toLocaleDateString('pt-BR'),
+              alerts: 0,
+              daysWorked: 0,
+              status: "Ativo",
+              totalHours: "0h",
+              overtime50: "0h",
+              overtime100: "0h",
+              breakTime: "01:00",
+              daysAbsent: 0,
+              daysWithMedicalCertificate: 0,
+              daysLate: 0
+            };
+          });
+          
+          setEmployees(mappedEmployees);
+        } else {
+          console.log("Nenhum empregado encontrado ou formato inválido");
+          setEmployees([]);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar empregados:", error);
+        
+        if (axios.isAxiosError(error)) {
+          console.error("Detalhes do erro:", error.response?.data);
+        }
+        
+        Alert.alert(
+          "Erro ao carregar funcionários",
+          "Não foi possível carregar a lista de funcionários. Por favor, tente novamente mais tarde."
+        );
+        
+        setEmployees([]);
+      } finally {
+        setLoading(false);
+      }
+    };
     
-    setTimeout(() => {
-      const mockEmployees = [
-        { 
-          id: '1', 
-          name: 'João Silva', 
-          role: 'Cozinheiro', 
-          photo: null,
-          workHours: '08:00 - 17:00',
-          startDate: '15/02/2024',
-          alerts: 2,
-          daysWorked: 45,
-          status: 'Ativo',
-          totalHours: '178h 20m',
-          overtime50: '12h 40m',
-          overtime100: '8h',
-          breakTime: '01:00',
-          daysAbsent: 10,
-          daysWithMedicalCertificate: 4,
-          daysLate: 1
-        },
-        { 
-          id: '2', 
-          name: 'Maria Oliveira', 
-          role: 'Empregado Domestica', 
-          photo: null,
-          workHours: '09:00 - 18:00',
-          startDate: '10/01/2024',
-          alerts: 0,
-          daysWorked: 72,
-          status: 'Ativo',
-          totalHours: '181h 45m',
-          overtime50: '15h 30m',
-          overtime100: '6h 15m',
-          breakTime: '01:00',
-          daysAbsent: 0,
-          daysWithMedicalCertificate: 0,
-          daysLate: 0
-        },
-        { 
-          id: '3', 
-          name: 'Pedro Santos', 
-          role: 'Empregado Domestico', 
-          photo: null,
-          workHours: '08:00 - 17:00',
-          startDate: '05/03/2024',
-          alerts: 1,
-          daysWorked: 30,
-          status: 'Ativo',
-          totalHours: '150h',
-          overtime50: '5h',
-          overtime100: '2h',
-          breakTime: '01:00',
-          daysAbsent: 0,
-          daysWithMedicalCertificate: 1,
-          daysLate: 0
-        },
-        { 
-          id: '4', 
-          name: 'Ana Costa', 
-          role: 'Motorista', 
-          photo: null,
-          workHours: '08:30 - 17:30',
-          startDate: '20/12/2023',
-          alerts: 3,
-          daysWorked: 90,
-          status: 'Ativo',
-          totalHours: '180h',
-          overtime50: '20h',
-          overtime100: '10h',
-          breakTime: '01:00',
-          daysAbsent: 5,
-          daysWithMedicalCertificate: 2,
-          daysLate: 3
-        },
-        { 
-          id: '5', 
-          name: 'Carlos Ferreira', 
-          role: 'Analista de Dados', 
-          photo: null,
-          workHours: '09:00 - 18:00',
-          startDate: '07/04/2024',
-          alerts: 0,
-          daysWorked: 15,
-          status: 'Ativo',
-          totalHours: '140h',
-          overtime50: '0h',
-          overtime100: '0h',
-          breakTime: '01:00',
-          daysAbsent: 0,
-          daysWithMedicalCertificate: 0,
-          daysLate: 0
-        },
-        { 
-          id: '6', 
-          name: 'Paulo Gomes', 
-          role: 'Engenheiro de Software', 
-          photo: null,
-          workHours: '08:00 - 17:00',
-          startDate: '12/11/2023',
-          alerts: 4,
-          daysWorked: 120,
-          status: 'Férias',
-          totalHours: '200h',
-          overtime50: '25h',
-          overtime100: '15h',
-          breakTime: '01:00',
-          daysAbsent: 0,
-          daysWithMedicalCertificate: 0,
-          daysLate: 0
-        },
-        { 
-          id: '7', 
-          name: 'Lucia Mendes', 
-          role: 'Analista de QA', 
-          photo: null,
-          workHours: '08:30 - 17:30',
-          startDate: '03/01/2024',
-          alerts: 1,
-          daysWorked: 70,
-          status: 'Ativo',
-          totalHours: '160h',
-          overtime50: '10h',
-          overtime100: '5h',
-          breakTime: '01:00',
-          daysAbsent: 1,
-          daysWithMedicalCertificate: 0,
-          daysLate: 1
-        },
-      ];
-      
-      setEmployees(mockEmployees);
-      setLoading(false);
-    }, 1500);
+    fetchEmployees();
   }, []);
   
   // Filtrar empregados com base no texto de pesquisa
@@ -208,9 +186,9 @@ export default function Employer() {
     router.push({
       pathname: '/(panel)/timecard-history/page',
       params: { 
-        employeeId: employee.id, 
+        employeeId: employee.id,  // Este é o ID real do empregado da API
         employeeName: employee.name,
-        userType: 'employer' // Adicione este parâmetro
+        userType: 'employer' 
       }
     });
     setEmployeeDetailsModalVisible(false);

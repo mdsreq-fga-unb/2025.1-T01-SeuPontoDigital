@@ -36,6 +36,3 @@ venv/
 logs/
 backend/logs/combined.log
 backend/logs/error.log
-
-#api.ts
-mobile/constants/api.ts

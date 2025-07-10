@@ -74,6 +74,7 @@ export default function EntryScreen() {
 
       if (response.data.token) {
         await AsyncStorage.setItem('userToken', response.data.token);
+        await AsyncStorage.setItem('userCpf', cleanCpf);
       }
 
       const { userType } = response.data;

@@ -1025,7 +1025,8 @@ export default function Employee() {
                 router.push({
                   pathname: '/(panel)/timecard-history/page',
                   params: { 
-                    employeeId: currentContractId || '', 
+                    employeeId: employeeInfo?.id || '',
+                    employeeName: employeeInfo?.name || '',
                     userType: 'employee' // Especifica que é visão de empregado
                   }
                 });
