@@ -104,6 +104,9 @@ export default function TimecardHistory() {
       return records;
     }
     
+    // Contador para garantir chaves únicas mesmo para registros do mesmo dia
+    let counter = 0;
+    
     // Percorre todos os meses disponíveis nos registros
     Object.entries(employeeData.registros).forEach(([monthKey, monthRecords]) => {
       // Verificar se monthRecords é um array
@@ -121,6 +124,9 @@ export default function TimecardHistory() {
         }
         
         try {
+          // Incrementar o contador para garantir unicidade
+          counter++;
+          
           // Converter data do formato "2025-06-24" para Date e formato legível
           const [year, month, day] = record.data.split('-');
           const formattedDate = `${day}/${month}/${year}`;
@@ -181,8 +187,9 @@ export default function TimecardHistory() {
             : getDayOfWeek(date);
           
           // Criar o objeto de registro no formato esperado pelo componente
+          // Usando chave única combinando data e contador
           records.push({
-            id: `record-${record.data}`,
+            id: `record-${record.data}-${counter}`,
             date: formattedDate,
             fullDate: date,
             dayOfWeek: dayOfWeek,
