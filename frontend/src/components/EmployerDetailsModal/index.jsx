@@ -19,9 +19,18 @@ const EmployerDetailsModal = ({ isOpen, onRequestClose, employerData }) => {
                 <p><strong>CPF:</strong> {employerData.cpf}</p>
                 <p><strong>Email:</strong> {employerData.email}</p>
                 <p><strong>Telefone:</strong> {employerData.phone}</p>
-                <p><strong>Rua:</strong> {employerData.street}</p>
-                <p><strong>Bairro:</strong> {employerData.neighborhood}</p>
-                <p><strong>Número:</strong> {employerData.house_number}</p>
+                {employerData.street && (
+                    <>
+                        <p><strong>Rua:</strong> {employerData.street}</p>
+                        <p><strong>Bairro:</strong> {employerData.neighborhood}</p>
+                        <p><strong>Número:</strong> {employerData.house_number}</p>
+                        <p><strong>Cidade:</strong> {employerData.city} - {employerData.uf}</p>
+                        <p><strong>CEP:</strong> {employerData.cep}</p>
+                        {employerData.complement && (
+                            <p><strong>Complemento:</strong> {employerData.complement}</p>
+                        )}
+                    </>
+                )}
             </div>
 
             <div className="employee-box active-employees">
@@ -35,7 +44,9 @@ const EmployerDetailsModal = ({ isOpen, onRequestClose, employerData }) => {
                                 <p><strong>Nome:</strong> {employee.name}</p>
                                 <p><strong>Função:</strong> {employee.job_function}</p>
                                 <p><strong>CPF:</strong> {employee.cpf}</p>
-                                <p><strong>Ínicio do contrato:</strong> {employee.contract_start_date}</p>
+                                <p><strong>Telefone:</strong> {employee.phone}</p>
+                                <p><strong>Salário:</strong> R$ {parseFloat(employee.salary || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                                <p><strong>Início do contrato:</strong> {new Date(employee.contract_start_date).toLocaleDateString('pt-BR')}</p>
                                 <p><strong>Acesso ao app:</strong> {employee.app_access_status}</p>
                             </div>
                         ))}
@@ -56,7 +67,12 @@ const EmployerDetailsModal = ({ isOpen, onRequestClose, employerData }) => {
                                 <p><strong>Nome:</strong> {employee.name}</p>
                                 <p><strong>Função:</strong> {employee.job_function}</p>
                                 <p><strong>CPF:</strong> {employee.cpf}</p>
-                                <p><strong>Fim do contrato:</strong> {employee.contract_end_date}</p>
+                                <p><strong>Telefone:</strong> {employee.phone}</p>
+                                <p><strong>Salário:</strong> R$ {parseFloat(employee.salary || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                                <p><strong>Início do contrato:</strong> {new Date(employee.contract_start_date).toLocaleDateString('pt-BR')}</p>
+                                {employee.contract_end_date && (
+                                    <p><strong>Fim do contrato:</strong> {new Date(employee.contract_end_date).toLocaleDateString('pt-BR')}</p>
+                                )}
                             </div>
                         ))}
                     </div>
