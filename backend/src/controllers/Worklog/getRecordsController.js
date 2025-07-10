@@ -1,21 +1,31 @@
 import getRecordsModel from "../../models/Worklogs/getRecordsModel.js";
 
 const getRecordsController = async (req, res) => {
-  // data de início e fim são opcionais
-  // recebendo o id do empregado via query
-
   const employId = req.id;
   const { inicio, fim, contractId } = req.query;
-  // tenho que pegar selectedContract
-  console.log("selectedContractttt", contractId)
 
+  console.log("Parâmetros recebidos na API:", {
+    employId,
+    inicio,
+    fim,
+    contractId,
+    tipoContractId: typeof contractId
+  });
 
   if (!employId) {
-    return res.status(400).json({ message: "Parâmetro 'employeeId' é obrigatório." });
+    return res.status(400).json({ message: "Parâmetro 'employId' é obrigatório." });
   }
 
   try {
-    const { data, error } = await getRecordsModel({ employId, inicio, fim, contractId });
+    // Converter string "undefined" para valor real undefined
+    const contractIdProcessado = contractId === "undefined" ? undefined : contractId;
+
+    const { data, error } = await getRecordsModel({ 
+      employId, 
+      inicio, 
+      fim, 
+      contractId: contractIdProcessado 
+    });
 
     if (error) {
       return res.status(500).json({ message: error });

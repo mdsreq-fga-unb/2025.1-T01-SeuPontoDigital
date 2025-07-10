@@ -286,6 +286,29 @@ export default function Employee() {
     }
   };
 
+  // Função para navegar ao histórico
+  const navigateToHistory = () => {
+    if (!currentContractId) {
+      Alert.alert(
+        'Selecione um contrato',
+        'Para visualizar o histórico, é necessário selecionar um contrato primeiro.'
+      );
+      setContractsModalVisible(true);
+      return;
+    }
+
+    setHistoricalModalVisible(false);
+    router.push({
+      pathname: '/(panel)/timecard-history/page',
+      params: { 
+        employeeId: employeeInfo?.id || '',
+        employeeName: employeeInfo?.name || '',
+        contractId: currentContractId,
+        userType: 'employee'
+      }
+    });
+  };
+
   // Formatar a data atual
   const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth() + 1).toString().padStart(2, '0')}/${currentDate.getFullYear()}`;
   const formattedHour = `${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}`;
@@ -324,7 +347,13 @@ export default function Employee() {
         
         <TouchableOpacity 
           style={styles.headerAction}
-          onPress={() => setHistoricalModalVisible(true)}
+          onPress={() => {
+            if (currentContractId) {
+              setHistoricalModalVisible(true);
+            } else {
+              navigateToHistory();
+            }
+          }}
         >
           <Ionicons name="time-outline" size={24} color="#FFFFFF" />
         </TouchableOpacity>
@@ -1023,14 +1052,21 @@ export default function Employee() {
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                 setHistoricalModalVisible(false);
+                
+                // Verificar se existe um contrato selecionado
+                if (!currentContractId) {
+                  Alert.alert('Selecione um contrato', 'Por favor, selecione um contrato para visualizar o histórico');
+                  return;
+                }
+                
+                // Navegação correta sem /page no final
                 router.push({
                   pathname: '/(panel)/timecard-history/page',
                   params: { 
                     employeeId: employeeInfo?.id || '',
                     employeeName: employeeInfo?.name || '',
-                    // contractId: currentContractId || '',
-                    contractId: currentContractId || '',
-                    userType: 'employee' // Especifica que é visão de empregado
+                    contractId: currentContractId,
+                    userType: 'employee'
                   }
                 });
               }}
