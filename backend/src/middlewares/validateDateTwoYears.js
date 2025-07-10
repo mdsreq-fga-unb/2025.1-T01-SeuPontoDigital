@@ -15,6 +15,16 @@ const validateDateTwoYearsEmployer = async (req, res, next) => {
         const dateNow = new Date();
         const twoYearsInMilliseconds = 2 * 365.5 * 24 * 60 * 60 * 1000;
 
+        // Debug logs
+        console.log("=== DEBUG validateDateTwoYearsEmployer ===");
+        console.log("Employer ID:", employerID);
+        console.log("Employer created_at:", employer.created_at);
+        console.log("Date created (parsed):", dateCreatedEmployer);
+        console.log("Date now:", dateNow);
+        console.log("Time difference (ms):", dateNow.getTime() - dateCreatedEmployer.getTime());
+        console.log("Two years in ms:", twoYearsInMilliseconds);
+        console.log("Is older than 2 years:", (dateNow.getTime() - dateCreatedEmployer.getTime()) > twoYearsInMilliseconds);
+
         if ((dateNow.getTime() - dateCreatedEmployer.getTime()) > twoYearsInMilliseconds) {
             req.id = employerID;
             next(); 
@@ -23,6 +33,7 @@ const validateDateTwoYearsEmployer = async (req, res, next) => {
             return res.status(403).send({ message: "employer created less than 2 years ago" });
         }
     } catch (error) {
+        console.error("Error in validateDateTwoYearsEmployer:", error);
         return res.status(500).send({ message: "internal server error"});
     }
 }
