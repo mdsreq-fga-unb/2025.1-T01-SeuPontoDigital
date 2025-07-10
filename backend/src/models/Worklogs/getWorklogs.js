@@ -84,10 +84,41 @@ export default async function getWorklogs(id_employee, inicio, fim) {
           ...(await calcRegistroInfo(id_contract, date, id_work_log)),
           cpf_empregador
         };
+
+        
+
+
       } catch (err) {
         console.error("Erro ao processar registro individual:", err?.message || err);
       }
     }
+
+    // Pós-processamento: soma de horas extras 50% e 100%
+    for (const mes in agrupados) {
+        console.log("mes:", mes)
+        let extras50 = 0;
+        let extras100 = 0;
+        const registrosDoMes = agrupados[mes];
+
+          // Somar horas extras por tipo
+          for (const r of registrosDoMes) {
+            const horasExtra = parseFloat(r.horas_extra);
+            if (!horasExtra || isNaN(horasExtra)) continue;
+
+            if (r.dia_semana === "domingo") {
+              extras100 += horasExtra;
+            } else {
+              extras50 += horasExtra;
+            }
+          }
+
+        // Adiciona resumo ao final do array do mês (apenas 1 vez)
+        registrosDoMes.push({
+          tipo: "resumo_horas_extras",
+          total_50: extras50.toFixed(2),
+          total_100: extras100.toFixed(2)
+        });
+      }
 
     console.log("Terminando getWorklogs");
     return agrupados;
