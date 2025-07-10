@@ -97,89 +97,114 @@ export default function TimecardHistory() {
   // Função para processar os registros da API
   const processApiRecords = (employeeData: EmployeeData) => {
     const records: TimecardRecord[] = [];
+  
+    // Verificar se employeeData e seus registros existem
+    if (!employeeData || !employeeData.registros) {
+      console.log("Dados de registros inválidos:", employeeData);
+      return records;
+    }
     
     // Percorre todos os meses disponíveis nos registros
     Object.entries(employeeData.registros).forEach(([monthKey, monthRecords]) => {
+      // Verificar se monthRecords é um array
+      if (!Array.isArray(monthRecords)) {
+        console.log(`Registros para ${monthKey} não é um array:`, monthRecords);
+        return;
+      }
+  
       // Para cada registro do mês
       monthRecords.forEach(record => {
-        // Converter data do formato "2025-06-24" para Date e formato legível
-        const [year, month, day] = record.data.split('-');
-        const formattedDate = `${day}/${month}/${year}`;
-        const date = new Date(`${year}-${month}-${day}`);
-        
-        // Processar horários - tratar valores nulos
-        const entry = record.entrada ? record.entrada.substring(0, 5) : '--:--';
-        const lunchOut = record.ida_almoco ? record.ida_almoco.substring(0, 5) : '--:--';
-        const lunchIn = record.volta_almoco ? record.volta_almoco.substring(0, 5) : '--:--';
-        const exit = record.saida ? record.saida.substring(0, 5) : '--:--';
-        
-        // Verificar alertas baseado em registros incompletos ou horas insuficientes
-        const hasAlert: boolean = Boolean(
-          !record.entrada || 
-          !record.saida || 
-          !record.ida_almoco || 
-          !record.volta_almoco ||
-          record.horas_trabalhadas === 'NaN' ||
-          (record.horas_trabalhadas && parseFloat(record.horas_trabalhadas) < parseFloat(record.carga_horaria_dia)));
-        
-        // Determinar o motivo do alerta
-        let alertReason = '';
-        if (hasAlert) {
-          if (!record.entrada && !record.saida && !record.ida_almoco && !record.volta_almoco) {
-            alertReason = 'Dia ausente';
-          } else if (!record.saida || !record.ida_almoco || !record.volta_almoco) {
-            alertReason = 'Registro incompleto';
-          } else if (record.horas_trabalhadas === 'NaN') {
-            alertReason = 'Cálculo de horas indisponível';
-          } else if (record.horas_trabalhadas && parseFloat(record.horas_trabalhadas) < parseFloat(record.carga_horaria_dia)) {
-            alertReason = 'Horário fora do padrão';
-          }
+        // Verificar se record.data existe antes de tentar split
+        if (!record || !record.data) {
+          console.log("Registro sem data:", record);
+          return; // Pular este registro e continuar com o próximo
         }
         
-        // Formatar horas trabalhadas
-        let totalHours = '--';
-        if (record.horas_trabalhadas && record.horas_trabalhadas !== 'NaN') {
-          const hoursValue = parseFloat(record.horas_trabalhadas);
-          const hours = Math.floor(hoursValue);
-          const minutes = Math.round((hoursValue - hours) * 60);
-          totalHours = `${hours}h${minutes > 0 ? ` ${minutes}m` : ''}`;
-        }
-        
-        // Mapear dias da semana para o formato abreviado
-        const dayOfWeekMap = {
-          'segunda-feira': 'Seg',
-          'terça-feira': 'Ter',
-          'quarta-feira': 'Qua',
-          'quinta-feira': 'Qui',
-          'sexta-feira': 'Sex',
-          'sábado': 'Sáb',
-          'domingo': 'Dom'
-        };
-        
-        const dayOfWeek = dayOfWeekMap[record.dia_semana as keyof typeof dayOfWeekMap] || getDayOfWeek(date);
-        
-        // Criar o objeto de registro no formato esperado pelo componente
-        records.push({
-          id: `record-${record.data}`,
-          date: formattedDate,
-          fullDate: date,
-          dayOfWeek: dayOfWeek,
-          records: {
-            entry,
-            lunchOut,
-            lunchIn,
-            exit
-          },
-          totalHours,
-          hasAlert,
-          alertReason,
-          // Dados extras para estatísticas
-          extraData: {
-            horasExtra: record.horas_extra || '0.00',
-            cargaHoraria: record.carga_horaria_dia || '0.00',
-            intervaloContrato: record.intervalo_contrato || 60
+        try {
+          // Converter data do formato "2025-06-24" para Date e formato legível
+          const [year, month, day] = record.data.split('-');
+          const formattedDate = `${day}/${month}/${year}`;
+          const date = new Date(`${year}-${month}-${day}`);
+          
+          // Processar horários - tratar valores nulos
+          const entry = record.entrada ? record.entrada.substring(0, 5) : '--:--';
+          const lunchOut = record.ida_almoco ? record.ida_almoco.substring(0, 5) : '--:--';
+          const lunchIn = record.volta_almoco ? record.volta_almoco.substring(0, 5) : '--:--';
+          const exit = record.saida ? record.saida.substring(0, 5) : '--:--';
+          
+          // Verificar alertas baseado em registros incompletos ou horas insuficientes
+          const hasAlert: boolean = Boolean(
+            !record.entrada || 
+            !record.saida || 
+            !record.ida_almoco || 
+            !record.volta_almoco ||
+            record.horas_trabalhadas === 'NaN' ||
+            (record.horas_trabalhadas && parseFloat(record.horas_trabalhadas) < parseFloat(record.carga_horaria_dia || '0')));
+          
+          // Determinar o motivo do alerta
+          let alertReason = '';
+          if (hasAlert) {
+            if (!record.entrada && !record.saida && !record.ida_almoco && !record.volta_almoco) {
+              alertReason = 'Dia ausente';
+            } else if (!record.saida || !record.ida_almoco || !record.volta_almoco) {
+              alertReason = 'Registro incompleto';
+            } else if (record.horas_trabalhadas === 'NaN') {
+              alertReason = 'Cálculo de horas indisponível';
+            } else if (record.horas_trabalhadas && record.carga_horaria_dia && 
+                      parseFloat(record.horas_trabalhadas) < parseFloat(record.carga_horaria_dia)) {
+              alertReason = 'Horário fora do padrão';
+            }
           }
-        });
+          
+          // Formatar horas trabalhadas
+          let totalHours = '--';
+          if (record.horas_trabalhadas && record.horas_trabalhadas !== 'NaN') {
+            const hoursValue = parseFloat(record.horas_trabalhadas);
+            const hours = Math.floor(hoursValue);
+            const minutes = Math.round((hoursValue - hours) * 60);
+            totalHours = `${hours}h${minutes > 0 ? ` ${minutes}m` : ''}`;
+          }
+          
+          // Mapear dias da semana para o formato abreviado
+          const dayOfWeekMap = {
+            'segunda-feira': 'Seg',
+            'terça-feira': 'Ter',
+            'quarta-feira': 'Qua',
+            'quinta-feira': 'Qui',
+            'sexta-feira': 'Sex',
+            'sábado': 'Sáb',
+            'domingo': 'Dom'
+          };
+          
+          const dayOfWeek = record.dia_semana && typeof record.dia_semana === 'string' 
+            ? (dayOfWeekMap[record.dia_semana as keyof typeof dayOfWeekMap] || getDayOfWeek(date))
+            : getDayOfWeek(date);
+          
+          // Criar o objeto de registro no formato esperado pelo componente
+          records.push({
+            id: `record-${record.data}`,
+            date: formattedDate,
+            fullDate: date,
+            dayOfWeek: dayOfWeek,
+            records: {
+              entry,
+              lunchOut,
+              lunchIn,
+              exit
+            },
+            totalHours,
+            hasAlert,
+            alertReason,
+            // Dados extras para estatísticas
+            extraData: {
+              horasExtra: record.horas_extra || '0.00',
+              cargaHoraria: record.carga_horaria_dia || '0.00',
+              intervaloContrato: record.intervalo_contrato || 60
+            }
+          });
+        } catch (error) {
+          console.error("Erro ao processar registro:", error, record);
+        }
       });
     });
     
@@ -270,85 +295,110 @@ export default function TimecardHistory() {
     const fetchRecords = async () => {
       try {
         setLoading(true);
-        
-        // Obter token de autenticação - CRUCIAL PARA ROTAS PRIVADAS
+  
+        // Obter token de autenticação
         const token = await AsyncStorage.getItem('userToken');
         
-      
+        if (!token) {
+          console.error("Token de autenticação não encontrado");
+          Alert.alert("Erro de Autenticação", "Sessão expirada. Por favor, faça login novamente.");
+          setLoading(false);
+          return;
+        }
         
         // Parâmetros de consulta para filtrar por empregado
         const params: Record<string, string> = {};
         if (employeeId) {
           params.employId = Array.isArray(employeeId) ? employeeId[0] : String(employeeId);
+          console.log("Usando employeeId:", params.employId);
         } else {
           const userId = await AsyncStorage.getItem('userId');
           if (userId) {
             params.employId = userId;
+            console.log("Usando userId do AsyncStorage:", userId);
           } else {
             throw new Error("ID do empregado não encontrado");
           }
         }
         
-        // Adicionar mês e ano como parâmetros de início e fim
+        // Adicionar início e fim do mês como parâmetros
         const startDate = new Date(selectedYear, selectedMonth, 1);
         const endDate = new Date(selectedYear, selectedMonth + 1, 0);
         
+        params.inicio = startDate.toISOString().split('T')[0];
+        params.fim = endDate.toISOString().split('T')[0];
+        
         console.log("Enviando parâmetros:", params);
         
-        // IMPORTANTE: Adicionar o token de autenticação nos cabeçalhos
         const response = await api.get('/worklog', { 
           params,
           headers: {
-            'Authorization': `Bearer ${token}` // Adicione esta linha!
+            'Authorization': `Bearer ${token}`
           }
         });
         
-        console.log("Resposta da API:", response.data);
+        console.log("Resposta recebida da API");
         
-        // Processar dados da API
-        if (response.data && response.data.length > 0) {
+        if (response.data && Array.isArray(response.data)) {
+          // Exibir a estrutura da resposta para debugging
+          console.log("Estrutura da resposta:", 
+            JSON.stringify(response.data.map(item => ({
+              id: item.empregado?.id,
+              nome: item.empregado?.nome,
+              temRegistros: !!item.registros,
+              meses: item.registros ? Object.keys(item.registros) : []
+            }))));
+          
           // Encontra os dados do empregado atual
           const employeeData = employeeId 
-            ? response.data.find((emp: EmployeeData) => emp.empregado?.id === employeeId) 
+            ? response.data.find((emp: EmployeeData) => emp.empregado?.id === params.employId) 
             : response.data[0];
               
           if (employeeData) {
+            console.log("Empregado encontrado:", employeeData.empregado?.nome);
             const processedRecords = processApiRecords(employeeData);
             setFullHistory(processedRecords);
           } else {
             console.error("Dados do empregado não encontrados na resposta");
+            Alert.alert("Aviso", "Não encontramos registros para este funcionário.");
             setFullHistory([]);
           }
         } else {
-          console.log("Nenhum dado retornado da API");
+          console.log("Formato de resposta inválido:", response.data);
+          Alert.alert("Aviso", "Os dados retornados estão em um formato inesperado.");
           setFullHistory([]);
         }
       } catch (error) {
+        console.error("Erro completo:", error);
+        
         if (axios.isAxiosError(error)) {
-          // Log mais detalhado para depuração
-          console.error("Erro ao buscar histórico de pontos:", 
-            error.response?.status,
-            error.response?.data,
-            error.message);
-            
-          // Se for erro 401, provavelmente o token expirou
+          console.error("Erro Axios:", {
+            status: error.response?.status,
+            statusText: error.response?.statusText,
+            data: error.response?.data,
+            message: error.message
+          });
+          
           if (error.response?.status === 401) {
             Alert.alert(
               "Sessão expirada", 
               "Sua sessão expirou. Por favor, faça login novamente."
             );
+          } else {
+            Alert.alert(
+              "Erro de servidor", 
+              `Não foi possível buscar os registros. (Erro: ${error.response?.status || "desconhecido"})`
+            );
           }
+        } else if (error instanceof Error) {
+          Alert.alert("Erro", error.message);
         } else {
-          console.error("Erro inesperado ao buscar histórico:", error);
+          Alert.alert(
+            "Erro inesperado", 
+            "Ocorreu um erro ao tentar carregar o histórico."
+          );
         }
         
-        // Exibe alerta de erro para o usuário
-        Alert.alert(
-          "Erro de conexão", 
-          "Não foi possível carregar o histórico de pontos. Verifique sua conexão e tente novamente."
-        );
-        
-        // Garantir que não fique em estado de loading infinito
         setFullHistory([]);
       } finally {
         setLoading(false);
