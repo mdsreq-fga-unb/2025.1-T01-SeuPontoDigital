@@ -1,11 +1,15 @@
 import supabase from "../../config/supabase.js";
 import getOneAddressModel from "./getOneAddressModel.js";
+import getCoordinates from "../../middlewares/getCoordinates.js";
 
 const postAddressModel = async (address) => {
 
     try{
+        const {latitude, longitude} = await getCoordinates(address);
+
+        console.log(latitude, longitude)
+
         const addressID = await getOneAddressModel(address)
-        console.log(addressID)
         if (!addressID){
             const { data, error } = await supabase.from("address").insert({
             cep: address.cep,
@@ -14,7 +18,9 @@ const postAddressModel = async (address) => {
             neighborhood: address.neighborhood,
             city: address.city,
             house_number: address.house_number,
-            complement: address.complement || null
+            complement: address.complement || null,
+            latitude: latitude,
+            longitude: longitude
             }).select("id");
 
             if (error || !data || data.length === 0) return;
