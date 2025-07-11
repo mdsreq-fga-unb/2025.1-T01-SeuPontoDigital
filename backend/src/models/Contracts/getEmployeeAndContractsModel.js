@@ -24,31 +24,8 @@ const getEmployeeAndContractsModel = async (employeeId) => {
             .select(`
                 id_contract,
                 id_employer,
-                contracts (
-                    id,
-                    start_date,
-                    end_date,
-                    status,
-                    access_app,
-                    salary,
-                    function
-                ),
-                employers (
-                    id,
-                    name,
-                    cpf,
-                    phone,
-                    email,
-                    address:address!employers_id_address_fkey (
-                        cep,
-                        street,
-                        uf,
-                        neighborhood,
-                        city,
-                        house_number,
-                        complement
-                    )
-                )
+                contracts ( *, address(cep, street, uf, neighborhood, city, house_number, complement, latitude, longitude) ),
+                employers ( id, name, cpf, phone, email, id_address(cep, street, uf, neighborhood, city, house_number, complement, latitude, longitude) )
             `)
             .eq('id_employee', employeeId);
 
