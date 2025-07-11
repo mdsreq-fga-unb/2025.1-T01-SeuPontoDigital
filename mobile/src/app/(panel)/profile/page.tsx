@@ -23,6 +23,7 @@ import axios from 'axios';
 import api from '@/constants/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
+import LocationTracker from '../../components/locationTracker';
 
 const { width, height } = Dimensions.get('window');
 
@@ -705,7 +706,7 @@ export default function Profile() {
         </Animated.View>
         
         {/* Card de Ações Rápidas */}
-        <Animated.View 
+         <Animated.View 
           style={[
             styles.quickActionsCard, 
             { 
@@ -769,6 +770,18 @@ export default function Profile() {
               <Text style={styles.quickActionText}>Ajuda</Text>
             </TouchableOpacity>
           </View>
+        </Animated.View>
+
+        {/* LocationTracker Component */}
+        <Animated.View 
+          style={[
+            { 
+              opacity: fadeAnim,
+              transform: [{ translateY: translateY }]
+            }
+          ]}
+        >
+          <LocationTracker />
         </Animated.View>
         
         {/* Botão para voltar à tela inicial */}
