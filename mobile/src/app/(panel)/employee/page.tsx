@@ -388,7 +388,7 @@ export default function Employee() {
             <FontAwesome5 name="user-circle" size={60} color="#1565C0" />
           </View>
           <View style={styles.userInfo}>
-            <Text style={styles.userName}>João da Silva</Text>
+            <Text style={styles.userName}>{employeeInfo?.name}</Text>
             <Text style={styles.userRole}>{selectedContract ? selectedContract.position : 'Selecione um contrato'}</Text>
             <View style={styles.employerContainer}>
               <FontAwesome5 name="building" size={12} color="#455A64" style={{marginRight: 6}} />
