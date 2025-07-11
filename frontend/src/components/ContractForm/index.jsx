@@ -1,12 +1,14 @@
 import "./ContractForm.css";
 import TextInput from "../TextInput";
 import SelectInput from "../SelectInput";
+import ToggleSwitch from "../ToggleSwitch";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import DaysOfWeekSelector from "../DaysOfWeekSelector";
 import { useEffect } from "react";
 import useFetchEmployer from "../../hooks/useFetchEmployer";
 import Notification from "../Notification";
+import formatField from "../../services/formatField";
 
 const ContractForm = (props) => {
 
@@ -26,30 +28,6 @@ const ContractForm = (props) => {
         { value: "false", label: "Não" },
         { value: "true", label: "Sim" }
     ];
-
-    const formatCPF = (value) => {
-        const cleaned = value.replace(/\D/g, '').slice(0, 11);
-        const masked = cleaned
-            .replace(/^(\d{3})(\d)/, '$1.$2')
-            .replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
-            .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
-        return masked;
-    };
-
-    const formatPhone = (value) => {
-        const cleaned = value.replace(/\D/g, '');
-        const masked = cleaned
-            .replace(/^(\d{2})(\d)/, '($1) $2')
-            .replace(/(\d{5})(\d)/, '$1-$2')
-            .replace(/(-\d{4})\d+?$/, '$1');
-        return masked;
-    };
-
-    const formatCEP = (value) => {
-        const cleaned = value.replace(/\D/g, '').slice(0, 8);
-        const masked = cleaned.replace(/^(\d{5})(\d)/, '$1-$2');
-        return masked;
-    };
 
     const { id } = useParams();
 
@@ -85,14 +63,18 @@ const ContractForm = (props) => {
                     props.handleInputChange({ name: "workplace_street", value: employer.street || "" });
                     props.handleInputChange({ name: "workplace_neighborhood", value: employer.neighborhood || "" });
                     props.handleInputChange({ name: "workplace_city", value: employer.city || "" });
-                    props.handleInputChange({ name: "workplace_state", value: employer.state || "" });
-                    props.handleInputChange({ name: "workplace_home_number", value: employer.home_number || "" });
+                    props.handleInputChange({ name: "workplace_state", value: employer.uf || "" });
+                    props.handleInputChange({ name: "workplace_home_number", value: employer.house_number || "" });
                     props.handleInputChange({ name: "workplace_complement", value: employer.complement || "" });
                 }
             }
         };
-        fillAddressFromEmployer();
-    }, [props.contract.workplace_employer]);
+        // Só executa se workplace_employer for true e os campos de endereço estiverem vazios
+        if ((props.contract.workplace_employer === true || props.contract.workplace_employer === "true") && 
+            !props.contract.workplace_cep) {
+            fillAddressFromEmployer();
+        }
+    }, [props.contract.workplace_employer, fetchOneEmployer, idEmployer, id, props.contract.workplace_cep]);
 
     const handleBlurCEP = (event) => {
         const cepValue = event.target.value?.replace(/[^0-9]/g, "");
@@ -129,15 +111,7 @@ const ContractForm = (props) => {
                     name="cpf"
                     type="text"
                     value={props.contract.cpf}
-                    onChange={(e) => props.handleInputChange({ name: "cpf", value: formatCPF(e.target.value) })}
-                    className="div-employer-form"
-                />
-                <TextInput
-                    label="Email do Empregado"
-                    name="email"
-                    type="email"
-                    value={props.contract.email}
-                    onChange={(e) => props.handleInputChange({ name: "email", value: e.target.value })}
+                    onChange={(e) => props.handleInputChange({ name: "cpf", value: formatField("cpf2", e.target.value) })}
                     className="div-employer-form"
                 />
                 <TextInput
@@ -145,7 +119,7 @@ const ContractForm = (props) => {
                     name="phone"
                     type="text"
                     value={props.contract.phone}
-                    onChange={(e) => props.handleInputChange({ name: "phone", value: formatPhone(e.target.value) })}
+                    onChange={(e) => props.handleInputChange({ name: "phone", value: formatField("phone2", e.target.value) })}
                     className="div-employer-form"
                 />
                 <TextInput
@@ -178,7 +152,19 @@ const ContractForm = (props) => {
                     label="Tipo de Intervalo"
                     name="break_type"
                     value={props.contract.break_type}
-                    onChange={e => props.handleInputChange({ name: "break_type", value: e.target.value })}
+                    onChange={e => {
+                        const newBreakType = e.target.value;
+                        // Limpar campos do outro tipo quando trocar o tipo
+                        if (newBreakType === "fixed") {
+                            // Se escolher duração fixa, limpa campos de horário
+                            props.handleInputChange({ name: "break_start", value: "" });
+                            props.handleInputChange({ name: "break_end", value: "" });
+                        } else {
+                            // Se escolher horário, limpa campo de duração
+                            props.handleInputChange({ name: "break_interval", value: "" });
+                        }
+                        props.handleInputChange({ name: "break_type", value: newBreakType });
+                    }}
                     options={[
                         { value: "fixed", label: "Duração fixa" },
                         { value: "range", label: "Horário de início/fim" }
@@ -228,15 +214,29 @@ const ContractForm = (props) => {
                 <SelectInput
                     label="Acesso ao aplicativo"
                     name="app_access"
-                    value={props.contract.app_access}
+                    value={String(props.contract.app_access)}
                     onChange={(e) => props.handleInputChange({ name: "app_access", value: e.target.value === "true" })}
                     options={app_access}
                     className="div-contract-select"
                 />
+                {props.isEditing && (
+                    <div className="contract-status-container">
+                        <label className="contract-status-label">Status do Contrato</label>
+                        <div className="contract-status-toggle">
+                            <ToggleSwitch 
+                                isOn={props.contract.contract_status === true || props.contract.contract_status === "true"}
+                                onToggle={() => props.handleInputChange({ 
+                                    name: "contract_status", 
+                                    value: !(props.contract.contract_status === true || props.contract.contract_status === "true") 
+                                })}
+                            />
+                        </div>
+                    </div>
+                )}
                 <SelectInput
                     label="Local de trabalho na casa do Empregador"
                     name="workplace_employer"
-                    value={props.contract.workplace_employer}
+                    value={String(props.contract.workplace_employer)}
                     onChange={(e) => props.handleInputChange({ name: "workplace_employer", value: e.target.value === "true" })}
                     options={workplace_employer}
                     className="div-contract-select"
@@ -248,7 +248,7 @@ const ContractForm = (props) => {
                     placeholder=""
                     className="div-address-form"
                     value={props.contract.workplace_cep || ""}
-                    onChange={(e) => props.handleInputChange({ name: "workplace_cep", value: formatCEP(e.target.value) })}
+                    onChange={(e) => props.handleInputChange({ name: "workplace_cep", value: formatField("cep", e.target.value) })}
                     onBlur={handleBlurCEP}
                     disabled={isEmployerAddress}
                 />

@@ -2,6 +2,8 @@ import Notification from "../components/Notification";
 
 const handleError = (data) => {
 
+    console.log(`Error: ${data}`)
+
     if (data === "invalid cpf")
         return Notification.error("O CPF digitado é inválido. Tente novamente!")
 
@@ -15,7 +17,10 @@ const handleError = (data) => {
         return Notification.error("Não é possível excluir empregadores criados há menos de 2 anos!")
 
     if (data === "contract created less than 2 years ago")
-        return Notification.error("Não é possível excluir contratos criados há menos de 2 anos!")
+        return Notification.error("Não é possível excluir contratos criados há menos de 2 anos! Aguarde até completar 2 anos desde a data de admissão.")
+
+    if (data === "contract finished less than 2 years ago")
+        return Notification.error("Não é possível excluir contratos finalizados há menos de 2 anos! Aguarde até completar 2 anos desde a data de finalização.")
 
     if (Array.isArray(data) && data.some((error) => error.includes("name")))
         return Notification.error("O nome digitado não é válido. Tente novamente!")
@@ -43,6 +48,9 @@ const handleError = (data) => {
 
     if (Array.isArray(data) && data.some((error) => error.includes("exceeded weekly hours")))
        return Notification.error("O total de horas trabalhadas na semana ultrapassam o limite de 44 horas.");
+
+    if(typeof data === "string" && data.includes("Geocoding request failed"))
+        return Notification.error("O endereço digitado não é válido. Tente novamente!")
 
     return Notification.error("Erro interno do servidor. Tente novamente mais tarde!")
 }

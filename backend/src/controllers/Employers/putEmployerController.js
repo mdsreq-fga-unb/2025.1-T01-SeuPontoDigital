@@ -1,46 +1,46 @@
-import validateCPF from "../../middlewares/validateCPF.js";
 import putEmployerModel from "../../models/Employers/putEmployerModel.js";
 import findAdminByEmail from "../../models/Admin/findAdminByEmail.js";
-import verifyPassword from "../../middlewares/verifyPassword.js";
+import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqual.js";
+import validateCPF from "../../middlewares/validateCPF.js";
 
 const putEmployerController = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const updateDataEmployer = req.body;
-        const { passwordAdmin } = req.body;
-        const adminEmail = req.email;
-        
-        delete updateDataEmployer.activeEmployees;
-        delete updateDataEmployer.inactiveEmployees;
+    const { id } = req.params;
+    const { adminEmail, adminPassword } = req.headers;
+    const employerData = req.body;
 
-        if (!passwordAdmin) {
-            return res.status(400).json({ message: "password required" });
+    try {
+        if (!adminPassword) {
+            return res.status(400).json({ message: "Senha do administrador é obrigatória." });
         }
 
         const admin = await findAdminByEmail(adminEmail);
+
         if (!admin) {
-            return res.status(404).json({ message: "admin not found" });
+            return res.status(404).json({ message: "Administrador não encontrado." });
         }
 
-        const isPasswordValid = await verifyPassword(passwordAdmin, admin.password);
-        delete updateDataEmployer.passwordAdmin;
+        const isPasswordValid = await validateHashPasswordEqual(adminPassword, admin.password);
+
         if (!isPasswordValid) {
-            return res.status(401).json({ message: "invalid password" });
+            return res.status(401).json({ message: "Senha do administrador inválida." });
         }
 
-        if (updateDataEmployer.cpf && !validateCPF(updateDataEmployer.cpf))
-            return res.status(400).json({ message: "invalid cpf" });
-        
-        const error = await putEmployerModel(id, updateDataEmployer);
-        if (error) {
-            return res.status(500).json({ message:  "internal server error" });
+        if (employerData.cpf && !validateCPF(employerData.cpf)) {
+            return res.status(400).json({ message: "CPF inválido." });
         }
 
-        return res.status(200).json({ message: "employer updated successfully" });
+        const updatedEmployer = await putEmployerModel(id, employerData);
+
+        if (!updatedEmployer) {
+            return res.status(404).json({ message: "Empregador não encontrado." });
+        }
+
+        return res.status(200).json(updatedEmployer);
+
+    } catch (err) {
+        console.error('Error in putEmployerController:', err);
+        return res.status(500).json({ message: "Erro interno do servidor." });
     }
-    catch (err) {
-        return res.status(500).send({ message: "internal server error" });
-    }
-}
+};
 
 export default putEmployerController;

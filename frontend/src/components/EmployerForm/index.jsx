@@ -45,7 +45,7 @@ const EmployerForm = (props) => {
                     props.handleInputChange({ name: "street", value: data.logradouro });
                     props.handleInputChange({ name: "neighborhood", value: data.bairro });
                     props.handleInputChange({ name: "city", value: data.localidade });
-                    props.handleInputChange({ name: "state", value: data.uf });
+                    props.handleInputChange({ name: "uf", value: data.uf });
                 })
                 .catch((e) => console.error(e));
         }
@@ -78,11 +78,11 @@ const EmployerForm = (props) => {
                 <TextInput
                     label="Estado"
                     type="text"
-                    name="state"
+                    name="uf"
                     placeholder=""
                     className="div-address-form"
-                    value={props.employer.state || ""}
-                    onChange={(e) => props.handleInputChange({ name: "state", value: e.target.value })}
+                    value={props.employer.uf || ""}
+                    onChange={(e) => props.handleInputChange({ name: "uf", value: e.target.value })}
                 />
                 <TextInput
                     label="CPF"
@@ -132,11 +132,11 @@ const EmployerForm = (props) => {
                 <TextInput
                     label="Número"
                     type="text"
-                    name="home_number"
+                    name="house_number"
                     placeholder=""
                     className="div-address-form"
-                    value={props.employer.home_number || ""}
-                    onChange={(e) => props.handleInputChange({ name: "home_number", value: e.target.value })}
+                    value={props.employer.house_number || ""}
+                    onChange={(e) => props.handleInputChange({ name: "house_number", value: e.target.value })}
                 />
                 <TextInput
                     label="Email"

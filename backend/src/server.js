@@ -17,6 +17,15 @@ app.use(cors({
 app.use("/api", publicRoute);
 app.use("/api", privateRoute);
 
+// Catch-all middleware for unmatched routes
+app.use((req, res) => {
+    res.status(404).json({ 
+        message: "Route not found",
+        requested_url: req.originalUrl || req.url,
+        method: req.method
+    });
+});
+
 app.listen(PORT, () => {
-    console.log(`Server running`);
+    console.log(`Server started on port ${PORT}`);
 });

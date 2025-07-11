@@ -1,10 +1,20 @@
 import axios from 'axios';
 
-const API_BASE = process.env.EXPO_PUBLIC_API_BASE;
+
+// const api = axios.create({
+//   baseURL: "http://10.0.2.2:3333/api",
+//   timeout: 15000,
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// });
 
 const api = axios.create({
-  baseURL: API_BASE,
+  baseURL: "http://10.0.2.2:3333/api",
   timeout: 15000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
-export default api;
+export default api; 

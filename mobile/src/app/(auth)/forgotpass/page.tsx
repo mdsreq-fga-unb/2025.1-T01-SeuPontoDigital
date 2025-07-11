@@ -53,7 +53,7 @@ export default function ForgotPassScreen() {
 
   const handleCPFChange = (value: string) => setCpf(formatCPF(value));
 
-  const handleSendSMS = async () => {
+  const handlesendCodeSMS = async () => {
     if (!cpf || !phone) {
       Alert.alert('Erro', 'Preencha CPF e telefone.');
       return;
@@ -131,7 +131,7 @@ export default function ForgotPassScreen() {
             keyboardType="phone-pad"
             maxLength={15}
           />
-          <Pressable style={styles.accessButton} onPress={handleSendSMS} disabled={loading}>
+          <Pressable style={styles.accessButton} onPress={handlesendCodeSMS} disabled={loading}>
             {loading ? <ActivityIndicator color="#FFF" /> : <Text style={styles.accessButtonText}>Enviar Código</Text>}
           </Pressable>
         </>

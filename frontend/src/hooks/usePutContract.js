@@ -1,26 +1,26 @@
 import axios from "axios";
 import Notification from "../components/Notification";
-import { useNavigate } from "react-router-dom";
 import handleError from "../services/errors";
 
 const usePutContract = () => {
-    const navigate = useNavigate();
 
-    const putContract = async (contract, closeModal, passwordInput) => {
-        const token = localStorage.getItem("token");
-
+    const putContract = async (contractId, contractData) => {
         try {
-            await axios.put(`${import.meta.env.VITE_API_URL}/api/contract/${contract.id}`, { ...contract, passwordAdmin: passwordInput }, { headers: { Authorization: `Bearer ${token}` } }
+            const token = localStorage.getItem("token");
+            await axios.put(
+                `${import.meta.env.VITE_API_URL}/api/contract/${contractId}`, 
+                contractData, 
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                }
             );
-
-            if (closeModal) closeModal();
-            Notification.success("Contrato atualizado com sucesso!");
-            setTimeout(() => navigate("/contratos"), 1000);
-
+            return true;
         } catch (err) {
+            console.error("Error updating contract:", err);
             handleError(err.response?.data.message || err.response?.data.errors);
+            return false;
         }
-    }
+    };
     return putContract;
 }
 

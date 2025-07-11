@@ -34,7 +34,7 @@
   height: 95vh;
 }
 
-.form-contract-add{
+.form-contract-add {
   width: calc(100vw - 28rem);
   display: flex;
   flex-direction: column;
@@ -84,6 +84,29 @@
   cursor: pointer;
 }
 
+.form-time-select {
+  width: calc(100vw - 28rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--light-color);
+  border: .1rem solid var(--neutral-color);
+  border-radius: .8rem;
+  box-shadow: 0 .2rem .4rem var(--dark-color);
+  overflow-y: auto; 
+  box-sizing: border-box;
+  height: 95vh;
+}
+
 .container-dashboard {
   font-size: 1.8rem;
+}
+
+.section-time-select {
+  display: flex;
+  gap: 10rem;
 }
