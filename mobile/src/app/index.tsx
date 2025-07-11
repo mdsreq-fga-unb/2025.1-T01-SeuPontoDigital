@@ -16,24 +16,15 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { Link, useRouter } from 'expo-router';
-import axios from 'axios';
+import api from '../../constants/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
-
-const api = axios.create({
-  baseURL: 'http://localhost:3333/api', // URL base da sua API
-  timeout: 10000, // tempo limite da requisição (em ms)
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
 
 export default function EntryScreen() {
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  // const [api] = useState<AxiosInstance>(apiInstance);
   const router = useRouter();
 
   const validateCPF = (cpf: string): boolean => {
@@ -59,30 +50,52 @@ export default function EntryScreen() {
   const handleCPFChange = (value: string) => setCpf(formatCPF(value));
 
   async function handleVerify() {
+
+    if (!cpf && !password) {
+      Alert.alert('Erro', 'Preencha CPF e senha.');
+      return;
+    } else if (!cpf) {
+      Alert.alert('Erro', 'CPF não informado.');
+      return;
+    } else if (!password) {
+      Alert.alert('Erro', 'Senha não informada.');
+      return;
+    }
+    
     if (!validateCPF(cpf)) {
-      Alert.alert('Erro', 'CPF inválido!');
+      Alert.alert('Erro', 'CPF inválido.');
       return;
     }
 
     setLoading(true);
     try {
       const cleanCpf = cpf.replace(/\D/g, '');
-      const response = await api.post('/login-employer', { cpf: cleanCpf, password });
+      const response = await api.post('/api/login-app', { cpf: cleanCpf, password });
 
       if (response.data.token) {
         await AsyncStorage.setItem('userToken', response.data.token);
       }
 
-      Alert.alert('Sucesso', response.data.message || 'Login realizado com sucesso');
-      router.replace('/(panel)/profile/page');
+      const { userType } = response.data;
+
+      Alert.alert('Sucesso', response.data.message || 'Login realizado com sucesso!');
+      console.log(userType)
+      if(userType === 'employee'){
+        console.log("indo 1")
+        router.replace('/(panel)/profile/page');
+      } else if (userType === 'employer') {
+        console.log("indo 2")
+        router.replace('/(panel)/employer/page');
+      }
+      
     } catch (err: any) {
-      console.error("Erro completo:", err);
+      console.error("Erro completo:", JSON.stringify(err));
       if (err.message?.includes('Network Error')) {
         Alert.alert('Erro de Conexão', 'Não foi possível conectar ao servidor localhost:3333.');
       } else if (err.response?.status === 401) {
         Alert.alert('Acesso negado', 'CPF ou senha incorretos.');
       } else {
-        Alert.alert('Erro', err.response?.data?.message || err.message || 'Erro ao fazer login');
+        Alert.alert('Erro', err.response?.data?.message || err.message || 'Erro ao fazer login.');
       }
     } finally {
       setLoading(false);
@@ -145,6 +158,7 @@ export default function EntryScreen() {
 
               <Pressable
                 style={[styles.accessButton, loading && styles.disabledButton]}
+                //onPress={() => router.replace('/(panel)/profile/page')}
                 onPress={handleVerify}
                 disabled={loading}
               >

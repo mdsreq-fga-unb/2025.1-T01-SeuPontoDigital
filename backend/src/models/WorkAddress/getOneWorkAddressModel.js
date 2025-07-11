@@ -12,7 +12,9 @@ const getOneWorkAddressModel = async(addressID, employeeID) => {
                     city,
                     uf,
                     house_number,
-                    complement
+                    complement,
+                    latitude,
+                    longitude
                 ),
                 employee:id_employee(
                     id,

@@ -1,84 +1,66 @@
 import supabase from "../../config/supabase.js";
+import axios from "axios";
 
-const putEmployerModel = async (employerID, updateFields) => {
+const putEmployerModel = async (id, employerData) => {
     try {
-        // Separar dados do employer dos dados do endereço
-        const employerFields = {};
-        const addressFields = {};
-        
-        // Campos que vão para a tabela employers
-        const employerColumns = ['name', 'cpf', 'email', 'phone', 'password'];
-        // Campos que vão para a tabela address
-        const addressColumns = ['cep', 'street', 'uf', 'neighborhood', 'city', 'house_number', 'complement'];
-        
-        // Separar os campos
-        Object.keys(updateFields).forEach(key => {
-            if (employerColumns.includes(key)) {
-                if (key === 'cpf' && updateFields[key]) {
-                    // Limpar CPF removendo formatação
-                    employerFields[key] = updateFields[key].replace(/\D/g, '');
-                } else if (key === 'phone' && updateFields[key]) {
-                    // Formatar telefone para o padrão do Twilio - sempre garantir +55 no início
-                    let phone = updateFields[key].trim();
-                    
-                    // Se já tem o prefixo +55, manter como está
-                    if (phone.startsWith('+55')) {
-                        employerFields[key] = phone;
-                    } else {
-                        // Remover qualquer formatação (parênteses, espaços, traços) e garantir que seja apenas números
-                        phone = phone.replace(/\D/g, '');
-                        
-                        // Se começar com 55, remover para evitar duplicação
-                        if (phone.startsWith('55')) {
-                            phone = phone.substring(2);
-                        }
-                        
-                        // Sempre adicionar +55 no início
-                        employerFields[key] = `+55${phone}`;
-                    }
-                } else {
-                    employerFields[key] = updateFields[key];
-                }
-            } else if (addressColumns.includes(key)) {
-                addressFields[key] = updateFields[key];
-            }
-        });
+        // Se houver dados de endereço, atualiza o endereço primeiro
+        if (employerData.address) {
+            const { data: currentEmployer } = await supabase
+                .from('employers')
+                .select('id_address')
+                .eq('id', id)
+                .single();
 
-        // Buscar o id_address do employer
-        const { data: employer, error: employerFetchError } = await supabase
-            .from("employers")
-            .select("id_address")
-            .eq("id", employerID)
+            if (currentEmployer) {
+                const addressFields = { ...employerData.address };
+                
+                // Geocodificação do endereço
+                const addressQuery = encodeURIComponent(
+                    `${addressFields.street}, ${addressFields.number} - ${addressFields.neighborhood}, ${addressFields.city} - ${addressFields.state}, ${addressFields.cep}`
+                );
+
+                try {
+                    const response = await axios.get(
+                        `https://nominatim.openstreetmap.org/search?format=json&q=${addressQuery}`
+                    );
+
+                    if (response.data && response.data.length > 0) {
+                        addressFields.latitude = response.data[0].lat;
+                        addressFields.longitude = response.data[0].lon;
+                    }
+                } catch (error) {
+                    console.error('Geocoding error:', error);
+                }
+
+                // Atualiza o endereço
+                const { error: addressError } = await supabase
+                    .from('addresses')
+                    .update(addressFields)
+                    .eq('id', currentEmployer.id_address);
+
+                if (addressError) throw addressError;
+            }
+        }
+
+        // Remove o campo address dos dados do empregador
+        delete employerData.address;
+
+        // Atualiza os dados do empregador
+        const { data: updatedEmployer, error: employerError } = await supabase
+            .from('employers')
+            .update(employerData)
+            .eq('id', id)
+            .select()
             .single();
 
-        if (employerFetchError) return employerFetchError;
+        if (employerError) throw employerError;
 
-        // Atualizar dados do employer se houver
-        if (Object.keys(employerFields).length > 0) {
-            const { error: employerUpdateError } = await supabase
-                .from("employers")
-                .update(employerFields)
-                .eq("id", employerID);
+        return updatedEmployer;
 
-            if (employerUpdateError) return employerUpdateError;
-        }
-
-        // Atualizar dados do endereço se houver
-        if (Object.keys(addressFields).length > 0 && employer.id_address) {
-            const { error: addressUpdateError } = await supabase
-                .from("address")
-                .update(addressFields)
-                .eq("id", employer.id_address);
-
-            if (addressUpdateError) return addressUpdateError;
-        }
-
-        return null;
+    } catch (error) {
+        console.error('Error in putEmployerModel:', error);
+        throw error;
     }
-    catch (err) {
-        console.error("error in putEmployerModel", err);
-        return err;
-    }
-}
+};
 
 export default putEmployerModel;
