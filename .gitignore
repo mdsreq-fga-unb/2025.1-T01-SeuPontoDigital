@@ -34,3 +34,5 @@ venv/
 
 #logs
 logs/
+backend/logs/combined.log
+backend/logs/error.log

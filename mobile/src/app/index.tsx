@@ -70,10 +70,11 @@ export default function EntryScreen() {
     setLoading(true);
     try {
       const cleanCpf = cpf.replace(/\D/g, '');
-      const response = await api.post('/api/login-app', { cpf: cleanCpf, password });
+      const response = await api.post('/login-app', { cpf: cleanCpf, password });
 
       if (response.data.token) {
         await AsyncStorage.setItem('userToken', response.data.token);
+        await AsyncStorage.setItem('userCpf', cleanCpf);
       }
 
       const { userType } = response.data;

@@ -1,0 +1,17 @@
+.container-button-generate button {
+  width: 100%;
+  padding: 1.4rem;
+  border-radius: 0.4rem;
+  border: .1rem solid var(--dark-color);
+  box-sizing: border-box;
+  background-color: var(--primary-color);
+  font-size: 1.8rem;
+  color: var(--light-color);
+  transition-duration: 0.5s;
+  font-weight: 600;
+}
+
+.container-button-generate button:hover {
+  background-color: var(--secondary-color);
+  cursor: pointer;
+}

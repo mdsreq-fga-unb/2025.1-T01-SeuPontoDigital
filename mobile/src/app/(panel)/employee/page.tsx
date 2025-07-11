@@ -23,6 +23,7 @@ import axios from 'axios';
 import api from '@/constants/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
+import LocationTracker from '../../components/locationTracker';
 
 const { width, height } = Dimensions.get('window');
 
@@ -145,12 +146,17 @@ export default function Employee() {
           },
           timeout: 10000
         });
-        
+
+        console.log("Resposta da API:", JSON.stringify(response.data, null, 2));
         const { employee, contracts: contractsFromApi } = response.data;
 
         setEmployeeInfo(employee);
 
-        const formattedContracts = contractsFromApi.map((sc: any) => ({
+        // Garantir que contractsFromApi seja sempre um array
+        const contractsList = Array.isArray(contractsFromApi) ? contractsFromApi : [];
+        console.log("Número de contratos encontrados:", contractsList.length);
+
+        const formattedContracts = contractsList.map((sc: any) => ({
           id: sc.id_contract,
           employerName: sc.employerDetails.name,
           position: sc.contractDetails.office,
@@ -159,26 +165,31 @@ export default function Employee() {
         
         setContracts(formattedContracts);
 
-         if (formattedContracts.length > 1) {
-          const firstContract = formattedContracts[0];
-          setSelectedContract(formattedContracts[0]);
-          setCurrentContractId(formattedContracts[0].id);
-          await fetchTodayRecords(firstContract.id);
-          setContractsModalVisible(true);
-
+        // Se houver mais de um contrato, mostrar o modal sem pré-selecionar
+        if (formattedContracts.length > 1) {
+          console.log("Múltiplos contratos encontrados, exibindo modal de seleção");
+          
+          // Não pré-selecionar nenhum contrato para forçar o usuário a escolher
+          setSelectedContract(null);
+          setCurrentContractId(null);
+          
+          // Mostrar o modal de seleção de contratos
+          setTimeout(() => {
+            setContractsModalVisible(true);
+          }, 500); // Pequeno atraso para garantir que a renderização inicial seja concluída
+        
         } else if (formattedContracts.length === 1) {
+          console.log("Um único contrato encontrado, selecionando automaticamente");
           const singleContract = formattedContracts[0];
-          setSelectedContract(formattedContracts[0]);
-          setCurrentContractId(formattedContracts[0].id);
+          setSelectedContract(singleContract);
+          setCurrentContractId(singleContract.id);
           await fetchTodayRecords(singleContract.id);
-
         } else {
           Alert.alert(
             "Nenhum Contrato Encontrado", 
             "Não encontramos contratos de trabalho ativos para você. Entre em contato com o suporte se isso for um erro."
           );
         }
-
       } catch (error) {
         console.error('Erro ao buscar dados do empregado:', error);
         Alert.alert('Erro de Conexão', 'Não foi possível carregar seus dados. Verifique sua conexão e tente novamente.');
@@ -285,6 +296,29 @@ export default function Employee() {
     }
   };
 
+  // Função para navegar ao histórico
+  const navigateToHistory = () => {
+    if (!currentContractId) {
+      Alert.alert(
+        'Selecione um contrato',
+        'Para visualizar o histórico, é necessário selecionar um contrato primeiro.'
+      );
+      setContractsModalVisible(true);
+      return;
+    }
+
+    setHistoricalModalVisible(false);
+    router.push({
+      pathname: '/(panel)/timecard-history/page',
+      params: { 
+        employeeId: employeeInfo?.id || '',
+        employeeName: employeeInfo?.name || '',
+        contractId: currentContractId,
+        userType: 'employee'
+      }
+    });
+  };
+
   // Formatar a data atual
   const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth() + 1).toString().padStart(2, '0')}/${currentDate.getFullYear()}`;
   const formattedHour = `${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}`;
@@ -323,7 +357,13 @@ export default function Employee() {
         
         <TouchableOpacity 
           style={styles.headerAction}
-          onPress={() => setHistoricalModalVisible(true)}
+          onPress={() => {
+            if (currentContractId) {
+              setHistoricalModalVisible(true);
+            } else {
+              navigateToHistory();
+            }
+          }}
         >
           <Ionicons name="time-outline" size={24} color="#FFFFFF" />
         </TouchableOpacity>
@@ -705,7 +745,7 @@ export default function Employee() {
         </Animated.View>
         
         {/* Card de Ações Rápidas */}
-        <Animated.View 
+         <Animated.View 
           style={[
             styles.quickActionsCard, 
             { 
@@ -770,6 +810,18 @@ export default function Employee() {
             </TouchableOpacity>
           </View>
         </Animated.View>
+
+        {/* LocationTracker Component */}
+        <Animated.View 
+          style={[
+            { 
+              opacity: fadeAnim,
+              transform: [{ translateY: translateY }]
+            }
+          ]}
+        >
+          <LocationTracker />
+        </Animated.View>
         
         {/* Botão para voltar à tela inicial */}
         <TouchableOpacity 
@@ -798,159 +850,171 @@ export default function Employee() {
           if (selectedContract) {
             setContractsModalVisible(false);
           } else {
-            if (contracts.length > 0) {
-              selectContract(contracts[0]);
-            } else {
-              Alert.alert("Nenhum contrato disponível", "Não há contratos disponíveis para seleção.");
-            }
+            Alert.alert(
+              "Seleção Obrigatória", 
+              "Por favor, selecione um contrato para continuar.",
+              [{ text: "OK" }]
+            );
           }
         }}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Selecione um Contrato</Text>
-              {selectedContract && (
-                <TouchableOpacity 
-                  onPress={() => {
-                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                    setContractsModalVisible(false);
-                  }}
-                  style={styles.closeButton}
-                >
-                  <Ionicons name="close" size={24} color="#1565C0" />
-                </TouchableOpacity>
-              )}
-            </View>
-            
-            <View style={styles.modalDivider} />
-            
-            <Text style={styles.modalSubtitle}>Escolha o contrato para registrar o ponto:</Text>
-            
-            <FlatList
-              data={contracts}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <TouchableOpacity 
-                  style={[
-                    styles.contractItem, 
-                    selectedContract?.id === item.id && styles.contractItemSelected
-                  ]}
-                  onPress={() => selectContract(item)}
-                >
-                  <View style={styles.contractItemIconContainer}>
-                    <FontAwesome5 
-                      name="file-contract" 
-                      size={20} 
-                      color={selectedContract?.id === item.id ? "#1565C0" : "#78909C"} 
-                    />
-                  </View>
-                  <View style={styles.contractItemContent}>
-                    <Text style={styles.contractEmployer}>{item.employerName}</Text>
-                    <Text style={styles.contractPosition}>{item.position}</Text>
-                  </View>
-                  {selectedContract?.id === item.id && (
-                    <Ionicons name="checkmark-circle" size={24} color="#4CAF50" />
-                  )}
-                </TouchableOpacity>
-              )}
-              style={styles.contractsList}
-            />
-            
-            <TouchableOpacity
-              style={[
-                styles.confirmButton,
-                !selectedContract && styles.disabledConfirmButton
-              ]}
-              onPress={() => {
-                if (selectedContract) {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-
-                  // Verificar se o contrato mudou, usando o ID armazenado
-                  const isChangingContract = currentContractId !== null && 
-                                             currentContractId !== selectedContract.id;
-                  
-                  // Se estiver trocando de contrato
-                  if (isChangingContract) {
-                    Alert.alert(
-                      "Alterar contrato",
-                      "Ao trocar de contrato, todos os registros de ponto do dia atual serão resetados. Deseja continuar?",
-                      [
-                        {
-                          text: "Cancelar",
-                          style: "cancel"
-                        },
-                        {
-                          text: "Confirmar",
-                          onPress: () => {
-                            // Resetar todos os registros de ponto
-                            setTodayRecords({
-                              entrada: false,
-                              saidaAlmoco: false,
-                              voltaAlmoco: false,
-                              saida: false
-                            });
-                            
-                            // Também remover registros do dia atual do histórico
-                            const today = new Date();
-                            const formattedToday = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
-                            
-                            const updatedRecords = records.filter(record => record.date !== formattedToday);
-                            setRecords(updatedRecords);
-                            
-                            // Atualizar o ID do contrato atual
-                            setCurrentContractId(selectedContract.id);
-                            
-                            // Fechar o modal
-                            setContractsModalVisible(false);
-                            
-                            // Feedback de sucesso
-                            setTimeout(() => {
-                              Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-                              Alert.alert(
-                                "Contrato alterado", 
-                                `Agora você está registrando ponto como ${selectedContract.position} para ${selectedContract.employerName}.\nTodos os registros do dia atual foram resetados.`
-                              );
-                            }, 300);
-                          }
-                        }
-                      ]
-                    );
-                  } else {
-                    // Atualizar o ID do contrato atual mesmo se não for mudança
-                    setCurrentContractId(selectedContract.id);
-                    setContractsModalVisible(false);
-                    
-                    // Se for a primeira seleção, mostrar mensagem informativa
-                    setTimeout(() => {
-                      Alert.alert(
-                        "Contrato selecionado", 
-                        `Você está registrando ponto como ${selectedContract.position} para ${selectedContract.employerName}.`
-                      );
-                    }, 300);
-                  }
-                } else {
-                  // Nenhum contrato selecionado
-                  Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-                  Alert.alert(
-                    "Seleção necessária", 
-                    "Por favor, selecione um contrato para continuar.",
-                    [{ text: "OK", style: "default" }]
-                  );
-                }
-              }}
-            >
-              <Text style={[
-                styles.confirmButtonText,
-                !selectedContract && styles.disabledConfirmButtonText
-              ]}>
-                Confirmar
-              </Text>
-            </TouchableOpacity>
+      <View style={styles.modalContainer}>
+        <View style={styles.modalContent}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.modalTitle}>Selecione um Contrato</Text>
+            {selectedContract && (
+              <TouchableOpacity 
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setContractsModalVisible(false);
+                }}
+                style={styles.closeButton}
+              >
+                <Ionicons name="close" size={24} color="#1565C0" />
+              </TouchableOpacity>
+            )}
           </View>
+          
+          <View style={styles.modalDivider} />
+          
+          <Text style={styles.modalSubtitle}>
+            {contracts.length > 1 
+              ? "Você tem múltiplos contratos ativos. Escolha qual deseja utilizar:"
+              : "Escolha o contrato para registrar o ponto:"}
+          </Text>
+          
+          <FlatList
+            data={contracts}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <TouchableOpacity 
+                style={[
+                  styles.contractItem, 
+                  selectedContract?.id === item.id && styles.contractItemSelected
+                ]}
+                onPress={() => selectContract(item)}
+              >
+                <View style={styles.contractItemIconContainer}>
+                  <FontAwesome5 
+                    name="file-contract" 
+                    size={20} 
+                    color={selectedContract?.id === item.id ? "#1565C0" : "#78909C"} 
+                  />
+                </View>
+                <View style={styles.contractItemContent}>
+                  <Text style={styles.contractEmployer}>{item.employerName}</Text>
+                  <Text style={styles.contractPosition}>{item.position}</Text>
+                </View>
+                {selectedContract?.id === item.id && (
+                  <Ionicons name="checkmark-circle" size={24} color="#4CAF50" />
+                )}
+              </TouchableOpacity>
+            )}
+            style={styles.contractsList}
+          />
+          
+          <TouchableOpacity
+            style={[
+              styles.confirmButton,
+              !selectedContract && styles.disabledConfirmButton
+            ]}
+            disabled={!selectedContract}
+            onPress={() => {
+              if (selectedContract) {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+
+                // Verificar se o contrato mudou, usando o ID armazenado
+                const isChangingContract = currentContractId !== null && 
+                                          currentContractId !== selectedContract.id;
+                
+                // Se estiver trocando de contrato
+                if (isChangingContract) {
+                  Alert.alert(
+                    "Alterar contrato",
+                    "Ao trocar de contrato, todos os registros de ponto do dia atual serão resetados. Deseja continuar?",
+                    [
+                      {
+                        text: "Cancelar",
+                        style: "cancel"
+                      },
+                      {
+                        text: "Confirmar",
+                        onPress: () => {
+                          // Resetar todos os registros de ponto
+                          setTodayRecords({
+                            entrada: false,
+                            saidaAlmoco: false,
+                            voltaAlmoco: false,
+                            saida: false
+                          });
+                          
+                          // Também remover registros do dia atual do histórico
+                          const today = new Date();
+                          const formattedToday = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+                          
+                          const updatedRecords = records.filter(record => record.date !== formattedToday);
+                          setRecords(updatedRecords);
+                          
+                          // Atualizar o ID do contrato atual
+                          setCurrentContractId(selectedContract.id);
+                          
+                          // Buscar registros do dia para o novo contrato
+                          fetchTodayRecords(selectedContract.id);
+                          
+                          // Fechar o modal
+                          setContractsModalVisible(false);
+                          
+                          // Feedback de sucesso
+                          setTimeout(() => {
+                            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                            Alert.alert(
+                              "Contrato alterado", 
+                              `Agora você está registrando ponto como ${selectedContract.position} para ${selectedContract.employerName}.\nTodos os registros do dia atual foram resetados.`
+                            );
+                          }, 300);
+                        }
+                      }
+                    ]
+                  );
+                } else {
+                  // Atualizar o ID do contrato atual mesmo se não for mudança
+                  setCurrentContractId(selectedContract.id);
+                  
+                  // Buscar registros do dia para este contrato
+                  fetchTodayRecords(selectedContract.id);
+                  
+                  setContractsModalVisible(false);
+                  
+                  // Se for a primeira seleção, mostrar mensagem informativa
+                  setTimeout(() => {
+                    Alert.alert(
+                      "Contrato selecionado", 
+                      `Você está registrando ponto como ${selectedContract.position} para ${selectedContract.employerName}.`
+                    );
+                  }, 300);
+                }
+              } else {
+                // Nenhum contrato selecionado
+                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+                Alert.alert(
+                  "Seleção necessária", 
+                  "Por favor, selecione um contrato para continuar.",
+                  [{ text: "OK", style: "default" }]
+                );
+              }
+            }}
+          >
+            <Text style={[
+              styles.confirmButtonText,
+              !selectedContract && styles.disabledConfirmButtonText
+            ]}>
+              Confirmar
+            </Text>
+          </TouchableOpacity>
         </View>
-      </Modal>
-      
+      </View>
+    </Modal>
+          
       {/* Modal para histórico de pontos */}
       <Modal
         animationType="slide"
@@ -1022,11 +1086,21 @@ export default function Employee() {
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                 setHistoricalModalVisible(false);
+                
+                // Verificar se existe um contrato selecionado
+                if (!currentContractId) {
+                  Alert.alert('Selecione um contrato', 'Por favor, selecione um contrato para visualizar o histórico');
+                  return;
+                }
+                
+                // Navegação correta sem /page no final
                 router.push({
                   pathname: '/(panel)/timecard-history/page',
                   params: { 
-                    employeeId: currentContractId || '', 
-                    userType: 'employee' // Especifica que é visão de empregado
+                    employeeId: employeeInfo?.id || '',
+                    employeeName: employeeInfo?.name || '',
+                    contractId: currentContractId,
+                    userType: 'employee'
                   }
                 });
               }}

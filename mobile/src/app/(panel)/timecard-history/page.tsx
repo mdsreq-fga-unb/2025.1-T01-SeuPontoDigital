@@ -9,11 +9,15 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   FlatList,
-  Modal
+  Modal,
+  Alert
 } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import * as Haptics from 'expo-haptics';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '@/constants/api'; // Corrigir a importação da API com o caminho correto
 
 export default function TimecardHistory() {
   const router = useRouter();
@@ -22,8 +26,10 @@ export default function TimecardHistory() {
   const params = useLocalSearchParams();
   const employeeId = params.employeeId;
   const employeeName = params.employeeName;
+  const selectedContract = params.contractId;
   const userType = params.userType || 'employee'; // 'employer' ou 'employee'
 
+  console.log("contratoal", params.selectedContract)
   // Função auxiliar para verificar se é uma visualização de empregador
   const isEmployerView = () => userType === 'employer';
 
@@ -41,6 +47,32 @@ export default function TimecardHistory() {
     totalHours: string;
     hasAlert: boolean;
     alertReason: string;
+    extraData?: {
+      horasExtra: string;
+      cargaHoraria: string;
+      intervaloContrato: number;
+    };
+  }
+  
+  interface EmployeeData {
+    registros: {
+      [monthKey: string]: Array<{
+        data: string;
+        dia_semana: string;
+        entrada: string | null;
+        ida_almoco: string | null;
+        volta_almoco: string | null;
+        saida: string | null;
+        horas_trabalhadas: string | null;
+        horas_extra?: string;
+        carga_horaria_dia: string;
+        intervalo_contrato?: number;
+      }>;
+    };
+    empregado?: {
+      id: string;
+      nome?: string;
+    };
   }
   
   const [fullHistory, setFullHistory] = useState<TimecardRecord[]>([]);
@@ -58,34 +90,137 @@ export default function TimecardHistory() {
   const currentYear = new Date().getFullYear();
   const years = [currentYear, currentYear - 1, currentYear - 2];
   
-  // Função para calcular horas trabalhadas corretamente
-  const calculateWorkedHours = (entry: string, lunchOut: string, lunchIn: string, exit: string) => {
-    const [entryH, entryM] = entry.split(':').map(Number);
-    const [lunchOutH, lunchOutM] = lunchOut.split(':').map(Number);
-    const [lunchInH, lunchInM] = lunchIn.split(':').map(Number);
-    const [exitH, exitM] = exit.split(':').map(Number);
-    
-    // Converter tudo para minutos
-    const entryMinutes = entryH * 60 + entryM;
-    const lunchOutMinutes = lunchOutH * 60 + lunchOutM;
-    const lunchInMinutes = lunchInH * 60 + lunchInM;
-    const exitMinutes = exitH * 60 + exitM;
-    
-    // Calcular período da manhã e tarde
-    const morningMinutes = lunchOutMinutes - entryMinutes;
-    const afternoonMinutes = exitMinutes - lunchInMinutes;
-    const totalMinutes = morningMinutes + afternoonMinutes;
-    
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
-    
-    return `${hours}h${minutes > 0 ? ` ${minutes}m` : ''}`;
-  };
-
   // Função para obter o dia da semana
   const getDayOfWeek = (date: Date) => {
     const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
     return days[date.getDay()];
+  };
+
+  // Função para processar os registros da API
+  const processApiRecords = (employeeData: EmployeeData) => {
+    const records: TimecardRecord[] = [];
+  
+    // Verificar se employeeData e seus registros existem
+    if (!employeeData || !employeeData.registros) {
+      console.log("Dados de registros inválidos:", employeeData);
+      return records;
+    }
+    
+    // Contador para garantir chaves únicas mesmo para registros do mesmo dia
+    let counter = 0;
+    
+    // Percorre todos os meses disponíveis nos registros
+    Object.entries(employeeData.registros).forEach(([monthKey, monthRecords]) => {
+      // Verificar se monthRecords é um array
+      if (!Array.isArray(monthRecords)) {
+        console.log(`Registros para ${monthKey} não é um array:`, monthRecords);
+        return;
+      }
+  
+      // Para cada registro do mês
+      monthRecords.forEach(record => {
+        // Verificar se record.data existe antes de tentar split
+        if (!record || !record.data) {
+          console.log("Registro sem data:", record);
+          return; // Pular este registro e continuar com o próximo
+        }
+        
+        try {
+          // Incrementar o contador para garantir unicidade
+          counter++;
+          
+          // Converter data do formato "2025-06-24" para Date e formato legível
+          const [year, month, day] = record.data.split('-');
+          const formattedDate = `${day}/${month}/${year}`;
+          const date = new Date(`${year}-${month}-${day}`);
+          
+          // Processar horários - tratar valores nulos
+          const entry = record.entrada ? record.entrada.substring(0, 5) : '--:--';
+          const lunchOut = record.ida_almoco ? record.ida_almoco.substring(0, 5) : '--:--';
+          const lunchIn = record.volta_almoco ? record.volta_almoco.substring(0, 5) : '--:--';
+          const exit = record.saida ? record.saida.substring(0, 5) : '--:--';
+          
+          // Verificar alertas baseado em registros incompletos ou horas insuficientes
+          const hasAlert: boolean = Boolean(
+            !record.entrada || 
+            !record.saida || 
+            !record.ida_almoco || 
+            !record.volta_almoco ||
+            record.horas_trabalhadas === 'NaN' ||
+            (record.horas_trabalhadas && parseFloat(record.horas_trabalhadas) < parseFloat(record.carga_horaria_dia || '0')));
+          
+          // Determinar o motivo do alerta
+          let alertReason = '';
+          if (hasAlert) {
+            if (!record.entrada && !record.saida && !record.ida_almoco && !record.volta_almoco) {
+              alertReason = 'Dia ausente';
+            } else if (!record.saida || !record.ida_almoco || !record.volta_almoco) {
+              alertReason = 'Registro incompleto';
+            } else if (record.horas_trabalhadas === 'NaN') {
+              alertReason = 'Cálculo de horas indisponível';
+            } else if (record.horas_trabalhadas && record.carga_horaria_dia && 
+                      parseFloat(record.horas_trabalhadas) < parseFloat(record.carga_horaria_dia)) {
+              alertReason = 'Horário fora do padrão';
+            }
+          }
+          
+          // Formatar horas trabalhadas
+          let totalHours = '--';
+          if (record.horas_trabalhadas && record.horas_trabalhadas !== 'NaN') {
+            const hoursValue = parseFloat(record.horas_trabalhadas);
+            const hours = Math.floor(hoursValue);
+            const minutes = Math.round((hoursValue - hours) * 60);
+            totalHours = `${hours}h${minutes > 0 ? ` ${minutes}m` : ''}`;
+          }
+          
+          // Mapear dias da semana para o formato abreviado
+          const dayOfWeekMap = {
+            'segunda-feira': 'Seg',
+            'terça-feira': 'Ter',
+            'quarta-feira': 'Qua',
+            'quinta-feira': 'Qui',
+            'sexta-feira': 'Sex',
+            'sábado': 'Sáb',
+            'domingo': 'Dom'
+          };
+          
+          const dayOfWeek = record.dia_semana && typeof record.dia_semana === 'string' 
+            ? (dayOfWeekMap[record.dia_semana as keyof typeof dayOfWeekMap] || getDayOfWeek(date))
+            : getDayOfWeek(date);
+          
+          // Criar o objeto de registro no formato esperado pelo componente
+          // Usando chave única combinando data e contador
+          records.push({
+            id: `record-${record.data}-${counter}`,
+            date: formattedDate,
+            fullDate: date,
+            dayOfWeek: dayOfWeek,
+            records: {
+              entry,
+              lunchOut,
+              lunchIn,
+              exit
+            },
+            totalHours,
+            hasAlert,
+            alertReason,
+            // Dados extras para estatísticas
+            extraData: {
+              horasExtra: record.horas_extra || '0.00',
+              cargaHoraria: record.carga_horaria_dia || '0.00',
+              intervaloContrato: record.intervalo_contrato || 60
+            }
+          });
+        } catch (error) {
+          console.error("Erro ao processar registro:", error, record);
+        }
+      });
+    });
+    
+    // Ordenar por data (mais recente primeiro)
+    records.sort((a, b) => b.fullDate.getTime() - a.fullDate.getTime());
+    
+    return records;
   };
 
   // Função para calcular estatísticas detalhadas
@@ -93,21 +228,26 @@ export default function TimecardHistory() {
     const totalRecords = filteredHistory.length;
     const alertsCount = filteredHistory.filter(item => item.hasAlert).length;
     
-    // Calcular diferentes tipos de alertas (exemplos fictícios para demonstração)
+    // Calcular diferentes tipos de alertas baseado nas razões reais
     const lateCount = filteredHistory.filter(item => 
       item.hasAlert && item.alertReason.includes('padrão')).length;
     
     const absentCount = filteredHistory.filter(item => 
-      item.hasAlert && item.records.entry === '--:--').length;
+      item.hasAlert && item.alertReason === 'Dia ausente').length;
     
     const withMedicalCertificateCount = filteredHistory.filter(item => 
       item.hasAlert && item.alertReason.includes('atestado')).length;
     
+    const incompleteCount = filteredHistory.filter(item => 
+      item.hasAlert && item.alertReason.includes('incompleto')).length;
+    
     const holidaysCount = filteredHistory.filter(item => 
-      item.hasAlert && item.alertReason.includes('feriado')).length;
-      
+      item.dayOfWeek === 'Dom' || 
+      (item.hasAlert && item.alertReason.includes('feriado'))).length;
+    
     // Calcular total de horas
     const totalMinutes = filteredHistory.reduce((acc, item) => {
+      if (item.totalHours === '--') return acc;
       const [hours, minutes] = item.totalHours.match(/(\d+)h(?:\s(\d+)m)?/)?.slice(1) || ['0', '0'];
       return acc + (parseInt(hours) * 60) + (parseInt(minutes || '0'));
     }, 0);
@@ -116,19 +256,41 @@ export default function TimecardHistory() {
     const remainingMinutes = totalMinutes % 60;
     const totalHoursFormatted = `${totalHours}h${remainingMinutes > 0 ? ` ${remainingMinutes}m` : ''}`;
     
-    // Para exemplos fictícios de horas extras
-    const overtime50 = `${Math.floor(totalHours * 0.15)}h ${Math.floor(remainingMinutes * 0.15)}m`;
-    const overtime100 = `${Math.floor(totalHours * 0.08)}h ${Math.floor(remainingMinutes * 0.08)}m`;
+    // Calcular horas extras com base nos dados reais
+    const overtimeMinutes = filteredHistory.reduce((acc, item) => {
+      if (!item.extraData?.horasExtra) return acc;
+      const horasExtra = parseFloat(item.extraData.horasExtra);
+      if (isNaN(horasExtra)) return acc;
+      
+      const hours = Math.floor(horasExtra);
+      const minutes = Math.round((horasExtra - hours) * 60);
+      return acc + (hours * 60) + minutes;
+    }, 0);
+    
+    // Dividindo as horas extras em 50% e 100% com base no dia da semana
+    const overtimeMinutes50 = overtimeMinutes * 0.7; // 70% são em dias úteis (estimativa)
+    const overtimeMinutes100 = overtimeMinutes * 0.3; // 30% são em domingos/feriados (estimativa)
+    
+    const overtime50Hours = Math.floor(overtimeMinutes50 / 60);
+    const overtime50Minutes = Math.round(overtimeMinutes50 % 60);
+    
+    const overtime100Hours = Math.floor(overtimeMinutes100 / 60);
+    const overtime100Minutes = Math.round(overtimeMinutes100 % 60);
+    
+    const overtime50 = `${overtime50Hours}h${overtime50Minutes > 0 ? ` ${overtime50Minutes}m` : ''}`;
+    const overtime100 = `${overtime100Hours}h${overtime100Minutes > 0 ? ` ${overtime100Minutes}m` : ''}`;
     
     // Calcular média diária
-    const avgHoursPerDay = totalRecords > 0 ? (totalMinutes / totalRecords / 60).toFixed(1) : 0;
+    const validRecords = filteredHistory.filter(item => item.totalHours !== '--').length;
+    const avgHoursPerDay = validRecords > 0 ? (totalMinutes / validRecords / 60).toFixed(1) : '0.0';
     
     return {
       totalRecords,
       alertsCount,
       lateCount,
-      absentCount, 
+      absentCount,
       withMedicalCertificateCount,
+      incompleteCount,
       holidaysCount,
       totalHoursFormatted,
       overtime50,
@@ -137,75 +299,138 @@ export default function TimecardHistory() {
     };
   };
 
-  // Simulação de dados para demonstração - em produção viria de uma API
+  // Atualize o useEffect para buscar os dados do histórico do backend
   useEffect(() => {
-    // Simular carregamento de dados
-    setLoading(true);
-    
-    setTimeout(() => {
-      // Gerar dados de exemplo para os últimos 60 dias
-      const exampleData = [];
-      const today = new Date();
-      
-      for (let i = 0; i < 60; i++) {
-        const date = new Date();
-        date.setDate(today.getDate() - i);
+    const fetchRecords = async () => {
+      try {
+        setLoading(true);
+  
+        // Obter token de autenticação
+        const token = await AsyncStorage.getItem('userToken');
         
-        // Pular finais de semana para simular dias úteis
-        const dayOfWeek = date.getDay();
-        if (dayOfWeek === 0 || dayOfWeek === 6) continue;
+        if (!token) {
+          console.error("Token de autenticação não encontrado");
+          Alert.alert("Erro de Autenticação", "Sessão expirada. Por favor, faça login novamente.");
+          setLoading(false);
+          return;
+        }
         
-        const formattedDate = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+        // Parâmetros de consulta para filtrar por empregado
+        const params: Record<string, string> = {};
+        if (employeeId) {
+          params.employId = Array.isArray(employeeId) ? employeeId[0] : String(employeeId);
+          console.log("Usando employeeId:", params.employId);
+        } else {
+          const userId = await AsyncStorage.getItem('userId');
+          if (userId) {
+            params.employId = userId;
+            console.log("Usando userId do AsyncStorage:", userId);
+          } else {
+            throw new Error("ID do empregado não encontrado");
+          }
+        }
         
-        // Gerar horários aleatórios realistas
-        const entryHour = 8 + Math.floor(Math.random() * 2);
-        const entryMin = Math.floor(Math.random() * 30);
+        // Adicionar início e fim do mês como parâmetros
+        const startDate = new Date(selectedYear, selectedMonth, 1);
+        const endDate = new Date(selectedYear, selectedMonth + 1, 0);
         
-        const lunchOutHour = 12 + Math.floor(Math.random() * 2);
-        const lunchOutMin = Math.floor(Math.random() * 60);
-        
-        const lunchInHour = lunchOutHour + 1;
-        const lunchInMin = Math.floor(Math.random() * 60);
-        
-        const exitHour = 17 + Math.floor(Math.random() * 3);
-        const exitMin = Math.floor(Math.random() * 60);
-        
-        // Adicionar alguns registros com alertas (cerca de 10%)
-        const hasAlert = Math.random() < 0.1;
+        params.inicio = startDate.toISOString().split('T')[0];
+        params.fim = endDate.toISOString().split('T')[0];
 
-        // Calcular horas trabalhadas
-        const workedHours = calculateWorkedHours(
-          `${String(entryHour).padStart(2, '0')}:${String(entryMin).padStart(2, '0')}`,
-          `${String(lunchOutHour).padStart(2, '0')}:${String(lunchOutMin).padStart(2, '0')}`,
-          `${String(lunchInHour).padStart(2, '0')}:${String(lunchInMin).padStart(2, '0')}`,
-          `${String(exitHour).padStart(2, '0')}:${String(exitMin).padStart(2, '0')}`
-        );
-
-        // Organizar em um objeto adequado para a tabela
-        exampleData.push({
-          id: `record-${i}`,
-          date: formattedDate,
-          fullDate: date,
-          dayOfWeek: getDayOfWeek(date),
-          records: {
-            entry: `${String(entryHour).padStart(2, '0')}:${String(entryMin).padStart(2, '0')}`,
-            lunchOut: `${String(lunchOutHour).padStart(2, '0')}:${String(lunchOutMin).padStart(2, '0')}`,
-            lunchIn: `${String(lunchInHour).padStart(2, '0')}:${String(lunchInMin).padStart(2, '0')}`,
-            exit: `${String(exitHour).padStart(2, '0')}:${String(exitMin).padStart(2, '0')}`
-          },
-          totalHours: workedHours,
-          hasAlert: hasAlert,
-          alertReason: hasAlert ? 'Horário fora do padrão' : ''
-        });
+        console.log("Adicionando contrato", selectedContract)
+        if(selectedContract){
+          params.contractId = selectedContract as string;
+        }
+        
+        console.log("Enviando parâmetros:", params);
+        
+        let response;
+        if(userType === "employee"){
+          response = await api.get('/worklog', { 
+            params,
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        } else if (userType === "employer"){
+          response = await api.get('/worklogEmployer', { 
+            params,
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        }
+        
+        console.log("Resposta recebida da API");
+        
+        if (response?.data && Array.isArray(response.data)) {
+          // Exibir a estrutura da resposta para debugging
+          console.log("Estrutura da resposta:", 
+            JSON.stringify(response.data.map(item => ({
+              id: item.empregado?.id,
+              nome: item.empregado?.nome,
+              temRegistros: !!item.registros,
+              meses: item.registros ? Object.keys(item.registros) : []
+            }))));
+          
+          // Encontra os dados do empregado atual
+          const employeeData = employeeId 
+            ? response.data.find((emp: EmployeeData) => emp.empregado?.id === params.employId) 
+            : response.data[0];
+              
+          if (employeeData) {
+            console.log("Empregado encontrado:", employeeData.empregado?.nome);
+            const processedRecords = processApiRecords(employeeData);
+            setFullHistory(processedRecords);
+          } else {
+            console.error("Dados do empregado não encontrados na resposta");
+            Alert.alert("Aviso", "Não encontramos registros para este funcionário.");
+            setFullHistory([]);
+          }
+        } else {
+          console.log("Formato de resposta inválido:", response?.data);
+          Alert.alert("Aviso", "Os dados retornados estão em um formato inesperado.");
+          setFullHistory([]);
+        }
+      } catch (error) {
+        console.error("Erro completo:", error);
+        
+        if (axios.isAxiosError(error)) {
+          console.error("Erro Axios:", {
+            status: error.response?.status,
+            statusText: error.response?.statusText,
+            data: error.response?.data,
+            message: error.message
+          });
+          
+          if (error.response?.status === 401) {
+            Alert.alert(
+              "Sessão expirada", 
+              "Sua sessão expirou. Por favor, faça login novamente."
+            );
+          } else {
+            Alert.alert(
+              "Erro de servidor", 
+              `Não foi possível buscar os registros. (Erro: ${error.response?.status || "desconhecido"})`
+            );
+          }
+        } else if (error instanceof Error) {
+          Alert.alert("Erro", error.message);
+        } else {
+          Alert.alert(
+            "Erro inesperado", 
+            "Ocorreu um erro ao tentar carregar o histórico."
+          );
+        }
+        
+        setFullHistory([]);
+      } finally {
+        setLoading(false);
       }
-      
-      // Ordenar por data (mais recente primeiro)
-      exampleData.sort((a, b) => b.fullDate.getTime() - a.fullDate.getTime());
-      
-      setFullHistory(exampleData);
-      setLoading(false);
-    }, 1500);
-  }, []);
+    };
+    
+    fetchRecords();
+  }, [employeeId, selectedMonth, selectedYear]);
   
   // Filtrar histórico por mês e ano selecionados
   const filteredHistory = fullHistory.filter(item => {
