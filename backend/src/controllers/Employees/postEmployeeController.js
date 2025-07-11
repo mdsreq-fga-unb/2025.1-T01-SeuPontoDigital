@@ -1,26 +1,21 @@
-import validateCPF from "../../middlewares/validateCPF.js";
 import postEmployeeModel from "../../models/Employees/postEmployeeModel.js";
+import validateCPF from "../../middlewares/validateCPF.js";
 
 const postEmployeeController = async (req, res) => {
     try {
-        const employee = req.body;
+        const employeeData = req.body;
 
-        if (validateCPF(employee.cpf)) {
-            const error = await postEmployeeModel(employee);
-            
-            if (error) {
-                return res.status(400).json({ message: error});
-            }
-            
-            return res.status(201).json({ message: "employee has been added successfully" });
+        if (!validateCPF(employeeData.cpf)) {
+            return res.status(400).json({ message: "CPF inválido." });
         }
 
-        return res.status(400).json({ message: "invalid cpf" });
+        const newEmployee = await postEmployeeModel(employeeData);
+        return res.status(201).json(newEmployee);
+
+    } catch (err) {
+        console.error('Error in postEmployeeController:', err);
+        return res.status(500).json({ message: "Erro interno do servidor." });
     }
-    catch (err) {
-        req.logger.error(err.message);
-        return res.status(500).send({message: "internal server error"});
-    }
-}
+};
 
 export default postEmployeeController;
