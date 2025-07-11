@@ -9,6 +9,7 @@ const sendCodeSMS = async (phone) => {
       .create({ to: phone, channel: 'sms' });
 
     return verification;
+
   } catch (error) {
     console.error('Erro ao enviar SMS:', error);
     throw new Error('Falha ao enviar código SMS.');

@@ -3,6 +3,8 @@ import clientTwilio from "../config/twilio.js";
 
 const validateCodeSMS = async (phone, code) => {
     try {
+        console.log(phone)
+
         const verificationCheck = await clientTwilio.verify.v2
             .services(TWILIO_VERIFY_SERVICE_ID)
             .verificationChecks
@@ -11,7 +13,7 @@ const validateCodeSMS = async (phone, code) => {
         return verificationCheck.status === 'approved';
     } 
     catch (error) {
-        throw new Error('failed in code verification');
+        throw new Error(error);
     }
 }
 

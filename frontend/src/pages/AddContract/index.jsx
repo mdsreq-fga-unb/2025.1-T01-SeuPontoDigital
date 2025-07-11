@@ -2,14 +2,12 @@ import "../pagesStyle.css";
 import { useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import usePostCompleteContract from "../../hooks/usePostCompleteContract.js";
-import useFetchEmployer from "../../hooks/useFetchEmployer.js";
 import ContractForm from "../../components/ContractForm/index.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 import Notification from "../../components/Notification";
 
 const AddContract = () => {
     const postCompleteContract = usePostCompleteContract();
-    const { fetchOneEmployer } = useFetchEmployer();
     const navigate = useNavigate();
     const {id} = useParams();
     const [contract, setContract] = useState({
