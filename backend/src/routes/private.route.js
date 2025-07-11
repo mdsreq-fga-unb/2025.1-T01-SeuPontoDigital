@@ -17,8 +17,9 @@ import putEmployerController from "../controllers/Employers/putEmployerControlle
 // import putContractController from "../controllers/ContractEmployee/putContractController.js"; já foi declarada na dev, veio de us15
 import postWorklogController from "../controllers/Worklog/postWorklogController.js";
 import putWorklogController from "../controllers/Worklog/putWorklogController.js";
-// import getEmployeeAndContractsController from "../controllers/ContractEmployee/getEmployeeAndContractsController.js"; não existe mais
+import getEmployeeAndContractsController from "../controllers/Contracts/getEmployeeAndContractsController.js";
 import getTodayRecordsController from "../controllers/Worklog/getTodayRecordsController.js";
+import getRecordsController from "../controllers/Worklog/getRecordsController.js"
 import getEmployeesController from "../controllers/Employees/getEmployeesController.js";
 import getOneEmployeeController from "../controllers/Employees/getOneEmployeeController.js";
 import postEmployeeController from "../controllers/Employees/postEmployeeController.js";
@@ -37,6 +38,8 @@ import postEmployController from "../controllers/Employ/postEmployController.js"
 import getAllSignContractController from "../controllers/SignContract/getAllSignContractController.js";
 import getOneSignContractController from "../controllers/SignContract/getOneSignContractController.js";
 import postSignContractController from "../controllers/SignContract/postSignContractController.js";
+import getEmployerRecordsController from "../controllers/Worklog/getEmployerRecordsController.js";
+import authVerifyToken from "../middlewares/authVerifyToken.js";
 
 const privateRoute = express.Router();
 
@@ -79,6 +82,7 @@ privateRoute.get("/employee/:id", getOneEmployeeController);
 privateRoute.post("/employee", validateUser, postEmployeeController);
 privateRoute.put("/employee/:id", validateUser, putEmployeeController);
 privateRoute.delete("/employee/:id", validateDateTwoYearsEmployee, deleteEmployeeController);
+privateRoute.get("/employee-contracts", getEmployeeAndContractsController);
 
 // ================= EMPLOY =================
 privateRoute.get("/employ", getAllEmployController);
@@ -93,7 +97,10 @@ privateRoute.post("/sign-contract", postSignContractController);
 
 // ================== WORKLOGS ==================
 privateRoute.get("/worklogToday/:id", getTodayRecordsController);
+privateRoute.get("/worklog", authVerifyToken, getRecordsController); //US17 nova, apague este comentário em produção
+privateRoute.get("/worklogEmployer", authVerifyToken, getEmployerRecordsController);
 privateRoute.post("/worklog", postWorklogController);
 privateRoute.put("/worklog", putWorklogController);
+
 
 export default privateRoute;

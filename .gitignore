@@ -31,3 +31,8 @@ app-example
 
 # Python virtual environment 
 venv/
+
+#logs
+logs/
+backend/logs/combined.log
+backend/logs/error.log

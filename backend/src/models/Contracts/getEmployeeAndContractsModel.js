@@ -2,6 +2,7 @@ import supabase from "../../config/supabase.js";
 
 const getEmployeeAndContractsModel = async (employeeId) => {
     try {
+        // Busca dados do funcionário
         const { data: employeeData, error: employeeError } = await supabase
             .from('employees')
             .select('id, name, phone, cpf')
@@ -12,10 +13,12 @@ const getEmployeeAndContractsModel = async (employeeId) => {
             console.error('Erro ao buscar funcionário por ID:', employeeError.message);
             return { error: employeeError.message };
         }
+
         if (!employeeData) {
             return { data: null, message: "Funcionário não encontrado." };
         }
 
+        // Busca os contratos assinados com detalhes do contrato, do empregador e do endereço do empregador
         const { data: contractsData, error: contractsError } = await supabase
             .from('sign_contract')
             .select(`
@@ -37,7 +40,10 @@ const getEmployeeAndContractsModel = async (employeeId) => {
                 id_contract: sc.id_contract,
                 id_employer: sc.id_employer,
                 contractDetails: sc.contracts,
-                employerDetails: sc.employers
+                employerDetails: {
+                    ...sc.employers,
+                    address: sc.employers.address
+                }
             }))
         };
 

@@ -11,7 +11,7 @@ const useLogin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/login-admin`, { email, password, });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, { email, password, });
 
       localStorage.setItem("token", response.data.token);
       Notification.success("Usuário autenticado com sucesso!");
