@@ -1,0 +1,73 @@
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.3s ease;
+}
+
+.toggle-switch.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.toggle-switch-slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-switch-slider.on {
+    background-color: #4CAF50;
+}
+
+.toggle-switch-slider.off {
+    background-color: #ccc;
+}
+
+.toggle-switch-knob {
+    position: absolute;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch-slider.on .toggle-switch-knob {
+    transform: translateX(20px);
+}
+
+.toggle-switch-slider.off .toggle-switch-knob {
+    transform: translateX(2px);
+}
+
+.toggle-switch-label {
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 50px;
+    text-align: left;
+}
+
+.toggle-switch-slider.on + .toggle-switch-label {
+    color: #4CAF50;
+}
+
+.toggle-switch-slider.off + .toggle-switch-label {
+    color: #666;
+}
+
+.toggle-switch:hover:not(.disabled) .toggle-switch-slider {
+    transform: scale(1.05);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.toggle-switch:active:not(.disabled) .toggle-switch-slider {
+    transform: scale(0.95);
+}

@@ -9,7 +9,7 @@ const verifyDateContract = async (req, res, next) => {
             return res.status(404).send({ message: "contract not found" });
         }
         
-        const dateCreatedContract = new Date(contract.contract_start_date);
+        const dateCreatedContract = new Date(contract.start_date);
         const dateNow = new Date();
         const twoYearsInMilliseconds = 2 * 365.5 * 24 * 60 * 60 * 1000;
 

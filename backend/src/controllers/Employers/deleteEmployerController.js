@@ -5,9 +5,13 @@ import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqu
 const deleteEmployerController = async (req, res) => {
     
     try {
-        const employerID  = req.id;
-        const {passwordAdmin} = req.body;
+        const { id: employerID } = req.params;
+        const { password: passwordAdmin } = req.body;
         const adminEmail = req.email;
+
+        if (!passwordAdmin) {
+            return res.status(400).json({ message: "password required" });
+        }
 
         const admin = await findAdminByEmail(adminEmail);
         if (!admin) {
@@ -21,13 +25,14 @@ const deleteEmployerController = async (req, res) => {
 
         const error = await deleteEmployerModel(employerID);
         if (error) {
-            return res.status(400).json({ message: "insert failed: 'id_employer' cannot be null in 'sign_contract' table"});
+            return res.status(400).json({ message: "delete failed: " + (error.message || JSON.stringify(error))});
         }
 
         return res.status(200).json({ message: "employer deleted" });
     }
     catch (err) {
-        return res.status(500).send({ message: err.message});  
+        console.error("Error in deleteEmployerController:", err);
+        return res.status(500).send({ message: "internal server error"});  
     }
 }
 

@@ -8,25 +8,36 @@ function toBrazilDateISO(dateStr) {
 
 const postContractModel = async (contract) => {
     try {
+        console.log("Creating contract with data:", contract);
+        
         const start_date = contract.start_date
             ? toBrazilDateISO(contract.start_date)
             : null;
 
-        const { data:contractID, error } = await supabase.from("contracts").insert({
-            function: contract.function,
-            salary: contract.salary,
+        const contractData = {
+            function: contract.function || null,
+            salary: parseFloat(contract.salary) || 0,
             start_date: start_date,
             end_date: contract.end_date || null,
-            access_app: contract.access_app ?? true,
-            status: contract.status ?? true
-        }).select("id")
+            access_app: Boolean(contract.access_app),
+            status: Boolean(contract.status)
+        };
+
+        console.log("Inserting contract data:", contractData);
+
+        const { data: contractID, error } = await supabase.from("contracts").insert(contractData).select("id");
 
         if (error) {
-            throw new Error("failed to insert contract");
+            console.error("Supabase error:", error);
+            throw new Error("failed to insert contract: " + error.message);
         }
+
+        console.log("Contract created successfully:", contractID);
+        return contractID[0]?.id;
     }
     catch (err) {
-        console.error("error in postContractModel");
+        console.error("error in postContractModel:", err);
+        return null;
     }
 }
 

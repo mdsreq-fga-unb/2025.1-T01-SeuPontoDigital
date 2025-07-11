@@ -1,12 +1,16 @@
 import "../pagesStyle.css";
 import { useState } from "react";
 import Sidebar from "../../components/Sidebar";
-import usePostContract from "../../hooks/usePostContract.js";
+import usePostCompleteContract from "../../hooks/usePostCompleteContract.js";
+import useFetchEmployer from "../../hooks/useFetchEmployer.js";
 import ContractForm from "../../components/ContractForm/index.jsx";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import Notification from "../../components/Notification";
 
 const AddContract = () => {
-    const postContract = usePostContract();
+    const postCompleteContract = usePostCompleteContract();
+    const { fetchOneEmployer } = useFetchEmployer();
+    const navigate = useNavigate();
     const {id} = useParams();
     const [contract, setContract] = useState({
         employer_id: id,
@@ -37,6 +41,58 @@ const AddContract = () => {
         setContract((prev) => ({ ...prev, [name]: value }));
     };
 
+    const extractWorkScheduleData = (contract) => {
+        const workSchedule = {
+            type: contract.work_schedule_type
+        };
+
+        // Adiciona os horários dos dias da semana baseado no work_days
+        if (contract.work_days && Array.isArray(contract.work_days)) {
+            contract.work_days.forEach(dayInfo => {
+                if (dayInfo.day && dayInfo.start && dayInfo.end) {
+                    const dayMapping = {
+                        'segunda': 'monday',
+                        'terca': 'tuesday', 
+                        'quarta': 'wednesday',
+                        'quinta': 'thursday',
+                        'sexta': 'friday',
+                        'sabado': 'saturday',
+                        'domingo': 'sunday'
+                    };
+                    
+                    const englishDay = dayMapping[dayInfo.day];
+                    if (englishDay) {
+                        workSchedule[`${englishDay}_start`] = dayInfo.start;
+                        workSchedule[`${englishDay}_end`] = dayInfo.end;
+                    }
+                }
+            });
+        }
+
+        return workSchedule;
+    };
+
+    const extractWorkBreakData = (contract) => {
+        if (contract.break_type === "fixed") {
+            const [hours, minutes] = contract.break_interval.split(':');
+            return {
+                type: 'flex',
+                duration_minutes: parseInt(hours) * 60 + parseInt(minutes),
+                // Garantir que campos de horário sejam explicitamente nulos
+                break_start: null,
+                break_end: null
+            };
+        } else {
+            return {
+                type: 'fixed',
+                break_start: contract.break_start,
+                break_end: contract.break_end,
+                // Garantir que campo de duração seja explicitamente nulo
+                duration_minutes: null
+            };
+        }
+    };
+
     const validateBreak = (contract) => {
         if (contract.break_type === "fixed") {
             if (!contract.break_interval) return false;
@@ -54,11 +110,79 @@ const AddContract = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        
+        // Validação básica dos campos obrigatórios
+        if (!contract.name || !contract.cpf || !contract.job_function || !contract.salary) {
+            Notification.error("Preencha todos os campos obrigatórios!");
+            return;
+        }
+        
         if (!validateBreak(contract)) {
             Notification.error("Preencha corretamente o intervalo de descanso!");
             return;
         }
-        postContract(contract);
+
+        try {
+            // Preparar dados do funcionário
+            const employeeData = {
+                name: contract.name,
+                cpf: contract.cpf.replace(/\D/g, ''), // Remove formatação
+                phone: contract.phone
+            };
+
+            // Preparar dados do contrato
+            const contractData = {
+                function: contract.job_function,
+                salary: parseFloat(contract.salary),
+                start_date: new Date().toISOString().split('T')[0], // Data atual
+                end_date: null,
+                access_app: contract.app_access === "true" || contract.app_access === true,
+                status: true // Sempre ativo ao criar
+            };
+
+            // Preparar dados do endereço
+            const addressData = {
+                cep: contract.workplace_cep,
+                street: contract.workplace_street,
+                house_number: contract.workplace_home_number,
+                city: contract.workplace_city,
+                uf: contract.workplace_state,
+                neighborhood: contract.workplace_neighborhood,
+                complement: contract.workplace_complement || null
+            };
+
+            // Preparar dados da jornada de trabalho
+            const workScheduleData = extractWorkScheduleData(contract);
+
+            // Preparar dados do intervalo
+            const workBreakData = extractWorkBreakData(contract);
+
+            // Preparar payload completo
+            const completeContractData = {
+                employee: employeeData,
+                contract: contractData,
+                address: addressData,
+                workSchedule: workScheduleData,
+                workBreak: workBreakData,
+                employerId: id
+            };
+
+            console.log("Complete contract data being sent:", completeContractData);
+
+            // Enviar tudo de uma vez para o endpoint unificado
+            const result = await postCompleteContract(completeContractData);
+            
+            if (result) {
+                Notification.success("Contrato cadastrado com sucesso!");
+                setTimeout(() => navigate("/contratos"), 1500);
+            } else {
+                Notification.error("Erro ao criar contrato!");
+            }
+
+        } catch (error) {
+            console.error("Erro durante o processo de criação do contrato:", error);
+            Notification.error("Erro inesperado ao criar contrato!");
+        }
     };
 
     return (

@@ -1,0 +1,133 @@
+.status-confirm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--background-modal-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.status-confirm-modal-content {
+  position: relative;
+  background: var(--light-color);
+  padding: 2rem;
+  border-radius: .8rem;
+  box-shadow: 0 .4rem .6rem var(--dark-color);
+  width: 50rem;
+  max-width: 90%;
+}
+
+.close-modal {
+  position: absolute;
+  top: .5rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: var(--dark-color);
+  cursor: pointer;
+}
+
+.status-confirm-modal {
+  max-width: 450px;
+  width: 100%;
+}
+
+.status-confirm-modal h2 {
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.status-confirm-content {
+  margin-bottom: 25px;
+}
+
+.status-confirm-content p {
+  margin-bottom: 12px;
+  color: #555;
+  line-height: 1.5;
+  font-size: 1.6rem;
+}
+
+.contract-name {
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #333 !important;
+  text-align: center;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 15px 0 !important;
+}
+
+.confirmation-text {
+  font-weight: 500;
+  margin-top: 20px !important;
+}
+
+.password-input {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  transition: border-color 0.3s ease;
+}
+
+.password-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  margin-top: 25px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.4rem;
+  min-width: 120px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-cancel:hover:not(:disabled) {
+  background-color: #5a6268;
+}
+
+.btn-confirm {
+  color: white;
+  font-weight: 600;
+}
+
+.btn-confirm:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
