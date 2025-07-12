@@ -7,7 +7,7 @@ const putWorklogController = async (req, res) => {
   }
 
   const employeeId = req.id;
-  const { contractId, ...updatePayload } = req.body;
+  const { contractId, latitude, longitude, ...updatePayload } = req.body;
 
   if (!employeeId || !contractId) {
     return res.status(400).json({ message: 'Dados incompletos para registrar a entrada.' });
@@ -24,13 +24,21 @@ const putWorklogController = async (req, res) => {
       return res.status(404).json({ message: 'Nenhum registro de entrada encontrado para hoje.' });
     }
 
-    delete updatePayload.contractId;
+    // Filter out fields that don't exist in work_logs table
+    const validFields = ['clock_out', 'break_start', 'break_end'];
+    const filteredPayload = {};
+    
+    for (const [key, value] of Object.entries(updatePayload)) {
+      if (validFields.includes(key)) {
+        filteredPayload[key] = value;
+      }
+    }
 
-    if (Object.keys(updatePayload).length === 0) {
+    if (Object.keys(filteredPayload).length === 0) {
       return res.status(400).json({ message: 'Nenhum dado de atualização fornecido.' });
     }
 
-    const { error: updateError } = await putWorklogModel(existingWorkLogId, updatePayload);
+    const { error: updateError } = await putWorklogModel(existingWorkLogId, filteredPayload);
 
     if (updateError) {
       return res.status(500).json({ message: updateError });
