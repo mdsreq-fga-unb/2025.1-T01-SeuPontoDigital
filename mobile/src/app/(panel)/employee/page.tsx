@@ -27,6 +27,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
 import LocationTracker from '../../components/locationTracker';
 import Geolocation from 'react-native-geolocation-service';
+import Constants from 'expo-constants';
+import * as ExpoLocation from 'expo-location';
 
 const { width, height } = Dimensions.get('window');
 
@@ -108,18 +110,28 @@ export default function Employee() {
   
   // Add this function to get current location
   const getCurrentLocation = async (): Promise<{latitude: number; longitude: number}> => {
-    const maxRetries = 3;
-    let retryCount = 0;
-
-    const tryGetLocation = (): Promise<{latitude: number; longitude: number}> => {
+    const isExpoGo = !!Constants.appOwnership && Constants.appOwnership === 'expo';
+    if (isExpoGo) {
+      // Usar expo-location no Expo Go
+      let { status } = await ExpoLocation.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        throw new Error('Permissão de localização não concedida');
+      }
+      let location = await ExpoLocation.getCurrentPositionAsync({});
+      return {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude
+      };
+    } else {
+      // Usar react-native-geolocation-service em build nativa
       return new Promise((resolve, reject) => {
         Geolocation.getCurrentPosition(
-          (position: Geolocation.GeoPosition) => {
+          (position) => {
             const { latitude, longitude } = position.coords;
             setCurrentLocation({ latitude, longitude });
             resolve({ latitude, longitude });
           },
-          (error: Geolocation.GeoError) => {
+          (error) => {
             reject(error);
           },
           { 
@@ -130,88 +142,7 @@ export default function Employee() {
           }
         );
       });
-    };
-
-    while (retryCount < maxRetries) {
-      try {
-        // Antes de tentar obter localização, verifica se o GPS está ativo
-        if (Platform.OS === 'android') {
-          const hasPermission = await PermissionsAndroid.check(
-            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-          );
-          
-          if (!hasPermission) {
-            throw new Error('Permissão de localização não concedida');
-          }
-        }
-
-        // Mostra loading enquanto tenta obter localização
-        Alert.alert(
-          'Obtendo Localização',
-          'Aguarde enquanto obtemos sua localização...',
-          [{ text: 'OK' }]
-        );
-
-        const location = await tryGetLocation();
-        return location;
-      } catch (error) {
-        retryCount++;
-        console.log(`Tentativa ${retryCount} de ${maxRetries} falhou:`, error);
-
-        if (error instanceof Error) {
-          if (error.message === 'Permissão de localização não concedida') {
-            Alert.alert(
-              'Permissão Necessária',
-              'Para registrar o ponto, é necessário permitir o acesso à sua localização.',
-              [
-                { 
-                  text: 'Abrir Configurações',
-                  onPress: () => {
-                    if (Platform.OS === 'ios') {
-                      Linking.openURL('app-settings:');
-                    } else {
-                      Linking.openSettings();
-                    }
-                  }
-                },
-                { text: 'Cancelar', style: 'cancel' }
-              ]
-            );
-            throw error;
-          }
-        }
-
-        // Se for a última tentativa, mostra mensagem de erro
-        if (retryCount === maxRetries) {
-          Alert.alert(
-            'Erro de Localização',
-            'Não foi possível obter sua localização. Por favor, verifique se:\n\n' +
-            '1. O GPS está ativado\n' +
-            '2. O aplicativo tem permissão para usar localização\n' +
-            '3. Você está em um local com boa cobertura GPS',
-            [
-              { 
-                text: 'Abrir Configurações',
-                onPress: () => {
-                  if (Platform.OS === 'ios') {
-                    Linking.openURL('app-settings:');
-                  } else {
-                    Linking.openSettings();
-                  }
-                }
-              },
-              { text: 'OK' }
-            ]
-          );
-          throw new Error('Não foi possível obter a localização após várias tentativas');
-        }
-
-        // Espera 2 segundos antes de tentar novamente
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      }
     }
-
-    throw new Error('Não foi possível obter a localização');
   };
 
   // Efeito para animar componentes na entrada
@@ -696,126 +627,44 @@ export default function Employee() {
           </View>
         </Animated.View>
         
-        {/* Card de Progresso do Dia */}
-        <Animated.View 
-          style={[
-            styles.progressCard, 
-            { 
-              opacity: fadeAnim,
-              transform: [{ translateY: translateY }]
-            }
-          ]}
-        >
-          <Text style={styles.progressTitle}>Progresso do Dia</Text>
-          <View style={styles.progressTracker}>
-            <View style={[
-              styles.progressStep,
-              todayRecords.entrada ? styles.progressStepCompleted : {}
-            ]}>
-              <View style={[
-                styles.progressCircle,
-                todayRecords.entrada ? styles.progressCircleCompleted : {}
-              ]}>
-                <MaterialIcons 
-                  name="login" 
-                  size={18} 
-                  color={todayRecords.entrada ? "#FFFFFF" : "#90A4AE"} 
-                />
+        {/* Adicione este componente logo ANTES do card de registro de ponto */}
+        {currentDistance !== null && currentDistance > 1 && (
+          <Animated.View 
+            style={[
+              styles.warningCard, 
+              { 
+                opacity: fadeAnim,
+                transform: [{ translateY: translateY }]
+              }
+            ]}
+          >
+            <View style={styles.warningContent}>
+              <Ionicons name="warning" size={24} color="#FFA000" />
+              <View style={styles.warningTextContainer}>
+                <Text style={styles.warningTitle}>Você está longe do local de trabalho</Text>
+                <Text style={styles.warningDistance}>
+                  Distância atual: {currentDistance.toFixed(2)}km
+                </Text>
+                <Text style={styles.warningInfo}>
+                  É necessário estar a no máximo 1km para registrar o ponto
+                </Text>
               </View>
-              <Text style={[
-                styles.progressText,
-                todayRecords.entrada ? styles.progressTextCompleted : {}
-              ]}>
-                Entrada
-              </Text>
             </View>
-            
-            {/* A linha só fica verde se AMBOS os pontos conectados estiverem registrados */}
-            <View style={[
-              styles.progressConnector,
-              todayRecords.entrada && todayRecords.saidaAlmoco ? styles.progressConnectorActive : {}
-            ]} />
-            
-            <View style={[
-              styles.progressStep,
-              todayRecords.saidaAlmoco ? styles.progressStepCompleted : {}
-            ]}>
-              <View style={[
-                styles.progressCircle,
-                todayRecords.saidaAlmoco ? styles.progressCircleCompleted : {}
-              ]}>
-                <MaterialIcons 
-                  name="restaurant" 
-                  size={18} 
-                  color={todayRecords.saidaAlmoco ? "#FFFFFF" : "#90A4AE"} 
-                />
-              </View>
-              <Text style={[
-                styles.progressText,
-                todayRecords.saidaAlmoco ? styles.progressTextCompleted : {}
-              ]}>
-                Almoço
-              </Text>
-            </View>
-            
-            {/* A linha só fica verde se AMBOS os pontos conectados estiverem registrados */}
-            <View style={[
-              styles.progressConnector,
-              todayRecords.saidaAlmoco && todayRecords.voltaAlmoco ? styles.progressConnectorActive : {}
-            ]} />
-            
-            <View style={[
-              styles.progressStep,
-              todayRecords.voltaAlmoco ? styles.progressStepCompleted : {}
-            ]}>
-              <View style={[
-                styles.progressCircle,
-                todayRecords.voltaAlmoco ? styles.progressCircleCompleted : {}
-              ]}>
-                <MaterialIcons 
-                  name="work" 
-                  size={18} 
-                  color={todayRecords.voltaAlmoco ? "#FFFFFF" : "#90A4AE"} 
-                />
-              </View>
-              <Text style={[
-                styles.progressText,
-                todayRecords.voltaAlmoco ? styles.progressTextCompleted : {}
-              ]}>
-                Retorno
-              </Text>
-            </View>
-            
-            {/* A linha só fica verde se AMBOS os pontos conectados estiverem registrados */}
-            <View style={[
-              styles.progressConnector,
-              todayRecords.voltaAlmoco && todayRecords.saida ? styles.progressConnectorActive : {}
-            ]} />
-            
-            <View style={[
-              styles.progressStep,
-              todayRecords.saida ? styles.progressStepCompleted : {}
-            ]}>
-              <View style={[
-                styles.progressCircle,
-                todayRecords.saida ? styles.progressCircleCompleted : {}
-              ]}>
-                <MaterialIcons 
-                  name="logout" 
-                  size={18} 
-                  color={todayRecords.saida ? "#FFFFFF" : "#90A4AE"} 
-                />
-              </View>
-              <Text style={[
-                styles.progressText,
-                todayRecords.saida ? styles.progressTextCompleted : {}
-              ]}>
-                Saída
-              </Text>
-            </View>
-          </View>
-        </Animated.View>
-        
+            <TouchableOpacity 
+              style={styles.warningButton}
+              onPress={() => {
+                if (selectedContract?.contractDetails?.address?.[0]) {
+                  const workplaceLocation = selectedContract.contractDetails.address[0];
+                  const url = `https://www.google.com/maps/dir/?api=1&destination=${workplaceLocation.latitude},${workplaceLocation.longitude}`;
+                  Linking.openURL(url);
+                }
+              }}
+            >
+              <Text style={styles.warningButtonText}>Ver no Mapa</Text>
+              <Ionicons name="map" size={18} color="#1565C0" style={{marginLeft: 4}} />
+            </TouchableOpacity>
+          </Animated.View>
+        )}
         {/* Card de Registro de Ponto */}
         <Animated.View 
           style={[
@@ -1079,7 +928,7 @@ export default function Employee() {
         </Animated.View>
 
         {/* LocationTracker Component */}
-        <Animated.View 
+        {/* <Animated.View 
           style={[
             { 
               opacity: fadeAnim,
@@ -1088,46 +937,7 @@ export default function Employee() {
           ]}
         >
           <LocationTracker />
-        </Animated.View>
-        
-        {/* Adicione este componente logo após o dateTimeCard */}
-        {currentDistance !== null && currentDistance > 1 && (
-          <Animated.View 
-            style={[
-              styles.warningCard, 
-              { 
-                opacity: fadeAnim,
-                transform: [{ translateY: translateY }]
-              }
-            ]}
-          >
-            <View style={styles.warningContent}>
-              <Ionicons name="warning" size={24} color="#FFA000" />
-              <View style={styles.warningTextContainer}>
-                <Text style={styles.warningTitle}>Você está longe do local de trabalho</Text>
-                <Text style={styles.warningDistance}>
-                  Distância atual: {currentDistance.toFixed(2)}km
-                </Text>
-                <Text style={styles.warningInfo}>
-                  É necessário estar a no máximo 1km para registrar o ponto
-                </Text>
-              </View>
-            </View>
-            <TouchableOpacity 
-              style={styles.warningButton}
-              onPress={() => {
-                if (selectedContract?.contractDetails?.address?.[0]) {
-                  const workplaceLocation = selectedContract.contractDetails.address[0];
-                  const url = `https://www.google.com/maps/dir/?api=1&destination=${workplaceLocation.latitude},${workplaceLocation.longitude}`;
-                  Linking.openURL(url);
-                }
-              }}
-            >
-              <Text style={styles.warningButtonText}>Ver no Mapa</Text>
-              <Ionicons name="map" size={18} color="#1565C0" style={{marginLeft: 4}} />
-            </TouchableOpacity>
-          </Animated.View>
-        )}
+        </Animated.View> */}
         
         {/* Botão para voltar à tela inicial */}
         <TouchableOpacity 
