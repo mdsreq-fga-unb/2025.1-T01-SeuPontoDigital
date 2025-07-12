@@ -48,14 +48,20 @@ const StatusConfirmModal = ({ isOpen, onConfirm, onCancel, contractName, current
                         Digite sua senha para confirmar esta alteração:
                     </p>
                     
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Digite sua senha"
-                        className="password-input"
-                        onKeyPress={(e) => e.key === 'Enter' && handleConfirm()}
-                    />
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        handleConfirm();
+                    }}>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Digite sua senha"
+                            className="password-input"
+                            autoComplete="current-password"
+                            onKeyPress={(e) => e.key === 'Enter' && handleConfirm()}
+                        />
+                    </form>
                 </div>
                 
                 <div className="modal-actions">

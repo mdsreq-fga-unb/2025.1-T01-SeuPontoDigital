@@ -72,7 +72,7 @@ const putEmployerModel = async (id, employerData) => {
             if (coordinates) {
                 addressFields.latitude = coordinates.latitude;
                 addressFields.longitude = coordinates.longitude;
-                console.log('Debug - Address fields with coordinates:', addressFields);
+                console.log(`Debug - Address fields with coordinates (${coordinates.confidence} confidence):`, addressFields);
             } else {
                 console.warn('Debug - Could not calculate coordinates for address');
                 console.log('Debug - Address fields without coordinates:', addressFields);

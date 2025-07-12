@@ -5,21 +5,30 @@ import validateCPF from "../../middlewares/validateCPF.js";
 
 const putEmployerController = async (req, res) => {
     const { id } = req.params;
-    const { adminEmail, adminPassword } = req.headers;
-    const employerData = req.body;
+    const { adminEmail, adminPassword, passwordAdmin, ...employerData } = req.body;
 
     try {
-        if (!adminPassword) {
+        // Aceita passwordAdmin do body ou adminPassword dos headers
+        const adminPasswordToValidate = passwordAdmin || adminPassword;
+        
+        if (!adminPasswordToValidate) {
             return res.status(400).json({ message: "Senha do administrador é obrigatória." });
         }
 
-        const admin = await findAdminByEmail(adminEmail);
+        // Se não tiver adminEmail no body, tenta pegar do header
+        const adminEmailToUse = adminEmail || req.headers.adminemail;
+
+        if (!adminEmailToUse) {
+            return res.status(400).json({ message: "Email do administrador é obrigatório." });
+        }
+
+        const admin = await findAdminByEmail(adminEmailToUse);
 
         if (!admin) {
             return res.status(404).json({ message: "Administrador não encontrado." });
         }
 
-        const isPasswordValid = await validateHashPasswordEqual(adminPassword, admin.password);
+        const isPasswordValid = await validateHashPasswordEqual(adminPasswordToValidate, admin.password);
 
         if (!isPasswordValid) {
             return res.status(401).json({ message: "Senha do administrador inválida." });

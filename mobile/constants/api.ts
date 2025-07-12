@@ -10,11 +10,9 @@ import axios from 'axios';
 // });
 
 const api = axios.create({
-  baseURL: "http://192.168.1.192:3333/api",
+  baseURL: 'http://192.168.0.4:3333/api',
   timeout: 15000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  headers: { 'Content-Type': 'application/json' },
 });
 
 export default api; 

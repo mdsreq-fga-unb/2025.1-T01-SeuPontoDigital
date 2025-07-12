@@ -14,6 +14,7 @@ const useLogin = () => {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, { email, password, });
 
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("adminEmail", email); // Salva o email do admin
       Notification.success("Usuário autenticado com sucesso!");
 
       setTimeout(() => { navigate("/empregadores") }, 2500);

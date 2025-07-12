@@ -8,10 +8,21 @@ const app = express();
 
 app.use(express.json());
 
+// Configuração de CORS com fallbacks para desenvolvimento
+const corsOrigins = [
+    CORS_ORIGIN || "http://localhost:5173",
+    CORS_ORIGIN_MOBILE || "http://localhost:8081",
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:3000"
+].filter(Boolean); // Remove valores undefined/null
+
 app.use(cors({
-    origin: [CORS_ORIGIN, CORS_ORIGIN_MOBILE],
+    origin: corsOrigins,
     credentials: true,
-    methods: ["GET", "POST", "DELETE", "PUT", "PATCH"]
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
 }));
 
 app.use("/api", publicRoute);
@@ -28,4 +39,5 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
+    console.log(`CORS origins: ${corsOrigins.join(", ")}`);
 });

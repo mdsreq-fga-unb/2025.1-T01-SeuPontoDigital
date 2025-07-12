@@ -8,12 +8,17 @@ const usePutEmployer = () => {
 
     const putEmployer = async (employer, closeModal, passwordInput) => {
         const token = localStorage.getItem("token");
+        const adminEmail = localStorage.getItem("adminEmail"); // Pega o email do admin do localStorage
 
         try {
             // O backend já faz a separação entre dados do employer e endereço
             await axios.put(
                 `${import.meta.env.VITE_API_URL}/api/employer/${employer.id}`, 
-                { ...employer, passwordAdmin: passwordInput }, 
+                { 
+                    ...employer, 
+                    passwordAdmin: passwordInput,
+                    adminEmail: adminEmail // Envia o email do admin
+                }, 
                 { headers: { Authorization: `Bearer ${token}` } }
             );
 

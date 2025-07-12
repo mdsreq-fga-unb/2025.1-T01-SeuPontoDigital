@@ -29,20 +29,26 @@ const ConfirmModal = ({ isOpen, onConfirm, onCancel, message, nameEmployer }) =>
             <p>{message} <span>{nameEmployer}</span></p>
             
             <div className="container-modal-input-button">
-                <input
-                    type="password"
-                    placeholder="Digite sua senha"
-                    value={passwordAdmin}
-                    onChange={(e) => setPasswordAdmin(e.target.value)}
-                    className="input-password"
-                />
-                <button
-                    className="button-confirm"
-                    onClick={handleConfirm}
-                    disabled={!passwordAdmin}
-                >
-                    Confirmar
-                </button>
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    handleConfirm();
+                }}>
+                    <input
+                        type="password"
+                        placeholder="Digite sua senha"
+                        value={passwordAdmin}
+                        onChange={(e) => setPasswordAdmin(e.target.value)}
+                        className="input-password"
+                        autoComplete="current-password"
+                    />
+                    <button
+                        type="submit"
+                        className="button-confirm"
+                        disabled={!passwordAdmin}
+                    >
+                        Confirmar
+                    </button>
+                </form>
             </div>
         </Modal>
     );
