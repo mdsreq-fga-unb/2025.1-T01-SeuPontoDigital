@@ -27,6 +27,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
 import LocationTracker from '../../components/locationTracker';
 import Geolocation from 'react-native-geolocation-service';
+import Constants from 'expo-constants';
+import * as ExpoLocation from 'expo-location';
 
 const { width, height } = Dimensions.get('window');
 
@@ -108,18 +110,28 @@ export default function Employee() {
   
   // Add this function to get current location
   const getCurrentLocation = async (): Promise<{latitude: number; longitude: number}> => {
-    const maxRetries = 3;
-    let retryCount = 0;
-
-    const tryGetLocation = (): Promise<{latitude: number; longitude: number}> => {
+    const isExpoGo = !!Constants.appOwnership && Constants.appOwnership === 'expo';
+    if (isExpoGo) {
+      // Usar expo-location no Expo Go
+      let { status } = await ExpoLocation.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        throw new Error('Permissão de localização não concedida');
+      }
+      let location = await ExpoLocation.getCurrentPositionAsync({});
+      return {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude
+      };
+    } else {
+      // Usar react-native-geolocation-service em build nativa
       return new Promise((resolve, reject) => {
         Geolocation.getCurrentPosition(
-          (position: Geolocation.GeoPosition) => {
+          (position) => {
             const { latitude, longitude } = position.coords;
             setCurrentLocation({ latitude, longitude });
             resolve({ latitude, longitude });
           },
-          (error: Geolocation.GeoError) => {
+          (error) => {
             reject(error);
           },
           { 
@@ -130,88 +142,7 @@ export default function Employee() {
           }
         );
       });
-    };
-
-    while (retryCount < maxRetries) {
-      try {
-        // Antes de tentar obter localização, verifica se o GPS está ativo
-        if (Platform.OS === 'android') {
-          const hasPermission = await PermissionsAndroid.check(
-            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-          );
-          
-          if (!hasPermission) {
-            throw new Error('Permissão de localização não concedida');
-          }
-        }
-
-        // Mostra loading enquanto tenta obter localização
-        Alert.alert(
-          'Obtendo Localização',
-          'Aguarde enquanto obtemos sua localização...',
-          [{ text: 'OK' }]
-        );
-
-        const location = await tryGetLocation();
-        return location;
-      } catch (error) {
-        retryCount++;
-        console.log(`Tentativa ${retryCount} de ${maxRetries} falhou:`, error);
-
-        if (error instanceof Error) {
-          if (error.message === 'Permissão de localização não concedida') {
-            Alert.alert(
-              'Permissão Necessária',
-              'Para registrar o ponto, é necessário permitir o acesso à sua localização.',
-              [
-                { 
-                  text: 'Abrir Configurações',
-                  onPress: () => {
-                    if (Platform.OS === 'ios') {
-                      Linking.openURL('app-settings:');
-                    } else {
-                      Linking.openSettings();
-                    }
-                  }
-                },
-                { text: 'Cancelar', style: 'cancel' }
-              ]
-            );
-            throw error;
-          }
-        }
-
-        // Se for a última tentativa, mostra mensagem de erro
-        if (retryCount === maxRetries) {
-          Alert.alert(
-            'Erro de Localização',
-            'Não foi possível obter sua localização. Por favor, verifique se:\n\n' +
-            '1. O GPS está ativado\n' +
-            '2. O aplicativo tem permissão para usar localização\n' +
-            '3. Você está em um local com boa cobertura GPS',
-            [
-              { 
-                text: 'Abrir Configurações',
-                onPress: () => {
-                  if (Platform.OS === 'ios') {
-                    Linking.openURL('app-settings:');
-                  } else {
-                    Linking.openSettings();
-                  }
-                }
-              },
-              { text: 'OK' }
-            ]
-          );
-          throw new Error('Não foi possível obter a localização após várias tentativas');
-        }
-
-        // Espera 2 segundos antes de tentar novamente
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      }
     }
-
-    throw new Error('Não foi possível obter a localização');
   };
 
   // Efeito para animar componentes na entrada
