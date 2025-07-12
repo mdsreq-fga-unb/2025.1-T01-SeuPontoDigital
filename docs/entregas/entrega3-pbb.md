@@ -1,4 +1,4 @@
-### Product Backlog Building - TechFix
+## Product Backlog Building - TechFix
 O **Product Backlog Building (PBB)** é uma abordagem que orienta times ágeis na construção e organização de uma lista de backlog colaborativamente. Para isso, a metodologia conta com uma ferramenta visual chamada Canvas PBB, que atua como um mapa de trabalho e auxilia o time na identificação de personas, funcionalidades, benefícios e PBIs (Product Backlog Items). 
 
 Dessa forma, para a prática do PBB, foi elaborada a priorização do Product Backlog com a aplicação da técnica **COORG** (Classificar, Ordenar e Organizar), na qual as funcionalidades foram dispostas em uma sequência lógica, estruturadas como uma narrativa da esquerda para a direita. Nessa organização, os PBIs com maior prioridade aparecem nas posições superiores, enquanto os de menor prioridade ficam nas inferiores, uma vez que a priorização considerou os critérios de frequência de uso e valor de negócio como valores quantitativos.
