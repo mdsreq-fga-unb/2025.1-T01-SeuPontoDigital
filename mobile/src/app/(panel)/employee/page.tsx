@@ -15,7 +15,9 @@ import {
   Platform,
   FlatList,
   Dimensions,
-  Animated
+  Animated,
+  Linking,
+  PermissionsAndroid
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
@@ -24,6 +26,7 @@ import api from '@/constants/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
 import LocationTracker from '../../components/locationTracker';
+import Geolocation from 'react-native-geolocation-service';
 
 const { width, height } = Dimensions.get('window');
 
@@ -34,9 +37,23 @@ interface Employee {
 
 interface Contract {
   id: string;
+  id_contract?: string;
   employerName: string;
   position: string;
   active: boolean;
+  contractDetails?: {
+    address: Array<{
+      latitude: number;
+      longitude: number;
+      street: string;
+      house_number: string;
+      neighborhood: string;
+      city: string;
+      uf: string;
+      cep: string;
+      complement?: string;
+    }>;
+  };
 }
 
 interface RecordItem {
@@ -82,6 +99,120 @@ export default function Employee() {
     voltaAlmoco: false,
     saida: false
   });
+
+  // Add this state for location validation
+  const [currentLocation, setCurrentLocation] = useState<{latitude: number; longitude: number} | null>(null);
+  
+  // Add this state for distance validation
+  const [currentDistance, setCurrentDistance] = useState<number | null>(null);
+  
+  // Add this function to get current location
+  const getCurrentLocation = async (): Promise<{latitude: number; longitude: number}> => {
+    const maxRetries = 3;
+    let retryCount = 0;
+
+    const tryGetLocation = (): Promise<{latitude: number; longitude: number}> => {
+      return new Promise((resolve, reject) => {
+        Geolocation.getCurrentPosition(
+          (position: Geolocation.GeoPosition) => {
+            const { latitude, longitude } = position.coords;
+            setCurrentLocation({ latitude, longitude });
+            resolve({ latitude, longitude });
+          },
+          (error: Geolocation.GeoError) => {
+            reject(error);
+          },
+          { 
+            enableHighAccuracy: true, 
+            timeout: 30000, // Aumentado para 30 segundos
+            maximumAge: 60000, // Cache de 1 minuto
+            distanceFilter: 10 // Atualiza se mover mais de 10 metros
+          }
+        );
+      });
+    };
+
+    while (retryCount < maxRetries) {
+      try {
+        // Antes de tentar obter localização, verifica se o GPS está ativo
+        if (Platform.OS === 'android') {
+          const hasPermission = await PermissionsAndroid.check(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+          );
+          
+          if (!hasPermission) {
+            throw new Error('Permissão de localização não concedida');
+          }
+        }
+
+        // Mostra loading enquanto tenta obter localização
+        Alert.alert(
+          'Obtendo Localização',
+          'Aguarde enquanto obtemos sua localização...',
+          [{ text: 'OK' }]
+        );
+
+        const location = await tryGetLocation();
+        return location;
+      } catch (error) {
+        retryCount++;
+        console.log(`Tentativa ${retryCount} de ${maxRetries} falhou:`, error);
+
+        if (error instanceof Error) {
+          if (error.message === 'Permissão de localização não concedida') {
+            Alert.alert(
+              'Permissão Necessária',
+              'Para registrar o ponto, é necessário permitir o acesso à sua localização.',
+              [
+                { 
+                  text: 'Abrir Configurações',
+                  onPress: () => {
+                    if (Platform.OS === 'ios') {
+                      Linking.openURL('app-settings:');
+                    } else {
+                      Linking.openSettings();
+                    }
+                  }
+                },
+                { text: 'Cancelar', style: 'cancel' }
+              ]
+            );
+            throw error;
+          }
+        }
+
+        // Se for a última tentativa, mostra mensagem de erro
+        if (retryCount === maxRetries) {
+          Alert.alert(
+            'Erro de Localização',
+            'Não foi possível obter sua localização. Por favor, verifique se:\n\n' +
+            '1. O GPS está ativado\n' +
+            '2. O aplicativo tem permissão para usar localização\n' +
+            '3. Você está em um local com boa cobertura GPS',
+            [
+              { 
+                text: 'Abrir Configurações',
+                onPress: () => {
+                  if (Platform.OS === 'ios') {
+                    Linking.openURL('app-settings:');
+                  } else {
+                    Linking.openSettings();
+                  }
+                }
+              },
+              { text: 'OK' }
+            ]
+          );
+          throw new Error('Não foi possível obter a localização após várias tentativas');
+        }
+
+        // Espera 2 segundos antes de tentar novamente
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      }
+    }
+
+    throw new Error('Não foi possível obter a localização');
+  };
 
   // Efeito para animar componentes na entrada
   useEffect(() => {
@@ -158,9 +289,11 @@ export default function Employee() {
 
         const formattedContracts = contractsList.map((sc: any) => ({
           id: sc.id_contract,
+          id_contract: sc.id_contract, // Mantendo o id_contract original
           employerName: sc.employerDetails.name,
-          position: sc.contractDetails.office,
-          active: sc.contractDetails.active_c || true
+          position: sc.contractDetails.function,
+          active: sc.contractDetails.status || true,
+          contractDetails: sc.contractDetails
         }));
         
         setContracts(formattedContracts);
@@ -215,8 +348,21 @@ export default function Employee() {
     setContractsModalVisible(false);
   };
 
-  
-  // Função para registrar ponto
+  // Add this helper function before the Employee component
+  const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+    const R = 6371; // Earth's radius in kilometers
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const distance = R * c; // Distance in kilometers
+    return distance;
+  };
+
+  // Modify the registerTimecard function
   const registerTimecard = async (type: 'Entrada' | 'Saída Almoço' | 'Volta Almoço' | 'Saída') => {    
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setLoading(true);
@@ -232,24 +378,89 @@ export default function Employee() {
     }
 
     try {
-      const token = await AsyncStorage.getItem('userToken');
-      const timeString = new Date().toTimeString().split(' ')[0];
+      // Get current location first
+      const userLocation = await getCurrentLocation();
+      console.log('Localização do usuário:', userLocation);
+      
+      // Get workplace location from the contract details
+      const workplaceLocation = selectedContract.contractDetails?.address?.[0];
+      console.log('Localização do local de trabalho:', workplaceLocation);
+      
+      if (!workplaceLocation?.latitude || !workplaceLocation?.longitude) {
+        Alert.alert('Erro', 'Não foi possível validar a localização do local de trabalho.');
+        setLoading(false);
+        setLoadingButton('');
+        return;
+      }
 
+      // Calculate distance between current location and workplace
+      const distance = calculateDistance(
+        userLocation.latitude,
+        userLocation.longitude,
+        Number(workplaceLocation.latitude),
+        Number(workplaceLocation.longitude)
+      );
+
+      console.log('Distância calculada:', distance);
+
+      // Check if distance is within 1km
+      if (distance > 1) {
+        const formattedDistance = distance.toFixed(2);
+        Alert.alert(
+          'Localização Fora do Perímetro',
+          `Você está a ${formattedDistance}km do local de trabalho.\n\n` +
+          `Local de Trabalho: ${workplaceLocation.street}, ${workplaceLocation.house_number}\n` +
+          `${workplaceLocation.neighborhood}, ${workplaceLocation.city}-${workplaceLocation.uf}\n\n` +
+          'É necessário estar a no máximo 1km do local de trabalho para registrar o ponto.\n\n' +
+          'Verifique se:\n' +
+          '• Você está no endereço correto\n' +
+          '• Seu GPS está funcionando adequadamente\n' +
+          '• Não há interferências no sinal',
+          [
+            {
+              text: 'Abrir Mapa',
+              onPress: () => {
+                const url = `https://www.google.com/maps/dir/?api=1&origin=${userLocation.latitude},${userLocation.longitude}&destination=${workplaceLocation.latitude},${workplaceLocation.longitude}`;
+                Linking.openURL(url);
+              }
+            },
+            { text: 'OK', style: 'cancel' }
+          ]
+        );
+        setLoading(false);
+        setLoadingButton('');
+        return;
+      }
+
+      const timeString = new Date().toTimeString().split(' ')[0];
       let response;
         
+      const token = await AsyncStorage.getItem('userToken');
       const headers = { 'Authorization': `Bearer ${token}` };
 
+      // Use o id_contract para as chamadas à API
+      const contractId = selectedContract.id_contract || selectedContract.id;
+
+      console.log('Enviando requisição com payload:', {
+        type,
+        contractId,
+        location: userLocation,
+        time: timeString
+      });
+
       if (type === 'Entrada') {
-          // Se for a primeira marcação, cria o registro do dia (POST)
           const payload = {
-              contractId: selectedContract.id,
+              contractId,
               clock_in: timeString,
+              latitude: userLocation.latitude,
+              longitude: userLocation.longitude
           };
           response = await api.post('/worklog', payload, { headers });
       } else {
-          // Para as demais marcações, atualiza o registro existente (PUT)
-          const payload: { contractId: string; [key: string]: string } = {
-              contractId: selectedContract.id,
+          const payload: { contractId: string; [key: string]: any } = {
+              contractId,
+              latitude: userLocation.latitude,
+              longitude: userLocation.longitude
           };
           const fieldMap = {
               'Saída Almoço': 'break_start',
@@ -259,6 +470,8 @@ export default function Employee() {
           payload[fieldMap[type]] = timeString;
           response = await api.put('/worklog', payload, { headers });
       }
+
+      console.log('Resposta da API:', response.data);
 
       if (response.status === 201 || response.status === 200) {
         setTodayRecords(prev => ({ ...prev, [type === 'Entrada' ? 'entrada' : type === 'Saída Almoço' ? 'saidaAlmoco' : type === 'Volta Almoço' ? 'voltaAlmoco' : 'saida']: true }));
@@ -276,19 +489,24 @@ export default function Employee() {
                 const newDay: DayRecord = { date: todayFormatted, records: [newRecord] };
                 return [newDay, ...prevRecords];
             }
-        })
+        });
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         Alert.alert('Ponto Registrado!', `${type} registrado com sucesso às ${timeString.substring(0, 5)}.`);
       }
 
     } catch (error) {
+      console.error('Erro detalhado ao registrar ponto:', error);
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       let errorMessage = 'Ocorreu um erro ao registrar o ponto.';
-      if (axios.isAxiosError(error) && error.response) {
-          errorMessage = error.response.data.message || errorMessage;
+      if (axios.isAxiosError(error)) {
+        console.error('Detalhes do erro Axios:', {
+          response: error.response?.data,
+          status: error.response?.status,
+          headers: error.response?.headers
+        });
+        errorMessage = error.response?.data?.message || errorMessage;
       }
-      console.error('Erro ao registrar ponto:', error);
       Alert.alert('Erro', errorMessage);
     } finally {
       setLoading(false);
@@ -337,6 +555,55 @@ export default function Employee() {
         return 'schedule';
     }
   };
+  
+  // Adicione esta função para atualizar a distância
+  const updateCurrentDistance = (userLocation: { latitude: number; longitude: number }) => {
+    if (selectedContract?.contractDetails?.address?.[0]) {
+      const workplaceLocation = selectedContract.contractDetails.address[0];
+      const distance = calculateDistance(
+        userLocation.latitude,
+        userLocation.longitude,
+        Number(workplaceLocation.latitude),
+        Number(workplaceLocation.longitude)
+      );
+      setCurrentDistance(distance);
+    }
+  };
+
+  // Modifique o useEffect do LocationTracker para atualizar a distância
+  useEffect(() => {
+    let watchId: number;
+
+    const startWatching = async () => {
+      try {
+        watchId = Geolocation.watchPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            updateCurrentDistance({ latitude, longitude });
+          },
+          (error) => {
+            console.error('Erro ao obter localização:', error);
+          },
+          {
+            enableHighAccuracy: true,
+            distanceFilter: 10,
+            interval: 5000,
+            fastestInterval: 2000,
+          }
+        );
+      } catch (err) {
+        console.error('Erro ao iniciar monitoramento:', err);
+      }
+    };
+
+    startWatching();
+
+    return () => {
+      if (watchId) {
+        Geolocation.clearWatch(watchId);
+      }
+    };
+  }, [selectedContract]);
   
   return (
     <SafeAreaView style={styles.container}>
@@ -822,6 +1089,45 @@ export default function Employee() {
         >
           <LocationTracker />
         </Animated.View>
+        
+        {/* Adicione este componente logo após o dateTimeCard */}
+        {currentDistance !== null && currentDistance > 1 && (
+          <Animated.View 
+            style={[
+              styles.warningCard, 
+              { 
+                opacity: fadeAnim,
+                transform: [{ translateY: translateY }]
+              }
+            ]}
+          >
+            <View style={styles.warningContent}>
+              <Ionicons name="warning" size={24} color="#FFA000" />
+              <View style={styles.warningTextContainer}>
+                <Text style={styles.warningTitle}>Você está longe do local de trabalho</Text>
+                <Text style={styles.warningDistance}>
+                  Distância atual: {currentDistance.toFixed(2)}km
+                </Text>
+                <Text style={styles.warningInfo}>
+                  É necessário estar a no máximo 1km para registrar o ponto
+                </Text>
+              </View>
+            </View>
+            <TouchableOpacity 
+              style={styles.warningButton}
+              onPress={() => {
+                if (selectedContract?.contractDetails?.address?.[0]) {
+                  const workplaceLocation = selectedContract.contractDetails.address[0];
+                  const url = `https://www.google.com/maps/dir/?api=1&destination=${workplaceLocation.latitude},${workplaceLocation.longitude}`;
+                  Linking.openURL(url);
+                }
+              }}
+            >
+              <Text style={styles.warningButtonText}>Ver no Mapa</Text>
+              <Ionicons name="map" size={18} color="#1565C0" style={{marginLeft: 4}} />
+            </TouchableOpacity>
+          </Animated.View>
+        )}
         
         {/* Botão para voltar à tela inicial */}
         <TouchableOpacity 
@@ -2132,6 +2438,61 @@ const styles = StyleSheet.create({
   footerText: {
     color: '#FFFFFF',
     fontSize: 12,
+    fontWeight: '500',
+  },
+  
+  warningCard: {
+    backgroundColor: '#FFF3E0',
+    marginHorizontal: 16,
+    marginTop: 16,
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#FFE0B2',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  warningContent: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  warningTextContainer: {
+    flex: 1,
+    marginLeft: 12,
+  },
+  warningTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#F57C00',
+    marginBottom: 4,
+  },
+  warningDistance: {
+    fontSize: 14,
+    color: '#F57C00',
+    marginBottom: 2,
+  },
+  warningInfo: {
+    fontSize: 13,
+    color: '#795548',
+  },
+  warningButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: '#1565C0',
+  },
+  warningButtonText: {
+    fontSize: 14,
+    color: '#1565C0',
     fontWeight: '500',
   },
 });

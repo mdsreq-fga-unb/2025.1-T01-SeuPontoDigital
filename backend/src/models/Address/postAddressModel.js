@@ -1,6 +1,6 @@
 import supabase from "../../config/supabase.js";
 import getOneAddressModel from "./getOneAddressModel.js";
-import getCoordinates from "../../middlewares/getCoordinates.js";
+import { getCoordinates } from "../../middlewares/getCoordinates.js";
 
 const postAddressModel = async (address) => {
     try{

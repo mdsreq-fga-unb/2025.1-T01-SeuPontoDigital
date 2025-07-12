@@ -1,8 +1,6 @@
 import { API_KEY_MAPS } from "../config/env.js";
 
 const getCoordinates = async (address) => {
-
-
     const street = address.street.replaceAll(' ','+');
     const neighborhood = address.neighborhood.replaceAll(' ','+');
     const city = address.city.replaceAll(' ','+');
@@ -31,4 +29,4 @@ const getCoordinates = async (address) => {
     }
 };
 
-export default getCoordinates;
+export { getCoordinates };
