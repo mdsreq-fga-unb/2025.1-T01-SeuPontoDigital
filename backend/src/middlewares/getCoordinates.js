@@ -1,27 +1,33 @@
-import { API_KEY_MAPS } from "../config/env.js";
-
 const getCoordinates = async (address) => {
+    console.log('Debug - getCoordinates called with address:', address);
+    
     const street = address.street.replaceAll(' ','+');
     const neighborhood = address.neighborhood.replaceAll(' ','+');
     const city = address.city.replaceAll(' ','+');
     const uf = address.uf.replaceAll(' ','+');
 
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${street},+${neighborhood},+${city},+${uf}&key=${API_KEY_MAPS}`;
+    // Usar LocationIQ - API mais confiável para endereços brasileiros
+    const searchQuery = `${street},+${neighborhood},+${city},+${uf},+Brasil`;
+    const url = `https://us1.locationiq.com/v1/search.php?key=pk.05c09cb62d481ccfb76ec10ffbaf1748&q=${searchQuery}&format=json&limit=1`;
+    
+    console.log('Debug - LocationIQ API URL:', url);
 
     try {
         const response = await fetch(url);
         const data = await response.json();
+        console.log('Debug - LocationIQ API response:', data);
         
-        if (data.status === 'OK' && data.results.length > 0) {
-            const location = data.results[0].geometry.location;
+        if (data && data.length > 0) {
+            const location = data[0];
+            console.log('Debug - Found coordinates:', location);
 
             return {
-                latitude: location.lat,
-                longitude: location.lng
+                latitude: parseFloat(location.lat),
+                longitude: parseFloat(location.lon)
             };
-                
         } else {
-            throw new Error('Endereço não encontrado');
+            console.error('Debug - LocationIQ API: No results found');
+            return null;
         }
     } catch (error) {
         console.error('Erro ao obter coordenadas:', error);

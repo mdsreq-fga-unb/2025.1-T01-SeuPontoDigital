@@ -1,4 +1,5 @@
 import supabase from "../../config/supabase.js";
+import { getCoordinates } from "../../middlewares/getCoordinates.js";
 
 const putEmployerModel = async (id, employerData) => {
     try {
@@ -21,118 +22,91 @@ const putEmployerModel = async (id, employerData) => {
         }
 
         if (!existingEmployer) {
-            console.error('Debug - Employer not found:', id);
             throw new Error('Empregador não encontrado');
         }
 
-        if (!existingEmployer.id_address) {
-            console.error('Debug - Address ID not found for employer:', id);
-            throw new Error('ID do endereço não encontrado para este empregador');
-        }
+        console.log('Debug - Existing employer:', existingEmployer);
 
-        console.log('Debug - Existing employer data:', existingEmployer);
-        console.log('Debug - Address ID to update:', existingEmployer.id_address);
-
-        // Separate address fields from employer data
-        const addressFields = {};
-        const employerFields = {};
-
-        // Known address fields
+        // Separate employer and address fields
+        const employerKeys = ['name', 'cpf', 'email', 'phone'];
         const addressKeys = ['cep', 'street', 'house_number', 'city', 'uf', 'neighborhood', 'complement'];
 
-        // Separate fields into appropriate objects, ignoring id and id_address
-        Object.entries(employerData).forEach(([key, value]) => {
-            if (value !== undefined && value !== null && value !== '') {
-                if (addressKeys.includes(key)) {
-                    addressFields[key] = value;
-                } else if (key !== 'id' && key !== 'id_address') {
-                    employerFields[key] = value;
-                }
+        const employerFields = {};
+        const addressFields = {};
+
+        // Organize fields
+        Object.keys(employerData).forEach(key => {
+            if (employerKeys.includes(key)) {
+                employerFields[key] = employerData[key];
+            } else if (addressKeys.includes(key)) {
+                addressFields[key] = employerData[key];
             }
         });
 
-        console.log('Debug - Separated data:', {
-            addressFields,
-            employerFields
-        });
+        console.log('Debug - Employer fields to update:', employerFields);
+        console.log('Debug - Address fields to update:', addressFields);
 
-        let updatedAddress = existingEmployer.address;
-        let updatedEmployer = existingEmployer;
-
-        // Update address if there are any address fields
-        if (Object.keys(addressFields).length > 0) {
-            console.log('Debug - Updating address with:', addressFields);
-            console.log('Debug - Address ID being updated:', existingEmployer.id_address);
-            
-            // First, let's check if the address exists
-            const { data: existingAddress, error: addressCheckError } = await supabase
-                .from('address')
-                .select('*')
-                .eq('id', existingEmployer.id_address)
-                .single();
-
-            if (addressCheckError) {
-                console.error('Debug - Error checking address:', addressCheckError);
-                throw new Error(`Erro ao verificar endereço: ${addressCheckError.message}`);
-            }
-
-            if (!existingAddress) {
-                console.error('Debug - Address not found:', existingEmployer.id_address);
-                throw new Error('Endereço não encontrado no banco de dados');
-            }
-
-            console.log('Debug - Existing address found:', existingAddress);
-
-            // Now try to update the address
-            const { data: address, error: addressError } = await supabase
-                .from('address')
-                .update(addressFields)
-                .eq('id', existingEmployer.id_address)
-                .select()
-                .single();
-
-            if (addressError) {
-                console.error('Debug - Error updating address:', addressError);
-                console.error('Debug - Address error details:', {
-                    message: addressError.message,
-                    details: addressError.details,
-                    hint: addressError.hint,
-                    code: addressError.code
-                });
-                throw new Error(`Erro ao atualizar endereço: ${addressError.message}`);
-            }
-
-            updatedAddress = address;
-            console.log('Debug - Address updated successfully:', updatedAddress);
-        }
-
-        // Update employer if there are any employer fields
+        // Update employer if there are fields to update
         if (Object.keys(employerFields).length > 0) {
-            console.log('Debug - Updating employer with:', employerFields);
-            const { data: employer, error: employerError } = await supabase
+            const { error: employerError } = await supabase
                 .from('employers')
                 .update(employerFields)
-                .eq('id', id)
-                .select()
-                .single();
+                .eq('id', id);
 
             if (employerError) {
                 console.error('Debug - Error updating employer:', employerError);
                 throw new Error(`Erro ao atualizar empregador: ${employerError.message}`);
             }
-
-            updatedEmployer = employer;
-            console.log('Debug - Employer updated successfully:', updatedEmployer);
+            console.log('Debug - Employer updated successfully');
         }
 
-        // Return the combined updated data
-        const result = {
-            ...updatedEmployer,
-            address: updatedAddress
-        };
+        // Update address if there are fields to update
+        if (Object.keys(addressFields).length > 0) {
+            console.log('Debug - Updating address with:', addressFields);
+            
+            // Get coordinates from address using the existing API
+            console.log('Debug - Calling getCoordinates with address:', addressFields);
+            const coordinates = await getCoordinates(addressFields);
+            console.log('Debug - Calculated coordinates:', coordinates);
+            
+            if (coordinates) {
+                addressFields.latitude = coordinates.latitude;
+                addressFields.longitude = coordinates.longitude;
+                console.log('Debug - Address fields with coordinates:', addressFields);
+            } else {
+                console.warn('Debug - Could not calculate coordinates for address');
+                console.log('Debug - Address fields without coordinates:', addressFields);
+            }
 
-        console.log('Debug - Returning updated data:', result);
-        return result;
+            const { error: addressError } = await supabase
+                .from('address')
+                .update(addressFields)
+                .eq('id', existingEmployer.id_address);
+
+            if (addressError) {
+                console.error('Debug - Error updating address:', addressError);
+                throw new Error(`Erro ao atualizar endereço: ${addressError.message}`);
+            }
+            console.log('Debug - Address updated successfully');
+        }
+
+        // Fetch updated employer data
+        const { data: updatedEmployer, error: fetchError } = await supabase
+            .from('employers')
+            .select(`
+                *,
+                address:id_address (*)
+            `)
+            .eq('id', id)
+            .single();
+
+        if (fetchError) {
+            console.error('Debug - Error fetching updated employer:', fetchError);
+            throw new Error(`Erro ao buscar empregador atualizado: ${fetchError.message}`);
+        }
+
+        console.log('Debug - Update completed successfully');
+        return updatedEmployer;
 
     } catch (error) {
         console.error('Debug - Error in putEmployerModel:', error);
