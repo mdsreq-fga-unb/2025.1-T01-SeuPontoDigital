@@ -696,126 +696,44 @@ export default function Employee() {
           </View>
         </Animated.View>
         
-        {/* Card de Progresso do Dia */}
-        <Animated.View 
-          style={[
-            styles.progressCard, 
-            { 
-              opacity: fadeAnim,
-              transform: [{ translateY: translateY }]
-            }
-          ]}
-        >
-          <Text style={styles.progressTitle}>Progresso do Dia</Text>
-          <View style={styles.progressTracker}>
-            <View style={[
-              styles.progressStep,
-              todayRecords.entrada ? styles.progressStepCompleted : {}
-            ]}>
-              <View style={[
-                styles.progressCircle,
-                todayRecords.entrada ? styles.progressCircleCompleted : {}
-              ]}>
-                <MaterialIcons 
-                  name="login" 
-                  size={18} 
-                  color={todayRecords.entrada ? "#FFFFFF" : "#90A4AE"} 
-                />
+        {/* Adicione este componente logo ANTES do card de registro de ponto */}
+        {currentDistance !== null && currentDistance > 1 && (
+          <Animated.View 
+            style={[
+              styles.warningCard, 
+              { 
+                opacity: fadeAnim,
+                transform: [{ translateY: translateY }]
+              }
+            ]}
+          >
+            <View style={styles.warningContent}>
+              <Ionicons name="warning" size={24} color="#FFA000" />
+              <View style={styles.warningTextContainer}>
+                <Text style={styles.warningTitle}>Você está longe do local de trabalho</Text>
+                <Text style={styles.warningDistance}>
+                  Distância atual: {currentDistance.toFixed(2)}km
+                </Text>
+                <Text style={styles.warningInfo}>
+                  É necessário estar a no máximo 1km para registrar o ponto
+                </Text>
               </View>
-              <Text style={[
-                styles.progressText,
-                todayRecords.entrada ? styles.progressTextCompleted : {}
-              ]}>
-                Entrada
-              </Text>
             </View>
-            
-            {/* A linha só fica verde se AMBOS os pontos conectados estiverem registrados */}
-            <View style={[
-              styles.progressConnector,
-              todayRecords.entrada && todayRecords.saidaAlmoco ? styles.progressConnectorActive : {}
-            ]} />
-            
-            <View style={[
-              styles.progressStep,
-              todayRecords.saidaAlmoco ? styles.progressStepCompleted : {}
-            ]}>
-              <View style={[
-                styles.progressCircle,
-                todayRecords.saidaAlmoco ? styles.progressCircleCompleted : {}
-              ]}>
-                <MaterialIcons 
-                  name="restaurant" 
-                  size={18} 
-                  color={todayRecords.saidaAlmoco ? "#FFFFFF" : "#90A4AE"} 
-                />
-              </View>
-              <Text style={[
-                styles.progressText,
-                todayRecords.saidaAlmoco ? styles.progressTextCompleted : {}
-              ]}>
-                Almoço
-              </Text>
-            </View>
-            
-            {/* A linha só fica verde se AMBOS os pontos conectados estiverem registrados */}
-            <View style={[
-              styles.progressConnector,
-              todayRecords.saidaAlmoco && todayRecords.voltaAlmoco ? styles.progressConnectorActive : {}
-            ]} />
-            
-            <View style={[
-              styles.progressStep,
-              todayRecords.voltaAlmoco ? styles.progressStepCompleted : {}
-            ]}>
-              <View style={[
-                styles.progressCircle,
-                todayRecords.voltaAlmoco ? styles.progressCircleCompleted : {}
-              ]}>
-                <MaterialIcons 
-                  name="work" 
-                  size={18} 
-                  color={todayRecords.voltaAlmoco ? "#FFFFFF" : "#90A4AE"} 
-                />
-              </View>
-              <Text style={[
-                styles.progressText,
-                todayRecords.voltaAlmoco ? styles.progressTextCompleted : {}
-              ]}>
-                Retorno
-              </Text>
-            </View>
-            
-            {/* A linha só fica verde se AMBOS os pontos conectados estiverem registrados */}
-            <View style={[
-              styles.progressConnector,
-              todayRecords.voltaAlmoco && todayRecords.saida ? styles.progressConnectorActive : {}
-            ]} />
-            
-            <View style={[
-              styles.progressStep,
-              todayRecords.saida ? styles.progressStepCompleted : {}
-            ]}>
-              <View style={[
-                styles.progressCircle,
-                todayRecords.saida ? styles.progressCircleCompleted : {}
-              ]}>
-                <MaterialIcons 
-                  name="logout" 
-                  size={18} 
-                  color={todayRecords.saida ? "#FFFFFF" : "#90A4AE"} 
-                />
-              </View>
-              <Text style={[
-                styles.progressText,
-                todayRecords.saida ? styles.progressTextCompleted : {}
-              ]}>
-                Saída
-              </Text>
-            </View>
-          </View>
-        </Animated.View>
-        
+            <TouchableOpacity 
+              style={styles.warningButton}
+              onPress={() => {
+                if (selectedContract?.contractDetails?.address?.[0]) {
+                  const workplaceLocation = selectedContract.contractDetails.address[0];
+                  const url = `https://www.google.com/maps/dir/?api=1&destination=${workplaceLocation.latitude},${workplaceLocation.longitude}`;
+                  Linking.openURL(url);
+                }
+              }}
+            >
+              <Text style={styles.warningButtonText}>Ver no Mapa</Text>
+              <Ionicons name="map" size={18} color="#1565C0" style={{marginLeft: 4}} />
+            </TouchableOpacity>
+          </Animated.View>
+        )}
         {/* Card de Registro de Ponto */}
         <Animated.View 
           style={[
@@ -1089,45 +1007,6 @@ export default function Employee() {
         >
           <LocationTracker />
         </Animated.View>
-        
-        {/* Adicione este componente logo após o dateTimeCard */}
-        {currentDistance !== null && currentDistance > 1 && (
-          <Animated.View 
-            style={[
-              styles.warningCard, 
-              { 
-                opacity: fadeAnim,
-                transform: [{ translateY: translateY }]
-              }
-            ]}
-          >
-            <View style={styles.warningContent}>
-              <Ionicons name="warning" size={24} color="#FFA000" />
-              <View style={styles.warningTextContainer}>
-                <Text style={styles.warningTitle}>Você está longe do local de trabalho</Text>
-                <Text style={styles.warningDistance}>
-                  Distância atual: {currentDistance.toFixed(2)}km
-                </Text>
-                <Text style={styles.warningInfo}>
-                  É necessário estar a no máximo 1km para registrar o ponto
-                </Text>
-              </View>
-            </View>
-            <TouchableOpacity 
-              style={styles.warningButton}
-              onPress={() => {
-                if (selectedContract?.contractDetails?.address?.[0]) {
-                  const workplaceLocation = selectedContract.contractDetails.address[0];
-                  const url = `https://www.google.com/maps/dir/?api=1&destination=${workplaceLocation.latitude},${workplaceLocation.longitude}`;
-                  Linking.openURL(url);
-                }
-              }}
-            >
-              <Text style={styles.warningButtonText}>Ver no Mapa</Text>
-              <Ionicons name="map" size={18} color="#1565C0" style={{marginLeft: 4}} />
-            </TouchableOpacity>
-          </Animated.View>
-        )}
         
         {/* Botão para voltar à tela inicial */}
         <TouchableOpacity 
