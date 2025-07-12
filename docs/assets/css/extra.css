@@ -1,3 +1,20 @@
+/* Cores para modo claro */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #027dd4;
+  --md-primary-fg-color--light: #027dd4;
+  --md-primary-fg-color--dark: #027dd4;
+  --md-accent-fg-color: #027dd4;
+}
+
+/* Cores para modo escuro */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #027dd4;
+  --md-primary-fg-color--light: #027dd4;
+  --md-primary-fg-color--dark: #027dd4;
+  --md-accent-fg-color: #027dd4;
+}
+
+
 ::selection {
   background-color: #008efa;
   color: #000;

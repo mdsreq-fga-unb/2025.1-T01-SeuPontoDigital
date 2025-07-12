@@ -70,14 +70,14 @@ theme:
 
   palette:
     - scheme: default
-      primary: blue
-      accent: blue
+      # primary: blue
+      # accent: blue
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
     - scheme: slate
-      primary: black
-      accent: blue
+      # primary: black
+      # accent: blue
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
