@@ -997,7 +997,7 @@ export default function Employee() {
         </Animated.View>
 
         {/* LocationTracker Component */}
-        <Animated.View 
+        {/* <Animated.View 
           style={[
             { 
               opacity: fadeAnim,
@@ -1006,7 +1006,7 @@ export default function Employee() {
           ]}
         >
           <LocationTracker />
-        </Animated.View>
+        </Animated.View> */}
         
         {/* Botão para voltar à tela inicial */}
         <TouchableOpacity 
