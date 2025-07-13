@@ -384,9 +384,10 @@ export default function Employee() {
               contractId,
               clock_in: timeString,
               latitude: userLocation.latitude,
-              longitude: userLocation.longitude
+              longitude: userLocation.longitude,
+              type
           };
-          response = await api.post('/worklog', payload, { headers });
+          response = await api.post('/worklog', payload, { headers }); // POST
       } else {
           const payload: { contractId: string; [key: string]: any } = {
               contractId,
@@ -399,7 +400,7 @@ export default function Employee() {
               'Saída': 'clock_out',
           };
           payload[fieldMap[type]] = timeString;
-          response = await api.put('/worklog', payload, { headers });
+          response = await api.put('/worklog', payload, { headers }); // PUT
       }
 
       console.log('Resposta da API:', response.data);
@@ -679,7 +680,8 @@ export default function Employee() {
             <Text style={styles.cardTitle}>Registrar Ponto</Text>
             <Text style={styles.cardSubtitle}>Selecione o tipo de registro</Text>
           </View>
-          
+
+          {/* 0b0b5b */}
           <View style={styles.cardContent}>
             <TouchableOpacity 
               style={[

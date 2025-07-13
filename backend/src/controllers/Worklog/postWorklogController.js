@@ -1,5 +1,10 @@
 import getTodayWorklogModel from '../../models/Worklogs/getTodayWorklogModel.js';
 import postWorklogModel from '../../models/Worklogs/postWorklogModel.js';
+//funções de alertas
+import checkAndGenerateLateAlert from '../../middlewares/checkAndGenerateLateAlert.js';
+import getScheduledTime from '../../middlewares/getScheduledTime.js';
+import getWorkLogId from '../../middlewares/getWorkLogId.js';
+import insertAlertModel from '../../models/Worklogs/insertAlertModel.js'
 
 const postWorklogController = async (req, res) => {
   console.log('Debug - postWorklogController called');
@@ -13,7 +18,9 @@ const postWorklogController = async (req, res) => {
   }
 
   const employeeId = req.id;
-  const { contractId, clock_in, latitude, longitude } = req.body;
+  const { contractId, clock_in, latitude, longitude, type } = req.body;
+  const registerType = type;
+  console.log("registerType", type);
 
   console.log('Debug - Extracted data:', {
     employeeId,
@@ -70,6 +77,30 @@ const postWorklogController = async (req, res) => {
       console.error('Debug - Error from postWorklogModel:', error);
       return res.status(500).json({ message: error });
     }
+
+    // Buscar horário previsto
+    const scheduledTime = await getScheduledTime(contractId, registerType);
+    const workLogId = await getWorkLogId(contractId, registerType, clock_in);
+
+    if (!scheduledTime || !workLogId) {
+      console.warn("Dados insuficientes para gerar alerta.");
+      return res.status(200).json({ message: "Registro salvo sem alerta." });
+    }
+
+    if (!scheduledTime) {
+      console.log('Sem horário previsto — não gera alerta (hora extra)');
+    } else {
+      const alert = checkAndGenerateLateAlert({
+        scheduledTime,
+        actualTime: clock_in,
+        registerType,
+        workLogId,
+      });
+
+    if (alert) {
+      await insertAlertModel(alert);
+    }
+  }
 
     console.log('Debug - Success! Returning response');
     return res.status(201).json({ message: 'Entrada registrada com sucesso!', id: newWorkLogData.id });
