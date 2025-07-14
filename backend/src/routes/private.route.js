@@ -44,6 +44,7 @@ import postSignContractController from "../controllers/SignContract/postSignCont
 import getEmployerRecordsController from "../controllers/Worklog/getEmployerRecordsController.js";
 import authVerifyToken from "../middlewares/authVerifyToken.js";
 import getAlertsController from "../controllers/Alerts/getAlertsController.js";
+import getEmployeeTimesheetController from "../controllers/Worklog/getEmployeeTimesheetController.js"
 
 const privateRoute = express.Router();
 
@@ -105,6 +106,7 @@ privateRoute.post("/sign-contract", postSignContractController);
 privateRoute.get("/worklogToday/:id", getTodayRecordsController);
 privateRoute.get("/worklog", authVerifyToken, getRecordsController); //US17 nova, apague este comentário em produção
 privateRoute.get("/worklogEmployer", authVerifyToken, getEmployerRecordsController);
+privateRoute.get("/timesheet", getEmployeeTimesheetController)
 privateRoute.post("/worklog", postWorklogController);
 privateRoute.put("/worklog", putWorklogController);
 

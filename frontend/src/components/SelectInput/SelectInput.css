@@ -1,18 +1,24 @@
 .div-contract-select,
-.div-time-select {
+.div-time-select,
+.div-employee-select,
+.div-employ-select {
     display: flex;
     flex-direction: column;
 }
 
 .div-contract-select label,
-.div-time-select label {
+.div-time-select label,
+.div-employee-select label,
+.div-employ-select label {
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--text-color);
 }
 
 .div-contract-select select,
-.div-time-select select {
+.div-time-select select,
+.div-employee-select select,
+.div-employ-select select {
     padding: 1.4rem;
     border-radius: .5rem;
     border: .1rem solid var(--dark-color);
@@ -26,6 +32,8 @@
     cursor: pointer;
 }
 
-.div-time-select select {
+.div-time-select select,
+.div-employee-select select,
+.div-employ-select select {
     width: 15rem;
 }

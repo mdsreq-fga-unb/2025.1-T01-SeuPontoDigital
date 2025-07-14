@@ -132,4 +132,3 @@ export default async function getScheduledTime(contractId, registerType) {
   }
 }
 
-console.log('getScheduledTime', getScheduledTime('e2149e35-eccc-49df-801a-a373fc4577d9', 'break_end'))
