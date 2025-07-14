@@ -53,8 +53,15 @@ import deleteOneWorkScheduleController from "../controllers/WorkSchedule/deleteO
 import putBreakController from "../controllers/WorkBreaks/putBreakController.js";
 
 // Worklog Controllers
+import getTodayRecordsController from "../controllers/Worklog/getTodayRecordsController.js";
+import getRecordsController from "../controllers/Worklog/getRecordsController.js";
+import getEmployerRecordsController from "../controllers/Worklog/getEmployerRecordsController.js";
+import getEmployeeTimesheetController from "../controllers/Worklog/getEmployeeTimesheetController.js";
 import postWorklogController from "../controllers/Worklog/postWorklogController.js";
 import putWorklogController from "../controllers/Worklog/putWorklogController.js";
+
+// Alerts Controllers
+import getAlertsController from "../controllers/Alerts/getAlertsController.js";
 
 const privateRoute = express.Router();
 
@@ -110,7 +117,14 @@ privateRoute.delete("/workschedule/:id", deleteOneWorkScheduleController);
 // ========== WORK BREAKS ROUTES ==========
 privateRoute.put("/workbreak/:id", putBreakController);
 
+// ========== ALERTS ROUTES ==========
+privateRoute.get("/alerts", getAlertsController);
+
 // ========== WORKLOG ROUTES ==========
+privateRoute.get("/worklogToday/:id", getTodayRecordsController);
+privateRoute.get("/worklog", getRecordsController);
+privateRoute.get("/worklogEmployer", getEmployerRecordsController);
+privateRoute.get("/timesheet", getEmployeeTimesheetController);
 privateRoute.post("/worklog", postWorklogController);
 privateRoute.put("/worklog", putWorklogController);
 

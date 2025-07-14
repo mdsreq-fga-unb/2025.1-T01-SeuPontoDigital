@@ -19,7 +19,6 @@ const getRecordsModel = async ({ employId, inicio, fim, contractId }) => {
     if (empregadoData) {
       let detalhesContrato = {};
       if (contractId && empregadoData.id) {
-        console.log("tentando!!!", empregadoData.id, contractId)
         detalhesContrato = await getContractDetails({
           id_employee: empregadoData.id,
           id_contract: contractId,
