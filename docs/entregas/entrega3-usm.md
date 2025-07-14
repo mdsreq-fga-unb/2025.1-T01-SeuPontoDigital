@@ -35,6 +35,7 @@ A ComunEventos é uma startup dedicada a criar uma plataforma para otimizar a ex
 O objetivo é oferecer ao mercado uma solução única, intuitiva e acessível, capaz de cobrir todas as etapas de um evento — desde o planejamento até o pós-evento — com um fluxo integrado de cadastro, comunicação, pagamento e coleta de feedback.
 
 ## User Story Map da ComunEventos
+![USM](../assets/images/USM.png)
 
 |       Atores          |                      Objetivos                          |                            Atividades Principais                     |
 |---------------------- | ------------------------------------------------------- | -------------------------------------------------------------------- |
@@ -49,26 +50,31 @@ O objetivo é oferecer ao mercado uma solução única, intuitiva e acessível, 
 ##### 1. Organizador de Evento
 - Busca uma visão centralizada de todas as etapas de planejamento.
 - Precisa integrar agenda, inscrições, comunicação e relatórios de feedback.
+
 ![Persona 1](../assets/images/Persona1.png)
 
 ##### 2. Participante de Evento
 - Quer facilidade para se inscrever e receber informações em tempo real.
 - Deseja métodos de pagamento diversos e ingressos digitais (QR Code).
+
 ![Persona 2](../assets/images/Persona2.png)
 
 ##### 3. Fornecedor Local 
 - Precisa registrar serviços, preços e contatos de forma clara.
 - Busca visibilidade e agendamento de participação em eventos.
+
 ![Persona 3](../assets/images/Persona3.png)
 
 ##### 4. Patrocinador
 - Quer propor e formalizar apoio de forma digital, receber relatórios de retorno.
 - Avalia parcerias com base em público e resultados anteriores.
+
 ![Persona 4](../assets/images/Persona4.png)
 
 ##### 5. Voluntário 
 - Deseja se inscrever para colaborar, ter clareza de funções e horários.
 - Precisa de instruções e acesso a materiais de suporte.
+
 ![Persona 5](../assets/images/Persona5.png)
 
 ## Objetivos de usuário
@@ -133,7 +139,7 @@ US08: Visualizar resultados das avaliações
 - "Eu, como organizador do evento, quero poder visualizar as avaliações dos participantes para obter o feedback geral do evento"
 
 US09: Criar espaço para depoimentos na plataforma
-- NAO TEM US AINDA
+- Eu, como organizador do evento, quero criar um espaço dedicado para depoimentos na plataforma, para que os participantes possam publicar e consultar feedbacks de forma organizada.
 
 US10: Analisar interações nas redes sociais
 - "Eu, como organizador do evento, quero poder analisar interações nas redes sociais de forma simplificada, única e automática"
@@ -169,17 +175,151 @@ US17: Registrar decisões tomadas em cada encontro
 US18: Criar lembretes automáticos de reunião
 - Como organizador do evento, eu quero configurar lembretes automáticos para as reuniões agendadas para que os colaboradores sejam notificados com antecedência
 
+#### BB04 - Comprar Ingresso
+
+##### Atividade: Facilitar a aquisição de ingressos pelos participantes
+
+US19: Oferecer diferentes métodos de pagamento
+- "Eu, como participante do evento, quero ter opção de fazer o pagamento de diferentes formas. " 
+
+US20: Gerar ingresso digital com QR code
+- "Eu, como participante do evento, quero ter meu ingressos disponibilizado por meio de um QR code."
+
+US21: Confirmar inscrição automaticamente após o pagamento
+- "Eu, como participante do evento, quero que minha inscrição seja validada de forma simples e automática depois do pagameno ser efetuado."
+
+#### BB05 - Comunicar os Inscritos
+
+##### Atividade: Enviar comunicações para inscritos
+
+US22: Informar mudanças na programação ou local
+- "Eu, como inscrito no evento, quero ser informado de qualquer mudança na programação do evento."
+
+US23: Compartilhar instruções práticas (como chegar, o que levar)
+- "Eu, como inscrito, quero receber dicas e instruçõs de localidade e o que levar."
+
+US24: Enviar lembretes de data e horário do evento
+- "Eu, como inscrito, quero receber lembretes contendo data e horário do evento"
+
+#### BB06 - Registrar na plataforma
+
+##### Atividade: Cadastrar usuários na ComunEventos
+
+US25: Criar conta com email e senha ou login social
+- "Eu, como participante do evento, quero que seja possível criar minha conta com email e senha ou login social, preencher perfil com informações básicas e escolher o tipo de usuário(organizador, participante, etc)."
+
+US26: Realizar inscrição no evento
+- "Eu como particpante do evento, quero realizar minha inscrição em um evento para  que eu possa garantir minha vaga."
+
+US27: Confirmar conta via email ou SMS
+- "Eu, como participante do evento, quero que minha conta seja confirmada por email ou sms para melhor segurança de acesso."
+
+#### BB07 - Escolher fornecedor local
+
+##### Atividade: Gerenciar fornecedores do evento
+
+US28: Cadastrar fornecedores com descrição e contatos
+- "Eu, como organizador/voluntário do evento, quero poder cadastrar fornecedores com as devidas descrições."
+
+US29: Selecionar fornecedor e registrar acordo
+- "Eu, como organizador do evento, quero poder selecionar fornecedores comparando orçamentos e condições e registrar acordo/contrato."
+
+US30: Compartilhar cronograma com fornecedor escolhido
+- "Eu, como organizador do evento, quero disponibilizar o cronograma do evento para o fornecedor escolhido."
+
+#### BB08 - Escolher patrocinador
+
+##### Atividade: Gerenciar apoio financeiro de patrocinadores
+
+US31: Registrar patrocínio na página do evento
+- "Eu, como organizador do evento, quero que os patrocínios firmados sejam devidamente divulgados na página do evento."
+
+US32: Formalizar parceria com contrato digital
+- "Eu, como organizador do evento, quero que o patrocínio firmado seja devidamente formalizado digitalmente."
+
+US33: Negociar contrapartidas e benefícios
+- "Eu, como organizador do evento, quero que seja possível fazer/receber e enviar propostas/contrapropostas de parcerias."
+
+US34: Enviar proposta de patrocínio personalizada
+- "Eu, como organizador do evento, quero poder divulgar templates de patrocínio personalizados, afim de facilitar a aquisição dessas parcerias."
+
+#### BB09 - Enviar feedback para fornecedores, patrocinadores e voluntarios
+
+##### Atividade: Avaliar e reconhecer parceiros do evento
+
+US35: Enviar relatório de desempenho e resultados para patrocinadores
+- "Eu, como patrocinador do evento, quero receber relatórios de desempenho para coletar feedbacks e mapeamento de resultados."
+
+US36: Avaliar desempenho dos fornecedores
+- "Eu, como organizador do evento, quero que seja possível avaliar o desempenho de fornecedores ao longo do evento coletando feedbacks."
+
+#### BB10 - Escolher voluntarios
+
+##### Atividade: Gerenciar equipe de voluntários
+
+US37: Enviar formulário de inscrição para voluntários 
+- "Eu, como organizador do evento, quero que seja possível gerar e enviar formulários de incrição de voluntários."
+
+US38: Definir funções e horários dos voluntários
+- "Eu, como organizador do evento, quero que seja possível gerenciar e definir funções e horários para os voluntários, confirmando disponibilidade dos mesmos."
+
+US39: Realizar sessões de treinamento
+- "Eu, como organizador do evento, quero que seja possível realizar sessões de treinamento de voluntários por meio do sistema."
+
+US40: Enviar atualizações e instruções para voluntários
+- "Eu, como organizador do evento, quero disponibilizar instruções detalhadas para os voluntários de forma dinŝmica e autalizada."
+
 ## Critérios de Priorização
-//esta parte está sendo atualizada para 1.2
+A priorização foi definida com base no fluxo de releases, em que a Release 1 entrega o MVP e as demais estendem as funcionalidades de forma incremental. Não usamos o método MoSCoW neste contexto, mas sim:
+
+- 1.Release 1 (v1.0 – MVP): Prioriza as histórias fundamentais para validar o produto, como criação/publicação de eventos, inscrição e pagamento, emissão de ingresso QR Code, coleta de feedback e espaço para depoimentos.
+
+- 2.Release 2 (v1.1): Adiciona capacidade de gestão avançada de colaboradores — fornecedores, patrocinadores e voluntários — e documentação interna (reuniões, propostas e contratos).
+
+- 3.Release 3 (v2.0): Foca em automação, análises e integrações externas, entregando dashboards de métricas, lembretes automáticos e ferramentas de marketing.
+
+Essa abordagem garante que o MVP seja lançado rapidamente e que cada release subsequente acrescente valor de forma planejada.
 
 ### Release 1
-//esta parte está sendo atualizada para 1.2
+
+Objetivo: Lançar o mínimo viável que enderece o fluxo principal de eventos:
+
+- Marcar Evento (US01, US02)
+- Promover Evento (US03)
+- Coleta de feedback (US07, US08)
+- Centralizar comunicação entre organizadores, parceiros e equipe (US11–US12)
+- Planejar e coordenar reuniões da organização (US15)
+- Facilitar a aquisição de ingressos pelos participantes (US19-US20)
+- Enviar comunicações para inscritos (US22)
+- Cadastrar usuários na ComunEventos (US25-US26)
+- Gerenciar fornecedores do evento (US28-US29)
+- Gerenciar apoio financeiro de patrocinadores (US31-US32)
+- Avaliar e reconhecer parceiros do evento (US35)
+- Gerenciar equipe de voluntários (US37-US38)
 
 ### Release 2
-//esta parte está sendo atualizada para 1.2
+
+Objetivo: Expandir colaboração e gestão de parceiros:
+
+- Promover Evento (US04-US05)
+- Coleta de feedback (US09)
+- Centralizar comunicação entre organizadores, parceiros e equipe (US13–US14)
+- Planejar e coordenar reuniões da organização (US16-US17)
+- Facilitar a aquisição de ingressos pelos participantes (US21)
+- Enviar comunicações para inscritos (US23-US24)
+- Cadastrar usuários na ComunEventos (US27)
+- Gerenciar fornecedores do evento (US30)
+- Gerenciar apoio financeiro de patrocinadores (US33-US34)
+- Avaliar e reconhecer parceiros do evento (US36)
+- Gerenciar equipe de voluntários (US39-US40)
 
 ### Release 3
-//esta parte está sendo atualizada para 1.2
+
+Objetivo: Introduzir automação, análise e integração:
+
+- Promover Evento (US06)
+- Coleta de feedback (US10)
+- Planejar e coordenar reuniões da organização (US18)
 
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
