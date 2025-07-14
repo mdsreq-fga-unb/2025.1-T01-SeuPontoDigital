@@ -32,6 +32,11 @@ const Table = (props) => {
                                             isOn={item.statusValue} 
                                             onToggle={() => props.onToggleStatus(item)} 
                                         />
+                                    ) : field === "access_app" && props.onToggleAppAccess ? (
+                                        <ToggleSwitch 
+                                            isOn={item.access_appValue} 
+                                            onToggle={() => props.onToggleAppAccess(item)} 
+                                        />
                                     ) : ( formatField(field, item[field]) )}
                                 </td>
                             ))}
