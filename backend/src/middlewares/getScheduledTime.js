@@ -71,25 +71,32 @@ export default async function getScheduledTime(contractId, registerType) {
       const today = new Date().toISOString().split("T")[0];
 
       const { data: breakData, error: breakError } = await supabase
-        .from("work_logs")
-        .select("break_start, break_end")
-        .eq("date", today)
+        .from("register_work_logs")
+        .select("work_logs(break_start, break_end, date)")
         .eq("id_contract", contractId)
+        .not("work_logs", "is", null)
+        .eq("work_logs.date", today)
+        // .limit(1)
         .maybeSingle();
 
-      if (breakError || !breakData?.break_start || !breakData?.break_end) {
-        console.warn("Não foi possível calcular duração do intervalo flexível.");
+      const breakStart = breakData.work_logs?.break_start;
+      const breakEnd = breakData.work_logs?.break_end;
+
+      if (!breakStart || !breakEnd) {
+        console.warn("⚠️ Campos de intervalo ausentes:", { breakStart, breakEnd });
         return null;
       }
 
-      const [h1, m1] = breakData.break_start.split(":").map(Number);
-      const [h2, m2] = breakData.break_end.split(":").map(Number);
+      const [h1, m1] = breakStart.split(":").map(Number);
+      const [h2, m2] = breakEnd.split(":").map(Number);
       const start = h1 * 60 + m1;
       const end = h2 * 60 + m2;
       const realDuration = end - start;
 
       if (realDuration > durationLimit) {
-        return `${durationLimit}min`; // retorna limite para gerar alerta
+        const hours = Math.floor(durationLimit / 60).toString().padStart(2, '0');
+        const minutes = (durationLimit % 60).toString().padStart(2, '0');
+        return `${hours}:${minutes}:00`; // formato HH:MM:SS
       } else {
         return null; // dentro do limite, sem alerta
       }
@@ -124,3 +131,5 @@ export default async function getScheduledTime(contractId, registerType) {
     return null;
   }
 }
+
+console.log('getScheduledTime', getScheduledTime('e2149e35-eccc-49df-801a-a373fc4577d9', 'break_end'))

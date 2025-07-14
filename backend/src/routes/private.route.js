@@ -43,6 +43,7 @@ import getOneSignContractController from "../controllers/SignContract/getOneSign
 import postSignContractController from "../controllers/SignContract/postSignContractController.js";
 import getEmployerRecordsController from "../controllers/Worklog/getEmployerRecordsController.js";
 import authVerifyToken from "../middlewares/authVerifyToken.js";
+import getAlertsController from "../controllers/Alerts/getAlertsController.js";
 
 const privateRoute = express.Router();
 
@@ -106,6 +107,9 @@ privateRoute.get("/worklog", authVerifyToken, getRecordsController); //US17 nova
 privateRoute.get("/worklogEmployer", authVerifyToken, getEmployerRecordsController);
 privateRoute.post("/worklog", postWorklogController);
 privateRoute.put("/worklog", putWorklogController);
+
+// ================== ALERTS ==================
+privateRoute.get("/alerts", authVerifyToken, getAlertsController);
 
 
 export default privateRoute;

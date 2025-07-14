@@ -70,7 +70,7 @@ const putWorklogController = async (req, res) => {
     try {
       const alert = checkAndGenerateLateAlert({
         scheduledTime,
-        actualTime: clock_in,
+        actualTime,
         registerType,
         workLogId,
       });
@@ -79,7 +79,7 @@ const putWorklogController = async (req, res) => {
         await insertAlertModel(alert);
       }
 
-      return res.status(201).json({ message: 'Entrada registrada com sucesso!', id: newWorkLogData.id });
+      return res.status(201).json({ message: 'Entrada registrada com sucesso!', id: workLogId });
 
   } catch (alertError) {
     console.error('Erro ao gerar/inserir alerta:', alertError);
