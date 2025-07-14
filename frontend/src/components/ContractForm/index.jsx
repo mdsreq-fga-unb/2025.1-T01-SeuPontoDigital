@@ -207,7 +207,7 @@ const ContractForm = (props) => {
             </div>
             <DaysOfWeekSelector
                 selectedDays={props.contract.work_days || []}
-                onChange={days => props.handleInputChange({ name: "work_days", value: days })}
+                onChange={props.handleWorkDaysChange || ((days) => props.handleInputChange({ name: "work_days", value: days }))}
                 workScheduleType={props.contract.work_schedule_type}
             />
             <div className="contract-form-grid">
