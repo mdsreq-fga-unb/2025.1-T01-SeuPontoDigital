@@ -44,6 +44,7 @@ nav:
       - USM: entregas/entrega3-usm.md
     - Entrega Unidade 4:
       - Video da apresentação: entregas/entrega4-video.md
+      - Casos de Uso: entregas/entrega4-casosdeuso.md
 
   - Políticas da Equipe :
     - Política de Issues: guias/issues.md
