@@ -18,6 +18,7 @@ const corsOrigins = [
     "http://127.0.0.1:3000"
 ].filter(Boolean); // Remove valores undefined/null
 
+
 app.use(cors({
     origin: corsOrigins,
     credentials: true,
@@ -25,10 +26,11 @@ app.use(cors({
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
 }));
 
+
 app.use("/api", publicRoute);
 app.use("/api", privateRoute);
 
-// Catch-all middleware for unmatched routes
+
 app.use((req, res) => {
     res.status(404).json({ 
         message: "Route not found",
@@ -36,6 +38,7 @@ app.use((req, res) => {
         method: req.method
     });
 });
+
 
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);

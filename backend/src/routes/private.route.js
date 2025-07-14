@@ -2,7 +2,6 @@ import express from "express";
 import validateTokenJWT from "../middlewares/validateTokenJWT.js";
 import validateUser from "../middlewares/validateUser.js";
 import validateEmployer from "../middlewares/validateEmployer.js";
-import validateDataContract from "../middlewares/validateDataContract.js"
 import {validateDateTwoYearsEmployee, validateDateTwoYearsEmployer, validateDateTwoYearsContract} from "../middlewares/validateDateTwoYears.js";
 import postAddressController from "../controllers/Address/postAddressController.js";
 import putAddressController from "../controllers/Address/putAddressController.js";
@@ -11,11 +10,6 @@ import getOneEmployerController from "../controllers/Employers/getOneEmployerCon
 import postEmployerController from "../controllers/Employers/postEmployerController.js";
 import deleteEmployerController from "../controllers/Employers/deleteEmployerController.js";
 import putEmployerController from "../controllers/Employers/putEmployerController.js";
-// import postContractController from "../controllers/ContractEmployee/postContractController.js"; já foi declarada na dev, veio de us15
-// import getContractsController from "../controllers/ContractEmployee/getContractsController.js"; já foi declarada na dev, veio de us15
-// import getOneContractController from "../controllers/ContractEmployee/getOneContractController.js"; já foi declarada na dev, veio de us15
-// import deleteContractController from "../controllers/ContractEmployee/deleteContractController.js"; já foi declarada na dev, veio de us15
-// import putContractController from "../controllers/ContractEmployee/putContractController.js"; já foi declarada na dev, veio de us15
 import postWorklogController from "../controllers/Worklog/postWorklogController.js";
 import putWorklogController from "../controllers/Worklog/putWorklogController.js";
 import getEmployeeAndContractsController from "../controllers/Contracts/getEmployeeAndContractsController.js";
@@ -65,10 +59,6 @@ privateRoute.post("/work-address", postWorkAddressController);
 privateRoute.get("/contracts", getContractsController);
 privateRoute.get("/contract/:id", getOneContractController);
 privateRoute.get("/contract/:id/full", getFullContractDataController);
-// privateRoute.get("/employee-contracts", getEmployeeAndContractsController); //TEM QUE CONSERTAR
-// privateRoute.post("/contract", validateUser, validateContract, postContractController); //TEM QUE CONSERTAR
-// privateRoute.put("/contract/:id", validateUser, validateContract, putContractController); //TEM QUE CONSERTAR
-// privateRoute.delete("/contract/:id", verifyDateContract, deleteContractController);
 privateRoute.post("/contract", postContractController);
 privateRoute.post("/contract/complete", postCompleteContractController);
 privateRoute.put("/contract/:id", putContractController);
@@ -91,6 +81,7 @@ privateRoute.put("/employee/:id", validateUser, putEmployeeController);
 privateRoute.delete("/employee/:id", validateDateTwoYearsEmployee, deleteEmployeeController);
 privateRoute.get("/employee-contracts", getEmployeeAndContractsController);
 
+
 // ================= EMPLOY =================
 privateRoute.get("/employ", getAllEmployController);
 privateRoute.post("/employ", postEmployController);
@@ -104,11 +95,12 @@ privateRoute.post("/sign-contract", postSignContractController);
 
 // ================== WORKLOGS ==================
 privateRoute.get("/worklogToday/:id", getTodayRecordsController);
-privateRoute.get("/worklog", authVerifyToken, getRecordsController); //US17 nova, apague este comentário em produção
+privateRoute.get("/worklog", authVerifyToken, getRecordsController);
 privateRoute.get("/worklogEmployer", authVerifyToken, getEmployerRecordsController);
 privateRoute.get("/timesheet", getEmployeeTimesheetController)
 privateRoute.post("/worklog", postWorklogController);
 privateRoute.put("/worklog", putWorklogController);
+
 
 // ================== ALERTS ==================
 privateRoute.get("/alerts", authVerifyToken, getAlertsController);
