@@ -76,7 +76,7 @@ privateRoute.put("/address/:id", putAddressController);
 privateRoute.get("/contracts", getContractsController);
 privateRoute.get("/contract/:id", getOneContractController);
 privateRoute.get("/contract/:id/full", getFullContractDataController);
-privateRoute.get("/employee-contracts/:id", getEmployeeAndContractsController);
+privateRoute.get("/employee-contracts", getEmployeeAndContractsController);
 privateRoute.post("/contract", postContractController);
 privateRoute.post("/contract/complete", postCompleteContractController);
 privateRoute.put("/contract/:id", putContractController);
