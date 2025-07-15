@@ -34,6 +34,7 @@ const Timesheets = () => {
   }, [selectYear]);
 
   const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth(); // 0 a 11
   const startYear = 2024;
 
   const year_period_time = [];
@@ -84,14 +85,16 @@ const Timesheets = () => {
   const getFilteredPeriods = (year) => {
     const today = new Date();
     const periods = generatePeriods();
+    const limiteMes = currentYear === year ? currentMonth + 2 : 12;
 
-    return periods.filter(({ startMonth }) => {
-      const startDate = new Date(year, startMonth - 1, 25);
-      const endMonth = startMonth === 12 ? 1 : startMonth + 1;
-      const endYear = startMonth === 12 ? year + 1 : year;
-      const endDate = new Date(endYear, endMonth - 1, 24);
-      return today > endDate;
-    });
+    // return periods.filter(({ startMonth }) => {
+    //   const startDate = new Date(year, startMonth - 1, 25);
+    //   const endMonth = startMonth === 12 ? 1 : startMonth + 1;
+    //   const endYear = startMonth === 12 ? year + 1 : year;
+    //   const endDate = new Date(endYear, endMonth - 1, 24);
+    //   return today > endDate;
+    // });
+    return periods.filter(({ startMonth }) => startMonth <= limiteMes);
   };
 
   const monthly_period_time = getFilteredPeriods(selectYear);
@@ -116,7 +119,7 @@ const Timesheets = () => {
   };
 
   const handleGeneratePDF = async () => {
-    const periodString = `${selectYear}-${getMonthFromPeriod(selectPeriod)}`;
+    let periodString = `${selectYear}-${getMonthFromPeriod(selectPeriod)}`;
 
     await fetchTimesheet({
       employeeId: selectedEmployee,
@@ -131,34 +134,42 @@ const Timesheets = () => {
 
     const doc = new jsPDF();
 
-    const registros = data[0].registros?.[periodString] || [];
+    const base =  data[0].registros || []
+    // console.log("base", base)
+    // console.log("periodstring", periodString)
+    // const registros =  base[periodString] || [];
+    // console.log("registros", registros)
 
     const linhas = [];
     let total50 = "0.00";
     let total100 = "0.00";
 
-    for (const r of registros) {
-      if (r.tipo === "resumo_horas_extras") {
-        total50 = r.total_50;
-        total100 = r.total_100;
-        continue;
+    for (const registrosDoMes of Object.values(base)) {
+      for (const r of registrosDoMes) {
+        if (r.tipo === "resumo_horas_extras") {
+          total50 = r.total_50;
+          total100 = r.total_100;
+          continue;
+        }
+
+        const intervalo = calcularIntervalo(r.ida_almoco, r.volta_almoco);
+
+        linhas.push([
+          r.data,
+          r.dia_semana,
+          r.entrada || "-",
+          r.ida_almoco || "-",
+          r.volta_almoco || "-",
+          r.saida || "-",
+          intervalo,
+          r.carga_horaria_dia || "-",
+          r.horas_trabalhadas || "-",
+          r.horas_extra || "-",
+        ]);
       }
-
-      const intervalo = calcularIntervalo(r.ida_almoco, r.volta_almoco);
-
-      linhas.push([
-        r.data,
-        r.dia_semana,
-        r.entrada || "-",
-        r.ida_almoco || "-",
-        r.volta_almoco || "-",
-        r.saida || "-",
-        intervalo,
-        r.carga_horaria_dia || "-",
-        r.horas_trabalhadas || "-",
-        r.horas_extra || "-",
-      ]);
     }
+
+    // console.log("linhas", linhas)
 
     // Cabeçalho do relatório com nome da pessoa e função
     const empregado = data[0].empregado;

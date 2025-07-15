@@ -8,6 +8,10 @@ const useEmployeeTimesheet = () => {
   const fetchTimesheet = async ({ employeeId, employerId, period }) => {
     if (!employeeId || !employerId || !period) return;
 
+    console.log("employeeId", employeeId)
+    console.log("employerId", employerId)
+    console.log("period", period)
+
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
@@ -24,6 +28,8 @@ const useEmployeeTimesheet = () => {
         }
       );
 
+      // console.log(JSON.stringify(response.data, null, 2));
+      // console.log("response:", response)
       setData(response.data);
     } catch (err) {
       console.error("Erro ao buscar timesheet:", err);

@@ -12,8 +12,12 @@ const getEmployeeTimesheetController = async (req, res) => {
     }
 
     const [ano, mes] = period.split("-").map(Number);
-    const inicio = new Date(ano, mes - 1, 25);
-    const fim = new Date(ano, mes, 24);
+    // Gera strings no formato "YYYY-MM-DD"
+    const inicio = `${ano}-${String(mes).padStart(2, "0")}-25`;
+
+    const proximoMes = mes === 12 ? 1 : mes + 1;
+    const proximoAno = mes === 12 ? ano + 1 : ano;
+    const fim = `${proximoAno}-${String(proximoMes).padStart(2, "0")}-24`;
 
     // Consertar esta parte
     const contract = await getAllSignContractModel();
@@ -45,6 +49,7 @@ const getEmployeeTimesheetController = async (req, res) => {
       contractId
     });
 
+    
     return res.status(200).json(registros.data);
   } catch (err) {
     console.error("Erro em getEmployeeTimesheetController:", err);
