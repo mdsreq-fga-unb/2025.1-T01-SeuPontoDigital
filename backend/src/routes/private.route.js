@@ -38,6 +38,7 @@ import postSignContractController from "../controllers/SignContract/postSignCont
 
 // Employ Controllers
 import postEmployController from "../controllers/Employ/postEmployController.js";
+import getAllEmployController from "../controllers/Employ/getAllEmployController.js";
 
 // WorkAddress Controllers
 import postWorkAddressController from "../controllers/WorkAddress/postWorkAddressController.js";
@@ -104,6 +105,7 @@ privateRoute.post("/sign-contract", postSignContractController);
 
 // ========== EMPLOY ROUTES ==========
 privateRoute.post("/employ", postEmployController);
+privateRoute.get("/employ", getAllEmployController)
 
 // ========== WORK ADDRESS ROUTES ==========
 privateRoute.post("/work-address", postWorkAddressController);
