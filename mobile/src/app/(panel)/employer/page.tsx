@@ -61,6 +61,13 @@ export default function Employer() {
       break_end?: string;
       // Add other fields from the API as needed
     };
+    registros?: {
+      [month: string]: Array<{ 
+        data?: string; 
+        entrada?: string | null;
+        tipo?: string;
+      }>;
+    };
     // Add other top-level fields if needed
   }
   
@@ -124,6 +131,44 @@ export default function Employer() {
         if (response.data && Array.isArray(response.data)) {
           // Mapear os dados da API para o formato esperado pelo componente
           const mappedEmployees: Employee[] = response.data.map((item: EmployeeResponse) => {
+            // Calcular dias trabalhados com base nos registros de ponto
+            const daysWorked = (() => {
+              console.log(`Employee ${item.empregado.nome} - Registros:`, JSON.stringify(item.registros));
+              
+              // Verificar se existem registros de ponto
+              if (!item.registros) {
+                console.log(`No registros found for ${item.empregado.nome}`);
+                return 0;
+              }
+              
+              try {
+                let count = 0;
+                
+                // Percorrer cada mês nos registros
+                Object.keys(item.registros).forEach(month => {
+                  // Obter o array de registros do mês
+                  const monthRecords = item.registros?.[month];
+                  
+                  if (Array.isArray(monthRecords)) {
+                    // Filtrar apenas os registros de dias (excluir o resumo de horas extras)
+                    const dayRecords = monthRecords.filter(record => 
+                      record.data && !record.tipo // Exclui o item de resumo que tem 'tipo'
+                    );
+                    
+                    // Contar dias com pelo menos um registro de entrada
+                    count += dayRecords.filter(record => record.entrada !== null).length;
+                    
+                    console.log(`Month ${month}: Found ${dayRecords.length} days with records, ${count} with entry`);
+                  }
+                });
+                
+                return count;
+              } catch (error) {
+                console.error(`Error calculating days worked for ${item.empregado.nome}:`, error);
+                return 0;
+              }
+            })();
+
             return {
               id: item.empregado.id,
               name: item.empregado.nome,
@@ -132,7 +177,7 @@ export default function Employer() {
               workHours: "08:00 - 17:00",
               startDate: item.empregado.start_date || "Não especificado",
               alerts: 0,
-              daysWorked: 0,
+              daysWorked, // Usar o valor calculado
               status: item.empregado.status || "Inativo",
               totalHours: "0h",
               overtime50: "0h",
