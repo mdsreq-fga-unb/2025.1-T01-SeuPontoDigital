@@ -65,8 +65,11 @@ import putWorklogController from "../controllers/Worklog/putWorklogController.js
 // Alerts Controllers
 import getAlertsController from "../controllers/Alerts/getAlertsController.js";
 import { validateDateTwoYearsContract, validateDateTwoYearsEmployee, validateDateTwoYearsEmployer } from "../middlewares/validateDateTwoYears.js";
+import validateUser from "../middlewares/validateUser.js";
+
 
 const privateRoute = express.Router();
+
 
 // Aplicar middleware de autenticação em todas as rotas privadas
 privateRoute.use(authVerifyToken);
@@ -577,7 +580,7 @@ privateRoute.get("/employee/:id", getOneEmployeeController);
  *       500:
  *         description: Erro interno do servidor
  */
-privateRoute.post("/employee", postEmployeeController);
+privateRoute.post("/employee", validateUser, postEmployeeController);
 
 /**
  * @swagger
@@ -625,7 +628,7 @@ privateRoute.post("/employee", postEmployeeController);
  *       500:
  *         description: Erro interno do servidor
  */
-privateRoute.put("/employee/:id", putEmployeeController);
+privateRoute.put("/employee/:id", validateUser, putEmployeeController);
 
 /**
  * @swagger
@@ -756,7 +759,7 @@ privateRoute.get("/employer/:id", getOneEmployerController);
  *       500:
  *         description: Erro interno do servidor
  */
-privateRoute.post("/employer", postEmployerController);
+privateRoute.post("/employer", validateUser, postEmployerController);
 
 /**
  * @swagger
@@ -808,7 +811,7 @@ privateRoute.post("/employer", postEmployerController);
  *       500:
  *         description: Erro interno do servidor
  */
-privateRoute.put("/employer/:id", putEmployerController);
+privateRoute.put("/employer/:id", validateUser, putEmployerController);
 
 /**
  * @swagger
