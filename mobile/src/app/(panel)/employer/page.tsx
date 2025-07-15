@@ -198,7 +198,13 @@ export default function Employer() {
               startDate: formatDate(item.empregado.start_date), // Aplicar formatação aqui
               alerts: 0,
               daysWorked, // Usar o valor calculado
-              status: item.empregado.status || "Inativo",
+              status: typeof item.empregado.status === 'boolean' 
+                     ? (item.empregado.status ? "Ativo" : "Inativo") 
+                     : typeof item.empregado.status === 'string' && item.empregado.status.toLowerCase() === 'true'
+                       ? "Ativo" 
+                       : typeof item.empregado.status === 'string' && item.empregado.status.toLowerCase() === 'false'
+                         ? "Inativo"
+                         : String(item.empregado.status || "Inativo"),
               totalHours: "0h",
               overtime50: "0h",
               overtime100: "0h",
@@ -334,7 +340,11 @@ export default function Employer() {
             </View>
             <View style={styles.statItem}>
               <Text style={styles.statNumber}>
-                {employees.filter(emp => emp.status === 'True').length}
+                {employees.filter(emp => 
+                  // Check both boolean true and string 'true' or 'Ativo'
+                  emp.status === 'true' || 
+                  emp.status === 'Ativo'
+                ).length}
               </Text>
               <Text style={styles.statLabel}>Ativos</Text>
             </View>
