@@ -366,6 +366,6 @@ Objetivo: Introduzir automação, análise e integração:
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-09/06/2025 | 1.0 | Elaboração inicial do estudo de caso | Caio Venâncio, Lucas Guimarães, Guilherme Moura e Davi de Aguiar | |
-23/06/2025 | 1.1 | Elaboração final do estudo de caso | Davi de Aguiar, Guilherme Moura ||
-14/07/2025 | 1.2 | Detalhamento do Miro no GitPages | Joao Pedro Ferreira Moraes ||
+09/06/2025 | 1.0 | Elaboração inicial do estudo de caso | Caio Venâncio, Lucas Guimarães, Guilherme Moura e Davi de Aguiar | Guilherme Moura |
+23/06/2025 | 1.1 | Elaboração final do estudo de caso | Davi de Aguiar e Guilherme Moura | João Pedro |
+14/07/2025 | 1.2 | Detalhamento do Miro no GitPages | João Pedro | Willian Silva |
