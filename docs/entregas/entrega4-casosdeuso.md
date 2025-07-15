@@ -4,9 +4,9 @@
 
 ## Especificações dos Casos de Uso:
 
-- Especificação de Caso de Uso 1: [Solicitar serviços essenciais](casos_de_uso/servicos.md)
-- Especificação de Caso de Uso 2: [Monitorar interesse dos refugiados](casos_de_uso/interesse.md)
-- Especificação de Caso de Uso 3: [Visualizar vaga de trabalho](casos_de_uso/visual_vaga.md)
+- Especificação de Caso de Uso 1: [Solicitar serviços essenciais](casos_de_uso/solicitar_servicos.md)
+- Especificação de Caso de Uso 2: [Monitorar interesse dos refugiados](casos_de_uso/monitorar_interesse.md)
+- Especificação de Caso de Uso 3: [Visualizar vaga de trabalho](casos_de_uso/visualizar_vaga.md)
 - Especificação de Caso de Uso 4: [Publicar cursos de capacitação](casos_de_uso/publicar_curso.md)
 - Especificação de Caso de Uso 5: [Gerenciar perfil do refugiado](casos_de_uso/perfil_refugiado.md)
 - Especificação de Caso de Uso 6: [Gerenciar campanhas](casos_de_uso/gerenciar_campanhas.md)

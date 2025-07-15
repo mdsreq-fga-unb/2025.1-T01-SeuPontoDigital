@@ -3,7 +3,7 @@ Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 14/07/2025 | 1.0 | Elaboração da especificação do caso de uso | Guilherme Moura | |
 
-# Especificação de Caso de Uso: Gerenciar Perfil do Refugiado
+# Especificação de Caso de Uso: Gerenciar perfil do refugiado
 
 ### 1. Breve Descrição
 Esta especificação de caso de uso permite ao ator Refugiado consultar e gerenciar as informações de sua conta na plataforma HopeBridge. O fluxo principal descreve a consulta dos dados do perfil seguida pela edição e salvamento das informações. A partir da tela de visualização, o usuário também tem acesso a fluxos alternativos para realizar outras ações de gerenciamento, como alterar a senha ou desativar a conta.

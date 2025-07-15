@@ -3,7 +3,7 @@ Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 12/07/2025 | 1.0 | Elaboração da especificação do caso de uso | Caio Venâncio | Willian Silva |
 
-## Especificação de Caso de Uso: Gerenciar Campanhas
+# Especificação de Caso de Uso: Gerenciar campanhas
 
 ### 1. Breve Descrição
 Este caso de uso permite que agências humanitárias criem, atualizem e desativem campanhas na plataforma. Essas campanhas podem incluir ações como vacinação, distribuição de alimentos ou iniciativas educativas. O objetivo é planejar, organizar e manter atualizadas as campanhas de ajuda humanitária de acordo com a demanda identificada nas regiões atendidas.

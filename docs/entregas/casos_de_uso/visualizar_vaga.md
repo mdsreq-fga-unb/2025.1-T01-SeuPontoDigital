@@ -3,7 +3,7 @@ Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 08/07/2025 | 1.0 | Elaboração da especificação do caso de uso | Lucas Guimarães | Willian Silva |
 
-## Especificação de Caso de Uso: Visualizar vaga de trabalho
+# Especificação de Caso de Uso: Visualizar vaga de trabalho
 
 ### 1. Breve Descrição
 Este caso de uso permite que refugiados visualizem as vagas de trabalho disponíveis na plataforma, de acordo com o seu perfil e localização. As vagas podem incluir detalhes como descrição da função, requisitos, benefícios e dados do empregador. Após visualizar uma vaga, o refugiado poderá optar por efetuar inscrição em cursos relacionados à vaga, caso disponíveis.

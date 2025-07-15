@@ -3,7 +3,7 @@ Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 08/07/2025 | 1.0 | Elaboração da especificação do caso de uso | Davi de Aguiar | Willian Silva |
 
-## Especificação de Caso de Uso: Monitorar interesse dos refugiados
+# Especificação de Caso de Uso: Monitorar interesse dos refugiados
 
 ### 1. Breve Descrição
 Este caso de uso permite que empregadores parceiros visualizem e acompanhem o interesse demonstrado por refugiados nas vagas publicadas por eles. O sistema exibe os refugiados que se candidataram às oportunidades, junto com o status das candidaturas. A partir dessa visualização, o empregador pode realizar ações adicionais, como registrar entrevistas com os candidatos.

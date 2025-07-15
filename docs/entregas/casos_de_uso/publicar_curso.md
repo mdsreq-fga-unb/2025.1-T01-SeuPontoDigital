@@ -3,7 +3,7 @@ Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 14/07/2025 | 1.0 | Elaboração da especificação do caso de uso | Willian Silva | |
 
-## Especificação de Caso de Uso: Publicar Cursos de Capacitação
+# Especificação de Caso de Uso: Publicar cursos de capacitação
 
 ### 1. Breve Descrição
 Este caso de uso permite que empregadores parceiros publiquem cursos de capacitação na plataforma "HopeBridge", através de informações como título, descrição, requisitos, datas, vagas e modalidade. O objetivo é disponibilizar oportunidades de formação para refugiados. Após a publicação, o empregador pode optar por visualizar o feedback recebido sobre cursos anteriores.

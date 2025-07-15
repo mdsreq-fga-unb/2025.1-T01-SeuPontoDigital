@@ -3,7 +3,7 @@ Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 14/07/2025 | 1.0 | Elaboração da especificação do caso de uso | Guilherme Moura | |
 
-# Especificação de Caso de Uso: Gerenciar Perfil da Agência
+# Especificação de Caso de Uso: Gerenciar perfil da agência
 
 ### 1. Breve Descrição
 Esta especificação de caso de uso permite ao ator Agência Humanitária consultar e gerenciar as informações de sua organização na plataforma HopeBridge. O fluxo principal descreve a consulta e a edição dos dados cadastrais. A partir da tela principal do perfil, a agência também tem acesso a um fluxo alternativo para gerenciar os usuários vinculados à sua organização.
