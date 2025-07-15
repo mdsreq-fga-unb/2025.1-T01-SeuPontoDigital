@@ -3,6 +3,7 @@ import cors from "cors";
 import publicRoute from "./routes/public.route.js";
 import privateRoute from "./routes/private.route.js";
 import { CORS_ORIGIN, PORT, CORS_ORIGIN_MOBILE } from "./config/env.js";
+import { swaggerUi, swaggerSpec } from "./config/swagger.js";
 
 const app = express();
 
@@ -29,6 +30,28 @@ app.use(cors({
 
 app.use("/api", publicRoute);
 app.use("/api", privateRoute);
+
+// Swagger Documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+    explorer: true,
+    customCss: '.swagger-ui .topbar { display: none }',
+    customSiteTitle: "Seu Ponto Digital API"
+}));
+
+// Rota de informações da API
+app.get("/", (req, res) => {
+    res.json({
+        message: "Seu Ponto Digital API",
+        version: "1.0.0",
+        documentation: "/api-docs",
+        endpoints: {
+            public: "/api",
+            private: "/api (com token Bearer)",
+            docs: "/api-docs"
+        },
+        status: "online"
+    });
+});
 
 
 app.use((req, res) => {
