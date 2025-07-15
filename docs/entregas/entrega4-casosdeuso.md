@@ -1,5 +1,9 @@
 ## Casos de Uso - HopeBridge
 
+O estudo de caso da Unidade 4 apresenta a plataforma HopeBridge – Reconstruindo Vidas e Comunidades de Refugiados Palestinos, idealizada como uma resposta humanitária às severas consequências enfrentadas por populações refugiadas após anos de conflitos.
+
+Como parte deste exercício, foram elaborados um diagrama de casos de uso e sete especificações de casos de uso. A imagem a seguir representa o diagrama desenvolvido, seguida pelos links que direcionam às informações detalhadas de cada especificação.
+
 ![Diagrama de Casos de Uso da HopeBridge](../assets/images/HopeBridge.png)
 
 ## Especificações dos Casos de Uso:
