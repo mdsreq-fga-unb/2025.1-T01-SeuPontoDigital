@@ -68,6 +68,8 @@ Utilizar fluxos alternativos aprimora a clareza do caso de uso. Tenha em mente q
 
 Caso de Uso: [Solicitar serviços essenciais](casos_de_uso/servicos.md)
 
+Caso de Uso: [Gerenciar perfil do refugiado](casos_de_uso/perfil_refugiado.md)
+
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
