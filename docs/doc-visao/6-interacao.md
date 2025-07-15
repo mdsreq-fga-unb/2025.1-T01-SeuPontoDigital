@@ -23,14 +23,20 @@ A equipe envolvida no desenvolvimento é composta por:
     <tr>
       <td>Desenvolvedor Front-End Mobile</td>
       <td>Atua na parte visual do aplicativo, o que inclui a interface com o usuário, o design e a navegação.</td>
-      <td align="center">Lucas Guimarães</td>
-      <td>Caio Venâncio, Davi de Aguiar e Thiago Melo</td>
+      <td align="center">João Pedro Ferreira</td>
+      <td>Caio Venâncio, Guilherme Moura e Thiago Melo</td>
+    </tr>
+    <tr>
+      <td>Desenvolvedor Front-End Web</td>
+      <td>Atua na parte visual do aplicativo, o que inclui a interface com o usuário, o design e a navegação.</td>
+      <td align="center">Davi de Aguiar</td>
+      <td>Lucas Guimarães e Caio Venâncio</td>
     </tr>
     <tr>
       <td>Desenvolvedor Back-End</td>
       <td>Responsável por implementar a lógica do servidor, gerenciar o banco de dados e integrar APIs.</td>
-      <td align="center">Guilherme Moura</td>
-      <td>João Pedro Ferreira, Lucas Guimarães, Willian Silva</td>
+      <td align="center">Lucas Guimarães</td>
+      <td>Guilherme Moura, Lucas Guimarães, Willian Silva</td>
     </tr>
     <tr>
       <td>Analista de QA</td>
@@ -86,4 +92,5 @@ O processo de validação da solução ocorrerá com base na *Definição de Pro
 ## Historico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-20/04/2025 | 1.0 | Interação entre Equipe e Cliente | Willian Silva | |
+20/04/2025 | 1.0 | Interação entre Equipe e Cliente | Willian Silva | Guilherme Moura|
+14/07/2025 | 1.1 | Revisão da Interação entre Equipe e Cliente | Lucas Guimarães | Davi de Aguiar|

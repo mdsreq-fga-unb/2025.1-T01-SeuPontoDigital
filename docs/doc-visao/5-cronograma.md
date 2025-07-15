@@ -1,4 +1,4 @@
-Esta é uma <strong>versão preliminar</strong> do planejamento temporal do projeto. Ao longo da disciplina, o planejamento será atualizado.
+Esta é a <strong>versão final</strong> do planejamento temporal do projeto.
 <br><br>
 _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) para estudo das tecnologias e realizar a documentação completa do documento de visão antes de iniciar as sprints.
 <hr>
@@ -76,7 +76,7 @@ _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) p
       <td style="text-align: center; vertical-align: middle;">06/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">12/06/2025</td>
      <td style="text-align: center; vertical-align: middle;">Refatorar:<br>1.US02<br>2.US03<br>3.US04</td>
-      <td style="text-align: center; vertical-align: middle;"><br>1.US02<br>2.US03<br>3.US04<br><b>Release 3</b></td>
+      <td style="text-align: center; vertical-align: middle;"><br>1.US02<br>2.US03<br>3.US04</td>
       <td style="text-align: center; vertical-align: middle;">Validação da refatoração da US02, US03 e US04</td>
     </tr>
     <tr>
@@ -84,7 +84,7 @@ _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) p
       <td style="text-align: center; vertical-align: middle;">13/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">19/06/2025</td>
      <td style="text-align: center; vertical-align: middle;">Refatorar:<br>1.US07<br>2.US08<br>3.US09</td>
-      <td style="text-align: center; vertical-align: middle;"></b>1.US07<br>2.US08<br>3.US09</td>
+      <td style="text-align: center; vertical-align: middle;"></b>1.US07<br>2.US08<br>3.US09<br><b>Release 3</b></td>
       <td style="text-align: center; vertical-align: middle;">Validação do sistema de notificações do registro de ponto</td>
     </tr>
     <tr>
@@ -92,24 +92,24 @@ _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) p
       <td style="text-align: center; vertical-align: middle;">20/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">26/06/2025</td>
      <td style="text-align: center; vertical-align: middle;">Refatorar:<br>1.US05<br>2.US06<br>3.US10</td>
-      <td style="text-align: center; vertical-align: middle;">1.US05<br>2.US06<br>3.US10<br><b>Release 4</b></td>
+      <td style="text-align: center; vertical-align: middle;">1.US05<br>2.US06<br>3.US10</b></td>
       <td style="text-align: center; vertical-align: middle;">Validação US11, US21, US24 e feedback release 4</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 10</td>
       <td style="text-align: center; vertical-align: middle;">27/06/2025</td>
       <td style="text-align: center; vertical-align: middle;">03/07/2025</td>
-     <td style="text-align: center; vertical-align: middle;">Desenvolver:<br>1.US15<br>2.US17<br>3.US18</td>
-      <td style="text-align: center; vertical-align: middle;">1.US15<br>2.US17<br>3.US18<br><b>MVP<b></td>
+      <td style="text-align: center; vertical-align: middle;">Desenvolver:<br>1.US15<br>2.US17<br>3.US18</td>
+      <td style="text-align: center; vertical-align: middle;">1.US15<br>2.US17<br>3.US18<b></td>
       <td style="text-align: center; vertical-align: middle;">Validação US25, US26 e US28</td>
     </tr>
     <tr>
       <td style="text-align: center; vertical-align: middle;">Sprint 11</td>
       <td style="text-align: center; vertical-align: middle;">04/07/2025</td>
-      <td style="text-align: center; vertical-align: middle;">10/07/2025</td>
-      <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>2.US11<br>1.US12<br>2.US16<br></td>
-      <td style="text-align: center; vertical-align: middle;"><br><b>Release 5 (Final)</b></td>
-      <td style="text-align: center; vertical-align: middle;">Feedback do projeto final</td>
+      <td style="text-align: center; vertical-align: middle;">14/07/2025</td>
+      <td style="text-align: center; vertical-align: middle;">Desenvolver: <br>1.US11<br><br><br></td>
+      <td style="text-align: center; vertical-align: middle;"><br><b>Release 4 (Final)<br>Entrega do MVP</b></td>
+      <td style="text-align: center; vertical-align: middle;">Feedback do projeto final (cliente ausente: problemas familiares)</td>
     </tr>
   </tbody>
 </table>
@@ -133,58 +133,29 @@ _**obs:**_ a equipe optou por reservar as duas primeiras semanas (Iniciação) p
       <td>1.0</td>
       <td>Versão preliminar do planejamento temporal do projeto</td>
       <td>Lucas Guimarães</td>
-      <td></td>
+      <td>Davi de Aguiar</td>
     </tr>
     <tr>
       <td>19/04/2025</td>
       <td>1.1</td>
       <td>Correção de alguns objetivos, entregas e validações</td>
       <td>Lucas Guimarães</td>
-      <td></td>
+      <td>Davi de Aguiar</td>
     </tr>
     <tr>
       <td>26/05/2025</td>
       <td>2.0</td>
       <td>Correção do Cronograma de acordo com o Backlog</td>
       <td>Lucas Guimarães</td>
-      <td></td>
+      <td>Davi de Aguiar</td>
+    </tr>
+    <tr>
+      <td>14/07/2025</td>
+      <td>2.1</td>
+      <td>Correção do Cronograma de acordo com o Backlog</td>
+      <td>Lucas Guimarães</td>
+      <td>Davi de Aguiar</td>
     </tr>
   </tbody>
 </table>
 
-
-<!-- RF01 -->
-<!-- RF02 -->
-<!-- RF03 -->
-<!-- RF04 -->
-<!-- RF05 não -->
-<!-- RF06 não -->
-<!-- RF07 -->
-<!-- RF08 -->
-<!-- RF09 -->
-<!-- RF10 não -->
-<!-- RF11 não -->
-<!-- RF12 não -->
-<!-- RF13 -->
-<!-- RF14 -->
-<!-- RF15 não -->
-
-<!-- entrega 3 -->
-<!-- Retiramos US10 da sprint 03 já que não existe mais "buscar dados"  -->
-<!-- A us12 da sprint 04 vira a us10 atual -->
-<!-- A us15 da sprint 05 vira a atual us14 -->
-<!-- a us16 da sprint 05 já não existe mais "acessar somente empregador" -->
-<!-- 1.US17<br>2.US18 desparecem e viram us13 -->
-<!-- US19 também é us13 (de senha) -->
-<!-- US20 agora é us15 -->
-<!-- US23 agora é us16 -->
-<!-- US13 agora é us11-->
-<!-- 2.US22 desaparece, não existe mais notificação -->
-<!-- US27 vira US18 -->
-<!-- US11, não existe mais, que era filtrar dados e se uniu de visualizar, que tem de empregador e contratos -->
-<!-- US21 não existe mais, era alerta sobre falta de registro de ponto -->
-<!-- US24 não existe feriado mais -->
-<!-- US25, virou us17 -->
-<!-- us26 sobre empregador poder visualizar histórico do empregado -->
-<!-- us28 virou us17 -->
-<!-- Us14 virou 12 -->

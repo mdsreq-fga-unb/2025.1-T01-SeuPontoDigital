@@ -90,4 +90,4 @@ Além disso, utilizamos uma versão adaptada do GUPTA Framework para ajudar na e
 ## Historico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-15/04/2025 | 1.0 | Estratégia priorizada para o projeto| Lucas Guimarães |
+15/04/2025 | 1.0 | Estratégia priorizada para o projeto| Lucas Guimarães | Willian Xavier|

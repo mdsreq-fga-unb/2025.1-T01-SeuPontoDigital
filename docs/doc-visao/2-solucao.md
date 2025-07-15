@@ -68,7 +68,7 @@ Além disso, a obrigatoriedade da folha de ponto para empregados domésticos, de
 
 - **Concorrentes diretos**
 
-    Aplicativos como PontoMais e MeuPonto disponibilizam soluções completas para o controle de ponto digital e gestão da jornada de trabalho, oferecendo funcionalidades como cálculo automatizado de horas extras, administração do banco de horas e geração de relatórios detalhados, como o espelho de ponto. No entanto, os planos disponíveis são voltados para empresas com um grande número de funcionários, e a opção mais acessível contempla até 10 colaboradores — um número superior ao necessário para empregadores domésticos. Além disso, funcionalidades avançadas como geolocalização só estão disponíveis em modalidades superiores, tornando sua adoção menos acessível.
+    Aplicativos como [PontoMais](https://app2.pontomais.com.br/) e [MeuPonto](https://meuponto.app/) disponibilizam soluções completas para o controle de ponto digital e gestão da jornada de trabalho, oferecendo funcionalidades como cálculo automatizado de horas extras, administração do banco de horas e geração de relatórios detalhados, como o espelho de ponto. No entanto, os planos disponíveis são voltados para empresas com um grande número de funcionários, e a opção mais acessível contempla até 10 colaboradores — um número superior ao necessário para empregadores domésticos. Além disso, funcionalidades avançadas como geolocalização só estão disponíveis em modalidades superiores, tornando sua adoção menos acessível.
 
 - **Concorrentes indiretos**
 
@@ -109,8 +109,8 @@ O *SeuPontoDigital* propõe uma solução acessível e prática para o controle 
 ## Historico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-15/04/2025 | 1.0 | Características da solução e Ferramentas utilizadas | Lucas Guimarães |
-16/04/2025 | 1.1 | Pesquisa de Mercado e Análise Competitiva e Objetivo do Produto (correção de adjetivos) | Joao Pedro |
-17/04/2025 | 1.2 | Impacto da Solução | Willian Silva |
-17/04/2025 | 1.3 | Análise de viabilidade (técnica, prazo e mercado) | Davi de Aguiar |
-21/04/2025 | 1.4 | Correção e revisão da Solução Proposta| Lucas Guimarães | |
+15/04/2025 | 1.0 | Características da solução e Ferramentas utilizadas | Lucas Guimarães | Thiago Tonin|
+16/04/2025 | 1.1 | Pesquisa de Mercado e Análise Competitiva e Objetivo do Produto (correção de adjetivos) | Joao Pedro | Davi de Aguiar|
+17/04/2025 | 1.2 | Impacto da Solução | Willian Silva | Caio Venâncio|
+17/04/2025 | 1.3 | Análise de viabilidade (técnica, prazo e mercado) | Davi de Aguiar | Guilherme Moura|
+21/04/2025 | 1.4 | Correção e revisão da Solução Proposta| Lucas Guimarães | Davi de Aguiar |
