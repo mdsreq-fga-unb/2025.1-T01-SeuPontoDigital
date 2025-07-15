@@ -4,7 +4,15 @@ import './StatusConfirmModal.css';
 
 Modal.setAppElement("#root");
 
-const StatusConfirmModal = ({ isOpen, onConfirm, onCancel, contractName, currentStatus }) => {
+const StatusConfirmModal = ({ 
+    isOpen, 
+    onConfirm, 
+    onCancel, 
+    contractName, 
+    currentStatus, 
+    title = "Confirmar Alteração de Status",
+    actionType = "contrato"
+}) => {
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
@@ -38,24 +46,30 @@ const StatusConfirmModal = ({ isOpen, onConfirm, onCancel, contractName, current
             <button className="close-modal" onClick={handleCancel}>&times;</button>
             
             <div className="status-confirm-modal">
-                <h2>Confirmar Alteração de Status</h2>
+                <h2>{title}</h2>
                 <div className="status-confirm-content">
                     <p>
-                        Você está prestes a <strong style={{ color: statusColor }}>{action}</strong> o contrato de:
+                        Você está prestes a <strong style={{ color: statusColor }}>{action}</strong> o {actionType} de:
                     </p>
                     <p className="contract-name">{contractName}</p>
                     <p className="confirmation-text">
                         Digite sua senha para confirmar esta alteração:
                     </p>
                     
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Digite sua senha"
-                        className="password-input"
-                        onKeyPress={(e) => e.key === 'Enter' && handleConfirm()}
-                    />
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        handleConfirm();
+                    }}>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Digite sua senha"
+                            className="password-input"
+                            autoComplete="current-password"
+                            onKeyPress={(e) => e.key === 'Enter' && handleConfirm()}
+                        />
+                    </form>
                 </div>
                 
                 <div className="modal-actions">
@@ -72,7 +86,7 @@ const StatusConfirmModal = ({ isOpen, onConfirm, onCancel, contractName, current
                         disabled={!password.trim() || isLoading}
                         style={{ backgroundColor: statusColor }}
                     >
-                        {isLoading ? "Processando..." : `${action.charAt(0).toUpperCase() + action.slice(1)} Contrato`}
+                        {isLoading ? "Processando..." : `${action.charAt(0).toUpperCase() + action.slice(1)} ${actionType.charAt(0).toUpperCase() + actionType.slice(1)}`}
                     </button>
                 </div>
             </div>

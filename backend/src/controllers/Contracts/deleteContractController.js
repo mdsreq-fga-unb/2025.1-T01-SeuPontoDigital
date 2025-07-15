@@ -4,7 +4,7 @@ import validateHashPasswordEqual from "../../middlewares/validateHashPasswordEqu
 
 const deleteContractController = async (req, res) => {
     try {
-        const contractID  = req.id;
+        const contractID = req.params.id;
         const {passwordAdmin} = req.body;
         const adminEmail = req.email;
 

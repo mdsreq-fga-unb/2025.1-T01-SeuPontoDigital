@@ -2,14 +2,12 @@ import "../pagesStyle.css";
 import { useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import usePostCompleteContract from "../../hooks/usePostCompleteContract.js";
-import useFetchEmployer from "../../hooks/useFetchEmployer.js";
 import ContractForm from "../../components/ContractForm/index.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 import Notification from "../../components/Notification";
 
 const AddContract = () => {
     const postCompleteContract = usePostCompleteContract();
-    const { fetchOneEmployer } = useFetchEmployer();
     const navigate = useNavigate();
     const {id} = useParams();
     const [contract, setContract] = useState({
@@ -35,39 +33,53 @@ const AddContract = () => {
         workplace_state: "",
         workplace_neighborhood: "",
         workplace_complement: "",
+        // Campos individuais de horário
+        monday_start: null,
+        monday_end: null,
+        tuesday_start: null,
+        tuesday_end: null,
+        wednesday_start: null,
+        wednesday_end: null,
+        thursday_start: null,
+        thursday_end: null,
+        friday_start: null,
+        friday_end: null,
+        saturday_start: null,
+        saturday_end: null,
+        sunday_start: null,
+        sunday_end: null,
     });
 
     const handleInputUserChange = ({ name, value }) => {
         setContract((prev) => ({ ...prev, [name]: value }));
     };
 
+    const handleWorkDaysChange = (workDaysArray, scheduleObject) => {
+        setContract((prev) => ({ 
+            ...prev, 
+            work_days: workDaysArray,
+            ...scheduleObject // Atualiza os campos individuais (monday_start, monday_end, etc.)
+        }));
+    };
+
     const extractWorkScheduleData = (contract) => {
         const workSchedule = {
-            type: contract.work_schedule_type
+            type: contract.work_schedule_type,
+            monday_start: contract.monday_start,
+            monday_end: contract.monday_end,
+            tuesday_start: contract.tuesday_start,
+            tuesday_end: contract.tuesday_end,
+            wednesday_start: contract.wednesday_start,
+            wednesday_end: contract.wednesday_end,
+            thursday_start: contract.thursday_start,
+            thursday_end: contract.thursday_end,
+            friday_start: contract.friday_start,
+            friday_end: contract.friday_end,
+            saturday_start: contract.saturday_start,
+            saturday_end: contract.saturday_end,
+            sunday_start: contract.sunday_start,
+            sunday_end: contract.sunday_end,
         };
-
-        // Adiciona os horários dos dias da semana baseado no work_days
-        if (contract.work_days && Array.isArray(contract.work_days)) {
-            contract.work_days.forEach(dayInfo => {
-                if (dayInfo.day && dayInfo.start && dayInfo.end) {
-                    const dayMapping = {
-                        'segunda': 'monday',
-                        'terca': 'tuesday', 
-                        'quarta': 'wednesday',
-                        'quinta': 'thursday',
-                        'sexta': 'friday',
-                        'sabado': 'saturday',
-                        'domingo': 'sunday'
-                    };
-                    
-                    const englishDay = dayMapping[dayInfo.day];
-                    if (englishDay) {
-                        workSchedule[`${englishDay}_start`] = dayInfo.start;
-                        workSchedule[`${englishDay}_end`] = dayInfo.end;
-                    }
-                }
-            });
-        }
 
         return workSchedule;
     };
@@ -190,7 +202,11 @@ const AddContract = () => {
             <Sidebar />
             <section className="form-contract-add">
                 <form className="form-users">
-                    <ContractForm contract={contract} handleInputChange={handleInputUserChange} />
+                    <ContractForm 
+                        contract={contract} 
+                        handleInputChange={handleInputUserChange} 
+                        handleWorkDaysChange={handleWorkDaysChange}
+                    />
                 </form>
                 <button onClick={handleFormSubmit} className="button-add-employer-confirm">Cadastrar Contrato</button>
             </section>

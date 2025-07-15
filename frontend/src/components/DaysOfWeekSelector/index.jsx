@@ -12,12 +12,35 @@ const daysOfWeek = [
 
 const maxDays = 6;
 
+const dayMap = {
+    segunda: "monday",
+    terca: "tuesday",
+    quarta: "wednesday",
+    quinta: "thursday",
+    sexta: "friday",
+    sabado: "saturday",
+    domingo: "sunday",
+};
+
+export function mapSelectedDaysToObject(selectedDays) {
+    const result = {};
+    Object.entries(dayMap).forEach(([ptDay, enDay]) => {
+        const found = selectedDays.find(d => d.day === ptDay);
+        result[`${enDay}_start`] = found && found.start ? found.start : null;
+        result[`${enDay}_end`] = found && found.end ? found.end : null;
+    });
+    return result;
+}
+
 const DaysOfWeekSelector = ({ selectedDays, onChange, workScheduleType }) => {
 
     const handleCheckboxChange = (day) => {
         const exists = selectedDays.find(d => d.day === day);
+        let newDays;
+        
         if (exists) {
-            onChange(selectedDays.filter(d => d.day !== day));
+            // Remove o dia da lista
+            newDays = selectedDays.filter(d => d.day !== day);
         } else if (selectedDays.length < maxDays) {
             if (
                 workScheduleType === "fixa" &&
@@ -26,38 +49,42 @@ const DaysOfWeekSelector = ({ selectedDays, onChange, workScheduleType }) => {
                 day !== "domingo"
             ) {
                 const { start, end } = selectedDays[0];
-                onChange([...selectedDays, { day, start, end }]);
+                newDays = [...selectedDays, { day, start, end }];
             } else {
-                onChange([...selectedDays, { day, start: "", end: "" }]);
+                newDays = [...selectedDays, { day, start: "", end: "" }];
             }
+        } else {
+            newDays = selectedDays;
         }
+        
+        // Envia tanto o array quanto o objeto formatado
+        onChange(newDays, mapSelectedDaysToObject(newDays));
     };
 
     const handleTimeChange = (day, field, value) => {
+        let newDays;
+        
         if (workScheduleType === "fixa") {
             if (day === "sabado" || day === "domingo") {
-                onChange(
-                    selectedDays.map(d =>
-                        d.day === day ? { ...d, [field]: value } : d
-                    )
+                newDays = selectedDays.map(d =>
+                    d.day === day ? { ...d, [field]: value } : d
                 );
             } else {
-                onChange(
-                    selectedDays.map(d => {
-                        if (d.day === "sabado" || d.day === "domingo") {
-                            return d;
-                        }
-                        return { ...d, [field]: value };
-                    })
-                );
+                newDays = selectedDays.map(d => {
+                    if (d.day === "sabado" || d.day === "domingo") {
+                        return d;
+                    }
+                    return { ...d, [field]: value };
+                });
             }
         } else {
-            onChange(
-                selectedDays.map(d =>
-                    d.day === day ? { ...d, [field]: value } : d
-                )
+            newDays = selectedDays.map(d =>
+                d.day === day ? { ...d, [field]: value } : d
             );
         }
+        
+        // Envia tanto o array quanto o objeto formatado
+        onChange(newDays, mapSelectedDaysToObject(newDays));
     };
 
     return (

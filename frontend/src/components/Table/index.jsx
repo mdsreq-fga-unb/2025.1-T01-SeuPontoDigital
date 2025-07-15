@@ -12,17 +12,17 @@ const Table = (props) => {
             <table className="data-table">
                 <thead>
                     <tr>
-                        {props.fieldsHeader.map(field => (
-                            <th>{field}</th>
+                        {props.fieldsHeader.map((field, index) => (
+                            <th key={`header-${index}`}>{field}</th>
                         ))}
-                        <th></th>
+                        <th key="actions-header"></th>
                     </tr>
                 </thead>
                 <tbody>
                     {props.data.map((item, index) => (
-                        <tr key={index}>
+                        <tr key={`row-${item.id || index}`}>
                             {props.fieldsData.map((field, i) => (
-                                <td key={i} title={formatField(field, item[field])}>
+                                <td key={`cell-${item.id || index}-${i}`} title={formatField(field, item[field])}>
                                     {field === "name" && isActive ? (
                                         <button className="name-button" onClick={() => props.onNameClick(item)}>
                                             {formatField(field, (item[field] ?? "").toUpperCase())}
@@ -32,10 +32,15 @@ const Table = (props) => {
                                             isOn={item.statusValue} 
                                             onToggle={() => props.onToggleStatus(item)} 
                                         />
+                                    ) : field === "access_app" && props.onToggleAppAccess ? (
+                                        <ToggleSwitch 
+                                            isOn={item.access_appValue} 
+                                            onToggle={() => props.onToggleAppAccess(item)} 
+                                        />
                                     ) : ( formatField(field, item[field]) )}
                                 </td>
                             ))}
-                            <td>{(isActive) ? <FaUserPlus onClick={() => props.onAddContract(item.id)} className="fa-add-contract" /> : ""
+                            <td key={`actions-${item.id || index}`}>{(isActive) ? <FaUserPlus onClick={() => props.onAddContract(item.id)} className="fa-add-contract" /> : ""
                             }
                                 <FaPenToSquare onClick={() => props.onEdit(item.id)} className="fa-edit-employer" />
                                 <FaTrashCan onClick={() => props.onDelete(item)} className="fa-delete-employer" />

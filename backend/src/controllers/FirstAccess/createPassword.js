@@ -3,9 +3,12 @@ import getOneEmployerFromCPF from "../../models/Employers/getOneEmployerFromCPF.
 import generatePasswordHash from "../../middlewares/generatePasswordHash.js";
 import validateCodeSMS from "../../middlewares/validateCodeSMS.js";
 import supabase from "../../config/supabase.js";
+import formatNumber from "../../middlewares/formarPhone.js";
 
 const createPassword = async (req, res) => {
     const { cpf, password, confirmPassword, code } = req.body;
+
+    console.log(password)
 
     if (!cpf || !password || !confirmPassword || !code) {
         return res.status(400).send({ message: "CPF, senha, confirmação de senha e código são obrigatórios." });
@@ -14,7 +17,7 @@ const createPassword = async (req, res) => {
     try {
         let user = await getOneEmployeeFromCPF(cpf);
         let userType = "Funcionário";
-        let table = "employee_contracts";
+        let table = "employees";
 
         if (!user) {
             user = await getOneEmployerFromCPF(cpf);
@@ -30,7 +33,9 @@ const createPassword = async (req, res) => {
             return res.status(401).send({ message: `${userType} já possui uma conta.` });
         }
 
-        const isValidCode = await validateCodeSMS(user.phone, code);
+        const isValidCode = await validateCodeSMS(formatNumber(user.phone), code);
+
+        console.log(isValidCode)
 
         if (!isValidCode) {
             return res.status(400).send({ message: "Código inválido." });
@@ -56,7 +61,7 @@ const createPassword = async (req, res) => {
         return res.status(200).send({ message: "Senha criada com sucesso!" });
     } 
     catch (err){
-        return res.status(500).send({ message: "Erro interno do servidor." });
+        return res.status(500).send({ message: err.message });
     }
 }
 

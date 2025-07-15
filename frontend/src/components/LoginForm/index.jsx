@@ -43,6 +43,7 @@ const LoginForm = () => {
                         onChange={handleInputEmail} 
                         placeholder="Digite seu email" 
                         className="div-login-text-input"
+                        autoComplete="username"
                     />
 
                     <TextInput 
@@ -53,6 +54,7 @@ const LoginForm = () => {
                         onChange={handleInputPassword} 
                         placeholder="Digite sua senha" 
                         className="div-login-text-input"
+                        autoComplete="current-password"
                     />
 
                     <ButtonForm disabled={loading}>{loading ? "Entrando..." : "Entrar"}</ButtonForm>

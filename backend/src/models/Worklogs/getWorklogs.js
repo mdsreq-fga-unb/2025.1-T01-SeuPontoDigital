@@ -2,8 +2,8 @@ import supabase from "../../config/supabase.js";
 import calcRegistroInfo from "./CalcRegisterInfo.js";
 
 export default async function getWorklogs(id_employee, inicio, fim, contractId) {
-  console.log("Começando getWorklogs");
-  console.log("selectedContract:", contractId)
+  // console.log("Começando getWorklogs");
+  // console.log("selectedContract:", contractId)
 
   try {
     // 1. Buscar todos os registros de ponto com o contrato vinculado
@@ -33,6 +33,8 @@ const { data: registros, error } = await query;
       return {};
     }
 
+  
+
     // Filtro por data
     const filtrados = (inicio && fim)
       ? registros.filter(r => {
@@ -40,6 +42,8 @@ const { data: registros, error } = await query;
           return data && data >= inicio && data <= fim;
         })
       : registros;
+
+
 
     const agrupados = {};
 
@@ -127,7 +131,7 @@ const { data: registros, error } = await query;
         });
       }
 
-    console.log("Terminando getWorklogs");
+
     return agrupados;
   } catch (err) {
     console.error("Erro geral no getWorklogs:", err?.message || err);

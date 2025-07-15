@@ -6,6 +6,7 @@ import usePutContract from "../../hooks/usePutContract.js";
 import usePutEmployee from "../../hooks/usePutEmployee.js";
 import usePutWorkSchedule from "../../hooks/usePutWorkSchedule.js";
 import usePutWorkBreak from "../../hooks/usePutWorkBreak.js";
+import { mapSelectedDaysToObject } from "../../components/DaysOfWeekSelector/index.jsx";
 import ContractForm from "../../components/ContractForm/index.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 import ConfirmModal from "../../components/ConfirmModal";
@@ -50,6 +51,21 @@ const UpdateContract = () => {
         workplace_state: "",
         workplace_neighborhood: "",
         workplace_complement: "",
+        // Campos individuais de horário
+        monday_start: null,
+        monday_end: null,
+        tuesday_start: null,
+        tuesday_end: null,
+        wednesday_start: null,
+        wednesday_end: null,
+        thursday_start: null,
+        thursday_end: null,
+        friday_start: null,
+        friday_end: null,
+        saturday_start: null,
+        saturday_end: null,
+        sunday_start: null,
+        sunday_end: null,
     });
 
     useEffect(() => {
@@ -92,6 +108,16 @@ const UpdateContract = () => {
 
                 // Mapear dados da jornada de trabalho
                 const workDays = [];
+                const scheduleFields = {
+                    monday_start: null, monday_end: null,
+                    tuesday_start: null, tuesday_end: null,
+                    wednesday_start: null, wednesday_end: null,
+                    thursday_start: null, thursday_end: null,
+                    friday_start: null, friday_end: null,
+                    saturday_start: null, saturday_end: null,
+                    sunday_start: null, sunday_end: null,
+                };
+                
                 if (fullContractData.workSchedule) {
                     const dayMapping = {
                         'monday': 'segunda',
@@ -108,11 +134,19 @@ const UpdateContract = () => {
                         const startKey = `${englishDay}_start`;
                         const endKey = `${englishDay}_end`;
                         
-                        if (fullContractData.workSchedule[startKey] && fullContractData.workSchedule[endKey]) {
+                        const startValue = fullContractData.workSchedule[startKey];
+                        const endValue = fullContractData.workSchedule[endKey];
+                        
+                        // Preenche os campos individuais
+                        scheduleFields[startKey] = startValue;
+                        scheduleFields[endKey] = endValue;
+                        
+                        // Se ambos os valores existem, adiciona ao array workDays
+                        if (startValue && endValue) {
                             workDays.push({
                                 day: portugueseDay,
-                                start: fullContractData.workSchedule[startKey],
-                                end: fullContractData.workSchedule[endKey]
+                                start: startValue,
+                                end: endValue
                             });
                         }
                     });
@@ -147,6 +181,8 @@ const UpdateContract = () => {
                     workplace_state: fullContractData.address?.uf || "",
                     workplace_neighborhood: fullContractData.address?.neighborhood || "",
                     workplace_complement: fullContractData.address?.complement || "",
+                    // Campos individuais de horário
+                    ...scheduleFields,
                 });
                 
                 // Armazenar o ID do funcionário para usar na atualização
@@ -163,31 +199,22 @@ const UpdateContract = () => {
     // Funções auxiliares para extrair dados (reutilizadas da criação)
     const extractWorkScheduleData = (contract) => {
         const workSchedule = {
-            type: contract.work_schedule_type
+            type: contract.work_schedule_type,
+            monday_start: contract.monday_start,
+            monday_end: contract.monday_end,
+            tuesday_start: contract.tuesday_start,
+            tuesday_end: contract.tuesday_end,
+            wednesday_start: contract.wednesday_start,
+            wednesday_end: contract.wednesday_end,
+            thursday_start: contract.thursday_start,
+            thursday_end: contract.thursday_end,
+            friday_start: contract.friday_start,
+            friday_end: contract.friday_end,
+            saturday_start: contract.saturday_start,
+            saturday_end: contract.saturday_end,
+            sunday_start: contract.sunday_start,
+            sunday_end: contract.sunday_end,
         };
-
-        // Adiciona os horários dos dias da semana baseado no work_days
-        if (contract.work_days && Array.isArray(contract.work_days)) {
-            contract.work_days.forEach(dayInfo => {
-                if (dayInfo.day && dayInfo.start && dayInfo.end) {
-                    const dayMapping = {
-                        'segunda': 'monday',
-                        'terca': 'tuesday', 
-                        'quarta': 'wednesday',
-                        'quinta': 'thursday',
-                        'sexta': 'friday',
-                        'sabado': 'saturday',
-                        'domingo': 'sunday'
-                    };
-                    
-                    const englishDay = dayMapping[dayInfo.day];
-                    if (englishDay) {
-                        workSchedule[`${englishDay}_start`] = dayInfo.start;
-                        workSchedule[`${englishDay}_end`] = dayInfo.end;
-                    }
-                }
-            });
-        }
 
         return workSchedule;
     };
@@ -230,6 +257,14 @@ const UpdateContract = () => {
 
     const handleInputUserChange = ({ name, value }) => {
         setContract((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleWorkDaysChange = (workDaysArray, scheduleObject) => {
+        setContract((prev) => ({ 
+            ...prev, 
+            work_days: workDaysArray,
+            ...scheduleObject // Atualiza os campos individuais (monday_start, monday_end, etc.)
+        }));
     };
 
     const closeModal = () => setModalOpen(false);
@@ -304,7 +339,13 @@ const UpdateContract = () => {
             <Sidebar />
             <section className="form-contract-add">
                 <form className="form-users">
-                    <ContractForm contract={contract} handleInputChange={handleInputUserChange} id={contract.employer_id} isEditing={true}/>
+                    <ContractForm 
+                        contract={contract} 
+                        handleInputChange={handleInputUserChange} 
+                        handleWorkDaysChange={handleWorkDaysChange}
+                        id={contract.employer_id} 
+                        isEditing={true}
+                    />
                 </form>
                 <button onClick={() => setModalOpen(true)} className="button-add-employer-confirm">Atualizar Contrato</button>
             </section>

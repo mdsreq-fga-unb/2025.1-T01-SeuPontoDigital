@@ -8,10 +8,9 @@ const useToggleContractStatus = () => {
         try {
             const token = localStorage.getItem("token");
             
-            // Inverte o status atual
             const newStatus = !currentStatus;
             
-            const response = await axios.put(
+            await axios.put(
                 `${import.meta.env.VITE_API_URL}/api/contract/${contractId}`, 
                 { 
                     status: newStatus,

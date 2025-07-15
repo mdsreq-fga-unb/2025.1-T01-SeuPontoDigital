@@ -1,29 +1,10 @@
 import getOneEmployeeFromCPF from "../../models/Contracts/getOneEmployeeFromCPF.js";
 import getOneEmployerFromCPF from "../../models/Employers/getOneEmployerFromCPF.js";
 import sendCodeSMS from "../../middlewares/sendCodeSMS.js";
+import formatNumber from "../../middlewares/formarPhone.js";
 
 const firstAccessController = async (req, res) => {
-    let { name, cpf, phone, password } = req.body;
-    
-    // Formatar telefone para o padrão do Twilio
-    phone = phone.trim();
-    
-    // Se já tem o prefixo +55, manter como está
-    if (phone.startsWith('+55')) {
-        // phone já está formatado
-    } else {
-        // Remover qualquer formatação e garantir que seja apenas números
-        phone = phone.replace(/\D/g, '');
-        
-        // Se começar com 55 e tiver 13 dígitos (55 + 11 dígitos do celular brasileiro)
-        // considera que já tem o código do país
-        if (phone.startsWith('55') && phone.length === 13) {
-            phone = `+${phone}`;
-        } else {
-            // Caso contrário, adiciona o +55
-            phone = `+55${phone}`;
-        }
-    }
+    let { name, cpf, phone } = req.body;
     
     if (!name || !cpf || !phone) {
         return res.status(400).send({ message: "Nome, CPF e Telefone são obrigatórios!" });
@@ -45,6 +26,7 @@ const firstAccessController = async (req, res) => {
         }
 
         if (user.phone !== phone) {
+            console.log(phone)
             return res.status(400).send({ message: "O número de celular digitado não pertence a esse CPF!" });
         }
         
@@ -52,8 +34,9 @@ const firstAccessController = async (req, res) => {
             return res.status(401).send({ message: `Você já possui uma conta!` });
         }
 
+
         try {
-            await sendCodeSMS(phone);
+            await sendCodeSMS(formatNumber(phone));
         } catch (smsErr) {
             return res.status(500).send({ message: "Erro ao enviar SMS" });
         }
