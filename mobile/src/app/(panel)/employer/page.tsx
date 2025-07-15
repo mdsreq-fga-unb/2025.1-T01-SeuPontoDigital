@@ -54,6 +54,11 @@ export default function Employer() {
     empregado: {
       id: string;
       nome: string;
+      function?: string;
+      status?: string;
+      start_date?: string;
+      break_start?: string;
+      break_end?: string;
       // Add other fields from the API as needed
     };
     // Add other top-level fields if needed
@@ -122,17 +127,37 @@ export default function Employer() {
             return {
               id: item.empregado.id,
               name: item.empregado.nome,
-              role: "Funcionário",
+              role: item.empregado.function || "Não especificado",
               photo: null,
               workHours: "08:00 - 17:00",
-              startDate: new Date().toLocaleDateString('pt-BR'),
+              startDate: item.empregado.start_date || "Não especificado",
               alerts: 0,
               daysWorked: 0,
-              status: "Ativo",
+              status: item.empregado.status || "Inativo",
               totalHours: "0h",
               overtime50: "0h",
               overtime100: "0h",
-              breakTime: "01:00",
+              breakTime: (() => {
+                // Format a number to a time string (e.g., 14 -> "14:00")
+                const formatTime = (time: number | null): string => {
+                  if (time == null) return "--:--";
+                  const hours = Math.floor(time);
+                  const minutes = Math.round((time - hours) * 60);
+                  return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+                };
+                
+                // Convert string|undefined to number|null before formatting
+                const parseTimeValue = (value: string | undefined): number | null => {
+                  if (value === undefined) return null;
+                  const parsed = parseFloat(value);
+                  return isNaN(parsed) ? null : parsed;
+                };
+                
+                const startTime = formatTime(parseTimeValue(item.empregado.break_start));
+                const endTime = formatTime(parseTimeValue(item.empregado.break_end));
+                
+                return `${startTime} - ${endTime}`;
+              })(),
               daysAbsent: 0,
               daysWithMedicalCertificate: 0,
               daysLate: 0

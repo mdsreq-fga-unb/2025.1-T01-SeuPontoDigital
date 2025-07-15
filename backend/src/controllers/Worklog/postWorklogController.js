@@ -59,7 +59,7 @@ const postWorklogController = async (req, res) => {
     }
 
     const worklogData = {
-      date: new Date().toISOString().split('T')[0],
+      date: new Date().toISOString('pt-BR', { timeZone: 'America/Sao_Paulo' }).split('T')[0],
       clock_in,
       employeeId,
       contractId

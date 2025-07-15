@@ -90,7 +90,7 @@ export default function EntryScreen() {
       }
       
     } catch (err: any) {
-      console.error("Erro completo:", JSON.stringify(err));
+      console.log("Erro completo:", JSON.stringify(err));
       if (err.message?.includes('Network Error')) {
         Alert.alert('Erro de Conexão', 'Não foi possível conectar ao servidor localhost:3333.');
       } else if (err.response?.status === 401) {
