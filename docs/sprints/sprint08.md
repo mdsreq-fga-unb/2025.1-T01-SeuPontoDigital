@@ -1,4 +1,4 @@
-**Data:** 13/06/2025 a 19/06/2025
+**Data:** 13/06/2025 a 26/06/2025
 
 ---
 ## Sprint Planning
@@ -21,14 +21,32 @@ Link para reunião gravada da sprint planning 8: [drive.google.com](https://driv
 
 ## Sprint Review
 
-- Ainda não foi realizada
+#### Detalhes da reunião
+|                     |                                                                                                           |
+|---------------------|-----------------------------------------------------------------------------------------------------------|
+| Data                | 26/06                                                                                                     |
+| Hora                | 21h                                                                                                       |
+| Plataforma          | Microsoft Teams                                                                                           |
+| Participantes       | Desenvolvedores e Stakeholder                                                                             |
+| Memembros Presentes | Willian Xavier, Guilherme Moura, Caio Venâncio                                                            |
+
+Infelizmente, a reunião infelizmente não.
+
+#### Principais pontos da sprint review 
+- Refatoração do banco de dados quase completa (US05 atual)
+- Refatoração do Acesso do Empregador e Empregado Completa
+- Registro de ponto incompleto (falta regra de negócio de geolocalização, US17 atual)
 
 ## Daily Scrum
+Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
+- 06/06 Online (sexta-feira) <br>
+- 09/06 Online (segunda-feira) <br>
+- 10/06 Presencial (segunda-feira) <br>
+- 11/06 Online (quarta-feira) <br>
 
-- Ainda não foi realizada
 
 ## Histórico de Versão
 
 | Data       | Versão | Descrição                                                                 | Autor(es)         | Revisor(es)        |
 |------------|--------|---------------------------------------------------------------------------|-------------------|--------------------|
-| 22/06/2025 | 1.0    | Criar documentação da sprint                                              |  Caio Venâncio    |                    |
+| 14/07/2025 | 1.0    | Criar documentação da sprint                                              |  Caio Venâncio    |                    |
