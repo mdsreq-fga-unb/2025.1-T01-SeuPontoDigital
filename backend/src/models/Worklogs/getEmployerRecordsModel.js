@@ -1,6 +1,7 @@
 import supabase from "../../config/supabase.js";
 import calcRegistroInfo from "./CalcRegisterInfo.js";
 import getEmployerWorklogs from "./getEmployerWorklogs.js";
+import getContractDetails from "./work_schedule.js";
 
 const getEmployerRecordsModel = async ({ employId, inicio, fim }) => {
   try {
@@ -43,11 +44,21 @@ const getEmployerRecordsModel = async ({ employId, inicio, fim }) => {
 
       const id_contract_input = contratoData.id_contract;
 
+      let detalhesContrato = {};
+      if (id_contract_input && id_employee) {
+        detalhesContrato = await getContractDetails({
+          id_employee: id_employee,
+          id_contract: id_contract_input,
+          id_employer: ''
+        });
+      }
+
       const registros = await getEmployerWorklogs(id_employee, inicio, fim, id_contract_input);
       resultados.push({
         empregado: {
           id: id_employee,
-          nome: employees.name //adicionarei novos dados aqui
+          nome: employees.name, //adicionarei novos dados aqui
+          ...detalhesContrato
         },
         registros
       });

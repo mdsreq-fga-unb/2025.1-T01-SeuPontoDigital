@@ -426,55 +426,7 @@ export default function Employer() {
                         <Text style={styles.detailLabel}>Tempo de intervalo:</Text>
                         <Text style={styles.detailValue}>{selectedEmployee.breakTime} h</Text>
                       </View>
-                      
-                      {/* Substituição da seção de alertas */}
-                      <View style={styles.detailItem}>
-                        <Ionicons name="calendar-sharp" size={18} color="#F44336" />
-                        <Text style={styles.detailLabel}>Dias ausente:</Text>
-                        <View style={[
-                          styles.detailAlertBadge,
-                          selectedEmployee.daysAbsent > 0 ? styles.detailAlertBadgeWarning : styles.detailAlertBadgeNormal
-                        ]}>
-                          <Text style={[
-                            styles.detailAlertText,
-                            selectedEmployee.daysAbsent > 0 ? styles.detailAlertTextWarning : styles.detailAlertTextNormal
-                          ]}>
-                            {selectedEmployee.daysAbsent || 0}
-                          </Text>
-                        </View>
-                      </View>
 
-                      <View style={styles.detailItem}>
-                        <Ionicons name="medkit-outline" size={18} color="#2196F3" />
-                        <Text style={styles.detailLabel}>Dias de atestado:</Text>
-                        <View style={[
-                          styles.detailAlertBadge,
-                          styles.detailAlertBadgeInfo
-                        ]}>
-                          <Text style={[
-                            styles.detailAlertText,
-                            styles.detailAlertTextInfo
-                          ]}>
-                            {selectedEmployee.daysWithMedicalCertificate || 0}
-                          </Text>
-                        </View>
-                      </View>
-
-                      <View style={styles.detailItem}>
-                        <Ionicons name="time" size={18} color="#FF9800" />
-                        <Text style={styles.detailLabel}>Dias atrasados:</Text>
-                        <View style={[
-                          styles.detailAlertBadge,
-                          selectedEmployee.daysLate > 0 ? styles.detailAlertBadgeWarning : styles.detailAlertBadgeNormal
-                        ]}>
-                          <Text style={[
-                            styles.detailAlertText,
-                            selectedEmployee.daysLate > 0 ? styles.detailAlertTextWarning : styles.detailAlertTextNormal
-                          ]}>
-                            {selectedEmployee.daysLate || 0}
-                          </Text>
-                        </View>
-                      </View>
                       
                       <View style={styles.detailItem}>
                         <Ionicons name="stats-chart-outline" size={18} color="#1565C0" />
@@ -483,44 +435,7 @@ export default function Employer() {
                       </View>
                     </View>
                     
-                    {/* Nova seção de horas - design completamente redesenhado */}
-                    <View style={[styles.employeeDetailSection, { marginTop: 16 }]}>
-                      <View style={styles.sectionTitleContainer}>
-                        <Ionicons name="time" size={22} color="#FFFFFF" style={styles.sectionTitleIcon} />
-                        <Text style={styles.sectionTitleEnhanced}>Horas do Mês Atual</Text>
-                      </View>
-                      
-                      {/* Card de horas totais */}
-                      <View style={styles.totalHoursCard}>
-                        <Text style={styles.totalHoursLabel}>Total de Horas Trabalhadas</Text>
-                        <Text style={styles.totalHoursValue}>{selectedEmployee.totalHours}</Text>
-                      </View>
-                      
-                      {/* Cards de horas extras */}
-                      <View style={styles.extraHoursRow}>
-                        <View style={styles.extraHoursCard}>
-                          <View style={styles.extraHoursHeader}>
-                            <Ionicons name="star-half" size={18} color="#43A047" />
-                            <Text style={styles.extraHoursTitle}>Extras 50%</Text>
-                          </View>
-                          <Text style={[styles.extraHoursValue, styles.overtime50Value]}>
-                            {selectedEmployee.overtime50}
-                          </Text>
-                          <Text style={styles.extraHoursCaption}>Dias úteis após jornada normal</Text>
-                        </View>
-                        
-                        <View style={styles.extraHoursCard}>
-                          <View style={styles.extraHoursHeader}>
-                            <Ionicons name="star" size={18} color="#E65100" />
-                            <Text style={styles.extraHoursTitle}>Extras 100%</Text>
-                          </View>
-                          <Text style={[styles.extraHoursValue, styles.overtime100Value]}>
-                            {selectedEmployee.overtime100}
-                          </Text>
-                          <Text style={styles.extraHoursCaption}>Domingos e feriados</Text>
-                        </View>
-                      </View>
-                    </View>
+
                   </View>
                 </ScrollView>
               </>

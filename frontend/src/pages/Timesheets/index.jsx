@@ -118,6 +118,36 @@ const Timesheets = () => {
     return `${hh}:${mm}:${ss}`;
   };
 
+  function calcularTrabalhadoEIntervalo({ entrada, saida, ida_almoco, volta_almoco }) {
+    const toSeconds = (str) => {
+      if (!str) return 0;
+      const [h, m, s] = str.split(":").map(Number);
+      return h * 3600 + m * 60 + s;
+    };
+
+    const format = (segundos) => {
+      if (!segundos || segundos < 0) return "00:00:00";
+      const h = Math.floor(segundos / 3600);
+      const m = Math.floor((segundos % 3600) / 60);
+      const s = segundos % 60;
+      return [h, m, s].map(n => String(n).padStart(2, "0")).join(":");
+    };
+
+    const entradaSeg = toSeconds(entrada);
+    const saidaSeg = toSeconds(saida);
+    const idaSeg = toSeconds(ida_almoco);
+    const voltaSeg = toSeconds(volta_almoco);
+
+    const intervalo = voltaSeg && idaSeg ? voltaSeg - idaSeg : 0;
+    const jornada = (saidaSeg && entradaSeg) ? saidaSeg - entradaSeg : 0;
+    const trabalhado = jornada - intervalo;
+
+    return {
+      intervalo: format(intervalo),
+      horasTrabalhadas: format(trabalhado)
+    };
+  }
+
   const handleGeneratePDF = async () => {
     let periodString = `${selectYear}-${getMonthFromPeriod(selectPeriod)}`;
 
@@ -156,7 +186,8 @@ const Timesheets = () => {
           continue;
         }
 
-        const intervalo = calcularIntervalo(r.ida_almoco, r.volta_almoco);
+        // const intervalo = calcularIntervalo(r.ida_almoco, r.volta_almoco);
+        const { intervalo, horasTrabalhadas } = calcularTrabalhadoEIntervalo(r);
 
         linhas.push([
           r.data,
@@ -165,10 +196,9 @@ const Timesheets = () => {
           r.ida_almoco || "-",
           r.volta_almoco || "-",
           r.saida || "-",
-          intervalo,
-          r.carga_horaria_dia || "-",
-          r.horas_trabalhadas || "-",
-          r.horas_extra || "-",
+          intervalo === "00:00:00" ? "-" : intervalo,
+          horasTrabalhadas === "00:00:00" ? "-" : horasTrabalhadas,
+          r.horas_extra || "00",
         ]);
       }
     }
@@ -192,9 +222,8 @@ const Timesheets = () => {
         "Almoço Volta",
         "Saída",
         "Duração Intervalo",
-        "Carga Horária",
         "Horas Trabalhadas",
-        "Horas Extra"
+        "Horas Extras"
       ]],
       body: linhas,
     });
