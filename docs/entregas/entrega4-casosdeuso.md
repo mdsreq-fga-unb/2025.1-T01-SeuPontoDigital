@@ -70,6 +70,8 @@ Caso de Uso: [Solicitar serviços essenciais](casos_de_uso/servicos.md)
 
 Caso de Uso: [Gerenciar perfil do refugiado](casos_de_uso/perfil_refugiado.md)
 
+Caso de Uso: [Gerenciar perfil da agência](casos_de_uso/perfil_agencia.md)
+
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
