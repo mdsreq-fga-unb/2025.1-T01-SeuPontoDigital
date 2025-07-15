@@ -1,7 +1,15 @@
-# Especificação de Caso de Uso: Solicitar Serviços Essenciais
+## Histórico de Versão
+Data     | Versão | Descrição | Autor(es) | Revisor(es)
+-------- | ------ | --------- | ----- | ---------
+14/07/2025 | 1.0 | Elaboração da especificação do caso de uso | Guilherme Moura | |
+
+# Especificação de Caso de Uso: Solicitar serviços essenciais
 
 ### 1. Breve Descrição
 Esta especificação de caso de uso permite ao Refugiado realizar a solicitação de um serviço essencial através da plataforma HopeBridge. O processo se inicia com a escolha de uma categoria de serviço, como abrigo, assistência médica ou alimentação. O fluxo principal detalha a solicitação de vaga em abrigo, enquanto os demais serviços são tratados em fluxos alternativos. O sistema valida a disponibilidade e elegibilidade para cada tipo de solicitação e confirma o registro do benefício ao final do processo.
+
+#### 1.2 Atores
+- Refugiados
 
 ### 2. Fluxo Básico de Eventos
 Este caso de uso é iniciado quando o ator Refugiado seleciona a opção “Solicitar Serviço Essencial”.
