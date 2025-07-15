@@ -1,0 +1,3230 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação do Aplicativo SeuPontoDigital">
+      
+      
+        <meta name="author" content="SeuPontoDigital">
+      
+      
+      
+        <link rel="prev" href="../entrega3-video/">
+      
+      
+        <link rel="next" href="../entrega3-usm/">
+      
+      
+      <link rel="icon" href="../../assets/icons/icon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>PBB - SeuPontoDigital</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#product-backlog-building-techfix" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="SeuPontoDigital" class="md-header__button md-logo" aria-label="SeuPontoDigital" data-md-component="logo">
+      
+  <img src="../../assets/icons/icon2.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SeuPontoDigital
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PBB
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../doc-visao/1-cenario/" class="md-tabs__link">
+          
+  
+  
+  Visão do Produto e Projeto
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../doc-visao/9-backlog/" class="md-tabs__link">
+          
+  
+  
+  Sprints & Product Backlog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../entrega1/" class="md-tabs__link">
+          
+  
+  
+  Entregas
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guias/issues/" class="md-tabs__link">
+          
+  
+  
+  Políticas da Equipe
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SeuPontoDigital" class="md-nav__button md-logo" aria-label="SeuPontoDigital" data-md-component="logo">
+      
+  <img src="../../assets/icons/icon2.png" alt="logo">
+
+    </a>
+    SeuPontoDigital
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Visão do Produto e Projeto
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Visão do Produto e Projeto
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/1-cenario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cenário Atual do Cliente e do Negócio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/2-solucao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solução Proposta
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/3-estrategia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Estratégias de Engenharia de Software
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/4-engenharia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Engenharia de Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/5-cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronogramas e Entregas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/6-interacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interação Entre Equipe e Cliente
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/7-requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requisitos de Software
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/8-dor-e-dod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DoR e DoD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/9-backlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Backlog de Produto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/10-licoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lições Aprendidas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/11-referencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Referências Bibliográficas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Sprints & Product Backlog
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Sprints & Product Backlog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc-visao/9-backlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Backlog de Produto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/release01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Planejamento da Release 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 03
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/release02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Planejamento da Release 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 05
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 06
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 07
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 08
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 09
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sprints/sprint10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 10
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Entregas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Entregas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Entrega Unidade 1
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Entrega Unidade 1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entrega1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Video de apresentação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Entrega Unidade 2
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Entrega Unidade 2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entrega2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Video de apresentação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Entrega Unidade 3
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Entrega Unidade 3
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entrega3-video/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Video da apresentação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    PBB
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    PBB
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#product-backlog-building-techfix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Product Backlog Building - TechFix
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historias-de-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Histórias de usuário
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Histórias de usuário">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gerenciar-agendamento-de-atendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Gerenciar agendamento de atendimento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gerenciar-registro-de-servico" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Gerenciar registro de serviço
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-acompanhar-solicitacao-em-tempo-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Acompanhar solicitação em tempo real
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-gerar-relatorio-pos-servico" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Gerar relatório pós-serviço
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-analisar-feedback-do-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Analisar feedback do cliente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-monitorar-desempenho-operacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Monitorar desempenho operacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criterios-de-aceitacao-das-historias-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Critérios de aceitação das histórias de usuários
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Critérios de aceitação das histórias de usuários">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gerenciar-agendamento-de-atendimento_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Gerenciar agendamento de atendimento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gerenciar-registro-de-servico_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Gerenciar registro de serviço
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-acompanhar-solicitacao-em-tempo-real_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Acompanhar solicitação em tempo real
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-gerar-relatorio-pos-servico_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Gerar relatório pós-serviço
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-analisar-feedback-do-cliente_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Analisar feedback do cliente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-monitorar-desempenho-operacional_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Monitorar desempenho operacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bdds-dos-criterios-de-aceitacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      BDDs dos critérios de aceitação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BDDs dos critérios de aceitação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cenario-11b-detectar-sobreposicao-de-agendamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 1.1.b: Detectar sobreposição de agendamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-11d-impedir-salvamento-de-agendamento-com-horario-ocupado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 1.1.d: Impedir salvamento de agendamento com horário ocupado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-12a-enviar-notificacao-apos-alteracao-de-agendamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 1.2.a: Enviar notificação após alteração de agendamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-12d-registrar-historico-da-notificacao-enviada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 1.2.d: Registrar histórico da notificação enviada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-21b-validar-preenchimento-obrigatorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.1.b: Validar preenchimento obrigatório
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-21c-acesso-ao-historico-do-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.1.c: Acesso ao histórico do cliente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-22a-anexar-imagem-ao-atendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.2.a: Anexar imagem ao atendimento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-22b-vincular-evidencia-ao-numero-do-atendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.2.b: Vincular evidência ao número do atendimento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-23b-confirmacao-de-encerramento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.3.b: Confirmação de encerramento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-23c-atendimento-bloqueado-apos-encerramento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.3.c: Atendimento bloqueado após encerramento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-31a-atualizacao-automatica-do-status-da-solicitacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 3.1.a: Atualização automática do status da solicitação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-31b-visualizacao-da-previsao-de-chegada-do-tecnico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 3.1.b: Visualização da previsão de chegada do técnico
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-32a-envio-de-notificacoes-por-e-mail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 3.2.a: Envio de notificações por e-mail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-32b-configuracao-da-frequencia-de-atualizacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 3.2.b: Configuração da frequência de atualizações
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-33b-exibicao-de-data-e-responsavel-por-cada-etapa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 3.3.b: Exibição de data e responsável por cada etapa
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-41b-preenchimento-automatico-dos-dados-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.1.b: Preenchimento automático dos dados básicos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-41c-geracao-do-relatorio-em-formato-pdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.1.c: Geração do relatório em formato PDF
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-42a-envio-do-relatorio-com-cliente-destinatario-selecionado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.2.a: Envio do relatório com cliente destinatário selecionado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-42b-cliente-recebe-o-relatorio-por-e-mail-em-ate-5-minutos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.2.b: Cliente recebe o relatório por e-mail em até 5 minutos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-43b-notificacao-de-novo-relatorio-na-central" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.3.b: Notificação de novo relatório na central
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-43c-acesso-aos-relatorios-por-filtros-de-data-tecnico-ou-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.3.c: Acesso aos relatórios por filtros de data, técnico ou cliente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-51b-aplicacao-de-filtros-nas-estatisticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 5.1.b: Aplicação de filtros nas estatísticas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-51c-exportacao-de-estatisticas-em-diferentes-formatos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 5.1.c: Exportação de estatísticas em diferentes formatos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-52a-envio-automatico-do-formulario-de-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 5.2.a: Envio automático do formulário de feedback
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-52c-registro-de-metadados-do-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 5.2.c: Registro de metadados do feedback
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-61a-calculo-do-tempo-entre-agendamento-e-conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.1.a: Cálculo do tempo entre agendamento e conclusão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-61c-visualizacao-segmentada-por-tecnico-e-regiao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.1.c: Visualização segmentada por técnico e região
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-62a-exibicao-de-total-de-atendimentos-e-variacao-em-relacao-a-media" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.2.a: Exibição de total de atendimentos e variação em relação à média
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-62b-aplicacao-de-filtros-por-periodo-e-tipo-de-atendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.2.b: Aplicação de filtros por período e tipo de atendimento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-63a-calculo-da-taxa-de-resolucao-por-tecnico-e-por-regiao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.3.a: Cálculo da taxa de resolução por técnico e por região
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-63d-consulta-ao-historico-mensal-da-taxa-de-resolucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.3.d: Consulta ao histórico mensal da taxa de resolução
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-64a-exibicao-consolidada-dos-principais-indicadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.4.a: Exibição consolidada dos principais indicadores
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-64b-personalizacao-do-painel-com-filtros-e-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.4.b: Personalização do painel com filtros e widgets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-65b-inclusao-de-logotipo-data-e-assinatura-digital" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.5.b: Inclusão de logotipo, data e assinatura digital
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-65d-selecao-de-metricas-para-exportacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.5.d: Seleção de métricas para exportação
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Histórico de Versão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entrega3-usm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    USM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Entrega Unidade 4
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Entrega Unidade 4
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entrega4-video/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Video da apresentação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entrega4-casosdeuso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Casos de Uso
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entrega4-links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Links do deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Políticas da Equipe
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Políticas da Equipe
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Política de Issues
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/branches/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Política de Branches
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guias/pull_requests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Política de Pull Request (PR)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#product-backlog-building-techfix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Product Backlog Building - TechFix
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historias-de-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Histórias de usuário
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Histórias de usuário">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gerenciar-agendamento-de-atendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Gerenciar agendamento de atendimento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gerenciar-registro-de-servico" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Gerenciar registro de serviço
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-acompanhar-solicitacao-em-tempo-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Acompanhar solicitação em tempo real
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-gerar-relatorio-pos-servico" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Gerar relatório pós-serviço
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-analisar-feedback-do-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Analisar feedback do cliente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-monitorar-desempenho-operacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Monitorar desempenho operacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#criterios-de-aceitacao-das-historias-de-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Critérios de aceitação das histórias de usuários
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Critérios de aceitação das histórias de usuários">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gerenciar-agendamento-de-atendimento_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Gerenciar agendamento de atendimento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gerenciar-registro-de-servico_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Gerenciar registro de serviço
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-acompanhar-solicitacao-em-tempo-real_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Acompanhar solicitação em tempo real
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-gerar-relatorio-pos-servico_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Gerar relatório pós-serviço
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-analisar-feedback-do-cliente_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Analisar feedback do cliente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-monitorar-desempenho-operacional_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Monitorar desempenho operacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bdds-dos-criterios-de-aceitacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      BDDs dos critérios de aceitação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BDDs dos critérios de aceitação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cenario-11b-detectar-sobreposicao-de-agendamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 1.1.b: Detectar sobreposição de agendamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-11d-impedir-salvamento-de-agendamento-com-horario-ocupado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 1.1.d: Impedir salvamento de agendamento com horário ocupado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-12a-enviar-notificacao-apos-alteracao-de-agendamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 1.2.a: Enviar notificação após alteração de agendamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-12d-registrar-historico-da-notificacao-enviada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 1.2.d: Registrar histórico da notificação enviada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-21b-validar-preenchimento-obrigatorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.1.b: Validar preenchimento obrigatório
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-21c-acesso-ao-historico-do-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.1.c: Acesso ao histórico do cliente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-22a-anexar-imagem-ao-atendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.2.a: Anexar imagem ao atendimento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-22b-vincular-evidencia-ao-numero-do-atendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.2.b: Vincular evidência ao número do atendimento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-23b-confirmacao-de-encerramento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.3.b: Confirmação de encerramento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-23c-atendimento-bloqueado-apos-encerramento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 2.3.c: Atendimento bloqueado após encerramento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-31a-atualizacao-automatica-do-status-da-solicitacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 3.1.a: Atualização automática do status da solicitação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-31b-visualizacao-da-previsao-de-chegada-do-tecnico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 3.1.b: Visualização da previsão de chegada do técnico
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-32a-envio-de-notificacoes-por-e-mail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 3.2.a: Envio de notificações por e-mail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-32b-configuracao-da-frequencia-de-atualizacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 3.2.b: Configuração da frequência de atualizações
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-33b-exibicao-de-data-e-responsavel-por-cada-etapa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 3.3.b: Exibição de data e responsável por cada etapa
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-41b-preenchimento-automatico-dos-dados-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.1.b: Preenchimento automático dos dados básicos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-41c-geracao-do-relatorio-em-formato-pdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.1.c: Geração do relatório em formato PDF
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-42a-envio-do-relatorio-com-cliente-destinatario-selecionado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.2.a: Envio do relatório com cliente destinatário selecionado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-42b-cliente-recebe-o-relatorio-por-e-mail-em-ate-5-minutos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.2.b: Cliente recebe o relatório por e-mail em até 5 minutos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-43b-notificacao-de-novo-relatorio-na-central" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.3.b: Notificação de novo relatório na central
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-43c-acesso-aos-relatorios-por-filtros-de-data-tecnico-ou-cliente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 4.3.c: Acesso aos relatórios por filtros de data, técnico ou cliente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-51b-aplicacao-de-filtros-nas-estatisticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 5.1.b: Aplicação de filtros nas estatísticas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-51c-exportacao-de-estatisticas-em-diferentes-formatos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 5.1.c: Exportação de estatísticas em diferentes formatos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-52a-envio-automatico-do-formulario-de-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 5.2.a: Envio automático do formulário de feedback
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-52c-registro-de-metadados-do-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 5.2.c: Registro de metadados do feedback
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-61a-calculo-do-tempo-entre-agendamento-e-conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.1.a: Cálculo do tempo entre agendamento e conclusão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-61c-visualizacao-segmentada-por-tecnico-e-regiao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.1.c: Visualização segmentada por técnico e região
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-62a-exibicao-de-total-de-atendimentos-e-variacao-em-relacao-a-media" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.2.a: Exibição de total de atendimentos e variação em relação à média
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-62b-aplicacao-de-filtros-por-periodo-e-tipo-de-atendimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.2.b: Aplicação de filtros por período e tipo de atendimento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-63a-calculo-da-taxa-de-resolucao-por-tecnico-e-por-regiao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.3.a: Cálculo da taxa de resolução por técnico e por região
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-63d-consulta-ao-historico-mensal-da-taxa-de-resolucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.3.d: Consulta ao histórico mensal da taxa de resolução
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-64a-exibicao-consolidada-dos-principais-indicadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.4.a: Exibição consolidada dos principais indicadores
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-64b-personalizacao-do-painel-com-filtros-e-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.4.b: Personalização do painel com filtros e widgets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-65b-inclusao-de-logotipo-data-e-assinatura-digital" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.5.b: Inclusão de logotipo, data e assinatura digital
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cenario-65d-selecao-de-metricas-para-exportacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cenário 6.5.d: Seleção de métricas para exportação
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Histórico de Versão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>PBB</h1>
+
+<h2 id="product-backlog-building-techfix">Product Backlog Building - TechFix</h2>
+<p>O <strong>Product Backlog Building (PBB)</strong> é uma abordagem que orienta times ágeis na construção e organização de uma lista de backlog colaborativamente. Para isso, a metodologia conta com uma ferramenta visual chamada Canvas PBB, que atua como um mapa de trabalho e auxilia o time na identificação de personas, funcionalidades, benefícios e PBIs (Product Backlog Items). </p>
+<p>Dessa forma, para a prática do PBB, foi elaborada a priorização do Product Backlog com a aplicação da técnica <strong>COORG</strong> (Classificar, Ordenar e Organizar), na qual as funcionalidades foram dispostas em uma sequência lógica, estruturadas como uma narrativa da esquerda para a direita. Nessa organização, os PBIs com maior prioridade aparecem nas posições superiores, enquanto os de menor prioridade ficam nas inferiores, uma vez que a priorização considerou os critérios de frequência de uso e valor de negócio como valores quantitativos.</p>
+<p>Diante disso, segue a elaboração do estudo de caso da TechFix abaixo:</p>
+<p><img alt="PBB Canvas da TechFix" src="../../assets/images/TechFix.jpg" /></p>
+<h2 id="historias-de-usuario">Histórias de usuário</h2>
+<h3 id="1-gerenciar-agendamento-de-atendimento">1. Gerenciar agendamento de atendimento</h3>
+<ul>
+<li>1.1: Eu, como atendente, posso organizar os agendamentos, tendo em conta a carga de trabalho dos técnicos, para evitar conflitos nos atendimentos.</li>
+<li>1.2: Eu, como atendente, posso notificar os clientes sobre alterações nos atendimentos para garantir o aviso prévio.</li>
+</ul>
+<h3 id="2-gerenciar-registro-de-servico">2. Gerenciar registro de serviço</h3>
+<ul>
+<li>2.1: Eu, como técnico de campo, posso registrar os dados do atendimento para padronizar as informações.</li>
+<li>2.2: Eu, como técnico de campo, posso anexar evidências ao atendimento para garantir rastreabilidade.</li>
+<li>2.3: Eu, como técnico de campo, posso encerrar o registro do serviço para concluir o atendimento no sistema.</li>
+</ul>
+<h3 id="3-acompanhar-solicitacao-em-tempo-real">3. Acompanhar solicitação em tempo real</h3>
+<ul>
+<li>3.1: Eu, como cliente corporativo, posso acompanhar o status da solicitação para me preparar para o atendimento.</li>
+<li>3.2: Eu, como cliente corporativo, posso receber atualizações do andamento para reduzir a necessidade de replanejamento.</li>
+<li>3.3: Eu, como cliente corporativo, posso consultar as etapas concluídas da solicitação para entender o progresso do serviço.</li>
+</ul>
+<h3 id="4-gerar-relatorio-pos-servico">4. Gerar relatório pós-serviço</h3>
+<ul>
+<li>4.1: Eu, como técnico de campo, posso produzir relatórios técnicos padronizados para formalizar o atendimento realizado.</li>
+<li>4.2: Eu, como técnico de campo, posso enviar o relatório final para o cliente para apoiar o planejamento das próximas ações.</li>
+<li>4.3: Eu, como técnico de campo, posso encaminhar o relatório técnico à central para subsidiar decisões da gestão.</li>
+</ul>
+<h3 id="5-analisar-feedback-do-cliente">5. Analisar feedback do cliente</h3>
+<ul>
+<li>5.1: Eu, como diretora de operações, posso analisar estatísticas dos feedbacks para identificar padrões nas avaliações dos clientes.</li>
+<li>5.2: Eu, como diretora de operações, posso armazenar os feedbacks para automatizar a coleta de avaliações dos clientes.</li>
+</ul>
+<h3 id="6-monitorar-desempenho-operacional">6. Monitorar desempenho operacional</h3>
+<ul>
+<li>6.1: Eu, como diretora de operações, posso acompanhar o cumprimento de prazos de atendimento para garantir o acompanhamento das metas.</li>
+<li>6.2: Eu, como diretora de operações, posso visualizar o número de atendimentos por técnico para facilitar a identificação de desvios na distribuição de tarefas.</li>
+<li>6.3: Eu, como diretora de operações, posso calcular o percentual de problemas resolvidos para monitorar a efetividade da equipe.</li>
+<li>6.4: Eu, como diretora de operações, posso gerar um dashboard de desempenho para obter uma visão geral da operação.</li>
+<li>6.5: Eu, como diretora de operações, posso exportar os indicadores de desempenho para facilitar a apresentação de resultados à diretoria.</li>
+</ul>
+<h2 id="criterios-de-aceitacao-das-historias-de-usuarios">Critérios de aceitação das histórias de usuários</h2>
+<h3 id="1-gerenciar-agendamento-de-atendimento_1">1. Gerenciar agendamento de atendimento</h3>
+<ul>
+<li>
+<p><strong>1.1: Eu, como atendente, posso organizar os agendamentos, tendo em conta a carga de trabalho dos técnicos, para evitar conflitos nos atendimentos.</strong></p>
+<ol>
+<li>O atendente deve visualizar a agenda de todos os técnicos por dia e horário.</li>
+<li>O sistema deve alertar o atendente ao detectar sobreposição de atendimentos para um mesmo técnico.</li>
+<li>O atendente deve conseguir aplicar filtros por data, técnico e status do atendimento.</li>
+<li>O sistema deve impedir o salvamento de agendamentos com horários já ocupados.</li>
+</ol>
+</li>
+<li>
+<p><strong>1.2: Eu, como atendente, posso notificar os clientes sobre alterações nos atendimentos para garantir o aviso prévio.</strong></p>
+<ol>
+<li>A notificação deve ser enviada automaticamente por e-mail e SMS após qualquer alteração no agendamento.</li>
+<li>O atendente deve visualizar um resumo da notificação antes de confirmar o envio.</li>
+<li>O cliente deve receber a notificação com data, horário, nome do técnico e motivo da alteração.</li>
+<li>O sistema deve registrar o histórico de envio da notificação com data e status.</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-gerenciar-registro-de-servico_1">2. Gerenciar registro de serviço</h3>
+<ul>
+<li>
+<p><strong>2.1: Eu, como técnico de campo, posso registrar os dados do atendimento para padronizar as informações.</strong></p>
+<ol>
+<li>O formulário deve conter campos obrigatórios como: data, hora, tipo de serviço, equipamento atendido e observações técnicas.</li>
+<li>O sistema deve validar o preenchimento de todos os campos antes de permitir o envio.</li>
+<li>O técnico deve ter acesso ao histórico de registros anteriores do mesmo cliente.</li>
+<li>Os dados registrados devem ser salvos automaticamente em caso de perda de conexão.</li>
+</ol>
+</li>
+<li>
+<p><strong>2.2: Eu, como técnico de campo, posso anexar evidências ao atendimento para garantir rastreabilidade.</strong></p>
+<ol>
+<li>O técnico deve conseguir anexar fotos — nos formatos JPEG e PNG — e documentos — como em PDF — com até 10MB por arquivo.</li>
+<li>As evidências devem estar vinculadas ao número do atendimento no sistema.</li>
+<li>O sistema deve permitir a visualização e download das evidências pela central.</li>
+<li>Cada anexo deve conter data, hora e tipo de evidência.</li>
+</ol>
+</li>
+<li>
+<p><strong>2.3: Eu, como técnico de campo, posso encerrar o registro do serviço para concluir o atendimento no sistema.</strong></p>
+<ol>
+<li>O botão de encerramento só deve ser habilitado após o preenchimento de todos os campos obrigatórios.</li>
+<li>O sistema deve solicitar confirmação do técnico antes de encerrar.</li>
+<li>Após o encerramento, o atendimento deve ficar bloqueado para edição.</li>
+<li>O encerramento deve gerar um número de protocolo e carimbo de data e hora.</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-acompanhar-solicitacao-em-tempo-real_1">3. Acompanhar solicitação em tempo real</h3>
+<ul>
+<li>
+<p><strong>3.1: Eu, como cliente corporativo, posso acompanhar o status da solicitação para me preparar para o atendimento.</strong></p>
+<ol>
+<li>O status deve ser atualizado automaticamente conforme o andamento.</li>
+<li>O cliente deve ser capaz de visualizar a previsão de chegada do técnico.</li>
+<li>A interface deve ser acessível via web e dispositivos móveis.</li>
+</ol>
+</li>
+<li>
+<p><strong>3.2: Eu, como cliente corporativo, posso receber atualizações do andamento para reduzir a necessidade de replanejamento.</strong></p>
+<ol>
+<li>As notificações devem ser enviadas por e-mail ou app.</li>
+<li>Deve ser possível configurar a frequência das atualizações.</li>
+</ol>
+</li>
+<li>
+<p><strong>3.3: Eu, como cliente corporativo, posso consultar as etapas concluídas da solicitação para entender o progresso do serviço.</strong></p>
+<ol>
+<li>As etapas devem estar organizadas em ordem cronológica.</li>
+<li>Cada etapa deve ter data e responsável associados.</li>
+</ol>
+</li>
+</ul>
+<h3 id="4-gerar-relatorio-pos-servico_1">4. Gerar relatório pós-serviço</h3>
+<ul>
+<li>
+<p><strong>4.1: Eu, como técnico de campo, posso produzir relatórios técnicos padronizados para formalizar o atendimento realizado.</strong></p>
+<ol>
+<li>O relatório deve seguir um modelo fixo com campos como: problema identificado, ações executadas, resultados.</li>
+<li>O sistema deve preencher automaticamente dados básicos: cliente, data, técnico.</li>
+<li>O relatório deve estar disponível em formato PDF para download.</li>
+<li>O sistema deve permitir salvar rascunhos antes do envio final.</li>
+</ol>
+</li>
+<li>
+<p><strong>4.2: Eu, como técnico de campo, posso enviar o relatório final para o cliente para apoiar o planejamento das próximas ações.</strong></p>
+<ol>
+<li>O técnico deve selecionar o cliente destinatário antes do envio.</li>
+<li>O cliente deve receber o relatório por e-mail em até 5 minutos após o envio.</li>
+<li>O sistema deve registrar o envio e disponibilizar o comprovante na área do técnico.</li>
+<li>O cliente deve confirmar o recebimento por meio de um botão ou e-mail de retorno.</li>
+</ol>
+</li>
+<li>
+<p><strong>4.3: Eu, como técnico de campo, posso encaminhar o relatório técnico à central para subsidiar decisões da gestão.</strong></p>
+<ol>
+<li>O envio à central deve ocorrer simultaneamente ao envio ao cliente.</li>
+<li>A central deve receber uma notificação de novo relatório disponível.</li>
+<li>Os gestores devem acessar todos os relatórios por data, técnico ou cliente.</li>
+<li>O relatório deve conter campos específicos para recomendações futuras.</li>
+</ol>
+</li>
+</ul>
+<h3 id="5-analisar-feedback-do-cliente_1">5. Analisar feedback do cliente</h3>
+<ul>
+<li>
+<p><strong>5.1: Eu, como diretora de operações, posso analisar estatísticas dos feedbacks para identificar padrões nas avaliações dos clientes.</strong></p>
+<ol>
+<li>O sistema deve gerar gráficos com indicadores como NPS, nota média e recorrência de palavras-chave.</li>
+<li>A diretora deve aplicar filtros por período, região e tipo de atendimento.</li>
+<li>O painel deve permitir exportar os dados em Excel ou PDF.</li>
+<li>As estatísticas devem atualizar automaticamente a cada novo feedback registrado.</li>
+</ol>
+</li>
+<li>
+<p><strong>5.2: Eu, como diretora de operações, posso armazenar os feedbacks para automatizar a coleta de avaliações dos clientes.</strong></p>
+<ol>
+<li>O sistema deve enviar automaticamente o formulário de feedback após a conclusão do atendimento.</li>
+<li>O cliente deve poder responder via e-mail, app ou portal.</li>
+<li>O sistema deve registrar data, cliente e serviço relacionado ao feedback.</li>
+<li>Feedbacks incompletos devem ser sinalizados para acompanhamento.</li>
+</ol>
+</li>
+</ul>
+<h3 id="6-monitorar-desempenho-operacional_1">6. Monitorar desempenho operacional</h3>
+<ul>
+<li>
+<p><strong>6.1: Eu, como diretora de operações, posso acompanhar o cumprimento de prazos de atendimento para garantir o acompanhamento das metas.</strong></p>
+<ol>
+<li>O sistema deve calcular o tempo entre agendamento e conclusão de cada atendimento.</li>
+<li>O painel deve destacar atendimentos fora do SLA.</li>
+<li>A diretora deve poder visualizar os dados por técnico, região ou tipo de serviço.</li>
+<li>Indicadores devem ser exportáveis em formato Excel e PDF.</li>
+</ol>
+</li>
+<li>
+<p><strong>6.2: Eu, como diretora de operações, posso visualizar o número de atendimentos por técnico para facilitar a identificação de desvios na distribuição de tarefas.</strong></p>
+<ol>
+<li>A listagem deve exibir técnico, total de atendimentos e variação em relação à média.</li>
+<li>A diretora deve aplicar filtros por período e tipo de atendimento.</li>
+<li>O sistema deve destacar técnicos com carga acima ou abaixo do esperado.</li>
+<li>Os dados devem estar disponíveis em dashboard e exportação.</li>
+</ol>
+</li>
+<li>
+<p><strong>6.3: Eu, como diretora de operações, posso calcular o percentual de problemas resolvidos para monitorar a efetividade da equipe.</strong></p>
+<ol>
+<li>O sistema deve comparar o total de atendimentos com os que foram marcados como “resolvidos”.</li>
+<li>O painel deve exibir a taxa de resolução por técnico e por região.</li>
+<li>Casos com resolução pendente devem ser destacados para revisão.</li>
+<li>A diretora deve acessar o histórico mensal da taxa de resolução.</li>
+</ol>
+</li>
+<li>
+<p><strong>6.4: Eu, como diretora de operações, posso gerar um dashboard de desempenho para obter uma visão geral da operação.</strong></p>
+<ol>
+<li>O dashboard deve incluir: atendimentos realizados, SLA cumprido, taxa de resolução e feedback médio.</li>
+<li>O painel deve ser personalizável com filtros e widgets.</li>
+<li>O sistema deve atualizar os dados em tempo real.</li>
+<li>A diretora deve compartilhar o dashboard com outros gestores via link.</li>
+</ol>
+</li>
+<li>
+<p><strong>6.5: Eu, como diretora de operações, posso exportar os indicadores de desempenho para facilitar a apresentação de resultados à diretoria.</strong></p>
+<ol>
+<li>O sistema deve permitir exportar em PDF, Excel e PPT.</li>
+<li>A exportação deve conter logotipo, data e assinatura digital.</li>
+<li>O relatório deve incluir gráficos e análises automáticas.</li>
+<li>A diretora deve selecionar quais métricas incluir antes de exportar.</li>
+</ol>
+</li>
+</ul>
+<h2 id="bdds-dos-criterios-de-aceitacao">BDDs dos critérios de aceitação</h2>
+<p>Dos 67 critérios de aceitação, a técnica BDD foi aplicada em 35 deles, o que corresponde a uma porcentagem de 52,23%. Abaixo estão os critérios de aceite, acompanhados de seus respectivos cenários de BDD:</p>
+<h3 id="cenario-11b-detectar-sobreposicao-de-agendamento">Cenário 1.1.b: Detectar sobreposição de agendamento</h3>
+<ul>
+<li><strong>Dado que</strong> o técnico João possui um atendimento agendado das 14h às 15h</li>
+<li><strong>Quando</strong> o atendente tenta agendar outro atendimento para João às 14h30</li>
+<li><strong>Então</strong> o sistema exibe um alerta de sobreposição de horário para o técnico João</li>
+</ul>
+<h3 id="cenario-11d-impedir-salvamento-de-agendamento-com-horario-ocupado">Cenário 1.1.d: Impedir salvamento de agendamento com horário ocupado</h3>
+<ul>
+<li><strong>Dado que</strong> existe um atendimento confirmado com o técnico Ana às 10h</li>
+<li><strong>Quando</strong> o atendente tenta salvar um novo agendamento no mesmo horário para Ana</li>
+<li><strong>Então</strong> o sistema bloqueia o salvamento e exibe a mensagem "Horário já ocupado para este técnico"</li>
+</ul>
+<h3 id="cenario-12a-enviar-notificacao-apos-alteracao-de-agendamento">Cenário 1.2.a: Enviar notificação após alteração de agendamento</h3>
+<ul>
+<li><strong>Dado que</strong> um atendimento para o cliente Bruno foi reagendado das 9h para as 11h</li>
+<li><strong>Quando</strong> o atendente confirma a alteração</li>
+<li><strong>Então</strong> o sistema envia automaticamente um e-mail e um SMS para o cliente com os novos detalhes</li>
+</ul>
+<h3 id="cenario-12d-registrar-historico-da-notificacao-enviada">Cenário 1.2.d: Registrar histórico da notificação enviada</h3>
+<ul>
+<li><strong>Dado que</strong> o sistema enviou uma notificação para o cliente sobre alteração de atendimento</li>
+<li><strong>Quando</strong> o atendente acessa o histórico da solicitação</li>
+<li><strong>Então</strong> o registro da notificação deve estar disponível com data, hora e status “Enviado”.</li>
+</ul>
+<h3 id="cenario-21b-validar-preenchimento-obrigatorio">Cenário 2.1.b: Validar preenchimento obrigatório</h3>
+<ul>
+<li><strong>Dado que</strong> o técnico está preenchendo o formulário de registro de atendimento com os seguintes dados:<ul>
+<li><strong>Data:</strong> 22/06/2025</li>
+<li><strong>Hora:</strong> 14:30</li>
+<li><strong>Tipo de serviço:</strong> (campo não preenchido)</li>
+<li><strong>Equipamento atendido:</strong> “Nobreak APC 3000VA”</li>
+<li><strong>Observações técnicas:</strong> “Equipamento apresentou oscilação de tensão”</li>
+</ul>
+</li>
+<li><strong>Quando</strong> ele tenta enviar o formulário</li>
+<li><strong>Então</strong> o sistema impede o envio e exibe a mensagem “Preencha todos os campos obrigatórios”</li>
+</ul>
+<h3 id="cenario-21c-acesso-ao-historico-do-cliente">Cenário 2.1.c: Acesso ao histórico do cliente</h3>
+<ul>
+<li><strong>Dado que</strong> há conexão ativa com o sistema e o técnico preenche o formulário com os seguintes dados:<ul>
+<li><strong>Data:</strong> 22/06/2025</li>
+<li><strong>Hora:</strong> 15:10</li>
+<li><strong>Tipo de serviço:</strong> "Manutenção preventiva"</li>
+<li><strong>Equipamento atendido:</strong> “Servidor Dell R730”</li>
+<li><strong>Observações técnicas:</strong> “Limpeza interna e troca de pasta térmica”</li>
+</ul>
+</li>
+<li><strong>Quando</strong> a conexão com a internet é perdida antes do envio do formulário</li>
+<li><strong>Então</strong> o sistema salva os dados preenchidos e exibe a mensagem “Formulário salvo. Envie quando a conexão for restabelecida.”</li>
+</ul>
+<h3 id="cenario-22a-anexar-imagem-ao-atendimento">Cenário 2.2.a: Anexar imagem ao atendimento</h3>
+<ul>
+<li><strong>Dado que</strong> o técnico está em campo com o número de atendimento 24567</li>
+<li><strong>Quando</strong>  ele anexa uma imagem no formato .jpeg de 2MB</li>
+<li><strong>Então</strong> o sistema salva a imagem vinculada ao atendimento 24567 com a data, hora e tipo de evidência "imagem"</li>
+</ul>
+<h3 id="cenario-22b-vincular-evidencia-ao-numero-do-atendimento">Cenário 2.2.b: Vincular evidência ao número do atendimento</h3>
+<ul>
+<li><strong>Dado que</strong> o técnico anexa uma foto do equipamento ao atendimento de número ATD-48291</li>
+<li><strong>Quando</strong>  ele envia a imagem com 3MB em formato .jpeg</li>
+<li><strong>Então</strong> o sistema deve exibir a imagem listada na seção de evidências vinculadas ao atendimento</li>
+</ul>
+<h3 id="cenario-23b-confirmacao-de-encerramento">Cenário 2.3.b: Confirmação de encerramento</h3>
+<ul>
+<li><strong>Dado que</strong> o técnico clicou no botão "Encerrar atendimento"</li>
+<li><strong>Quando</strong>  o sistema exibe a mensagem de confirmação com as informações preenchidas</li>
+<li><strong>Então</strong> o técnico deve confirmar o encerramento antes da finalização</li>
+</ul>
+<h3 id="cenario-23c-atendimento-bloqueado-apos-encerramento">Cenário 2.3.c: Atendimento bloqueado após encerramento</h3>
+<ul>
+<li><strong>Dado que</strong> o atendimento foi encerrado com sucesso</li>
+<li><strong>Quando</strong>  o técnico tenta editar qualquer campo do formulário</li>
+<li><strong>Então</strong> o sistema deve exibir uma mensagem "Registro bloqueado para edição"</li>
+</ul>
+<h3 id="cenario-31a-atualizacao-automatica-do-status-da-solicitacao">Cenário 3.1.a: Atualização automática do status da solicitação</h3>
+<ul>
+<li><strong>Dado que</strong> o atendimento foi iniciado pelo técnico com o status "Em execução"</li>
+<li><strong>Quando</strong> o sistema detecta a mudança de fase para "Finalização"</li>
+<li><strong>Então</strong> o status da solicitação do cliente é atualizado automaticamente para "Finalizando atendimento"</li>
+</ul>
+<h3 id="cenario-31b-visualizacao-da-previsao-de-chegada-do-tecnico">Cenário 3.1.b: Visualização da previsão de chegada do técnico</h3>
+<ul>
+<li><strong>Dado que</strong> o técnico foi designado para o atendimento das 14h às 16h no dia 24/06</li>
+<li><strong>Quando</strong> o cliente acessa a tela de status da solicitação às 13h</li>
+<li><strong>Então</strong> o sistema exibe a previsão de chegada do técnico entre 14h e 16h</li>
+</ul>
+<h3 id="cenario-32a-envio-de-notificacoes-por-e-mail">Cenário 3.2.a: Envio de notificações por e-mail</h3>
+<ul>
+<li><strong>Dado que</strong> a solicitação está em andamento e o e-mail do cliente está cadastrado como "cliente@empresa.com"</li>
+<li><strong>Quando</strong> o status da solicitação muda de "Agendado" para "Em execução"</li>
+<li><strong>Então</strong> o cliente deve receber um e-mail com o título "Atualização de atendimento"</li>
+</ul>
+<h3 id="cenario-32b-configuracao-da-frequencia-de-atualizacoes">Cenário 3.2.b: Configuração da frequência de atualizações</h3>
+<ul>
+<li><strong>Dado que</strong> o cliente configurou para receber atualizações apenas no início e fim do atendimento</li>
+<li><strong>Quando</strong> o status muda de "Em execução" para "Finalizado"</li>
+<li><strong>Então</strong> apenas essa mudança deve gerar uma nova notificação</li>
+</ul>
+<h3 id="cenario-33b-exibicao-de-data-e-responsavel-por-cada-etapa">Cenário 3.3.b: Exibição de data e responsável por cada etapa</h3>
+<ul>
+<li><strong>Dado que</strong> o técnico João Silva concluiu a etapa “Diagnóstico” em 21/06/2025 às 10h30</li>
+<li><strong>Quando</strong> o cliente acessa os detalhes dessa etapa</li>
+<li><strong>Então</strong> o sistema deve mostrar “Diagnóstico – João Silva – 21/06/2025 10:30”</li>
+</ul>
+<h3 id="cenario-41b-preenchimento-automatico-dos-dados-basicos">Cenário 4.1.b: Preenchimento automático dos dados básicos</h3>
+<ul>
+<li><strong>Dado que</strong> o atendimento nº 8392 foi finalizado no dia 22/06/2025 pelo técnico Marcos Lima para o cliente ACME Ltda</li>
+<li><strong>Quando</strong> o técnico inicia o preenchimento do relatório</li>
+<li><strong>Então</strong> o sistema deve preencher automaticamente os campos: "Cliente: ACME Ltda", "Data: 22/06/2025", "Técnico: Marcos Lima"</li>
+</ul>
+<h3 id="cenario-41c-geracao-do-relatorio-em-formato-pdf">Cenário 4.1.c: Geração do relatório em formato PDF</h3>
+<ul>
+<li><strong>Dado que</strong> o técnico concluiu o preenchimento de todos os campos obrigatórios</li>
+<li><strong>Quando</strong> ele clica no botão “Gerar PDF”</li>
+<li><strong>Então</strong> o sistema deve disponibilizar o relatório em formato PDF para download</li>
+</ul>
+<h3 id="cenario-42a-envio-do-relatorio-com-cliente-destinatario-selecionado">Cenário 4.2.a: Envio do relatório com cliente destinatário selecionado</h3>
+<ul>
+<li><strong>Dado que</strong> o técnico preencheu o relatório do atendimento nº 4921</li>
+<li><strong>Quando</strong> ele seleciona o cliente "Hospital Santa Luzia" como destinatário</li>
+<li><strong>Então</strong> o sistema deve habilitar o botão de envio e registrar o destinatário como "Hospital Santa Luzia"</li>
+</ul>
+<h3 id="cenario-42b-cliente-recebe-o-relatorio-por-e-mail-em-ate-5-minutos">Cenário 4.2.b: Cliente recebe o relatório por e-mail em até 5 minutos</h3>
+<ul>
+<li><strong>Dado que</strong> técnico enviou o relatório final às 14:00</li>
+<li><strong>Quando</strong> o tempo de envio for processado</li>
+<li><strong>Então</strong> o cliente deve receber o relatório por e-mail até às 14:05 com o título "Relatório Técnico – Atendimento nº 4921"</li>
+</ul>
+<h3 id="cenario-43b-notificacao-de-novo-relatorio-na-central">Cenário 4.3.b: Notificação de novo relatório na central</h3>
+<ul>
+<li><strong>Dado que</strong> a central recebeu um novo relatório do atendimento nº 5278</li>
+<li><strong>Quando</strong> um gestor da central acessa a área “Relatórios Recebidos”</li>
+<li><strong>Então</strong> o sistema deve exibir uma notificação com o título “Novo relatório técnico recebido – Técnico Carlos, 22/06/2025”</li>
+</ul>
+<h3 id="cenario-43c-acesso-aos-relatorios-por-filtros-de-data-tecnico-ou-cliente">Cenário 4.3.c: Acesso aos relatórios por filtros de data, técnico ou cliente</h3>
+<ul>
+<li><strong>Dado que</strong> a central possui um histórico de relatórios no sistema</li>
+<li><strong>Quando</strong> o gestor aplicar os filtros “Cliente: Clínica Vida”, “Técnico: Carlos”, e “Data: Junho/2025”</li>
+<li><strong>Então</strong> o sistema deve exibir todos os relatórios que correspondem aos critérios selecionados</li>
+</ul>
+<h3 id="cenario-51b-aplicacao-de-filtros-nas-estatisticas">Cenário 5.1.b: Aplicação de filtros nas estatísticas</h3>
+<ul>
+<li><strong>Dado que</strong> a diretora está visualizando os dados consolidados de feedback</li>
+<li><strong>Quando</strong> ela aplica os filtros "Região: Sudeste", "Tipo de atendimento: Preventivo", e "Período: Maio de 2025"</li>
+<li><strong>Então</strong> o painel deve exibir apenas os resultados estatísticos correspondentes a esses critérios</li>
+</ul>
+<h3 id="cenario-51c-exportacao-de-estatisticas-em-diferentes-formatos">Cenário 5.1.c: Exportação de estatísticas em diferentes formatos</h3>
+<ul>
+<li><strong>Dado que</strong> a diretora deseja compartilhar as análises de feedbacks com a equipe de qualidade</li>
+<li><strong>Quando</strong> ela clica na opção “Exportar” e seleciona o formato Excel</li>
+<li><strong>Então</strong> o sistema deve gerar um arquivo .xlsx com os gráficos, os dados brutos e as métricas consolidadas</li>
+</ul>
+<h3 id="cenario-52a-envio-automatico-do-formulario-de-feedback">Cenário 5.2.a: Envio automático do formulário de feedback</h3>
+<ul>
+<li><strong>Dado que</strong> um atendimento foi encerrado com sucesso às 15h do dia 10/06/2025</li>
+<li><strong>Quando</strong> o sistema identifica o status como “concluído”</li>
+<li><strong>Então</strong> deve enviar automaticamente um formulário de feedback para o e-mail do cliente vinculado ao atendimento encerrado</li>
+</ul>
+<h3 id="cenario-52c-registro-de-metadados-do-feedback">Cenário 5.2.c: Registro de metadados do feedback</h3>
+<ul>
+<li><strong>Dado que</strong> o cliente João da Silva respondeu ao feedback no dia 12/06/2025 às 09h12</li>
+<li><strong>Quando</strong> a resposta for recebida</li>
+<li><strong>Então</strong> o sistema deve armazenar os metadados com: nome do cliente, data/hora da resposta e código do atendimento relacionado</li>
+</ul>
+<h3 id="cenario-61a-calculo-do-tempo-entre-agendamento-e-conclusao">Cenário 6.1.a: Cálculo do tempo entre agendamento e conclusão</h3>
+<ul>
+<li><strong>Dado que</strong> um atendimento foi agendado para o dia 10/06/2025 às 08h00</li>
+<li><strong>Quando</strong> o sistema calcular o tempo de atendimento</li>
+<li><strong>Então</strong> deve registrar a duração como 2 horas e 30 minutos</li>
+</ul>
+<h3 id="cenario-61c-visualizacao-segmentada-por-tecnico-e-regiao">Cenário 6.1.c: Visualização segmentada por técnico e região</h3>
+<ul>
+<li><strong>Dado que</strong> existem 45 atendimentos registrados entre os dias 01 e 10 de junho</li>
+<li><strong>Quando</strong> a diretora aplicar filtros em técnico para Lucas e região para Norte</li>
+<li><strong>Então</strong> o sistema deve exibir apenas os 15 atendimentos correspondentes</li>
+</ul>
+<h3 id="cenario-62a-exibicao-de-total-de-atendimentos-e-variacao-em-relacao-a-media">Cenário 6.2.a: Exibição de total de atendimentos e variação em relação à média</h3>
+<ul>
+<li><strong>Dado que</strong> o sistema possui registros de atendimentos dos técnicos João, Carla e Diego</li>
+<li><strong>Quando</strong> a diretora acessar a listagem de atendimentos</li>
+<li><strong>Então</strong> o sistema deve exibir:<ul>
+<li>João: 12 atendimentos (+2)</li>
+<li>Carla: 9 atendimentos (–1)</li>
+<li>Diego: 8 atendimentos (–2)</li>
+</ul>
+</li>
+</ul>
+<h3 id="cenario-62b-aplicacao-de-filtros-por-periodo-e-tipo-de-atendimento">Cenário 6.2.b: Aplicação de filtros por período e tipo de atendimento</h3>
+<ul>
+<li><strong>Dado que</strong> a diretora deseja analisar os atendimentos de maio de 2025 do tipo “manutenção corretiva”</li>
+<li><strong>Quando</strong> aplicar os filtros em período para 01/05 a 31/05 e em tipo para "manutenção corretiva”</li>
+<li><strong>Então</strong> o sistema deve mostrar apenas os atendimentos compatíveis com esses critérios</li>
+</ul>
+<h3 id="cenario-63a-calculo-da-taxa-de-resolucao-por-tecnico-e-por-regiao">Cenário 6.3.a: Cálculo da taxa de resolução por técnico e por região</h3>
+<ul>
+<li><strong>Dado que</strong> o sistema registra 100 atendimentos para o técnico Bruno, dos quais 85 foram marcados como “resolvidos”</li>
+<li><strong>Quando</strong> a diretora acessar o painel de efetividade</li>
+<li><strong>Então</strong> o sistema deve exibir:<ul>
+<li>Técnico Bruno: 85% de resolução</li>
+<li>Região Norte: 80% de resolução</li>
+</ul>
+</li>
+</ul>
+<h3 id="cenario-63d-consulta-ao-historico-mensal-da-taxa-de-resolucao">Cenário 6.3.d: Consulta ao histórico mensal da taxa de resolução</h3>
+<ul>
+<li><strong>Dado que</strong> o sistema armazena dados de resolução por mês</li>
+<li><strong>Quando</strong> a diretora selecionar o filtro “histórico mensal”</li>
+<li><strong>Então</strong> o sistema deve exibir um gráfico de linha com as taxas dos últimos meses</li>
+</ul>
+<h3 id="cenario-64a-exibicao-consolidada-dos-principais-indicadores">Cenário 6.4.a: Exibição consolidada dos principais indicadores</h3>
+<ul>
+<li><strong>Dado que</strong> o sistema possui registros atualizados de atendimentos realizados, SLA, taxa de resolução e média de feedbacks</li>
+<li><strong>Quando</strong>  a diretora acessar o dashboard de desempenho</li>
+<li><strong>Então</strong> o painel deve exibir:<ul>
+<li>Total de atendimentos: 380</li>
+<li>Cumprimento de SLA: 94%</li>
+<li>Taxa de resolução: 89%</li>
+<li>Feedback médio: 4,7 estrelas</li>
+</ul>
+</li>
+</ul>
+<h3 id="cenario-64b-personalizacao-do-painel-com-filtros-e-widgets">Cenário 6.4.b: Personalização do painel com filtros e widgets</h3>
+<ul>
+<li><strong>Dado que</strong> a diretora deseja ajustar o painel conforme suas necessidades</li>
+<li><strong>Quando</strong> ela selecionar os filtros por período, tipo de serviço e equipe</li>
+<li><strong>Então</strong> o sistema deve atualizar os dados do dashboard com base nos filtros</li>
+</ul>
+<h3 id="cenario-65b-inclusao-de-logotipo-data-e-assinatura-digital">Cenário 6.5.b: Inclusão de logotipo, data e assinatura digital</h3>
+<ul>
+<li><strong>Dado que</strong> a diretora está exportando o relatório em PDF</li>
+<li><strong>Quando</strong>  o sistema gerar o documento</li>
+<li><strong>Então</strong> ele deve conter o logotipo da empresa no topo, a data de emissão “22/06/2025” e uma assinatura digital validada no rodapé da última página</li>
+</ul>
+<h3 id="cenario-65d-selecao-de-metricas-para-exportacao">Cenário 6.5.d: Seleção de métricas para exportação</h3>
+<ul>
+<li><strong>Dado que</strong> a diretora deseja preparar um relatório com foco em produtividade</li>
+<li><strong>Quando</strong>  ela selecionar os indicadores “Total de atendimentos”, “SLA” e “Feedback médio”</li>
+<li><strong>Então</strong> o sistema deve gerar o arquivo contendo apenas essas métricas e excluir os indicadores não selecionados da visualização final</li>
+</ul>
+<hr />
+<h2 id="historico-de-versao">Histórico de Versão</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Versão</th>
+<th>Descrição</th>
+<th>Autor(es)</th>
+<th>Revisor(es)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16/06/2025</td>
+<td>1.0</td>
+<td>Elaboração inicial do estudo de caso</td>
+<td>João Pedro, Thiago Melo e Willian Silva</td>
+<td>Willian Silva</td>
+</tr>
+<tr>
+<td>23/06/2025</td>
+<td>1.1</td>
+<td>Elaboração final do estudo de caso</td>
+<td>Willian Silva</td>
+<td>Thiago Melo</td>
+</tr>
+<tr>
+<td>12/07/2025</td>
+<td>1.2</td>
+<td>Correção do estudo de caso</td>
+<td>Willian Silva</td>
+<td>João Pedro</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <div style="text-align: center; padding: 5px 0;">
+    <p>© 2025 SeuPontoDigital</p>
+  </div>
+  
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>
