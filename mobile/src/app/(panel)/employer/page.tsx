@@ -131,6 +131,26 @@ export default function Employer() {
         if (response.data && Array.isArray(response.data)) {
           // Mapear os dados da API para o formato esperado pelo componente
           const mappedEmployees: Employee[] = response.data.map((item: EmployeeResponse) => {
+            
+            // Função para formatar a data de ISO (YYYY-MM-DD) para DD/MM/YYYY
+            const formatDate = (dateString?: string): string => {
+              if (!dateString) return "Não especificado";
+              
+              try {
+                // Dividir a string da data em partes
+                const [year, month, day] = dateString.split('-');
+                
+                // Verificar se todas as partes existem
+                if (!year || !month || !day) return dateString;
+                
+                // Retornar no formato DD/MM/YYYY
+                return `${day}/${month}/${year}`;
+              } catch (error) {
+                console.error("Erro ao formatar data:", error);
+                return dateString; // Em caso de erro, retorna a string original
+              }
+            };
+            
             // Calcular dias trabalhados com base nos registros de ponto
             const daysWorked = (() => {
               console.log(`Employee ${item.empregado.nome} - Registros:`, JSON.stringify(item.registros));
@@ -175,7 +195,7 @@ export default function Employer() {
               role: item.empregado.function || "Não especificado",
               photo: null,
               workHours: "08:00 - 17:00",
-              startDate: item.empregado.start_date || "Não especificado",
+              startDate: formatDate(item.empregado.start_date), // Aplicar formatação aqui
               alerts: 0,
               daysWorked, // Usar o valor calculado
               status: item.empregado.status || "Inativo",
@@ -314,7 +334,7 @@ export default function Employer() {
             </View>
             <View style={styles.statItem}>
               <Text style={styles.statNumber}>
-                {employees.filter(emp => emp.status === 'Ativo').length}
+                {employees.filter(emp => emp.status === 'True').length}
               </Text>
               <Text style={styles.statLabel}>Ativos</Text>
             </View>
