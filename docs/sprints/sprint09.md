@@ -16,8 +16,9 @@
 Infelizmente essa reunião não foi gravada.
 
 #### Principais pontos da sprint planning
-- Fazer entrega 3 do trabalho de requisitos
-- Terminar US05 e US17 (pendentes)
+- Fazer RF15: Registrar ponto de trabalho
+- Fazer RF17: Visualizar próprio histórico de ponto de trabalho
+- Fazer RF18: Gerar relatório de registro de ponto
 
 ---
 ## Sprint Review
@@ -35,15 +36,15 @@ Link para reunião gravada da sprint review 9: [drive.google.com](https://drive.
 
 #### Principais pontos da sprint review 
 - Refatoração do banco de dados quase completa (US05 atual)
-- Refatoração do Acesso do Empregador e Empregado Completa
-- Registro de ponto incompleto (falta regra de negócio de geolocalização, US17 atual)
+- Funcionalidade: Registrar ponto de trabalho (RF15) - Débito: Implementada, mas ainda sem geolocalização.
+- Funcionalidade: Visualizar histórico de ponto (RF17) Débito: Integração incompleta (65%)
+- Funcionalidade: Gerar relatório de ponto (RF18) - Débito: Interface em desenvolvimento.
 
 ## Daily Scrum
 Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
-- 06/06 Online (sexta-feira) <br>
-- 09/06 Online (segunda-feira) <br>
-- 10/06 Presencial (segunda-feira) <br>
-- 11/06 Online (quarta-feira) <br>
+- 30/06 Online (segunda-feira) <br>
+- 01/07 Presencial (terça-feira) <br>
+- 03/07 Presencial (quinta-feira) <br>
 
 ## Histórico de Versão
 

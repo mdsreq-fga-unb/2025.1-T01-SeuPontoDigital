@@ -28,7 +28,7 @@ Link para reunião gravada da sprint planning 8: [drive.google.com](https://driv
 | Hora                | 21h                                                                                                       |
 | Plataforma          | Microsoft Teams                                                                                           |
 | Participantes       | Desenvolvedores e Stakeholder                                                                             |
-| Memembros Presentes | Willian Xavier, Guilherme Moura, Caio Venâncio                                                            |
+| Memembros Presentes | Willian Xavier, Guilherme Moura, Caio Venâncio, Davi de Aguiar, Lucas Guimarães, João Pedro, Thiago Tonin |
 
 Infelizmente, a reunião infelizmente não.
 
@@ -39,10 +39,10 @@ Infelizmente, a reunião infelizmente não.
 
 ## Daily Scrum
 Durante o período, foram conduzidas as seguintes reuniões Daily Scrum:<br>
-- 06/06 Online (sexta-feira) <br>
-- 09/06 Online (segunda-feira) <br>
-- 10/06 Presencial (segunda-feira) <br>
-- 11/06 Online (quarta-feira) <br>
+- 17/06 Presencial (terça-feira) <br>
+- 19/06 Presencial (quinta-feira) <br>
+- 24/06 Presencial (terça-feira) <br>
+- 26/06 Presencial (quinta-feira) <br>
 
 
 ## Histórico de Versão
