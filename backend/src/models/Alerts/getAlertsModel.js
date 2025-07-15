@@ -1,7 +1,22 @@
 import supabase from "../../config/supabase.js";
 
-export default async function getAlertsModel(contractId, employeeId) {
+export default async function getAlertsModel(contractId, employerId) {
   try {
+    // Buscar o employeeId a partir do employerId e contractId
+    const { data: contractData, error: contractError } = await supabase
+      .from("sign_contract")
+      .select("id_employee")
+      .eq("id_employer", employerId)
+      .eq("id_contract", contractId)
+      .single();
+
+    if (contractError || !contractData) {
+  throw new Error("Erro ao buscar o contrato ou vínculo não encontrado");
+  }
+
+  const employeeId = contractData.id_employee;
+
+
     // Primeiro, buscar todos os work_logs do funcionário para o contrato
     const { data: workLogs, error: workLogError } = await supabase
       .from("register_work_logs")

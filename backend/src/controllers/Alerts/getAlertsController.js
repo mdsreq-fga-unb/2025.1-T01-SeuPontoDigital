@@ -5,15 +5,16 @@ const getAlertsController = async (req, res) => {
     return res.status(405).json({ message: "Método não permitido." });
   }
 
-  const employeeId = req.id; // vindo do middleware de autenticação
+  const employerId = req.id; // vindo do middleware de autenticação
   const contractId = req.query.contractId || req.params.contractId;
+  // const employerId = req.query.employId || req.params.employId;
 
-  if (!contractId || !employeeId) {
+  if (!contractId || !employerId) {
     return res.status(400).json({ message: "Faltam parâmetros obrigatórios." });
   }
 
   try {
-    const { count, error } = await getAlertsModel(contractId, employeeId);
+    const { count, error } = await getAlertsModel(contractId, employerId);
 
     if (error) {
       console.error("Erro ao buscar alertas:", error);
@@ -22,7 +23,6 @@ const getAlertsController = async (req, res) => {
 
     return res.status(200).json({
       contractId,
-      employeeId,
       totalAlerts: count
     });
 
