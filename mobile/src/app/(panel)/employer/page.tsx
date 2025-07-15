@@ -54,7 +54,19 @@ export default function Employer() {
     empregado: {
       id: string;
       nome: string;
+      function?: string;
+      status?: string;
+      start_date?: string;
+      break_start?: string;
+      break_end?: string;
       // Add other fields from the API as needed
+    };
+    registros?: {
+      [month: string]: Array<{ 
+        data?: string; 
+        entrada?: string | null;
+        tipo?: string;
+      }>;
     };
     // Add other top-level fields if needed
   }
@@ -119,20 +131,104 @@ export default function Employer() {
         if (response.data && Array.isArray(response.data)) {
           // Mapear os dados da API para o formato esperado pelo componente
           const mappedEmployees: Employee[] = response.data.map((item: EmployeeResponse) => {
+            
+            // Função para formatar a data de ISO (YYYY-MM-DD) para DD/MM/YYYY
+            const formatDate = (dateString?: string): string => {
+              if (!dateString) return "Não especificado";
+              
+              try {
+                // Dividir a string da data em partes
+                const [year, month, day] = dateString.split('-');
+                
+                // Verificar se todas as partes existem
+                if (!year || !month || !day) return dateString;
+                
+                // Retornar no formato DD/MM/YYYY
+                return `${day}/${month}/${year}`;
+              } catch (error) {
+                console.error("Erro ao formatar data:", error);
+                return dateString; // Em caso de erro, retorna a string original
+              }
+            };
+            
+            // Calcular dias trabalhados com base nos registros de ponto
+            const daysWorked = (() => {
+              console.log(`Employee ${item.empregado.nome} - Registros:`, JSON.stringify(item.registros));
+              
+              // Verificar se existem registros de ponto
+              if (!item.registros) {
+                console.log(`No registros found for ${item.empregado.nome}`);
+                return 0;
+              }
+              
+              try {
+                let count = 0;
+                
+                // Percorrer cada mês nos registros
+                Object.keys(item.registros).forEach(month => {
+                  // Obter o array de registros do mês
+                  const monthRecords = item.registros?.[month];
+                  
+                  if (Array.isArray(monthRecords)) {
+                    // Filtrar apenas os registros de dias (excluir o resumo de horas extras)
+                    const dayRecords = monthRecords.filter(record => 
+                      record.data && !record.tipo // Exclui o item de resumo que tem 'tipo'
+                    );
+                    
+                    // Contar dias com pelo menos um registro de entrada
+                    count += dayRecords.filter(record => record.entrada !== null).length;
+                    
+                    console.log(`Month ${month}: Found ${dayRecords.length} days with records, ${count} with entry`);
+                  }
+                });
+                
+                return count;
+              } catch (error) {
+                console.error(`Error calculating days worked for ${item.empregado.nome}:`, error);
+                return 0;
+              }
+            })();
+
             return {
               id: item.empregado.id,
               name: item.empregado.nome,
-              role: "Funcionário",
+              role: item.empregado.function || "Não especificado",
               photo: null,
               workHours: "08:00 - 17:00",
-              startDate: new Date().toLocaleDateString('pt-BR'),
+              startDate: formatDate(item.empregado.start_date), // Aplicar formatação aqui
               alerts: 0,
-              daysWorked: 0,
-              status: "Ativo",
+              daysWorked, // Usar o valor calculado
+              status: typeof item.empregado.status === 'boolean' 
+                     ? (item.empregado.status ? "Ativo" : "Inativo") 
+                     : typeof item.empregado.status === 'string' && item.empregado.status.toLowerCase() === 'true'
+                       ? "Ativo" 
+                       : typeof item.empregado.status === 'string' && item.empregado.status.toLowerCase() === 'false'
+                         ? "Inativo"
+                         : String(item.empregado.status || "Inativo"),
               totalHours: "0h",
               overtime50: "0h",
               overtime100: "0h",
-              breakTime: "01:00",
+              breakTime: (() => {
+                // Format a number to a time string (e.g., 14 -> "14:00")
+                const formatTime = (time: number | null): string => {
+                  if (time == null) return "--:--";
+                  const hours = Math.floor(time);
+                  const minutes = Math.round((time - hours) * 60);
+                  return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+                };
+                
+                // Convert string|undefined to number|null before formatting
+                const parseTimeValue = (value: string | undefined): number | null => {
+                  if (value === undefined) return null;
+                  const parsed = parseFloat(value);
+                  return isNaN(parsed) ? null : parsed;
+                };
+                
+                const startTime = formatTime(parseTimeValue(item.empregado.break_start));
+                const endTime = formatTime(parseTimeValue(item.empregado.break_end));
+                
+                return `${startTime} - ${endTime}`;
+              })(),
               daysAbsent: 0,
               daysWithMedicalCertificate: 0,
               daysLate: 0
@@ -244,7 +340,11 @@ export default function Employer() {
             </View>
             <View style={styles.statItem}>
               <Text style={styles.statNumber}>
-                {employees.filter(emp => emp.status === 'Ativo').length}
+                {employees.filter(emp => 
+                  // Check both boolean true and string 'true' or 'Ativo'
+                  emp.status === 'true' || 
+                  emp.status === 'Ativo'
+                ).length}
               </Text>
               <Text style={styles.statLabel}>Ativos</Text>
             </View>
@@ -426,55 +526,7 @@ export default function Employer() {
                         <Text style={styles.detailLabel}>Tempo de intervalo:</Text>
                         <Text style={styles.detailValue}>{selectedEmployee.breakTime} h</Text>
                       </View>
-                      
-                      {/* Substituição da seção de alertas */}
-                      <View style={styles.detailItem}>
-                        <Ionicons name="calendar-sharp" size={18} color="#F44336" />
-                        <Text style={styles.detailLabel}>Dias ausente:</Text>
-                        <View style={[
-                          styles.detailAlertBadge,
-                          selectedEmployee.daysAbsent > 0 ? styles.detailAlertBadgeWarning : styles.detailAlertBadgeNormal
-                        ]}>
-                          <Text style={[
-                            styles.detailAlertText,
-                            selectedEmployee.daysAbsent > 0 ? styles.detailAlertTextWarning : styles.detailAlertTextNormal
-                          ]}>
-                            {selectedEmployee.daysAbsent || 0}
-                          </Text>
-                        </View>
-                      </View>
 
-                      <View style={styles.detailItem}>
-                        <Ionicons name="medkit-outline" size={18} color="#2196F3" />
-                        <Text style={styles.detailLabel}>Dias de atestado:</Text>
-                        <View style={[
-                          styles.detailAlertBadge,
-                          styles.detailAlertBadgeInfo
-                        ]}>
-                          <Text style={[
-                            styles.detailAlertText,
-                            styles.detailAlertTextInfo
-                          ]}>
-                            {selectedEmployee.daysWithMedicalCertificate || 0}
-                          </Text>
-                        </View>
-                      </View>
-
-                      <View style={styles.detailItem}>
-                        <Ionicons name="time" size={18} color="#FF9800" />
-                        <Text style={styles.detailLabel}>Dias atrasados:</Text>
-                        <View style={[
-                          styles.detailAlertBadge,
-                          selectedEmployee.daysLate > 0 ? styles.detailAlertBadgeWarning : styles.detailAlertBadgeNormal
-                        ]}>
-                          <Text style={[
-                            styles.detailAlertText,
-                            selectedEmployee.daysLate > 0 ? styles.detailAlertTextWarning : styles.detailAlertTextNormal
-                          ]}>
-                            {selectedEmployee.daysLate || 0}
-                          </Text>
-                        </View>
-                      </View>
                       
                       <View style={styles.detailItem}>
                         <Ionicons name="stats-chart-outline" size={18} color="#1565C0" />
@@ -483,44 +535,7 @@ export default function Employer() {
                       </View>
                     </View>
                     
-                    {/* Nova seção de horas - design completamente redesenhado */}
-                    <View style={[styles.employeeDetailSection, { marginTop: 16 }]}>
-                      <View style={styles.sectionTitleContainer}>
-                        <Ionicons name="time" size={22} color="#FFFFFF" style={styles.sectionTitleIcon} />
-                        <Text style={styles.sectionTitleEnhanced}>Horas do Mês Atual</Text>
-                      </View>
-                      
-                      {/* Card de horas totais */}
-                      <View style={styles.totalHoursCard}>
-                        <Text style={styles.totalHoursLabel}>Total de Horas Trabalhadas</Text>
-                        <Text style={styles.totalHoursValue}>{selectedEmployee.totalHours}</Text>
-                      </View>
-                      
-                      {/* Cards de horas extras */}
-                      <View style={styles.extraHoursRow}>
-                        <View style={styles.extraHoursCard}>
-                          <View style={styles.extraHoursHeader}>
-                            <Ionicons name="star-half" size={18} color="#43A047" />
-                            <Text style={styles.extraHoursTitle}>Extras 50%</Text>
-                          </View>
-                          <Text style={[styles.extraHoursValue, styles.overtime50Value]}>
-                            {selectedEmployee.overtime50}
-                          </Text>
-                          <Text style={styles.extraHoursCaption}>Dias úteis após jornada normal</Text>
-                        </View>
-                        
-                        <View style={styles.extraHoursCard}>
-                          <View style={styles.extraHoursHeader}>
-                            <Ionicons name="star" size={18} color="#E65100" />
-                            <Text style={styles.extraHoursTitle}>Extras 100%</Text>
-                          </View>
-                          <Text style={[styles.extraHoursValue, styles.overtime100Value]}>
-                            {selectedEmployee.overtime100}
-                          </Text>
-                          <Text style={styles.extraHoursCaption}>Domingos e feriados</Text>
-                        </View>
-                      </View>
-                    </View>
+
                   </View>
                 </ScrollView>
               </>

@@ -672,49 +672,6 @@ export default function TimecardHistory() {
                   </View>
                 </View>
                 
-                <View style={styles.statRow}>
-                  <View style={styles.statItem}>
-                    <View style={[styles.statIcon, {backgroundColor: '#FFEBEE'}]}>
-                      <Ionicons name="close-circle" size={22} color="#F44336" />
-                    </View>
-                    <View style={styles.statContent}>
-                      <Text style={styles.statValue}>{calculateDetailedStats().absentCount}</Text>
-                      <Text style={styles.statLabel}>Dias Ausentes</Text>
-                    </View>
-                  </View>
-                  
-                  <View style={styles.statItem}>
-                    <View style={[styles.statIcon, {backgroundColor: '#E1F5FE'}]}>
-                      <Ionicons name="medkit" size={22} color="#03A9F4" />
-                    </View>
-                    <View style={styles.statContent}>
-                      <Text style={styles.statValue}>{calculateDetailedStats().withMedicalCertificateCount}</Text>
-                      <Text style={styles.statLabel}>Com Atestado</Text>
-                    </View>
-                  </View>
-                </View>
-                
-                <View style={styles.statRow}>
-                  <View style={styles.statItem}>
-                    <View style={[styles.statIcon, {backgroundColor: '#FFF8E1'}]}>
-                      <Ionicons name="time" size={22} color="#FFA000" />
-                    </View>
-                    <View style={styles.statContent}>
-                      <Text style={styles.statValue}>{calculateDetailedStats().lateCount}</Text>
-                      <Text style={styles.statLabel}>Dias com Atraso</Text>
-                    </View>
-                  </View>
-                  
-                  <View style={styles.statItem}>
-                    <View style={[styles.statIcon, {backgroundColor: '#E8F5E9'}]}>
-                      <Ionicons name="flag" size={22} color="#4CAF50" />
-                    </View>
-                    <View style={styles.statContent}>
-                      <Text style={styles.statValue}>{calculateDetailedStats().holidaysCount}</Text>
-                      <Text style={styles.statLabel}>Feriados</Text>
-                    </View>
-                  </View>
-                </View>
               </View>
               
               {/* Horas */}
