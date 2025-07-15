@@ -1,4 +1,5 @@
 import putOneWorkScheduleModel from "../../models/WorkSchedule/putOneWorkScheduleModel.js";
+import validateWorkSchedule from "../../middlewares/validateWorkSchedule.js";
 
 const putOneWorkScheduleController = async (req, res) => {
 
@@ -24,4 +25,5 @@ const putOneWorkScheduleController = async (req, res) => {
     }
 }
 
+export { putOneWorkScheduleController, validateWorkSchedule };
 export default putOneWorkScheduleController;

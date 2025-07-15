@@ -48,6 +48,7 @@ import getOneWorkScheduleController from "../controllers/WorkSchedule/getOneWork
 import postWorkScheduleController from "../controllers/WorkSchedule/postWorkScheduleController.js";
 import putOneWorkScheduleController from "../controllers/WorkSchedule/putOneWorkScheduleController.js";
 import deleteOneWorkScheduleController from "../controllers/WorkSchedule/deleteOneWorkScheduleController.js";
+import validateWorkSchedule from "../middlewares/validateWorkSchedule.js";
 
 // WorkBreaks Controllers
 import putBreakController from "../controllers/WorkBreaks/putBreakController.js";
@@ -110,8 +111,8 @@ privateRoute.post("/work-address", postWorkAddressController);
 // ========== WORK SCHEDULE ROUTES ==========
 privateRoute.get("/workschedule", getAllWorkScheduleController);
 privateRoute.get("/workschedule/:id", getOneWorkScheduleController);
-privateRoute.post("/workschedule/:id", postWorkScheduleController);
-privateRoute.put("/workschedule/:id", putOneWorkScheduleController);
+privateRoute.post("/workschedule/:id", validateWorkSchedule, postWorkScheduleController);
+privateRoute.put("/workschedule/:id", validateWorkSchedule, putOneWorkScheduleController);
 privateRoute.delete("/workschedule/:id", deleteOneWorkScheduleController);
 
 // ========== WORK BREAKS ROUTES ==========

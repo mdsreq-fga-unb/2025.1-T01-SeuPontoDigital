@@ -1,4 +1,5 @@
 import postWorkScheduleModel from "../../models/WorkSchedule/postWorkScheduleModel.js";
+import validateWorkSchedule from "../../middlewares/validateWorkSchedule.js";
 
 const postWorkScheduleController = async (req, res) => {
 
@@ -19,4 +20,5 @@ const postWorkScheduleController = async (req, res) => {
     }
 }
 
+export { postWorkScheduleController, validateWorkSchedule };
 export default postWorkScheduleController;
