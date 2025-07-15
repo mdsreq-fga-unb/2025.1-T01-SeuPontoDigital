@@ -1,7 +1,7 @@
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-14/07/2025 | 1.0 | Elaboração da especificação do caso de uso | Guilherme Moura | |
+14/07/2025 | 1.0 | Elaboração da especificação do caso de uso | Guilherme Moura | Caio Venâncio |
 
 # Especificação de Caso de Uso: Gerenciar perfil da agência
 

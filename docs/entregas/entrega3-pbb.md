@@ -357,6 +357,6 @@ Dos 67 critérios de aceitação, a técnica BDD foi aplicada em 35 deles, o que
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-16/06/2025 | 1.0 | Elaboração inicial do estudo de caso | João Pedro, Thago Melo e Willian Silva | Willian Silva |
-23/06/2025 | 1.1 | Elaboração final do estudo de caso | Willian Silva ||
-12/07/2025 | 1.2 | Correção do estudo de caso | Willian Silva ||
+16/06/2025 | 1.0 | Elaboração inicial do estudo de caso | João Pedro, Thiago Melo e Willian Silva | Willian Silva |
+23/06/2025 | 1.1 | Elaboração final do estudo de caso | Willian Silva | Thiago Melo |
+12/07/2025 | 1.2 | Correção do estudo de caso | Willian Silva | João Pedro |

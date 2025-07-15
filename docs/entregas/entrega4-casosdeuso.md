@@ -19,4 +19,4 @@ Como parte deste exercício, foram elaborados um diagrama de casos de uso e sete
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-01/07/2025 | 1.0 | Elaboração do diagrama de estudo de caso | Caio Venâncio e Willian Silva | Willian Silva |
+01/07/2025 | 1.0 | Elaboração do diagrama de casos de uso | Caio Venâncio e Willian Silva | Willian Silva |

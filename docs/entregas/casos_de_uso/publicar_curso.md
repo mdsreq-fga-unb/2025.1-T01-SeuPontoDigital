@@ -1,7 +1,7 @@
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-14/07/2025 | 1.0 | Elaboração da especificação do caso de uso | Willian Silva | |
+14/07/2025 | 1.0 | Elaboração da especificação do caso de uso | Willian Silva | João Pedro |
 
 # Especificação de Caso de Uso: Publicar cursos de capacitação
 
