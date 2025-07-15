@@ -13,5 +13,5 @@ Rota de solicitação para o servidor:<br>
 
 ## Mobile
 
-Link para apk do Mobile:<br>
-[https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/releases/tag/mvp](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/releases/tag/mvp)
+Link para APK do Mobile:  
+[Baixar APK](seupontodigitalmobile.apk)
