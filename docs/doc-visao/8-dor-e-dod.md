@@ -23,10 +23,10 @@ o "Done":
 - **Está desenvolvida por completo?** A funcionalidade deve estar totalmente implementada, com todas as suas partes integradas e operando conjuntamente.
 - **Está disponível para acesso pelo stakeholder?** A funcionalidade deve estar liberada e acessível ao stakeholder para uso.
 - **Foi incorporada à branch principal com ausência de conflitos?** A branch de desenvolvimento da funcionalidade deve estar integrada à branch principal sem conflitos.
-- **Foi revisada pelo analista de QA?** O analista de QA deve revisar a funcionalidade, garantir a conformidade com a LGPD, se aplicável, e assegurar uma cobertura mínima de testes de 80%.
 
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
 18/05/2025 | 1.0 | DoR e DoD | Willian Silva | Caio Venâncio |
-26/05/2025 | 1.1 | Correção do DoD | Willian Silva |  |
+26/05/2025 | 1.1 | Correção do DoD | Willian Silva | Thiago Tonin |
+14/07/2025 | 1.2 | Revisão DoR e DoD |Lucas Borges |Davi de Aguiar |

@@ -57,3 +57,17 @@ Compreendemos ainda a importância de detalhar cada item do backlog em história
 Um destaque importante foi o aprendizado e a aplicação da técnica de User Story Mapping, que proporcionou uma visualização clara e estruturada do fluxo do produto. Essa abordagem permitiu compreender de forma linear e coesa as etapas envolvidas no desenvolvimento, facilitando a identificação dos pontos mais críticos e assegurando que o valor entregue ao cliente final fosse priorizado.
 
 ## 10.4 Unidade 4 
+
+Durante o desenvolvimento do projeto, percebemos o quanto os casos de uso são fundamentais para compreender o comportamento esperado do sistema em diversas situações. No começo, tivemos certa dificuldade para distinguir os atores primários dos secundários, mas, à medida que analisamos exemplos em grupo, fomos entendendo melhor como cada tipo de ator interage com o sistema e qual seu papel nos processos.
+
+Também aprendemos que é essencial identificar com precisão os fluxos principais e alternativos. Isso nos permitiu mapear melhor os diferentes caminhos que uma funcionalidade pode seguir, garantindo que nenhuma necessidade do usuário fosse deixada de lado.
+
+Outro ponto importante foi a forma de descrever os casos de uso. Inicialmente, nossas descrições eram genéricas demais, o que dificultava a compreensão dos detalhes. Com o tempo, passamos a adotar uma estrutura mais clara e padronizada, incluindo itens como pré-condições, pós-condições e passos bem definidos. Essa mudança melhorou significativamente tanto o entendimento do funcionamento do sistema quanto a comunicação com o restante da equipe.
+
+## Histórico de Versão
+Data     | Versão | Descrição | Autor(es) | Revisor(es)
+-------- | ------ | --------- | ----- | ---------
+20/04/2025 | 1.0 | Lições Aprendidas Unidade I | Thiago Tonin | Lucas Guimarães |
+25/05/2025 | 1.1 | Lições Aprendidas Unidade II | Davi de Aguiar | Thiago Tonin|
+23/06/2025 | 1.2 | Lições Aprendidas Unidade III | Willian Silva | João Pedro Ferreira|
+14/07/2025 | 1.3 | Lições Aprendidas Unidade IV | Lucas Guimarães | Davi de Aguiar |

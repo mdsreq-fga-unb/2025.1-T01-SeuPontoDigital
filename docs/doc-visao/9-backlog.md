@@ -149,8 +149,8 @@ O MVP (Produto Mínimo Viável) do sistema foi definido com base nos requisitos 
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-20/05/2025 | 1.0 | Backlog geral | Caio Venâncio e João Pedro | |
-25/05/2025 | 1.1 | MVP | Davi de Aguiar | |
-26/05/2025 | 1.2 | Critérios de priorização | Willian Silva | |
-23/06/2025 | 1.3 | Priorizacao do BackLog, Requisitos Nao Funcionais, US | Caio Venâncio e João Pedro | |
+20/05/2025 | 1.0 | Backlog geral | Caio Venâncio e João Pedro | Thiago Tonin |
+25/05/2025 | 1.1 | MVP | Davi de Aguiar | Lucas Guimarães|
+26/05/2025 | 1.2 | Critérios de priorização | Willian Silva | Thiago Tonin|
+23/06/2025 | 1.3 | Priorizacao do BackLog, Requisitos Nao Funcionais, US | Caio Venâncio e João Pedro | Davi de Aguiar |
 

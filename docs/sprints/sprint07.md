@@ -10,7 +10,7 @@
 | Hora                | 21h                                                                                                       |
 | Plataforma          | Microsoft Teams                                                                                           |
 | Participantes       | Desenvolvedores e Stakeholder                                                                             |
-| Memembros Presentes | Willian Xavier, Thiago Tonin, Lucas Guimarães, João Pedro, Guilherme Moura, Davi de Aguiar, Caio Venâncio |
+| Membros Presentes | Willian Xavier, Thiago Tonin, Lucas Guimarães, João Pedro, Guilherme Moura, Davi de Aguiar, Caio Venâncio |
 
 Link para reunião gravada da sprint planning 7: [drive.google.com](https://drive.google.com/file/d/1o0CDmX3az4FlJzjYjxFYl5d2g4Ok7CB1/view?usp=sharing)
 

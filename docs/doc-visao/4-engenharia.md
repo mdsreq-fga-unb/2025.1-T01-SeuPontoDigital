@@ -50,11 +50,7 @@ Sprint Review | [Verificação e Validação](#verificacao-e-validacao-de-requis
 ## Historico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
 -------- | ------ | --------- | ----- | ---------
-17/05/2025 | 1.0 | Adição de Atividades e Técnicas de ER | Caio Venâncio  | | 
-21/06/2025 | 1.1 | Retirar ambiguidade de USM e PBB [(#74)](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/issues/74) | Caio Venâcio  | |
-21/06/2025 | 1.1 | Adicionar Organização/atualização e Verificação/validação na página [(#75)](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/issues/75) | Caio Venâcio  | |
+17/05/2025 | 1.0 | Adição de Atividades e Técnicas de ER | Caio Venâncio  | João Pedro Ferreira | 
+21/06/2025 | 1.1 | Retirar ambiguidade de USM e PBB [(#74)](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/issues/74) | Caio Venâcio  | Davi de Aguiar|
+21/06/2025 | 1.1 | Adicionar Organização/atualização e Verificação/validação na página [(#75)](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/issues/75) | Caio Venâcio  | Lucas Guimarães|
 
-## Referências Bibliográficas 
-- COHN, Mike. User Stories Applied: For Agile Software Development. Boston: Addison-Wesley, 2004. (para critérios de aceitação como testes de aceitação)
-- CRISPIN, Lisa; GREGORY, Janet. Agile Testing: A Practical Guide for Testers and Agile Teams. Addison-Wesley, 2009.
-- BECK, Kent. Extreme Programming Explained: Embrace Change. 1st ed. Boston: Addison-Wesley, 1999. (para planning game)

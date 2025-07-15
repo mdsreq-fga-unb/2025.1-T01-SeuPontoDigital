@@ -26,11 +26,11 @@ A figura a seguir apresenta o Diagrama de Ishikawa sobre o problema enfretado pe
   - **Quanto aos Materiais:** o uso de papel e a necessidade de digitalização manual seria dispensada, além da folha se manter segura digitalmente.
   - **Quanto aos Métodos:** a necessidade da precisão dos horários, a diminuição do tempo de contagem e cálculo de horas trabalhadas podem ser resolvidas. Também seria possível enviar o registro dos pontos automaticamente em qualquer data desejada.
   - **Quanto à Medida:** uma solução tecnológica admite indicadores de desempenho e controle de processos.
-  - **Quanto à Mão de obra:** o contador e o empregador terá menos tempo de trabalho de manutenção da folha, e menos dificuldade.
+  - **Quanto à Mão de obra:** o contador e o empregador terão menos tempo de trabalho de manutenção da folha, e menos dificuldade.
 
 *O que não está sendo resolvido:*
 
-  - **Quanto ao Meio Ambiente:** a folha de ponto ainda deve ser criada e enviado no e-Social, um fator externo obrigatório por lei.
+  - **Quanto ao Meio Ambiente:** a folha de ponto ainda deve ser criada e enviada no e-Social, um fator externo obrigatório por lei.
   - **Quanto à Mão de Obra:** ainda será necessário que o empregador se atente ao ponto diariamente.
   - **Quanto a Máquina:** as múltiplas etapas de criação da folha de ponto persistiram (o empregador precisa assinar uma folha física ao fim do mês e a *Legalize Folha Doméstica* precisa verificar se os dados estão no formato certo, dentre outras etapas). Também não seria possível impedir que dados incorretos sejam preenchidos no sistema do [eSocial](https://www.gov.br/esocial/pt-br) (plataforma do Governo Brasileiro para submeter documentos ao Ministério do Trabalho).
 
