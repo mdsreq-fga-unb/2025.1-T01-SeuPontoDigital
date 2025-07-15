@@ -524,7 +524,7 @@ export default function Employee() {
           }
         );
       } catch (err) {
-        console.error('Erro ao iniciar monitoramento:', err);
+        console.log('Erro ao iniciar monitoramento:', err);
       }
     };
 
