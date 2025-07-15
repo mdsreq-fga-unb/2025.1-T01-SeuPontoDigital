@@ -64,6 +64,7 @@ import putWorklogController from "../controllers/Worklog/putWorklogController.js
 
 // Alerts Controllers
 import getAlertsController from "../controllers/Alerts/getAlertsController.js";
+import { validateDateTwoYearsContract, validateDateTwoYearsEmployee, validateDateTwoYearsEmployer } from "../middlewares/validateDateTwoYears.js";
 
 const privateRoute = express.Router();
 
@@ -470,7 +471,7 @@ privateRoute.put("/contract/:id", putContractController);
  *       500:
  *         description: Erro interno do servidor
  */
-privateRoute.delete("/contract/:id", deleteContractController);
+privateRoute.delete("/contract/:id", validateDateTwoYearsContract ,deleteContractController);
 
 // ========== EMPLOYEE ROUTES ==========
 /**
@@ -651,7 +652,7 @@ privateRoute.put("/employee/:id", putEmployeeController);
  *       500:
  *         description: Erro interno do servidor
  */
-privateRoute.delete("/employee/:id", deleteEmployeeController);
+privateRoute.delete("/employee/:id", validateDateTwoYearsEmployee,deleteEmployeeController);
 
 // ========== EMPLOYER ROUTES ==========
 /**
@@ -834,7 +835,7 @@ privateRoute.put("/employer/:id", putEmployerController);
  *       500:
  *         description: Erro interno do servidor
  */
-privateRoute.delete("/employer/:id", deleteEmployerController);
+privateRoute.delete("/employer/:id", validateDateTwoYearsEmployer, deleteEmployerController);
 
 // ========== SIGN CONTRACT ROUTES ==========
 /**
