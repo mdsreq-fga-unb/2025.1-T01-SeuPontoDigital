@@ -121,20 +121,24 @@ const Timesheets = () => {
   const handleGeneratePDF = async () => {
     let periodString = `${selectYear}-${getMonthFromPeriod(selectPeriod)}`;
 
-    await fetchTimesheet({
+    console.log("selectedEmployee", selectedEmployee)
+    console.log("selectedEmployer", selectedEmployer)
+    console.log("period", periodString)
+
+    const fetchedData = await fetchTimesheet({
       employeeId: selectedEmployee,
       employerId: selectedEmployer,
       period: periodString,
     });
 
-    if (!data || data.length === 0) {
-      alert("Nenhum dado encontrado para gerar o relatório.");
+    if (!fetchedData || fetchedData.length === 0) {
+      alert("Nenhum dado encontrado para gerar o relatório. Clique novamente.");
       return;
     }
 
     const doc = new jsPDF();
 
-    const base =  data[0].registros || []
+    const base =  fetchedData[0].registros || []
     // console.log("base", base)
     // console.log("periodstring", periodString)
     // const registros =  base[periodString] || [];
@@ -172,7 +176,7 @@ const Timesheets = () => {
     // console.log("linhas", linhas)
 
     // Cabeçalho do relatório com nome da pessoa e função
-    const empregado = data[0].empregado;
+    const empregado = fetchedData[0].empregado;
     doc.text(`Relatório de Horas - ${empregado.nome}`, 20, 20);
     doc.text(`Função: ${empregado.function}`, 20, 30);
     doc.text(`Período: ${selectPeriod} / ${selectYear}`, 20, 40);
