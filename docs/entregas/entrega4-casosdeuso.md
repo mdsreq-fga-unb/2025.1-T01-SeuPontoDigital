@@ -64,6 +64,9 @@ Utilizar fluxos alternativos aprimora a clareza do caso de uso. Tenha em mente q
 ### 9. Informações Adicionais
 [Inclua, ou forneça referências a, informações adicionais requeridas para explicar o caso de uso. Isso pode incluir diagramas de visão geral, exemplos ou qualquer outra coisa que você imagine.]: #
 
+## Especificações dos Casos de Uso:
+
+Caso de Uso: [Solicitar serviços essenciais](casos_de_uso/servicos.md)
 
 ## Histórico de Versão
 Data     | Versão | Descrição | Autor(es) | Revisor(es)
