@@ -13,6 +13,16 @@ O site pode ser acessado no seguinte link: [https://seupontodigital.onrender.com
 
 O **SeuPontoDigital** é uma solução desenvolvida para auxiliar a empresa  *Legalize Folha de Pagamento do Lar LTDA (Legalize Folha Doméstica)* a controlar o registro da folha de ponto dos empregados domésticos contratados pelos clientes da empresa e auxiliar na gestão da folha de pagamento dos mesmos.
 
+## Feedback Final do Cliente
+
+Vídeo disponível no Teams:
+[Link do Video no Teams](https://unbbr.sharepoint.com/:v:/s/SeuPontoDigital/EXThTUP2C3ZGt7Qiz3iB1GgBht3Nyf1qqDs0DnbzmIHqbw?e=icfoJL)
+
+Caso o vídeo não abra no Teams:
+[Link do Video no Drive](https://drive.google.com/file/d/1_J219cQm4MBQnQRYdsHIgKcsc20VT5ny/view?usp=sharing)
+
+> Como o vídeo apresenta CPFs e senhas, o youtube bane automaticamente o vídeo do youtube, por conteúdo sensível.
+
 ## Equipe 
 
 <table align="center" cellspacing="20" cellpadding="0">
