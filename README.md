@@ -23,6 +23,17 @@ Caso o vídeo não abra no Teams:
 
 > Como o vídeo apresenta CPFs e senhas, o youtube bane automaticamente o vídeo do youtube, por conteúdo sensível.
 
+## Slides e Credenciais de teste
+
+Link para Slides: [Baixar Slides](jornadaseuponto.pdf)
+
+Crendenciais:
+Para o painel administrador, email: admin@email.com, senha: senha
+
+Para o empregado no aplicativo, cpf: 12219279146, senha: Senha@123
+
+Para o empregador no aplicativo, cpf: 17422648163, senha: Senha@123
+
 ## Equipe 
 
 <table align="center" cellspacing="20" cellpadding="0">
