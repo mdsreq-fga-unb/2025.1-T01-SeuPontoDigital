@@ -2,10 +2,7 @@
 
 Este projeto foi realizado durante a disciplina de Requisitos de Software, na Universidade de Brasília, sob orientação do Professor Dr. George Marsicano Correa. Mais detalhes sobre o projeto e toda a documentação pode ser encontrada no nosso [GitHub Pages](https://mdsreq-fga-unb.github.io/2025.1-T01-SeuPontoDigital/).
 
-Os arquivos da documentação do projeto se encontram na branch [docs](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/tree/docs).
-A branch main será usada apenas para entregas de releases e versões estáveis. O desenvolvimento acontecerá na branch dev e em branchs derivadas da mesma.
-
-O site pode ser acessado no seguinte link: [https://seupontodigital.onrender.com](https://seupontodigital.onrender.com)
+> Os arquivos da documentação do projeto se encontram na branch [docs](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/tree/docs). A branch main será usada apenas para entregas de releases e versões estáveis. O desenvolvimento acontecerá na branch dev e em branchs derivadas da mesma.
 
 <p align="center">
   <img src="https://mdsreq-fga-unb.github.io/2025.1-T01-SeuPontoDigital/assets/icons/icon2.png" alt="Logo do produto" width="200">
@@ -13,26 +10,7 @@ O site pode ser acessado no seguinte link: [https://seupontodigital.onrender.com
 
 O **SeuPontoDigital** é uma solução desenvolvida para auxiliar a empresa  *Legalize Folha de Pagamento do Lar LTDA (Legalize Folha Doméstica)* a controlar o registro da folha de ponto dos empregados domésticos contratados pelos clientes da empresa e auxiliar na gestão da folha de pagamento dos mesmos.
 
-## Feedback Final do Cliente
-
-Vídeo disponível no Teams:
-[Link do Video no Teams](https://unbbr.sharepoint.com/:v:/s/SeuPontoDigital/EXThTUP2C3ZGt7Qiz3iB1GgBht3Nyf1qqDs0DnbzmIHqbw?e=icfoJL)
-
-Caso o vídeo não abra no Teams:
-[Link do Video no Drive](https://drive.google.com/file/d/1_J219cQm4MBQnQRYdsHIgKcsc20VT5ny/view?usp=sharing)
-
-> Como o vídeo apresenta CPFs e senhas, o youtube bane automaticamente o vídeo do youtube, por conteúdo sensível.
-
-## Slides e Credenciais de teste
-
-Link para Slides: [Baixar Slides](jornadaseuponto.pdf)
-
-Crendenciais:
-Para o painel administrador, email: admin@email.com, senha: senha
-
-Para o empregado no aplicativo, cpf: 12219279146, senha: Senha@123
-
-Para o empregador no aplicativo, cpf: 17422648163, senha: Senha@123
+> O site pode ser acessado no seguinte link: [https://seupontodigital.onrender.com](https://seupontodigital.onrender.com)
 
 ## Equipe 
 
