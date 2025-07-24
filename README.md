@@ -2,14 +2,15 @@
 
 Este projeto foi realizado durante a disciplina de Requisitos de Software, na Universidade de Brasília, sob orientação do Professor Dr. George Marsicano Correa. Mais detalhes sobre o projeto e toda a documentação pode ser encontrada no nosso [GitHub Pages](https://mdsreq-fga-unb.github.io/2025.1-T01-SeuPontoDigital/).
 
-Os arquivos da documentação do projeto se encontram na branch [docs](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/tree/docs).
-A branch main será usada apenas para entregas de releases e versões estáveis. O desenvolvimento acontecerá na branch dev e em branchs derivadas da mesma.
+> Os arquivos da documentação do projeto se encontram na branch [docs](https://github.com/mdsreq-fga-unb/2025.1-T01-SeuPontoDigital/tree/docs). A branch main será usada apenas para entregas de releases e versões estáveis. O desenvolvimento acontecerá na branch dev e em branchs derivadas da mesma.
 
 <p align="center">
   <img src="https://mdsreq-fga-unb.github.io/2025.1-T01-SeuPontoDigital/assets/icons/icon2.png" alt="Logo do produto" width="200">
 </p>
 
 O **SeuPontoDigital** é uma solução desenvolvida para auxiliar a empresa  *Legalize Folha de Pagamento do Lar LTDA (Legalize Folha Doméstica)* a controlar o registro da folha de ponto dos empregados domésticos contratados pelos clientes da empresa e auxiliar na gestão da folha de pagamento dos mesmos.
+
+> O site pode ser acessado no seguinte link: [https://seupontodigital.onrender.com](https://seupontodigital.onrender.com)
 
 ## Equipe 
 
